@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="testRunner" value="GRADLE" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="jbr-17" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/base" />
+            <option value="$PROJECT_DIR$/base/ui" />
+            <option value="$PROJECT_DIR$/base/utils" />
+            <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/domain/invoice" />
+            <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/accountsigin" />
+            <option value="$PROJECT_DIR$/features/accountsignup" />
+            <option value="$PROJECT_DIR$/features/customercreation" />
+            <option value="$PROJECT_DIR$/features/customerdetail" />
+            <option value="$PROJECT_DIR$/features/customerlist" />
+            <option value="$PROJECT_DIR$/features/invoicecreation" />
+            <option value="$PROJECT_DIR$/features/invoicedetail" />
+            <option value="$PROJECT_DIR$/features/invoicelist" />
+            <option value="$PROJECT_DIR$/features/itemcreation" />
+            <option value="$PROJECT_DIR$/features/itemdetail" />
+            <option value="$PROJECT_DIR$/features/itemlist" />
+            <option value="$PROJECT_DIR$/features/taskcreation" />
+            <option value="$PROJECT_DIR$/features/taskdetail" />
+            <option value="$PROJECT_DIR$/features/tasklist" />
+            <option value="$PROJECT_DIR$/infrastructure" />
+            <option value="$PROJECT_DIR$/infrastructure/firebase" />
+            <option value="$PROJECT_DIR$/infrastructure/printer" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
