@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <!-- Se nombra directamente al Fragment. La propiedad android:name da error
+    porque el Fragmento no está en app y es en tiempo de ejecución cuando el módulo se une al
+    fichero apk-->
+    <fragment
+        app:moduleName="accountsignin"
+        android:label="@string/title_accountsigin"
+        android:id="@+id/accountSignInFragment"
+        android:name="com.moronlu18.accountsignin.ui.AccountSignIn" />
+    <fragment
+        app:moduleName="accountsignup"
+        android:label="@string/title_accountsignup"
+        android:id="@+id/accountSignUpFragment"
+        android:name="com.moronlu18.accountsignup.ui.AccountSignUp" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.moronlu18.invoice.MainFragment"
+        android:label="@string/mainFragment"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_featureAccountSignIn"
+            app:destination="@+id/accountSignInFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_featureAccountSignUp"
+            app:destination="@+id/accountSignUpFragment" />
+        </fragment>
+
+
+</navigation>
