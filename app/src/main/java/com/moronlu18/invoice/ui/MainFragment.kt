@@ -43,6 +43,10 @@ class MainFragment : Fragment() {
             //findNavController().navigate()
             findNavController().navigate(R.id.action_mainFragment_to_featureAccountSignUp)
         }
+
+        //binding.btCustomerCreation.setOnClickListener{
+
+        //}
     }
 
     override fun onDestroyView() {

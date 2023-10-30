@@ -53,8 +53,6 @@ android {
         ":features:customerdetail",
         ":features:customerlist",
         ":features:invoicecreation",
-        ":base:ui",
-        ":base:utils",
         ":domain:invoice",
         ":features:invoicedetail",
         ":features:invoicelist",
