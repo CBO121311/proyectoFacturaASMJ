@@ -1,0 +1,183 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cbo.customercreation.ui.CustomerCreation">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/customer_creation_TextInputLayout_NombreCliente"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:hint="Nombre"
+        app:helperText="Requerido*"
+        app:helperTextTextColor="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:startIconDrawable="@drawable/ic_action_person">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/customer_creation_editTextUsername_NombreCliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/customer_creation_txv_Contacto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="200dp"
+        android:fontFamily="@font/helvetica"
+        android:text="Contacto"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.201"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/customer_creation_TextInputLayout_NombreCliente" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/customer_creation_TextInputLayout_CorreoCliente"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="32dp"
+        android:hint="Correo electrónico"
+        app:helperText="Requerido*"
+        app:helperTextTextColor="@color/red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/customer_creation_txv_Contacto"
+        app:startIconDrawable="@drawable/ic_action_email">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/customer_creation_editTextUsername_CorreoCliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/customer_creation_TextInputLayout_Telefono"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="32dp"
+        android:hint="Teléfono"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/customer_creation_TextInputLayout_CorreoCliente"
+        app:startIconDrawable="@drawable/ic_action_phone">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/customer_creation_editTextUsername_Telefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/customer_creation_txv_Direccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/helvetica"
+        android:text="Dirección"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/customer_creation_TextInputLayout_Telefono" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/customer_creation_TextInputLayout_Direccion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:hint="Línea de dirección"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/customer_creation_txv_Direccion"
+        app:startIconDrawable="@drawable/ic_action_house">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/customer_creation_editTextUsername_Direccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/customer_creation_TextInputLayout_CodigoPostal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="32dp"
+        android:hint="Código Postal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/customer_creation_TextInputLayout_Ciudad"
+        app:layout_constraintTop_toBottomOf="@+id/customer_creation_TextInputLayout_Direccion">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/customer_creation_editTextUsername_CodigoPostal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/customer_creation_TextInputLayout_Ciudad"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="240dp"
+        android:hint="Ciudad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/customer_creation_TextInputLayout_Direccion"
+        app:startIconDrawable="@drawable/ic_action_city">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/customer_creation_editTextUsername_Ciudad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/customer_creation_btnConfirmar"
+        android:layout_width="168dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:text="Confirmar"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/customer_creation_TextInputLayout_CodigoPostal" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

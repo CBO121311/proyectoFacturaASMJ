@@ -8,6 +8,19 @@
     <!-- Se nombra directamente al Fragment. La propiedad android:name da error
     porque el Fragmento no está en app y es en tiempo de ejecución cuando el módulo se une al
     fichero apk-->
+
+    <fragment
+        app:moduleName="customerlist"
+        android:label="@string/title_customerlist"
+        android:id="@+id/CustomerListFragment"
+        android:name="com.cbo.customerlist.ui.CustomerList" />
+
+    <fragment
+        app:moduleName="customercreation"
+        android:label="@string/title_customercreation"
+        android:id="@+id/CustomerCreationFragment"
+        android:name="com.cbo.customercreation.ui.CustomerCreation" />
+
     <fragment
         app:moduleName="accountsignin"
         android:label="@string/title_accountsigin"
@@ -29,7 +42,15 @@
         <action
             android:id="@+id/action_mainFragment_to_featureAccountSignUp"
             app:destination="@+id/accountSignUpFragment" />
-        </fragment>
+
+        <action
+            android:id="@+id/action_mainFragment_to_CustomerCreationFragment"
+            app:destination="@id/CustomerCreationFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_CustomerListFragment"
+            app:destination="@id/CustomerListFragment"/>
+
+    </fragment>
 
 
 </navigation>

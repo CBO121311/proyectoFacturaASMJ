@@ -1,13 +1,10 @@
 package com.moronlu18.invoice
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import android.widget.Toast.makeText
 import androidx.navigation.fragment.findNavController
 import com.moronlu18.invoice.databinding.FragmentMainBinding
 
@@ -29,7 +26,6 @@ class MainFragment : Fragment() {
 
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,9 +40,18 @@ class MainFragment : Fragment() {
             findNavController().navigate(R.id.action_mainFragment_to_featureAccountSignUp)
         }
 
-        //binding.btCustomerCreation.setOnClickListener{
+        //Clientes
+        binding.btCustomerCreation.setOnClickListener{
+            findNavController().navigate(R.id.action_mainFragment_to_CustomerCreationFragment)
+        }
 
-        //}
+        binding.btCustomerDetails.setOnClickListener{
+            findNavController().navigate(R.id.action_mainFragment_to_CustomerCreationFragment)
+        }
+
+        binding.btCustomerList.setOnClickListener{
+            findNavController().navigate(R.id.action_mainFragment_to_CustomerListFragment)
+        }
     }
 
     override fun onDestroyView() {
