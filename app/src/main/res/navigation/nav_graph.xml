@@ -22,6 +22,33 @@
         android:name="com.cbo.customercreation.ui.CustomerCreation" />
 
     <fragment
+        app:moduleName="customerdetail"
+        android:label="@string/title_customerdetail"
+        android:id="@+id/CustomerDetailFragment"
+        android:name="com.cbo.customerdetail.ui.CustomerDetail"/>
+
+
+
+    <fragment
+        app:moduleName="tasklist"
+        android:label="@string/title_tasklist"
+        android:id="@+id/TaskListFragment"
+        android:name="com.moronlu18.tasklist.TaskList" />
+
+
+    <fragment
+        app:moduleName="taskcreation"
+        android:label="@string/title_taskcreation"
+        android:id="@+id/TaskCreationFragment"
+        android:name="com.moronlu18.taskcreation.TaskCreation" />
+
+    <fragment
+        app:moduleName="taskdetail"
+        android:label="@string/title_taskdetail"
+        android:id="@+id/TaskDetailFragment"
+        android:name="com.moronlu18.taskdetail.TaskDetail" />
+
+    <fragment
         app:moduleName="accountsignin"
         android:label="@string/title_accountsigin"
         android:id="@+id/accountSignInFragment"
@@ -49,6 +76,18 @@
         <action
             android:id="@+id/action_mainFragment_to_CustomerListFragment"
             app:destination="@id/CustomerListFragment"/>
+        <action
+            android:id="@+id/action_mainFragment_to_TaskCreationFragment"
+            app:destination="@id/TaskCreationFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_TaskListFragment"
+            app:destination="@id/TaskListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_TaskDetailFragment"
+            app:destination="@id/TaskDetailFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_CustomerDetailFragment"
+            app:destination="@id/CustomerDetailFragment" />
 
     </fragment>
 

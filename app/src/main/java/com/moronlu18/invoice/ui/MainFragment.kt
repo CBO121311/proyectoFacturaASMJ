@@ -40,17 +40,30 @@ class MainFragment : Fragment() {
             findNavController().navigate(R.id.action_mainFragment_to_featureAccountSignUp)
         }
 
-        //Clientes
+        //Customer
         binding.btCustomerCreation.setOnClickListener{
             findNavController().navigate(R.id.action_mainFragment_to_CustomerCreationFragment)
         }
 
         binding.btCustomerDetails.setOnClickListener{
-            findNavController().navigate(R.id.action_mainFragment_to_CustomerCreationFragment)
+            findNavController().navigate(R.id.action_mainFragment_to_CustomerDetailFragment)
         }
 
         binding.btCustomerList.setOnClickListener{
             findNavController().navigate(R.id.action_mainFragment_to_CustomerListFragment)
+        }
+
+        //Task
+        binding.btTaskCreation.setOnClickListener{
+            findNavController().navigate(R.id.action_mainFragment_to_TaskCreationFragment)
+        }
+
+        binding.btTaskDetails.setOnClickListener{
+            findNavController().navigate(R.id.action_mainFragment_to_TaskDetailFragment)
+        }
+
+        binding.btTaskList.setOnClickListener{
+            findNavController().navigate(R.id.action_mainFragment_to_TaskListFragment)
         }
     }
 
