@@ -35,3 +35,11 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  - Se ha agregado el código necesario para que al entrar en la lista de tareas se muestren unas tareas creadas.
  - Renombramiento de las carpetas principales de tareas.
  - Cambios en el nav_graph para poder navegar correctamente.
+   
+--------------------------------------------------------------------------------------------------
+ Escrito por CBO121311
+ 
+ ## V2.3.9 (02/11/2023)
+ - Implementado el resto de layouts.
+ - Corrección menores a los módulos customer.
+  
