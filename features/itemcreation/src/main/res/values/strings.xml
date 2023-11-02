@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="item_creation_tvTitle_text">Añadir Artículo</string>
+    <string name="item_creation_edName_text">Nombre</string>
+    <string name="item_creation_edDescription_text">Descripción</string>
+    <string name="item_creation_btnDone_text">Añadir</string>
+    <string name="item_creation_tvTypeItem_text">Tipo de artículo</string>
+    <string name="item_creation_tvRate_text">Tasa</string>
+    <string name="item_creation_chbxTaxable_text">Impuestos</string>
+</resources>
