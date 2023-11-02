@@ -1,6 +1,5 @@
 package com.cbo.customerlist.adapter
 
-import android.content.DialogInterface.OnClickListener
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.cbo.customerlist.data.Clientes

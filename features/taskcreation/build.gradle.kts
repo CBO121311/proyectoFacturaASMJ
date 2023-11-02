@@ -27,6 +27,10 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+
+    viewBinding {
+        enable = true
+    }
 }
 
 dependencies {
@@ -40,4 +44,6 @@ dependencies {
     //Implementar la navegación por módulos
     implementation ("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation ("androidx.navigation:navigation-ui-ktx:2.3.5")
+    implementation ("com.google.android.material:material:1.10.0")
+
 }

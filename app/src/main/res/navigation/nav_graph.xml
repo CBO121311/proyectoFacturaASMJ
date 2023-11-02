@@ -33,20 +33,20 @@
         app:moduleName="tasklist"
         android:label="@string/title_tasklist"
         android:id="@+id/TaskListFragment"
-        android:name="com.moronlu18.tasklist.TaskList" />
+        android:name="com.sergiogv98.tasklist.TaskList" />
 
 
     <fragment
         app:moduleName="taskcreation"
         android:label="@string/title_taskcreation"
         android:id="@+id/TaskCreationFragment"
-        android:name="com.moronlu18.taskcreation.TaskCreation" />
+        android:name="com.sergiogv98.taskcreation.TaskCreation" />
 
     <fragment
         app:moduleName="taskdetail"
         android:label="@string/title_taskdetail"
         android:id="@+id/TaskDetailFragment"
-        android:name="com.moronlu18.taskdetail.TaskDetail" />
+        android:name="com.sergiogv98.taskdetail.TaskDetail" />
 
     <fragment
         app:moduleName="accountsignin"

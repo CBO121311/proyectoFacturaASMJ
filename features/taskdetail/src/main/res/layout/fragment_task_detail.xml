@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".TaskDetail">
+    tools:context="com.sergiogv98.taskdetail.TaskDetail">
 
     <LinearLayout
         android:id="@+id/task_details_clientbox"
@@ -13,20 +13,30 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="@color/teal_200">
+        android:background="@color/md_theme_light_secondary">
+
+        <ImageView
+            android:id="@+id/task_details_client_image_view"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_avatar" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/task_details_txt_client"
             android:textStyle="bold"
-            android:textSize="26sp"/>
+            android:textSize="26sp"
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/task_details_txt_client_name"
-            android:textSize="15sp"/>
+            android:textSize="18sp"
+            android:textColor="@color/gold" />
+
     </LinearLayout>
 
     <View
@@ -42,7 +52,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
-        android:background="#F5F5F5">
+        android:background="@color/md_theme_light_primaryContainer">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -55,7 +65,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/task_details_txt_task_name"
                 android:textStyle="bold"
-                android:textSize="18sp"/>
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
         </LinearLayout>
 
         <Button
@@ -66,7 +77,8 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:enabled="false"
-            android:background="@android:color/darker_gray"
+            android:background="@color/md_theme_light_tertiary"
+            android:textColor="@color/red"
             android:layout_marginStart="8dp"/>
     </LinearLayout>
 
@@ -83,13 +95,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="#F5F5F5">
+        android:background="@color/md_theme_light_secondaryContainer">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/task_details_type_task"
             android:textStyle="bold"
+            android:textColor="@color/teal_700"
             android:textSize="20sp"/>
 
         <TextView
@@ -112,44 +125,46 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
-        android:background="#F5F5F5">
+        android:background="@color/md_theme_light_primaryContainer">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="@string/task_details_txt_date_creation"
                 android:textStyle="bold"
+                android:textColor="@color/teal_700"
                 android:textSize="19sp"/>
 
             <TextView
                 android:id="@+id/task_details_date_creation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="@string/task_details_date_creation"
                 android:textSize="14sp"/>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="1">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="@string/task_details_txt_date_end"
                 android:textStyle="bold"
+                android:textColor="@color/teal_700"
                 android:textSize="19sp"/>
 
             <TextView
                 android:id="@+id/task_details_date_end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="@string/task_details_date_end"
                 android:textSize="14sp"/>
         </LinearLayout>
@@ -168,13 +183,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="#F5F5F5">
+        android:background="@color/md_theme_light_secondaryContainer">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/task_details_txt_description"
             android:textStyle="bold"
+            android:textColor="@color/teal_700"
             android:textSize="20sp"/>
 
         <TextView
@@ -190,7 +206,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_gravity="center_horizontal|bottom"
+        android:layout_gravity="end"
         android:src="@drawable/ic_add_task" />
 
 </LinearLayout>

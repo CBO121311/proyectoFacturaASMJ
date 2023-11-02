@@ -23,3 +23,15 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  - Se ha añadido el icono e insertado el tema principal.
  - Se añadió las tres layout tanto de customer como de task
  - Se ha añadido los 12 botones y el navgraph correspondiente para acceder a las distintas layout.
+
+ --------------------------------------------------------------------------------------------------
+ Escrito por SergioGV98
+
+ ## V2.3.5 (02/11/2023)
+ - Se ha agregado un RadioGroup para los botones.
+ - Se ha cambiado el layout de Task_detail de RelativeLayout a LinearLayout.
+ - Se ha agregado mejoras en la interfaz de task_detail. Tanto colores como imágenes.
+ - Se ha añadido temporalmente una imagen al proyecto de placeholder para task_detail.
+ - Se ha agregado el código necesario para que al entrar en la lista de tareas se muestren unas tareas creadas.
+ - Renombramiento de las carpetas principales de tareas.
+ - Cambios en el nav_graph para poder navegar correctamente.
