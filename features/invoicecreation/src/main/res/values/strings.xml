@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="tbFacturas">Facturas</string>
+    <string name="tieCliente">Cliente</string>
+    <string name="tieFechaEm">Fecha de emisión</string>
+    <string name="tieFechaFin">Fecha de finalización</string>
+    <string name="btnAñadir">Añadir artículo</string>
+    <string name="tieCliente_description">Imagen de usuario</string>
+    <string name="tieArticulos">Articulos</string>
+    <string name="tvObligatorio">*Obligatorio</string>
+    <string name="tvFecha">DD/MM/AAAA</string>
+
+    <string name="tvDisponibles">Disponibles</string>
+    <string name="tvAñadidos">Añadidos</string>
+    <string name="tvTotal">Total: </string>
+</resources>

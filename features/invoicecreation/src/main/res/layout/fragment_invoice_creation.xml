@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/invoice_creation_clLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/invoice_creation_tilCliente"
+        android:layout_width="350dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="16dp"
+        app:endIconContentDescription="@string/tieCliente_description"
+        app:endIconDrawable="@drawable/ic_refacuser_foreground"
+        app:endIconMode="custom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:helperText="@string/tvObligatorio">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/invoice_creation_tieCliente"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:fontFamily="@font/helvetica"
+            android:hint="@string/tieCliente" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/invoice_creation_tilFechaEm"
+        android:layout_width="350dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="30dp"
+        app:endIconDrawable="@drawable/ic_fecha_foreground"
+        app:endIconMode="custom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/invoice_creation_tilCliente"
+        app:helperText="@string/tvFecha">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/invoice_creation_tieFechaEm"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:fontFamily="@font/helvetica"
+            android:hint="@string/tieFechaEm" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/invoice_creation_tilFechaFin"
+        android:layout_width="350dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="30dp"
+        app:endIconDrawable="@drawable/ic_fecha_foreground"
+        app:endIconMode="custom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/invoice_creation_tilFechaEm"
+        app:helperText="@string/tvFecha">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/invoice_creation_tieFechaFin"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:fontFamily="@font/helvetica"
+            android:hint="@string/tieFechaFin" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/invoice_creation_fabFactura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:src="@android:drawable/ic_menu_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/invoice_creation_btnArticulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="@string/btnAñadir"
+        android:fontFamily="@font/helvetica"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/invoice_creation_tilFechaFin" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/invoice_creation_cdArti"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/invoice_creation_fabFactura"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/invoice_creation_btnArticulo">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:orientation="horizontal">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/invoice_creation_rvDisponibles"
+                android:layout_width="175dp"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/helvetica">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/invoice_creation_rvAñadidos"
+                android:layout_width="175dp"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/helvetica"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/invoice_creation_tvTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text="@string/tvTotal"
+        android:textStyle="bold"
+        android:fontFamily="@font/helvetica"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/invoice_creation_cdArti"
+        app:layout_constraintVertical_bias="0.508" />
+
+    <TextView
+        android:id="@+id/invoice_creation_tvArtDisponibles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvDisponibles"
+        android:textStyle="bold"
+        android:fontFamily="@font/helvetica"
+        app:layout_constraintBottom_toTopOf="@+id/invoice_creation_cdArti"
+        app:layout_constraintEnd_toStartOf="@+id/invoice_creation_btnArticulo"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/invoice_creation_tilFechaFin"
+        app:layout_constraintVertical_bias="0.753" />
+
+    <TextView
+        android:id="@+id/invoice_creation_tvAñadidos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tvAñadidos"
+        android:textStyle="bold"
+        android:fontFamily="@font/helvetica"
+        app:layout_constraintBottom_toTopOf="@+id/invoice_creation_cdArti"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.623"
+        app:layout_constraintStart_toEndOf="@+id/invoice_creation_btnArticulo"
+        app:layout_constraintTop_toBottomOf="@+id/invoice_creation_btnArticulo"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/invoice_creation_tvTotalText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="144dp"
+        android:fontFamily="@font/helvetica"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/invoice_creation_fabFactura"
+        app:layout_constraintTop_toBottomOf="@+id/invoice_creation_cdArti"
+        app:layout_constraintVertical_bias="0.508" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

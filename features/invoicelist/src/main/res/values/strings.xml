@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="tvVacio">La lista de facturas está vacia</string>
+    <string name="item_fa_Factura">Factura: </string>
+    <string name="item_fa_Cliente">Cliente: </string>
+    <string name="item_fa_FechaEm">Fecha de emisión: </string>
+    <string name="item_fa_FechaFi">Fecha de finalización: </string>
+    <string name="item_fa_Total">Total: </string>
+</resources>
