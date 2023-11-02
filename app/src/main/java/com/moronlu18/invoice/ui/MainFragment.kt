@@ -66,6 +66,20 @@ class MainFragment : Fragment() {
             findNavController().navigate(R.id.action_mainFragment_to_InvoiceListFragment)
         }
 
+        //Item
+        binding.btItemCreation.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_ItemCreationFragment)
+        }
+
+        binding.btItemDetails.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_ItemDetailFragment)
+        }
+
+        binding.btItemList.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_ItemListFragment)
+        }
+
+
         //Task
         binding.btTaskCreation.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_TaskCreationFragment)

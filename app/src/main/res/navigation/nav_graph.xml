@@ -49,6 +49,26 @@
 
 
     <fragment
+        app:moduleName="itemcreation"
+        android:label="@string/title_itemcreation"
+        android:id="@+id/ItemCreationFragment"
+        android:name="com.jcasrui.itemcreation.ui.ItemCreation" />
+
+
+    <fragment
+        app:moduleName="itemdetail"
+        android:label="@string/title_itemdetail"
+        android:id="@+id/ItemDetailFragment"
+        android:name="com.jcasrui.itemdetail.ui.ItemDetail" />
+
+    <fragment
+        app:moduleName="itemlist"
+        android:label="@string/title_itemlist"
+        android:id="@+id/ItemListFragment"
+        android:name="com.jcasrui.itemlist.ui.ItemList" />
+
+
+    <fragment
         app:moduleName="tasklist"
         android:label="@string/title_tasklist"
         android:id="@+id/TaskListFragment"
@@ -116,6 +136,15 @@
         <action
             android:id="@+id/action_mainFragment_to_InvoiceCreationFragment"
             app:destination="@id/InvoiceCreationFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_ItemDetailFragment"
+            app:destination="@id/ItemDetailFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_ItemListFragment"
+            app:destination="@id/ItemListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_ItemCreationFragment"
+            app:destination="@id/ItemCreationFragment" />
 
     </fragment>
 
