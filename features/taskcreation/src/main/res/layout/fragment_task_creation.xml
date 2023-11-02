@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_marginStart="15dp"
     android:layout_marginEnd="15dp"
+    android:orientation="vertical"
     tools:context=".TaskCreation">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -19,7 +19,7 @@
             android:id="@+id/task_creation_info_txv_customer"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:hint="@string/task_creation_txv_hint_nombre_cliente"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -72,42 +72,42 @@
             android:gravity="center_horizontal"
             android:inputType="none" />
 
-        <GridLayout
+    </com.google.android.material.textfield.TextInputLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:rowCount="2"
-            android:columnCount="2">
+            android:orientation="vertical">
 
             <RadioButton
                 android:id="@+id/task_creation_rdb_notstarted"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
                 android:text="@string/task_creation_txt_button_no_comenzada" />
 
             <RadioButton
                 android:id="@+id/task_creation_rdb_inprogress"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
                 android:text="@string/task_creation_txt_button_en_proceso" />
 
             <RadioButton
                 android:id="@+id/task_creation_rdb_completed"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
                 android:text="@string/task_creation_txt_button_completada" />
 
             <RadioButton
                 android:id="@+id/task_creation_rdb_abandoned"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
                 android:text="@string/task_creation_txt_button_abandonada" />
-        </GridLayout>
-    </com.google.android.material.textfield.TextInputLayout>
+
+        </RadioGroup>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -118,15 +118,15 @@
 
         <Button
             android:id="@+id/task_Creation_button_date_creation"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginRight="10dp"
+            android:layout_weight="1"
             android:text="@string/task_creation_txt_button_fecha_creacion" />
 
         <Button
             android:id="@+id/task_Creation_button_date_end"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/task_creation_txt_button_fecha_finalizacion" />
@@ -134,7 +134,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
@@ -142,6 +142,7 @@
             android:id="@+id/task_creation_ftb_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:layout_weight="1"
             android:clickable="true"
             app:srcCompat="@drawable/ic_add_task" />
