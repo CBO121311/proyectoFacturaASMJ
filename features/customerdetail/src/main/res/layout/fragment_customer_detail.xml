@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.cbo.customerdetail.ui.CustomerDetail">
@@ -12,12 +12,11 @@
         android:layout_height="142dp"
         android:layout_marginTop="100dp"
         android:alpha="0.2"
-        android:outlineAmbientShadowColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/person_circle_icon"
-        app:tint="#5225FF" />
+        app:tint="@color/cd_color_ivCliente" />
 
 
     <androidx.cardview.widget.CardView
@@ -33,7 +32,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/customer_detail_imgCliente">
 
-
         <LinearLayout
             android:id="@+id/customer_detail_LinearNombre"
             android:layout_width="match_parent"
@@ -47,7 +45,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E1C8FD"
+                android:background="@color/cd_color_fondo_1"
                 android:orientation="vertical"
                 android:padding="8dp">
 
@@ -56,7 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/helvetica"
-                    android:text="Nombre:"
+                    android:text="@string/cd_tvNombre"
                     android:textSize="14sp" />
 
                 <TextView
@@ -64,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/helvetica"
-                    android:text="Alejandro López"
+                    android:text="@string/cd_tvEjemNombre"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -73,7 +71,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#EFE6FF"
+                android:background="@color/cd_color_fondo_2"
                 android:orientation="vertical"
                 android:padding="8dp">
 
@@ -82,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/helvetica"
-                    android:text="Correo Electrónico:"
+                    android:text="@string/cd_tvCorreo"
                     android:textSize="14sp" />
 
                 <TextView
@@ -90,7 +88,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/helvetica"
-                    android:text="abc@hotmail.es"
+                    android:text="@string/cd_tvEjemCorreo"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -98,7 +96,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E1C8FD"
+                android:background="@color/cd_color_fondo_1"
                 android:orientation="vertical"
                 android:padding="8dp">
 
@@ -107,7 +105,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/helvetica"
-                    android:text="Teléfono:"
+                    android:text="@string/cd_tvTelefono"
                     android:textSize="14sp" />
 
                 <TextView
@@ -115,7 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/helvetica"
-                    android:text="672-231-356"
+                    android:text="@string/cd_tvEjemTelefono"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -147,7 +145,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#EFE6FF"
+                android:background="@color/cd_color_fondo_2"
                 android:orientation="vertical"
                 android:padding="8dp">
 
@@ -156,7 +154,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/helvetica"
-                    android:text="Direccion"
+                    android:text="@string/cd_tvDireccion"
                     android:textSize="14sp" />
 
                 <TextView
@@ -164,16 +162,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/helvetica"
-                    android:text="Calle Salamanca Nº27 (21110)"
+                    android:text="@string/cd_tvEjemDireccion"
                     android:textSize="16sp"
                     android:textStyle="bold" />
-
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E1C8FD"
+                android:background="@color/cd_color_fondo_1"
                 android:orientation="vertical"
                 android:padding="8dp">
 
@@ -182,7 +179,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/helvetica"
-                    android:text="Ciudad"
+                    android:text="@string/cd_tvCiudad"
                     android:textSize="14sp" />
 
                 <TextView
@@ -190,7 +187,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/helvetica"
-                    android:text="Málaga"
+                    android:text="@string/cd_tvEjemCiudad"
                     android:textSize="16sp"
                     android:textStyle="bold" />
             </LinearLayout>

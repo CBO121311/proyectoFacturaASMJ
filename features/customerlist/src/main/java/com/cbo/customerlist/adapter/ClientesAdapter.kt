@@ -22,7 +22,6 @@ class ClientesAdapter(
     override fun getItemCount(): Int {
 
         return clientesList.size
-
     }
 
     override fun onBindViewHolder(holder: ClientesViewHolder, position: Int) {

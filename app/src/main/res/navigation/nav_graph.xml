@@ -28,6 +28,25 @@
         android:name="com.cbo.customerdetail.ui.CustomerDetail"/>
 
 
+    <fragment
+        app:moduleName="invoicecreation"
+        android:label="@string/title_invoicecreation"
+        android:id="@+id/InvoiceCreationFragment"
+        android:name="com.moronlu18.invoicecreation.InvoiceCreation" />
+
+
+    <fragment
+        app:moduleName="invoicedetail"
+        android:label="@string/title_invoicedetail"
+        android:id="@+id/InvoiceDetailFragment"
+        android:name="com.moronlu18.invoicedetail.InvoiceDetail" />
+
+    <fragment
+        app:moduleName="invoicelist"
+        android:label="@string/title_invoicelist"
+        android:id="@+id/InvoiceListFragment"
+        android:name="com.moronlu18.invoicelist.InvoiceList" />
+
 
     <fragment
         app:moduleName="tasklist"
@@ -88,6 +107,15 @@
         <action
             android:id="@+id/action_mainFragment_to_CustomerDetailFragment"
             app:destination="@id/CustomerDetailFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_InvoiceListFragment"
+            app:destination="@id/InvoiceListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_InvoiceDetailFragment"
+            app:destination="@id/InvoiceDetailFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_InvoiceCreationFragment"
+            app:destination="@id/InvoiceCreationFragment" />
 
     </fragment>
 

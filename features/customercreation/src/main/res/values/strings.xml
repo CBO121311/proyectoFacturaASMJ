@@ -2,4 +2,13 @@
 <resources>
 
 
+    <string name="til_hint_nombre">Escribe tu nombre</string>
+    <string name="til_hint_email">Escribe tu email</string>
+    <string name="til_hint_telefono">Escribe tu teléfono</string>
+    <string name="til_hint_direccion">Escribe tu dirección</string>
+    <string name="tv_direccion">Dirección</string>
+    <string name="tv_contacto">Contacto</string>
+    <string name="til_hint_cp">Escribe tú código postal</string>
+    <string name="til_hint_ciudad">Escribe tu ciudad</string>
+    <string name="btn_confirmar">Confirmar</string>
 </resources>
