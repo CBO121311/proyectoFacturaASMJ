@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="item_detail_tvTitle_text">Information</string>
+    <string name="item_detail_btnEdit_text">Edit</string>
+    <string name="item_detail_tvName_text">Name</string>
+    <string name="item_detail_tvDescripcion_text">Description</string>
+    <string name="item_detail_tvType_text">Type</string>
+    <string name="item_detail_tvRate_text">Rate</string>
+    <string name="item_detail_tvTaxable_text">isTaxable</string>
+</resources>

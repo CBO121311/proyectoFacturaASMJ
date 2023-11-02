@@ -1,2 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="item_detail_tvTitle_text">Información</string>
+    <string name="item_detail_tvName_text">Nombre</string>
+    <string name="item_detail_tvDescripcion_text">Descripción</string>
+    <string name="item_detail_tvType_text">Tipo</string>
+    <string name="item_detail_tvRate_text">Tasa</string>
+    <string name="item_detail_tvTaxable_text">Impuestos</string>
+    <string name="item_detail_btnEdit_text">Editar</string>
+    <string-array name="itemType_array">
+        <item>Artículo</item>
+        <item>Servicio</item>
+    </string-array>
+</resources>

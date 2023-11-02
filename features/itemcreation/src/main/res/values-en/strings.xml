@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="item_creation_tvTitle_text">Add Item</string>
+    <string name="item_creation_edName_text">Name</string>
+    <string name="item_creation_edDescription_text">Description</string>
+    <string name="item_creation_btnDone_text">Add</string>
+    <string name="item_creation_tvTypeItem_text">Type item</string>
+    <string name="item_creation_tvRate_text">Rate</string>
+    <string name="item_creation_chbxTaxable_text">isTaxable</string>
+</resources>
