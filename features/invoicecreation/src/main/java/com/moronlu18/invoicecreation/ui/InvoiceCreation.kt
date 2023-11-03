@@ -1,4 +1,4 @@
-package com.moronlu18.invoicecreation
+package com.moronlu18.invoicecreation.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.moronlu18.invoicecreation.R
 
 class InvoiceCreation : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
