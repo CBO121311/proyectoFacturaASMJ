@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="tie_task_creation" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="android:textSize">15dp</item>
+    </style>
+    <style name="tie_task_description" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:lines">6</item>
+        <item name="android:overScrollMode">always</item>
+        <item name="android:scrollbarStyle">insideInset</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:scrollHorizontally">false</item>
+    </style>
+    <style name="edm_task_creation" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"></style>
+</resources>

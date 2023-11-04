@@ -5,28 +5,28 @@ class TaskProvider {
             Task(
                 "Sergio",
                 "Estudiart dart",
-                "Repasar listas",
+                "Prueba de estudiar Dart FULL HD NO FAKE 1234 AAAAAAAAAAAAAAAAAAAA",
                 "29-10-2023",
                 "30-10-2023"
             ),
             Task(
                 "Sergio",
                 "Estudiart dart",
-                "Repasar listas",
+                "Prueba de estudiar Dart FULL HD NO FAKE 1234 AAAAAAAAAAAAAAAAAAAA",
                 "29-10-2023",
                 "30-10-2023"
             ),
             Task(
                 "Sergio",
                 "Estudiart dart",
-                "Repasar listas",
+                "Prueba de estudiar Dart FULL HD NO FAKE 1234 AAAAAAAAAAAAAAAAAAAA",
                 "29-10-2023",
                 "30-10-2023"
             ),
             Task(
                 "Sergio",
                 "Estudiart dart",
-                "Repasar listas",
+                "Prueba de estudiar Dart FULL HD NO FAKE 1234 AAAAAAAAAAAAAAAAAAAA",
                 "29-10-2023",
                 "30-10-2023"
             )

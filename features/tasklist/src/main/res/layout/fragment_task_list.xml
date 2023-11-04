@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center|right"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/task_list_add_task_margin"
         android:src="@android:drawable/ic_input_add" />
 
 </FrameLayout>

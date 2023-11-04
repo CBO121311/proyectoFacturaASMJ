@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="task_details_clientbox_padding">16dp</dimen>
+    <dimen name="task_details_client_image_view_width_height">110dp</dimen>
+    <dimen name="task_details_view_margin_top">16dp</dimen>
+    <dimen name="task_details_nametask_statusbox_padding">16dp</dimen>
+    <dimen name="task_details_task_type_padding">16dp</dimen>
+    <dimen name="task_details_date_layout_padding">16dp</dimen>
+    <dimen name="task_details_descriptionBox_padding">16dp</dimen>
+    <dimen name="task_details_fab_modify_margin">16dp</dimen>
+</resources>
