@@ -60,3 +60,14 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  
  ## V2.4.2 (06/11/2023)
  - Actualización de las layout customer y mejoras en los xml de los recursos.
+
+ --------------------------------------------------------------------------------------------------
+ Escrito por mateotamayoo
+
+ ## V2.4.3 (06/11/2023)
+ - Se ha cambiado el layout de invoice_detail.
+ - Se ha agregado el código necesario para que al entrar en la lista de facturas se muestren unas facturas creadas.
+ - Renombramiento de las carpetas principales de invoice.
+ - Cambios en el nav_graph para poder navegar correctamente.
+   
+--------------------------------------------------------------------------------------------------
