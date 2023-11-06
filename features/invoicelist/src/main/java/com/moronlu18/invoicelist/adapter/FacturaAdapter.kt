@@ -1,8 +1,9 @@
-package com.moronlu18.invoicelist
+package com.moronlu18.invoicelist.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.moronlu18.invoicelist.R
 import com.moronlu18.invoicelist.adapter.FacturaViewHolder
 import com.moronlu18.invoicelist.data.Factura
 

@@ -32,21 +32,20 @@
         app:moduleName="invoicecreation"
         android:label="@string/title_invoicecreation"
         android:id="@+id/InvoiceCreationFragment"
-        android:name="com.moronlu18.invoicecreation.InvoiceCreation" />
+        android:name="com.moronlu18.invoicecreation.ui.InvoiceCreation" />
 
 
     <fragment
         app:moduleName="invoicedetail"
         android:label="@string/title_invoicedetail"
         android:id="@+id/InvoiceDetailFragment"
-        android:name="com.moronlu18.invoicedetail.InvoiceDetail" />
+        android:name="com.moronlu18.invoicedetail.ui.InvoiceDetail" />
 
     <fragment
         app:moduleName="invoicelist"
         android:label="@string/title_invoicelist"
         android:id="@+id/InvoiceListFragment"
-        android:name="com.moronlu18.invoicelist.InvoiceList" />
-
+        android:name="com.moronlu18.invoicelist.ui.InvoiceList" />
 
     <fragment
         app:moduleName="itemcreation"
