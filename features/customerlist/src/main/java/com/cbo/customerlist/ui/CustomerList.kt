@@ -16,14 +16,15 @@ import com.moronlu18.customerlist.databinding.FragmentCustomerListBinding
 
 class CustomerList : Fragment() {
 
-    private lateinit var binding : FragmentCustomerListBinding
+    private var _binding: FragmentCustomerListBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentCustomerListBinding.inflate(inflater,container,false)
+        _binding = FragmentCustomerListBinding.inflate(inflater,container,false)
         return binding.root
     }
 
@@ -45,14 +46,14 @@ class CustomerList : Fragment() {
 
             x-> onItemSelected1(x)
         }
-
-
         binding.customerListRvClientes.addItemDecoration(decoration)
-
 
     }
     fun onItemSelected1(cliente: Clientes) {
         Toast.makeText(requireContext(),cliente.name, Toast.LENGTH_SHORT).show()
-
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

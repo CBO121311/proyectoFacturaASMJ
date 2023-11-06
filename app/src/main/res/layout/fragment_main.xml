@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="100dp"
-            android:text="Clientes"
+            android:text="@string/app_tvCustomer"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:text="Factura"
+            android:text="@string/app_tvInvoice"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btCustomerCreation" />
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:text="Articulos"
+            android:text="@string/app_tvItem"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btInvoiceCreation" />
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="408dp"
-            android:text="Tareas"
+            android:text="@string/app_tvTask"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -81,7 +81,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Creación"
+            android:text="@string/app_btnCreation"
             android:backgroundTint="#4CAF50"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvCustomer" />
@@ -91,7 +91,7 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginStart="16dp"
-            android:text="Creación"
+            android:text="@string/app_btnCreation"
             android:backgroundTint="#009688"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvInvoice" />
@@ -101,7 +101,7 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginStart="16dp"
-            android:text="Creación"
+            android:text="@string/app_btnCreation"
             android:backgroundTint="#03A9F4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvItem" />
@@ -111,7 +111,7 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginStart="16dp"
-            android:text="Creación"
+            android:text="@string/app_btnCreation"
             android:backgroundTint="#9C27B0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTask" />
@@ -122,7 +122,7 @@
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
             android:backgroundTint="#03A9F4"
-            android:text="Detalles"
+            android:text="@string/app_btnDetail"
             app:layout_constraintStart_toEndOf="@+id/btItemCreation"
             app:layout_constraintTop_toBottomOf="@+id/tvItem" />
 
@@ -132,7 +132,7 @@
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
             android:backgroundTint="#9C27B0"
-            android:text="Detalles"
+            android:text="@string/app_btnDetail"
             app:layout_constraintStart_toEndOf="@+id/btTaskCreation"
             app:layout_constraintTop_toBottomOf="@+id/tvTask" />
 
@@ -142,7 +142,7 @@
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
             android:backgroundTint="#03A9F4"
-            android:text="Listado"
+            android:text="@string/app_btnList"
             app:layout_constraintStart_toEndOf="@+id/btItemDetails"
             app:layout_constraintTop_toBottomOf="@+id/tvItem" />
 
@@ -152,7 +152,7 @@
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
             android:backgroundTint="#9C27B0"
-            android:text="Listado"
+            android:text="@string/app_btnList"
             app:layout_constraintStart_toEndOf="@+id/btTaskDetails"
             app:layout_constraintTop_toBottomOf="@+id/tvTask" />
 
@@ -162,7 +162,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:backgroundTint="#4CAF50"
-            android:text="Detalles"
+            android:text="@string/app_btnDetail"
             app:layout_constraintStart_toEndOf="@+id/btCustomerCreation"
             app:layout_constraintTop_toBottomOf="@+id/tvCustomer" />
 
@@ -172,7 +172,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:backgroundTint="#009688"
-            android:text="Detalles"
+            android:text="@string/app_btnDetail"
             app:layout_constraintStart_toEndOf="@+id/btInvoiceCreation"
             app:layout_constraintTop_toBottomOf="@+id/tvInvoice" />
 
@@ -182,7 +182,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:backgroundTint="#4CAF50"
-            android:text="Listado"
+            android:text="@string/app_btnList"
             app:layout_constraintStart_toEndOf="@+id/btCustomerDetails"
             app:layout_constraintTop_toBottomOf="@+id/tvCustomer" />
 
@@ -192,9 +192,22 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:backgroundTint="#009688"
-            android:text="Listado"
+            android:text="@string/app_btnList"
             app:layout_constraintStart_toEndOf="@+id/btInvoiceDetails"
             app:layout_constraintTop_toBottomOf="@+id/tvInvoice" />
+
+        <Button
+            android:id="@+id/btnPrueba"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/app_btnTest"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.457"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btTaskDetails"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

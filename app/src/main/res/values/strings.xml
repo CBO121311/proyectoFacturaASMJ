@@ -23,9 +23,15 @@
 
     <string name="action_settings">Settings</string>
 
-
-
     <string name="btSignIn">Login</string>
     <string name="btSignUp">Registro</string>
     <string name="mainFragment">Pantalla Inicial</string>
+    <string name="app_tvCustomer">Clientes</string>
+    <string name="app_tvInvoice">Factura</string>
+    <string name="app_tvItem">Articulos</string>
+    <string name="app_tvTask">Tareas</string>
+    <string name="app_btnCreation">Creación</string>
+    <string name="app_btnDetail">Detalles</string>
+    <string name="app_btnList">Listado</string>
+    <string name="app_btnTest">Prueba</string>
 </resources>
