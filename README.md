@@ -53,4 +53,10 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  - Creación de styles.xml en las distintas carpetas de tareas.
  - Se ha asignado a cada interfaz su dimens y styles correspondientes.
  - Se ha actualizado la interfaz tasklist (Mejoras visuales).
-  
+
+----------------------------------------------------------------------------------------------------
+
+ Escrito por CBO121311
+ 
+ ## V2.4.1 (06/11/2023)
+ - Actualización de las layout customer y mejoras en los xml de los recursos.
