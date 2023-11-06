@@ -1,146 +1,100 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/customer_creation_clayoutCustomer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/cc_general_margin"
     tools:context="com.cbo.customercreation.ui.CustomerCreation">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/customer_creation_TextInputLayout_NombreCliente"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:hint="@string/til_hint_nombre"
-        app:helperText="Requerido*"
-        app:helperTextTextColor="@color/text_color_required"
+    <ImageView
+        android:id="@+id/customer_creation_ivCustomer"
+        android:layout_width="@dimen/cc_width_ivCustomer"
+        android:layout_height="@dimen/cc_height_ivCustomer"
+        android:alpha="0.5"
+        android:src="@drawable/person_circle_icon"
+        app:layout_constraintBottom_toTopOf="@+id/customer_creation_tilNameCustomer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/cc_color_seedColor" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/customer_creation_tilNameCustomer"
+        style="@style/customer_creation_tilStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/cc_general_margin"
+        android:hint="@string/cc_til_hint_name"
+        app:helperText="@string/cc_til_helperText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/customer_creation_ivCustomer"
         app:startIconDrawable="@drawable/ic_action_person">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/customer_creation_editTextUsername_NombreCliente"
+            android:id="@+id/customer_creation_tietNameCustomer"
+            style="customer_creation_tietStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/customer_creation_txv_Contacto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="200dp"
-        android:fontFamily="@font/helvetica"
-        android:text="@string/tv_contacto"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.201"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customer_creation_TextInputLayout_NombreCliente" />
-
-
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/customer_creation_TextInputLayout_CorreoCliente"
+        android:id="@+id/customer_creation_tilCustomerEmail"
+        style="@style/customer_creation_tilStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="32dp"
-        android:hint="@string/til_hint_email"
-        app:helperText="Requerido*"
-        app:helperTextTextColor="@color/text_color_required"
+        android:hint="@string/cc_til_hint_email"
+        app:helperText="@string/cc_til_helperText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customer_creation_txv_Contacto"
+        app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilNameCustomer"
         app:startIconDrawable="@drawable/ic_action_email">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/customer_creation_editTextUsername_CorreoCliente"
+            android:id="@+id/customer_creation_tietEmailCustomer"
+            style="customer_creation_tietStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/customer_creation_TextInputLayout_Telefono"
+        android:id="@+id/customer_creation_tilPhone"
+        style="@style/customer_creation_tilStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="32dp"
-        android:hint="@string/til_hint_telefono"
+        android:layout_marginTop="@dimen/cc_smaller_marginTop"
+        android:hint="@string/cc_til_hint_phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customer_creation_TextInputLayout_CorreoCliente"
+        app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilCustomerEmail"
         app:startIconDrawable="@drawable/ic_action_phone">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/customer_creation_editTextUsername_Telefono"
+            android:id="@+id/customer_creation_tietPhone"
+            style="customer_creation_tietStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/customer_creation_txv_Direccion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/helvetica"
-        android:text="@string/tv_direccion"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.077"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customer_creation_TextInputLayout_Telefono" />
-
-
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/customer_creation_TextInputLayout_Direccion"
+        android:id="@+id/customer_creation_tilAddress"
+        style="@style/customer_creation_tilStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        android:hint="@string/til_hint_direccion"
+        android:layout_marginTop="@dimen/cc_general_margin"
+        android:hint="@string/cc_til_hint_address"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customer_creation_txv_Direccion"
+        app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilPhone"
         app:startIconDrawable="@drawable/ic_action_house">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/customer_creation_editTextUsername_Direccion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/customer_creation_TextInputLayout_CodigoPostal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        android:hint="@string/til_hint_cp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/customer_creation_TextInputLayout_Ciudad"
-        app:layout_constraintTop_toBottomOf="@+id/customer_creation_TextInputLayout_Direccion">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/customer_creation_editTextUsername_CodigoPostal"
+            android:id="@+id/customer_creation_tietAddress"
+            style="customer_creation_tietStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />
@@ -148,20 +102,20 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/customer_creation_TextInputLayout_Ciudad"
+        android:id="@+id/customer_creation_tilCity"
+        style="@style/customer_creation_tilStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="240dp"
-        android:hint="@string/til_hint_ciudad"
+        android:layout_marginTop="@dimen/cc_general_margin"
+        android:hint="@string/cc_til_hint_city"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customer_creation_TextInputLayout_Direccion"
+        app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilAddress"
         app:startIconDrawable="@drawable/ic_action_city">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/customer_creation_editTextUsername_Ciudad"
+            android:id="@+id/customer_creation_tietCity"
+            style="customer_creation_tietStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />
@@ -169,15 +123,41 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/customer_creation_btnConfirmar"
-        android:layout_width="168dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="@string/btn_confirmar"
-        android:textSize="18sp"
+        android:id="@+id/customer_creation_btnSave"
+        style="@style/customer_creation_btnStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/cc_general_margin"
+        android:backgroundTint="@color/cc_color_seedColor"
+        android:drawableEnd="@drawable/ic_action_save"
+        android:padding="@dimen/cc_Padding_btnSave"
+        android:text="@string/cc_btn_text_save"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/customer_creation_TextInputLayout_CodigoPostal" />
+        app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilCity" />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/customer_creation_cvImgCustomer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/cc_cardView_marginTop"
+        app:cardBackgroundColor="@color/cc_cvBackgroundColor"
+        app:cardCornerRadius="@dimen/cc_radius_cvImgCustomer"
+        app:cardElevation="@dimen/cc_cardElevation_cvImgCustomer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.645"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/customer_creation_ivCustomer">
+
+        <ImageButton
+            android:id="@+id/customer_creation_imgbtnCustomer"
+            android:layout_width="@dimen/cc_size_imgbtnCustomer"
+            android:layout_height="@dimen/cc_size_imgbtnCustomer"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="@string/cc_descriptiontext_ibCustomer"
+            android:focusable="true"
+            android:padding="@dimen/cc_Padding_imgButton"
+            android:src="@drawable/ic_action_altimage" />
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,63 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="8dp"
+    android:id="@+id/customer_list_cvItemCustomer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="4dp">
+    android:layout_margin="@dimen/cl_item_cvMargin"
+    app:cardElevation="@dimen/cl_item_cvElevation">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/customer_list_ccCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/customer_list_tvNombre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold"
+        <ImageView
+            android:id="@+id/customer_list_ivCliente"
+            android:layout_width="@dimen/cl_size_ivCustomer"
+            android:layout_height="@dimen/cl_size_ivCustomer"
+            android:alpha="0.2"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Automóviles Mero" />
+            app:srcCompat="@drawable/reduce_person_circle_icon"
+            app:tint="@color/cl_color_ivCustomer" />
 
         <TextView
-            android:id="@+id/customer_list_tvCorreo"
+            android:id="@+id/customer_list_tvName"
+            style="@style/customer_list_tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/customer_list_tvNombre"
-            tools:text="cbo@hotmail.es" />
+            android:layout_marginStart="@dimen/cl_tvMarginStart"
+            android:text="@string/cl_tvExampleName"
+            app:layout_constraintStart_toEndOf="@+id/customer_list_ivCliente"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/customer_list_tvTelefono"
+            android:id="@+id/customer_list_tvEmail"
+            style="@style/customer_list_tvNormal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/cl_tvMarginStart"
+            android:text="@string/cl_tvExampleEmail"
+            app:layout_constraintStart_toEndOf="@+id/customer_list_ivCliente"
+            app:layout_constraintTop_toBottomOf="@+id/customer_list_tvName" />
+
+        <TextView
+            android:id="@+id/customer_list_tvPhone"
+            style="@style/customer_list_tvNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/cl_tvMarginEnd"
+            android:text="@string/cl_tvExamplePhone"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/customer_list_tvCorreo"
-            app:layout_constraintTop_toBottomOf="@+id/customer_list_tvNombre"
-            tools:text="610-554-323" />
+            app:layout_constraintTop_toBottomOf="@+id/customer_list_tvName" />
 
         <TextView
-            android:id="@+id/customer_list_tvCiudad"
+            android:id="@+id/customer_list_tvCity"
+            style="@style/customer_list_tvNormal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/customer_list_tvTelefono"
-            tools:text="Málaga" />
+            android:layout_marginStart="@dimen/cl_tvMarginStart"
+            android:text="@string/cl_tvExampleCity"
+            app:layout_constraintStart_toEndOf="@+id/customer_list_ivCliente"
+            app:layout_constraintTop_toBottomOf="@+id/customer_list_tvEmail" />
 
         <TextView
-            android:id="@+id/customer_list_tvDireccion"
+            android:id="@+id/customer_list_tvAddress"
+            style="@style/customer_list_tvNormal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginEnd="@dimen/cl_tvMarginEnd"
             android:maxLines="1"
+            android:text="@string/cl_tvExampleAddress"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/customer_list_tvTelefono"
-            app:layout_constraintStart_toEndOf="@+id/customer_list_tvCiudad"
-            tools:layout_editor_absoluteY="46dp"
-            tools:text="Calle Ejemplo, Número 23" />
+            app:layout_constraintTop_toBottomOf="@+id/customer_list_tvPhone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

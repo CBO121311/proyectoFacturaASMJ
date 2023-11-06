@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="cd_tvNombre">Nombre:</string>
-    <string name="cd_tvEjemNombre">Alejandro López</string>
-    <string name="cd_tvEjemCorreo">abc@hotmail.es</string>
-    <string name="cd_tvCorreo">Correo Electrónico:</string>
-    <string name="cd_tvTelefono">Teléfono:</string>
-    <string name="cd_tvEjemTelefono">672231356</string>
-    <string name="cd_tvDireccion">Dirección</string>
-    <string name="cd_tvEjemDireccion">Calle Salamanca Nº27 (21110)</string>
-    <string name="cd_tvCiudad">Ciudad</string>
-    <string name="cd_tvEjemCiudad">Málaga</string>
+    <string name="cd_tvName">Nombre:</string>
+    <string name="cd_tvExampleName">Alejandro López</string>
+    <string name="cd_tvExampleEmail">abc@hotmail.es</string>
+    <string name="cd_tvEmail">Correo Electrónico:</string>
+    <string name="cd_tvPhone">Teléfono:</string>
+    <string name="cd_tvExamplePhone">672231356</string>
+    <string name="cd_tvAddress">Dirección</string>
+    <string name="cd_tvExampleAddress">Calle Salamanca Nº27 (21110)</string>
+    <string name="cd_tvCity">Ciudad</string>
+    <string name="cd_tvExampleCity">Málaga</string>
 </resources>

@@ -10,8 +10,6 @@ import com.moronlu18.customercreation.R
 
 class CustomerCreation : Fragment() {
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

@@ -6,62 +6,57 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
-    android:background="@drawable/ic_launcher_background">
+    android:background="@drawable/task_background">
 
     <TextView
         android:id="@+id/task_client_name"
+        style="@style/task_client_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Sergio"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#333333" />
+        android:text="Sergio" />
 
     <TextView
         android:id="@+id/task_name"
+        style="@style/task_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/task_client_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Estudiar Dart"
-        android:textSize="16sp"
-        android:textColor="#555555" />
+        android:text="Estudiar Dart" />
 
     <TextView
         android:id="@+id/task_description"
+        style="@style/task_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingTop="@dimen/task_list_padding_general"
         app:layout_constraintTop_toBottomOf="@+id/task_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="@tools:sample/lorem"
-        android:textSize="14sp"
-        android:textColor="#777777" />
+        android:text="Prueba de estudiar Dart FULL HD NO FAKE 1234 AAAAAAAAAAAAAAAAAAAA" />
 
     <TextView
         android:id="@+id/task_creation_date"
+        style="@style/task_creation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task_description"
-        android:text="Created: 29-10-2023"
-        android:textSize="12sp"
-        android:textColor="#999999" />
+        android:paddingTop="@dimen/task_list_padding_general"
+        android:text="Created: 29-10-2023"/>
 
     <TextView
         android:id="@+id/task_end_date"
+        style="@style/task_creation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="160dp"
+        android:layout_marginEnd="@dimen/task_end_date_layout_margin"
+        android:paddingTop="@dimen/task_list_padding_general"
         android:text="Due: 29-10-2023"
-        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.942"
-        app:layout_constraintStart_toEndOf="@+id/task_creation_date"
-        android:textColor="#999999" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

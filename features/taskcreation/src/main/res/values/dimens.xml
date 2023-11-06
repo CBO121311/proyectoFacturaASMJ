@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="task_creation_layout_padding">16dp</dimen>
+    <dimen name="task_creation_button_date_creation_marginRight">10dp</dimen>
+    <dimen name="task_creation_ftb_add_layout_margin">16dp</dimen>
+</resources>

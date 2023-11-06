@@ -4,20 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="15dp"
-    android:layout_marginEnd="15dp"
+    android:paddingStart="@dimen/task_creation_layout_padding"
+    android:paddingEnd="@dimen/task_creation_layout_padding"
     android:orientation="vertical"
     tools:context="com.sergiogv98.taskcreation.TaskCreation">
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        app:errorEnabled="true"
         app:startIconDrawable="@drawable/ic_person">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/task_creation_info_txv_customer"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            style="@style/tie_task_creation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="@string/task_creation_txv_hint_nombre_cliente"
@@ -28,38 +28,31 @@
         android:id="@+id/task_creation_txv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        app:errorEnabled="true"
         app:startIconDrawable="@drawable/ic_description">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/task_creation_txv_taskName"
+            style="@style/tie_task_creation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/task_creation_txv_hint_nombre_tarea"
-            android:textSize="14sp" />
+            android:hint="@string/task_creation_txv_hint_nombre_tarea" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/task_creation_txv_description"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            style="@style/tie_task_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/task_creation_txv_hint_descripcion"
-            android:inputType="textMultiLine"
-            android:lines="8"
-            android:overScrollMode="always"
-            android:scrollbarStyle="insideInset"
-            android:scrollbars="vertical"
-            android:scrollHorizontally="false" />
+            android:hint="@string/task_creation_txv_hint_descripcion"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        style="@style/edm_task_creation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/task_creation_txv_hint_tipo_tarea"
@@ -112,15 +105,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/task_Creation_button_date_creation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="@dimen/task_creation_button_date_creation_marginRight"
             android:layout_weight="1"
             android:text="@string/task_creation_txt_button_fecha_creacion" />
 
@@ -137,8 +128,8 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/task_creation_ftb_add"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/task_creation_ftb_add_layout_margin"
             android:layout_weight="1"
             android:clickable="true"
             android:layout_gravity="bottom|end"

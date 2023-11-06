@@ -42,4 +42,21 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  ## V2.3.9 (02/11/2023)
  - Implementado el resto de layouts.
  - Corrección menores a los módulos customer.
-  
+
+ --------------------------------------------------------------------------------------------------
+ Escrito por SergioGV98
+ 
+ ## V2.4.1 (04/11/2023)
+ - Eliminación de imágenes PlaceHolder.
+ - Eliminación de carpetas innecesarias que no se usaban.
+ - Creación de dimens.xml en las distintas carpetas de tareas.
+ - Creación de styles.xml en las distintas carpetas de tareas.
+ - Se ha asignado a cada interfaz su dimens y styles correspondientes.
+ - Se ha actualizado la interfaz tasklist (Mejoras visuales).
+
+----------------------------------------------------------------------------------------------------
+
+ Escrito por CBO121311
+ 
+ ## V2.4.2 (06/11/2023)
+ - Actualización de las layout customer y mejoras en los xml de los recursos.

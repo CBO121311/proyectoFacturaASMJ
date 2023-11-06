@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-
-    <string name="til_hint_nombre">Escribe tu nombre</string>
-    <string name="til_hint_email">Escribe tu email</string>
-    <string name="til_hint_telefono">Escribe tu teléfono</string>
-    <string name="til_hint_direccion">Escribe tu dirección</string>
-    <string name="tv_direccion">Dirección</string>
-    <string name="tv_contacto">Contacto</string>
-    <string name="til_hint_cp">Escribe tú código postal</string>
-    <string name="til_hint_ciudad">Escribe tu ciudad</string>
-    <string name="btn_confirmar">Confirmar</string>
+    <string name="cc_til_hint_name">Nombre</string>
+    <string name="cc_til_hint_email">Email</string>
+    <string name="cc_til_hint_phone">Teléfono</string>
+    <string name="cc_til_hint_address">Dirección</string>
+    <string name="cc_til_hint_city">Ciudad</string>
+    <string name="cc_btn_text_save">Guardar</string>
+    <string name="cc_til_helperText">Requerido*</string>
+    <string name="cc_descriptiontext_ibCustomer">Pulsa añadir una imagen</string>
 </resources>
