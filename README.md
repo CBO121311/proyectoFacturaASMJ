@@ -71,3 +71,9 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  - Cambios en el nav_graph para poder navegar correctamente.
    
 --------------------------------------------------------------------------------------------------
+
+ Escrito por CBO121311
+ 
+ ## V2.4.4 (06/11/2023)
+ - Añadido botón prueba para el calendario (se eliminará el miercoles).
+ - Actualización de los fragment de customer añadiendo binding y utilizando el destroy.
