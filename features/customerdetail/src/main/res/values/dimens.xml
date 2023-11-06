@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="cd_width_ivCustomer">200dp</dimen>
+    <dimen name="cd_height_ivCustomer">200dp</dimen>
+    <dimen name="cd_marginTop_ivCustomer">60dp</dimen>
+    <dimen name="cd_general_margin">24dp</dimen>
+    <dimen name="cd_cv_marginTop">16dp</dimen>
+    <dimen name="cd_LinearLayout_padding">8dp</dimen>
+    <dimen name="cd_radius_cv">8dp</dimen>
+    <dimen name="cd_cardElevation_cv">2dp</dimen>
+</resources>

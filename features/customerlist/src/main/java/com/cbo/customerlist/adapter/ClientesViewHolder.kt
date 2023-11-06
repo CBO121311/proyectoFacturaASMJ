@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cbo.customerlist.data.Clientes
 import com.moronlu18.customerlist.databinding.ItemClienteBinding
 
-//import com.example.pruebasconclientes.databinding.ItemClienteBinding
 
 class ClientesViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
@@ -13,11 +12,11 @@ class ClientesViewHolder(private val view: View) : RecyclerView.ViewHolder(view)
 
     fun render(clientesModel: Clientes, onClickListener: (Clientes) -> Unit){
 
-        binding.customerListTvNombre.text = clientesModel.name
-        binding.customerListTvCorreo.text = clientesModel.email
-        binding.customerListTvDireccion.text = clientesModel.adress
-        binding.customerListTvCiudad.text= clientesModel.city
-        binding.customerListTvTelefono.text = clientesModel.phone
+        binding.customerListTvName.text = clientesModel.name
+        binding.customerListTvEmail.text = clientesModel.email
+        binding.customerListTvAddress.text = clientesModel.adress
+        binding.customerListTvCity.text= clientesModel.city
+        binding.customerListTvPhone.text = clientesModel.phone
 
         itemView.setOnClickListener{onClickListener(clientesModel)}
 

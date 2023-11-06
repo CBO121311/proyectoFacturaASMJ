@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="customer_creation_tietStyle">
+        <item name="android:textColor">@color/cc_black</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="customer_creation_tilStyle">
+        <item name="android:textColorHint">@color/cc_predetermined_color</item>
+        <item name="helperTextTextColor">@color/cc_color_tilHelper</item>
+    </style>
+
+
+    <style name="customer_creation_btnStyle">
+        <item name="android:backgroundTint">@color/cc_color_seedColor</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+</resources>

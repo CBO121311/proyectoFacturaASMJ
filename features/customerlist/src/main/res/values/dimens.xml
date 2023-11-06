@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="cl_size_ivCustomer">67dp</dimen>
+    <dimen name="cl_general_margin">4dp</dimen>
+    <dimen name="cl_flbtnMargin">24dp</dimen>
+    <dimen name="cl_item_cvMargin">8dp</dimen>
+    <dimen name="cl_item_cvElevation">4dp</dimen>
+    <dimen name="cl_tvMarginStart">16dp</dimen>
+    <dimen name="cl_tvMarginEnd">24dp</dimen>
+</resources>

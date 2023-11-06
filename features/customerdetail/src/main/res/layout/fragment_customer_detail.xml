@@ -2,15 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/customer_detail_clayoutCustomer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/cd_general_margin"
     tools:context="com.cbo.customerdetail.ui.CustomerDetail">
 
     <ImageView
         android:id="@+id/customer_detail_imgCliente"
-        android:layout_width="164dp"
-        android:layout_height="142dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="@dimen/cd_width_ivCustomer"
+        android:layout_height="@dimen/cd_height_ivCustomer"
+        android:layout_marginTop="@dimen/cd_marginTop_ivCustomer"
         android:alpha="0.2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,175 +25,158 @@
         android:id="@+id/customer_detail_cardNombre"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="2dp"
+        android:layout_marginTop="@dimen/cd_general_margin"
+        app:cardCornerRadius="@dimen/cd_radius_cv"
+        app:cardElevation="@dimen/cd_cardElevation_cv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/customer_detail_imgCliente">
 
         <LinearLayout
-            android:id="@+id/customer_detail_LinearNombre"
+            android:id="@+id/customer_detail_llTableA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView">
 
             <LinearLayout
+                android:id="@+id/customer_detail_llName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/cd_color_fondo_1"
                 android:orientation="vertical"
-                android:padding="8dp">
+                android:padding="@dimen/cd_LinearLayout_padding">
 
                 <TextView
-                    android:id="@+id/customer_detail_tvNombre"
+                    android:id="@+id/customer_detail_tvName"
+                    style="@style/customer_detail_tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/helvetica"
-                    android:text="@string/cd_tvNombre"
-                    android:textSize="14sp" />
+                    android:text="@string/cd_tvName" />
 
                 <TextView
-                    android:id="@+id/customer_detail_tvCorreo"
+                    android:id="@+id/customer_detail_tvNameCustomer"
+                    style="@style/customer_detail_tvDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/helvetica"
-                    android:text="@string/cd_tvEjemNombre"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:text="@string/cd_tvExampleName" />
             </LinearLayout>
 
 
             <LinearLayout
+                android:id="@+id/customer_detail_llEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/cd_color_fondo_2"
                 android:orientation="vertical"
-                android:padding="8dp">
+                android:padding="@dimen/cd_LinearLayout_padding">
 
                 <TextView
-                    android:id="@+id/customer_detail_tvCorreoCliente"
+                    android:id="@+id/customer_detail_tvEmail"
+                    style="@style/customer_detail_tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/helvetica"
-                    android:text="@string/cd_tvCorreo"
-                    android:textSize="14sp" />
+                    android:text="@string/cd_tvEmail" />
 
                 <TextView
-                    android:id="@+id/customer_detail_tvNombreCliente"
+                    android:id="@+id/customer_detail_tvEmailCustomer"
+                    style="@style/customer_detail_tvDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/helvetica"
-                    android:text="@string/cd_tvEjemCorreo"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:text="@string/cd_tvExampleEmail" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/customer_detail_llPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/cd_color_fondo_1"
                 android:orientation="vertical"
-                android:padding="8dp">
+                android:padding="@dimen/cd_LinearLayout_padding">
 
                 <TextView
-                    android:id="@+id/customer_detail_tvTelefono"
+                    android:id="@+id/customer_detail_tvPhone"
+                    style="@style/customer_detail_tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/helvetica"
-                    android:text="@string/cd_tvTelefono"
-                    android:textSize="14sp" />
+                    android:text="@string/cd_tvPhone" />
 
                 <TextView
-                    android:id="@+id/customer_detail_tvTelefonoClienteCliente"
+                    android:id="@+id/customer_detail_tvPhoneCustomer"
+                    style="@style/customer_detail_tvDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/helvetica"
-                    android:text="@string/cd_tvEjemTelefono"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:text="@string/cd_tvExamplePhone" />
 
             </LinearLayout>
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/customer_detail_cardUbicacion"
+        android:id="@+id/customer_detail_cardLocation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="2dp"
+        android:layout_marginTop="@dimen/cd_cv_marginTop"
+        app:cardCornerRadius="@dimen/cd_radius_cv"
+        app:cardElevation="@dimen/cardview_default_elevation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/customer_detail_cardNombre">
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/customer_detail_llLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/customer_detail_llAdress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/cd_color_fondo_2"
                 android:orientation="vertical"
-                android:padding="8dp">
+                android:padding="@dimen/cd_LinearLayout_padding">
 
                 <TextView
-                    android:id="@+id/customer_detail_tvDireccion"
+                    android:id="@+id/customer_detail_tvAddress"
+                    style="@style/customer_detail_tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/helvetica"
-                    android:text="@string/cd_tvDireccion"
-                    android:textSize="14sp" />
+                    android:text="@string/cd_tvAddress" />
 
                 <TextView
-                    android:id="@+id/customer_detail_tvDireccionCliente"
+                    android:id="@+id/customer_detail_tvAddressCustomer"
+                    style="@style/customer_detail_tvDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/helvetica"
-                    android:text="@string/cd_tvEjemDireccion"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:text="@string/cd_tvExampleAddress" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/customer_detail_llCity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/cd_color_fondo_1"
                 android:orientation="vertical"
-                android:padding="8dp">
+                android:padding="@dimen/cd_LinearLayout_padding">
 
                 <TextView
-                    android:id="@+id/customer_detail_tvCiudad"
+                    android:id="@+id/customer_detail_tvCity"
+                    style="@style/customer_detail_tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/helvetica"
-                    android:text="@string/cd_tvCiudad"
-                    android:textSize="14sp" />
+                    android:text="@string/cd_tvCity" />
 
                 <TextView
-                    android:id="@+id/customer_detail_tvCiudadCliente"
+                    android:id="@+id/customer_detail_tvCityName"
+                    style="@style/customer_detail_tvDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/helvetica"
-                    android:text="@string/cd_tvEjemCiudad"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:text="@string/cd_tvExampleCity" />
             </LinearLayout>
-
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

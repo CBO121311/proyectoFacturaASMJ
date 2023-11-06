@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="text_color_required">#989898</color>
+    <color name="cc_color_tilHelper">#989898</color>
+    <color name="cc_color_seedColor">#8a72e3</color>
+    <color name="cc_black">#000000</color>
+    <color name="cc_predetermined_color">#505050</color>
+    <color name="cc_cvBackgroundColor">#E6DFFF</color>
+
+
 </resources>
