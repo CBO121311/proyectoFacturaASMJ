@@ -58,5 +58,5 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
 
  Escrito por CBO121311
  
- ## V2.4.1 (06/11/2023)
+ ## V2.4.2 (06/11/2023)
  - Actualización de las layout customer y mejoras en los xml de los recursos.
