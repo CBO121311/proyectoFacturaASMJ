@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.moronlu18.taskdetail.R
+import com.moronlu18.taskdetail.databinding.FragmentTaskDetailBinding
 
 
 class TaskDetail : Fragment() {
+
+    private var _binding:FragmentTaskDetailBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +24,12 @@ class TaskDetail : Fragment() {
     ): View? {
         val fab = requireActivity().findViewById<FloatingActionButton>(com.moronlu18.invoice.R.id.fab)
         fab.visibility = View.GONE
-        return inflater.inflate(R.layout.fragment_task_detail, container, false)
+        _binding = FragmentTaskDetailBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

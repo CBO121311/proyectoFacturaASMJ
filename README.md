@@ -77,3 +77,13 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  ## V2.4.4 (06/11/2023)
  - Añadido botón prueba para el calendario (se eliminará el miercoles).
  - Actualización de los fragment de customer añadiendo binding y utilizando el destroy.
+
+ --------------------------------------------------------------------------------------------------
+
+ Escrito por SergioGV98
+ 
+ ## V2.4.6 (06/11/2023)
+ - Añadido la funcionalidad de los botones de agregar fecha en Task create.
+ - Añadido a todos los fragments de tareas el destroy para manejar su destrucción.
+ - Eliminación de código innecesario.
+ - Mejoras generales en las interfaces y cambio de fondo en Task List.

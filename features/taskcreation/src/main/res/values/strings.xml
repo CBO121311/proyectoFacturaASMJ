@@ -3,7 +3,6 @@
     <string name="task_creation_txv_hint_nombre_cliente">Nombre del cliente</string>
     <string name="task_creation_txv_hint_nombre_tarea">Nombre de la tarea</string>
     <string name="task_creation_txv_hint_descripcion">Descripción</string>
-    <string name="task_creation_txv_hint_tipo_tarea">Tipo de tarea</string>
     <string name="task_creation_txt_button_no_comenzada">No comenzada</string>
     <string name="task_creation_txt_button_en_proceso">En proceso</string>
     <string name="task_creation_txt_button_completada">Completada</string>

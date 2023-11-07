@@ -51,56 +51,51 @@
             android:hint="@string/task_creation_txv_hint_descripcion"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/edm_task_creation"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/task_creation_txv_hint_tipo_tarea"
-        app:startIconDrawable="@drawable/ic_list">
+        android:layout_marginTop="@dimen/margin_general"
+        android:background="@drawable/border_background">
 
-        <AutoCompleteTextView
+        <Spinner
             android:id="@+id/task_creation_type_task_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:inputType="none" />
+            android:minHeight="@dimen/spinner_height"
+            android:entries="@array/typetask"/>
+    </FrameLayout>
 
-    </com.google.android.material.textfield.TextInputLayout>
-    <LinearLayout
+    <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <RadioGroup
+        android:layout_marginBottom="@dimen/margin_general"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/task_creation_rdb_notstarted"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="@string/task_creation_txt_button_no_comenzada" />
 
-            <RadioButton
-                android:id="@+id/task_creation_rdb_notstarted"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/task_creation_txt_button_no_comenzada" />
+        <RadioButton
+            android:id="@+id/task_creation_rdb_inprogress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/task_creation_txt_button_en_proceso" />
 
-            <RadioButton
-                android:id="@+id/task_creation_rdb_inprogress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/task_creation_txt_button_en_proceso" />
+        <RadioButton
+            android:id="@+id/task_creation_rdb_completed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/task_creation_txt_button_completada" />
 
-            <RadioButton
-                android:id="@+id/task_creation_rdb_completed"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/task_creation_txt_button_completada" />
+        <RadioButton
+            android:id="@+id/task_creation_rdb_abandoned"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/task_creation_txt_button_abandonada" />
 
-            <RadioButton
-                android:id="@+id/task_creation_rdb_abandoned"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/task_creation_txt_button_abandonada" />
-
-        </RadioGroup>
-    </LinearLayout>
+    </RadioGroup>
 
     <LinearLayout
         android:layout_width="match_parent"

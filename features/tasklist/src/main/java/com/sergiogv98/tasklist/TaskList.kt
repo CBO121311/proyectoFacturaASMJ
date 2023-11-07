@@ -17,14 +17,16 @@ import com.moronlu18.tasklist.databinding.FragmentTaskListBinding
 
 class TaskList : Fragment() {
 
-    private lateinit var binding : FragmentTaskListBinding
+
+    private var _binding:FragmentTaskListBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentTaskListBinding.inflate(inflater,container,false)
+        _binding = FragmentTaskListBinding.inflate(inflater,container,false)
         return binding.root
     }
 
@@ -53,5 +55,10 @@ class TaskList : Fragment() {
     }
     fun onItemSelected(task: Task) {
         Toast.makeText(requireContext(),task.nomTask, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
