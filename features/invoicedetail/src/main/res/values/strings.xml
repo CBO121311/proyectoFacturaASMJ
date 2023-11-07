@@ -6,4 +6,7 @@
     <string name="tieFechaFin">Fecha de finalización</string>
     <string name="tieArticulosFactura">Articulos en la factura</string>
     <string name="tvTotal">Total: </string>
+    <string name="invoice_detail_tvEstado">Estado de la factura</string>
+    <string name="invoice_detail_descCalendar">Imagen de calendario</string>
+    <string name="invoice_detail_descUser">Imagen de usuario</string>
 </resources>

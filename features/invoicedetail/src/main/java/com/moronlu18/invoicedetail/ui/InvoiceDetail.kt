@@ -6,9 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.moronlu18.invoicedetail.R
+import com.moronlu18.invoicedetail.databinding.FragmentInvoiceDetailBinding
 
 class InvoiceDetail : Fragment() {
+
+
+    private var _binding: FragmentInvoiceDetailBinding? = null
+    private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -22,6 +26,14 @@ class InvoiceDetail : Fragment() {
         fab.visibility = View.GONE
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_invoice_detail, container, false)
+        _binding = FragmentInvoiceDetailBinding.inflate(inflater, container, false)
+
+        return binding.root;
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
