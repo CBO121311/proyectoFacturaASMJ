@@ -22,7 +22,7 @@ class ItemList : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentItemListBinding.inflate(inflater, container, false)
         return binding.root
@@ -51,7 +51,7 @@ class ItemList : Fragment() {
     }
 
     fun onItemSelected(item: Item) {
-        Toast.makeText(requireContext(), item.id, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), item.name, Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {

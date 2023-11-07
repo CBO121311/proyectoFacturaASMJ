@@ -7,8 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.moronlu18.itemdetail.R
+import com.moronlu18.itemdetail.databinding.FragmentItemDetailBinding
 
 class ItemDetail : Fragment() {
+
+    private var _binding: FragmentItemDetailBinding? = null
+    private val binding
+        get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,10 +28,12 @@ class ItemDetail : Fragment() {
         fab.visibility = View.GONE
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_item_detail, container, false)
+        _binding = FragmentItemDetailBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        _binding = null
     }
 }
