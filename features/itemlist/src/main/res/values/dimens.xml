@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="itemItem_textSizeTitulo">20sp</dimen>
+    <dimen name="itemItem_textSizeSubTitulo">16sp</dimen>
+    <dimen name="itemItem_margin">16dp</dimen>
+    <dimen name="itemItem_marginGeneral">10dp</dimen>
+    <dimen name="itemItem_anchoAltoImg">60dp</dimen>
+    <dimen name="itemItem_marginVerticalCard">8dp</dimen>
+    <dimen name="itemItem_marginTopDescription">5dp</dimen>
+    <dimen name="itemItem_marginStartEndSubtitulos">40dp</dimen>
+</resources>

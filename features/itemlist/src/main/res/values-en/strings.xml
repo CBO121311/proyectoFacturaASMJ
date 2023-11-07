@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="item_list_fab_text">Add item</string>
+    <string name="itemList_fab_text">Add item</string>
+    <string name="itemItem_tvType_text">"Type: "</string>
+    <string name="itemItem_tvRate_text">"Rate: "</string>
+    <string name="itemItem_tvTaxable_text">"Taxable: "</string>
+    <string name="itemItem_tvNamePrueba">Wristwatch</string>
+    <string name="itemItem_tvTypePrueba">" item"</string>
+    <string name="itemItem_tvDescriptionPrueba">Instrument for telling time, worn on the wrist</string>
+    <string name="itemItem_tvRatePrueba">" 5.52"</string>
+    <string name="itemItem_tvTaxablePrueba">" True"</string>
 </resources>

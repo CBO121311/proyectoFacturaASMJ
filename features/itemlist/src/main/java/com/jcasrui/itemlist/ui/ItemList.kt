@@ -5,25 +5,57 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.moronlu18.itemlist.R
+import com.jcasrui.itemlist.adapter.ItemAdapter
+import com.jcasrui.itemlist.data.Item
+import com.jcasrui.itemlist.data.ItemProvider
+import com.moronlu18.itemlist.databinding.FragmentItemListBinding
 
 class ItemList : Fragment() {
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private var _binding : FragmentItemListBinding? = null
+    private val binding
+        get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
+        _binding = FragmentItemListBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val fab = requireActivity().findViewById<FloatingActionButton>(com.moronlu18.invoice.R.id.fab)
         fab.visibility = View.GONE
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_item_list, container, false)
+        initReciclerView()
+    }
+
+    private fun initReciclerView() {
+        val manager = LinearLayoutManager(requireContext())
+        val decoration = DividerItemDecoration(requireContext(), manager.orientation)
+
+        binding.itemListRvItems.layoutManager = manager
+        binding.itemListRvItems.adapter = ItemAdapter(ItemProvider.itemList) { item ->
+            onItemSelected(
+                item
+            )
+        }
+        binding.itemListRvItems.addItemDecoration(decoration)
+    }
+
+    fun onItemSelected(item: Item) {
+        Toast.makeText(requireContext(), item.id, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

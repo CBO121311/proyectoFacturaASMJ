@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="itemCreation_textSize_itemList">20sp</dimen>
+    <dimen name="itemCreation_textSize_tvRate">20sp</dimen>
+    <dimen name="itemCreation_textSize_etRate">16sp</dimen>
+    <dimen name="itemCreation_textSize_btnSave">18sp</dimen>
+
+    <dimen name="itemCreation_paddingGeneral">16dp</dimen>
+    <!-- dimen name="itemCreation_paddingLeftFragment">16dp</dimen>
+    <dimen name="itemCreation_paddingTopFragment">16dp</dimen>
+    <dimen name="itemCreation_paddingRightFragment">16dp</dimen>
+    <dimen name="itemCreation_paddingBottom_chbxTaxable">16dp</dimen>
+    <dimen name="itemCreation_paddingBottom_etRate">16dp</dimen>
+    <dimen name="itemCreation_paddingTop_chbxTaxable">16dp</dimen-->
+
+    <dimen name="itemCreation_paddingTopBottom">20dp</dimen>
+    <!-- dimen name="itemCreation_paddingTopName">20dp</dimen>
+    <dimen name="itemCreation_paddingBottomName">20dp</dimen>
+    <dimen name="itemCreation_paddingTopDescription">20dp</dimen>
+    <dimen name="itemCreation_paddingBottomDescription">20dp</dimen>
+    <dimen name="itemCreation_paddingTopItemList">20dp</dimen>
+    <dimen name="itemCreation_paddingTopSpinner">20dp</dimen>
+    <dimen name="itemCreation_paddingBottomSpinner">20dp</dimen>
+    <dimen name="itemCreation_paddingToptvRate">20dp</dimen-->
+
+    <dimen name="itemCreation_paddingBottom_linearLayout">55dp</dimen>
+    <dimen name="itemCreation_marginHorizontal_chbxTaxable">43dp</dimen>
+    <dimen name="itemCreation_layoutWidth_btnSave">130dp</dimen>
+    <dimen name="itemCreation_layoutHeight_btnSave">48dp</dimen>
+</resources>

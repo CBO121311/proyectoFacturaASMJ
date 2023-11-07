@@ -25,4 +25,8 @@ class ItemDetail : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_item_detail, container, false)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
 }

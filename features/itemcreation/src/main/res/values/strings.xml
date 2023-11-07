@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="item_creation_tvTitle_text">Añadir Artículo</string>
-    <string name="item_creation_edName_text">Nombre</string>
-    <string name="item_creation_edDescription_text">Descripción</string>
-    <string name="item_creation_btnDone_text">Añadir</string>
-    <string name="item_creation_tvTypeItem_text">Tipo de artículo</string>
-    <string name="item_creation_tvRate_text">Tasa</string>
-    <string name="item_creation_chbxTaxable_text">Impuestos</string>
+    <string name="itemCreation_edNameText">Nombre</string>
+    <string name="itemCreation_edDescriptionText">Descripción</string>
+    <string name="itemCreation_btnDoneText">Añadir</string>
+    <string name="itemCreation_tvTypeItemText">Tipo de artículo</string>
+    <string name="itemCreation_tvRateText">Tasa</string>
+    <string name="itemCreation_chbxTaxableText">Impuestos</string>
+    <string-array name="itemType_array">
+        <item>Artículo</item>
+        <item>Servicio</item>
+    </string-array>
 </resources>

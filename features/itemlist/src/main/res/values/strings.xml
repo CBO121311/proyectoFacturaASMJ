@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="item_list_fab_text">Añadir artículo</string>
+    <string name="itemList_fab_text">Añadir artículo</string>
+    <string name="itemItem_tvType_text">"Tipo: "</string>
+    <string name="itemItem_tvRate_text">"Tasa: "</string>
+    <string name="itemItem_tvTaxable_text">"Impuesto: "</string>
+
+    <string name="itemItem_tvNamePrueba">Reloj de pulsera</string>
+    <string name="itemItem_tvTypePrueba">" articulo"</string>
+    <string name="itemItem_tvDescriptionPrueba">Intrumento para indicar la hora, que se lleva en la muñeca</string>
+    <string name="itemItem_tvRatePrueba">" 5.52"</string>
+    <string name="itemItem_tvTaxablePrueba">" True"</string>
 </resources>

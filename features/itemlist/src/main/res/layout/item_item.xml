@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/itemItem_cvItem"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/itemItem_margin"
+    android:layout_marginVertical="@dimen/itemItem_marginVerticalCard"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/itemItem_clItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cardview_light_background">
+
+        <ImageView
+            android:id="@+id/itemItem_ivItem"
+            android:layout_width="@dimen/itemItem_anchoAltoImg"
+            android:layout_height="@dimen/itemItem_anchoAltoImg"
+            android:src="@drawable/item_item_cart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/itemItem_tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/itemItem_marginGeneral"
+            android:textSize="@dimen/itemItem_textSizeTitulo"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/itemItem_ivItem"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/itemItem_tvNamePrueba" />
+
+
+        <TextView
+            android:id="@+id/itemItem_tvType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/itemItem_textSizeSubTitulo"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/itemItem_tvName"
+            app:layout_constraintEnd_toStartOf="@+id/itemItem_tvTypeContent"
+            app:layout_constraintTop_toTopOf="@+id/itemItem_tvName"
+            tools:text="@string/itemItem_tvType_text" />
+
+        <TextView
+            android:id="@+id/itemItem_tvTypeContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/itemItem_marginGeneral"
+            app:layout_constraintBottom_toBottomOf="@+id/itemItem_tvType"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/itemItem_tvType"
+            tools:text="@string/itemItem_tvTypePrueba" />
+
+        <TextView
+            android:id="@+id/itemItem_tvDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/itemItem_marginGeneral"
+            android:layout_marginTop="@dimen/itemItem_marginTopDescription"
+            android:layout_marginEnd="@dimen/itemItem_marginGeneral"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/itemItem_ivItem"
+            app:layout_constraintTop_toBottomOf="@+id/itemItem_tvName"
+            tools:text="@string/itemItem_tvDescriptionPrueba" />
+
+        <TextView
+            android:id="@+id/itemItem_tvRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/itemItem_marginStartEndSubtitulos"
+            android:layout_marginTop="@dimen/itemItem_marginGeneral"
+            android:textSize="@dimen/itemItem_textSizeSubTitulo"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/itemItem_ivItem"
+            app:layout_constraintTop_toBottomOf="@+id/itemItem_tvDescription"
+            tools:text="@string/itemItem_tvRate_text" />
+
+        <TextView
+            android:id="@+id/itemItem_tvRateContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/itemItem_tvRate"
+            app:layout_constraintTop_toTopOf="@+id/itemItem_tvRate"
+            tools:text="@string/itemItem_tvRatePrueba" />
+
+        <TextView
+            android:id="@+id/itemItem_tvTaxable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/itemItem_marginGeneral"
+            android:textSize="@dimen/itemItem_textSizeSubTitulo"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/itemItem_tvTaxableContent"
+            app:layout_constraintTop_toBottomOf="@+id/itemItem_tvDescription"
+            tools:text="@string/itemItem_tvTaxable_text" />
+
+        <TextView
+            android:id="@+id/itemItem_tvTaxableContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/itemItem_marginStartEndSubtitulos"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/itemItem_tvTaxable"
+            tools:text="@string/itemItem_tvTaxablePrueba" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
