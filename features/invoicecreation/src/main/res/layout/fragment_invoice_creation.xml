@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/invoice_creation_clLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -12,12 +11,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         app:endIconContentDescription="@string/tieCliente_description"
         app:endIconDrawable="@drawable/ic_action_user"
         app:endIconMode="custom"
         app:helperText="@string/tvObligatorio"
+        android:hint="@string/tieCliente"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -27,7 +27,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/helvetica"
-            android:hint="@string/tieCliente" />
+            android:inputType="text"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -35,12 +36,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         app:endIconDrawable="@drawable/ic_action_fecha"
         app:endIconMode="custom"
+        android:hint="@string/tieFechaEm"
         app:helperText="@string/tvFecha"
         app:layout_constraintEnd_toEndOf="parent"
+        android:imeOptions="actionNext"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/invoice_creation_tilCliente">
 
@@ -49,7 +52,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/helvetica"
-            android:hint="@string/tieFechaEm" />
+            android:inputType="text"
+             />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -57,11 +61,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         app:endIconDrawable="@drawable/ic_action_fecha"
         app:endIconMode="custom"
         app:helperText="@string/tvFecha"
+        android:hint="@string/tieFechaFin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/invoice_creation_tilFechaEm">
@@ -71,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/helvetica"
-            android:hint="@string/tieFechaFin" />
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -91,7 +96,7 @@
         android:id="@+id/invoice_creation_btnArticulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="60dp"
         android:fontFamily="@font/helvetica"
         android:text="@string/btnAñadir"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,7 +107,7 @@
         android:id="@+id/invoice_creation_cdArti"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@+id/invoice_creation_fabFactura"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,22 +115,24 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="220dp"
             android:orientation="horizontal">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/invoice_creation_rvDisponibles"
-                android:layout_width="175dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/helvetica">
+                android:fontFamily="@font/helvetica"
+                android:layout_weight="5">
 
             </androidx.recyclerview.widget.RecyclerView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/invoice_creation_rvAñadidos"
-                android:layout_width="175dp"
+                android:layout_width="0dp"
+                android:layout_weight="5"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/helvetica"/>
+                android:fontFamily="@font/helvetica" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -160,15 +167,13 @@
         android:id="@+id/invoice_creation_tvAñadidos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/helvetica"
         android:text="@string/tvAñadidos"
         android:textStyle="bold"
-        android:fontFamily="@font/helvetica"
-        app:layout_constraintBottom_toTopOf="@+id/invoice_creation_cdArti"
+        app:layout_constraintBaseline_toBaselineOf="@+id/invoice_creation_tvArtDisponibles"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.623"
-        app:layout_constraintStart_toEndOf="@+id/invoice_creation_btnArticulo"
-        app:layout_constraintTop_toBottomOf="@+id/invoice_creation_btnArticulo"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.573"
+        app:layout_constraintStart_toEndOf="@+id/invoice_creation_btnArticulo" />
 
     <TextView
         android:id="@+id/invoice_creation_tvTotalText"
@@ -183,6 +188,18 @@
         app:layout_constraintStart_toEndOf="@+id/invoice_creation_tvTotal"
         app:layout_constraintTop_toBottomOf="@+id/invoice_creation_cdArti"
         app:layout_constraintVertical_bias="0.509" />
+
+    <Spinner
+        android:id="@+id/invoice_creation_spEstado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:entries="@array/invoice_creation_spStrings"
+        app:layout_constraintBottom_toTopOf="@+id/invoice_creation_btnArticulo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/invoice_creation_tilFechaFin" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

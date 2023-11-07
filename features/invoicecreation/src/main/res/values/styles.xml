@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="invoice_creation_calendarStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/invoice_creation_calendar</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+</resources>

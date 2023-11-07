@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -18,7 +17,10 @@ import com.moronlu18.invoicelist.databinding.FragmentInvoiceListBinding
 
 class InvoiceList : Fragment() {
 
-    private lateinit var binding : FragmentInvoiceListBinding
+    private var _binding : FragmentInvoiceListBinding? = null
+
+    private val binding get() = _binding!!
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +31,7 @@ class InvoiceList : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentInvoiceListBinding.inflate(inflater,container,false)
+        _binding = FragmentInvoiceListBinding.inflate(inflater,container,false)
         return binding.root
     }
 
@@ -63,6 +65,13 @@ class InvoiceList : Fragment() {
         }
 
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+
 
 
 }
