@@ -8,10 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="red">#EF0000</color>
-    <color name="red_task">#FA3F3F</color>
-    <color name="gold">#FFD700</color>
-
     <color name="seed">#8a72e3</color>
     <color name="md_theme_light_primary">#644BBA</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>
