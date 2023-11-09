@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="item_detail_tvTitle_text">Information</string>
-    <string name="item_detail_btnEdit_text">Edit</string>
-    <string name="item_detail_tvName_text">Name</string>
-    <string name="item_detail_tvDescripcion_text">Description</string>
-    <string name="item_detail_tvType_text">Type</string>
-    <string name="item_detail_tvRate_text">Rate</string>
-    <string name="item_detail_tvTaxable_text">isTaxable</string>
+<resources>ç
+    <string name="itemDetail_tvNameText">Name</string>
+    <string name="itemDetail_tvContentNameText">Apple</string>
+    <string name="itemDetail_tvDescriptionText">Description</string>
+    <string name="itemDetail_tvContentDescriptionText">Fruit section product</string>
+    <string name="itemDetail_tvContenTaxableText">Yes</string>
+    <string name="itemDetail_tvTaxableText">Is taxable</string>
+    <string name="itemDetail_tvContenRateText">1.4</string>
+    <string name="itemDetail_tvRateText">Rate</string>
+    <string name="itemDetail_tvContenTypeText">Item</string>
+    <string name="itemDetail_tvTypeText">Type</string>
 </resources>

@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/itemItem_cvItem"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemItem_cvItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/itemItem_margin"
-    android:layout_marginVertical="@dimen/itemItem_marginVerticalCard"
-    xmlns:tools="http://schemas.android.com/tools">
+    app:cardCornerRadius="@dimen/itemItem_cardRadius"
+    app:cardElevation="@dimen/itemItem_cardElevation"
+    app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/itemItem_clItem"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/cardview_light_background">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/itemItem_ivItem"
             android:layout_width="@dimen/itemItem_anchoAltoImg"
             android:layout_height="@dimen/itemItem_anchoAltoImg"
-            android:src="@drawable/item_item_cart"
+            android:contentDescription="@string/itemItem_tvDescriptionImg"
+            android:src="@drawable/carrito"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -28,12 +29,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/itemItem_marginGeneral"
+            android:textColor="@color/md_theme_light_primary"
             android:textSize="@dimen/itemItem_textSizeTitulo"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/itemItem_ivItem"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/itemItem_tvNamePrueba" />
-
 
         <TextView
             android:id="@+id/itemItem_tvType"

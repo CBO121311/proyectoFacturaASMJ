@@ -10,4 +10,5 @@
     <string name="itemItem_tvDescriptionPrueba">Intrumento para indicar la hora, que se lleva en la muñeca</string>
     <string name="itemItem_tvRatePrueba">" 5.52"</string>
     <string name="itemItem_tvTaxablePrueba">" True"</string>
+    <string name="itemItem_tvDescriptionImg">Imagen ilustrativa</string>
 </resources>

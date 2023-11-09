@@ -6,9 +6,7 @@
     <string name="itemCreation_btnDoneText">Add</string>
     <string name="itemCreation_tvTypeItemText">Type item</string>
     <string name="itemCreation_tvRateText">Rate</string>
-    <string name="itemCreation_chbxTaxableText">isTaxable</string>
-    <string-array name="itemType_array">
-        <item>Item</item>
-        <item>Service</item>
-    </string-array>
+    <string name="itemCreation_chbxTaxableText">Is taxable</string>
+    <string name="itemCreation_etRateText">Insert rate</string>
+    <string name="itemCreation_tvTaxable">Is taxable</string>
 </resources>

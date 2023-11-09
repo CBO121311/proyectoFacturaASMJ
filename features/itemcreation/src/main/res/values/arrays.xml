@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="itemType_array">
+        <item>Artículo</item>
+        <item>Servicio</item>
+    </string-array>
+</resources>

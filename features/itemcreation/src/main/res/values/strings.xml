@@ -7,8 +7,6 @@
     <string name="itemCreation_tvTypeItemText">Tipo de artículo</string>
     <string name="itemCreation_tvRateText">Tasa</string>
     <string name="itemCreation_chbxTaxableText">Impuestos</string>
-    <string-array name="itemType_array">
-        <item>Artículo</item>
-        <item>Servicio</item>
-    </string-array>
+    <string name="itemCreation_etRateText">Insertar tasa</string>
+    <string name="itemCreation_tvTaxable">Sujeto a impuestos</string>
 </resources>
