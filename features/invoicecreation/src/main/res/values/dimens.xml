@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="invoice_creation_dimenComun">350dp</dimen>
+    <dimen name="invoice_creationHeightComun">220dp</dimen>
+</resources>

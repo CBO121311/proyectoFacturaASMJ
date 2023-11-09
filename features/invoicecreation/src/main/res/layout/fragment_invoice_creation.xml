@@ -105,7 +105,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/invoice_creation_cdArti"
-        android:layout_width="350dp"
+        android:layout_width="@dimen/invoice_creation_dimenComun"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@+id/invoice_creation_fabFactura"
@@ -115,7 +115,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="@dimen/invoice_creationHeightComun"
             android:orientation="horizontal">
 
             <androidx.recyclerview.widget.RecyclerView

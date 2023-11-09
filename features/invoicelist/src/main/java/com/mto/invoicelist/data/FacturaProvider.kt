@@ -1,4 +1,4 @@
-package com.moronlu18.invoicelist.data
+package com.mto.invoicelist.data
 
 class FacturaProvider {
     companion object {

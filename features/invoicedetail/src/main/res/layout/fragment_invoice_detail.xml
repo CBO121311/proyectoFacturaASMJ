@@ -83,7 +83,6 @@
             android:id="@+id/invoice_detail_tieCliente"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:background="@color/invoice_detail_c2"
             android:cursorVisible="false"
             android:enabled="false"

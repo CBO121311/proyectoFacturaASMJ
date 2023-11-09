@@ -1,11 +1,11 @@
-package com.moronlu18.invoicelist.adapter
+package com.mto.invoicelist.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.moronlu18.invoicelist.R
-import com.moronlu18.invoicelist.adapter.FacturaViewHolder
-import com.moronlu18.invoicelist.data.Factura
+import com.mto.invoicelist.adapter.FacturaViewHolder
+import com.mto.invoicelist.data.Factura
 
 class FacturaAdapter(
     private val facturaList:List<Factura>,

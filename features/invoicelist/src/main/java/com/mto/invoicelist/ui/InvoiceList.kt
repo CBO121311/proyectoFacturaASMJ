@@ -1,4 +1,4 @@
-package com.moronlu18.invoicelist.ui
+package com.mto.invoicelist.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,9 +9,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.moronlu18.invoicelist.adapter.FacturaAdapter
-import com.moronlu18.invoicelist.data.Factura
-import com.moronlu18.invoicelist.data.FacturaProvider
+import com.mto.invoicelist.adapter.FacturaAdapter
+import com.mto.invoicelist.data.Factura
+import com.mto.invoicelist.data.FacturaProvider
 import com.moronlu18.invoicelist.databinding.FragmentInvoiceListBinding
 
 

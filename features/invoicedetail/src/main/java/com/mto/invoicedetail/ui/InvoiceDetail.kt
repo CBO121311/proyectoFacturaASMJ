@@ -1,4 +1,4 @@
-package com.moronlu18.invoicedetail.ui
+package com.mto.invoicedetail.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
