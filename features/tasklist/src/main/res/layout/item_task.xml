@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Sergio" />
+        android:text="" />
 
     <TextView
         android:id="@+id/task_name"
@@ -24,7 +24,7 @@
         app:layout_constraintTop_toBottomOf="@+id/task_client_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Estudiar Dart" />
+        android:text="" />
 
     <TextView
         android:id="@+id/task_description"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/task_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Prueba de estudiar Dart FULL HD NO FAKE 1234 AAAAAAAAAAAAAAAAAAAA" />
+        android:text="" />
 
     <TextView
         android:id="@+id/task_creation_date"
@@ -45,7 +45,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task_description"
         android:paddingTop="@dimen/task_list_padding_general"
-        android:text="Created: 29-10-2023"/>
+        android:text=""/>
 
     <TextView
         android:id="@+id/task_end_date"
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/task_end_date_layout_margin"
         android:paddingTop="@dimen/task_list_padding_general"
-        android:text="Due: 29-10-2023"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
