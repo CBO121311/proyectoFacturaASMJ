@@ -11,13 +11,12 @@
         android:id="@+id/customer_creation_ivCustomer"
         android:layout_width="@dimen/cc_width_ivCustomer"
         android:layout_height="@dimen/cc_height_ivCustomer"
-        android:alpha="0.5"
         android:src="@drawable/person_circle_icon"
         app:layout_constraintBottom_toTopOf="@+id/customer_creation_tilNameCustomer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/cc_color_seedColor" />
+        app:tint="@color/cc_cvBackgroundColor" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/customer_creation_tilNameCustomer"
@@ -77,7 +76,7 @@
             style="customer_creation_tietStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            android:inputType="phone" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -128,10 +127,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/cc_general_margin"
-        android:backgroundTint="@color/cc_color_seedColor"
+        android:layout_marginBottom="@dimen/cc_marginBottom_btnSave"
+        android:backgroundTint="@color/cc_color_btnSave"
         android:drawableEnd="@drawable/ic_action_save"
-        android:padding="@dimen/cc_Padding_btnSave"
+        android:padding="@dimen/cc_padding_btnSave"
         android:text="@string/cc_btn_text_save"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilCity" />
 
@@ -140,7 +141,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/cc_cardView_marginTop"
-        app:cardBackgroundColor="@color/cc_cvBackgroundColor"
+        app:cardBackgroundColor="@color/cc_color_seedColor"
         app:cardCornerRadius="@dimen/cc_radius_cvImgCustomer"
         app:cardElevation="@dimen/cc_cardElevation_cvImgCustomer"
         app:layout_constraintEnd_toEndOf="parent"
@@ -156,7 +157,7 @@
             android:clickable="true"
             android:contentDescription="@string/cc_descriptiontext_ibCustomer"
             android:focusable="true"
-            android:padding="@dimen/cc_Padding_imgButton"
+            android:padding="@dimen/cc_padding_imgButton"
             android:src="@drawable/ic_action_altimage" />
     </androidx.cardview.widget.CardView>
 

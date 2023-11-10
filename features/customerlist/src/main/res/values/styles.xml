@@ -3,9 +3,8 @@
     <style name="customer_list_tvTitle">
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/cl_predetermined_color</item>
+        <item name="android:textColor">@color/cl_tvName</item>
     </style>
-
     <style name="customer_list_tvNormal">
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">normal</item>

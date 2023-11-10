@@ -44,12 +44,12 @@ class CustomerList : Fragment() {
 
         binding.customerListRvClientes.adapter = ClientesAdapter(ClientesProvider.clientesList){
 
-            x-> onItemSelected1(x)
+            x-> onItemSelected(x)
         }
         binding.customerListRvClientes.addItemDecoration(decoration)
 
     }
-    fun onItemSelected1(cliente: Clientes) {
+    fun onItemSelected(cliente: Clientes) {
         Toast.makeText(requireContext(),cliente.name, Toast.LENGTH_SHORT).show()
     }
     override fun onDestroyView() {

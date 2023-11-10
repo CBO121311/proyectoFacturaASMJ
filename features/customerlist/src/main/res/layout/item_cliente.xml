@@ -16,7 +16,6 @@
             android:id="@+id/customer_list_ivCliente"
             android:layout_width="@dimen/cl_size_ivCustomer"
             android:layout_height="@dimen/cl_size_ivCustomer"
-            android:alpha="0.2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

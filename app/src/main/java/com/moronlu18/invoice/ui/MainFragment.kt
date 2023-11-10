@@ -92,11 +92,6 @@ class MainFragment : Fragment() {
         binding.btTaskList.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_TaskListFragment)
         }
-
-
-        binding.btnPrueba.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_PruebaFechaFragment)
-        }
     }
 
     override fun onDestroyView() {

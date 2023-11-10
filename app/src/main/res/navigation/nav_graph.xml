@@ -28,12 +28,6 @@
         android:name="com.cbo.customerdetail.ui.CustomerDetail"/>
 
     <fragment
-        app:moduleName="customercreation"
-        android:label="Prueba"
-        android:id="@+id/PruebaFechaFragment"
-        android:name="com.cbo.customercreation.ui.PruebaFecha"/>
-
-    <fragment
         app:moduleName="invoicecreation"
         android:label="@string/title_invoicecreation"
         android:id="@+id/InvoiceCreationFragment"
@@ -149,9 +143,6 @@
         <action
             android:id="@+id/action_mainFragment_to_ItemCreationFragment"
             app:destination="@id/ItemCreationFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_PruebaFechaFragment"
-            app:destination="@id/PruebaFechaFragment" />
     </fragment>
 
 

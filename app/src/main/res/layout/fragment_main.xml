@@ -196,18 +196,5 @@
             app:layout_constraintStart_toEndOf="@+id/btInvoiceDetails"
             app:layout_constraintTop_toBottomOf="@+id/tvInvoice" />
 
-        <Button
-            android:id="@+id/btnPrueba"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/app_btnTest"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.457"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btTaskDetails"
-            app:layout_constraintVertical_bias="0.0" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
