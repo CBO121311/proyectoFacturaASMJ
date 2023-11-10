@@ -93,33 +93,26 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
 Escrito por CBO121311
 
  ## V2.5 (10/11/2023)
- - Añadido la funcionalidad de los botones de agregar fecha en Task create.
- - Añadido a todos los fragments de tareas el destroy para manejar su destrucción.
- - Eliminación de código innecesario.
- - Mejoras generales en las interfaces y cambio de fondo en Task List.
-
-
-
+ - Versión final de todas las layout.
+------------------------
 
 # Capas de Layout
 
 ## Cliente
 |Crear|Detalles|Lista| 
 | ------------------------------ | ------------------------------ | ------------------------------ | 
-| ![proyectoFacturaASMJ](imagenesMuestra/LayoutCustomerCreation.png) |![proyectoFacturaASMJ](imagenesMuestra/LayoutCustomerDetail.png) | ![proyectoFacturaASMJ](imagenesMuestra/LayoutCustomerList.png)   |
+|<img src="ImagenesMuestra/LayoutCustomerCreation.png" width="300">|<img src="ImagenesMuestra/LayoutCustomerDetail.png" width="300">| <img src="ImagenesMuestra/LayoutCustomerList.png" width="300">|
 
 ## Factura
 |Crear|Detalles|Lista| 
 | ------------------------------ | ------------------------------ | ------------------------------ | 
-| ![proyectoFacturaASMJ](imagenesMuestra/LayoutInvoiceCreation.png) |![proyectoFacturaASMJ](imagenesMuestra/LayoutInvoiceDetail.png) | ![proyectoFacturaASMJ](imagenesMuestra/LayoutInvoiceList.png)   |
+|<img src="ImagenesMuestra/LayoutInvoiceCreation.png" width="300">|<img src="ImagenesMuestra/LayoutInvoiceDetail.png" width="300">| <img src="ImagenesMuestra/LayoutInvoiceList.png" width="300">|
 
 ## Artículos
 |Crear|Detalles|Lista| 
 | ------------------------------ | ------------------------------ | ------------------------------ | 
-| ![proyectoFacturaASMJ](imagenesMuestra/LayoutItemCreation.png) |![proyectoFacturaASMJ](imagenesMuestra/LayoutItemDetail.png) | ![proyectoFacturaASMJ](imagenesMuestra/LayoutItemList.png)   |
-
+|<img src="ImagenesMuestra/LayoutItemCreation.png" width="300">|<img src="ImagenesMuestra/LayoutItemDetail.png" width="300">| <img src="ImagenesMuestra/LayoutItemList.png" width="300">|
 ## Tareas
 |Crear|Detalles|Lista| 
 | ------------------------------ | ------------------------------ | ------------------------------ | 
-| ![proyectoFacturaASMJ](imagenesMuestra/LayoutTaskCreation.png) |![proyectoFacturaASMJ](imagenesMuestra/LayoutTaskDetail.png) | ![proyectoFacturaASMJ](imagenesMuestra/LayoutTaskList.png)   |
-
+|<img src="ImagenesMuestra/LayoutTaskCreation.png" width="300">|<img src="ImagenesMuestra/LayoutTaskDetail.png" width="300">| <img src="ImagenesMuestra/LayoutTaskList.png" width="300">|
