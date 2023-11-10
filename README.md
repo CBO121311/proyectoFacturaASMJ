@@ -96,6 +96,10 @@ Escrito por CBO121311
  - Versión final de todas las layout.
 ------------------------
 
+# Icono
+
+<img src="ImagenesMuestra/ic_launcher_theme_kiwi_round.webp" width="300">
+
 # Capas de Layout
 
 ## Cliente
