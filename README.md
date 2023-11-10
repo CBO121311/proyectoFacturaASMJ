@@ -87,3 +87,39 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  - Añadido a todos los fragments de tareas el destroy para manejar su destrucción.
  - Eliminación de código innecesario.
  - Mejoras generales en las interfaces y cambio de fondo en Task List.
+
+-------------------------------------------------------------------------------------
+
+Escrito por CBO121311
+
+ ## V2.5 (10/11/2023)
+ - Añadido la funcionalidad de los botones de agregar fecha en Task create.
+ - Añadido a todos los fragments de tareas el destroy para manejar su destrucción.
+ - Eliminación de código innecesario.
+ - Mejoras generales en las interfaces y cambio de fondo en Task List.
+
+
+
+
+# Capas de Layout
+
+## Cliente
+|Crear|Detalles|Lista| 
+| ------------------------------ | ------------------------------ | ------------------------------ | 
+| ![proyectoFacturaASMJ](imagenesMuestra/LayoutCustomerCreation.png) |![proyectoFacturaASMJ](imagenesMuestra/LayoutCustomerDetail.png) | ![proyectoFacturaASMJ](imagenesMuestra/LayoutCustomerList.png)   |
+
+## Factura
+|Crear|Detalles|Lista| 
+| ------------------------------ | ------------------------------ | ------------------------------ | 
+| ![proyectoFacturaASMJ](imagenesMuestra/LayoutInvoiceCreation.png) |![proyectoFacturaASMJ](imagenesMuestra/LayoutInvoiceDetail.png) | ![proyectoFacturaASMJ](imagenesMuestra/LayoutInvoiceList.png)   |
+
+## Artículos
+|Crear|Detalles|Lista| 
+| ------------------------------ | ------------------------------ | ------------------------------ | 
+| ![proyectoFacturaASMJ](imagenesMuestra/LayoutItemCreation.png) |![proyectoFacturaASMJ](imagenesMuestra/LayoutItemDetail.png) | ![proyectoFacturaASMJ](imagenesMuestra/LayoutItemList.png)   |
+
+## Tareas
+|Crear|Detalles|Lista| 
+| ------------------------------ | ------------------------------ | ------------------------------ | 
+| ![proyectoFacturaASMJ](imagenesMuestra/LayoutTaskCreation.png) |![proyectoFacturaASMJ](imagenesMuestra/LayoutTaskDetail.png) | ![proyectoFacturaASMJ](imagenesMuestra/LayoutTaskList.png)   |
+
