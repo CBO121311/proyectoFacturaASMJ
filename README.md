@@ -87,3 +87,32 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  - Añadido a todos los fragments de tareas el destroy para manejar su destrucción.
  - Eliminación de código innecesario.
  - Mejoras generales en las interfaces y cambio de fondo en Task List.
+
+-------------------------------------------------------------------------------------
+
+Escrito por CBO121311
+
+ ## V2.5 (10/11/2023)
+ - Versión final de todas las layout.
+------------------------
+
+# Capas de Layout
+
+## Cliente
+|Crear|Detalles|Lista| 
+| ------------------------------ | ------------------------------ | ------------------------------ | 
+|<img src="ImagenesMuestra/LayoutCustomerCreation.png" width="300">|<img src="ImagenesMuestra/LayoutCustomerDetail.png" width="300">| <img src="ImagenesMuestra/LayoutCustomerList.png" width="300">|
+
+## Factura
+|Crear|Detalles|Lista| 
+| ------------------------------ | ------------------------------ | ------------------------------ | 
+|<img src="ImagenesMuestra/LayoutInvoiceCreation.png" width="300">|<img src="ImagenesMuestra/LayoutInvoiceDetail.png" width="300">| <img src="ImagenesMuestra/LayoutInvoiceList.png" width="300">|
+
+## Artículos
+|Crear|Detalles|Lista| 
+| ------------------------------ | ------------------------------ | ------------------------------ | 
+|<img src="ImagenesMuestra/LayoutItemCreation.png" width="300">|<img src="ImagenesMuestra/LayoutItemDetail.png" width="300">| <img src="ImagenesMuestra/LayoutItemList.png" width="300">|
+## Tareas
+|Crear|Detalles|Lista| 
+| ------------------------------ | ------------------------------ | ------------------------------ | 
+|<img src="ImagenesMuestra/LayoutTaskCreation.png" width="300">|<img src="ImagenesMuestra/LayoutTaskDetail.png" width="300">| <img src="ImagenesMuestra/LayoutTaskList.png" width="300">|
