@@ -9,9 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cbo.customerlist.adapter.ClientesAdapter
-import com.cbo.customerlist.data.Clientes
-import com.cbo.customerlist.data.ClientesProvider
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.cbo.customerlist.data.model.Clientes
+import com.cbo.customerlist.data.repository.ClientesProvider
 import com.moronlu18.customerlist.databinding.FragmentCustomerListBinding
 
 class CustomerList : Fragment() {
@@ -30,8 +29,6 @@ class CustomerList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val fab = requireActivity().findViewById<FloatingActionButton>(com.moronlu18.invoice.R.id.fab)
-        fab.visibility = View.GONE
 
         initRecyclerViewClientes()
     }

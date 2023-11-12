@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/splashFragment">
 
     <!-- Se nombra directamente al Fragment. La propiedad android:name da error
     porque el Fragmento no está en app y es en tiempo de ejecución cuando el módulo se une al
@@ -89,12 +89,25 @@
         app:moduleName="accountsignin"
         android:label="@string/title_accountsigin"
         android:id="@+id/accountSignInFragment"
-        android:name="com.moronlu18.accountsignin.ui.AccountSignIn" />
+        android:name="com.moronlu18.accountsignin.ui.AccountSignIn" >
+        <action
+            android:id="@+id/action_accountSignInFragment_to_as_userListFragment"
+            app:destination="@id/as_userListFragment" />
+    </fragment>
+
     <fragment
         app:moduleName="accountsignup"
         android:label="@string/title_accountsignup"
         android:id="@+id/accountSignUpFragment"
         android:name="com.moronlu18.accountsignup.ui.AccountSignUp" />
+
+    <fragment
+        app:moduleName="accountsignin"
+        android:id="@+id/as_userListFragment"
+        android:name="com.moronlu18.accountsignin.ui.UserListFragment"
+        android:label="Lista de Usuario"
+        tools:layout="@layout/fragment_user_list" />
+
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.moronlu18.invoice.MainFragment"
@@ -109,10 +122,13 @@
 
         <action
             android:id="@+id/action_mainFragment_to_CustomerCreationFragment"
-            app:destination="@id/CustomerCreationFragment" />
+            app:destination="@id/CustomerCreationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_mainFragment_to_CustomerListFragment"
-            app:destination="@id/CustomerListFragment"/>
+            app:destination="@id/CustomerListFragment"
+            app:enterAnim="@android:anim/fade_in" />
         <action
             android:id="@+id/action_mainFragment_to_TaskCreationFragment"
             app:destination="@id/TaskCreationFragment" />
@@ -124,7 +140,8 @@
             app:destination="@id/TaskDetailFragment" />
         <action
             android:id="@+id/action_mainFragment_to_CustomerDetailFragment"
-            app:destination="@id/CustomerDetailFragment" />
+            app:destination="@id/CustomerDetailFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
         <action
             android:id="@+id/action_mainFragment_to_InvoiceListFragment"
             app:destination="@id/InvoiceListFragment" />
@@ -143,6 +160,16 @@
         <action
             android:id="@+id/action_mainFragment_to_ItemCreationFragment"
             app:destination="@id/ItemCreationFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.moronlu18.invoice.ui.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 
 

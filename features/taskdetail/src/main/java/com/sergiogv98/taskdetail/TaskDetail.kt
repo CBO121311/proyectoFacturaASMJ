@@ -22,8 +22,7 @@ class TaskDetail : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val fab = requireActivity().findViewById<FloatingActionButton>(com.moronlu18.invoice.R.id.fab)
-        fab.visibility = View.GONE
+
         _binding = FragmentTaskDetailBinding.inflate(inflater, container, false)
         return binding.root
     }

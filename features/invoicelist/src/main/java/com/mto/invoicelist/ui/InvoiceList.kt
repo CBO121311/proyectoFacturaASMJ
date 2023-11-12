@@ -37,8 +37,6 @@ class InvoiceList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val fab = requireActivity().findViewById<FloatingActionButton>(com.moronlu18.invoice.R.id.fab)
-        fab.visibility = View.GONE
 
         initRecyclerView()
     }

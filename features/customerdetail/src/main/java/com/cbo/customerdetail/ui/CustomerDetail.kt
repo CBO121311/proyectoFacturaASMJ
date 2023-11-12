@@ -21,8 +21,6 @@ class CustomerDetail : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val fab = requireActivity().findViewById<FloatingActionButton>(com.moronlu18.invoice.R.id.fab)
-        fab.visibility = View.GONE
 
         // Inflate the layout for this fragment
         _binding = FragmentCustomerDetailBinding.inflate(inflater, container, false)

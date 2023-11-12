@@ -2,7 +2,7 @@ package com.cbo.customerlist.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.cbo.customerlist.data.Clientes
+import com.cbo.customerlist.data.model.Clientes
 import com.moronlu18.customerlist.databinding.ItemClienteBinding
 
 

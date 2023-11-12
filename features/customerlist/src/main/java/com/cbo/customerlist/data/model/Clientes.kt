@@ -1,4 +1,4 @@
-package com.cbo.customerlist.data
+package com.cbo.customerlist.data.model
 
 data class Clientes(
     val id: Int,

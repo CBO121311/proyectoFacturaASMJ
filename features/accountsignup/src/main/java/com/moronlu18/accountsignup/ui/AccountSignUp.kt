@@ -1,33 +1,21 @@
 package com.moronlu18.accountsignup.ui
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.moronlu18.accountsignup.R
+import android.widget.ArrayAdapter
+import com.moronlu18.accountsignup.databinding.FragmentAccountSignUpBinding
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AccountSignUp.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AccountSignUp : Fragment() {
 
+    private var _binding: FragmentAccountSignUpBinding? = null
 
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -35,26 +23,31 @@ class AccountSignUp : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account_sign_up, container, false)
+
+        _binding = FragmentAccountSignUpBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AccountSignUp.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AccountSignUp().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    /**
+     * Se utiliza esta función para inicializar los componentes que se han creado ya en la función onCreateView
+     * requiredContext() utiliza el de la clase base, this siempre en java.
+     * la razón de context
+     */
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //1. Crear colección de datos
+        val itemList = arrayListOf<String>("Private", "Public", "Empty")
+        //2. Crear Adapter
+        val adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, itemList)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+
+        with(binding.spProfile) {
+            this.adapter = adapter
+            setSelection(2)
+            onItemSelectedListener = null
+        }
     }
 }

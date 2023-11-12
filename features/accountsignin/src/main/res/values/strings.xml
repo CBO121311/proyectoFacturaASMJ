@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="tvTitle">Se implementará Login</string>
+    <string name="app_name">PruebasConClientes</string>
+    <string name="tilEmailSignInHit">Contraseña</string>
+    <string name="tvCalification">Calificacion</string>
+    <string name="tvProfile">Perfil:</string>
+    <string name="tvType">Tipo:</string>
+    <string name="tietEmailSignUp">Email</string>
+    <string name="tietPasswordSignUp">Password</string>
+    <string name="tietConfirmPasswordSignUp">Confirmar Password</string>
+    <string name="imgLogo_decscription">Mi caja</string>
 </resources>

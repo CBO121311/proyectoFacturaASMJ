@@ -1,4 +1,6 @@
-package com.cbo.customerlist.data
+package com.cbo.customerlist.data.repository
+
+import com.cbo.customerlist.data.model.Clientes
 
 class ClientesProvider {
     companion object {

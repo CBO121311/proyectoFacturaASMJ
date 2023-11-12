@@ -21,6 +21,8 @@
     <string name="title_taskdetail">Detalle de tarea</string>
     <string name="title_tasklist">Lista de tareas</string>
 
+    <string name="imgLogo_decscription">Icono</string>
+
     <string name="action_settings">Settings</string>
 
     <string name="btSignIn">Login</string>

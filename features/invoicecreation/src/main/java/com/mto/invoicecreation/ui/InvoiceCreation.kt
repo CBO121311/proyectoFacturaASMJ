@@ -40,9 +40,6 @@ class InvoiceCreation : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val fab = requireActivity().findViewById<FloatingActionButton>(com.moronlu18.invoice.R.id.fab)
-        fab.visibility = View.GONE
-
         // Inflate the layout for this fragment
         _binding = FragmentInvoiceCreationBinding.inflate(inflater, container, false)
 

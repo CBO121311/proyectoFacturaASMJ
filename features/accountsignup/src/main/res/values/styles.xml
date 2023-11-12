@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ButtonTransparent">
+
+        <item name="android:background">@drawable/selector_button</item>
+
+    </style>
+
+    <!-- Se utilizar la herencia entre los estilos definidos por el desarrollador
+    Para estilos del sdk de android hay que usar parent-->
+    <style name="ButtonTransparent.TextColor">
+        <item name="android:textColor">@color/design_default_color_secondary</item>
+    </style>
+
+    <style name="InvoiceTitleSmall" parent="MaterialAlertDialog.Material3.Body.Text">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="SignIntextInputLayout">
+        <item name="hintTextColor">@color/signinh_color</item>
+        <item name="errorTextColor">@android:color/holo_red_light</item>
+        <item name="boxBackgroundColor">@android:color/darker_gray</item>
+    </style>
+</resources>
