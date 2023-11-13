@@ -7,11 +7,10 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
 
 *Escrito por CBO121311*
 
- ## V2.5.1 (12/11/2023)
- - Comienzo de la segunda etapa del proyecto.
- - Se ha añadido las layout SignIn, SignUp, Splash y UserList.
- - Añadida animaciones a las layout customer.
- - Quitada líneas de código del floatingButton del Activity en todos los módulos.
+ ## V3.0.1 (13/11/2023)
+ - Se ha eliminado los navgraph y los botones relacionado a creation y detail.
+ - Comunicación de graph entre las capas de customer.
+ - Añadido e implementado nuevo icono
 
 ------------------------
 
