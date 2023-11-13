@@ -17,13 +17,20 @@
         <action
             android:id="@+id/action_CustomerListFragment_to_CustomerDetailFragment"
             app:destination="@id/CustomerDetailFragment"/>
+        <action
+            android:id="@+id/action_CustomerListFragment_to_CustomerCreationFragment"
+            app:destination="@id/CustomerCreationFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/CustomerCreationFragment"
         android:name="com.cbo.customercreation.ui.CustomerCreation"
         android:label="@string/title_customercreation"
-        app:moduleName="customercreation" />
+        app:moduleName="customercreation" >
+        <action
+            android:id="@+id/action_CustomerCreationFragment_to_CustomerListFragment"
+            app:destination="@id/CustomerListFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/CustomerDetailFragment"
@@ -128,47 +135,19 @@
         <action
             android:id="@+id/action_mainFragment_to_featureAccountSignUp"
             app:destination="@+id/accountSignUpFragment" />
-
-        <action
-            android:id="@+id/action_mainFragment_to_CustomerCreationFragment"
-            app:destination="@id/CustomerCreationFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_mainFragment_to_CustomerListFragment"
             app:destination="@id/CustomerListFragment"
             app:enterAnim="@android:anim/fade_in" />
         <action
-            android:id="@+id/action_mainFragment_to_TaskCreationFragment"
-            app:destination="@id/TaskCreationFragment" />
-        <action
             android:id="@+id/action_mainFragment_to_TaskListFragment"
             app:destination="@id/TaskListFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_TaskDetailFragment"
-            app:destination="@id/TaskDetailFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_CustomerDetailFragment"
-            app:destination="@id/CustomerDetailFragment"
-            app:enterAnim="@android:anim/slide_in_left" />
         <action
             android:id="@+id/action_mainFragment_to_InvoiceListFragment"
             app:destination="@id/InvoiceListFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_InvoiceDetailFragment"
-            app:destination="@id/InvoiceDetailFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_InvoiceCreationFragment"
-            app:destination="@id/InvoiceCreationFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_ItemDetailFragment"
-            app:destination="@id/ItemDetailFragment" />
-        <action
             android:id="@+id/action_mainFragment_to_ItemListFragment"
             app:destination="@id/ItemListFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_ItemCreationFragment"
-            app:destination="@id/ItemCreationFragment" />
 
     </fragment>
     <fragment

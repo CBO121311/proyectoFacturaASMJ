@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.cbo.customerlist.adapter.ClientesAdapter
 import com.cbo.customerlist.data.model.Clientes
 import com.cbo.customerlist.data.repository.ClientesProvider
+import com.moronlu18.invoice.R
 import com.moronlu18.customerlist.databinding.FragmentCustomerListBinding
 
 class CustomerList : Fragment() {
@@ -23,7 +24,7 @@ class CustomerList : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCustomerListBinding.inflate(inflater,container,false)
+        _binding = FragmentCustomerListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -31,21 +32,40 @@ class CustomerList : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerViewClientes()
+
+        binding.customerListFltbtnAdd.setOnClickListener {
+            findNavController().navigate(R.id.action_CustomerListFragment_to_CustomerCreationFragment)
+        }
     }
 
-    private fun initRecyclerViewClientes(){
+    private fun initRecyclerViewClientes() {
 
         val manager = LinearLayoutManager(requireContext())
-        val decoration = DividerItemDecoration(requireContext(),manager.orientation)
+        val decoration = DividerItemDecoration(requireContext(), manager.orientation)
         binding.customerListRvClientes.layoutManager = manager
 
-        binding.customerListRvClientes.adapter = ClientesAdapter(ClientesProvider.clientesList){
 
-            x-> onItemSelected(x)
+        val recyclerView = binding.customerListRvClientes
+        val emptyTextView = binding.customerListTvempty
+
+        if (ClientesProvider.clientesListVacia.isEmpty()) {
+            emptyTextView.visibility = View.VISIBLE
+            recyclerView.visibility = View.GONE
+        } else {
+            emptyTextView.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
         }
+
+        binding.customerListRvClientes.adapter =
+            ClientesAdapter(ClientesProvider.clientesListVacia) {
+
+                    x ->
+                onItemSelected(x)
+            }
         binding.customerListRvClientes.addItemDecoration(decoration)
 
     }
+
     fun onItemSelected(cliente: Clientes) {
         //Toast.makeText(requireContext(),cliente.name, Toast.LENGTH_SHORT).show()
         findNavController().navigate(com.moronlu18.invoice.R.id.action_CustomerListFragment_to_CustomerDetailFragment)
@@ -54,6 +74,7 @@ class CustomerList : Fragment() {
 
 
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

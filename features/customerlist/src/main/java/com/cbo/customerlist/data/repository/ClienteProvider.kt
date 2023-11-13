@@ -85,5 +85,7 @@ class ClientesProvider {
             )
             // Agrega más clientes aquí
         )
+
+        val clientesListVacia = emptyList<Clientes>()
     }
 }

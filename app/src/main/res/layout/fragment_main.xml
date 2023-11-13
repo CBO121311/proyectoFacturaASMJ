@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp">
+        android:padding="24dp">
 
         <Button
             android:id="@+id/btSignin"
@@ -36,165 +36,101 @@
             android:id="@+id/tvCustomer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="100dp"
-            android:text="@string/app_tvCustomer"
+            android:text="Lista de clientes"
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/btCustomerList" />
 
         <TextView
             android:id="@+id/tvInvoice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:text="@string/app_tvInvoice"
+            android:text="Lista de Facturas"
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btCustomerCreation" />
+            app:layout_constraintBottom_toBottomOf="@+id/tvCustomer"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3" />
 
         <TextView
             android:id="@+id/tvItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:text="@string/app_tvItem"
+            android:text="Lista de articulos"
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btInvoiceCreation" />
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/btItemList" />
 
         <TextView
             android:id="@+id/tvTask"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="408dp"
-            android:text="@string/app_tvTask"
+            android:text="Lista de tareas"
             android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btCustomerCreation"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/app_btnCreation"
-            android:backgroundTint="#4CAF50"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCustomer" />
-
-        <Button
-            android:id="@+id/btInvoiceCreation"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="16dp"
-            android:text="@string/app_btnCreation"
-            android:backgroundTint="#009688"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvInvoice" />
-
-        <Button
-            android:id="@+id/btItemCreation"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="16dp"
-            android:text="@string/app_btnCreation"
-            android:backgroundTint="#03A9F4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvItem" />
-
-        <Button
-            android:id="@+id/btTaskCreation"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="16dp"
-            android:text="@string/app_btnCreation"
-            android:backgroundTint="#9C27B0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTask" />
-
-        <Button
-            android:id="@+id/btItemDetails"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="8dp"
-            android:backgroundTint="#03A9F4"
-            android:text="@string/app_btnDetail"
-            app:layout_constraintStart_toEndOf="@+id/btItemCreation"
-            app:layout_constraintTop_toBottomOf="@+id/tvItem" />
-
-        <Button
-            android:id="@+id/btTaskDetails"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="8dp"
-            android:backgroundTint="#9C27B0"
-            android:text="@string/app_btnDetail"
-            app:layout_constraintStart_toEndOf="@+id/btTaskCreation"
-            app:layout_constraintTop_toBottomOf="@+id/tvTask" />
+            app:layout_constraintStart_toStartOf="@+id/tvInvoice"
+            app:layout_constraintTop_toBottomOf="@+id/btTaskList" />
 
         <Button
             android:id="@+id/btItemList"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
             android:backgroundTint="#03A9F4"
             android:text="@string/app_btnList"
-            app:layout_constraintStart_toEndOf="@+id/btItemDetails"
-            app:layout_constraintTop_toBottomOf="@+id/tvItem" />
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/tvCustomer" />
 
         <Button
             android:id="@+id/btTaskList"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="44dp"
             android:backgroundTint="#9C27B0"
             android:text="@string/app_btnList"
-            app:layout_constraintStart_toEndOf="@+id/btTaskDetails"
-            app:layout_constraintTop_toBottomOf="@+id/tvTask" />
-
-        <Button
-            android:id="@+id/btCustomerDetails"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:backgroundTint="#4CAF50"
-            android:text="@string/app_btnDetail"
-            app:layout_constraintStart_toEndOf="@+id/btCustomerCreation"
-            app:layout_constraintTop_toBottomOf="@+id/tvCustomer" />
-
-        <Button
-            android:id="@+id/btInvoiceDetails"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:backgroundTint="#009688"
-            android:text="@string/app_btnDetail"
-            app:layout_constraintStart_toEndOf="@+id/btInvoiceCreation"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintTop_toBottomOf="@+id/tvInvoice" />
 
         <Button
             android:id="@+id/btCustomerList"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
             android:backgroundTint="#4CAF50"
             android:text="@string/app_btnList"
-            app:layout_constraintStart_toEndOf="@+id/btCustomerDetails"
-            app:layout_constraintTop_toBottomOf="@+id/tvCustomer" />
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
         <Button
             android:id="@+id/btInvoiceList"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
             android:backgroundTint="#009688"
             android:text="@string/app_btnList"
-            app:layout_constraintStart_toEndOf="@+id/btInvoiceDetails"
-            app:layout_constraintTop_toBottomOf="@+id/tvInvoice" />
+            app:layout_constraintStart_toStartOf="@+id/btTaskList"
+            app:layout_constraintTop_toTopOf="@+id/guideline2" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="24dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="130dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="346dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

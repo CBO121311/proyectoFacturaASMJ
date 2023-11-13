@@ -30,64 +30,28 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btSignin.setOnClickListener {
-            //findNavController().navigate()
-            //findNavController().navigate(R.id.action_mainFragment_to_featureAccountSignIn)
             findNavController().navigate(R.id.action_mainFragment_to_featureAccountSignIn)
         }
         binding.btSignUp.setOnClickListener {
-            //findNavController().navigate()
             findNavController().navigate(R.id.action_mainFragment_to_featureAccountSignUp)
         }
 
         //Customer
-        binding.btCustomerCreation.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_CustomerCreationFragment)
-        }
-
-        binding.btCustomerDetails.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_CustomerDetailFragment)
-        }
-
         binding.btCustomerList.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_CustomerListFragment)
         }
 
         //Invoice
-        binding.btInvoiceCreation.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_InvoiceCreationFragment)
-        }
-
-        binding.btInvoiceDetails.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_InvoiceDetailFragment)
-        }
-
         binding.btInvoiceList.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_InvoiceListFragment)
         }
 
         //Item
-        binding.btItemCreation.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_ItemCreationFragment)
-        }
-
-        binding.btItemDetails.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_ItemDetailFragment)
-        }
-
         binding.btItemList.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_ItemListFragment)
         }
 
-
         //Task
-        binding.btTaskCreation.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_TaskCreationFragment)
-        }
-
-        binding.btTaskDetails.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_TaskDetailFragment)
-        }
-
         binding.btTaskList.setOnClickListener {
             findNavController().navigate(R.id.action_mainFragment_to_TaskListFragment)
         }
