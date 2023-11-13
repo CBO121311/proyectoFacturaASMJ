@@ -6,5 +6,5 @@ data class Clientes(
     val email: String,
     val phone: String,
     val city: String,
-    val adress:String
+    val address:String
 )

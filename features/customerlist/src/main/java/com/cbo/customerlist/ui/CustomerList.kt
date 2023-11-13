@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cbo.customerlist.adapter.ClientesAdapter
@@ -47,7 +47,12 @@ class CustomerList : Fragment() {
 
     }
     fun onItemSelected(cliente: Clientes) {
-        Toast.makeText(requireContext(),cliente.name, Toast.LENGTH_SHORT).show()
+        //Toast.makeText(requireContext(),cliente.name, Toast.LENGTH_SHORT).show()
+        findNavController().navigate(com.moronlu18.invoice.R.id.action_CustomerListFragment_to_CustomerDetailFragment)
+        //findNavController().navigate(Customer)
+        //findNavController().navigate(CustomerListDirections.actionCustomerListFragmentToCustomerDetailFragment)
+
+
     }
     override fun onDestroyView() {
         super.onDestroyView()

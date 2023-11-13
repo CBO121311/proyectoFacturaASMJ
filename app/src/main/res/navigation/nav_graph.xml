@@ -10,109 +10,118 @@
     fichero apk-->
 
     <fragment
-        app:moduleName="customerlist"
-        android:label="@string/title_customerlist"
         android:id="@+id/CustomerListFragment"
-        android:name="com.cbo.customerlist.ui.CustomerList" />
+        android:name="com.cbo.customerlist.ui.CustomerList"
+        android:label="@string/title_customerlist"
+        app:moduleName="customerlist">
+        <action
+            android:id="@+id/action_CustomerListFragment_to_CustomerDetailFragment"
+            app:destination="@id/CustomerDetailFragment"/>
+    </fragment>
 
     <fragment
-        app:moduleName="customercreation"
-        android:label="@string/title_customercreation"
         android:id="@+id/CustomerCreationFragment"
-        android:name="com.cbo.customercreation.ui.CustomerCreation" />
+        android:name="com.cbo.customercreation.ui.CustomerCreation"
+        android:label="@string/title_customercreation"
+        app:moduleName="customercreation" />
 
     <fragment
-        app:moduleName="customerdetail"
-        android:label="@string/title_customerdetail"
         android:id="@+id/CustomerDetailFragment"
-        android:name="com.cbo.customerdetail.ui.CustomerDetail"/>
+        android:name="com.cbo.customerdetail.ui.CustomerDetail"
+        android:label="@string/title_customerdetail"
+        app:moduleName="customerdetail" >
+        <argument
+            android:name="customerPrueba"
+            app:argType="string"
+            android:defaultValue="Nada" />
+    </fragment>
 
     <fragment
-        app:moduleName="invoicecreation"
-        android:label="@string/title_invoicecreation"
         android:id="@+id/InvoiceCreationFragment"
-        android:name="com.mto.invoicecreation.ui.InvoiceCreation" />
+        android:name="com.mto.invoicecreation.ui.InvoiceCreation"
+        android:label="@string/title_invoicecreation"
+        app:moduleName="invoicecreation" />
 
 
     <fragment
-        app:moduleName="invoicedetail"
-        android:label="@string/title_invoicedetail"
         android:id="@+id/InvoiceDetailFragment"
-        android:name="com.mto.invoicedetail.ui.InvoiceDetail" />
+        android:name="com.mto.invoicedetail.ui.InvoiceDetail"
+        android:label="@string/title_invoicedetail"
+        app:moduleName="invoicedetail" />
 
     <fragment
-        app:moduleName="invoicelist"
-        android:label="@string/title_invoicelist"
         android:id="@+id/InvoiceListFragment"
-        android:name="com.mto.invoicelist.ui.InvoiceList" />
+        android:name="com.mto.invoicelist.ui.InvoiceList"
+        android:label="@string/title_invoicelist"
+        app:moduleName="invoicelist" />
 
     <fragment
-        app:moduleName="itemcreation"
-        android:label="@string/title_itemcreation"
         android:id="@+id/ItemCreationFragment"
-        android:name="com.jcasrui.itemcreation.ui.ItemCreation" />
+        android:name="com.jcasrui.itemcreation.ui.ItemCreation"
+        android:label="@string/title_itemcreation"
+        app:moduleName="itemcreation" />
 
 
     <fragment
-        app:moduleName="itemdetail"
-        android:label="@string/title_itemdetail"
         android:id="@+id/ItemDetailFragment"
-        android:name="com.jcasrui.itemdetail.ui.ItemDetail" />
+        android:name="com.jcasrui.itemdetail.ui.ItemDetail"
+        android:label="@string/title_itemdetail"
+        app:moduleName="itemdetail" />
 
     <fragment
-        app:moduleName="itemlist"
-        android:label="@string/title_itemlist"
         android:id="@+id/ItemListFragment"
-        android:name="com.jcasrui.itemlist.ui.ItemList" />
+        android:name="com.jcasrui.itemlist.ui.ItemList"
+        android:label="@string/title_itemlist"
+        app:moduleName="itemlist" />
 
 
     <fragment
-        app:moduleName="tasklist"
-        android:label="@string/title_tasklist"
         android:id="@+id/TaskListFragment"
-        android:name="com.sergiogv98.tasklist.TaskList" />
+        android:name="com.sergiogv98.tasklist.TaskList"
+        android:label="@string/title_tasklist"
+        app:moduleName="tasklist" />
 
 
     <fragment
-        app:moduleName="taskcreation"
-        android:label="@string/title_taskcreation"
         android:id="@+id/TaskCreationFragment"
-        android:name="com.sergiogv98.taskcreation.TaskCreation" />
+        android:name="com.sergiogv98.taskcreation.TaskCreation"
+        android:label="@string/title_taskcreation"
+        app:moduleName="taskcreation" />
 
     <fragment
-        app:moduleName="taskdetail"
-        android:label="@string/title_taskdetail"
         android:id="@+id/TaskDetailFragment"
-        android:name="com.sergiogv98.taskdetail.TaskDetail" />
+        android:name="com.sergiogv98.taskdetail.TaskDetail"
+        android:label="@string/title_taskdetail"
+        app:moduleName="taskdetail" />
 
     <fragment
-        app:moduleName="accountsignin"
-        android:label="@string/title_accountsigin"
         android:id="@+id/accountSignInFragment"
-        android:name="com.moronlu18.accountsignin.ui.AccountSignIn" >
+        android:name="com.moronlu18.accountsignin.ui.AccountSignIn"
+        android:label="@string/title_accountsigin"
+        app:moduleName="accountsignin">
         <action
             android:id="@+id/action_accountSignInFragment_to_as_userListFragment"
             app:destination="@id/as_userListFragment" />
     </fragment>
 
     <fragment
-        app:moduleName="accountsignup"
-        android:label="@string/title_accountsignup"
         android:id="@+id/accountSignUpFragment"
-        android:name="com.moronlu18.accountsignup.ui.AccountSignUp" />
+        android:name="com.moronlu18.accountsignup.ui.AccountSignUp"
+        android:label="@string/title_accountsignup"
+        app:moduleName="accountsignup" />
 
     <fragment
-        app:moduleName="accountsignin"
         android:id="@+id/as_userListFragment"
         android:name="com.moronlu18.accountsignin.ui.UserListFragment"
         android:label="Lista de Usuario"
+        app:moduleName="accountsignin"
         tools:layout="@layout/fragment_user_list" />
 
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.moronlu18.invoice.MainFragment"
         android:label="@string/mainFragment"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_featureAccountSignIn"
             app:destination="@+id/accountSignInFragment" />
@@ -166,7 +175,7 @@
         android:id="@+id/splashFragment"
         android:name="com.moronlu18.invoice.ui.SplashFragment"
         android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" >
+        tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_mainFragment"
             app:destination="@id/mainFragment" />

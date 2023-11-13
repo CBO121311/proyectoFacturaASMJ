@@ -14,7 +14,7 @@ class ClientesViewHolder(private val view: View) : RecyclerView.ViewHolder(view)
 
         binding.customerListTvName.text = clientesModel.name
         binding.customerListTvEmail.text = clientesModel.email
-        binding.customerListTvAddress.text = clientesModel.adress
+        binding.customerListTvAddress.text = clientesModel.address
         binding.customerListTvCity.text= clientesModel.city
         binding.customerListTvPhone.text = clientesModel.phone
 

@@ -3,7 +3,7 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
 ## Características
 
 - Aplicación que se ha desarrollado con módulos dinámicos
-- Nevagación a Fragment de forma direct
+- Nevagación a Fragment de forma directo
 
 *Escrito por CBO121311*
 

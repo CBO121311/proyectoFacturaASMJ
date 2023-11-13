@@ -27,5 +27,7 @@ class ClientesAdapter(
     override fun onBindViewHolder(holder: ClientesViewHolder, position: Int) {
         val item = clientesList[position]
         holder.render(item, onClickListener)
+
+
     }
 }
