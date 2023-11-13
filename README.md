@@ -5,9 +5,10 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
 - Aplicación que se ha desarrollado con módulos dinámicos
 - Nevagación a Fragment de forma directo
 
-*Escrito por CBO121311*
+
 
  ## V3.0.1 (13/11/2023)
+ *Escrito por CBO121311*
  - Se ha eliminado los navgraph y los botones relacionado a creation y detail.
  - Comunicación de graph entre las capas de customer.
  - Añadido e implementado nuevo icono
