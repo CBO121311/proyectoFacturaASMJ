@@ -11,6 +11,6 @@
         android:layout_height="400dp"
         android:layout_gravity="center"
         android:contentDescription="@string/imgLogo_decscription"
-        android:src="@drawable/ic_launcher_kiwi_round" />
+        android:src="@drawable/ic_launcher_theme_kiwiv1_round" />
 
 </FrameLayout>
