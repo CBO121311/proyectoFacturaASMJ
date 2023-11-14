@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -32,6 +33,9 @@ class InvoiceList : Fragment() {
     ): View? {
 
         _binding = FragmentInvoiceListBinding.inflate(inflater,container,false)
+        binding.fab.setOnClickListener {
+            findNavController().navigate(com.moronlu18.invoice.R.id.action_InvoiceListFragment_to_InvoiceCreationFragment)
+        }
         return binding.root
     }
 
@@ -43,7 +47,6 @@ class InvoiceList : Fragment() {
 
     fun initRecyclerView() {
         val manager = LinearLayoutManager(context)
-        val decoration = DividerItemDecoration(context, manager.orientation)
 
         binding.invoiceListRvFacturas.layoutManager = LinearLayoutManager(context)
         binding.invoiceListRvFacturas.adapter = FacturaAdapter(FacturaProvider.facturaList) {
@@ -51,17 +54,13 @@ class InvoiceList : Fragment() {
                 it
             )
         }
-        binding.invoiceListRvFacturas.addItemDecoration(decoration)
         binding.tvVacio.text="";
+
 
     }
 
     fun onItemSelected(factura: Factura) {
-        binding.invoiceListRvFacturas.setOnClickListener {
-            Toast.makeText(requireContext(),factura.id, Toast.LENGTH_SHORT).show()
-
-        }
-
+        findNavController().navigate(com.moronlu18.invoice.R.id.action_InvoiceListFragment_to_InvoiceDetailFragment)
     }
 
     override fun onDestroyView() {

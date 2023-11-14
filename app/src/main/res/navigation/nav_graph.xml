@@ -60,7 +60,14 @@
         android:id="@+id/InvoiceListFragment"
         android:name="com.mto.invoicelist.ui.InvoiceList"
         android:label="@string/title_invoicelist"
-        app:moduleName="invoicelist" />
+        app:moduleName="invoicelist">
+        <action
+            android:id="@+id/action_InvoiceListFragment_to_InvoiceDetailFragment"
+            app:destination="@id/InvoiceDetailFragment"/>
+        <action
+            android:id="@+id/action_InvoiceListFragment_to_InvoiceCreationFragment"
+            app:destination="@id/InvoiceCreationFragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/ItemCreationFragment"

@@ -3,119 +3,134 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
+    android:layout_height="wrap_content"
+    android:foregroundTint="@color/coloresBlanco"
+    android:padding="5dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/coloresBlanco"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="10dp">
 
-        <LinearLayout
-            android:id="@+id/item_factura_layout"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/invoice_list_c2"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_item_factura">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+            <TextView
+                android:id="@+id/item_factura_ivtFa"
+                style="@style/ilFac"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-                <TextView
-                    style="@style/ilFac"
-                    android:id="@+id/item_factura_ivtFa"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/item_fa_Factura"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/item_factura_gl1"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                    tools:text="@string/item_fa_Factura" />
+            <TextView
+                android:id="@+id/item_factura_ivtTotal"
+                style="@style/ilFac"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-                <TextView
-                    android:id="@+id/item_factura_tvId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold" />
-            </LinearLayout>
+                android:layout_marginEnd="24dp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/item_factura_tvCliente"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="@string/item_fa_Total" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+            <TextView
+                android:id="@+id/item_factura_tvId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/item_factura_ivtFa"
+                app:layout_constraintStart_toEndOf="@+id/item_factura_ivtFa" />
 
-                <TextView
-                    style="@style/ilFac"
-                    android:id="@+id/item_factura_itvNo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    tools:text="@string/item_fa_Cliente" />
+            <TextView
+                android:id="@+id/item_factura_tvCliente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/item_factura_itvNo"
+                app:layout_constraintStart_toEndOf="@+id/item_factura_itvNo" />
 
-                <TextView
-                    android:id="@+id/item_factura_tvCliente"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/item_factura_itvNo"
+                style="@style/ilFac"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/item_fa_Cliente"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/item_factura_gl1"
+                app:layout_constraintTop_toBottomOf="@+id/item_factura_ivtFa" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/item_factura_gl1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="74dp" />
 
-                <TextView
-                    style="@style/ilFac"
-                    android:id="@+id/item_factura_itvFe"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    tools:text="@string/item_fa_FechaEm" />
 
-                <TextView
+            <ImageView
+                android:id="@+id/item_factura_ivKiwi"
+                android:layout_width="60dp"
+                android:layout_height="68dp"
+                android:src="@drawable/kiwi"
+                android:contentDescription="@string/invoice_item_ivKiwi"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/item_factura_gl1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                    android:id="@+id/item_factura_tvFechaEm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold" />
-            </LinearLayout>
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:contentDescription="@string/invoice_item_btnEdi"
+                android:layout_width="23dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_edit"
+                app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:contentDescription="@string/invoice_item_btnDelete"
+                android:layout_width="23dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_delete"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageButton"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/item_factura_itvFem"
-                    style="@style/ilFac"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    tools:text="@string/item_fa_FechaFi" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="299dp" />
 
-                <TextView
-                    android:id="@+id/item_factura_tvFechaF"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold" />
-
-                <TextView
-                    style="@style/ilFac"
-                    android:id="@+id/item_factura_itvTotal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingRight="10dp"
-                    android:textAlignment="viewEnd"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </LinearLayout>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

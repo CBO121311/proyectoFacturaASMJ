@@ -1,192 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/invoice_detail_tilEstado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:background="@color/invoice_detail_c1"
-        app:layout_constraintBottom_toTopOf="@+id/invoice_detail_ivCalendar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.058">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/invoice_detail_tieEstado"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            android:background="@color/invoice_detail_c2"
-            android:cursorVisible="false"
-            android:enabled="false"
-            android:focusable="false"
-            android:fontFamily="@font/helvetica"
-            android:text="Pagada"
-            android:textAlignment="center" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <ImageView
-        android:id="@+id/invoice_detail_ivUser"
-        android:layout_width="27dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="16dp"
-        android:src="@drawable/userdetail"
-        android:contentDescription="@string/invoice_detail_descUser"
-        app:layout_constraintBottom_toTopOf="@+id/invoice_detail_tvFechaEm"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.128"
-        app:tint="@color/invoice_detail_c1" />
-
     <TextView
-        android:id="@+id/invoice_detail_tvCliente"
+        android:id="@+id/invoice_detail_tvDetalles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:fontFamily="@font/helvetica"
-        android:text="@string/tieCliente"
-        android:textAllCaps="false"
+        android:text="@string/tvDatos"
         android:textColor="@color/invoice_detail_c"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/invoice_detail_tilCliente"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.148"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.533" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/invoice_detail_tilCliente"
-        android:layout_width="wrap_content"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/invoice_detail_cvDatos"
+        android:layout_width="@dimen/invoice_detail_cdDatos"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:background="@color/invoice_detail_c1"
-        app:layout_constraintBottom_toTopOf="@+id/invoice_detail_ivCalendar"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintHorizontal_bias="0.285"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.057">
+        app:layout_constraintTop_toBottomOf="@+id/invoice_detail_tvDetalles">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/invoice_detail_tieCliente"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/invoice_detail_c2"
-            android:cursorVisible="false"
-            android:enabled="false"
-            android:focusable="false"
-            android:fontFamily="@font/helvetica"
-            android:text="Juan Pérez"
-            android:textAlignment="center" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/invoice_detail_tilFechaEm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/invoice_detail_c1"
-        app:layout_constraintBaseline_toBaselineOf="@+id/invoice_detail_tilFechaFin"
-        app:layout_constraintEnd_toStartOf="@+id/invoice_detail_tilFechaFin"
-        app:layout_constraintHorizontal_bias="0.087"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/invoice_detail_tieFechaEm"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/invoice_detail_constCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/invoice_detail_c2"
-            android:cursorVisible="false"
-            android:enabled="false"
-            android:focusable="false"
-            android:fontFamily="@font/helvetica"
-            android:text="1/1/2003"
-            android:textAlignment="center" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:background="@drawable/shape_detail_card">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/invoice_detail_tilFechaFin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@color/invoice_detail_c1"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:focusable="false"
-        android:enabled="false"
-        android:cursorVisible="false"
-        app:layout_constraintHorizontal_bias="0.914"
-        app:layout_constraintStart_toStartOf="@+id/invoice_detail_tvArticulos"
-        app:layout_constraintTop_toBottomOf="@+id/invoice_detail_tvFechaFin">
+            <TextView
+                android:id="@+id/invoice_detail_tvCliente"
+                style="@style/ilDet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/tieCliente"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/invoice_detail_tieFechaFin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/invoice_detail_c2"
-            android:fontFamily="@font/helvetica"
-            android:text="10/12/2023"
-            android:textAlignment="center" />
-    </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/invoice_detail_tvFechaEm"
+                style="@style/ilDet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/tieFechaEm"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/invoice_detail_tvCliente" />
 
-    <TextView
-        android:id="@+id/invoice_detail_tvFechaEm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:fontFamily="@font/helvetica"
-        android:text="@string/tieFechaEm"
-        android:textColor="@color/invoice_detail_c"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.22" />
+            <TextView
+                android:id="@+id/invoice_detail_FechaF"
+                style="@style/ilDet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/tieFechaFin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/invoice_detail_tvFechaEm" />
 
-    <TextView
-        android:id="@+id/invoice_detail_tvFechaFin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/helvetica"
-        android:text="@string/tieFechaFin"
-        android:textColor="@color/invoice_detail_c"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.68"
-        app:layout_constraintStart_toEndOf="@+id/invoice_detail_tvFechaEm"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.22" />
+            <TextView
+                style="@style/ilDet1"
+                android:id="@+id/invoice_detail_tvEstado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="@string/tvPendiente"
+                android:textColor="#F44336"
+                app:layout_constraintBaseline_toBaselineOf="@+id/invoice_detail_tvCliente"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                style="@style/ilDet"
+                android:id="@+id/invoice_detail_tcCliText"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Juan López"
+                app:layout_constraintBaseline_toBaselineOf="@+id/invoice_detail_tvCliente"
+                app:layout_constraintStart_toEndOf="@+id/invoice_detail_tvCliente" />
+
+            <TextView
+                style="@style/ilDet"
+                android:id="@+id/invoice_detail_tcFechaEmText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="10/10/2002"
+                app:layout_constraintBaseline_toBaselineOf="@+id/invoice_detail_tvFechaEm"
+                app:layout_constraintStart_toEndOf="@+id/invoice_detail_tvFechaEm" />
+
+            <TextView
+                android:id="@+id/invoice_detail_tcFechaFText"
+                style="@style/ilDet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="10/2/2023"
+                app:layout_constraintBaseline_toBaselineOf="@+id/invoice_detail_FechaF"
+                app:layout_constraintStart_toEndOf="@+id/invoice_detail_FechaF" />
+
+            <ImageView
+                android:id="@+id/item_factura_ivKiwi"
+                android:layout_width="@dimen/invoice_detail_cdImage1"
+                android:layout_height="@dimen/invoice_detail_cdImage2"
+                android:layout_marginBottom="16dp"
+                android:contentDescription="Kiwi"
+                android:src="@drawable/kiwi"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.501"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/invoice_detail_FechaF"
+                app:layout_constraintVertical_bias="1.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/invoice_detail_rvArticulos"
-        android:layout_width="350dp"
-        android:layout_height="330dp"
+        android:layout_width="@dimen/invoice_detail_cdDatos"
+        android:layout_height="@dimen/invoice_detail_cdDatosAltura"
+        android:layout_marginBottom="80dp"
         android:background="@color/invoice_detail_c2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/invoice_detail_tilFechaFin"
-        app:layout_constraintVertical_bias="0.581" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/invoice_detail_tvArticulos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="@font/helvetica"
         android:text="@string/tieArticulosFactura"
         android:textColor="@color/invoice_detail_c"
@@ -196,8 +154,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/invoice_detail_tilFechaFin"
-        app:layout_constraintVertical_bias="0.859" />
+        app:layout_constraintTop_toBottomOf="@+id/invoice_detail_cvDatos" />
 
     <TextView
         android:id="@+id/invoice_detail_tvPrecio"
@@ -219,47 +176,19 @@
         android:id="@+id/invoice_detail_tvTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:cursorVisible="false"
+        android:enabled="false"
+        android:focusable="false"
         android:fontFamily="@font/helvetica"
+        android:text="0.00"
         android:textColor="@color/invoice_detail_c"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:focusable="false"
-        android:enabled="false"
-        android:cursorVisible="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.326"
         app:layout_constraintStart_toEndOf="@+id/invoice_detail_tvPrecio"
         app:layout_constraintTop_toBottomOf="@+id/invoice_detail_rvArticulos"
-        app:layout_constraintVertical_bias="0.794"
-        tools:text="0.00" />
-
-    <ImageView
-        android:id="@+id/invoice_detail_ivCalendar"
-        android:layout_width="63dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="36dp"
-        android:src="@drawable/calendar"
-        android:contentDescription="@string/invoice_detail_descCalendar"
-        app:layout_constraintBottom_toTopOf="@+id/invoice_detail_tvArticulos"
-        app:layout_constraintEnd_toStartOf="@+id/invoice_detail_tilFechaFin"
-        app:layout_constraintHorizontal_bias="0.431"
-        app:layout_constraintStart_toEndOf="@+id/invoice_detail_tilFechaEm"
-        app:tint="@color/invoice_detail_c1" />
-
-    <TextView
-        android:id="@+id/a"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/helvetica"
-        android:text="@string/invoice_detail_tvEstado"
-        android:textColor="@color/invoice_detail_c"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/invoice_detail_tvCliente"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.907"
-        app:layout_constraintStart_toEndOf="@+id/invoice_detail_tvCliente" />
+        app:layout_constraintVertical_bias="0.794" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

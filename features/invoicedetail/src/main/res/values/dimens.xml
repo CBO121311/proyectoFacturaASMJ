@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="invoice_detail_cdDatos">350dp</dimen>
+    <dimen name="invoice_detail_cdImage1">81dp</dimen>
+    <dimen name="invoice_detail_cdImage2">74dp</dimen>
+    <dimen name="invoice_detail_cdDatosAltura">330dp</dimen>
+</resources>

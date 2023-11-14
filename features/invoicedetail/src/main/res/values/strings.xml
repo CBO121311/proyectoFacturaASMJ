@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="tbFacturas">Facturas</string>
-    <string name="tieCliente">Cliente</string>
-    <string name="tieFechaEm">Fecha de emisión</string>
-    <string name="tieFechaFin">Fecha de finalización</string>
+    <string name="tieCliente">Cliente:</string>
+    <string name="tieFechaEm">Fecha de emisión: </string>
+    <string name="tieFechaFin">Fecha de finalización: </string>
     <string name="tieArticulosFactura">Articulos en la factura</string>
     <string name="tvTotal">Total: </string>
-    <string name="invoice_detail_tvEstado">Estado de la factura</string>
     <string name="invoice_detail_descCalendar">Imagen de calendario</string>
     <string name="invoice_detail_descUser">Imagen de usuario</string>
+    <string name="tvPendiente">Pendiente</string>
+    <string name="tvDatos">Datos de la factura</string>
 </resources>
