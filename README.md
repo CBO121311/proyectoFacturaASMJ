@@ -14,6 +14,11 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  - Añadido e implementado nuevo icono
 
 ------------------------
+ ## V3.0.2 (14/11/2023)
+ *Escrito por mateotamayoo*
+ - Interfaces de invoice detail e invoice list actualizadas.
+ - Cambios en el navgraph para habilitar la navegación entre las interfaces invoice.
+------------------------
 
 
 
