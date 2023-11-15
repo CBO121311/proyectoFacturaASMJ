@@ -5,12 +5,12 @@
     <solid
         android:color="@color/invoice_list_c1" />
     <stroke
-        android:width="3dp"
+        android:width="1dp"
         android:color="@color/invoice_list_c"
 
         ></stroke>
 
-    <corners android:radius="36dp"></corners>
+    <corners android:radius="26dp"></corners>
 
     <size
         android:width="120dp"
