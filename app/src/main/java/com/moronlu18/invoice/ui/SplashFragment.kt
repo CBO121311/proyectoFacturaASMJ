@@ -33,7 +33,7 @@ class SplashFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        var r= Runnable { findNavController().navigate(R.id.action_splashFragment_to_mainFragment) }
+        val r= Runnable { findNavController().navigate(R.id.action_splashFragment_to_mainFragment) }
 
         Handler(Looper.getMainLooper()).postDelayed(r, WAIT_TIME)
     }

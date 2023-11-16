@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="cc_smaller_marginTop">6dp</dimen>
-    <dimen name="cc_general_margin">24dp</dimen>
+    <dimen name="cc_general_margin">16dp</dimen>
     <dimen name="cc_cardView_marginTop">104dp</dimen>
     <dimen name="cc_padding_btnSave">17dp</dimen>
     <dimen name="cc_marginBottom_btnSave">24dp</dimen>

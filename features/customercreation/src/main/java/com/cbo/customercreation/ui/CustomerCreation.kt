@@ -5,10 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.moronlu18.customercreation.databinding.FragmentCustomerCreationBinding
-import com.moronlu18.invoice.R
 
 class CustomerCreation : Fragment() {
     private var _binding: FragmentCustomerCreationBinding? = null
@@ -32,7 +29,9 @@ class CustomerCreation : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.customerCreationBtnSave.setOnClickListener {
-            findNavController().navigate(R.id.action_CustomerCreationFragment_to_CustomerListFragment)
+            val fragmentManager = requireActivity().supportFragmentManager
+
+            fragmentManager.popBackStack()
         }
     }
 

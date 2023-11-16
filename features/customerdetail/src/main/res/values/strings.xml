@@ -2,7 +2,7 @@
 <resources>
 
     <string name="cd_tvName">Nombre:</string>
-    <string name="cd_tvExampleName">Alejandro López</string>
+    <string name="cd_tvExampleName">Mr. Kiwi</string>
     <string name="cd_tvExampleEmail">abc@hotmail.es</string>
     <string name="cd_tvEmail">Correo Electrónico:</string>
     <string name="cd_tvPhone">Teléfono:</string>

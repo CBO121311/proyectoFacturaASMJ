@@ -1,26 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/customer_list_cvItemCustomer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/cl_item_cvMargin"
+
     app:cardElevation="@dimen/cl_item_cvElevation">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/customer_list_ccCardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="10dp">
 
-        <ImageView
+        <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/customer_list_ivCliente"
-            android:layout_width="@dimen/cl_size_ivCustomer"
-            android:layout_height="@dimen/cl_size_ivCustomer"
+            android:layout_width="67dp"
+            android:layout_height="67dp"
+            android:src="@drawable/cbotuxedo"
+            app:civ_border_color="@color/seed"
+            app:civ_border_width="4dp"
+            app:civ_shadow="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/reduce_person_circle_icon"
-            app:tint="@color/cl_color_ivCustomer" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/customer_list_imgbtnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="Borrar"
+            android:focusable="true"
+            android:src="@drawable/ic_action_delete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/customer_list_imgtnEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="Editar"
+            android:focusable="true"
+            android:src="@drawable/ic_action_edit"
+            app:layout_constraintBottom_toBottomOf="@+id/customer_list_imgbtnDelete"
+            app:layout_constraintEnd_toStartOf="@+id/customer_list_imgbtnDelete"
+            app:layout_constraintTop_toTopOf="@+id/customer_list_imgbtnDelete" />
 
         <TextView
             android:id="@+id/customer_list_tvName"
@@ -47,10 +78,10 @@
             style="@style/customer_list_tvNormal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/cl_tvMarginEnd"
+            android:layout_marginEnd="8dp"
             android:text="@string/cl_tvExamplePhone"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/customer_list_tvName" />
+            app:layout_constraintTop_toBottomOf="@+id/customer_list_tvEmail" />
 
         <TextView
             android:id="@+id/customer_list_tvCity"
@@ -62,16 +93,6 @@
             app:layout_constraintStart_toEndOf="@+id/customer_list_ivCliente"
             app:layout_constraintTop_toBottomOf="@+id/customer_list_tvEmail" />
 
-        <TextView
-            android:id="@+id/customer_list_tvAddress"
-            style="@style/customer_list_tvNormal"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/cl_tvMarginEnd"
-            android:maxLines="1"
-            android:text="@string/cl_tvExampleAddress"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/customer_list_tvPhone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

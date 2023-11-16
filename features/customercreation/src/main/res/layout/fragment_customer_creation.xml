@@ -4,31 +4,56 @@
     android:id="@+id/customer_creation_clayoutCustomer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/cc_general_margin"
     tools:context="com.cbo.customercreation.ui.CustomerCreation">
 
-    <ImageView
-        android:id="@+id/customer_creation_ivCustomer"
-        android:layout_width="@dimen/cc_width_ivCustomer"
-        android:layout_height="@dimen/cc_height_ivCustomer"
-        android:src="@drawable/person_circle_icon"
-        app:layout_constraintBottom_toTopOf="@+id/customer_creation_tilNameCustomer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/cc_cvBackgroundColor" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/customer_creation_glStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="24dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/customer_creation_glEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="24dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/customer_creation_glTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="24dp" />
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/circularImageView"
+        android:layout_width="212dp"
+        android:layout_height="197dp"
+        android:src="@drawable/kiwidiner_background"
+        app:civ_border_color="@color/seed"
+        app:civ_border_width="4dp"
+        app:civ_shadow="false"
+        app:civ_shadow_color="#3f51b5"
+        app:civ_shadow_radius="10dp"
+
+        app:layout_constraintEnd_toStartOf="@+id/customer_creation_glEnd"
+        app:layout_constraintStart_toStartOf="@+id/customer_creation_glStart"
+        app:layout_constraintTop_toTopOf="@+id/customer_creation_glTop" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/customer_creation_tilNameCustomer"
         style="@style/customer_creation_tilStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/cc_general_margin"
+        android:layout_marginTop="16dp"
         android:hint="@string/cc_til_hint_name"
         app:helperText="@string/cc_til_helperText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/customer_creation_ivCustomer"
+        app:layout_constraintEnd_toStartOf="@+id/customer_creation_glEnd"
+        app:layout_constraintStart_toStartOf="@+id/customer_creation_glStart"
+        app:layout_constraintTop_toBottomOf="@+id/circularImageView"
         app:startIconDrawable="@drawable/ic_action_person">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -46,8 +71,8 @@
         android:layout_height="wrap_content"
         android:hint="@string/cc_til_hint_email"
         app:helperText="@string/cc_til_helperText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/customer_creation_glEnd"
+        app:layout_constraintStart_toStartOf="@+id/customer_creation_glStart"
         app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilNameCustomer"
         app:startIconDrawable="@drawable/ic_action_email">
 
@@ -66,9 +91,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/cc_smaller_marginTop"
         android:hint="@string/cc_til_hint_phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/customer_creation_glEnd"
+        app:layout_constraintStart_toStartOf="@+id/customer_creation_glStart"
         app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilCustomerEmail"
+        app:prefixText="+34"
         app:startIconDrawable="@drawable/ic_action_phone">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -86,8 +112,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/cc_general_margin"
         android:hint="@string/cc_til_hint_address"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/customer_creation_glEnd"
+        app:layout_constraintStart_toStartOf="@+id/customer_creation_glStart"
         app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilPhone"
         app:startIconDrawable="@drawable/ic_action_house">
 
@@ -97,7 +123,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -107,8 +132,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/cc_general_margin"
         android:hint="@string/cc_til_hint_city"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/customer_creation_glEnd"
+        app:layout_constraintStart_toStartOf="@+id/customer_creation_glStart"
         app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilAddress"
         app:startIconDrawable="@drawable/ic_action_city">
 
@@ -123,31 +148,33 @@
 
     <Button
         android:id="@+id/customer_creation_btnSave"
-        style="@style/customer_creation_btnStyle"
+
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/cc_general_margin"
-        android:layout_marginBottom="@dimen/cc_marginBottom_btnSave"
-        android:backgroundTint="@color/cc_color_btnSave"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="#B683E8"
         android:drawableEnd="@drawable/ic_action_save"
         android:padding="@dimen/cc_padding_btnSave"
         android:text="@string/cc_btn_text_save"
+
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/customer_creation_glEnd"
+        app:layout_constraintStart_toStartOf="@+id/customer_creation_glStart"
         app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilCity" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/customer_creation_cvImgCustomer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/cc_cardView_marginTop"
         app:cardBackgroundColor="@color/cc_color_seedColor"
         app:cardCornerRadius="@dimen/cc_radius_cvImgCustomer"
         app:cardElevation="@dimen/cc_cardElevation_cvImgCustomer"
+        app:layout_constraintBottom_toBottomOf="@+id/circularImageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.645"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/customer_creation_ivCustomer">
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
             android:id="@+id/customer_creation_imgbtnCustomer"
@@ -160,5 +187,8 @@
             android:padding="@dimen/cc_padding_imgButton"
             android:src="@drawable/ic_action_altimage" />
     </androidx.cardview.widget.CardView>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,10 +11,12 @@ import com.cbo.customerlist.data.model.Clientes
 
 class ClientesAdapter(
     private val clientesList: List<Clientes>,
-    private val onClickListener: (Clientes) -> Unit
+    private val onClickListener: (Clientes) -> Unit,
+    private val onClickDelete:(Int) -> Unit
 ) : RecyclerView.Adapter<ClientesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClientesViewHolder {
+
         val layoutInflater = LayoutInflater.from(parent.context)
         return ClientesViewHolder(layoutInflater.inflate(R.layout.item_cliente, parent, false))
     }
@@ -26,7 +28,7 @@ class ClientesAdapter(
 
     override fun onBindViewHolder(holder: ClientesViewHolder, position: Int) {
         val item = clientesList[position]
-        holder.render(item, onClickListener)
+        holder.render(item, onClickListener, onClickDelete)
 
 
     }

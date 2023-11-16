@@ -1,8 +1,10 @@
 package com.moronlu18.invoice
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
@@ -26,36 +28,54 @@ class MainFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btSignin.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_featureAccountSignIn)
+        binding.imvAlert.setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    binding.imvAlert.setImageResource(R.drawable.btnalertpressed)
+                }
+                MotionEvent.ACTION_UP,MotionEvent.ACTION_CANCEL -> {
+                    binding.imvAlert.setImageResource(R.drawable.btnalert)
+                }
+            }
+            false
         }
-        binding.btSignUp.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_featureAccountSignUp)
-        }
-
         //Customer
-        binding.btCustomerList.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_CustomerListFragment)
+        binding.imvAlert.setOnClickListener {
+
         }
 
-        //Invoice
-        binding.btInvoiceList.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_InvoiceListFragment)
+        binding.cvSigIn.btnAnimationNav(R.id.action_mainFragment_to_featureAccountSignIn)
+        binding.cvSignUp.btnAnimationNav(R.id.action_mainFragment_to_featureAccountSignUp)
+        binding.cvCustomer.btnAnimationNav(R.id.action_mainFragment_to_CustomerListFragment)
+        binding.cvInvoice.btnAnimationNav(R.id.action_mainFragment_to_InvoiceListFragment)
+        binding.cvItem.btnAnimationNav(R.id.action_mainFragment_to_ItemListFragment)
+        binding.cvTask.btnAnimationNav(R.id.action_mainFragment_to_TaskListFragment)
+
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    fun View.btnAnimationNav(idDestination:Int) {
+        setOnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    v.animate().scaleX(0.90f).scaleY(0.90f).setDuration(100).start()
+                }
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    v.animate().scaleX(1.0f).scaleY(1.0f).setDuration(100).start()
+                }
+            }
+            false
         }
 
-        //Item
-        binding.btItemList.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_ItemListFragment)
-        }
-
-        //Task
-        binding.btTaskList.setOnClickListener {
-            findNavController().navigate(R.id.action_mainFragment_to_TaskListFragment)
+        setOnClickListener {
+            findNavController().navigate(idDestination)
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

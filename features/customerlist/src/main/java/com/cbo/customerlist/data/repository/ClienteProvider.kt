@@ -1,6 +1,7 @@
 package com.cbo.customerlist.data.repository
 
 import com.cbo.customerlist.data.model.Clientes
+import com.moronlu18.customerlist.R
 
 class ClientesProvider {
     companion object {
@@ -11,7 +12,9 @@ class ClientesProvider {
                 "juan@example.com",
                 "+123456789",
                 "Madrid",
-                "Calle Principal, 123"
+                "Calle Principal, 123",
+                R.drawable.liontuxedo
+
             ),
             Clientes(
                 2,
@@ -19,7 +22,7 @@ class ClientesProvider {
                 "maria@example.com",
                 "+987654321",
                 "Barcelona",
-                "Avenida Central, 456"
+                "Avenida Central, 456",R.drawable.elephantuxedo
             ),
             Clientes(
                 3,
@@ -27,14 +30,14 @@ class ClientesProvider {
                 "luis@example.com",
                 "+111223344",
                 "Valencia",
-                "Paseo de la Playa, 789"
-            ),           Clientes(
+                "Paseo de la Playa, 789",R.drawable.kangorutuxedo
+            ), Clientes(
                 4,
                 "Ana Martínez",
                 "ana@example.com",
                 "+555666777",
                 "Sevilla",
-                "Calle Sevilla, 42"
+                "Calle Sevilla, 42",R.drawable.dolphintuxedo
             ),
             Clientes(
                 5,
@@ -42,7 +45,8 @@ class ClientesProvider {
                 "al@example.com",
                 "+999000111",
                 "Málaga",
-                "Calle perdices, 567"
+                "Calle perdices, 567",
+                R.drawable.cbotuxedo
             ),
             Clientes(
                 6,
@@ -50,7 +54,8 @@ class ClientesProvider {
                 "sr@example.com",
                 "+123456789",
                 "Asturias",
-                "Calle Principal, 123"
+                "Calle Principal, 123",
+                R.drawable.sharktuxedo
             ),
             Clientes(
                 7,
@@ -58,7 +63,8 @@ class ClientesProvider {
                 "mateo@example.com",
                 "+987654321",
                 "Cádiz",
-                "Avenida Central, 456"
+                "Avenida Central, 456",R.drawable.tigretuxedo
+
             ),
             Clientes(
                 8,
@@ -66,14 +72,15 @@ class ClientesProvider {
                 "moronlu@example.com",
                 "+111223344",
                 "Antequera",
-                "Centro, 789"
-            ),           Clientes(
+                "Centro, 789",
+                R.drawable.lynxtuxedo
+            ), Clientes(
                 9,
                 "Paco",
                 "paco@example.com",
                 "+555666777",
                 "Sevilla",
-                "Calle Sevilla, 42"
+                "Calle Sevilla, 42",R.drawable.hipopotuxedo
             ),
             Clientes(
                 10,
@@ -81,9 +88,8 @@ class ClientesProvider {
                 "jes@example.com",
                 "+999000111",
                 "Málaga",
-                "Avenida Málaga, 567"
+                "Avenida Málaga, 567",R.drawable.cougartuxedo
             )
-            // Agrega más clientes aquí
         )
 
         val clientesListVacia = emptyList<Clientes>()

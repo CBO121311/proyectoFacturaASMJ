@@ -26,11 +26,7 @@
         android:id="@+id/CustomerCreationFragment"
         android:name="com.cbo.customercreation.ui.CustomerCreation"
         android:label="@string/title_customercreation"
-        app:moduleName="customercreation" >
-        <action
-            android:id="@+id/action_CustomerCreationFragment_to_CustomerListFragment"
-            app:destination="@id/CustomerListFragment" />
-    </fragment>
+        app:moduleName="customercreation" />
 
     <fragment
         android:id="@+id/CustomerDetailFragment"

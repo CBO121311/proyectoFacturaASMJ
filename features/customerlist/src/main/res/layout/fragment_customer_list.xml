@@ -14,7 +14,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <TextView
         android:id="@+id/customer_list_tvempty"
         android:layout_width="match_parent"
@@ -38,6 +37,7 @@
         android:layout_marginBottom="@dimen/cl_flbtnMargin"
         android:clickable="true"
         android:focusable="true"
+        app:backgroundTint="#BA99F1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />

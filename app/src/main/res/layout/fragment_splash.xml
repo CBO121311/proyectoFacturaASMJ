@@ -1,16 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="24dp"
     tools:context=".ui.SplashFragment">
 
     <ImageView
         android:id="@+id/imgLogo"
-        android:layout_width="400dp"
-        android:layout_height="400dp"
+        android:layout_width="340dp"
+        android:layout_height="340dp"
         android:layout_gravity="center"
         android:contentDescription="@string/imgLogo_decscription"
-        android:src="@drawable/ic_launcher_theme_kiwiv1_round" />
+        android:src="@drawable/kiwipistola"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="¡Bienvenido!"
+        android:textSize="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
+
+    <!--<com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/imgUser"
+        android:layout_width="309dp"
+        android:layout_height="351dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="120dp"
+        android:src="@drawable/kiwipistola"
+        app:civ_border_color="#3f51b5"
+        app:civ_border_width="4dp"
+        app:civ_shadow="true"
+        app:civ_shadow_color="#3f51b5"
+        app:civ_shadow_radius="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="cl_tvExampleName">Automóviles Mero</string>
-    <string name="cl_tvExampleEmail">cbo@hotmail.es</string>
-    <string name="cl_tvExamplePhone">610554323</string>
-    <string name="cl_tvExampleCity">Málaga</string>
-    <string name="cl_tvExampleAddress">Calle Ejemplo, Número 23</string>
+    <string name="cl_tvExampleName">Mr.Onion</string>
+    <string name="cl_tvExampleEmail">abc@hotmail.es</string>
+    <string name="cl_tvExamplePhone">No disponible</string>
+    <string name="cl_tvExampleCity">No disponible</string>
+    <string name="cl_tvExampleAddress">No disponible</string>
 </resources>
