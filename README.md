@@ -12,14 +12,19 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  - Se ha eliminado los navgraph y los botones relacionado a creation y detail.
  - Comunicación de graph entre las capas de customer.
  - Añadido e implementado nuevo icono
-
 ------------------------
  ## V3.0.2 (14/11/2023)
  *Escrito por mateotamayoo*
  - Interfaces de invoice detail e invoice list actualizadas.
  - Cambios en el navgraph para habilitar la navegación entre las interfaces invoice.
 ------------------------
-
+ ## V3.1.0 (16/11/2023)
+ *Escrito por CBO121311*
+ - Actualización completa del dashboard
+ - Cambiada la imagen del layout splash.
+ - Actualización de los tres layout customer y realizadas con guías.
+ - Añadido funcionalidad de borrar a customerlist. También está la función añadir pero está anulado.
+ - Corregido bucle del navgraph.
 
 
 # Icono
