@@ -1,4 +1,4 @@
-package com.sergiogv98.tasklist
+package com.sergiogv98.tasklist.ui
 
 import Task
 import TaskProvider
@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -27,6 +28,11 @@ class TaskList : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentTaskListBinding.inflate(inflater,container,false)
+
+        binding.taskListAddTask.setOnClickListener {
+            findNavController().navigate(com.moronlu18.invoice.R.id.action_TaskListFragment_to_TaskCreationFragment)
+        }
+
         return binding.root
     }
 
@@ -52,7 +58,7 @@ class TaskList : Fragment() {
 
     }
     fun onItemSelected(task: Task) {
-        Toast.makeText(requireContext(),task.nomTask, Toast.LENGTH_SHORT).show()
+        findNavController().navigate(com.moronlu18.invoice.R.id.action_TaskListFragment_to_TaskDetailFragment)
     }
 
     override fun onDestroyView() {

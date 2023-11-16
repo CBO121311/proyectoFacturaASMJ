@@ -91,9 +91,16 @@
 
     <fragment
         android:id="@+id/TaskListFragment"
-        android:name="com.sergiogv98.tasklist.TaskList"
+        android:name="com.sergiogv98.tasklist.ui.TaskList"
         android:label="@string/title_tasklist"
-        app:moduleName="tasklist" />
+        app:moduleName="tasklist" >
+        <action
+            android:id="@+id/action_TaskListFragment_to_TaskDetailFragment"
+            app:destination="@id/TaskDetailFragment" />
+        <action
+            android:id="@+id/action_TaskListFragment_to_TaskCreationFragment"
+            app:destination="@id/TaskCreationFragment" />
+    </fragment>
 
 
     <fragment
