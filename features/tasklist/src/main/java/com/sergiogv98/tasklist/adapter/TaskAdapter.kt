@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.moronlu18.tasklist.R
 
-class TaskAdapter(private val taskList:List<Task>, private val onClickListener: (Task) -> Unit) : RecyclerView.Adapter<TaskViewHolder>(){
+class TaskAdapter(private val taskList:List<Task>, private val onClickListener: (Task) -> Unit,
+                  private val onClickDeleted: (Int) -> Unit
+) : RecyclerView.Adapter<TaskViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -14,7 +16,7 @@ class TaskAdapter(private val taskList:List<Task>, private val onClickListener: 
     }
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val item = taskList[position]
-        holder.render(item, onClickListener)
+        holder.render(item, onClickListener, onClickDeleted)
     }
     override fun getItemCount(): Int = taskList.size
 }

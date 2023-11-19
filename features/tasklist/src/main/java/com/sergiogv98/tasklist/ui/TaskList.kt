@@ -21,6 +21,9 @@ class TaskList : Fragment() {
 
     private var _binding:FragmentTaskListBinding? = null
     private val binding get() = _binding!!
+    private var taskMutableList: MutableList<Task> = TaskProvider.taskList.toMutableList()
+    private lateinit var adapter: TaskAdapter
+    private var isDeleting = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,20 +48,40 @@ class TaskList : Fragment() {
 
     private fun initRecyclerViewTask(){
 
-        val manager = LinearLayoutManager(requireContext())
-        val decoration = DividerItemDecoration(requireContext(),manager.orientation)
-        binding.taskListRecyclerTasks.layoutManager = manager
+        adapter = TaskAdapter(
+            taskList = taskMutableList,
+            onClickListener = { task ->  onItemSelected(task)},
+            onClickDeleted = { position -> onDeletedItem(position)}
+        )
 
-        binding.taskListRecyclerTasks.adapter = TaskAdapter(TaskProvider.taskList){
+        val recyclerView = binding.taskListRecyclerTasks
+        val emptyImg = binding.taskListImgEmpty
 
-                x-> onItemSelected(x)
+        if (TaskProvider.taskList.isEmpty()){
+            emptyImg.visibility = View.VISIBLE
+            recyclerView.visibility = View.GONE
+        } else {
+            emptyImg.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
         }
 
-        binding.taskListRecyclerTasks.addItemDecoration(decoration)
-
+        binding.taskListRecyclerTasks.layoutManager = LinearLayoutManager(requireContext())
+        binding.taskListRecyclerTasks.adapter = adapter
     }
     fun onItemSelected(task: Task) {
         findNavController().navigate(com.moronlu18.invoice.R.id.action_TaskListFragment_to_TaskDetailFragment)
+    }
+    private fun onDeletedItem(position: Int) {
+
+        if (!isDeleting) {
+            isDeleting = true
+            taskMutableList.removeAt(position)
+            adapter.notifyItemRemoved(position)
+        }
+
+        binding.taskListRecyclerTasks.postDelayed({
+            isDeleting = false
+        }, 300)
     }
 
     override fun onDestroyView() {

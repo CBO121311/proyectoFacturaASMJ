@@ -92,10 +92,14 @@
         app:moduleName="tasklist" >
         <action
             android:id="@+id/action_TaskListFragment_to_TaskDetailFragment"
-            app:destination="@id/TaskDetailFragment" />
+            app:destination="@id/TaskDetailFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_TaskListFragment_to_TaskCreationFragment"
-            app:destination="@id/TaskCreationFragment" />
+            app:destination="@id/TaskCreationFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
 
 
@@ -151,7 +155,9 @@
             app:enterAnim="@android:anim/fade_in" />
         <action
             android:id="@+id/action_mainFragment_to_TaskListFragment"
-            app:destination="@id/TaskListFragment" />
+            app:destination="@id/TaskListFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_mainFragment_to_InvoiceListFragment"
             app:destination="@id/InvoiceListFragment" />

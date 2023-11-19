@@ -3,4 +3,7 @@
     <dimen name="task_list_add_task_margin">16dp</dimen>
     <dimen name="task_list_padding_general">15sp</dimen>
     <dimen name="task_end_date_layout_margin">24dp</dimen>
+    <dimen name="task_item_margin_layout">4dp</dimen>
+    <dimen name="task_item_constraint_padding">10dp</dimen>
+    <dimen name="task_item_layout_margin_edit_button">8dp</dimen>
 </resources>

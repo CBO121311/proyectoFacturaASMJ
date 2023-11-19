@@ -2,4 +2,7 @@
 <resources>
     <color name="gold">#FFD700</color>
     <color name="red">#EF0000</color>
+    <color name="background">#673AB7</color>
+    <color name="blue">#0409FD</color>
+    <color name="blue2">#9E1F34EA</color>
 </resources>

@@ -12,4 +12,5 @@
     <string name="task_details_date_end">30/10/2023</string>
     <string name="task_details_txt_description">Descripción de la Tarea</string>
     <string name="task_details_description">Descripción de la tarea obtenida de otro lugar</string>
+    <string name="task_details_button">Aceptar</string>
 </resources>

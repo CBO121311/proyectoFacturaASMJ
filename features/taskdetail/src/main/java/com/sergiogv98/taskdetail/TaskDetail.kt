@@ -11,7 +11,7 @@ import com.moronlu18.taskdetail.databinding.FragmentTaskDetailBinding
 
 class TaskDetail : Fragment() {
 
-    private var _binding:FragmentTaskDetailBinding? = null
+    private var _binding: FragmentTaskDetailBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +25,15 @@ class TaskDetail : Fragment() {
 
         _binding = FragmentTaskDetailBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.taskDetailsButtonBack.setOnClickListener {
+            val fragmentManager = requireActivity().supportFragmentManager
+            fragmentManager.popBackStack()
+        }
     }
 
     override fun onDestroyView() {

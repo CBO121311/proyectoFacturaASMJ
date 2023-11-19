@@ -9,12 +9,13 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     val binding = ItemTaskBinding.bind(view)
 
-    fun render(task: Task, onClickListener: (Task) -> Unit) {
+    fun render(task: Task, onClickListener: (Task) -> Unit, onClickDeleted: (Int) -> Unit) {
         binding.taskClientName.text = task.nomClient
         binding.taskName.text = task.nomTask
         binding.taskDescription.text = task.descTask
         binding.taskCreationDate.text = task.fechCreation
         binding.taskEndDate.text = task.fechFinalization
+        binding.taskButtonDelete.setOnClickListener { onClickDeleted (adapterPosition) }
         itemView.setOnClickListener { onClickListener(task) }
     }
 }

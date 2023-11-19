@@ -25,7 +25,13 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  - Actualización de los tres layout customer y realizadas con guías.
  - Añadido funcionalidad de borrar a customerlist. También está la función añadir pero está anulado.
  - Corregido bucle del navgraph.
-
+------------------------
+ ## V3.1.3 (19/11/2023)
+ *Escrito por SergioGV98*
+ - Actualización completa en todas las interfaces de tareas.
+ - Añadidas animaciones entre pestañas.
+ - Añadida funcionalidad para poder eliminar del listado tareas creadas.
+ - Eliminación de recursos, carpetas, líneas innecesarias.
 
 # Icono
 

@@ -32,6 +32,11 @@ class TaskCreation : Fragment() {
         binding.taskCreationButtonDateEnd.setOnClickListener {
             showDatePicker(binding.taskCreationButtonDateEnd)
         }
+
+        binding.taskCreationButtonAdd.setOnClickListener {
+            val fragmentManager = requireActivity().supportFragmentManager
+            fragmentManager.popBackStack()
+        }
     }
 
 
@@ -43,6 +48,7 @@ class TaskCreation : Fragment() {
         _binding = FragmentTaskCreationBinding.inflate(inflater, container, false)
         return binding.root
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
