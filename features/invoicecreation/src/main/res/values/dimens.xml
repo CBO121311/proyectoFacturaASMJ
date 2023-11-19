@@ -3,4 +3,13 @@
 
     <dimen name="invoice_creation_dimenComun">350dp</dimen>
     <dimen name="invoice_creationHeightComun">220dp</dimen>
+
+    <dimen name="itemItem_tamCardView">150dp</dimen>
+    <dimen name="itemItem_textSizeTitulo">18sp</dimen>
+    <dimen name="itemItem_textSizesubTitulo">10sp</dimen>
+    <dimen name="itemItem_marginGeneral">10dp</dimen>
+    <dimen name="itemItem_anchoAltoImg">30dp</dimen>
+    <dimen name="itemItem_cardRadius">6dp</dimen>
+    <dimen name="itemItem_cardElevation">4dp</dimen>
+
 </resources>

@@ -6,10 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.textfield.TextInputEditText
 import com.moronlu18.invoicecreation.R
 import com.moronlu18.invoicecreation.databinding.FragmentInvoiceCreationBinding
+import com.mto.invoicecreation.adapter.ItemAdapter
+import com.mto.invoicecreation.data.Item
+import com.mto.invoicecreation.data.ItemProvider
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -33,6 +37,12 @@ class InvoiceCreation : Fragment() {
         binding.invoiceCreationTieFechaFin.setOnClickListener {
             showDatePicker(binding.invoiceCreationTieFechaFin)
         }
+        binding.invoiceCreationFabFactura.setOnClickListener {
+            val fragmentManager = requireActivity().supportFragmentManager
+
+            fragmentManager.popBackStack()
+        }
+        initReciclerView()
     }
 
     override fun onCreateView(
@@ -49,6 +59,22 @@ class InvoiceCreation : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun initReciclerView() {
+        val manager = LinearLayoutManager(requireContext())
+
+        binding.invoiceCreationRvDisponibles.layoutManager = manager
+        binding.invoiceCreationRvDisponibles.adapter = ItemAdapter(ItemProvider.itemList) { item ->
+            onItemSelected(
+                item
+            )
+        }
+    }
+    fun onItemSelected(item: Item) {
+            Toast.makeText(requireContext(), item.name, Toast.LENGTH_SHORT).show()
+
+
     }
 
     private val calendar = Calendar.getInstance()

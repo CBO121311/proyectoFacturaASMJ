@@ -50,7 +50,7 @@
         android:id="@+id/InvoiceDetailFragment"
         android:name="com.mto.invoicedetail.ui.InvoiceDetail"
         android:label="@string/title_invoicedetail"
-        app:moduleName="invoicedetail" />
+        app:moduleName="invoicedetail"/>
 
     <fragment
         android:id="@+id/InvoiceListFragment"

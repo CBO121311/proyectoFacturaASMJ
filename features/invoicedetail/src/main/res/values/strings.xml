@@ -9,4 +9,17 @@
     <string name="invoice_detail_descUser">Imagen de usuario</string>
     <string name="tvPendiente">Pendiente</string>
     <string name="tvDatos">Datos de la factura</string>
+
+    <!-- Lo de jessica :) -->
+    <string name="itemList_fab_text">Añadir artículo</string>
+    <string name="itemItem_tvType_text">"Tipo: "</string>
+    <string name="itemItem_tvRate_text">"Tasa: "</string>
+    <string name="itemItem_tvTaxable_text">"Impuestos"</string>
+
+    <string name="itemItem_tvNamePrueba">Reloj de pulsera</string>
+    <string name="itemItem_tvTypePrueba">" articulo"</string>
+    <string name="itemItem_tvDescriptionPrueba">Intrumento para indicar la hora, que se lleva en la muñeca</string>
+    <string name="itemItem_tvRatePrueba">" 5.52"</string>
+    <string name="itemItem_tvTaxablePrueba">" True"</string>
+    <string name="itemItem_tvDescriptionImg">Imagen ilustrativa</string>
 </resources>

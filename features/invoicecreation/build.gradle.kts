@@ -43,4 +43,5 @@ dependencies {
     //Implementar la navegación por módulos
     implementation ("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation ("androidx.navigation:navigation-ui-ktx:2.3.5")
+    implementation ("com.mikhaellopez:circularimageview:4.3.1")
 }

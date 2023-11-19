@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.moronlu18.invoicelist.R
-import com.mto.invoicelist.adapter.FacturaViewHolder
 import com.mto.invoicelist.data.Factura
 
 class FacturaAdapter(
     private val facturaList:List<Factura>,
-    private val onClickListener:(Factura) -> Unit
+    private val onClickListener:(Factura) -> Unit,
+    private val onClickDelete:(Int) -> Unit
 ) : RecyclerView.Adapter<FacturaViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FacturaViewHolder {
@@ -19,7 +19,7 @@ class FacturaAdapter(
 
     override fun onBindViewHolder(holder: FacturaViewHolder, position: Int) {
         val item = facturaList[position]
-        holder.render(item, onClickListener)
+        holder.render(item, onClickListener, onClickDelete)
     }
 
     override fun getItemCount(): Int = facturaList.size

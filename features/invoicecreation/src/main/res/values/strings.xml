@@ -13,4 +13,5 @@
     <string name="tvDisponibles">Disponibles</string>
     <string name="tvAñadidos">Añadidos</string>
     <string name="tvTotal">Total: </string>
+    <string name="itemItem_tvNamePrueba">Reloj de pulsera</string>
 </resources>

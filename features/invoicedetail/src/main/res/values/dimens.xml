@@ -4,4 +4,15 @@
     <dimen name="invoice_detail_cdImage1">81dp</dimen>
     <dimen name="invoice_detail_cdImage2">74dp</dimen>
     <dimen name="invoice_detail_cdDatosAltura">330dp</dimen>
+
+    <dimen name="itemItem_textSizeTitulo">18sp</dimen>
+    <dimen name="itemItem_textSizeSubTitulo">16sp</dimen>
+    <dimen name="itemItem_marginGeneral">10dp</dimen>
+    <dimen name="itemItem_anchoAltoImg">80dp</dimen>
+    <dimen name="itemItem_marginVerticalCard">4dp</dimen>
+    <dimen name="itemItem_marginTopDescription">5dp</dimen>
+    <dimen name="itemItem_marginStartEndSubtitulos">40dp</dimen>
+    <dimen name="itemItem_cardRadius">6dp</dimen>
+    <dimen name="itemItem_cardElevation">4dp</dimen>
+    <dimen name="itemItem_marginFab">16dp</dimen>
 </resources>

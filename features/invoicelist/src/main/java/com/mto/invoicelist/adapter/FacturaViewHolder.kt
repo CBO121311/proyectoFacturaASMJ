@@ -9,13 +9,18 @@ class FacturaViewHolder(view: View): RecyclerView.ViewHolder(view){
 
     private val binding = ItemFacturaBinding.bind(view)
 
-    fun render(facturaModel: Factura, onClickListener:(Factura) -> Unit) {
+    fun render(
+        facturaModel: Factura,
+        onClickListener: (Factura) -> Unit,
+        onClickDelete: (Int) -> Unit
+    ) {
 
         binding.itemFacturaIvtTotal.text ="Total: ${facturaModel.total}"
         binding.itemFacturaTvId.text = facturaModel.id.toString()
         binding.itemFacturaTvCliente.text =facturaModel.cliente
 
         itemView.setOnClickListener { onClickListener(facturaModel) }
+        binding.invoiceItemBtnDelete.setOnClickListener { onClickDelete(adapterPosition) }
 
 
     }
