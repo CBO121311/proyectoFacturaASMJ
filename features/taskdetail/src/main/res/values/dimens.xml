@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="task_details_profile_width">419dp</dimen>
-    <dimen name="task_details_profile_height">216dp</dimen>
+    <dimen name="task_details_profile_width">420dp</dimen>
+    <dimen name="task_details_profile_height">185dp</dimen>
     <dimen name="task_details_client_txt_margin_top">75dp</dimen>
     <dimen name="task_details_client_name_txt_margin_top">15dp</dimen>
     <dimen name="task_details_button_width">42dp</dimen>
@@ -30,4 +30,7 @@
     <dimen name="task_details_task_description_name_margin_top">8dp</dimen>
     <dimen name="task_details_description_margin_top">13dp</dimen>
     <dimen name="task_details_button_back_width">150dp</dimen>
+    <dimen name="task_details_scroll_view_width">413dp</dimen>
+    <dimen name="task_details_scroll_view_height">53dp</dimen>
+    <dimen name="task_details_scroll_view_margin_bottom">5dp</dimen>
 </resources>

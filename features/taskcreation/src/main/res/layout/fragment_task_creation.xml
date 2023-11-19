@@ -54,6 +54,7 @@
             android:id="@+id/task_creation_txv_taskName"
             style="@style/tie_task_creation"
             android:layout_width="match_parent"
+            android:inputType="text"
             android:layout_height="wrap_content"
             android:hint="@string/task_creation_txv_hint_nombre_tarea"
             android:textColor="@color/white" />
@@ -131,6 +132,7 @@
             style="@style/tie_task_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="start"
             android:background="@color/md_theme_dark_onPrimaryContainer" />
     </com.google.android.material.textfield.TextInputLayout>
 
