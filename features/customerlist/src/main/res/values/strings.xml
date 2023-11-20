@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="cl_tvExampleName">Mr.Onion</string>
-    <string name="cl_tvExampleEmail">abc@hotmail.es</string>
-    <string name="cl_tvExamplePhone">No disponible</string>
-    <string name="cl_tvExampleCity">No disponible</string>
-    <string name="cl_tvExampleAddress">No disponible</string>
-</resources>

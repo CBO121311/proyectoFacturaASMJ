@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/nav_graph_customer"
+    app:startDestination="@id/customerList">
+
+
+    <fragment
+        android:id="@+id/customerList"
+        android:name="com.moronlu18.customer.ui.CustomerList"
+        android:label="CustomerList" >
+        <action
+            android:id="@+id/action_customerList_to_customerCreation"
+            app:destination="@id/customerCreation" />
+        <action
+            android:id="@+id/action_customerList_to_customerDetail"
+            app:destination="@id/customerDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerCreation"
+        android:name="com.moronlu18.customer.ui.CustomerCreation"
+        android:label="fragment_customer_creation"
+        tools:layout="@layout/fragment_customer_creation" />
+    <fragment
+        android:id="@+id/customerDetail"
+        android:name="com.moronlu18.customer.ui.CustomerDetail"
+        android:label="fragment_customer_detail"
+        tools:layout="@layout/fragment_customer_detail" />
+</navigation>
+    <!--<fragment
+        android:id="@+id/CustomerListFragment"
+        android:name="com.cbo.customer.ui.CustomerList"
+        android:label="@string/title_customerlist"
+        app:moduleName="customerlist">
+        <action
+            android:id="@+id/action_CustomerListFragment_to_CustomerDetailFragment"
+            app:destination="@id/CustomerDetailFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_CustomerListFragment_to_CustomerCreationFragment"
+            app:destination="@id/CustomerCreationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/CustomerCreationFragment"
+        android:name="com.cbo.customer.ui.CustomerCreation"
+        android:label="@string/title_customercreation"
+        app:moduleName="customercreation" />
+
+    <fragment
+        android:id="@+id/CustomerDetailFragment"
+        android:name="com.cbo.customer.ui.CustomerDetail"
+        android:label="@string/title_customerdetail"
+        app:moduleName="customerdetail" >
+    </fragment>-->
+
+

@@ -35,7 +35,7 @@ class AccountSignIn : Fragment() {
           //findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
         }
         binding.btListUser.setOnClickListener{
-            findNavController().navigate(com.moronlu18.invoice.R.id.action_accountSignInFragment_to_as_userListFragment) //Crear esta acción
+            //findNavController().navigate(com.moronlu18.invoice.R.id.action_accountSignInFragment_to_as_userListFragment) //Crear esta acción
         }
     }
 

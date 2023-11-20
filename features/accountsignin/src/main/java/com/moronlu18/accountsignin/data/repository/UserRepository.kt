@@ -14,7 +14,6 @@ class UserRepository private constructor(){
 
     companion object{
         val  dataSet: MutableList<User> = initDataSetUser()
-
         private fun initDataSetUser(): MutableList<User> {
             var dataSet: MutableList<User> = ArrayList()
             dataSet.add(User("Alejandro", "López", "cb2@hotmail.es"))
@@ -26,7 +25,6 @@ class UserRepository private constructor(){
             dataSet.add(User("Cebolla", "Veeee", "cbb@hotmail.es"))
             dataSet.add(User("Rabano", "Ra", "rf@hotmail.es"))
             return dataSet
-
         }
     }
 }

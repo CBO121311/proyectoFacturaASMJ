@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.moronlu18.accountsignup.databinding.FragmentAccountSignUpBinding
 
 class AccountSignUp : Fragment() {
@@ -44,9 +46,34 @@ class AccountSignUp : Fragment() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
 
+        val listener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?, //El adapterview es el listener que lo usaremos en este caso.
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                //Una manera, llama al padre, después el adapter y después me da el dato.
+                //val profile = parent.adapter.getItem(position)
+                //El ArrayList del adapter se encuentra en esta función itemList
+
+                //val  profile = itemList.get(position) // Me devuelve la colección del adapter
+                //Mal lo anterior(¿)
+
+                val profile = parent?.adapter?.getItem(position) //Me devuelva el elemento seleccionado con los parametros de arriba
+                Toast.makeText(requireActivity(),"Elemento pulsado $profile", Toast.LENGTH_SHORT).show()
+            }
+///arreglar
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+        }
+
         with(binding.spProfile) {
             this.adapter = adapter
             setSelection(2)
+            onItemSelectedListener=listener
             onItemSelectedListener = null
         }
     }

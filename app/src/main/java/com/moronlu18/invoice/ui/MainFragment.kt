@@ -1,12 +1,15 @@
 package com.moronlu18.invoice
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ToggleButton
 import androidx.navigation.fragment.findNavController
 import com.moronlu18.invoice.databinding.FragmentMainBinding
 
@@ -37,7 +40,8 @@ class MainFragment : Fragment() {
                 MotionEvent.ACTION_DOWN -> {
                     binding.imvAlert.setImageResource(R.drawable.btnalertpressed)
                 }
-                MotionEvent.ACTION_UP,MotionEvent.ACTION_CANCEL -> {
+
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     binding.imvAlert.setImageResource(R.drawable.btnalert)
                 }
             }
@@ -48,22 +52,39 @@ class MainFragment : Fragment() {
 
         }
 
-        binding.cvSigIn.btnAnimationNav(R.id.action_mainFragment_to_featureAccountSignIn)
+        binding.cvCustomer.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_customer)
+        /*binding.cvSigIn.btnAnimationNav(R.id.action_mainFragment_to_featureAccountSignIn)
         binding.cvSignUp.btnAnimationNav(R.id.action_mainFragment_to_featureAccountSignUp)
-        binding.cvCustomer.btnAnimationNav(R.id.action_mainFragment_to_CustomerListFragment)
+
         binding.cvInvoice.btnAnimationNav(R.id.action_mainFragment_to_InvoiceListFragment)
         binding.cvItem.btnAnimationNav(R.id.action_mainFragment_to_ItemListFragment)
-        binding.cvTask.btnAnimationNav(R.id.action_mainFragment_to_TaskListFragment)
-
+        binding.cvTask.btnAnimationNav(R.id.action_mainFragment_to_TaskListFragment)*/
+        binding.cvSignOut.setOnClickListener {
+            showConfirmationDialog()
+        }
     }
 
+    private fun showConfirmationDialog() {
+
+        val show = AlertDialog.Builder(requireContext())
+            .setTitle("Confimación")
+            .setMessage("¿Estás seguro de que quieres cerrar la aplicación?")
+            .setPositiveButton("Sí") { _, _ ->
+                requireActivity().finish()
+            }
+            .setNegativeButton("No", null)
+            .show()
+    }
+
+
     @SuppressLint("ClickableViewAccessibility")
-    fun View.btnAnimationNav(idDestination:Int) {
+    fun View.btnAnimationNav(idDestination: Int) {
         setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     v.animate().scaleX(0.90f).scaleY(0.90f).setDuration(100).start()
                 }
+
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     v.animate().scaleX(1.0f).scaleY(1.0f).setDuration(100).start()
                 }

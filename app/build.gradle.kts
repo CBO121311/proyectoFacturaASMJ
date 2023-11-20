@@ -46,18 +46,12 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-
-
-
-
     dynamicFeatures += setOf(
         ":features:accountsignin",
         ":features:accountsignup",
-        ":features:customercreation",
+        ":features:customer",
         ":infrastructure:firebase",
         ":infrastructure:printer",
-        ":features:customerdetail",
-        ":features:customerlist",
         ":features:invoicecreation",
         ":domain:invoice",
         ":features:invoicedetail",

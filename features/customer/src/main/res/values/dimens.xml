@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="cc_smaller_marginTop">6dp</dimen>
+    <dimen name="cc_general_margin">16dp</dimen>
+    <dimen name="cc_cardView_marginTop">104dp</dimen>
+    <dimen name="cc_padding_btnSave">17dp</dimen>
+    <dimen name="cc_marginBottom_btnSave">24dp</dimen>
+    <dimen name="cc_padding_imgButton">8dp</dimen>
+    <dimen name="cc_width_ivCustomer">164dp</dimen>
+    <dimen name="cc_height_ivCustomer">142dp</dimen>
+    <dimen name="cc_size_imgbtnCustomer">48dp</dimen>
+    <dimen name="cc_radius_cvImgCustomer">100dp</dimen>
+    <dimen name="cc_cardElevation_cvImgCustomer">2dp</dimen>
+    <dimen name="cl_size_ivCustomer">67dp</dimen>
+    <dimen name="cl_general_margin">4dp</dimen>
+    <dimen name="cl_flbtnMargin">24dp</dimen>
+    <dimen name="cl_item_cvMargin">4dp</dimen>
+    <dimen name="cl_item_cvElevation">4dp</dimen>
+    <dimen name="cl_tvMarginStart">16dp</dimen>
+    <dimen name="cl_tvMarginEnd">24dp</dimen>
+    <dimen name="cd_width_ivCustomer">200dp</dimen>
+    <dimen name="cd_height_ivCustomer">200dp</dimen>
+    <dimen name="cd_marginTop_ivCustomer">60dp</dimen>
+    <dimen name="cd_general_margin">24dp</dimen>
+    <dimen name="cd_cv_marginTop">16dp</dimen>
+    <dimen name="cd_LinearLayout_padding">8dp</dimen>
+    <dimen name="cd_radius_cv">8dp</dimen>
+    <dimen name="cd_cardElevation_cv">2dp</dimen>
+</resources>

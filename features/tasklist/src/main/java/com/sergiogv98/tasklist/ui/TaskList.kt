@@ -33,7 +33,7 @@ class TaskList : Fragment() {
         _binding = FragmentTaskListBinding.inflate(inflater,container,false)
 
         binding.taskListAddTask.setOnClickListener {
-            findNavController().navigate(com.moronlu18.invoice.R.id.action_TaskListFragment_to_TaskCreationFragment)
+            //findNavController().navigate(com.moronlu18.invoice.R.id.action_TaskListFragment_to_TaskCreationFragment)
         }
 
         return binding.root
@@ -69,7 +69,7 @@ class TaskList : Fragment() {
         binding.taskListRecyclerTasks.adapter = adapter
     }
     fun onItemSelected(task: Task) {
-        findNavController().navigate(com.moronlu18.invoice.R.id.action_TaskListFragment_to_TaskDetailFragment)
+        //findNavController().navigate(com.moronlu18.invoice.R.id.action_TaskListFragment_to_TaskDetailFragment)
     }
     private fun onDeletedItem(position: Int) {
 

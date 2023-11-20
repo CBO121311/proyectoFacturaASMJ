@@ -34,7 +34,7 @@ class InvoiceList : Fragment() {
 
         _binding = FragmentInvoiceListBinding.inflate(inflater,container,false)
         binding.fab.setOnClickListener {
-            findNavController().navigate(com.moronlu18.invoice.R.id.action_InvoiceListFragment_to_InvoiceCreationFragment)
+            //findNavController().navigate(com.moronlu18.invoice.R.id.action_InvoiceListFragment_to_InvoiceCreationFragment)
         }
         return binding.root
     }
@@ -64,7 +64,7 @@ class InvoiceList : Fragment() {
         adapter.notifyItemRemoved(position)
     }
     private fun onItemSelected(factura: Factura) {
-        findNavController().navigate(com.moronlu18.invoice.R.id.action_InvoiceListFragment_to_InvoiceDetailFragment)
+        //findNavController().navigate(com.moronlu18.invoice.R.id.action_InvoiceListFragment_to_InvoiceDetailFragment)
     }
 
     override fun onDestroyView() {

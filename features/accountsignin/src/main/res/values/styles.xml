@@ -21,4 +21,9 @@
         <item name="errorTextColor">@android:color/holo_red_light</item>
         <item name="boxBackgroundColor">@android:color/darker_gray</item>
     </style>
+
+    <style name="ShapeAppearanceOverlay.MyApp.FloatingActionButton" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>
