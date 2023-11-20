@@ -11,13 +11,13 @@
     app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/itemItem_clItem"
+        android:id="@+id/invoiced_itemItem_clItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_detail_card">
 
         <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/itemItem_ivItem"
+            android:id="@+id/invoiced_itemItem_ivItem"
             android:layout_width="@dimen/itemItem_anchoAltoImg"
             android:layout_height="@dimen/itemItem_anchoAltoImg"
             android:layout_marginStart="8dp"
@@ -35,19 +35,19 @@
 
 
         <TextView
-            android:id="@+id/itemItem_tvName"
+            android:id="@+id/invoiced_itemItem_tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/itemItem_marginGeneral"
             android:textColor="@color/md_theme_light_primary"
             android:textSize="@dimen/itemItem_textSizeTitulo"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/itemItem_ivItem"
+            app:layout_constraintStart_toEndOf="@+id/invoiced_itemItem_ivItem"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/itemItem_tvNamePrueba" />
 
         <TextView
-            android:id="@+id/itemItem_tvType"
+            android:id="@+id/invoiced_itemItem_tvType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/itemItem_tvType_text"
@@ -55,22 +55,22 @@
 
             android:textSize="@dimen/itemItem_textSizeSubTitulo"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/itemItem_tvName"
-            app:layout_constraintEnd_toStartOf="@+id/itemItem_tvTypeContent"
-            app:layout_constraintTop_toTopOf="@+id/itemItem_tvName" />
+            app:layout_constraintBottom_toBottomOf="@+id/invoiced_itemItem_tvName"
+            app:layout_constraintEnd_toStartOf="@+id/invoiced_itemItem_tvTypeContent"
+            app:layout_constraintTop_toTopOf="@+id/invoiced_itemItem_tvName" />
 
         <TextView
-            android:id="@+id/itemItem_tvTypeContent"
+            android:id="@+id/invoiced_itemItem_tvTypeContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/itemItem_marginGeneral"
             android:textStyle="bold"
-            app:layout_constraintBaseline_toBaselineOf="@+id/itemItem_tvType"
+            app:layout_constraintBaseline_toBaselineOf="@+id/invoiced_itemItem_tvType"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="@string/itemItem_tvTypePrueba" />
 
         <TextView
-            android:id="@+id/itemItem_tvDescription"
+            android:id="@+id/invoiced_itemItem_tvDescription"
 
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -79,12 +79,12 @@
             android:layout_marginEnd="@dimen/itemItem_marginGeneral"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/itemItem_ivItem"
-            app:layout_constraintTop_toBottomOf="@+id/itemItem_tvName"
+            app:layout_constraintStart_toEndOf="@+id/invoiced_itemItem_ivItem"
+            app:layout_constraintTop_toBottomOf="@+id/invoiced_itemItem_tvName"
             tools:text="@string/itemItem_tvDescriptionPrueba" />
 
         <TextView
-            android:id="@+id/itemItem_tvRate"
+            android:id="@+id/invoiced_itemItem_tvRate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -96,22 +96,22 @@
             android:textSize="@dimen/itemItem_textSizeSubTitulo"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/itemItem_ivItem"
-            app:layout_constraintTop_toBottomOf="@+id/itemItem_tvDescription"
+            app:layout_constraintStart_toEndOf="@+id/invoiced_itemItem_ivItem"
+            app:layout_constraintTop_toBottomOf="@+id/invoiced_itemItem_tvDescription"
             app:layout_constraintVertical_bias="0.125" />
 
         <TextView
-            android:id="@+id/itemItem_tvRateContent"
+            android:id="@+id/invoiced_itemItem_tvRateContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:textStyle="bold"
-            app:layout_constraintBaseline_toBaselineOf="@+id/itemItem_tvRate"
-            app:layout_constraintStart_toEndOf="@+id/itemItem_tvRate"
+            app:layout_constraintBaseline_toBaselineOf="@+id/invoiced_itemItem_tvRate"
+            app:layout_constraintStart_toEndOf="@+id/invoiced_itemItem_tvRate"
             tools:text="@string/itemItem_tvRatePrueba" />
 
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/invoiced_itemItem_chkImpuestos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"

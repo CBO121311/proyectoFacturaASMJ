@@ -13,8 +13,8 @@ class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun render(itemModel: Item, onClickListener: (Item) -> Unit) {
 
-        binding.itemItemTvName.text = itemModel.name
-        binding.itemItemTvRate.text = "Unidad: " + itemModel.rate.toString()
+        binding.invoicecItemItemTvName.text = itemModel.name
+        binding.invoicecItemItemTvRate.text = "Unidad: " + itemModel.rate.toString()
 
         itemView.setOnClickListener { onClickListener(itemModel) }
     }

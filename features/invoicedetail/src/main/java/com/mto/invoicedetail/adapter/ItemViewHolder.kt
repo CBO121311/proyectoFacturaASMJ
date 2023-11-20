@@ -11,10 +11,10 @@ class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun render(itemModel: Item, onClickListener: (Item) -> Unit) {
 
-        binding.itemItemTvName.text = itemModel.name
-        binding.itemItemTvDescription.text = itemModel.description
-        binding.itemItemTvTypeContent.text = itemModel.type
-        binding.itemItemTvRateContent.text = itemModel.rate.toString()
+        binding.invoicedItemItemTvName.text = itemModel.name
+        binding.invoicedItemItemTvDescription.text = itemModel.description
+        binding.invoicedItemItemTvTypeContent.text = itemModel.type
+        binding.invoicedItemItemTvRateContent.text = itemModel.rate.toString()
 
         itemView.setOnClickListener { onClickListener(itemModel) }
     }

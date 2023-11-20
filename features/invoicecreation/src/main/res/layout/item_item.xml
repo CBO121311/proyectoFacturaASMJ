@@ -2,22 +2,21 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/itemItem_cvItem"
+    android:id="@+id/invoicec_itemItem_cvItem"
     android:layout_width="@dimen/itemItem_tamCardView"
     android:layout_height="wrap_content"
-
     app:cardCornerRadius="@dimen/itemItem_cardRadius"
     app:cardElevation="@dimen/itemItem_cardElevation"
     app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/itemItem_clItem"
+        android:id="@+id/invoicec_itemItem_clItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_detail_card">
 
         <TextView
-            android:id="@+id/itemItem_tvName"
+            android:id="@+id/invoicec_itemItem_tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -33,7 +32,7 @@
             tools:text="@string/itemItem_tvNamePrueba" />
 
         <TextView
-            android:id="@+id/itemItem_tvRate"
+            android:id="@+id/invoicec_itemItem_tvRate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="62dp"
@@ -47,7 +46,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.91"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/itemItem_tvName"
+            app:layout_constraintTop_toBottomOf="@+id/invoicec_itemItem_tvName"
             app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

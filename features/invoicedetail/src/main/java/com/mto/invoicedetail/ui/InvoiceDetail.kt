@@ -70,7 +70,7 @@ class InvoiceDetail : Fragment() {
     @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
-        inflater.inflate(com.moronlu18.invoicedetail.R.menu.menu_customer_detail, menu)
+        inflater.inflate(com.moronlu18.invoicedetail.R.menu.menu_invoice_detail, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
