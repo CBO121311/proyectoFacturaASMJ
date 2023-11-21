@@ -54,9 +54,7 @@ android {
         ":infrastructure:printer",
         ":domain:invoice",
         ":features:invoicemodule",
-        ":features:itemcreation",
-        ":features:itemdetail",
-        ":features:itemlist",
+        ":features:item",
         ":features:task"
     )
 }

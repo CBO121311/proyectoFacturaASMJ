@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemItem_cvItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/itemItem_cardMargin"
+    app:cardCornerRadius="@dimen/itemItem_cardRadius"
+    app:cardElevation="@dimen/itemItem_cardElevation">
+    <!-- app:cardUseCompatPadding="true"  -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/itemItem_clItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/itemItem_cvImg"
+            android:layout_width="@dimen/itemItem_sizeImg"
+            android:layout_height="@dimen/itemItem_sizeImg"
+            android:layout_marginStart="@dimen/itemItem_marginImg"
+            app:cardCornerRadius="@dimen/itemItem_radiusImg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/itemItem_ivImg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/itemItem_tvDescriptionImg"
+                android:scaleType="centerCrop"
+                android:src="@drawable/reloj" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/itemItem_tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/itemItem_marginGeneral"
+            android:textColor="@color/md_theme_light_primary"
+            android:textSize="@dimen/item_sizeTitles"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/itemItem_cvImg"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/itemItem_tvNamePrueba" />
+
+        <TextView
+            android:id="@+id/itemItem_tvType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/item_marginSymbol"
+            android:textSize="@dimen/item_sizeSubtitles"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/itemItem_tvName"
+            app:layout_constraintEnd_toStartOf="@+id/itemItem_tvTypeContent"
+            app:layout_constraintTop_toTopOf="@+id/itemItem_tvName"
+            tools:text="@string/itemItem_tvType" />
+
+        <TextView
+            android:id="@+id/itemItem_tvTypeContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/itemItem_marginGeneral"
+            app:layout_constraintBottom_toBottomOf="@+id/itemItem_tvType"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/itemItem_tvType"
+            tools:text="@string/itemItem_tvTypePrueba" />
+
+        <TextView
+            android:id="@+id/itemItem_tvDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/itemItem_marginGeneral"
+            android:layout_marginTop="@dimen/itemItem_marginDescrip"
+            android:layout_marginEnd="@dimen/itemItem_marginGeneral"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/itemItem_cvImg"
+            app:layout_constraintTop_toBottomOf="@+id/itemItem_tvName"
+            tools:text="@string/itemItem_tvDescriptionPrueba" />
+
+        <TextView
+            android:id="@+id/itemItem_tvRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/itemItem_marginRate"
+            android:layout_marginTop="@dimen/itemItem_marginGeneral"
+            android:textSize="@dimen/item_sizeSubtitles"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/itemItem_cvImg"
+            app:layout_constraintTop_toBottomOf="@+id/itemItem_tvDescription"
+            tools:text="@string/itemItem_tvRate" />
+
+        <TextView
+            android:id="@+id/itemItem_tvRateContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/item_marginSymbol"
+            app:layout_constraintBottom_toBottomOf="@+id/itemItem_tvRate"
+            app:layout_constraintStart_toEndOf="@+id/itemItem_tvRate"
+            app:layout_constraintTop_toTopOf="@+id/itemItem_tvRate"
+            tools:text="@string/itemItem_tvRatePrueba" />
+
+        <TextView
+            android:id="@+id/itemItem_tvSymbolEuro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/item_marginSymbol"
+            android:text="@string/item_tvSymbolEuro"
+            app:layout_constraintBottom_toBottomOf="@+id/itemItem_tvRateContent"
+            app:layout_constraintStart_toEndOf="@+id/itemItem_tvRateContent"
+            app:layout_constraintTop_toTopOf="@+id/itemItem_tvRateContent" />
+
+        <CheckBox
+            android:id="@+id/itemItem_cbTaxable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/itemItem_marginTaxable"
+            android:checked="true"
+            android:clickable="false"
+            android:text="@string/item_tvTaxable"
+            android:textSize="@dimen/item_sizeSubtitles"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/itemItem_tvRate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/itemItem_tvRate" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

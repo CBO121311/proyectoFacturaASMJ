@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="item_name">Name</string>
+    <string name="item_description">Description</string>
+    <string name="item_tvRate">Rate</string>
+    <string name="item_tvTaxable">Is taxable</string>
+    <string name="item_tvSymbolEuro">€</string>
+
+    <string name="itemCreation_tvTypeItem">Type item</string>
+    <string name="itemCreation_etRate">Insert rate</string>
+    <string name="itemCreation_btnDone">Add</string>
+
+    <string name="itemDetail_tvTypeText">Type</string>
+    <string name="itemDetail_tvDescriptionImg">Illustrative image</string>
+    <string name="itemDetail_actionEdit">Edit</string>
+    <string name="itemDetail_actionDelete">Delete</string>
+    <string name="itemDetail_tvNamePrueba">Apple</string>
+    <string name="itemDetail_tvDescriptionPrueba">Fruit section product</string>
+    <string name="itemDetail_tvRatePrueba">1.40</string>
+    <string name="itemDetail_tvTypePrueba">Item</string>
+
+    <string name="itemList_fab">Add item</string>
+    <string name="itemItem_tvDescriptionImg">Illustrative image</string>
+    <string name="itemItem_tvType">Type:</string>
+    <string name="itemItem_tvRate">Rate:</string>
+    <string name="itemItem_tvNamePrueba">Wristwatch</string>
+    <string name="itemItem_tvTypePrueba">item</string>
+    <string name="itemItem_tvDescriptionPrueba">Instrument for telling time, worn on the wrist</string>
+    <string name="itemItem_tvRatePrueba">5.52</string>
+</resources>

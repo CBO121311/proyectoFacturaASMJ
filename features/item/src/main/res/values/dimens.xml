@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="item_sizeTitles">20sp</dimen>
+    <dimen name="item_sizeText">18sp</dimen>
+    <dimen name="item_sizeSubtitles">16sp</dimen>
+    <dimen name="item_paddingGeneral">25dp</dimen>
+    <dimen name="item_marginSymbol">4dp</dimen>
+    <dimen name="item_marginFab">16dp</dimen>
+
+    <dimen name="itemCreation_guideVertical">5dp</dimen>
+    <dimen name="itemCreation_guideHorizontal">20dp</dimen>
+    <dimen name="itemCreation_paddingLayout">16dp</dimen>
+    <dimen name="itemCreation_heightBtn">50dp</dimen>
+    <dimen name="itemCreation_sizeSwitch">48dp</dimen>
+
+    <dimen name="itemDetail_sizeImg">150dp</dimen>
+    <dimen name="itemDetail_marginTopImg">50dp</dimen>
+    <dimen name="itemDetail_radiusImg">75dp</dimen>
+
+    <dimen name="itemItem_marginGeneral">10dp</dimen>
+    <dimen name="itemItem_marginRate">40dp</dimen>
+    <dimen name="itemItem_cardMargin">5dp</dimen>
+    <dimen name="itemItem_cardRadius">12dp</dimen>
+    <dimen name="itemItem_cardElevation">4dp</dimen>
+    <dimen name="itemItem_sizeImg">66dp</dimen>
+    <dimen name="itemItem_radiusImg">33dp</dimen>
+    <dimen name="itemItem_marginImg">10dp</dimen>
+    <dimen name="itemItem_marginDescrip">6dp</dimen>
+    <dimen name="itemItem_marginTaxable">20dp</dimen>
+</resources>
