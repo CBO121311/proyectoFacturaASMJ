@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="invoice_detail_cdDatos">350dp</dimen>
+    <dimen name="invoice_detail_cdImage1">81dp</dimen>
+    <dimen name="invoice_detail_cdImage2">74dp</dimen>
+    <dimen name="invoice_detail_cdDatosAltura">330dp</dimen>
+
+    <dimen name="itemItem_textSizeTitulo">18sp</dimen>
+    <dimen name="itemItem_textSizeSubTitulo">16sp</dimen>
+    <dimen name="itemItem_marginGeneral">10dp</dimen>
+    <dimen name="itemItem_anchoAltoImg">80dp</dimen>
+    <dimen name="itemItem_marginVerticalCard">4dp</dimen>
+    <dimen name="itemItem_marginTopDescription">5dp</dimen>
+    <dimen name="itemItem_marginStartEndSubtitulos">40dp</dimen>
+    <dimen name="itemItem_cardRadius">6dp</dimen>
+    <dimen name="itemItem_cardElevation">4dp</dimen>
+    <dimen name="itemItem_marginFab">16dp</dimen>
+
+    <dimen name="invoice_creation_dimenComun">350dp</dimen>
+    <dimen name="invoice_creationHeightComun">220dp</dimen>
+
+    <dimen name="ic_itemItem_tamCardView">150dp</dimen>
+    <dimen name="ic_itemItem_textSizeTitulo">18sp</dimen>
+    <dimen name="ic_itemItem_textSizesubTitulo">10sp</dimen>
+    <dimen name="ic_itemItem_marginGeneral">10dp</dimen>
+    <dimen name="ic_itemItem_anchoAltoImg">30dp</dimen>
+    <dimen name="ic_itemItem_cardRadius">6dp</dimen>
+    <dimen name="ic_itemItem_cardElevation">4dp</dimen>
+</resources>
