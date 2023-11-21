@@ -53,6 +53,7 @@ class MainFragment : Fragment() {
         }
 
         binding.cvCustomer.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_customer)
+        binding.cvTask.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_task)
         /*binding.cvSigIn.btnAnimationNav(R.id.action_mainFragment_to_featureAccountSignIn)
         binding.cvSignUp.btnAnimationNav(R.id.action_mainFragment_to_featureAccountSignUp)
 

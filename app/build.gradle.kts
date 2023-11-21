@@ -59,9 +59,7 @@ android {
         ":features:itemcreation",
         ":features:itemdetail",
         ":features:itemlist",
-        ":features:taskcreation",
-        ":features:taskdetail",
-        ":features:tasklist"
+        ":features:task"
     )
 }
 

@@ -26,6 +26,12 @@
         app:moduleName="customer"
         />
 
+    <include-dynamic android:id="@+id/nav_graph_task"
+        app:graphPackage="${applicationId}.task"
+        app:graphResName="nav_graph_task"
+        app:moduleName="task"
+        />
+
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.moronlu18.invoice.ui.SplashFragment"
@@ -145,6 +151,9 @@
         <action
             android:id="@+id/action_mainFragment_to_nav_graph_customer"
             app:destination="@id/nav_graph_customer" />
+        <action
+            android:id="@+id/action_mainFragment_to_nav_graph_task"
+            app:destination="@id/nav_graph_task" />
     </fragment>
 
 
