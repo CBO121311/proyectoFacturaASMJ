@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/invoicec_itemItem_cvItem"
-    android:layout_width="@dimen/itemItem_tamCardView"
+    android:layout_width="@dimen/ic_itemItem_tamCardView"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="@dimen/itemItem_cardRadius"
-    app:cardElevation="@dimen/itemItem_cardElevation"
+    app:cardCornerRadius="@dimen/ic_itemItem_cardRadius"
+    app:cardElevation="@dimen/ic_itemItem_cardElevation"
     app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,12 +24,12 @@
             android:layout_marginEnd="5dp"
             android:maxLines="1"
             android:textColor="@color/md_theme_light_primary"
-            android:textSize="@dimen/itemItem_textSizeTitulo"
+            android:textSize="@dimen/ic_itemItem_textSizeTitulo"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@string/ie_itemItem_tvNamePrueba" />
+            tools:text="@string/itemItem_tvNamePrueba" />
 
         <TextView
             android:id="@+id/invoicec_itemItem_tvRate"
@@ -40,7 +40,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="0.00"
-            android:textSize="@dimen/itemItem_textSizesubTitulo"
+            android:textSize="@dimen/ic_itemItem_textSizesubTitulo"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

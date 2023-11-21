@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/invoice_detail_tvDetalles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/helvetica"
+        android:text="@string/tvDatos"
+        android:textColor="@color/invoice_detail_c"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/invoice_detail_cvDatos"
+        android:layout_width="@dimen/invoice_detail_cdDatos"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.285"
+        app:layout_constraintStart_toStartOf="parent"
+        app:cardCornerRadius="8dp"
+        android:elevation="6dp"
+        app:layout_constraintTop_toBottomOf="@+id/invoice_detail_tvDetalles">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/invoice_detail_constCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_detail_card"
+            >
+
+            <TextView
+                android:id="@+id/invoice_detail_tvCliente"
+                style="@style/ilDet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/tieCliente"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/invoice_detail_tvFechaEm"
+                style="@style/ilDet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/tieFechaEm"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/invoice_detail_tvCliente" />
+
+            <TextView
+                android:id="@+id/invoice_detail_FechaF"
+                style="@style/ilDet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/tieFechaFin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/invoice_detail_tvFechaEm" />
+
+            <TextView
+                style="@style/ilDet1"
+                android:id="@+id/invoice_detail_tvEstado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:text="@string/tvPendiente"
+                android:textColor="#F44336"
+                app:layout_constraintBaseline_toBaselineOf="@+id/invoice_detail_tvCliente"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                style="@style/ilDet"
+                android:id="@+id/invoice_detail_tcCliText"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Juan López"
+                app:layout_constraintBaseline_toBaselineOf="@+id/invoice_detail_tvCliente"
+                app:layout_constraintStart_toEndOf="@+id/invoice_detail_tvCliente" />
+
+            <TextView
+                style="@style/ilDet"
+                android:id="@+id/invoice_detail_tcFechaEmText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="10/10/2002"
+                app:layout_constraintBaseline_toBaselineOf="@+id/invoice_detail_tvFechaEm"
+                app:layout_constraintStart_toEndOf="@+id/invoice_detail_tvFechaEm" />
+
+            <TextView
+                android:id="@+id/invoice_detail_tcFechaFText"
+                style="@style/ilDet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="10/2/2023"
+                app:layout_constraintBaseline_toBaselineOf="@+id/invoice_detail_FechaF"
+                app:layout_constraintStart_toEndOf="@+id/invoice_detail_FechaF" />
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/item_factura_ivKiwi"
+                android:layout_width="@dimen/invoice_detail_cdImage1"
+                android:layout_height="@dimen/invoice_detail_cdImage2"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/kiwidiner_background"
+                android:contentDescription="Kiwi"
+                app:civ_border_color="@color/seed"
+                app:civ_border_width="2dp"
+                app:civ_shadow="false"
+                app:civ_shadow_color="#3f51b5"
+                app:civ_shadow_radius="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.501"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/invoice_detail_FechaF"
+                app:layout_constraintVertical_bias="1.0"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/invoice_detail_rvArticulos"
+        android:layout_width="@dimen/invoice_detail_cdDatos"
+        android:layout_height="@dimen/invoice_detail_cdDatosAltura"
+        android:layout_marginBottom="80dp"
+        android:background="@color/invoice_detail_c2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/invoice_detail_tvArticulos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/helvetica"
+        android:text="@string/tieArticulosFactura"
+        android:textColor="@color/invoice_detail_c"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/invoice_detail_rvArticulos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/invoice_detail_cvDatos" />
+
+    <TextView
+        android:id="@+id/invoice_detail_tvPrecio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/helvetica"
+        android:text="@string/tvTotal"
+        android:textColor="@color/invoice_detail_c"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.085"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/invoice_detail_rvArticulos"
+        app:layout_constraintVertical_bias="0.391" />
+
+    <TextView
+        android:id="@+id/invoice_detail_tvTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:cursorVisible="false"
+        android:enabled="false"
+        android:focusable="false"
+        android:fontFamily="@font/helvetica"
+        android:text="241€"
+        android:textColor="@color/invoice_detail_c"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/invoice_detail_tvPrecio"
+        app:layout_constraintTop_toBottomOf="@+id/invoice_detail_rvArticulos"
+        app:layout_constraintVertical_bias="0.391" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/invoice_detail_fabCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="#BA99F1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_action_correct" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

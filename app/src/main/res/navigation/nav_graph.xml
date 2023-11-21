@@ -31,6 +31,11 @@
         app:graphResName="nav_graph_task"
         app:moduleName="task"
         />
+    <include-dynamic android:id="@+id/nav_graph_invoice"
+        app:graphPackage="${applicationId}.invoicemodule"
+        app:graphResName="nav_graph_invoice"
+        app:moduleName="invoicemodule"
+        />
 
     <fragment
         android:id="@+id/splashFragment"
@@ -154,6 +159,9 @@
         <action
             android:id="@+id/action_mainFragment_to_nav_graph_task"
             app:destination="@id/nav_graph_task" />
+        <action
+            android:id="@+id/action_mainFragment_to_nav_graph_invoice"
+            app:destination="@id/nav_graph_invoice" />
     </fragment>
 
 

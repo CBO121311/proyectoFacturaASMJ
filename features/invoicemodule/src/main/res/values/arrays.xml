@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="invoice_creation_spStrings">
+        <item>Pendiente</item>
+        <item>Pagada</item>
+        <item>Vencida</item>
+    </string-array>
+</resources>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/nav_graph_invoice"
+    app:startDestination="@id/invoiceList">
+
+    <fragment
+        android:id="@+id/invoiceList"
+        android:name="com.mto.invoice.ui.InvoiceList"
+        android:label="InvoiceList"
+        tools:layout="@layout/fragment_invoice_list">
+        <action
+            android:id="@+id/action_invoiceList_to_invoiceCreation"
+            app:destination="@id/invoiceCreation" />
+        <action
+            android:id="@+id/action_invoiceList_to_invoiceDetail"
+            app:destination="@id/invoiceDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/invoiceCreation"
+        android:name="com.mto.invoice.ui.InvoiceCreation"
+        android:label="InvoiceCreation"
+        tools:layout="@layout/fragment_invoice_creation"
+        />
+    <fragment
+        android:id="@+id/invoiceDetail"
+        android:name="com.mto.invoice.ui.InvoiceDetail"
+        android:label="InvoiceDetail"
+        tools:layout="@layout/fragment_invoice_detail"/>
+</navigation>

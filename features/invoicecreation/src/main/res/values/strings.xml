@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="tbFacturas">Facturas</string>
-    <string name="tieCliente">Cliente</string>
-    <string name="tieFechaEm">Fecha de emisión</string>
-    <string name="tieFechaFin">Fecha de finalización</string>
+    <string name="ie_tbFacturas">Facturas</string>
+    <string name="ie_tieCliente">Cliente</string>
+    <string name="ie_tieFechaEm">Fecha de emisión</string>
+    <string name="ie_tieFechaFin">Fecha de finalización</string>
     <string name="btnAñadir">Añadir artículo</string>
     <string name="tieCliente_description">Imagen de usuario</string>
     <string name="tieArticulos">Articulos</string>
@@ -12,6 +12,6 @@
 
     <string name="tvDisponibles">Disponibles</string>
     <string name="tvAñadidos">Añadidos</string>
-    <string name="tvTotal">Total: </string>
-    <string name="itemItem_tvNamePrueba">Reloj de pulsera</string>
+    <string name="ie_tvTotal">Total: </string>
+    <string name="ie_itemItem_tvNamePrueba">Reloj de pulsera</string>
 </resources>

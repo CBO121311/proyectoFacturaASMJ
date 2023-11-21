@@ -10,7 +10,7 @@
     <string name="tvPendiente">Pendiente</string>
     <string name="tvDatos">Datos de la factura</string>
 
-    <!-- Lo de jessica :) -->
+
     <string name="itemList_fab_text">Añadir artículo</string>
     <string name="itemItem_tvType_text">"Tipo: "</string>
     <string name="itemItem_tvRate_text">"Tasa: "</string>

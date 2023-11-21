@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="invoice_list_c">#5225FF</color>
+    <color name="invoice_list_c1">#E1C8FD</color>
+    <color name="invoice_list_c2">#EFE6FF</color>
+    <color name="coloresBlanco">#FFFFFF</color>
+
+    <color name="invoice_detail_c">#5225FF</color>
+    <color name="invoice_detail_c1">#E1C8FD</color>
+    <color name="invoice_detail_c2">#EFE6FF</color>
+
+    <color name="invoice_creation_calendar">#E1C8FD</color>
+    <color name="invoice_creation_c">#5225FF</color>
+    <color name="invoice_creation_c1">#E1C8FD</color>
+    <color name="invoice_creation_c2">#EFE6FF</color>
+
+</resources>

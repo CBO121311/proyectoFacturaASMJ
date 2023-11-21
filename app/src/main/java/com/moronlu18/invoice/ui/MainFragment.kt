@@ -54,10 +54,11 @@ class MainFragment : Fragment() {
 
         binding.cvCustomer.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_customer)
         binding.cvTask.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_task)
+        binding.cvInvoice.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_invoice)
         /*binding.cvSigIn.btnAnimationNav(R.id.action_mainFragment_to_featureAccountSignIn)
         binding.cvSignUp.btnAnimationNav(R.id.action_mainFragment_to_featureAccountSignUp)
 
-        binding.cvInvoice.btnAnimationNav(R.id.action_mainFragment_to_InvoiceListFragment)
+
         binding.cvItem.btnAnimationNav(R.id.action_mainFragment_to_ItemListFragment)
         binding.cvTask.btnAnimationNav(R.id.action_mainFragment_to_TaskListFragment)*/
         binding.cvSignOut.setOnClickListener {
