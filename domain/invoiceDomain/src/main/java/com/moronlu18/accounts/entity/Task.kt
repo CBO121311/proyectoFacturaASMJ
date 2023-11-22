@@ -1,3 +1,5 @@
+package com.moronlu18.accounts.entity
+
 data class Task(
     val nomClient: String,
     val nomTask: String,

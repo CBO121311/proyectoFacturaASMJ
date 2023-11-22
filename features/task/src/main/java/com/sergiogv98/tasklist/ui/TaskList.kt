@@ -1,7 +1,7 @@
 package com.sergiogv98.tasklist.ui
 
-import Task
-import TaskProvider
+import com.moronlu18.accounts.entity.Task
+import com.moronlu18.accounts.repository.TaskProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater

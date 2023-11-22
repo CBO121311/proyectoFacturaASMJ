@@ -1,6 +1,6 @@
 package com.sergiogv98.tasklist.adapter
 
-import Task
+import com.moronlu18.accounts.entity.Task
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.moronlu18.tasklist.databinding.ItemTaskBinding

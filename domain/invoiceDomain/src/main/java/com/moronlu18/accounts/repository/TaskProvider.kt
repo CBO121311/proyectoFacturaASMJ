@@ -1,3 +1,7 @@
+package com.moronlu18.accounts.repository
+
+import com.moronlu18.accounts.entity.Task
+
 class TaskProvider {
 
     companion object {
