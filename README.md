@@ -49,6 +49,13 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  ## V3.2.1 (21/11/2023)
  *Escrito por SergioGV98*
  - Actualizado nav-graph usando include-dynamic en task.
+   
+------------------------
+ ## V3.2.2 (22/11/2023)
+ *Escrito por CBO121311*
+ - Implementado que al seleccionar un elemento de lista de clientes muestre su información en la capa detalles utilizando SafeArgs.
+ - Preparando el proyecto para meter las entidades y los datos en el domain. Las de clientes y user ya se han añadido.
+ - Cambiado el nombre *invoice* por *invoiceDomain* y la de *invoicemodule* por *invoice*.
 
 # Icono
 
