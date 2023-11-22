@@ -1,10 +1,9 @@
 plugins {
     id("com.android.dynamic-feature")
     id("org.jetbrains.kotlin.android")
-    id("androidx.navigation.safeargs.kotlin")
 }
 android {
-    namespace = "com.moronlu18.customercreation"
+    namespace = "com.moronlu18.invoicelist"
     compileSdk = 33
 
     defaultConfig {
@@ -28,7 +27,7 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
     }
 }
@@ -40,7 +39,6 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation(project(mapOf("path" to ":domain:invoiceDomain")))
-
 
     //Implementar la navegación por módulos
     implementation ("androidx.navigation:navigation-fragment-ktx:2.3.5")

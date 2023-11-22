@@ -2,7 +2,7 @@ package com.moronlu18.customer.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.moronlu18.customer.data.model.Clientes
+import com.moronlu18.accounts.entity.Clientes
 import com.moronlu18.customercreation.databinding.ItemClienteBinding
 
 

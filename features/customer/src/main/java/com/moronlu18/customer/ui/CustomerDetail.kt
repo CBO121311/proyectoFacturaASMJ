@@ -7,6 +7,9 @@ import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
+import com.moronlu18.accounts.entity.Clientes
+import com.moronlu18.accounts.repository.ClientesProvider
 import com.moronlu18.customercreation.databinding.FragmentCustomerDetailBinding
 
 
@@ -14,7 +17,8 @@ class CustomerDetail : Fragment() {
 
     //private val args: CustomerDetailArgs by navArgs()
     //private val idCliente = args.customerPrueba
-    //private val args: CustomerListArgs by NavArgs()
+    private val args: CustomerDetailArgs by navArgs()
+
     //private val cliente = args.cliente
     private var _binding: FragmentCustomerDetailBinding? = null
     private val binding get() = _binding!!
@@ -28,7 +32,21 @@ class CustomerDetail : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         _binding = FragmentCustomerDetailBinding.inflate(inflater, container, false)
+
+        val idcliente: Int = args.idcliente
+        val cliente: Clientes = ClientesProvider.getClienteId(idcliente);
+
+
+        binding.customerDetailTvNameCustomer.text = cliente.name;
+        binding.customerDetailTvEmailCustomer.text = cliente.email;
+        binding.customerDetailTvPhoneCustomer.text = cliente.phone;
+        binding.customerDetailTvCityName.text = cliente.city;
+        binding.customerDetailTvAddressCustomer.text = cliente.address;
+        binding.customerDetailCiPhoto.setImageResource(cliente.photo);
+
         return binding.root
     }
 
@@ -40,8 +58,12 @@ class CustomerDetail : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         binding.customerDetailFlbtncorrect.setOnClickListener {
             val fragmentManager = requireActivity().supportFragmentManager
+
+
 
             fragmentManager.popBackStack()
         }
@@ -55,25 +77,3 @@ class CustomerDetail : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 }
-
-
-/**Pruebas futuras
- *    override fun onCreateView(
- *         inflater: LayoutInflater, container: ViewGroup?,
- *         savedInstanceState: Bundle?
- *     ): View? {
- *         //val args: FragmentCustomerDetailBinding by navArgs<>()
- *         // Inflate the layout for this fragment
- *
- *         /*binding.customerDetailTvNameCustomer.text = cliente.name;
- *         binding.customerDetailTvEmailCustomer.text = cliente.email;
- *         binding.customerDetailTvPhoneCustomer.text = cliente.phone;
- *         binding.customerDetailTvCity.text = cliente.city;
- *         binding.customerDetailTvAddressCustomer.text = cliente.address;*/
- *
- *         _binding = FragmentCustomerDetailBinding.inflate(inflater, container, false)
- *
- *         //binding.customerDetailTvAddressCustomer.text = idCliente
- *         return binding.root
- *     }
- */

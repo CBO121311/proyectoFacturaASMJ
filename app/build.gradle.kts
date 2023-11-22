@@ -40,6 +40,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
     packaging {
         resources {
@@ -47,13 +48,12 @@ android {
         }
     }
     dynamicFeatures += setOf(
-        ":features:accountsignin",
-        ":features:accountsignup",
+        ":features:account",
         ":features:customer",
         ":infrastructure:firebase",
         ":infrastructure:printer",
-        ":domain:invoice",
-        ":features:invoicemodule",
+        ":domain:invoiceDomain",
+        ":features:invoice",
         ":features:item",
         ":features:task"
     )

@@ -29,7 +29,7 @@
         app:layout_constraintGuide_begin="24dp" />
 
     <com.mikhaellopez.circularimageview.CircularImageView
-        android:id="@+id/circularImageView"
+        android:id="@+id/customer_creation_imgcAvatar"
         android:layout_width="212dp"
         android:layout_height="197dp"
         android:src="@drawable/kiwidiner_background"
@@ -53,7 +53,7 @@
         app:helperText="@string/cc_til_helperText"
         app:layout_constraintEnd_toStartOf="@+id/customer_creation_glEnd"
         app:layout_constraintStart_toStartOf="@+id/customer_creation_glStart"
-        app:layout_constraintTop_toBottomOf="@+id/circularImageView"
+        app:layout_constraintTop_toBottomOf="@+id/customer_creation_imgcAvatar"
         app:startIconDrawable="@drawable/ic_action_person">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -171,7 +171,7 @@
         app:cardBackgroundColor="@color/cc_color_seedColor"
         app:cardCornerRadius="@dimen/cc_radius_cvImgCustomer"
         app:cardElevation="@dimen/cc_cardElevation_cvImgCustomer"
-        app:layout_constraintBottom_toBottomOf="@+id/circularImageView"
+        app:layout_constraintBottom_toBottomOf="@+id/customer_creation_imgcAvatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.645"
         app:layout_constraintStart_toStartOf="parent">

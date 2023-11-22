@@ -8,9 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.moronlu18.customer.adapter.ClientesAdapter
-import com.moronlu18.customer.data.model.Clientes
-import com.moronlu18.customer.data.repository.ClientesProvider
+import com.moronlu18.accounts.entity.Clientes
+import com.moronlu18.accounts.repository.ClientesProvider
 import com.moronlu18.customercreation.R
+
 import com.moronlu18.customercreation.databinding.FragmentCustomerListBinding
 
 class CustomerList : Fragment() {
@@ -86,7 +87,7 @@ class CustomerList : Fragment() {
             3,
             "Tienda de verduras",
             "abc@gmail.com",
-            photo = com.moronlu18.customercreation.R.drawable.cbotuxedo
+            photo = com.moronlu18.inovice.R.drawable.cbotuxedo
         );
         clientesMutableList.add(clientes)
         adapter.notifyItemInserted(clientesMutableList.size - 1)
@@ -111,12 +112,8 @@ class CustomerList : Fragment() {
     }
 
     private fun onItemSelected(cliente: Clientes) {
-        //Toast.makeText(requireContext(),cliente.name, Toast.LENGTH_SHORT).show()
-        findNavController().navigate(R.id.action_customerList_to_customerDetail)
-        //findNavController().navigate(Customer)
-        //findNavController().navigate(CustomerListDirections.actionCustomerListFragmentToCustomerDetailFragment)
-
-
+        //findNavController().navigate(R.id.action_customerList_to_customerDetail)
+        findNavController().navigate(CustomerListDirections.actionCustomerListToCustomerDetail(cliente.id))
     }
 
     override fun onDestroyView() {

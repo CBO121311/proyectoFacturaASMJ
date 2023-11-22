@@ -1,5 +1,7 @@
 package com.moronlu18.invoice
 
+import android.animation.AnimatorInflater
+import android.animation.AnimatorSet
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
@@ -8,8 +10,6 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ToggleButton
 import androidx.navigation.fragment.findNavController
 import com.moronlu18.invoice.databinding.FragmentMainBinding
 
@@ -56,8 +56,8 @@ class MainFragment : Fragment() {
         binding.cvTask.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_task)
         binding.cvInvoice.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_invoice)
         binding.cvItem.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_item)
-        /*binding.cvSigIn.btnAnimationNav(R.id.action_mainFragment_to_featureAccountSignIn)
-        binding.cvSignUp.btnAnimationNav(R.id.action_mainFragment_to_featureAccountSignUp)*/
+        binding.cvSigIn.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_account)
+        //binding.cvSignUp.btnAnimationNav(R.id.action_mainFragment_to_featureAccountSignUp)
         binding.cvSignOut.setOnClickListener {
             showConfirmationDialog()
         }
@@ -81,11 +81,19 @@ class MainFragment : Fragment() {
         setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    v.animate().scaleX(0.90f).scaleY(0.90f).setDuration(100).start()
+                    //v.animate().scaleX(0.90f).scaleY(0.90f).setDuration(30).start()
+
+                    val pushDown = AnimatorInflater.loadAnimator(requireContext(), R.animator.anim_btn_push) as AnimatorSet
+                    pushDown.setTarget(v)
+                    pushDown.start();
                 }
 
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                    v.animate().scaleX(1.0f).scaleY(1.0f).setDuration(100).start()
+                    //v.animate().scaleX(1.0f).scaleY(1.0f).setDuration(80).start()
+
+                    val pushUp = AnimatorInflater.loadAnimator(requireContext(), R.animator.anim_btn_up) as AnimatorSet
+                    pushUp.setTarget(v)
+                    pushUp.start();
                 }
             }
             false

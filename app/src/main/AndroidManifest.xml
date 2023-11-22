@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <dist:module dist:instant="true" />
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"

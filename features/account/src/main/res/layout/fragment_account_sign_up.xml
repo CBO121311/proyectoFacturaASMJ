@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/started"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/ended"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="20dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEmailSignUp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/ended"
+        app:layout_constraintStart_toStartOf="@+id/started"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tietEmailSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tietEmailSignUp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPasswordSignUp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/ended"
+        app:layout_constraintStart_toStartOf="@+id/started"
+        app:layout_constraintTop_toBottomOf="@+id/tilEmailSignUp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tietPasswordSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="@string/tietPasswordSignUp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilConfirmPasswordSignUp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toStartOf="@+id/ended"
+        app:layout_constraintStart_toStartOf="@+id/started"
+        app:layout_constraintTop_toBottomOf="@+id/tilPasswordSignUp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tietConfirmPasswordSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="@string/tietConfirmPasswordSignUp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/spType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:entries="@array/typeuser"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvType"
+        app:layout_constraintEnd_toStartOf="@+id/ended"
+        app:layout_constraintStart_toEndOf="@+id/brStart"
+        app:layout_constraintTop_toTopOf="@id/tvType" />
+
+    <Spinner
+        android:id="@+id/spProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvProfiLe"
+        app:layout_constraintEnd_toStartOf="@+id/ended"
+        app:layout_constraintStart_toEndOf="@+id/brStart" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/brStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="tvType,tvProfiLe" />
+
+    <TextView
+        android:id="@+id/tvType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/tvType"
+        app:layout_constraintStart_toStartOf="@+id/started"
+        app:layout_constraintTop_toBottomOf="@+id/tilConfirmPasswordSignUp" />
+
+    <TextView
+        android:id="@+id/tvProfiLe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/tvProfile"
+        app:layout_constraintStart_toStartOf="@+id/started"
+        app:layout_constraintTop_toBottomOf="@+id/tvType" />
+
+    <TextView
+        android:id="@+id/tvCalification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="@string/tvCalification"
+        app:layout_constraintEnd_toStartOf="@+id/ended"
+        app:layout_constraintStart_toStartOf="@+id/started"
+        app:layout_constraintTop_toBottomOf="@+id/tvProfiLe" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toStartOf="@+id/ended"
+        app:layout_constraintStart_toStartOf="@+id/started"
+        app:layout_constraintTop_toBottomOf="@+id/tvCalification">
+
+        <RadioButton
+            android:id="@+id/rbLevel1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RadioButton" />
+
+        <RadioButton
+            android:id="@+id/rbLevel2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RadioButton" />
+
+        <RadioButton
+            android:id="@+id/rbLevel3"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RadioButton" />
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

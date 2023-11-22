@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 //import com.example.pruebasconclientes.R
 import com.moronlu18.customercreation.R
 //import com.example.pruebasconclientes.data.Clientes
-import com.moronlu18.customer.data.model.Clientes
+import com.moronlu18.accounts.entity.Clientes
 
 class ClientesAdapter(
     private val clientesList: List<Clientes>,
