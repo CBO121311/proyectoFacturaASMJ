@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jcasrui.itemcreation.adapter.ItemAdapter
-import com.jcasrui.itemcreation.data.model.Item
-import com.jcasrui.itemcreation.data.repository.ItemProvider
+import com.moronlu18.accounts.entity.Item
+import com.moronlu18.accounts.repository.ItemProvider
 import com.moronlu18.itemcreation.R
 import com.moronlu18.itemcreation.databinding.FragmentItemListBinding
 

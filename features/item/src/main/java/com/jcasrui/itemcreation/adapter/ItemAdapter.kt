@@ -3,7 +3,7 @@ package com.jcasrui.itemcreation.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.jcasrui.itemcreation.data.model.Item
+import com.moronlu18.accounts.entity.Item
 import com.moronlu18.itemcreation.R
 
 class ItemAdapter(

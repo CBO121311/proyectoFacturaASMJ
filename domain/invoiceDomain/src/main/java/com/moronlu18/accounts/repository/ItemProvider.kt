@@ -1,7 +1,8 @@
-package com.jcasrui.itemcreation.data.repository
+package com.moronlu18.accounts.repository
 
-import com.jcasrui.itemcreation.data.model.Item
-import com.moronlu18.itemcreation.R
+import com.moronlu18.accounts.entity.Item
+import com.moronlu18.inovice.R
+
 
 class ItemProvider {
     companion object {

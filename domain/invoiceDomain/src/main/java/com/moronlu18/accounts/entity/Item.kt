@@ -1,4 +1,4 @@
-package com.jcasrui.itemcreation.data.model
+package com.moronlu18.accounts.entity
 
 data class Item(
     val id: Int,
