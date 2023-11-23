@@ -150,8 +150,8 @@
         style="@style/tv_taks_details_general"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/task_details_task_type_txt_margin_top"
         android:text="@string/task_details_type_task_name"
+        app:layout_constraintBottom_toBottomOf="@+id/task_details_task_type_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task_details_task_type_name" />
@@ -239,8 +239,8 @@
     <ScrollView
         android:id="@+id/task_details_scroll_view"
         android:layout_width="@dimen/task_details_scroll_view_width"
-        android:layout_height="53dp"
-        android:layout_marginBottom="5dp"
+        android:layout_height="@dimen/task_details_scroll_view_height"
+        android:layout_marginBottom="@dimen/task_details_scroll_view_margin_bottom"
         app:layout_constraintBottom_toBottomOf="@+id/task_details_task_description_view"
         app:layout_constraintEnd_toEndOf="@+id/task_details_task_description_view"
         app:layout_constraintStart_toStartOf="parent">
@@ -251,7 +251,6 @@
             style="@style/tv_taks_details_general"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/task_details_description_margin_top"
             android:text="@string/task_details_description" />
     </ScrollView>
 
