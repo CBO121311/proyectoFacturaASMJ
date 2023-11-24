@@ -36,9 +36,9 @@ class CustomerCreation : Fragment() {
 
         //binding.customerCreationImgbtnCustomer.setOnClickListener(requestPermission())
 
-        /*binding.customerCreationImgbtnCustomer.setOnClickListener {
+        binding.customerCreationImgbtnCustomer.setOnClickListener {
             openGallery()
-        }*/
+        }
 
         launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == Activity.RESULT_OK) {

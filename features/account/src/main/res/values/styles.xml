@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="ButtonTransparent">
-
         <item name="android:background">@drawable/selector_button</item>
 
     </style>
 
     <!-- Se utilizar la herencia entre los estilos definidos por el desarrollador
     Para estilos del sdk de android hay que usar parent-->
+
+
+
+    <style name="cvCustom_style" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/cvCustomSignInCorner</item>
+    </style>
+
+    <style name="cvCustomSignInCorner">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">48dp</item>
+        <item name="cornerSizeTopLeft">48dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+
     <style name="ButtonTransparent.TextColor">
         <item name="android:textColor">@color/design_default_color_secondary</item>
     </style>
@@ -22,7 +37,7 @@
         <item name="boxBackgroundColor">@android:color/darker_gray</item>
     </style>
 
-    <style name="ShapeAppearanceOverlay.MyApp.FloatingActionButton" parent="">
+    <style name="ftlStyleSignIn">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>

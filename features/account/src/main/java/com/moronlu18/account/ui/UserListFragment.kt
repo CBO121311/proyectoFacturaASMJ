@@ -42,15 +42,15 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick {
      */
     private fun setUpUserRecycler() {
 
-        //Añadimos el listener
-        //var adapter = UserAdapter(UserRepository.dataSet, requireContext(),this)
+        /*Añadimos el listener
+        var adapter = UserAdapter(UserRepository.dataSet, requireContext(),this)
 
-        //El abstracto, recoge un usuario y puedo usar el view.
-        //Otra manera --> Abramos laves
+        El abstracto, recoge un usuario y puedo usar el view.
+        Otra manera --> Abramos llaves
 
-        //todo ¿Esto está mal? Ya que pregunta al repositorio  var adapter = UserAdapter(null, requireContext(),this)
-        //todo Ya que el que le facilita es el usecase. Así se inicia a null
-        //var adapter = UserAdapter(null, requireContext(),this){
+        todo ¿Esto está mal? Ya que pregunta al repositorio  var adapter = UserAdapter(null, requireContext(),this)
+        todo Ya que el que le facilita es el usecase. Así se inicia a null
+        var adapter = UserAdapter(null, requireContext(),this){*/
         var adapter = UserAdapter(UserRepository.dataSet, requireContext(),this){
             //when(event){}
 

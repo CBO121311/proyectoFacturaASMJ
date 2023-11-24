@@ -1,12 +1,12 @@
 package com.moronlu18.accounts.repository
 
-import com.moronlu18.accounts.entity.Clientes
+import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.inovice.R
 
-class ClientesProvider {
+class CustomerRepository {
     companion object {
-        val clientesList = listOf(
-            Clientes(
+        val customerList = listOf(
+            Customer(
                 0,
                 "Mr.Kiwi",
                 "kiwi@boss.com",
@@ -15,7 +15,7 @@ class ClientesProvider {
                 "Calle Plkjhgfd, 123",
                 R.drawable.kiwituxedo
             ),
-            Clientes(
+            Customer(
                 1,
                 "Juan Pérez",
                 "juan@example.com",
@@ -25,7 +25,7 @@ class ClientesProvider {
                 R.drawable.liontuxedo
 
             ),
-            Clientes(
+            Customer(
                 2,
                 "María López",
                 "maria@example.com",
@@ -33,14 +33,14 @@ class ClientesProvider {
                 "Barcelona",
                 "Avenida Central, 456", R.drawable.elephantuxedo
             ),
-            Clientes(
+            Customer(
                 3,
                 "Luis García",
                 "luis@example.com",
                 "+111223344",
                 "Valencia",
                 "Paseo de la Playa, 789", R.drawable.kangorutuxedo
-            ), Clientes(
+            ), Customer(
                 4,
                 "Ana Martínez",
                 "ana@example.com",
@@ -48,7 +48,7 @@ class ClientesProvider {
                 "Sevilla",
                 "Calle Sevilla, 42", R.drawable.dolphintuxedo
             ),
-            Clientes(
+            Customer(
                 5,
                 "Alejandro López",
                 "al@example.com",
@@ -57,7 +57,7 @@ class ClientesProvider {
                 "Calle perdices, 567",
                 R.drawable.cbotuxedo
             ),
-            Clientes(
+            Customer(
                 6,
                 "Sergio Ram",
                 "sr@example.com",
@@ -66,7 +66,7 @@ class ClientesProvider {
                 "Calle Principal, 123",
                 R.drawable.sharktuxedo
             ),
-            Clientes(
+            Customer(
                 7,
                 "Mateo",
                 "mateo@example.com",
@@ -75,7 +75,7 @@ class ClientesProvider {
                 "Avenida Central, 456", R.drawable.tigretuxedo
 
             ),
-            Clientes(
+            Customer(
                 8,
                 "Lourdes",
                 "moronlu@example.com",
@@ -83,7 +83,7 @@ class ClientesProvider {
                 "Antequera",
                 "Centro, 789",
                 R.drawable.lynxtuxedo
-            ), Clientes(
+            ), Customer(
                 9,
                 "Paco",
                 "paco@example.com",
@@ -91,7 +91,7 @@ class ClientesProvider {
                 "Sevilla",
                 "Calle Sevilla, 42", R.drawable.hipopotuxedo
             ),
-            Clientes(
+            Customer(
                 10,
                 "Jessica",
                 "jes@example.com",
@@ -101,11 +101,11 @@ class ClientesProvider {
             )
         )
 
-        val clientesListVacia = emptyList<Clientes>()
-
-        fun getClienteId(id: Int): Clientes {
-
-            return clientesList.find { it.id == id }!!
+        val customerListEmpty = emptyList<Customer>()
+        //No se puede añadir una tarea si no hay clientes.
+        //El cliente debe pasar un array de clientes
+        fun getCustomerId(id: Int): Customer {
+            return customerList.find { it.id == id }!!
         }
     }
 }

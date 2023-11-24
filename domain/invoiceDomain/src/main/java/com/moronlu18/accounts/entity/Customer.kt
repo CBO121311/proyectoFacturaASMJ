@@ -1,6 +1,6 @@
 package com.moronlu18.accounts.entity
 
-data class Clientes(
+data class Customer(
     val id: Int,
     val name: String,
     val email: String,

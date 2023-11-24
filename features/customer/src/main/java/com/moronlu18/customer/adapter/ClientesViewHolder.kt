@@ -2,7 +2,7 @@ package com.moronlu18.customer.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.moronlu18.accounts.entity.Clientes
+import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.customercreation.databinding.ItemClienteBinding
 
 
@@ -11,8 +11,8 @@ class ClientesViewHolder(private val view: View) : RecyclerView.ViewHolder(view)
     private val binding = ItemClienteBinding.bind(view)
 
     fun render(
-        clientesModel: Clientes,
-        onClickListener: (Clientes) -> Unit,
+        clientesModel: Customer,
+        onClickListener: (Customer) -> Unit,
         onClickDelete: (Int) -> Unit
     ){
 

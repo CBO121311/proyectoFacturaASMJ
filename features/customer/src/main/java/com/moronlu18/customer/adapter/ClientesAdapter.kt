@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 //import com.example.pruebasconclientes.R
 import com.moronlu18.customercreation.R
 //import com.example.pruebasconclientes.data.Clientes
-import com.moronlu18.accounts.entity.Clientes
+import com.moronlu18.accounts.entity.Customer
 
 class ClientesAdapter(
-    private val clientesList: List<Clientes>,
-    private val onClickListener: (Clientes) -> Unit,
+    private val clientesList: List<Customer>,
+    private val onClickListener: (Customer) -> Unit,
     private val onClickDelete:(Int) -> Unit
 ) : RecyclerView.Adapter<ClientesViewHolder>() {
 

@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.moronlu18.accountsignin.databinding.FragmentAccountSignUpBinding
 
-class AccountSignUp : Fragment() {
+class SignUpFragment : Fragment() {
 
     private var _binding: FragmentAccountSignUpBinding? = null
 
@@ -53,17 +53,18 @@ class AccountSignUp : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                //Una manera, llama al padre, después el adapter y después me da el dato.
-                //val profile = parent.adapter.getItem(position)
-                //El ArrayList del adapter se encuentra en esta función itemList
+                /*
+                Una manera, llama al padre, después el adapter y después me da el dato.
+                val profile = parent.adapter.getItem(position)
+                El ArrayList del adapter se encuentra en esta función itemList
 
-                //val  profile = itemList.get(position) // Me devuelve la colección del adapter
-                //Mal lo anterior(¿)
+                //val  profile = itemList.get(position) Me devuelve la colección del adapter
+                Mal lo anterior(¿)*/
 
                 val profile = parent?.adapter?.getItem(position) //Me devuelva el elemento seleccionado con los parametros de arriba
                 Toast.makeText(requireActivity(),"Elemento pulsado $profile", Toast.LENGTH_SHORT).show()
             }
-///arreglar
+            //arreglar
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }

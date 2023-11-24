@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.moronlu18.customer.adapter.ClientesAdapter
-import com.moronlu18.accounts.entity.Clientes
-import com.moronlu18.accounts.repository.ClientesProvider
+import com.moronlu18.accounts.entity.Customer
+import com.moronlu18.accounts.repository.CustomerRepository
 import com.moronlu18.customercreation.R
 
 import com.moronlu18.customercreation.databinding.FragmentCustomerListBinding
@@ -18,8 +18,8 @@ class CustomerList : Fragment() {
 
     private var _binding: FragmentCustomerListBinding? = null
     private val binding get() = _binding!!
-    private var clientesMutableList: MutableList<Clientes> =
-        ClientesProvider.clientesList.toMutableList()
+    private var clientesMutableList: MutableList<Customer> =
+        CustomerRepository.customerList.toMutableList()
     private lateinit var adapter: ClientesAdapter
     private var isDeleting = false
 
@@ -67,7 +67,7 @@ class CustomerList : Fragment() {
         val recyclerView = binding.customerListRvClientes
         val emptyTextView = binding.customerListTvempty
 
-        if (ClientesProvider.clientesList.isEmpty()) {
+        if (CustomerRepository.customerList.isEmpty()) {
             emptyTextView.visibility = View.VISIBLE
             recyclerView.visibility = View.GONE
         } else {
@@ -83,7 +83,7 @@ class CustomerList : Fragment() {
 
     private fun createCliente() {
 
-        val clientes = Clientes(
+        val clientes = Customer(
             3,
             "Tienda de verduras",
             "abc@gmail.com",
@@ -111,7 +111,7 @@ class CustomerList : Fragment() {
         }, 300)
     }
 
-    private fun onItemSelected(cliente: Clientes) {
+    private fun onItemSelected(cliente: Customer) {
         //findNavController().navigate(R.id.action_customerList_to_customerDetail)
         findNavController().navigate(CustomerListDirections.actionCustomerListToCustomerDetail(cliente.id))
     }

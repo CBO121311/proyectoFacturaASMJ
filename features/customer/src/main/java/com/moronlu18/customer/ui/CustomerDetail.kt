@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.moronlu18.accounts.entity.Clientes
-import com.moronlu18.accounts.repository.ClientesProvider
+import com.moronlu18.accounts.entity.Customer
+import com.moronlu18.accounts.repository.CustomerRepository
 import com.moronlu18.customercreation.databinding.FragmentCustomerDetailBinding
 
 
@@ -37,7 +37,7 @@ class CustomerDetail : Fragment() {
         _binding = FragmentCustomerDetailBinding.inflate(inflater, container, false)
 
         val idcliente: Int = args.idcliente
-        val cliente: Clientes = ClientesProvider.getClienteId(idcliente);
+        val cliente: Customer = CustomerRepository.getCustomerId(idcliente);
 
 
         binding.customerDetailTvNameCustomer.text = cliente.name;

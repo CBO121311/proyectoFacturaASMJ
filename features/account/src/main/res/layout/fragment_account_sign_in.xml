@@ -4,13 +4,14 @@
     <!-- Tocamos botón derecho loginapplicaction.ui.signin.SignInViewModel
     ahora es databinding, antes viewbinding-->
     <data>
+
         <variable
             name="viewmodel"
             type="com.moronlu18.account.ui.signin.SignInViewModel" />
     </data>
 
     <LinearLayout
-        android:id="@+id/llSignIn"
+        android:id="@+id/cc_SignInv2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -30,10 +31,10 @@
                 android:hint="Email"
                 android:text="@={viewmodel.email}" />
         </com.google.android.material.textfield.TextInputLayout>
-
+        <!--style="@style/SignIntextInputLayout"-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilPassword"
-            style="@style/SignIntextInputLayout"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:endIconMode="password_toggle"
@@ -114,6 +115,12 @@
                 android:src="@drawable/facebook" />
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btnLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LayoutSignIn" />
 
 
     </LinearLayout>
