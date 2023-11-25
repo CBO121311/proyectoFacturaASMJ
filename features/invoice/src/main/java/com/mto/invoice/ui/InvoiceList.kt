@@ -9,8 +9,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.moronlu18.invoicelist.R
 import com.mto.invoice.adapter.FacturaAdapter
-import com.mto.invoice.data.Factura
-import com.mto.invoice.data.FacturaProvider
+import com.moronlu18.accounts.entity.Factura
+import com.moronlu18.accounts.repository.FacturaProvider
 import com.moronlu18.invoicelist.databinding.FragmentInvoiceListBinding
 
 

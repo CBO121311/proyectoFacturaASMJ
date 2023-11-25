@@ -2,7 +2,7 @@ package com.mto.invoice.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.mto.invoice.data.Factura
+import com.moronlu18.accounts.entity.Factura
 import com.moronlu18.invoicelist.databinding.ItemFacturaBinding
 
 class FacturaViewHolder(view: View): RecyclerView.ViewHolder(view){

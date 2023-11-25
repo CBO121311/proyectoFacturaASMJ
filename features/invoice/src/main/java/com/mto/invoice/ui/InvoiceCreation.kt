@@ -9,11 +9,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.textfield.TextInputEditText
+import com.moronlu18.accounts.entity.Item
+import com.moronlu18.accounts.repository.ItemProvider
 import com.moronlu18.invoicelist.R
 import com.moronlu18.invoicelist.databinding.FragmentInvoiceCreationBinding
 import com.mto.invoice.adapter.ItemCreationAdapter
-import com.mto.invoice.data.model.Item
-import com.mto.invoice.data.repository.ItemProvider
+
 
 import java.text.SimpleDateFormat
 import java.util.Calendar

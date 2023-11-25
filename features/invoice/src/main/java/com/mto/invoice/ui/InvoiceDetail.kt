@@ -9,11 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.moronlu18.invoice.R
+import com.moronlu18.accounts.entity.Item
+import com.moronlu18.accounts.repository.ItemProvider
 import com.moronlu18.invoicelist.databinding.FragmentInvoiceDetailBinding
 import com.mto.invoice.adapter.ItemAdapter
-import com.mto.invoice.data.model.Item
-import com.mto.invoice.data.repository.ItemProvider
+
 
 
 class InvoiceDetail : Fragment() {
