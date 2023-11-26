@@ -56,6 +56,16 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  - Implementado que al seleccionar un elemento de lista de clientes muestre su información en la capa detalles utilizando SafeArgs.
  - Preparando el proyecto para meter las entidades y los datos en el domain. Las de clientes y user ya se han añadido.
  - Cambiado el nombre *invoice* por *invoiceDomain* y la de *invoicemodule* por *invoice*.
+------------------------
+ ## V3.3.0 (26/11/2023)
+ *Escrito por CBO121311*
+ - El toolbar se ha cambiado de color (cambio temporal)
+ - Iconos más grande en el dashboard.
+ - Rediseño de las capas de customer, los colores se han cambiado que se parezca más al tema seleccionado.
+ - Implementado borrar un cliente en el CustomerDetail y su mensaje de confirmación.
+ - Implementado añadir un cliente y varias excepciones en el CustomerCreation *(Nombre vacío, Email vacío, Formato email incorrecto).*
+ - Implementado que al tener la lista vacía en customerList sale una imagen avisándote.
+ - CustomerProvider es ahora un MutableList de vez de una lista.
 
 # Icono
 
