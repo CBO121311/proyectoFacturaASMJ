@@ -2,8 +2,9 @@ package com.mto.invoice.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.moronlu18.accounts.entity.Item
 import com.moronlu18.invoicelist.databinding.ItemItemcreationBinding
-import com.mto.invoice.data.model.Item
+
 
 
 class ItemCreationViewHolder(view: View) : RecyclerView.ViewHolder(view) {

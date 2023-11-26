@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.moronlu18.invoicelist.R
-import com.mto.invoice.data.Factura
+import com.moronlu18.accounts.entity.Factura
 
 class FacturaAdapter(
     private val facturaList:List<Factura>,

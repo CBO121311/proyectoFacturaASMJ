@@ -1,4 +1,6 @@
-package com.mto.invoice.data
+package com.moronlu18.accounts.repository
+
+import com.moronlu18.accounts.entity.Factura
 
 class FacturaProvider {
     companion object {
