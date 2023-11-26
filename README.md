@@ -61,7 +61,7 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  *Escrito por CBO121311*
  - El toolbar se ha cambiado de color (cambio temporal)
  - Iconos más grande en el dashboard.
- - Rediseño de las capas de customer, los colores se han cambiado que se parezca más al tema seleccionado.
+ - Rediseño de las capas de customer, los colores se han cambiado para que se parezca más al tema seleccionado.
  - Implementado borrar un cliente en el CustomerDetail y su mensaje de confirmación.
  - Implementado añadir un cliente y varias excepciones en el CustomerCreation *(Nombre vacío, Email vacío, Formato email incorrecto).*
  - Implementado que al tener la lista vacía en customerList sale una imagen avisándote.
