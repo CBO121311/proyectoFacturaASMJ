@@ -7,12 +7,16 @@
     <color name="cc_color_btnSave">#8721C6</color>
     <color name="cc_cvBackgroundColor">#E9D3FF</color>
 
+    <color name="customer_color_seed">#8a72e3</color>
+
     <color name="cl_color_ivCustomer">#E9D3FF</color>
     <color name="cl_predetermined_color">#505050</color>
     <color name="cl_background">#F6EDFF</color>
     <color name="cl_tvName">#9942EF</color>
 
     <color name="cd_color_ivCliente">#E9D3FF</color>
-    <color name="cd_color_fondo_1">#E1C8FD</color>
-    <color name="cd_color_fondo_2">#EFE6FF</color>
+    <color name="cd_color_fondo_1">#D58A72E3</color>
+    <color name="cd_color_fondo_2">#528A72E3</color>
+    <color name="customer_color_floatingbutton">#AF9DF1</color>
+
 </resources>

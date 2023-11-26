@@ -1,5 +1,11 @@
 package com.moronlu18.accounts.entity
 
+
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+
+@Parcelize
 data class Customer(
     val id: Int,
     val name: String,
@@ -8,4 +14,6 @@ data class Customer(
     val city: String="No disponible",
     val address:String="No disponible",
     val photo:Int
-)
+) : Parcelable
+
+

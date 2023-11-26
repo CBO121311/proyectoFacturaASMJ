@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/customer_list_cvItemCustomer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -26,6 +25,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
+
 
         <ImageButton
             android:id="@+id/customer_list_imgbtnDelete"
@@ -56,29 +58,36 @@
         <TextView
             android:id="@+id/customer_list_tvName"
             style="@style/customer_list_tvTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/cl_tvMarginStart"
-            android:text="@string/cl_tvExampleName"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:maxLength="40"
+            android:maxLines="2"
+            android:text="Mr.Onion"
+
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toEndOf="@+id/customer_list_ivCliente"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/customer_list_tvEmail"
             style="@style/customer_list_tvNormal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:maxLength="100"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/cl_tvMarginStart"
             android:text="@string/cl_tvExampleEmail"
-            app:layout_constraintStart_toEndOf="@+id/customer_list_ivCliente"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/customer_list_tvName"
             app:layout_constraintTop_toBottomOf="@+id/customer_list_tvName" />
+
 
         <TextView
             android:id="@+id/customer_list_tvPhone"
             style="@style/customer_list_tvNormal"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:maxLength="18"
             android:text="@string/cl_tvExamplePhone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/customer_list_tvEmail" />
@@ -88,10 +97,27 @@
             style="@style/customer_list_tvNormal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/cl_tvMarginStart"
-            android:text="@string/cl_tvExampleCity"
-            app:layout_constraintStart_toEndOf="@+id/customer_list_ivCliente"
+            android:layout_marginEnd="16dp"
+            android:maxLength="30"
+            android:maxLines="2"
+            android:text="San Petersburgoffvdvfvfdfvvdffdvfdvvf"
+            app:layout_constraintEnd_toStartOf="@+id/guideline5"
+            app:layout_constraintStart_toStartOf="@+id/customer_list_tvName"
             app:layout_constraintTop_toBottomOf="@+id/customer_list_tvEmail" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="318dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="148dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -48,7 +48,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cvSigIn"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="140dp"
             android:layout_marginTop="16dp"
             app:cardCornerRadius="4dp"
             app:cardUseCompatPadding="true"
@@ -64,8 +64,8 @@
                 android:padding="10dp">
 
                 <ImageView
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="5dp"
                     android:src="@drawable/imglogin" />
@@ -87,7 +87,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cvSignUp"
             android:layout_width="0dp"
-            android:layout_height="100dp"
+            android:layout_height="140dp"
             android:layout_marginTop="16dp"
             app:cardCornerRadius="4dp"
             app:cardUseCompatPadding="true"
@@ -105,8 +105,8 @@
                 android:padding="10dp">
 
                 <ImageView
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="5dp"
                     android:src="@drawable/imgregistro" />
@@ -142,8 +142,8 @@
                 android:padding="24dp">
 
                 <ImageView
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="20dp"
                     android:src="@drawable/imgtareas" />
@@ -165,7 +165,7 @@
             android:id="@+id/cvItem"
             android:layout_width="0dp"
             android:layout_height="160dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             app:cardCornerRadius="4dp"
             app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
@@ -180,8 +180,8 @@
                 android:padding="24dp">
 
                 <ImageView
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="20dp"
                     android:src="@drawable/imgarticulos" />
@@ -203,7 +203,7 @@
             android:id="@+id/cvCustomer"
             android:layout_width="0dp"
             android:layout_height="160dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             app:cardCornerRadius="4dp"
             app:cardUseCompatPadding="true"
             app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -215,11 +215,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:orientation="vertical"
-                android:padding="24dp">
+                android:padding="16dp">
 
                 <ImageView
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="20dp"
                     android:src="@drawable/imgclientes" />
@@ -256,8 +256,8 @@
                 android:padding="24dp">
 
                 <ImageView
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="20dp"
                     android:src="@drawable/imgfacturas" />
@@ -292,8 +292,8 @@
                 android:padding="24dp">
 
                 <ImageView
-                    android:layout_width="46dp"
-                    android:layout_height="46dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginBottom="20dp"
                     android:src="@drawable/imgcerrarsesion" />

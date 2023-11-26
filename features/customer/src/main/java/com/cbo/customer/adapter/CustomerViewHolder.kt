@@ -1,4 +1,4 @@
-package com.moronlu18.customer.adapter
+package com.cbo.customer.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -6,14 +6,14 @@ import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.customercreation.databinding.ItemClienteBinding
 
 
-class ClientesViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+class CustomerViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemClienteBinding.bind(view)
 
     fun render(
         clientesModel: Customer,
-        onClickListener: (Customer) -> Unit,
-        onClickDelete: (Int) -> Unit
+        onClickListener: ((Customer) -> Unit)? = null,
+        onClickDelete: ((Int) -> Unit)? = null
     ){
 
         binding.customerListTvName.text = clientesModel.name
@@ -22,8 +22,7 @@ class ClientesViewHolder(private val view: View) : RecyclerView.ViewHolder(view)
         binding.customerListTvPhone.text = clientesModel.phone
         binding.customerListIvCliente.setImageResource(clientesModel.photo)
 
-        itemView.setOnClickListener{onClickListener(clientesModel)}
-        binding.customerListImgbtnDelete.setOnClickListener{onClickDelete(adapterPosition)}
-
+        itemView.setOnClickListener{onClickListener?.invoke(clientesModel)}
+        binding.customerListImgbtnDelete.setOnClickListener{onClickDelete?.invoke(adapterPosition)}
     }
 }

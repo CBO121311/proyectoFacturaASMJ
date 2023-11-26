@@ -1,6 +1,7 @@
 plugins {
     id("com.android.dynamic-feature")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-parcelize") //plugin parcelable
 }
 android {
     namespace = "com.moronlu18.inovice"

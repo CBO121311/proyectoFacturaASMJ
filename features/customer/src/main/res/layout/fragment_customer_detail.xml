@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.moronlu18.customer.ui.CustomerDetail">
+    tools:context="com.cbo.customer.ui.CustomerDetail">
 
 
     <androidx.cardview.widget.CardView
@@ -58,7 +58,7 @@
                 android:id="@+id/customer_detail_llEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/cd_color_fondo_2"
+                android:background="#528A72E3"
                 android:orientation="vertical"
                 android:padding="@dimen/cd_LinearLayout_padding"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -231,7 +231,7 @@
         android:layout_marginBottom="24dp"
         android:clickable="true"
         android:focusable="true"
-        app:backgroundTint="#BA99F1"
+        app:backgroundTint="#AF9DF1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/customer_detailglRight"
         app:srcCompat="@drawable/ic_action_correct" />

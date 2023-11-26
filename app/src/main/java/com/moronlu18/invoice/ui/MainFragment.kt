@@ -65,7 +65,7 @@ class MainFragment : Fragment() {
 
     private fun showConfirmationDialog() {
 
-        val show = AlertDialog.Builder(requireContext())
+        AlertDialog.Builder(requireContext())
             .setTitle("Confimación")
             .setMessage("¿Estás seguro de que quieres cerrar la aplicación?")
             .setPositiveButton("Sí") { _, _ ->

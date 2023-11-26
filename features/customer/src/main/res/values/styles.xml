@@ -39,4 +39,16 @@
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">@font/helvetica</item>
     </style>
+
+    <style name="cvCustomerCreationCorner_style" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/cvCustomerCreationCorner</item>
+    </style>
+
+    <style name="cvCustomerCreationCorner">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">48dp</item>
+        <item name="cornerSizeTopLeft">48dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
 </resources>
