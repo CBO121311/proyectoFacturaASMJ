@@ -6,42 +6,57 @@
     android:layout_height="match_parent">
 
 
-    <Spinner
-        android:id="@+id/invoice_creation_spinnerCliente"
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/invoice_creation_tilCliente"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
+        app:endIconContentDescription="@string/tieCliente_description"
+        app:endIconDrawable="@drawable/ic_action_user"
+        app:endIconMode="custom"
+        app:helperText="@string/tvObligatorio"
         android:hint="@string/tieCliente"
-        android:fontFamily="@font/helvetica"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/invoice_creation_tieCliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/helvetica"
+            android:inputType="text"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/invoice_creation_tilFechaEm"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:hint="@string/tieFechaEm"
-        android:imeOptions="actionNext"
         app:endIconDrawable="@drawable/ic_action_fecha"
         app:endIconMode="custom"
+        android:hint="@string/tieFechaEm"
         app:helperText="@string/tvFecha"
         app:layout_constraintEnd_toEndOf="parent"
+        android:imeOptions="actionNext"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/invoice_creation_spinnerCliente">
+        app:layout_constraintTop_toBottomOf="@+id/invoice_creation_tilCliente">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/invoice_creation_tieFechaEm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/helvetica"
-            android:inputType="text" />
+            android:inputType="text"
+            />
     </com.google.android.material.textfield.TextInputLayout>
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/invoice_creation_tilFechaFin"
         android:layout_width="0dp"

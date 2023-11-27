@@ -22,6 +22,8 @@ class FragmentProgressDialog : DialogFragment() {
         builder.setView(view)
         builder.setTitle("Esperando...")
 
+        builder.setCancelable(false)
+
         // Devuelve el cuadro de diálogo creado
         return builder.create()
     }

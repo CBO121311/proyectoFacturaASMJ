@@ -2,10 +2,13 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs.kotlin")
+    // Add the Google services Gradle plugin
+    //id("com.google.gms.google-services")
 
 }
 
 android {
+    //el namespace el id del proyecto
     namespace = "com.moronlu18.invoice"
     compileSdk = 34
 
@@ -73,4 +76,7 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation ("com.mikhaellopez:circularimageview:4.3.1")
+
+    // Declare the dependency for the Firebase Authentication library
+    //implementation ("com.google.firebase:firebase-auth-ktx")
 }
