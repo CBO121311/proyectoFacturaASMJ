@@ -12,16 +12,24 @@
         tools:layout="@layout/fragment_task_list" >
         <action
             android:id="@+id/action_taskList_to_taskDetail"
-            app:destination="@id/taskDetail" />
+            app:destination="@id/taskDetail"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_taskList_to_taskCreation"
-            app:destination="@id/taskCreation" />
+            app:destination="@id/taskCreation"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/taskDetail"
         android:name="com.sergiogv98.taskdetail.TaskDetail"
         android:label="fragment_task_detail"
-        tools:layout="@layout/fragment_task_detail" />
+        tools:layout="@layout/fragment_task_detail" >
+        <argument
+            android:name="task"
+            app:argType="com.moronlu18.accounts.entity.Task" />
+    </fragment>
     <fragment
         android:id="@+id/taskCreation"
         android:name="com.sergiogv98.taskcreation.TaskCreation"

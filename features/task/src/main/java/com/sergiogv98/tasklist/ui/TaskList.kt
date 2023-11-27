@@ -19,7 +19,7 @@ class TaskList : Fragment() {
 
     private var _binding:FragmentTaskListBinding? = null
     private val binding get() = _binding!!
-    private var taskMutableList: MutableList<Task> = TaskProvider.taskList.toMutableList()
+    private var taskMutableList: MutableList<Task> = TaskProvider.taskDataSet
     private lateinit var adapter: TaskAdapter
     private var isDeleting = false
 
@@ -52,22 +52,17 @@ class TaskList : Fragment() {
             onClickDeleted = { position -> onDeletedItem(position)}
         )
 
-        val recyclerView = binding.taskListRecyclerTasks
-        val emptyImg = binding.taskListImgEmpty
-
-        if (TaskProvider.taskList.isEmpty()){
-            emptyImg.visibility = View.VISIBLE
-            recyclerView.visibility = View.GONE
-        } else {
-            emptyImg.visibility = View.GONE
-            recyclerView.visibility = View.VISIBLE
-        }
+        updateEmptyView()
 
         binding.taskListRecyclerTasks.layoutManager = LinearLayoutManager(requireContext())
         binding.taskListRecyclerTasks.adapter = adapter
     }
+
+    /**
+     * Envía un objeto (Task) al layout taskDetail utilizando SafeArgs
+     */
     fun onItemSelected(task: Task) {
-        findNavController().navigate(R.id.action_taskList_to_taskDetail)
+        findNavController().navigate(TaskListDirections.actionTaskListToTaskDetail(task))
     }
     private fun onDeletedItem(position: Int) {
 
@@ -80,6 +75,16 @@ class TaskList : Fragment() {
         binding.taskListRecyclerTasks.postDelayed({
             isDeleting = false
         }, 300)
+
+        updateEmptyView()
+    }
+
+    private fun updateEmptyView(){
+        if(taskMutableList.isEmpty()){
+            binding.taskListImgEmpty.visibility = View.VISIBLE
+        } else {
+            binding.taskListImgEmpty.visibility = View.GONE
+        }
     }
 
     override fun onDestroyView() {

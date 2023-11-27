@@ -68,7 +68,9 @@
             app:destination="@id/nav_graph_customer" />
         <action
             android:id="@+id/action_mainFragment_to_nav_graph_task"
-            app:destination="@id/nav_graph_task" />
+            app:destination="@id/nav_graph_task"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_mainFragment_to_nav_graph_invoice"
             app:destination="@id/nav_graph_invoice" />

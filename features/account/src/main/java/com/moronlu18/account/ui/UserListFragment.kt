@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.moronlu18.account.adapter.UserAdapter
-import com.moronlu18.accounts.entity.User
 import com.moronlu18.accounts.repository.UserRepository
 import com.moronlu18.accountsignin.databinding.FragmentUserListBinding
 

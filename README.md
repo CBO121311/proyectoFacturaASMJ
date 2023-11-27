@@ -66,6 +66,13 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  - Implementado añadir un cliente y varias excepciones en el CustomerCreation *(Nombre vacío, Email vacío, Formato email incorrecto).*
  - Implementado que al tener la lista vacía en customerList sale una imagen avisándote.
  - CustomerProvider es ahora un MutableList de vez de una lista.
+------------------------
+ ## V3.3.3 (26/11/2023)
+ *Escrito por SergioGV98*
+ - Implementado que al tener la lista vacía en taskList sale una imagen avisándote.
+ - TaskList es ahora un MutableList de vez de una lista.
+ - Implementado que al seleccionar un elemento de lista de tareas muestre su información en la capa detalles utilizando SafeArgs.
+ - *Código extra adjudicado a falta de otras implementaciones* (Este mensaje será borrado cuando se implemente el resto del código)
 
 # Icono
 

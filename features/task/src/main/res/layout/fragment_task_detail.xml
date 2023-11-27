@@ -135,7 +135,7 @@
         app:layout_constraintTop_toBottomOf="@+id/task_details_task_view" />
 
     <TextView
-        android:id="@+id/task_details_task_type_name"
+        android:id="@+id/task_details_task_type"
         style="@style/tv_task_details_general"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -147,6 +147,7 @@
         app:layout_constraintTop_toTopOf="@+id/task_details_task_type_view" />
 
     <TextView
+        android:id="@+id/task_details_task_type_name"
         style="@style/tv_taks_details_general"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -154,7 +155,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/task_details_task_type_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_details_task_type_name" />
+        app:layout_constraintTop_toBottomOf="@+id/task_details_task_type" />
 
     <View
         android:id="@+id/task_details_task_creation_view"

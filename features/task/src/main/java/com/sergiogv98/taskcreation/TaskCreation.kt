@@ -2,12 +2,23 @@ package com.sergiogv98.taskcreation
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.textfield.TextInputLayout
+import com.moronlu18.accounts.entity.Task
+import com.moronlu18.accounts.enum.TaskStatus
+import com.moronlu18.accounts.enum.TypeTask
+import com.moronlu18.accounts.repository.TaskProvider
 import com.moronlu18.tasklist.databinding.FragmentTaskCreationBinding
+import com.sergiogv98.usecase.TaskState
+import com.sergiogv98.usecase.TaskViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -18,9 +29,21 @@ class TaskCreation : Fragment() {
 
     private var _binding:FragmentTaskCreationBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: TaskViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+        _binding = FragmentTaskCreationBinding.inflate(inflater, container, false)
+        binding.viewmodeltaskcreation = this.viewModel
+        binding.lifecycleOwner = this
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,18 +60,15 @@ class TaskCreation : Fragment() {
             val fragmentManager = requireActivity().supportFragmentManager
             fragmentManager.popBackStack()
         }
+
+        viewModel.getState().observe(viewLifecycleOwner) {
+            when (it) {
+                TaskState.OnSuccess -> onSuccessCreate()
+                else -> {}
+            }
+        }
+
     }
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        _binding = FragmentTaskCreationBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -73,5 +93,24 @@ class TaskCreation : Fragment() {
 
     }
 
+    private fun onSuccessCreate(){
+        val nameClient = binding.taskCreationInfoTxvCustomer.text.toString()
+        val nameTask = binding.taskCreationTxvTaskName.text.toString()
+        val description = binding.taskCreationTxvDescription.text.toString()
+
+        val task = Task(
+            id = 1,
+            nomClient = nameClient,
+            nomTask = nameTask,
+            typeTask = TypeTask.TAREA_DE_APRENDIZAJE,
+            taskStatus = TaskStatus.PENDIENTE,
+            descTask = description
+        )
+
+        TaskProvider.taskDataSet.add(task)
+
+        findNavController().popBackStack()
+
+    }
 
 }

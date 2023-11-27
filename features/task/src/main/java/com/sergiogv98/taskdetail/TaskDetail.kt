@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
+import com.moronlu18.accounts.entity.Task
 import com.moronlu18.tasklist.databinding.FragmentTaskDetailBinding
 
 
@@ -12,6 +14,7 @@ class TaskDetail : Fragment() {
 
     private var _binding: FragmentTaskDetailBinding? = null
     private val binding get() = _binding!!
+    private val args: TaskDetailArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +26,14 @@ class TaskDetail : Fragment() {
     ): View? {
 
         _binding = FragmentTaskDetailBinding.inflate(inflater, container, false)
+        val tarea: Task = args.task
+
+        binding.taskDetailsClientNameTxt.text = tarea.nomClient
+        binding.taskDetailsTaskName.text = tarea.nomTask
+        //binding.taskDetailsStatusButton.text = tarea.taskStatus as String
+        //binding.taskDetailsTaskTypeName.text = tarea.typeTask as String
+        binding.taskDetailsDescription.text = tarea.descTask
+
         return binding.root
     }
 
