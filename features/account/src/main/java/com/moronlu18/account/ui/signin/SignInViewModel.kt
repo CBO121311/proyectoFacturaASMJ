@@ -47,17 +47,32 @@ class SignInViewModel : ViewModel() {
                 */
 
                 viewModelScope.launch {
+
+
+                    state.value = SignInState.Loading(true)
+
                     /*
                     Vamos a ejecutar el Login del repositorio -> que pregunta a la capa de la infrasestructura
                     val result = UserRepository.login(email.value!!,password.value!!) //esto lo hace el repositorio.
                     Esto me devuelve un Resource, es decir un data Class.
                     is cuando sea un data class
                     */
-                    when (val result = UserRepository.login(
+
+                    //Vamos a ejecutar el login del repositorio --> que pregunta a la capa de la infraestructura
+
+                    //Es obligatorio quitar el FragmentDialog antes de mostrar el error. Ya que el FragmentSignIn está pausado
+
+                    //Se ejecuta toda seguido.
+                    val result = UserRepository.login(
                         email.value!!,
                         password.value!!
-                    )) {
-                        //esto es una clase sellada (Resource)
+                    )
+
+                    state.value = SignInState.Loading(false)
+
+
+                    when (result) {
+                             //esto es una clase sellada (Resource)
                         is Resource.Success<*> -> {
                             //Aquí tenemos que hacer un Casting Seguro porque el tipo de dato es genérico T.
                             Log.i(TAG, "Información del dato ${result.data}")
@@ -66,6 +81,8 @@ class SignInViewModel : ViewModel() {
 
                         is Resource.Error -> {
                             Log.i(TAG, "Información del dato ${result.exception.message}")
+
+                            //De mientras está esto pausado.
                             state.value = SignInState.AuthencationError(result.exception.message!!)
                         }
                     }

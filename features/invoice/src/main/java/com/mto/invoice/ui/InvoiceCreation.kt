@@ -6,10 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.textfield.TextInputEditText
 import com.moronlu18.accounts.entity.Item
+import com.moronlu18.accounts.repository.CustomerProvider
 import com.moronlu18.accounts.repository.ItemProvider
 import com.moronlu18.invoicelist.R
 import com.moronlu18.invoicelist.databinding.FragmentInvoiceCreationBinding
@@ -56,6 +60,35 @@ class InvoiceCreation : Fragment() {
             fragmentManager.popBackStack()
         }
         initReciclerView()
+
+        val spinnerCliente: Spinner = binding.invoiceCreationSpinnerCliente
+        val customerList = CustomerProvider.dataSet
+
+        val adapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            customerList.map { "${it.id} - ${it.name}" }.toTypedArray()
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerCliente.adapter = adapter
+
+        spinnerCliente.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parentView: AdapterView<*>?, selectedItemView: View?, position: Int, id: Long) {
+                val selectedCustomer = customerList[position]
+                if (selectedCustomer != null) {
+                    Toast.makeText(
+                        requireContext(),
+                        "${selectedCustomer.name}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            override fun onNothingSelected(parentView: AdapterView<*>?) {
+            }
+        }
+
+
+
     }
 
 

@@ -87,6 +87,7 @@ class SignInFragment : Fragment() {
 
                 //is Es un data class.
                 is SignInState.AuthencationError -> showMessage(it.message)
+                is SignInState.Loading -> showProgressbar(it.value)
                 else -> onSuccess() //Todos los casos de uso tiene uno de éxito
             }
         })
@@ -101,6 +102,18 @@ class SignInFragment : Fragment() {
 
         binding.btnLayout.setOnClickListener {
             findNavController().navigate(R.id.action_accountSignIn_to_blankFragmentpRUEBA2)
+        }
+    }
+
+    /**
+     * Mostar un progressbar en el comienzo de una operación larga como es una consulta a la base de datos.
+     * Firebase o bien ocultar cuando la operación ha terminado.
+     */
+    private fun showProgressbar(value: Boolean) {
+        if (value)
+            findNavController().navigate(R.id.action_accountSignIn_to_fragmentProgressDialog)
+        else{
+            findNavController().popBackStack()
         }
     }
 
@@ -151,7 +164,12 @@ class SignInFragment : Fragment() {
      */
 
     private fun showMessage(message: String) {
-        Toast.makeText(requireContext(), "Mi primer MVVM $message", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(requireContext(), "Mi primer MVVM $message", Toast.LENGTH_SHORT).show()
+        val action =
+            SignInFragmentDirections.actionAccountSignInToBaseFragmentDialog("Error", message)
+        //Navegamos al dialog
+        findNavController().navigate(action)
+
     }
 
     /**
