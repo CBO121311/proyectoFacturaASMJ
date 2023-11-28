@@ -15,9 +15,9 @@
         android:background="@color/task_creation_background"
         android:orientation="vertical"
         android:id="@+id/task_creation_layout"
-        tools:context="com.sergiogv98.taskcreation.TaskCreation">
+        tools:context="com.sergiogv98.tasklist.ui.TaskCreation">
 
-        <com.google.android.material.textfield.TextInputLayout
+        <!--<com.google.android.material.textfield.TextInputLayout
             android:id="@+id/task_creation_customer_name_txv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,6 +41,31 @@
                 android:hint="@string/task_creation_txv_hint_nombre_cliente"
                 android:inputType="text"
                 android:textColor="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/task_creation_task_dropdown"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:hint="@string/select"
+            android:textColorHint="@color/white"
+            app:boxStrokeColor="@color/white"
+            app:errorEnabled="true"
+            app:hintTextColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/task_creation_task_til_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/task_creation_task_til_name"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <AutoCompleteTextView
+                android:id="@+id/auto_complete_txt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -55,16 +80,16 @@
             app:hintTextColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/task_creation_customer_name_txv"
+            app:layout_constraintTop_toBottomOf="@+id/task_creation_task_dropdown"
             app:startIconDrawable="@drawable/ic_description">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/task_creation_txv_task_name"
                 style="@style/tie_task_creation"
                 android:layout_width="match_parent"
-                android:inputType="text"
                 android:layout_height="wrap_content"
                 android:hint="@string/task_creation_txv_hint_nombre_tarea"
+                android:inputType="text"
                 android:text="@={viewmodeltaskcreation.taskName}"
                 android:textColor="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -217,12 +242,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/task_creation_button_add_margin_top"
             android:layout_marginBottom="@dimen/task_creation_button_add_margin_bottom"
-            android:text="@string/task_creation_button_add"
             android:onClick="@{()->viewmodeltaskcreation.validateTask()}"
+            android:text="@string/task_creation_button_add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/task_creation_status" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

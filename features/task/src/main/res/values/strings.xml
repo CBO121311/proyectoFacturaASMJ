@@ -17,4 +17,7 @@
     <string name="task_creation_txt_button_fecha_creacion">Fecha de Creación</string>
     <string name="task_creation_txt_button_fecha_finalizacion">Fecha de Finalización</string>
     <string name="task_list_empty_list">No tienes tareas...</string>
+
+    <string name="dropdown">Dropdown Menu</string>
+    <string name="select">Cliente seleccionado</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.sergiogv98.usecase
+package com.sergiogv98.tasklist.ui
 
 sealed class TaskState {
 

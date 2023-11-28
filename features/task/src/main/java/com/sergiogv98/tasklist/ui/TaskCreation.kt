@@ -1,16 +1,15 @@
-package com.sergiogv98.taskcreation
+package com.sergiogv98.tasklist.ui
 
+import android.R
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -18,21 +17,19 @@ import com.google.android.material.textfield.TextInputLayout
 import com.moronlu18.accounts.entity.Task
 import com.moronlu18.accounts.enum.TaskStatus
 import com.moronlu18.accounts.enum.TypeTask
+import com.moronlu18.accounts.repository.CustomerProvider
 import com.moronlu18.accounts.repository.TaskProvider
-import com.moronlu18.tasklist.R
 import com.moronlu18.tasklist.databinding.FragmentTaskCreationBinding
-import com.sergiogv98.usecase.TaskState
 import com.sergiogv98.usecase.TaskViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-private val calendar = Calendar.getInstance()
-
 class TaskCreation : Fragment() {
 
     private var _binding: FragmentTaskCreationBinding? = null
     private val binding get() = _binding!!
+    private val calendar = Calendar.getInstance()
     private val viewModel: TaskViewModel by viewModels()
 
     override fun onCreateView(
@@ -43,6 +40,13 @@ class TaskCreation : Fragment() {
         _binding = FragmentTaskCreationBinding.inflate(inflater, container, false)
         binding.viewmodeltaskcreation = this.viewModel
         binding.lifecycleOwner = this
+        binding.autoCompleteTxt.setAdapter(
+            ArrayAdapter(
+                requireContext(),
+                R.layout.simple_dropdown_item_1line,
+                CustomerProvider.getCustomerNames()
+            )
+        )
         binding.taskCreationTxvTaskName.addTextChangedListener(GeneralTextWatcher(binding.taskCreationTaskTilName))
 
         return binding.root
@@ -96,7 +100,8 @@ class TaskCreation : Fragment() {
     }
 
     private fun onSuccessCreate() {
-        val nameClient = binding.taskCreationInfoTxvCustomer.text.toString()
+        //val nameClient = binding.taskCreationInfoTxvCustomer.text.toString()
+        val nameClient = binding.taskCreationTaskDropdown.editText?.text.toString()
         val nameTask = binding.taskCreationTxvTaskName.text.toString()
         val description = binding.taskCreationTxvDescription.text.toString()
         val fechaCreation = binding.taskCreationButtonDateCreation.text.toString()
@@ -139,11 +144,11 @@ class TaskCreation : Fragment() {
     }
 
     private fun setTaskNameEmptyError(){
-        binding.taskCreationTaskTilName.error = getString(R.string.name_error)
+        binding.taskCreationTaskTilName.error = getString(com.moronlu18.tasklist.R.string.name_error)
         binding.taskCreationTaskTilName.requestFocus()
     }
 
-    inner class GeneralTextWatcher(private val til: TextInputLayout) : TextWatcher{
+    inner class GeneralTextWatcher(private val til: TextInputLayout) : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
         }
 

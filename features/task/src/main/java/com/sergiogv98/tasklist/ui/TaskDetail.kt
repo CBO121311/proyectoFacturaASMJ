@@ -1,4 +1,4 @@
-package com.sergiogv98.taskdetail
+package com.sergiogv98.tasklist.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.moronlu18.accounts.entity.Task
-import com.moronlu18.accounts.enum.TypeTask
 import com.moronlu18.tasklist.databinding.FragmentTaskDetailBinding
 
 
