@@ -42,7 +42,6 @@ class SignInViewModel : ViewModel() {
             //EmailFormat
             //PasswordFormat
 
-
             else -> {
                 /*Se crea una corrutina que suspende el hilo principal hasta que el
                 bloque with Context el repositorio termina de ejecutarse.
@@ -77,11 +76,14 @@ class SignInViewModel : ViewModel() {
                     when (result) {
                              //esto es una clase sellada (Resource)
                         is Resource.Success<*> -> {
-                            val account = result.data as Account
-                            Log.i(TAG, "Información del dato ${result.data}")
-
-
-                            state.value = SignInState.Success(account)
+                            val account = result.data as? Account
+                            if (account != null) {
+                                Log.i(TAG, "Información del dato $account")
+                                state.value = SignInState.Success(account)
+                            } else {
+                                Log.e(TAG, "Error al convertir el resultado a Account")
+                                state.value = SignInState.AuthencationError("Error en la autenticación")
+                            }
                             //ght123456@hotmail.es
                         }
 

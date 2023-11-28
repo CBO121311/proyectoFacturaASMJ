@@ -78,7 +78,7 @@ class CustomerProvider private constructor() {
         }
 
 
-       /* suspend fun deleteCustomer(customer: Customer): Boolean {
+        /*suspend fun deleteCustomer(customer: Customer): Boolean {
             val isReferenced = FacturaProvider.isCustomerReferenceFactura(customer.name) ||
                     TaskProvider.isCustomerReferenceTask(customer.name)
 
