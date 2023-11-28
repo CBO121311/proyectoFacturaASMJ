@@ -1,29 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/task_list_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/task_list_layout"
     tools:context="com.moronlu18.tasklist.com.sergiogv98.tasklist.ui.TaskList">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/task_list_recycler_tasks"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/task_list_add_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center|right"
-        android:layout_margin="@dimen/task_list_add_task_margin"
-        android:src="@android:drawable/ic_input_add" />
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@android:drawable/ic_input_add"
+        app:layout_constraintBottom_toBottomOf="@+id/task_list_recycler_tasks"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/task_list_img_empty"
+    <LinearLayout
+        android:id="@+id/task_list_ll_empty"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:src="@drawable/kiwipistola" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/task_list_ll_empty_img"
+            android:layout_width="@dimen/task_list_ll_img"
+            android:layout_height="@dimen/task_list_ll_img"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/dolphintuxedo" />
+
+        <TextView
+            android:id="@+id/task_list_text_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/task_list_empty_list"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/task_list_text_empty2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:text="Toca el botón '+' para añadir una tarea" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

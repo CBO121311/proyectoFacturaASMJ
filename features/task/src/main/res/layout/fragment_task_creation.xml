@@ -18,7 +18,7 @@
         tools:context="com.sergiogv98.taskcreation.TaskCreation">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/task_creation_name_txv"
+            android:id="@+id/task_creation_customer_name_txv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/task_creation_name_client_txv_margin_start"
@@ -44,7 +44,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/task_creation_txv_name"
+            android:id="@+id/task_creation_task_til_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/task_creation_name_task_txv_margin_start"
@@ -55,16 +55,17 @@
             app:hintTextColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/task_creation_name_txv"
+            app:layout_constraintTop_toBottomOf="@+id/task_creation_customer_name_txv"
             app:startIconDrawable="@drawable/ic_description">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/task_creation_txv_taskName"
+                android:id="@+id/task_creation_txv_task_name"
                 style="@style/tie_task_creation"
                 android:layout_width="match_parent"
                 android:inputType="text"
                 android:layout_height="wrap_content"
                 android:hint="@string/task_creation_txv_hint_nombre_tarea"
+                android:text="@={viewmodeltaskcreation.taskName}"
                 android:textColor="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -77,7 +78,7 @@
             android:src="@drawable/arc_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/task_creation_txv_name" />
+            app:layout_constraintTop_toBottomOf="@+id/task_creation_task_til_name" />
 
         <View
             android:id="@+id/task_creation_view"
@@ -187,6 +188,7 @@
                 android:id="@+id/task_creation_rdb_pendiente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:text="@string/task_creation_txt_button_pendiente" />
 
             <RadioButton

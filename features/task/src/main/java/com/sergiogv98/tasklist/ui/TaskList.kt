@@ -81,9 +81,9 @@ class TaskList : Fragment() {
 
     private fun updateEmptyView(){
         if(taskMutableList.isEmpty()){
-            binding.taskListImgEmpty.visibility = View.VISIBLE
+            binding.taskListLlEmpty.visibility = View.VISIBLE
         } else {
-            binding.taskListImgEmpty.visibility = View.GONE
+            binding.taskListLlEmpty.visibility = View.GONE
         }
     }
 
