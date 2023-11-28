@@ -54,7 +54,7 @@
     <dimen name="task_details_task_description_name_margin_top">8dp</dimen>
     <dimen name="task_details_description_margin_top">13dp</dimen>
     <dimen name="task_details_button_back_width">150dp</dimen>
-    <dimen name="task_details_scroll_view_width">413dp</dimen>
+    <dimen name="task_details_scroll_view_width">393dp</dimen>
     <dimen name="task_details_scroll_view_height">73dp</dimen>
     <dimen name="task_details_scroll_view_margin_bottom">5dp</dimen>
 </resources>

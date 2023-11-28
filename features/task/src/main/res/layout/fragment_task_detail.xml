@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/task_details_client_name_txt_margin_top"
         android:gravity="center"
-        android:text="@string/task_details_txt_client_name"
+        android:text=""
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task_details_client_txt"
@@ -105,7 +105,7 @@
         android:layout_height="@dimen/task_details_task_name_height"
         android:layout_marginEnd="@dimen/task_details_task_name_margin_end"
         android:gravity="center"
-        android:text="@string/task_details_txt_task_name"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="@+id/task_details_task_view"
         app:layout_constraintEnd_toStartOf="@+id/task_details_status_button"
         app:layout_constraintStart_toStartOf="parent"
@@ -117,7 +117,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:enabled="false"
-        android:text="@string/task_details_button_status"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="@+id/task_details_task_view"
         app:layout_constraintEnd_toEndOf="@+id/task_details_task_view"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -151,7 +151,7 @@
         style="@style/tv_taks_details_general"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/task_details_type_task_name"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="@+id/task_details_task_type_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -185,7 +185,7 @@
         style="@style/tv_taks_details_general"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/task_details_date_creation"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="@+id/task_details_task_creation_view"
         app:layout_constraintEnd_toEndOf="@+id/task_details_date_creation_name"
         app:layout_constraintStart_toStartOf="@+id/task_details_date_creation_name"
@@ -209,7 +209,7 @@
         style="@style/tv_taks_details_general"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/task_details_date_end"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="@+id/task_details_task_creation_view"
         app:layout_constraintEnd_toEndOf="@+id/task_details_date_end_name"
         app:layout_constraintStart_toStartOf="@+id/task_details_date_end_name"
@@ -252,7 +252,7 @@
             style="@style/tv_taks_details_general"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/task_details_description" />
+            android:text="" />
     </ScrollView>
 
     <Button

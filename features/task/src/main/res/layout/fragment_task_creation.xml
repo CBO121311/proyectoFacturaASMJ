@@ -173,7 +173,7 @@
             app:layout_constraintTop_toBottomOf="@+id/task_creation_til_description" />
 
         <RadioGroup
-            android:id="@+id/radioGroup"
+            android:id="@+id/task_creation_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/radio_group_margin_start"
@@ -184,28 +184,28 @@
             app:layout_constraintVertical_bias="0.20999998">
 
             <RadioButton
-                android:id="@+id/task_creation_rdb_notstarted"
+                android:id="@+id/task_creation_rdb_pendiente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/task_creation_txt_button_no_comenzada" />
+                android:text="@string/task_creation_txt_button_pendiente" />
 
             <RadioButton
-                android:id="@+id/task_creation_rdb_inprogress"
+                android:id="@+id/task_creation_rdb_modificada"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/task_creation_txt_button_en_proceso" />
+                android:text="@string/task_creation_txt_button_modificada" />
 
             <RadioButton
-                android:id="@+id/task_creation_rdb_completed"
+                android:id="@+id/task_creation_rdb_vencida"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/task_creation_txt_button_completada" />
+                android:text="@string/task_creation_txt_button_vencida" />
 
             <RadioButton
-                android:id="@+id/task_creation_rdb_abandoned"
+                android:id="@+id/task_creation_rdb_finalizada"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/task_creation_txt_button_abandonada" />
+                android:text="@string/task_creation_txt_button_finalizada" />
 
         </RadioGroup>
 
@@ -216,10 +216,11 @@
             android:layout_marginTop="@dimen/task_creation_button_add_margin_top"
             android:layout_marginBottom="@dimen/task_creation_button_add_margin_bottom"
             android:text="@string/task_creation_button_add"
+            android:onClick="@{()->viewmodeltaskcreation.validateTask()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+            app:layout_constraintTop_toBottomOf="@+id/task_creation_status" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

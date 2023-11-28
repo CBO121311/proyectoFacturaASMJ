@@ -13,4 +13,8 @@ class TaskViewModel : ViewModel() {
     fun getState(): LiveData<TaskState> {
         return state
     }
+
+    fun validateTask(){
+        state.value = TaskState.OnSuccess
+    }
 }

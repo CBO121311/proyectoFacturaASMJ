@@ -13,8 +13,8 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         binding.taskClientName.text = task.nomClient
         binding.taskName.text = task.nomTask
         binding.taskDescription.text = task.descTask
-        //binding.taskCreationDate.text = task.fechCreation
-        //binding.taskEndDate.text = task.fechFinalization
+        binding.taskCreationDate.text = task.fechCreation
+        binding.taskEndDate.text = task.fechFinalization
         binding.taskButtonDelete.setOnClickListener { onClickDeleted (adapterPosition) }
         itemView.setOnClickListener { onClickListener(task) }
     }
