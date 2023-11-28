@@ -101,12 +101,7 @@ class FacturaProvider {
                 "12/12/2033",
                 20.00
             )
-
         )
-
-        suspend fun isCustomerReferenceFactura(nomCli: String?): Boolean {
-            return facturaList.any() { it.cliente == nomCli }
-        }
     }
 }
 

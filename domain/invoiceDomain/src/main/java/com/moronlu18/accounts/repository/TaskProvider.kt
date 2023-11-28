@@ -55,9 +55,5 @@ class TaskProvider {
                 ),
             )
         }
-
-        suspend fun isCustomerReferenceTask(nomCli: String?): Boolean {
-            return taskDataSet.any() { it.nomClient == nomCli }
-        }
     }
 }
