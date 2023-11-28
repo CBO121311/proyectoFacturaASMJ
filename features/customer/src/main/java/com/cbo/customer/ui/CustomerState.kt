@@ -1,4 +1,4 @@
-package com.cbo.customer.usecase
+package com.cbo.customer.ui
 
 /*Esto es mi viewModel de SignIn que coge el genérico de Resource.
 La clase sellada engloba todos los errores*/
@@ -23,7 +23,7 @@ sealed class CustomerState {
     data object ReferencedCustomer: CustomerState()
 
    //Escribe solo el nombre
-    data object OnSuccess :CustomerState()
+    data object OnSuccess : CustomerState()
 
     //todos estos son clases
     //data class AuthencationError(var message: String) : CustomerState()
