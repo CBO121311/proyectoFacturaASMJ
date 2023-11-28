@@ -72,7 +72,7 @@ class InvoiceCreation : Fragment() {
         val manager = LinearLayoutManager(requireContext())
 
         binding.invoiceCreationRvDisponibles.layoutManager = manager
-        binding.invoiceCreationRvDisponibles.adapter = ItemCreationAdapter(ItemProvider.itemList) { item ->
+        binding.invoiceCreationRvDisponibles.adapter = ItemCreationAdapter(ItemProvider.dataSetItem) { item ->
             onItemSelected(
                 item
             )

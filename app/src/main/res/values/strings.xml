@@ -37,4 +37,7 @@
     <string name="app_btnList">Listado</string>
     <string name="app_btnTest">Prueba</string>
     <string name="title_baseui">baseui</string>
+
+    <string name="title_fragmentDialogExit">Confirmación</string>
+    <string name="Content_fragmentDialogExit">¿Estás seguro de que quieres cerrar la aplicación?</string>
 </resources>

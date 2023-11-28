@@ -38,6 +38,8 @@ class UserRepository private constructor() {
             dataSet.add(User("Cebolla", "Veeee", "cbb@hotmail.es"))
             dataSet.add(User("Rabano", "Ra", "rf@hotmail.es"))
         }
+
+
         /**
          * La función que se pregunta a Firebase /Room (Sqlite por el usuario)
          */

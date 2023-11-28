@@ -1,6 +1,6 @@
 package com.moronlu18.account.ui.signin
 
-import com.moronlu18.accounts.Account
+import com.moronlu18.accounts.entity.Account
 
 /*Esto es mi viewModel de SignIn que coge el genérico de Resource.
 La clase sellada engloba todos los errores*/

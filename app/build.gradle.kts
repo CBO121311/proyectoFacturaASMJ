@@ -3,7 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs.kotlin")
     // Add the Google services Gradle plugin
-    //id("com.google.gms.google-services")
+    id("com.google.gms.google-services")
 
 }
 
@@ -77,6 +77,6 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation ("com.mikhaellopez:circularimageview:4.3.1")
 
-    // Declare the dependency for the Firebase Authentication library
-    //implementation ("com.google.firebase:firebase-auth-ktx")
+
+    implementation (platform("com.google.firebase:firebase-bom:32.3.1"))
 }

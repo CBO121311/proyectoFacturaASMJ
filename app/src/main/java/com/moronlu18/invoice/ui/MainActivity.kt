@@ -1,4 +1,4 @@
-package com.moronlu18.invoice
+package com.moronlu18.invoice.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +9,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import androidx.core.content.ContextCompat
+import com.moronlu18.invoice.R
 import com.moronlu18.invoice.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         }*/
 
         //Cambia el color del toolbar.
-       binding.toolbar.setBackgroundColor(ContextCompat.getColor(this,R.color.seed));
+       binding.toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.seed));
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

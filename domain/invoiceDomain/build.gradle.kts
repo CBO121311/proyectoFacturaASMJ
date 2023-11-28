@@ -43,5 +43,5 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     // Declare the dependency for the Firebase Authentication library
-    //implementation ("com.google.firebase:firebase-auth-ktx")
+    implementation ("com.google.firebase:firebase-auth-ktx")
 }

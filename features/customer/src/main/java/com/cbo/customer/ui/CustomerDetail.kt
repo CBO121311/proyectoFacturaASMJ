@@ -3,6 +3,9 @@ package com.cbo.customer.ui
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -17,12 +20,14 @@ import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.accounts.repository.CustomerProvider
 import com.moronlu18.customercreation.R
 import com.moronlu18.customercreation.databinding.FragmentCustomerDetailBinding
+import com.moronlu18.invoice.base.BaseFragmentDialog
+import com.moronlu18.invoice.ui.MainFragmentDirections
 
 
 class CustomerDetail : Fragment() {
 
     private val args: CustomerDetailArgs by navArgs()
-    private var customerMutableList: MutableList<Customer> = CustomerProvider.dataSet
+    private var customerMutableList: MutableList<Customer> = CustomerProvider.CustomerdataSet
 
     private var _binding: FragmentCustomerDetailBinding? = null
     private val binding get() = _binding!!
@@ -85,7 +90,7 @@ class CustomerDetail : Fragment() {
         return when (item.itemId) {
 
             R.id.menu_cd_action_delete -> {
-                DeleteConfirmation()
+                deleteConfirmation()
                 true
             }
 
@@ -101,24 +106,48 @@ class CustomerDetail : Fragment() {
     /**
      * Confirmación para hacer el borrado.
      */
-    private fun DeleteConfirmation() {
-        AlertDialog.Builder(requireContext())
-            .setTitle("Confirmación")
-            .setMessage("¿Estás seguro de que quieres borrar el cliente?")
-            .setPositiveButton("Sí") { _, _ ->
+    private fun deleteConfirmation() {
 
-                val position = CustomerProvider.dataSet.indexOf(args.customer)
+
+        findNavController().navigate(
+            CustomerDetailDirections.actionCustomerDetailToBaseFragmentDialog2(
+                getString(com.moronlu18.invoice.R.string.title_fragmentDialogExit),
+                getString(com.moronlu18.invoice.R.string.Content_fragmentDialogExit)
+            )
+        )
+        //val prueba :Boolean = deleteCusto
+       // Log.i("TAG","${prueba}" )
+        parentFragmentManager.setFragmentResultListener(
+            BaseFragmentDialog.request,
+            viewLifecycleOwner
+        ) { _, result ->
+            val success = result.getBoolean(BaseFragmentDialog.result, false)
+            if (success) {
+                val position = CustomerProvider.CustomerdataSet.indexOf(args.customer)
 
                 if (position != -1) {
-                    CustomerProvider.dataSet.removeAt(position)
+                    CustomerProvider.CustomerdataSet.removeAt(position)
                     adapter.notifyItemRemoved(position)
-                    findNavController().popBackStack()
+
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        findNavController().popBackStack()
+                    }, 100)
                 }
             }
-            .setNegativeButton("No", null)
-            .show()
+        }
     }
 
+
+    /*
+   AlertDialog.Builder(requireContext())
+       .setTitle("Confirmación")
+       .setMessage("¿Estás seguro de que quieres borrar el cliente?")
+       .setPositiveButton("Sí") { _, _ ->
+
+
+       }
+       .setNegativeButton("No", null)
+       .show()*/
 
     override fun onDestroyView() {
         super.onDestroyView()

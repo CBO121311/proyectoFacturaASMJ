@@ -24,6 +24,9 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_customerList_to_baseFragmentDialog2"
+            app:destination="@id/baseFragmentDialog2" />
     </fragment>
     <fragment
         android:id="@+id/customerCreation"
@@ -38,7 +41,20 @@
         <argument
             android:name="customer"
             app:argType="com.moronlu18.accounts.entity.Customer" />
+        <action
+            android:id="@+id/action_customerDetail_to_baseFragmentDialog2"
+            app:destination="@id/baseFragmentDialog2" />
     </fragment>
+    <dialog
+        android:id="@+id/baseFragmentDialog2"
+        android:name="com.moronlu18.invoice.base.BaseFragmentDialog"
+        android:label="BaseFragmentDialog" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument android:name="message"
+            app:argType="string" />
+    </dialog>
 
 
 </navigation>

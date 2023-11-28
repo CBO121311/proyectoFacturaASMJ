@@ -15,7 +15,7 @@ class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         binding.invoicedItemItemTvName.text = itemModel.name
         binding.invoicedItemItemTvDescription.text = itemModel.description
-        binding.invoicedItemItemTvTypeContent.text = itemModel.type
+        binding.invoicedItemItemTvTypeContent.text = itemModel.type.name
         binding.invoicedItemItemTvRateContent.text = itemModel.rate.toString()
 
         itemView.setOnClickListener { onClickListener(itemModel) }

@@ -1,4 +1,10 @@
 package com.moronlu18.accounts.entity
 
-data class Factura(val id:Int,val cliente:String, val fechaE:String, val fechaF:String, val total:Double )
+data class Factura(
+    val id: Int,
+    val cliente: String,
+    val fechaE: String,
+    val fechaF: String,
+    val total: Double
+)
 

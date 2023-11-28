@@ -43,7 +43,7 @@
 
     <dialog
         android:id="@+id/baseFragmentDialog"
-        android:name="com.moronlu18.account.base.BaseFragmentDialog"
+        android:name="com.moronlu18.invoice.base.BaseFragmentDialog"
         android:label="BaseFragmentDialog" >
         <argument
             android:name="title"
@@ -54,7 +54,7 @@
     </dialog>
     <dialog
         android:id="@+id/fragmentProgressDialog"
-        android:name="com.moronlu18.account.base.FragmentProgressDialog"
+        android:name="com.moronlu18.invoice.base.FragmentProgressDialog"
         android:label="FragmentProgressDialog" />
 
 

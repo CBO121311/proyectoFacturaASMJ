@@ -53,7 +53,7 @@ class InvoiceDetail : Fragment() {
         val manager = LinearLayoutManager(requireContext())
 
         binding.invoiceDetailRvArticulos.layoutManager = manager
-        binding.invoiceDetailRvArticulos.adapter = ItemAdapter(ItemProvider.itemList) { item ->
+        binding.invoiceDetailRvArticulos.adapter = ItemAdapter(ItemProvider.dataSetItem) { item ->
             onItemSelected(
                 item
             )

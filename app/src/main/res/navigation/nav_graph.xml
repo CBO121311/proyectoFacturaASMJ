@@ -60,7 +60,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.moronlu18.invoice.MainFragment"
+        android:name="com.moronlu18.invoice.ui.MainFragment"
         android:label="@string/mainFragment"
         tools:layout="@layout/fragment_main">
         <action
@@ -80,7 +80,21 @@
         <action
             android:id="@+id/action_mainFragment_to_nav_graph_account"
             app:destination="@id/nav_graph_account" />
+        <action
+            android:id="@+id/action_mainFragment_to_baseFragmentDialog"
+            app:destination="@id/baseFragmentDialog" />
     </fragment>
+    <dialog
+        android:id="@+id/baseFragmentDialog"
+        android:name="com.moronlu18.invoice.base.BaseFragmentDialog"
+        android:label="BaseFragmentDialog" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="message"
+            app:argType="string" />
+    </dialog>
 
 
 </navigation>

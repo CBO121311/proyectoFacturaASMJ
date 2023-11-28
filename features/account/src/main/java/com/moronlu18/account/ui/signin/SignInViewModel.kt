@@ -6,8 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.moronlu18.accounts.entity.Account
 import com.moronlu18.accounts.network.Resource
 import com.moronlu18.accounts.repository.UserRepository
+import com.moronlu18.firebase.AuthFirebase
 import kotlinx.coroutines.launch
 
 const val TAG = "ViewModel"
@@ -48,7 +50,6 @@ class SignInViewModel : ViewModel() {
 
                 viewModelScope.launch {
 
-
                     state.value = SignInState.Loading(true)
 
                     /*
@@ -62,11 +63,13 @@ class SignInViewModel : ViewModel() {
 
                     //Es obligatorio quitar el FragmentDialog antes de mostrar el error. Ya que el FragmentSignIn está pausado
 
-                    //Se ejecuta toda seguido.
-                    val result = UserRepository.login(
+                    //Se ejecuta toda seguido, esto siempre da error.
+                    /* val result = UserRepository.login(
                         email.value!!,
                         password.value!!
-                    )
+                    )*/
+
+                    val result = AuthFirebase().login(email.value!!, password.value!!)
 
                     state.value = SignInState.Loading(false)
 
@@ -74,9 +77,12 @@ class SignInViewModel : ViewModel() {
                     when (result) {
                              //esto es una clase sellada (Resource)
                         is Resource.Success<*> -> {
-                            //Aquí tenemos que hacer un Casting Seguro porque el tipo de dato es genérico T.
+                            val account = result.data as Account
                             Log.i(TAG, "Información del dato ${result.data}")
 
+
+                            state.value = SignInState.Success(account)
+                            //ght123456@hotmail.es
                         }
 
                         is Resource.Error -> {

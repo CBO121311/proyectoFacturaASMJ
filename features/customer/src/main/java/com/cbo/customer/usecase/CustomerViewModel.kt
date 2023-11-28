@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.moronlu18.accounts.entity.Customer
+import com.moronlu18.accounts.repository.CustomerProvider
 import java.util.regex.Pattern
 
 const val TAG = "ViewModel"
@@ -23,6 +25,15 @@ class CustomerViewModel : ViewModel() {
      * Esta función se ejecuta directamente desde el fichero xml al user
      *  DataBinding android:onClick="@{()->viewmodel.validateCredentials()}"
      */
+
+    suspend fun deleteCusto(customer: Customer): Boolean {
+
+
+
+        return CustomerProvider.deleteCustomer(customer)
+    }
+
+
 
     fun validateCredentials() {
         Log.i(TAG, "El email es: ${email.value} y el nombre es ${nameCustomer.value}")

@@ -88,6 +88,7 @@ class SignInFragment : Fragment() {
                 //is Es un data class.
                 is SignInState.AuthencationError -> showMessage(it.message)
                 is SignInState.Loading -> showProgressbar(it.value)
+                is SignInState.Success -> "Login correcto del usuario";
                 else -> onSuccess() //Todos los casos de uso tiene uno de éxito
             }
         })

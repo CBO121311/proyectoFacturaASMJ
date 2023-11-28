@@ -1,14 +1,14 @@
-package com.moronlu18.account.base
+package com.moronlu18.invoice.base
 
 import android.R
 import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.setFragmentResult
 
 
 class BaseFragmentDialog() : DialogFragment() {
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val title = requireArguments().getString(title)
         val message = requireArguments().getString(message)
@@ -23,7 +23,10 @@ class BaseFragmentDialog() : DialogFragment() {
         ) { _, _ -> //Una de las claves para realizar la comunicación entre fragmentos (padre-hijo) es utilizar los métodos
             // supportFragmentManager de la actividad para realizar el intercambio de información.
             val bundle = Bundle()
+
             bundle.putBoolean(result, true)
+            setFragmentResult(request, bundle)
+
             requireActivity().supportFragmentManager.setFragmentResult(request, bundle)
         }
 
@@ -44,8 +47,8 @@ class BaseFragmentDialog() : DialogFragment() {
         fun newInstance(title: String, message: String): BaseFragmentDialog {
             val fragment = BaseFragmentDialog()
             val args = Bundle()
-            args.putString(BaseFragmentDialog.title, title)
-            args.putString(BaseFragmentDialog.message, message)
+            args.putString(Companion.title, title)
+            args.putString(Companion.message, message)
             fragment.arguments = args
             return fragment
         }

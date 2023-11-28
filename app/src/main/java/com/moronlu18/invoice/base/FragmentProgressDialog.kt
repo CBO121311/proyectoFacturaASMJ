@@ -1,11 +1,12 @@
-package com.moronlu18.account.base
+package com.moronlu18.invoice.base
 
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.fragment.app.DialogFragment
-import com.moronlu18.accountsignin.R
+import com.moronlu18.invoice.R
+
 
 //import com.moronlu18.loginapplication.R
 

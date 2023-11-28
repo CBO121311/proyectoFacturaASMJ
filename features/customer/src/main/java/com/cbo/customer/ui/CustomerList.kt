@@ -1,6 +1,6 @@
 package com.cbo.customer.ui
 
-import android.annotation.SuppressLint
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -17,12 +17,13 @@ import com.moronlu18.accounts.repository.CustomerProvider
 import com.moronlu18.customercreation.R
 
 import com.moronlu18.customercreation.databinding.FragmentCustomerListBinding
+import com.moronlu18.invoice.base.BaseFragmentDialog
 
 class CustomerList : Fragment() {
 
     private var _binding: FragmentCustomerListBinding? = null
     private val binding get() = _binding!!
-    private var customerMutableList: MutableList<Customer> = CustomerProvider.dataSet
+    private var customerMutableList: MutableList<Customer> = CustomerProvider.CustomerdataSet
     private lateinit var adapter: CustomerAdapter
     private var isDeleting = false
 
@@ -71,7 +72,6 @@ class CustomerList : Fragment() {
     private fun updateEmptyView() {
 
         if (customerMutableList.isEmpty()) {
-            //binding.customerListTvempty.visibility = View.VISIBLE
             binding.llListEmpty.visibility = View.VISIBLE
         } else {
             binding.llListEmpty.visibility = View.GONE
@@ -81,20 +81,26 @@ class CustomerList : Fragment() {
     /**
      * Acción al eliminar un elemento del recycle.
      */
-
     private fun onDeletedItem(position: Int) {
 
-        if (!isDeleting) {
-            isDeleting = true
-            customerMutableList.removeAt(position)
-            adapter.notifyItemRemoved(position)
+        findNavController().navigate(
+            CustomerListDirections.actionCustomerListToBaseFragmentDialog2(
+                getString(com.moronlu18.invoice.R.string.title_fragmentDialogExit),
+                getString(com.moronlu18.invoice.R.string.Content_fragmentDialogExit)
+            )
+        )
+
+        parentFragmentManager.setFragmentResultListener(
+            BaseFragmentDialog.request,
+            viewLifecycleOwner
+        ) { _, result ->
+            val success = result.getBoolean(BaseFragmentDialog.result, false)
+            if (success) {
+                customerMutableList.removeAt(position)
+                adapter.notifyItemRemoved(position)
+                updateEmptyView()
+            }
         }
-
-        binding.customerListRvClientes.postDelayed({
-            isDeleting = false
-        }, 300)
-
-        updateEmptyView()
     }
 
 
@@ -109,7 +115,6 @@ class CustomerList : Fragment() {
         )
     }
 
-
     /**
      * Creación del menu de customer_list
      */
@@ -123,7 +128,7 @@ class CustomerList : Fragment() {
      * Opciones al seleccionar el menú. Actualmente solo hace el orden de la lista.
      */
 
-    @SuppressLint("NotifyDataSetChanged")
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_cd_action_sortname -> {

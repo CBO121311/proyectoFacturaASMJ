@@ -24,4 +24,8 @@
     <string name="cd_tvExampleAddress">Calle Salamanca Nº27 (21110)</string>
     <string name="cd_tvCity">Ciudad:</string>
     <string name="cd_tvExampleCity">Málaga</string>
+
+
+    <string name="title_deleteCustomer">Confirmación</string>
+    <string name="Content_deleteCustomer">¿Estás seguro de que quieres borrar el cliente?</string>
 </resources>

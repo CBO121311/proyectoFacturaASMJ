@@ -1,7 +1,5 @@
 package com.cbo.customer.usecase
 
-import com.moronlu18.accounts.Account
-
 /*Esto es mi viewModel de SignIn que coge el genérico de Resource.
 La clase sellada engloba todos los errores*/
 

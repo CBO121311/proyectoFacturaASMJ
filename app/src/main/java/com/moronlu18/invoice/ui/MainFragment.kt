@@ -1,5 +1,5 @@
-package com.moronlu18.invoice
-
+package com.moronlu18.invoice.ui
+import com.moronlu18.invoice.R
 import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
 import android.annotation.SuppressLint
@@ -10,12 +10,14 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
+import com.moronlu18.invoice.base.BaseFragmentDialog
+
 import com.moronlu18.invoice.databinding.FragmentMainBinding
 
 
 class MainFragment : Fragment() {
-
     private var _binding: FragmentMainBinding? = null
 
     // This property is only valid between onCreateView and
@@ -47,10 +49,6 @@ class MainFragment : Fragment() {
             }
             false
         }
-        //Customer
-        binding.imvAlert.setOnClickListener {
-
-        }
 
         binding.cvCustomer.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_customer)
         binding.cvTask.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_task)
@@ -59,14 +57,33 @@ class MainFragment : Fragment() {
         binding.cvSigIn.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_account)
         //binding.cvSignUp.btnAnimationNav(R.id.action_mainFragment_to_featureAccountSignUp)
         binding.cvSignOut.setOnClickListener {
-            showConfirmationDialog()
+
+            findNavController().navigate(
+                MainFragmentDirections.actionMainFragmentToBaseFragmentDialog(
+                    getString(R.string.title_fragmentDialogExit),
+                    getString(R.string.Content_fragmentDialogExit)
+                )
+            )
+        }
+
+        parentFragmentManager.setFragmentResultListener(
+            BaseFragmentDialog.request,
+            viewLifecycleOwner
+        ) { _, result ->
+            val success = result.getBoolean(BaseFragmentDialog.result, false)
+            if (success) {
+                requireActivity().finish()
+            }
         }
     }
 
-    private fun showConfirmationDialog() {
+
+
+    //showConfirmationDialog()
+    private fun onfirmationDialog() {
 
         AlertDialog.Builder(requireContext())
-            .setTitle("Confimación")
+            .setTitle("Confirmación")
             .setMessage("¿Estás seguro de que quieres cerrar la aplicación?")
             .setPositiveButton("Sí") { _, _ ->
                 requireActivity().finish()
@@ -75,7 +92,6 @@ class MainFragment : Fragment() {
             .show()
     }
 
-
     @SuppressLint("ClickableViewAccessibility")
     fun View.btnAnimationNav(idDestination: Int) {
         setOnTouchListener { v, event ->
@@ -83,7 +99,10 @@ class MainFragment : Fragment() {
                 MotionEvent.ACTION_DOWN -> {
                     //v.animate().scaleX(0.90f).scaleY(0.90f).setDuration(30).start()
 
-                    val pushDown = AnimatorInflater.loadAnimator(requireContext(), R.animator.anim_btn_push) as AnimatorSet
+                    val pushDown = AnimatorInflater.loadAnimator(
+                        requireContext(),
+                        R.animator.anim_btn_push
+                    ) as AnimatorSet
                     pushDown.setTarget(v)
                     pushDown.start();
                 }
@@ -91,7 +110,10 @@ class MainFragment : Fragment() {
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     //v.animate().scaleX(1.0f).scaleY(1.0f).setDuration(80).start()
 
-                    val pushUp = AnimatorInflater.loadAnimator(requireContext(), R.animator.anim_btn_up) as AnimatorSet
+                    val pushUp = AnimatorInflater.loadAnimator(
+                        requireContext(),
+                        R.animator.anim_btn_up
+                    ) as AnimatorSet
                     pushUp.setTarget(v)
                     pushUp.start();
                 }

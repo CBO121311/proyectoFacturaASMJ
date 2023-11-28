@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.cbo.customer.adapter.CustomerAdapter
 import com.cbo.customer.usecase.CustomerState
 import com.cbo.customer.usecase.CustomerViewModel
 import com.google.android.material.textfield.TextInputLayout
@@ -92,7 +91,7 @@ class CustomerCreation : Fragment() {
 
 
         val customer = Customer(
-            id = CustomerProvider.dataSet.size,
+            id = CustomerProvider.CustomerdataSet.size,
             name = name,
             email = email,
             phone = phone.ifEmpty { "No disponible" },
@@ -100,7 +99,7 @@ class CustomerCreation : Fragment() {
             address = address.ifEmpty { "No disponible" },
             photo = R.drawable.kiwidiner_background
         )
-        CustomerProvider.dataSet.add(customer)
+        CustomerProvider.CustomerdataSet.add(customer)
         //adapter.notifyItemInserted(CustomerProvider.dataSet.size - 1)
 
         findNavController().popBackStack()

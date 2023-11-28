@@ -103,6 +103,10 @@ class FacturaProvider {
             )
 
         )
+
+        suspend fun isCustomerReferenceFactura(nomCli: String?): Boolean {
+            return facturaList.any() { it.cliente == nomCli }
+        }
     }
 }
 
