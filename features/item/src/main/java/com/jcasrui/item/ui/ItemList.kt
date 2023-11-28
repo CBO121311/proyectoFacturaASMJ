@@ -50,8 +50,12 @@ class ItemList : Fragment() {
             itemList = itemMutableList,
             onClickListener = { item -> onItemSelected(item) }
         )
-        binding.itemListRvItems.layoutManager = LinearLayoutManager(requireContext())
-        binding.itemListRvItems.adapter = adapter
+        binding.itemListRvItems.layoutManager = manager
+        binding.itemListRvItems.adapter = ItemAdapter(ItemProvider.dataSetItem) { item ->
+            onItemSelected(
+                item
+            )
+        }
     }
 
     private fun onItemSelected(item: Item) {

@@ -36,8 +36,8 @@ class ItemDetail : Fragment() {
         binding.itemDetailCbTaxable.text = "Impuestos:"
 
         binding.itemDetailIvImg.setImageResource(article.image)
-        binding.itemDetailTvName.text = article.name
-        binding.itemDetailTvDescription.text = article.description
+        binding.itemDetailTvContentName.text = article.name
+        binding.itemDetailTvContentDescription.text = article.description
         binding.itemDetailTvContentType.text = article.type.name
         binding.itemDetailTvContentRate.text = article.rate.toString()
         binding.itemDetailCbTaxable.text = article.taxable.toString()
