@@ -105,9 +105,13 @@ class InvoiceCreation : Fragment() {
             }
         })
 
-        binding.invoiceCreationBtnArticulo.setOnClickListener {
-            addItem()
-        }
+
+            binding.invoiceCreationBtnArticulo.setOnClickListener {
+                if(_ItemSelected!=null) {
+                    addItem()
+                }
+            }
+
         initReciclerView()
     }
     private fun parse(text:String):InvoiceStatus {
