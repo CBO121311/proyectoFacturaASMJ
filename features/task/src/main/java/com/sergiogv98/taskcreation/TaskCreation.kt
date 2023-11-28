@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -42,6 +43,8 @@ class TaskCreation : Fragment() {
         _binding = FragmentTaskCreationBinding.inflate(inflater, container, false)
         binding.viewmodeltaskcreation = this.viewModel
         binding.lifecycleOwner = this
+        binding.taskCreationTxvTaskName.addTextChangedListener(GeneralTextWatcher(binding.taskCreationTaskTilName))
+
         return binding.root
     }
 
@@ -62,8 +65,8 @@ class TaskCreation : Fragment() {
 
         viewModel.getState().observe(viewLifecycleOwner) {
             when (it) {
-                TaskState.OnSuccess -> onSuccessCreate()
-                else -> {}
+                TaskState.TitleIsMandatory -> setTaskNameEmptyError()
+                else -> onSuccessCreate()
             }
         }
 
@@ -133,5 +136,23 @@ class TaskCreation : Fragment() {
             binding.taskCreationRdbFinalizada.id -> TaskStatus.FINALIZADA
             else -> TaskStatus.FINALIZADA
         }
+    }
+
+    private fun setTaskNameEmptyError(){
+        binding.taskCreationTaskTilName.error = getString(R.string.name_error)
+        binding.taskCreationTaskTilName.requestFocus()
+    }
+
+    inner class GeneralTextWatcher(private val til: TextInputLayout) : TextWatcher{
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            til.error = null
+        }
+
     }
 }
