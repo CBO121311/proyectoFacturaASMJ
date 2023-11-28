@@ -26,12 +26,12 @@ class CustomerViewModel : ViewModel() {
      *  DataBinding android:onClick="@{()->viewmodel.validateCredentials()}"
      */
 
-    suspend fun deleteCusto(customer: Customer): Boolean {
+/*    suspend fun deleteCusto(customer: Customer): Boolean {
 
 
 
         return CustomerProvider.deleteCustomer(customer)
-    }
+    }*/
 
 
 

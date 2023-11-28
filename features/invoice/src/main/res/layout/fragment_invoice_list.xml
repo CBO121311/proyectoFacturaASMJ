@@ -5,11 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/invoice_list_rvFacturas"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/invoice_list_rvFacturas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/invoice_creation_layoutVacio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/invoice_creation_ivRoto"
+            android:layout_width="167dp"
+            android:layout_height="127dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/roto" />
+
+        <TextView
+            android:id="@+id/invoice_creation_tvEx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Vacío, como el corazon de tu ex..."
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/invoice_creation_tvAñadir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:text="Toca el botón '+' para añadir" />
+
+
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -21,21 +61,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />
-
-    <TextView
-        android:id="@+id/tvVacio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="28dp"
-        android:fontFamily="@font/helvetica"
-        android:text="@string/tvVacio"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/fab"
-        app:layout_constraintHorizontal_bias="0.246"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.506" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

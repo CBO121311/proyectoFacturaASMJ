@@ -8,19 +8,25 @@ import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.moronlu18.accounts.entity.Factura
 import com.moronlu18.accounts.entity.Item
+import com.moronlu18.accounts.entity.Task
+import com.moronlu18.accounts.repository.CustomerProvider
 import com.moronlu18.accounts.repository.ItemProvider
 import com.moronlu18.invoicelist.databinding.FragmentInvoiceDetailBinding
 import com.mto.invoice.adapter.ItemAdapter
-
+import java.time.Instant
 
 
 class InvoiceDetail : Fragment() {
 
-
+    private val args: InvoiceDetailArgs by navArgs()
     private var _binding: FragmentInvoiceDetailBinding? = null
     private val binding get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -33,6 +39,12 @@ class InvoiceDetail : Fragment() {
 
         _binding = FragmentInvoiceDetailBinding.inflate(inflater, container, false)
 
+        val invoice: Factura = args.invoice
+        binding.invoiceDetailTcCliText.text = CustomerProvider.getNom(invoice.customerId)
+        binding.invoiceDetailTcFechaEmText.text = invoice.issuedDate
+        binding.invoiceDetailTcFechaFText.text = invoice.dueDate
+        binding.invoiceDetailTvTotal.text = ItemProvider.getTotal(invoice.lineItems!!.toMutableList())
+        binding.invoiceDetailTvEstado.text = invoice.status.toString()
         return binding.root;
 
     }
@@ -42,9 +54,7 @@ class InvoiceDetail : Fragment() {
         initReciclerView()
 
         binding.invoiceDetailFabCheck.setOnClickListener {
-            val fragmentManager = requireActivity().supportFragmentManager
-
-            fragmentManager.popBackStack()
+            findNavController().popBackStack()
         }
 
     }
@@ -53,7 +63,7 @@ class InvoiceDetail : Fragment() {
         val manager = LinearLayoutManager(requireContext())
 
         binding.invoiceDetailRvArticulos.layoutManager = manager
-        binding.invoiceDetailRvArticulos.adapter = ItemAdapter(ItemProvider.dataSetItem) { item ->
+        binding.invoiceDetailRvArticulos.adapter = ItemAdapter(args.invoice.lineItems!!.toMutableList()) { item ->
             onItemSelected(
                 item
             )
@@ -76,6 +86,5 @@ class InvoiceDetail : Fragment() {
         inflater.inflate(com.moronlu18.invoicelist.R.menu.menu_invoice_detail, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
-
 
 }

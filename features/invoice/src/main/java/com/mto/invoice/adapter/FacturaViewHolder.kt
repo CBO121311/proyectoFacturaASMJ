@@ -3,6 +3,7 @@ package com.mto.invoice.adapter
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.moronlu18.accounts.entity.Factura
+import com.moronlu18.accounts.repository.CustomerProvider
 import com.moronlu18.invoicelist.databinding.ItemFacturaBinding
 
 class FacturaViewHolder(view: View): RecyclerView.ViewHolder(view){
@@ -15,9 +16,9 @@ class FacturaViewHolder(view: View): RecyclerView.ViewHolder(view){
         onClickDelete: (Int) -> Unit
     ) {
 
-        binding.itemFacturaIvtTotal.text ="Total: ${facturaModel.total}"
+        binding.itemFacturaIvtTotal.text ="Total: ${facturaModel.number}"
         binding.itemFacturaTvId.text = facturaModel.id.toString()
-        binding.itemFacturaTvCliente.text =facturaModel.cliente
+        binding.itemFacturaTvCliente.text =CustomerProvider.getNom(facturaModel.customerId)
 
         itemView.setOnClickListener { onClickListener(facturaModel) }
         binding.invoiceItemBtnDelete.setOnClickListener { onClickDelete(adapterPosition) }

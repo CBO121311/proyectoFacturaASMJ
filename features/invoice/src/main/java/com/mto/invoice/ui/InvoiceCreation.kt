@@ -1,38 +1,69 @@
 package com.mto.invoice.ui
 
+
 import android.app.DatePickerDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
+import com.moronlu18.accounts.entity.Factura
+import com.moronlu18.accounts.entity.InvoiceStatus
 import com.moronlu18.accounts.entity.Item
 import com.moronlu18.accounts.repository.CustomerProvider
+import com.moronlu18.accounts.repository.FacturaProvider
 import com.moronlu18.accounts.repository.ItemProvider
 import com.moronlu18.invoicelist.R
 import com.moronlu18.invoicelist.databinding.FragmentInvoiceCreationBinding
+import com.mto.invoice.adapter.AddItemCreationAdapter
 import com.mto.invoice.adapter.ItemCreationAdapter
-
-
+import com.mto.invoice.usecase.InvoiceCreationState
+import com.mto.invoice.usecase.InvoiceCreationViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
 
 class InvoiceCreation : Fragment() {
+    inner class Listener : TextWatcher {
+        private val contenedor: TextInputLayout
+        constructor(contenedor: TextInputLayout) {
+            this.contenedor = contenedor;
+        }
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            contenedor.isErrorEnabled = false
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+        }
+
+    }
 
     private var _binding: FragmentInvoiceCreationBinding? = null
     private val binding get() = _binding!!
+    private val viewmodel: InvoiceCreationViewModel by viewModels()
+
+    private var _ItemSelected: Item? = null;
+    private val ItemSelected get() = _ItemSelected!!
+
+    private var itemMutableList: MutableList<Item> = mutableListOf()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
     }
 
     override fun onCreateView(
@@ -42,7 +73,11 @@ class InvoiceCreation : Fragment() {
 
         // Inflate the layout for this fragment
         _binding = FragmentInvoiceCreationBinding.inflate(inflater, container, false)
-
+        binding.viewmodel = this.viewmodel
+        binding.lifecycleOwner = this
+        binding.invoiceCreationTieCliente.addTextChangedListener(Listener(binding.invoiceCreationTilCliente))
+        binding.invoiceCreationTieFechaEm.addTextChangedListener(Listener(binding.invoiceCreationTilFechaEm))
+        binding.invoiceCreationTieFechaFin.addTextChangedListener(Listener(binding.invoiceCreationTilFechaFin))
         return binding.root;
     }
 
@@ -54,14 +89,111 @@ class InvoiceCreation : Fragment() {
         binding.invoiceCreationTieFechaFin.setOnClickListener {
             showDatePicker(binding.invoiceCreationTieFechaFin)
         }
-        binding.invoiceCreationFabFactura.setOnClickListener {
-            val fragmentManager = requireActivity().supportFragmentManager
 
-            fragmentManager.popBackStack()
+        viewmodel.getState().observe(viewLifecycleOwner, Observer {
+            when (it) {
+                InvoiceCreationState.CustomerUnspecified -> setCustomerUnspecified()
+                InvoiceCreationState.AtLeastOneItem -> setAtLeastOneItem()
+                InvoiceCreationState.CustomerNoExists -> setCustomerNoExists()
+                InvoiceCreationState.StartDateEmptyError -> setStartDateEmpty()
+                InvoiceCreationState.EndDateEmptyError -> setEndDateEmpty()
+                InvoiceCreationState.IncorrectDateRange -> setIncorrectDateRange()
+                InvoiceCreationState.EndDateFormatError -> setEndDateFormatError()
+                InvoiceCreationState.EndDateFormatError -> setEndDateFormatError()
+                InvoiceCreationState.StartDateFormatError -> setStartDateFormatError()
+                InvoiceCreationState.OnSuccess -> onSuccessCreate()
+            }
+        })
+
+        binding.invoiceCreationBtnArticulo.setOnClickListener {
+            addItem()
         }
         initReciclerView()
     }
+    private fun parse(text:String):InvoiceStatus {
+        if (InvoiceStatus.Pagada.equals(text)) {
+            return InvoiceStatus.Pagada
+        } else if (InvoiceStatus.Vencida.equals(text)) {
+            return InvoiceStatus.Vencida
+        } else {
+            return InvoiceStatus.Pendiente
+        }
 
+    }
+    private fun parseStatus(pos:Int):String {
+        if (pos == 0) {
+            return "Pagada"
+        } else if (pos == 1) {
+            return "Pagada"
+        } else {
+            return "Vencida"
+        }
+    }
+    private fun onSuccessCreate() {
+        val customId = CustomerProvider.getId(binding.invoiceCreationTieCliente.text.toString())
+        val numb = ItemProvider.getTotal(itemMutableList)
+        val stat = parseStatus(binding.invoiceCreationSpEstado.selectedItemPosition )
+        val issued = binding.invoiceCreationTieFechaEm.text.toString()
+        val due = binding.invoiceCreationTieFechaFin.text.toString()
+        val items = itemMutableList.toList()
+
+
+        val invoice = Factura(
+            id = FacturaProvider.dataSet.size + 1,
+            customerId = customId,
+            number = 0,
+            status = parse(stat),
+            issuedDate = issued,
+            dueDate = due,
+            lineItems = items
+
+        )
+        FacturaProvider.dataSet.add(invoice)
+        findNavController().popBackStack()
+    }
+
+    private fun addItem() {
+        if(itemMutableList.size != 0) {
+            binding.invoiceCreationRvErrorAnadidos.text = ""
+        }
+        val manager2 = LinearLayoutManager(requireContext())
+        binding.invoiceCreationRvAnadidos.layoutManager = manager2
+        binding.invoiceCreationRvAnadidos.adapter = AddItemCreationAdapter(itemMutableList, 1)
+        binding.viewmodel?.adapter?.value = AddItemCreationAdapter(itemMutableList,1)
+        if(ItemSelected == null) {
+
+        } else {
+            //PINCHAR EL MISMO ITEM, CAMBIAR LA CANTIDAD DE UNIDADES EN EL ITEM VISIBLE, FALTA PICAR
+            /*if(itemMutableList.contains(ItemSelected)) {
+                var iterador = 0
+                var acumulador = 1
+                var primeraAparicion:Int = -1
+                for (item in itemMutableList) {
+                    if(item == ItemSelected) {
+                        if(primeraAparicion == -1) {
+                            primeraAparicion = iterador
+                        }
+                        acumulador++
+                    }else{
+                        iterador++
+                    }
+                }
+                itemMutableList.removeAt(primeraAparicion)
+                binding.invoiceCreationRvAnadidos.adapter = AddItemCreationAdapter(itemMutableList, acumulador)
+                itemMutableList.add(index = primeraAparicion,ItemSelected)
+                binding.invoiceCreationRvAnadidos.adapter!!.notifyDataSetChanged()
+            } else {
+                itemMutableList.add(ItemSelected)
+                binding.invoiceCreationRvAnadidos.adapter = AddItemCreationAdapter(itemMutableList, 1)
+                binding.invoiceCreationRvAnadidos.adapter!!.notifyDataSetChanged()
+            }*/
+            itemMutableList.add(ItemSelected)
+            binding.invoiceCreationRvAnadidos.adapter!!.notifyDataSetChanged()
+            binding.invoiceCreationRvErrorAnadidos.text = ""
+            binding.invoiceCreationTvTotalText.text = ItemProvider.getTotal(itemMutableList).toString()
+        }
+
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -78,9 +210,9 @@ class InvoiceCreation : Fragment() {
             )
         }
     }
-    fun onItemSelected(item: Item) {
-            Toast.makeText(requireContext(), item.name, Toast.LENGTH_SHORT).show()
 
+    fun onItemSelected(item: Item) {
+        _ItemSelected = item
 
     }
 
@@ -103,5 +235,44 @@ class InvoiceCreation : Fragment() {
 
     }
 
+    private fun setCustomerUnspecified() {
+        binding.invoiceCreationTilCliente.error = getString(R.string.errUserEmpty)
+        binding.invoiceCreationTieCliente.requestFocus()
+
+    }
+    private fun setAtLeastOneItem() {
+        binding.invoiceCreationRvErrorAnadidos.text = getString(R.string.errAtLeastOneItem)
+    }
+    private fun setCustomerNoExists() {
+        binding.invoiceCreationTilCliente.error = getString(R.string.errUserNoExists)
+        binding.invoiceCreationTieCliente.requestFocus()
+    }
+
+    private fun setStartDateEmpty() {
+        binding.invoiceCreationTilFechaEm.error = getString(R.string.errStartDateEmpty)
+        binding.invoiceCreationTieFechaEm.requestFocus()
+
+
+    }
+    private fun setEndDateEmpty() {
+        binding.invoiceCreationTilFechaFin.error = getString(R.string.errEndDateEmpty)
+        binding.invoiceCreationTieFechaFin.requestFocus()
+    }
+
+    private fun setIncorrectDateRange() {
+        binding.invoiceCreationTilFechaFin.error = getString(R.string.errIncorrectDateRange)
+        binding.invoiceCreationTieFechaFin.requestFocus()
+    }
+    private fun setStartDateFormatError() {
+        binding.invoiceCreationTilFechaEm.error = getString(R.string.errDateFormat)
+        binding.invoiceCreationTieFechaEm.requestFocus()
+    }
+
+    private fun setEndDateFormatError() {
+        binding.invoiceCreationTilFechaFin.error =  getString(R.string.errDateFormat)
+        binding.invoiceCreationTieFechaFin.requestFocus()
+    }
+
 
 }
+

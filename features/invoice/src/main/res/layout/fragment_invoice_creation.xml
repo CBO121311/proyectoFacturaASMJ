@@ -1,206 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/invoice_creation_clLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.mto.invoice.usecase.InvoiceCreationViewModel"/>
+    </data>
 
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/invoice_creation_clLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/invoice_creation_tilCliente"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        app:endIconContentDescription="@string/tieCliente_description"
-        app:endIconDrawable="@drawable/ic_action_user"
-        app:endIconMode="custom"
-        app:helperText="@string/tvObligatorio"
-        android:hint="@string/tieCliente"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/invoice_creation_tieCliente"
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/invoice_creation_tilCliente"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/helvetica"
-            android:inputType="text"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            app:endIconContentDescription="@string/tieCliente_description"
+            app:endIconDrawable="@drawable/ic_action_user"
+            app:endIconMode="custom"
+            app:helperText="@string/tvObligatorio"
+            android:hint="@string/ie_tieCliente"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/invoice_creation_tilFechaEm"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        app:endIconDrawable="@drawable/ic_action_fecha"
-        app:endIconMode="custom"
-        android:hint="@string/tieFechaEm"
-        app:helperText="@string/tvFecha"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:imeOptions="actionNext"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/invoice_creation_tilCliente">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/invoice_creation_tieFechaEm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/helvetica"
-            android:inputType="text"
-            />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/invoice_creation_tilFechaFin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        app:endIconDrawable="@drawable/ic_action_fecha"
-        app:endIconMode="custom"
-        app:helperText="@string/tvFecha"
-        android:hint="@string/tieFechaFin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/invoice_creation_tilFechaEm">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/invoice_creation_tieFechaFin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/helvetica"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/invoice_creation_fabFactura"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:clickable="true"
-        android:src="@android:drawable/ic_menu_add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.955"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/invoice_creation_btnArticulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:fontFamily="@font/helvetica"
-        android:text="@string/btnAñadir"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/invoice_creation_tilFechaFin" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/invoice_creation_cdArti"
-        android:layout_width="@dimen/invoice_creation_dimenComun"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/invoice_creation_fabFactura"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/invoice_creation_btnArticulo">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/invoice_creationHeightComun"
-            android:orientation="horizontal">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/invoice_creation_rvDisponibles"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/invoice_creation_tieCliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/helvetica"
-                android:layout_weight="5">
+                android:text="@={viewmodel.user}"
+                android:inputType="text"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
-            </androidx.recyclerview.widget.RecyclerView>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/invoice_creation_tilFechaEm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            app:endIconDrawable="@drawable/ic_action_fecha"
+            app:endIconMode="custom"
+            android:hint="@string/ie_tieFechaEm"
+            app:helperText="@string/tvFecha"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:imeOptions="actionNext"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/invoice_creation_tilCliente">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/invoice_creation_rvAñadidos"
-                android:layout_width="0dp"
-                android:layout_weight="5"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/helvetica" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/invoice_creation_tieFechaEm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/helvetica"
+                android:inputType="date"
+                android:maxLength="10"
+                android:text="@={viewmodel.startDate}"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/invoice_creation_tvTotal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:fontFamily="@font/helvetica"
-        android:text="@string/tvTotal"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/invoice_creation_cdArti"
-        app:layout_constraintVertical_bias="0.508" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/invoice_creation_tilFechaFin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            app:endIconDrawable="@drawable/ic_action_fecha"
+            app:endIconMode="custom"
+            app:helperText="@string/tvFecha"
+            android:hint="@string/ie_tieFechaFin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/invoice_creation_tilFechaEm">
 
-    <TextView
-        android:id="@+id/invoice_creation_tvArtDisponibles"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tvDisponibles"
-        android:textStyle="bold"
-        android:fontFamily="@font/helvetica"
-        app:layout_constraintBottom_toTopOf="@+id/invoice_creation_cdArti"
-        app:layout_constraintEnd_toStartOf="@+id/invoice_creation_btnArticulo"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/invoice_creation_tilFechaFin"
-        app:layout_constraintVertical_bias="0.753" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/invoice_creation_tieFechaFin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/helvetica"
+                android:inputType="date"
+                android:maxLength="10"
+                android:text="@={viewmodel.endDate}"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/invoice_creation_tvAñadidos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/helvetica"
-        android:text="@string/tvAñadidos"
-        android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/invoice_creation_tvArtDisponibles"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.573"
-        app:layout_constraintStart_toEndOf="@+id/invoice_creation_btnArticulo" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/invoice_creation_fabFactura"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:onClick="@{()->viewmodel.validateAll()}"
+            android:src="@android:drawable/ic_menu_add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.955"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/invoice_creation_tvTotalText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="144dp"
-        android:fontFamily="@font/helvetica"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/invoice_creation_fabFactura"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/invoice_creation_tvTotal"
-        app:layout_constraintTop_toBottomOf="@+id/invoice_creation_cdArti"
-        app:layout_constraintVertical_bias="0.509" />
+        <Button
+            android:id="@+id/invoice_creation_btnArticulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/helvetica"
+            android:text="@string/btnAñadir"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/invoice_creation_tilFechaFin" />
 
-    <Spinner
-        android:id="@+id/invoice_creation_spEstado"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:entries="@array/invoice_creation_spStrings"
-        app:layout_constraintBottom_toTopOf="@+id/invoice_creation_btnArticulo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/invoice_creation_tilFechaFin" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/invoice_creation_cdArti"
+            android:layout_width="@dimen/invoice_creation_dimenComun"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/invoice_creation_fabFactura"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/invoice_creation_btnArticulo">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/invoice_creationHeightComun"
+                android:orientation="horizontal">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/invoice_creation_rvDisponibles"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:fontFamily="@font/helvetica">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/invoice_creation_rvAnadidos"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:fontFamily="@font/helvetica"
+                    android:adapter="@{viewmodel.adapter}"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/invoice_creation_tvTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:fontFamily="@font/helvetica"
+            android:text="@string/tvTotal"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/invoice_creation_cdArti"
+            app:layout_constraintVertical_bias="0.508" />
+
+        <TextView
+            android:id="@+id/invoice_creation_tvArtDisponibles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tvDisponibles"
+            android:textStyle="bold"
+            android:fontFamily="@font/helvetica"
+            app:layout_constraintBottom_toTopOf="@+id/invoice_creation_cdArti"
+            app:layout_constraintEnd_toStartOf="@+id/invoice_creation_btnArticulo"
+            app:layout_constraintHorizontal_bias="0.508"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/invoice_creation_tilFechaFin"
+            app:layout_constraintVertical_bias="0.753" />
+
+        <TextView
+            android:id="@+id/invoice_creation_tvAñadidos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/helvetica"
+            android:text="@string/tvAñadidos"
+            android:textStyle="bold"
+            app:layout_constraintBaseline_toBaselineOf="@+id/invoice_creation_tvArtDisponibles"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.573"
+            app:layout_constraintStart_toEndOf="@+id/invoice_creation_btnArticulo" />
+
+        <TextView
+            android:id="@+id/invoice_creation_tvTotalText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/helvetica"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/invoice_creation_tvTotal"
+            app:layout_constraintTop_toBottomOf="@+id/invoice_creation_cdArti"
+            app:layout_constraintVertical_bias="0.515" />
+
+        <Spinner
+            android:id="@+id/invoice_creation_spEstado"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:entries="@array/invoice_creation_spStrings"
+            app:layout_constraintBottom_toTopOf="@+id/invoice_creation_btnArticulo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/invoice_creation_tilFechaFin" />
+
+        <TextView
+            android:id="@+id/invoice_creation_rvErrorAnadidos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="80dp"
+            android:layout_marginBottom="5dp"
+            android:textColor="#F44336"
+            app:layout_constraintBottom_toTopOf="@+id/invoice_creation_cdArti"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

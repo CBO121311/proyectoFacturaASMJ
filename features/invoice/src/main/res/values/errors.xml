@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="errUserEmpty">Debe escribir un cliente</string>
+    <string name="errAtLeastOneItem">Debe añadir un artículo</string>
+    <string name="errUserNoExists">El cliente debe existir</string>
+    <string name="errStartDateEmpty">Debe añadir fecha de emisión</string>
+    <string name="errEndDateEmpty">Debe añadir fecha de finalización</string>
+    <string name="errIncorrectDateRange">Fecha de finalización anterior a fecha de emisión</string>
+    <string name="errDateFormat">Debe seguir el formato de fecha</string>
+
+</resources>

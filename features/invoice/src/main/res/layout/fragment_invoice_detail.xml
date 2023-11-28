@@ -80,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
-                android:text="@string/tvPendiente"
+                android:text=""
                 android:textColor="#F44336"
                 app:layout_constraintBaseline_toBaselineOf="@+id/invoice_detail_tvCliente"
                 app:layout_constraintEnd_toEndOf="parent" />

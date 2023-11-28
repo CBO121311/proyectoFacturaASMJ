@@ -1,6 +1,7 @@
 plugins {
     id("com.android.dynamic-feature")
     id("org.jetbrains.kotlin.android")
+    id("androidx.navigation.safeargs.kotlin")
 }
 android {
     namespace = "com.moronlu18.invoicelist"
@@ -29,6 +30,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 }
 

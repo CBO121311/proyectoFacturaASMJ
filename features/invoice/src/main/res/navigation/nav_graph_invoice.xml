@@ -27,5 +27,10 @@
         android:id="@+id/invoiceDetail"
         android:name="com.mto.invoice.ui.InvoiceDetail"
         android:label="InvoiceDetail"
-        tools:layout="@layout/fragment_invoice_detail"/>
+        tools:layout="@layout/fragment_invoice_detail">
+
+        <argument
+            android:name="invoice"
+            app:argType="com.moronlu18.accounts.entity.Factura" />
+    </fragment>
 </navigation>

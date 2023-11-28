@@ -63,6 +63,14 @@ class CustomerProvider private constructor() {
                     photo = R.drawable.cbotuxedo
                 )
             )
+            CustomerdataSet.add(
+                Customer(
+                    5,
+                    "a",
+                    "al@example.com",
+                    photo = R.drawable.cbotuxedo
+                )
+            )
         }
 
         /* fun getCustomerId(id: Int): Customer {
@@ -78,7 +86,7 @@ class CustomerProvider private constructor() {
         }
 
 
-        suspend fun deleteCustomer(customer: Customer): Boolean {
+       /* suspend fun deleteCustomer(customer: Customer): Boolean {
             val isReferenced = FacturaProvider.isCustomerReferenceFactura(customer.name) ||
                     TaskProvider.isCustomerReferenceTask(customer.name)
 
@@ -86,6 +94,33 @@ class CustomerProvider private constructor() {
                 return true
             }
             return false
+        }*/
+        fun contains(nombre:String?): Boolean {
+            for (item in CustomerdataSet) {
+                if(item.name == nombre) {
+                    return true
+                }
+            }
+            return false
         }
+        fun getNom(id:Int):String {
+            lateinit var nombre:String
+            for(item in CustomerdataSet) {
+                if (item.id == id) {
+                    nombre = item.name
+                }
+            }
+            return nombre
+        }
+        fun getId(nom:String):Int {
+            var id:Int = 0
+            for(item in CustomerdataSet) {
+                if (item.name == nom) {
+                    id = item.id
+                }
+            }
+            return id
+        }
+
     }
 }
