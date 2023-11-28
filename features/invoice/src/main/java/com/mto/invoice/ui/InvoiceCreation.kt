@@ -111,28 +111,19 @@ class InvoiceCreation : Fragment() {
         initReciclerView()
     }
     private fun parse(text:String):InvoiceStatus {
-        if (InvoiceStatus.Pagada.equals(text)) {
+        if ("Pagada".equals(text)) {
             return InvoiceStatus.Pagada
-        } else if (InvoiceStatus.Vencida.equals(text)) {
+        } else if ("Vencida".equals(text)) {
             return InvoiceStatus.Vencida
         } else {
             return InvoiceStatus.Pendiente
         }
 
     }
-    private fun parseStatus(pos:Int):String {
-        if (pos == 0) {
-            return "Pagada"
-        } else if (pos == 1) {
-            return "Pagada"
-        } else {
-            return "Vencida"
-        }
-    }
     private fun onSuccessCreate() {
         val customId = CustomerProvider.getId(binding.invoiceCreationTieCliente.text.toString())
-        val numb = ItemProvider.getTotal(itemMutableList)
-        val stat = parseStatus(binding.invoiceCreationSpEstado.selectedItemPosition )
+        val numb = ItemProvider.getTotal(itemMutableList).replace(',','.')
+        val stat = binding.invoiceCreationSpEstado.selectedItem.toString()
         val issued = binding.invoiceCreationTieFechaEm.text.toString()
         val due = binding.invoiceCreationTieFechaFin.text.toString()
         val items = itemMutableList.toList()
@@ -141,7 +132,7 @@ class InvoiceCreation : Fragment() {
         val invoice = Factura(
             id = FacturaProvider.dataSet.size + 1,
             customerId = customId,
-            number = 0,
+            number = numb.subSequence(0,numb.length -1).toString().toDouble(),
             status = parse(stat),
             issuedDate = issued,
             dueDate = due,

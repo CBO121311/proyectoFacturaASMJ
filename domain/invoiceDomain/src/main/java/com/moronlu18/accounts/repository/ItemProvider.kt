@@ -161,13 +161,11 @@ class ItemProvider {
 
         }
         fun getTotal(lista: MutableList<Item>) : String {
-
             var suma:Double = 0.0
             for (item in lista) {
                 suma+= item.rate
             }
             return String.format("%.2f€",suma)
-
         }
     }
 }
