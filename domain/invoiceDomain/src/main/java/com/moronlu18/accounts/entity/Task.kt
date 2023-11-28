@@ -14,6 +14,6 @@ data class Task(
     val typeTask: TypeTask,
     val taskStatus: TaskStatus,
     val descTask: String,
-    //val fechCreation: Instant,
-    //val fechFinalization: Instant
+    val fechCreation: String,
+    val fechFinalization: String
 ) : Parcelable

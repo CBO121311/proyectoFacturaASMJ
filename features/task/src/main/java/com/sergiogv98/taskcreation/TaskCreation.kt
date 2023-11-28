@@ -4,10 +4,12 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -16,6 +18,7 @@ import com.moronlu18.accounts.entity.Task
 import com.moronlu18.accounts.enum.TaskStatus
 import com.moronlu18.accounts.enum.TypeTask
 import com.moronlu18.accounts.repository.TaskProvider
+import com.moronlu18.tasklist.R
 import com.moronlu18.tasklist.databinding.FragmentTaskCreationBinding
 import com.sergiogv98.usecase.TaskState
 import com.sergiogv98.usecase.TaskViewModel
@@ -27,13 +30,9 @@ private val calendar = Calendar.getInstance()
 
 class TaskCreation : Fragment() {
 
-    private var _binding:FragmentTaskCreationBinding? = null
+    private var _binding: FragmentTaskCreationBinding? = null
     private val binding get() = _binding!!
     private val viewModel: TaskViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -93,24 +92,46 @@ class TaskCreation : Fragment() {
 
     }
 
-    private fun onSuccessCreate(){
+    private fun onSuccessCreate() {
         val nameClient = binding.taskCreationInfoTxvCustomer.text.toString()
         val nameTask = binding.taskCreationTxvTaskName.text.toString()
         val description = binding.taskCreationTxvDescription.text.toString()
+        val fechaCreation = binding.taskCreationButtonDateCreation.text.toString()
+        val fechaEnd = binding.taskCreationButtonDateEnd.text.toString()
 
         val task = Task(
-            id = 1,
+            id = (TaskProvider.taskDataSet.size + 1).coerceAtLeast(1),
             nomClient = nameClient,
             nomTask = nameTask,
-            typeTask = TypeTask.TAREA_DE_APRENDIZAJE,
-            taskStatus = TaskStatus.PENDIENTE,
-            descTask = description
+            typeTask = taskTypeChoose(),
+            taskStatus = taskStatusChoose(),
+            descTask = description,
+            fechCreation = fechaCreation,
+            fechFinalization = fechaEnd
         )
-
         TaskProvider.taskDataSet.add(task)
 
         findNavController().popBackStack()
-
     }
 
+    private fun taskTypeChoose(): TypeTask {
+        return when (binding.taskCreationTypeTaskList.selectedItemId) {
+            0L -> TypeTask.PRIVADA
+            1L -> TypeTask.LLAMAR
+            2L -> TypeTask.VISITA
+            else -> {
+                TypeTask.PRIVADA
+            }
+        }
+    }
+
+    private fun taskStatusChoose(): TaskStatus {
+        return when (binding.taskCreationStatus.checkedRadioButtonId) {
+            binding.taskCreationRdbPendiente.id -> TaskStatus.PENDIENTE
+            binding.taskCreationRdbModificada.id -> TaskStatus.MODIFICADA
+            binding.taskCreationRdbVencida.id -> TaskStatus.VENCIDA
+            binding.taskCreationRdbFinalizada.id -> TaskStatus.FINALIZADA
+            else -> TaskStatus.FINALIZADA
+        }
+    }
 }
