@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.moronlu18.accounts.entity.Task
+import com.moronlu18.accounts.enum.TypeTask
 import com.moronlu18.tasklist.databinding.FragmentTaskDetailBinding
 
 
@@ -30,8 +31,10 @@ class TaskDetail : Fragment() {
 
         binding.taskDetailsClientNameTxt.text = tarea.nomClient
         binding.taskDetailsTaskName.text = tarea.nomTask
-        //binding.taskDetailsStatusButton.text = tarea.taskStatus as String
-        //binding.taskDetailsTaskTypeName.text = tarea.typeTask as String
+        binding.taskDetailsStatusButton.text = tarea.taskStatus.toString().replaceRange(1, tarea.taskStatus.toString().length, tarea.taskStatus.toString().substring(1).lowercase())
+        binding.taskDetailsTaskTypeName.text = tarea.typeTask.toString().replaceRange(1, tarea.typeTask.toString().length, tarea.typeTask.toString().substring(1).lowercase())
+        binding.taskDetailsDateCreation.text = tarea.fechCreation
+        binding.taskDetailsDateEnd.text = tarea.fechFinalization
         binding.taskDetailsDescription.text = tarea.descTask
 
         return binding.root

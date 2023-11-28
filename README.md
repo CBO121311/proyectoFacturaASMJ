@@ -67,12 +67,19 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  - Implementado que al tener la lista vacía en customerList sale una imagen avisándote.
  - CustomerProvider es ahora un MutableList de vez de una lista.
 ------------------------
- ## V3.3.3 (26/11/2023)
+ ## V3.3.3 (27/11/2023)
  *Escrito por SergioGV98*
  - Implementado que al tener la lista vacía en taskList sale una imagen avisándote.
  - TaskList es ahora un MutableList de vez de una lista.
  - Implementado que al seleccionar un elemento de lista de tareas muestre su información en la capa detalles utilizando SafeArgs.
  - *Código extra adjudicado a falta de otras implementaciones* (Este mensaje será borrado cuando se implemente el resto del código)
+------------------------
+ ## V3.3.4 (28/11/2023)
+ *Escrito por SergioGV98*
+ - Implementada la funcionalidad para que al añadir una tarea, esta se refleje automáticamente en la lista de tareas.
+ - Se han incorporado funciones para obtener el estado y el tipo de una tarea de manera eficiente.
+ - Ahora la información de la tarea correspondiente se visualiza de forma consistente en todas las interfaces.
+ - Se ha eliminado código innecesario, mejorando la legibilidad y eficiencia del programa.
 
 # Icono
 

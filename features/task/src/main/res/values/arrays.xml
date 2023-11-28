@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="typetask">
-        <item>Tarea doméstica</item>
-        <item>Tarea de organización</item>
-        <item>Tareas de bricolaje y reparaciones</item>
-        <item>Tareas de cuidado personal</item>
-        <item>Tareas creativas</item>
-        <item>Tareas profesionales o académicas</item>
-        <item>Tareas de entretenimiento</item>
-        <item>Tareas de aprendizaje</item>
+        <item>Privada</item>
+        <item>Llamar</item>
+        <item>Visita</item>
     </array>
 </resources>

@@ -16,48 +16,7 @@ class TaskProvider {
         }
 
         private fun initDataSetTask() {
-            taskDataSet.add(
-                Task(
-                    1,
-                    "Alice",
-                    "Hacer la presentación",
-                    TypeTask.TAREA_DE_APRENDIZAJE,
-                    TaskStatus.PENDIENTE,
-                    "Preparar la presentación para la reunión de ventas",
-                    //Instant.parse("2023-11-15"),
-                    //Instant.parse("2023-11-15").,
-                ),
-            )
 
-            taskDataSet.add(
-                Task(
-                    2,
-                    "Bob",
-                    "Completar informe",
-                    TypeTask.TAREA_DE_APRENDIZAJE,
-                    TaskStatus.PENDIENTE,
-                    "Finalizar el informe mensual de ventas y enviarlo al cliente",
-                    //Instant.parse("2023-11-15"),
-                    //Instant.parse("2023-11-15"),
-                ),
-            )
-
-            taskDataSet.add(
-                Task(
-                    3,
-                    "Charlie",
-                    "Entrenamiento en línea",
-                    TypeTask.TAREA_DE_BRICOLAJE_Y_REPARACIONES,
-                    TaskStatus.VENCIDA,
-                    "Participar en el curso de desarrollo web en línea",
-                    //Instant.parse("2023-11-15"),
-                    //Instant.parse("2023-11-15"),
-                ),
-            )
-        }
-
-        suspend fun isCustomerReferenceTask(nomCli: String?): Boolean {
-            return taskDataSet.any() { it.nomClient == nomCli }
         }
     }
 }

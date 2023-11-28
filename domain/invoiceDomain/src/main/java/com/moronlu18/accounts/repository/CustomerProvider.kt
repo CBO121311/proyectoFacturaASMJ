@@ -63,14 +63,6 @@ class CustomerProvider private constructor() {
                     photo = R.drawable.cbotuxedo
                 )
             )
-            CustomerdataSet.add(
-                Customer(
-                    5,
-                    "a",
-                    "al@example.com",
-                    photo = R.drawable.cbotuxedo
-                )
-            )
         }
 
         /* fun getCustomerId(id: Int): Customer {
@@ -95,14 +87,14 @@ class CustomerProvider private constructor() {
             }
             return false
         }*/
-        fun contains(nombre:String?): Boolean {
-            for (item in CustomerdataSet) {
-                if(item.name == nombre) {
-                    return true
-                }
-            }
-            return false
-        }
+       fun contains(nombre:String?): Boolean {
+           for (item in CustomerdataSet) {
+               if(item.name == nombre) {
+                   return true
+               }
+           }
+           return false
+       }
         fun getNom(id:Int):String {
             lateinit var nombre:String
             for(item in CustomerdataSet) {
