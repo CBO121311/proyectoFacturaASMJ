@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.moronlu18.invoice.base.BaseFragmentDialog
 import com.moronlu18.tasklist.R
 import com.sergiogv98.tasklist.adapter.TaskAdapter
 import com.moronlu18.tasklist.databinding.FragmentTaskListBinding
@@ -21,7 +22,6 @@ class TaskList : Fragment() {
     private val binding get() = _binding!!
     private var taskMutableList: MutableList<Task> = TaskProvider.taskDataSet
     private lateinit var adapter: TaskAdapter
-    private var isDeleting = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -66,17 +66,24 @@ class TaskList : Fragment() {
     }
     private fun onDeletedItem(position: Int) {
 
-        if (!isDeleting) {
-            isDeleting = true
-            taskMutableList.removeAt(position)
-            adapter.notifyItemRemoved(position)
+        findNavController().navigate(
+            TaskListDirections.actionTaskListToBaseFragmentDialog2(
+                getString(com.moronlu18.invoice.R.string.title_fragmentDialogExit),
+                getString(com.moronlu18.invoice.R.string.Content_fragmentDialogExit)
+            )
+        )
+
+        parentFragmentManager.setFragmentResultListener(
+            BaseFragmentDialog.request,
+            viewLifecycleOwner
+        ) { _, result ->
+            val success = result.getBoolean(BaseFragmentDialog.result, false)
+            if (success) {
+                taskMutableList.removeAt(position)
+                adapter.notifyItemRemoved(position)
+                updateEmptyView()
+            }
         }
-
-        binding.taskListRecyclerTasks.postDelayed({
-            isDeleting = false
-        }, 300)
-
-        updateEmptyView()
     }
 
     private fun updateEmptyView(){
