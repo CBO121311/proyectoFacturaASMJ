@@ -6,8 +6,8 @@
 
     <fragment
         android:id="@+id/itemList"
-        android:name="com.jcasrui.itemcreation.ui.ItemList"
-        android:label="ItemList" >
+        android:name="com.jcasrui.item.ui.ItemList"
+        android:label="@string/title_itemlist">
         <action
             android:id="@+id/action_itemList_to_itemCreation"
             app:destination="@id/itemCreation" />
@@ -15,12 +15,18 @@
             android:id="@+id/action_itemList_to_itemDetail"
             app:destination="@id/itemDetail" />
     </fragment>
+
     <fragment
         android:id="@+id/itemCreation"
-        android:name="com.jcasrui.itemcreation.ui.ItemCreation"
-        android:label="ItemCreation" />
+        android:name="com.jcasrui.item.ui.ItemCreation"
+        android:label="@string/title_itemcreation" />
+
     <fragment
         android:id="@+id/itemDetail"
-        android:name="com.jcasrui.itemcreation.ui.ItemDetail"
-        android:label="ItemDetail" />
+        android:name="com.jcasrui.item.ui.ItemDetail"
+        android:label="@string/title_itemdetail" >
+        <argument
+            android:name="item"
+            app:argType="com.moronlu18.accounts.entity.Item" />
+    </fragment>
 </navigation>

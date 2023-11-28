@@ -1,4 +1,4 @@
-package com.jcasrui.itemcreation.ui
+package com.jcasrui.item.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,11 +7,14 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
+import com.moronlu18.accounts.entity.Item
 import com.moronlu18.itemcreation.R
 import com.moronlu18.itemcreation.databinding.FragmentItemDetailBinding
 
 class ItemDetail : Fragment() {
 
+    private val args: ItemDetailArgs by navArgs()
     private var _binding: FragmentItemDetailBinding? = null
     private val binding get() = _binding!!
 
@@ -26,6 +29,19 @@ class ItemDetail : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentItemDetailBinding.inflate(inflater, container, false)
+
+        val article: Item = args.item
+        binding.itemDetailTvType.text = "Tipo:"
+        binding.itemDetailTvRate.text = "Precio:"
+        binding.itemDetailCbTaxable.text = "Impuestos:"
+
+        binding.itemDetailIvImg.setImageResource(article.image)
+        binding.itemDetailTvName.text = article.name
+        binding.itemDetailTvDescription.text = article.description
+        binding.itemDetailTvContentType.text = article.type.name
+        binding.itemDetailTvContentRate.text = article.rate.toString()
+        binding.itemDetailCbTaxable.text = article.taxable.toString()
+
         return binding.root
     }
 

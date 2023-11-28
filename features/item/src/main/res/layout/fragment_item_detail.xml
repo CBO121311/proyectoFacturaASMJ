@@ -114,7 +114,7 @@
         app:layout_constraintTop_toBottomOf="@+id/itemDetail_tvRate" />
 
     <TextView
-        android:id="@+id/itemItem_tvSymbolEuro"
+        android:id="@+id/itemDetail_tvSymbolEuro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/item_marginSymbol"
@@ -125,6 +125,7 @@
         app:layout_constraintTop_toTopOf="@+id/item_detail_tvContentRate" />
 
     <CheckBox
+        android:id="@+id/itemDetail_CbTaxable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/item_paddingGeneral"

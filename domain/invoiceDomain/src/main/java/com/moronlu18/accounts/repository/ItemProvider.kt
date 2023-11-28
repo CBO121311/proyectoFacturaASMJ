@@ -1,119 +1,163 @@
 package com.moronlu18.accounts.repository
 
 import com.moronlu18.accounts.entity.Item
+import com.moronlu18.accounts.enum.ItemType
 import com.moronlu18.inovice.R
 
 
 class ItemProvider {
     companion object {
-        val itemList = listOf(
-            Item(
-                1,
-                R.drawable.pizza,
-                "Pizza",
-                "Producto sección precocinados",
-                "artículo",
-                1.02,
-                true
-            ),
-            Item(
-                2,
-                R.drawable.leche,
-                "Leche",
-                "Producto sección lacteos",
-                "artículo",
-                0.80,
-                true
-            ),
-            Item(
-                3,
-                R.drawable.manzana,
-                "Manzana",
-                "Producto sección fruta",
-                "artículo",
-                0.42,
-                true
-            ),
-            Item(
-                4,
-                R.drawable.panespelta,
-                "Pan de espelta",
-                "Producto sección panadería",
-                "artículo",
-                0.32,
-                false
-            ),
-            Item(
-                5,
-                R.drawable.zanahoria,
-                "Zanahoria",
-                "Producto sección verdura",
-                "artículo",
-                0.56,
-                true
-            ), Item(
-                6,
-                R.drawable.fresa,
-                "Fresa",
-                "Producto sección fruta",
-                "artículo",
-                0.42,
-                true
-            ),
-            Item(
-                7,
-                R.drawable.panmaiz,
-                "Pan de maíz",
-                "Producto sección panadería",
-                "artículo",
-                0.25,
-                false
-            ),
-            Item(
-                8,
-                R.drawable.brocoli,
-                "Brocoli",
-                "Producto sección verdura",
-                "artículo",
-                0.24,
-                true
-            ),
-            Item(
-                9,
-                R.drawable.cebolla,
-                "Cebolla",
-                "Producto sección verdura",
-                "artículo",
-                0.34,
-                true
-            ),
-            Item(
-                10,
-                R.drawable.berenjena,
-                "Berenjena",
-                "Producto sección verdura",
-                "artículo",
-                0.26,
-                true
-            ),
-            Item(
-                11,
-                R.drawable.platano,
-                "Platano",
-                "Producto sección fruta",
-                "artículo",
-                0.52,
-                true
-            ),
-            Item(
-                12,
-                R.drawable.servicio,
-                "Repartidor",
-                "Repartir productos a clientes",
-                "servicio",
-                3.8,
-                true
+
+        var dataSetItem: MutableList<Item> = mutableListOf()
+
+        init {
+            initDataSetItem()
+        }
+
+        private fun initDataSetItem() {
+            dataSetItem.add(
+                Item(
+                    1,
+                    R.drawable.pizza,
+                    "Pizza",
+                    "Producto sección precocinados",
+                    ItemType.ARTÍCULO,
+                    2.52,
+                    true
+                )
             )
-        )
+
+            dataSetItem.add(
+                Item(
+                    2,
+                    R.drawable.leche,
+                    "Leche",
+                    "Producto sección lacteos",
+                    ItemType.ARTÍCULO,
+                    1.20,
+                    true
+                )
+            )
+
+            dataSetItem.add(
+                Item(
+                    3,
+                    R.drawable.manzana,
+                    "Manzana",
+                    "Producto sección fruta",
+                    ItemType.ARTÍCULO,
+                    0.42,
+                    true
+                )
+            )
+
+            dataSetItem.add(
+                Item(
+                    4,
+                    R.drawable.panespelta,
+                    "Pan de espelta",
+                    "Producto sección panadería",
+                    ItemType.ARTÍCULO,
+                    0.92,
+                    false
+                )
+            )
+
+            dataSetItem.add(
+                Item(
+                    5,
+                    R.drawable.zanahoria,
+                    "Zanahoria",
+                    "Producto sección verdura",
+                    ItemType.ARTÍCULO,
+                    0.56,
+                    true
+                )
+            )
+
+            dataSetItem.add(
+                Item(
+                    6,
+                    R.drawable.fresa,
+                    "Fresa",
+                    "Producto sección fruta",
+                    ItemType.ARTÍCULO,
+                    0.42,
+                    true
+                )
+            )
+
+            dataSetItem.add(
+                Item(
+                    7,
+                    R.drawable.panmaiz,
+                    "Pan de maíz",
+                    "Producto sección panadería",
+                    ItemType.ARTÍCULO,
+                    0.85,
+                    false
+                )
+            )
+
+            dataSetItem.add(
+                Item(
+                    8,
+                    R.drawable.brocoli,
+                    "Brocoli",
+                    "Producto sección verdura",
+                    ItemType.ARTÍCULO,
+                    0.34,
+                    true
+                )
+            )
+
+            dataSetItem.add(
+                Item(
+                    9,
+                    R.drawable.cebolla,
+                    "Cebolla",
+                    "Producto sección verdura",
+                    ItemType.ARTÍCULO,
+                    0.39,
+                    true
+                )
+            )
+
+            dataSetItem.add(
+                Item(
+                    10,
+                    R.drawable.berenjena,
+                    "Berenjena",
+                    "Producto sección verdura",
+                    ItemType.ARTÍCULO,
+                    0.26,
+                    true
+                )
+            )
+
+            dataSetItem.add(
+                Item(
+                    11,
+                    R.drawable.platano,
+                    "Platano",
+                    "Producto sección fruta",
+                    ItemType.ARTÍCULO,
+                    0.52,
+                    true
+                )
+            )
+
+            dataSetItem.add(
+                Item(
+                    12,
+                    R.drawable.servicio,
+                    "Repartidor",
+                    "Repartir productos a clientes",
+                    ItemType.SERVICIO,
+                    3.8,
+                    false
+                )
+            )
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.jcasrui.itemcreation.adapter
+package com.jcasrui.item.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

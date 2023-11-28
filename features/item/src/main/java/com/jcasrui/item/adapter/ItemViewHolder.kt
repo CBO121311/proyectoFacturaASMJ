@@ -1,4 +1,4 @@
-package com.jcasrui.itemcreation.adapter
+package com.jcasrui.item.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +19,7 @@ class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         binding.itemItemIvImg.setImageResource(itemModel.image)
         binding.itemItemTvName.text = itemModel.name
         binding.itemItemTvDescription.text = itemModel.description
-        binding.itemItemTvTypeContent.text = itemModel.type
+        binding.itemItemTvTypeContent.text = itemModel.type.name
         binding.itemItemTvRateContent.text = itemModel.rate.toString()
         //binding.itemItemCbTaxable.text = "Impuestos: ${itemModel.taxable}"
 

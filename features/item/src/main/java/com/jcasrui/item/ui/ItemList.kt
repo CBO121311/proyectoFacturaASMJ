@@ -1,4 +1,4 @@
-package com.jcasrui.itemcreation.ui
+package com.jcasrui.item.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jcasrui.itemcreation.adapter.ItemAdapter
+import com.jcasrui.item.adapter.ItemAdapter
 import com.moronlu18.accounts.entity.Item
 import com.moronlu18.accounts.repository.ItemProvider
 import com.moronlu18.itemcreation.R
@@ -18,7 +18,7 @@ class ItemList : Fragment() {
     private var _binding: FragmentItemListBinding? = null
     private val binding get() = _binding!!
 
-    private var itemMutableList: MutableList<Item> = ItemProvider.itemList.toMutableList()
+    private var itemMutableList: MutableList<Item> = ItemProvider.dataSetItem
     private lateinit var adapter: ItemAdapter
 
     override fun onCreateView(
@@ -36,28 +36,27 @@ class ItemList : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initReciclerView()
+        initReciclerViewItem()
 
         //binding.itemListRvItems.setOnClickListener{
         //    findNavController().navigate(com.moronlu18.invoice.R.id.action_ItemListFragment_to_ItemCreationFragment)
         //}
     }
 
-    private fun initReciclerView() {
+    private fun initReciclerViewItem() {
         val manager = LinearLayoutManager(requireContext())
 
         adapter = ItemAdapter(
             itemList = itemMutableList,
-            onClickListener = { onItemSelected() }
+            onClickListener = { item -> onItemSelected(item) }
         )
-        binding.itemListRvItems.layoutManager = manager
-        binding.itemListRvItems.adapter = ItemAdapter(ItemProvider.itemList) {
-            onItemSelected()
-        }
+        binding.itemListRvItems.layoutManager = LinearLayoutManager(requireContext())
+        binding.itemListRvItems.adapter = adapter
     }
 
-    private fun onItemSelected() {
-        findNavController().navigate(R.id.action_itemList_to_itemDetail)
+    private fun onItemSelected(item: Item) {
+        //findNavController().navigate(R.id.action_itemList_to_itemDetail)
+        findNavController().navigate(ItemListDirections.actionItemListToItemDetail(item))
     }
 
     override fun onDestroyView() {
