@@ -41,7 +41,7 @@ class TaskDetail : Fragment() {
         _binding = FragmentTaskDetailBinding.inflate(inflater, container, false)
         val tarea: Task = args.task
 
-        binding.taskDetailsClientNameTxt.text = tarea.nomClient
+        binding.taskDetailsClientNameTxt.text = CustomerProvider.getCustomerNameById(tarea.clientID)
         binding.taskDetailsTaskName.text = tarea.nomTask
         binding.taskDetailsStatusButton.text = tarea.taskStatus.toString().replaceRange(1, tarea.taskStatus.toString().length, tarea.taskStatus.toString().substring(1).lowercase())
         binding.taskDetailsTaskTypeName.text = tarea.typeTask.toString().replaceRange(1, tarea.typeTask.toString().length, tarea.typeTask.toString().substring(1).lowercase())

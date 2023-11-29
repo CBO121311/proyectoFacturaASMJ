@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -44,7 +45,7 @@ class TaskCreation : Fragment() {
             ArrayAdapter(
                 requireContext(),
                 R.layout.simple_dropdown_item_1line,
-                CustomerProvider.getCustomerNames()
+                CustomerProvider.getCustomer().map { it.name }
             )
         )
 
@@ -103,7 +104,8 @@ class TaskCreation : Fragment() {
     }
 
     private fun onSuccessCreate() {
-        val nameClient = binding.taskCreationTaskDropdown.editText?.text.toString()
+        val selectedClientName = binding.autoCompleteTxt.text.toString()
+        val selectedClient = CustomerProvider.getCustomer().find { it.name == selectedClientName }
         val nameTask = binding.taskCreationTxvTaskName.text.toString()
         val description = binding.taskCreationTxvDescription.text.toString()
         val fechaCreation = binding.taskCreationButtonDateCreation.text.toString()
@@ -111,7 +113,7 @@ class TaskCreation : Fragment() {
 
         val task = Task(
             id = (TaskProvider.taskDataSet.size + 1).coerceAtLeast(1),
-            nomClient = nameClient,
+            clientID = selectedClient!!.id,
             nomTask = nameTask,
             typeTask = taskTypeChoose(),
             taskStatus = taskStatusChoose(),
@@ -120,6 +122,8 @@ class TaskCreation : Fragment() {
             fechFinalization = fechaEnd
         )
         TaskProvider.taskDataSet.add(task)
+
+        Toast.makeText(requireContext(), "Client ID: ${selectedClient!!.id}", Toast.LENGTH_LONG).show()
 
         findNavController().popBackStack()
     }

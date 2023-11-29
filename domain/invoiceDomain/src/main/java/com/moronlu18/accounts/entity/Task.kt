@@ -9,7 +9,7 @@ import java.time.Instant
 @Parcelize
 data class Task(
     val id: Int,
-    val nomClient: String,
+    val clientID: Int,
     val nomTask: String,
     val typeTask: TypeTask,
     val taskStatus: TaskStatus,

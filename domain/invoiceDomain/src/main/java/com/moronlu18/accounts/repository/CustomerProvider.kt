@@ -77,6 +77,15 @@ class CustomerProvider private constructor() {
             return CustomerdataSet.find { it.id == id }
         }
 
+        fun getCustomer(): List<Customer>{
+            return CustomerdataSet
+        }
+
+        fun getCustomerNameById(customerId: Int): String? {
+            val customer = CustomerdataSet.find { it.id == customerId }
+            return customer?.name
+        }
+
 
         /*suspend fun deleteCustomer(customer: Customer): Boolean {
             val isReferenced = FacturaProvider.isCustomerReferenceFactura(customer.name) ||
