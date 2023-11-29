@@ -4,7 +4,6 @@ import com.moronlu18.accounts.entity.Task
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.tasklist.R
 
 class TaskAdapter(private var taskList: List<Task>,

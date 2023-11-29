@@ -19,6 +19,10 @@
     <string name="task_list_empty_list">No tienes tareas...</string>
     <string name="task_list_customer_help_text">Campo obligatorio</string>
     <string name="task_list_task_help_text">Campo obligatorio</string>
+    <string name="title_list_task">Lista de tareas</string>
+    <string name="title_task_creation">Creacción de la Tarea</string>
+    <string name="title_task_detail">Detalle de la Tarea</string>
+    <string name="delete_task_info">¿Estás seguro de que quieres borrar la tarea?</string>
 
     <string name="dropdown">Dropdown Menu</string>
     <string name="select">Cliente seleccionado</string>

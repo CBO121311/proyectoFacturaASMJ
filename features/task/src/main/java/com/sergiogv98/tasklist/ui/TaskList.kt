@@ -69,7 +69,7 @@ class TaskList : Fragment() {
         findNavController().navigate(
             TaskListDirections.actionTaskListToBaseFragmentDialog2(
                 getString(com.moronlu18.invoice.R.string.title_fragmentDialogExit),
-                getString(com.moronlu18.invoice.R.string.Content_fragmentDialogExit)
+                getString(R.string.delete_task_info)
             )
         )
 

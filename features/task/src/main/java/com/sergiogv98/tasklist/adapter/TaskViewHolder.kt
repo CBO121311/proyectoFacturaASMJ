@@ -4,7 +4,6 @@ import com.moronlu18.accounts.entity.Task
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.moronlu18.accounts.repository.CustomerProvider
-import com.moronlu18.accounts.repository.TaskProvider
 import com.moronlu18.tasklist.databinding.ItemTaskBinding
 
 class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {

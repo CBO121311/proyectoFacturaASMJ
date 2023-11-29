@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.accounts.entity.Task
 import com.moronlu18.accounts.repository.CustomerProvider
 import com.moronlu18.accounts.repository.TaskProvider
@@ -83,7 +82,7 @@ class TaskDetail : Fragment() {
         findNavController().navigate(
             TaskListDirections.actionTaskListToBaseFragmentDialog2(
                 getString(com.moronlu18.invoice.R.string.title_fragmentDialogExit),
-                getString(com.moronlu18.invoice.R.string.Content_fragmentDialogExit)
+                getString(R.string.delete_task_info)
             )
         )
         parentFragmentManager.setFragmentResultListener(

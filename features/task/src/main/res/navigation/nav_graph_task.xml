@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/taskList"
         android:name="com.sergiogv98.tasklist.ui.TaskList"
-        android:label="fragment_task_list"
+        android:label="@string/title_list_task"
         tools:layout="@layout/fragment_task_list" >
         <action
             android:id="@+id/action_taskList_to_taskDetail"
@@ -27,7 +27,7 @@
     <fragment
         android:id="@+id/taskDetail"
         android:name="com.sergiogv98.tasklist.ui.TaskDetail"
-        android:label="fragment_task_detail"
+        android:label="@string/title_task_detail"
         tools:layout="@layout/fragment_task_detail" >
         <argument
             android:name="task"
@@ -39,7 +39,7 @@
     <fragment
         android:id="@+id/taskCreation"
         android:name="com.sergiogv98.tasklist.ui.TaskCreation"
-        android:label="fragment_task_creation"
+        android:label="@string/title_task_creation"
         tools:layout="@layout/fragment_task_creation" />
     <dialog
         android:id="@+id/baseFragmentDialog2"
