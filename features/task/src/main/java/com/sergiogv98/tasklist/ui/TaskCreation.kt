@@ -47,6 +47,8 @@ class TaskCreation : Fragment() {
                 CustomerProvider.getCustomerNames()
             )
         )
+
+        binding.autoCompleteTxt.addTextChangedListener(GeneralTextWatcher(binding.taskCreationTaskDropdown))
         binding.taskCreationTxvTaskName.addTextChangedListener(GeneralTextWatcher(binding.taskCreationTaskTilName))
 
         return binding.root
@@ -70,6 +72,7 @@ class TaskCreation : Fragment() {
         viewModel.getState().observe(viewLifecycleOwner) {
             when (it) {
                 TaskState.TitleIsMandatory -> setTaskNameEmptyError()
+                TaskState.CustomerUnspecified -> setTaskCustomerEmptyError()
                 else -> onSuccessCreate()
             }
         }
@@ -100,7 +103,6 @@ class TaskCreation : Fragment() {
     }
 
     private fun onSuccessCreate() {
-        //val nameClient = binding.taskCreationInfoTxvCustomer.text.toString()
         val nameClient = binding.taskCreationTaskDropdown.editText?.text.toString()
         val nameTask = binding.taskCreationTxvTaskName.text.toString()
         val description = binding.taskCreationTxvDescription.text.toString()
@@ -146,6 +148,11 @@ class TaskCreation : Fragment() {
     private fun setTaskNameEmptyError(){
         binding.taskCreationTaskTilName.error = getString(com.moronlu18.tasklist.R.string.name_error)
         binding.taskCreationTaskTilName.requestFocus()
+    }
+
+    private fun setTaskCustomerEmptyError(){
+        binding.taskCreationTaskDropdown.error = getString(com.moronlu18.tasklist.R.string.client_error)
+        binding.taskCreationTaskDropdown.requestFocus()
     }
 
     inner class GeneralTextWatcher(private val til: TextInputLayout) : TextWatcher {

@@ -11,11 +11,13 @@ const val TAG = "ViewModel"
 class TaskViewModel : ViewModel() {
 
     var taskName = MutableLiveData<String>()
+    var customerName = MutableLiveData<String>()
 
     private var state = MutableLiveData<TaskState>()
 
     fun validateTask() {
         when {
+            TextUtils.isEmpty(customerName.value) -> state.value = TaskState.CustomerUnspecified
             TextUtils.isEmpty(taskName.value) -> state.value = TaskState.TitleIsMandatory
             else -> state.value = TaskState.OnSuccess
         }

@@ -93,6 +93,11 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  ## V3.3.7 (28/11/2023)
  *Escrito por SergioGV98*
  - Se ha añadido la funcionalidad de AlertBox para eliminar tareas.
+------------------------
+ ## V3.3.8 (29/11/2023)
+ *Escrito por SergioGV98*
+ - Se ha mejorado la interfaz de creación de tareas para que sea más intuitiva.
+ - Se ha implementado una excepción para manejar la falta de asignación de un cliente en una tarea.
 
 
 # Icono

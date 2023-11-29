@@ -64,9 +64,14 @@
         <item name="android:scrollHorizontally">false</item>
     </style>
     <style name="edm_task_creation" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"></style>
-    <style name="SpinnerStyle">
+    <style name="spinnerStyle">
         <item name="android:background">@drawable/spinner_background</item>
         <item name="android:paddingStart">8dp</item>
         <item name="android:paddingEnd">8dp</item>
+    </style>
+    <style name="exposedDropDownMenu_Customer" parent="Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@color/white</item>
+        <item name="hintTextColor">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
     </style>
 </resources>

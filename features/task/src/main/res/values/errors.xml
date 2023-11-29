@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="name_error">El nombre de la tarea no puede dejarse en blanco</string>
+    <string name="client_error">Debes seleccionar un cliente</string>
 </resources>
