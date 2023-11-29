@@ -23,10 +23,8 @@ import com.moronlu18.accounts.repository.TaskProvider
 import com.moronlu18.tasklist.databinding.FragmentTaskCreationBinding
 import com.sergiogv98.usecase.TaskViewModel
 import java.text.SimpleDateFormat
-import java.time.Instant
 import java.util.Calendar
 import java.util.Locale
-import java.util.TimeZone
 
 class TaskCreation : Fragment() {
 
@@ -111,7 +109,6 @@ class TaskCreation : Fragment() {
         val nameTask = binding.taskCreationTxvTaskName.text.toString()
         val description = binding.taskCreationTxvDescription.text.toString()
         val fechaCreation = binding.taskCreationButtonDateCreation.text.toString()
-        val instant: Instant = SimpleDateFormat("dd/MM/yyyy").apply { timeZone = TimeZone.getTimeZone("UTC") }.parse(fechaCreation).toInstant()
         val fechaEnd = binding.taskCreationButtonDateEnd.text.toString()
 
         val task = Task(
@@ -121,7 +118,7 @@ class TaskCreation : Fragment() {
             typeTask = taskTypeChoose(),
             taskStatus = taskStatusChoose(),
             descTask = description,
-            fechCreation = instant,
+            fechCreation = fechaCreation,
             fechFinalization = fechaEnd
         )
         TaskProvider.taskDataSet.add(task)
