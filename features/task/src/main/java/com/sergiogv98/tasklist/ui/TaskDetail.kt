@@ -40,7 +40,7 @@ class TaskDetail : Fragment() {
 
         _binding = FragmentTaskDetailBinding.inflate(inflater, container, false)
         val tarea: Task = args.task
-
+        binding.taskDetailsClientImageView.setImageResource(CustomerProvider.getCustomerPhotoById(tarea.clientID))
         binding.taskDetailsClientNameTxt.text = CustomerProvider.getCustomerNameById(tarea.clientID)
         binding.taskDetailsTaskName.text = tarea.nomTask
         binding.taskDetailsStatusButton.text = tarea.taskStatus.toString().replaceRange(1, tarea.taskStatus.toString().length, tarea.taskStatus.toString().substring(1).lowercase())

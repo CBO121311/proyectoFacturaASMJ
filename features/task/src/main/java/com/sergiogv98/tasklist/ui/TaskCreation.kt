@@ -123,7 +123,7 @@ class TaskCreation : Fragment() {
         )
         TaskProvider.taskDataSet.add(task)
 
-        Toast.makeText(requireContext(), "Client ID: ${selectedClient!!.id}", Toast.LENGTH_LONG).show()
+        //Toast.makeText(requireContext(), "Client ID: ${selectedClient!!.id}", Toast.LENGTH_LONG).show()
 
         findNavController().popBackStack()
     }

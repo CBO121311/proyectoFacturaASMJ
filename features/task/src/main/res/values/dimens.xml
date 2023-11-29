@@ -57,5 +57,6 @@
     <dimen name="task_details_scroll_view_width">393dp</dimen>
     <dimen name="task_details_scroll_view_height">73dp</dimen>
     <dimen name="task_details_scroll_view_margin_bottom">5dp</dimen>
+    <dimen name="task_details_img_width_height">120dp</dimen>
     <dimen name="task_list_ll_img">200dp</dimen>
 </resources>

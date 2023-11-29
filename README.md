@@ -98,6 +98,10 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  *Escrito por SergioGV98*
  - Se ha mejorado la interfaz de creación de tareas para que sea más intuitiva.
  - Se ha implementado una excepción para manejar la falta de asignación de un cliente en una tarea.
+------------------------
+## V3.3.9 (29/11/2023)
+ *Escrito por SergioGV98*
+ - Se ha implementado la visualización de imágenes en la lista de tareas según las preferencias del cliente que las haya creado.
 
 # Icono
 

@@ -45,17 +45,15 @@
         tools:layout_conversion_absoluteWidth="147dp" />
 
 
-    <ImageView
+    <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/task_details_client_image_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/task_details_img_width_height"
+        android:layout_height="@dimen/task_details_img_width_height"
         android:src="@drawable/client_profile"
         app:layout_constraintBottom_toBottomOf="@+id/task_details_profile_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_conversion_absoluteHeight="110dp"
-        tools:layout_conversion_absoluteWidth="110dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

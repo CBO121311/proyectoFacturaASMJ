@@ -86,6 +86,12 @@ class CustomerProvider private constructor() {
             return customer?.name
         }
 
+        fun getCustomerPhotoById(customerId: Int): Int {
+            val customer = CustomerdataSet.find { it.id == customerId }
+            return customer?.photo ?: R.drawable.cebolla
+        }
+
+
 
         /*suspend fun deleteCustomer(customer: Customer): Boolean {
             val isReferenced = FacturaProvider.isCustomerReferenceFactura(customer.name) ||
