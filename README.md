@@ -107,7 +107,12 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  *Escrito por SergioGV98*
  - Arreglos al mostrar las listas; la descripción ya no se expande.
  - Se implementó la función de mostrar la fecha de creación y finalización de una tarea con Instant.
-
+------------------------
+## V3.4.0 (30/11/2023)
+ *Escrito por SergioGV98*
+ - Mejores visuales en la interfaz de creación de tareas.
+ - Se ha implementado una excepción que evita que puedas crear una tarea si la fecha de finalización
+de la misma es anterior a la de la creación.
 # Icono
 
 <img src="ImagenesMuestra/ic_launcher_theme_kiwi_round.webp" width="300">

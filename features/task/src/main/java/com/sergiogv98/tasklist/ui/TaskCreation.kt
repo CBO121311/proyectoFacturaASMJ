@@ -60,11 +60,11 @@ class TaskCreation : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.taskCreationButtonDateCreation.setOnClickListener {
+        binding.taskCreationImgCalendarCreation.setOnClickListener {
             showDatePicker(binding.taskCreationButtonDateCreation)
         }
 
-        binding.taskCreationButtonDateEnd.setOnClickListener {
+        binding.taskCreationImgCalendarEnd.setOnClickListener {
             showDatePicker(binding.taskCreationButtonDateEnd)
         }
 
@@ -77,6 +77,7 @@ class TaskCreation : Fragment() {
             when (it) {
                 TaskState.TitleIsMandatory -> setTaskNameEmptyError()
                 TaskState.CustomerUnspecified -> setTaskCustomerEmptyError()
+                TaskState.IncorrectDateRange -> setDateValidationError()
                 else -> onSuccessCreate()
             }
         }
@@ -168,6 +169,10 @@ class TaskCreation : Fragment() {
 
     private fun setTaskCustomerEmptyError(){
         binding.taskCreationTaskDropdown.error = getString(com.moronlu18.tasklist.R.string.client_error)
+        binding.taskCreationTaskDropdown.requestFocus()
+    }
+    private fun setDateValidationError() {
+        binding.taskDateErrorInfo.text = getString(com.moronlu18.tasklist.R.string.date_error)
         binding.taskCreationTaskDropdown.requestFocus()
     }
 

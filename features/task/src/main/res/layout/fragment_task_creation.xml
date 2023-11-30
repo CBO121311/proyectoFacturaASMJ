@@ -94,8 +94,10 @@
             android:id="@+id/task_creation_button_date_creation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_weight="1"
-            android:text="@string/task_creation_txt_button_fecha_creacion"
+            android:clickable="false"
+            android:text="@={viewmodeltaskcreation.dateCreation}"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintHorizontal_bias="0.41"
             app:layout_constraintStart_toStartOf="parent"
@@ -105,8 +107,10 @@
             android:id="@+id/task_creation_button_date_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
             android:layout_weight="1"
-            android:text="@string/task_creation_txt_button_fecha_finalizacion"
+            android:clickable="false"
+            android:text="@={viewmodeltaskcreation.dateEnd}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
             app:layout_constraintTop_toBottomOf="@+id/task_creation_img_top" />
@@ -151,6 +155,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/task_creation_text_description_margin_start"
+            android:layout_marginTop="8dp"
             android:text="@string/task_creation_txv_descripcion"
             android:textColor="@color/md_theme_dark_outlineVariant"
             app:layout_constraintBottom_toTopOf="@+id/task_creation_til_description"
@@ -223,5 +228,42 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/task_creation_status" />
+
+        <TextView
+            android:id="@+id/task_date_error_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/red"
+            app:layout_constraintBottom_toTopOf="@+id/task_creation_text_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/task_creation_button_date_creation" />
+
+        <ImageView
+            android:id="@+id/task_creation_img_calendar_creation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="@+id/task_creation_button_date_creation"
+            app:layout_constraintEnd_toStartOf="@+id/task_creation_button_date_creation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/task_creation_img_top"
+            app:srcCompat="@drawable/ic_calendar" />
+
+        <ImageView
+            android:id="@+id/task_creation_img_calendar_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="@+id/task_creation_button_date_end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/task_creation_button_date_end"
+            app:layout_constraintTop_toTopOf="@+id/task_creation_button_date_end"
+            app:srcCompat="@drawable/ic_calendar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

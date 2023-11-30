@@ -2,4 +2,5 @@
 <resources>
     <string name="name_error">El nombre de la tarea no puede dejarse en blanco</string>
     <string name="client_error">Debes seleccionar un cliente</string>
+    <string name="date_error">La fecha de finalización no puede ser anterior a la de creación</string>
 </resources>
