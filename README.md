@@ -102,6 +102,11 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
 ## V3.3.9 (29/11/2023)
  *Escrito por SergioGV98*
  - Se ha implementado la visualización de imágenes en la lista de tareas según las preferencias del cliente que las haya creado.
+------------------------
+## V3.3.95 (30/11/2023)
+ *Escrito por SergioGV98*
+ - Arreglos al mostrar las listas; la descripción ya no se expande.
+ - Se implementó la función de mostrar la fecha de creación y finalización de una tarea con Instant.
 
 # Icono
 

@@ -14,8 +14,8 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         binding.taskClientName.text = CustomerProvider.getCustomerNameById(task.clientID)
         binding.taskName.text = task.nomTask
         binding.taskDescription.text = task.descTask
-        binding.taskCreationDate.text = task.fechCreation
-        binding.taskEndDate.text = task.fechFinalization
+        binding.taskCreationDate.text = task.fechCreation.toString().substring(0, task.fechCreation.toString().lastIndexOf("T"))
+        binding.taskEndDate.text = task.fechFinalization.toString().substring(0, task.fechFinalization.toString().lastIndexOf("T"))
         binding.taskButtonDelete.setOnClickListener { onClickDeleted (adapterPosition) }
         itemView.setOnClickListener { onClickListener(task) }
     }

@@ -22,6 +22,10 @@ import com.moronlu18.accounts.repository.TaskProvider
 import com.moronlu18.tasklist.databinding.FragmentTaskCreationBinding
 import com.sergiogv98.usecase.TaskViewModel
 import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 
@@ -86,7 +90,7 @@ class TaskCreation : Fragment() {
 
     private fun showDatePicker(button: Button) {
         val datePickerDialog = DatePickerDialog(
-            requireContext(), { DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int ->
+            requireContext(), { _, year: Int, monthOfYear: Int, dayOfMonth: Int ->
                 val selectedDate = Calendar.getInstance()
                 selectedDate.set(year, monthOfYear, dayOfMonth)
                 val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
@@ -107,8 +111,8 @@ class TaskCreation : Fragment() {
         val selectedClient = CustomerProvider.getCustomer().find { it.name == selectedClientName }
         val nameTask = binding.taskCreationTxvTaskName.text.toString()
         val description = binding.taskCreationTxvDescription.text.toString()
-        val fechaCreation = binding.taskCreationButtonDateCreation.text.toString()
-        val fechaEnd = binding.taskCreationButtonDateEnd.text.toString()
+        val fechaCreation =processDate(binding.taskCreationButtonDateCreation.text.toString())
+        val fechaEnd = processDate(binding.taskCreationButtonDateEnd.text.toString())
 
         val task = Task(
             id = (TaskProvider.taskDataSet.size + 1).coerceAtLeast(1),
@@ -123,6 +127,17 @@ class TaskCreation : Fragment() {
         TaskProvider.taskDataSet.add(task)
 
         findNavController().popBackStack()
+    }
+
+    private fun processDate(dateString: String): Instant {
+        val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+
+        return try {
+            val localDate = LocalDate.parse(dateString, formatter)
+            localDate.atStartOfDay(ZoneOffset.UTC).toInstant()
+        } catch (e: Exception) {
+            Instant.now()
+        }
     }
 
     private fun taskTypeChoose(): TypeTask {
