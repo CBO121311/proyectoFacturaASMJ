@@ -23,6 +23,8 @@
     <string name="title_task_creation">Creacción de la Tarea</string>
     <string name="title_task_detail">Detalle de la Tarea</string>
     <string name="delete_task_info">¿Estás seguro de que quieres borrar la tarea?</string>
+    <string name="task_creation_date_creation_txt">Fecha de creación</string>
+    <string name="task_creation_date_fin_txt">Fecha de finalización</string>
 
     <string name="dropdown">Dropdown Menu</string>
     <string name="select">Cliente seleccionado</string>

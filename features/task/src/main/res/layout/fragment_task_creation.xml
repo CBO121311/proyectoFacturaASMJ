@@ -265,5 +265,23 @@
             app:layout_constraintStart_toEndOf="@+id/task_creation_button_date_end"
             app:layout_constraintTop_toTopOf="@+id/task_creation_button_date_end"
             app:srcCompat="@drawable/ic_calendar" />
+
+        <TextView
+            android:id="@+id/task_creation_date_creation_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/task_creation_date_creation_txt"
+            app:layout_constraintBottom_toTopOf="@+id/task_creation_button_date_creation"
+            app:layout_constraintEnd_toEndOf="@+id/task_creation_button_date_creation"
+            app:layout_constraintStart_toStartOf="@+id/task_creation_button_date_creation" />
+
+        <TextView
+            android:id="@+id/task_creation_date_end_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/task_creation_date_fin_txt"
+            app:layout_constraintBottom_toTopOf="@+id/task_creation_button_date_end"
+            app:layout_constraintEnd_toEndOf="@+id/task_creation_button_date_end"
+            app:layout_constraintStart_toStartOf="@+id/task_creation_button_date_end" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
