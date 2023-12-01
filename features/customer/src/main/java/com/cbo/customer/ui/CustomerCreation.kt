@@ -74,6 +74,8 @@ class CustomerCreation : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         //Prueba de galería
         binding.customerCreationImgbtnCustomer.setOnClickListener {
             openGallery()
@@ -124,7 +126,6 @@ class CustomerCreation : Fragment() {
                 address = address.ifEmpty { "No disponible" },
                 photo = R.drawable.kiwidiner_background
             )
-            customerList[editCustomerPos] = updatedCustomer
 
         } else {
             val customer = Customer(

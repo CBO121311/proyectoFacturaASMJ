@@ -44,13 +44,15 @@ class CustomerDetail : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewnodelcustomerdetail = viewModel
         adapter = CustomerAdapter(
             clientesList = customerList,
         )
 
         _binding = FragmentCustomerDetailBinding.inflate(inflater, container, false)
+
+
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewnodelcustomerdetail = viewModel
 
         val custome: Customer = args.customer
 
