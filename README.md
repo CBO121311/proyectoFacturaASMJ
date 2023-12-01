@@ -114,7 +114,7 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  - Se ha implementado una excepción que evita que puedas crear una tarea si la fecha de finalización
 de la misma es anterior a la de la creación.
 ------------------------
- ## V3.3.0 (26/11/2023)
+ ## V3.4.1 (26/11/2023)
  *Escrito por CBO121311*
  - Añadido animación al splash y customList.
  - Ahora Email es un tipo de dato.
