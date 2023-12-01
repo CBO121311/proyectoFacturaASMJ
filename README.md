@@ -113,6 +113,15 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  - Mejores visuales en la interfaz de creación de tareas.
  - Se ha implementado una excepción que evita que puedas crear una tarea si la fecha de finalización
 de la misma es anterior a la de la creación.
+------------------------
+ ## V3.3.0 (26/11/2023)
+ *Escrito por CBO121311*
+ - Añadido animación al splash y customList.
+ - Ahora Email es un tipo de dato.
+ - El botón editar de customer funciona.
+ - Añadido excepción referenciado.
+ - Diversos cambios de código, de databinding y unido viewholder.
+
 # Icono
 
 <img src="ImagenesMuestra/ic_launcher_theme_kiwi_round.webp" width="300">
