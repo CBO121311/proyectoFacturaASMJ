@@ -1,11 +1,9 @@
 package com.cbo.customer.ui
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -13,21 +11,22 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.cbo.customer.adapter.CustomerAdapter
+import com.cbo.customer.usecase.CustomerViewModel
 import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.accounts.repository.CustomerProvider
 import com.moronlu18.customercreation.R
 import com.moronlu18.customercreation.databinding.FragmentCustomerDetailBinding
 import com.moronlu18.invoice.base.BaseFragmentDialog
-import com.moronlu18.invoice.ui.MainFragmentDirections
-
 
 class CustomerDetail : Fragment() {
 
+    private val viewModel: CustomerViewModel by viewModels()
     private val args: CustomerDetailArgs by navArgs()
-    private var customerMutableList: MutableList<Customer> = CustomerProvider.CustomerdataSet
+    private var customerList = CustomerProvider.CustomerdataSet
 
     private var _binding: FragmentCustomerDetailBinding? = null
     private val binding get() = _binding!!
@@ -37,6 +36,7 @@ class CustomerDetail : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
     }
 
     override fun onCreateView(
@@ -44,22 +44,26 @@ class CustomerDetail : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewnodelcustomerdetail = viewModel
         adapter = CustomerAdapter(
-            clientesList = customerMutableList,
+            clientesList = customerList,
         )
 
         _binding = FragmentCustomerDetailBinding.inflate(inflater, container, false)
 
         val custome: Customer = args.customer
-        //val cliente: Customer = CustomerProvider.getCustomerId(idcliente);
 
-        binding.customerDetailTvNameCustomer.text = custome.name;
-        binding.customerDetailTvEmailCustomer.text = custome.email;
-        binding.customerDetailTvPhoneCustomer.text = custome.phone;
-        binding.customerDetailTvCityName.text = custome.city;
-        binding.customerDetailTvAddressCustomer.text = custome.address;
-        binding.customerDetailCiPhoto.setImageResource(custome.photo);
+        viewModel.let {
+            it.nameCustomer.value = custome.name
+            it.emailCustomer.value = custome.email.toString()
+            it.phoneCustomer.value = custome.phone
+            it.cityCustomer.value = custome.city
+            it.addressCustomer.value=custome.address
+        }
+
+        binding.customerDetailCiPhoto.setImageResource(custome.photo)
+
         return binding.root
     }
 
@@ -137,21 +141,8 @@ class CustomerDetail : Fragment() {
         }
     }
 
-
-    /*
-   AlertDialog.Builder(requireContext())
-       .setTitle("Confirmación")
-       .setMessage("¿Estás seguro de que quieres borrar el cliente?")
-       .setPositiveButton("Sí") { _, _ ->
-
-
-       }
-       .setNegativeButton("No", null)
-       .show()*/
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

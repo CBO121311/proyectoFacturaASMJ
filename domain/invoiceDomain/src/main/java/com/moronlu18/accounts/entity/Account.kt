@@ -1,6 +1,8 @@
 package com.moronlu18.accounts.entity
 
 
+//Patrón factory.
+//Crea objeto de si mismo.
 class Account private constructor(
     val id: Int,
     val email: Email,
@@ -48,9 +50,11 @@ class Account private constructor(
     }
 
     /**
-     * Al utilizar un objeto acompante con una función y el constructor privado de la clase
+     * Al utilizar un objeto acompañante con una función y el constructor privado de la clase
      * garantizo el modo/restricciones que  tengo al crear un objeto de la clase.
      */
+    //Se hace para tener control de la propiedad sobre ellos.
+    //Y así garantizo que todas las cuenta sean no verificados.
     companion object {
         fun create(id: Int, email: Email, password: String?, displayName: String?, state: AccountState): Account {
             return Account(

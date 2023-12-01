@@ -1,41 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/customer_list_cvItemCustomer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/cl_item_cvMargin"
-
     app:cardElevation="@dimen/cl_item_cvElevation">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/customer_list_ccCardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:layout_height="wrap_content">
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/customer_list_ivCliente"
-            android:layout_width="67dp"
-            android:layout_height="67dp"
+            android:layout_width="@dimen/cl_width_ivCustomer"
+            android:layout_height="@dimen/cl_height_ivCustomer"
+            android:layout_marginStart="@dimen/cl_item_marginstart_civCustomer"
             android:src="@drawable/cbotuxedo"
             app:civ_border_color="@color/seed"
-            app:civ_border_width="4dp"
-            app:civ_shadow="false"
+            app:civ_border_width="@dimen/customer_border_ivCustomer"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-
 
 
         <ImageButton
             android:id="@+id/customer_list_imgbtnDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/cl_item_margintop_ibDelete"
+            android:layout_marginEnd="@dimen/cl_item_marginend_ibDelete"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
-            android:contentDescription="Borrar"
+            android:contentDescription="@string/cl_cd_imgtdelete"
             android:focusable="true"
             android:src="@drawable/ic_action_delete"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,10 +44,10 @@
             android:id="@+id/customer_list_imgtnEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="@dimen/cl_item_marginend_ibEdit"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
-            android:contentDescription="Editar"
+            android:contentDescription="@string/cl_cd_imgtedit"
             android:focusable="true"
             android:src="@drawable/ic_action_edit"
             app:layout_constraintBottom_toBottomOf="@+id/customer_list_imgbtnDelete"
@@ -60,12 +59,12 @@
             style="@style/customer_list_tvTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/cl_tvMarginStart"
+            android:layout_marginTop="@dimen/cl_item_margintop_tvName"
+            android:layout_marginEnd="@dimen/cl_item_marginend_tvName"
             android:maxLength="40"
             android:maxLines="2"
-            android:text="Mr.Onion"
-
+            android:text="@string/cd_tvExampleName"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toEndOf="@+id/customer_list_ivCliente"
             app:layout_constraintTop_toTopOf="parent" />
@@ -74,8 +73,8 @@
             android:id="@+id/customer_list_tvEmail"
             style="@style/customer_list_tvNormal"
             android:layout_width="0dp"
-            android:maxLength="100"
             android:layout_height="wrap_content"
+            android:maxLength="100"
             android:text="@string/cl_tvExampleEmail"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/customer_list_tvName"
@@ -87,6 +86,7 @@
             style="@style/customer_list_tvNormal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/cl_item_marginend_ibPhone"
             android:maxLength="18"
             android:text="@string/cl_tvExamplePhone"
             app:layout_constraintEnd_toEndOf="parent"
@@ -97,10 +97,12 @@
             style="@style/customer_list_tvNormal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="@dimen/cl_item_marginend_tvCity"
+            android:layout_marginBottom="@dimen/cl_item_marginbottom_tvCity"
             android:maxLength="30"
             android:maxLines="2"
-            android:text="San Petersburgoffvdvfvfdfvvdffdvfdvvf"
+            android:text="@string/cl_tvExampleCity"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline5"
             app:layout_constraintStart_toStartOf="@+id/customer_list_tvName"
             app:layout_constraintTop_toBottomOf="@+id/customer_list_tvEmail" />
@@ -118,6 +120,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_end="148dp" />
+
+        <TextView
+            android:id="@+id/customer_list_tvid"
+            style="@style/cd_style_ItemtvId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/cl_item_padding_tvId"
+            android:text="@string/cl_tvExampleId"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

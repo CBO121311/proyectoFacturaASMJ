@@ -9,30 +9,31 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.cbo.customer.usecase.CustomerViewModel
 import com.google.android.material.textfield.TextInputLayout
 import com.moronlu18.accounts.entity.Customer
+import com.moronlu18.accounts.entity.Email
 import com.moronlu18.accounts.repository.CustomerProvider
 import com.moronlu18.customercreation.R
 import com.moronlu18.customercreation.databinding.FragmentCustomerCreationBinding
 
 
 class CustomerCreation : Fragment() {
+    private var customerList = CustomerProvider.CustomerdataSet
     private var _binding: FragmentCustomerCreationBinding? = null
     private val binding get() = _binding!!
     private lateinit var launcher: ActivityResultLauncher<Intent>
     private val viewModel: CustomerViewModel by viewModels()
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private var isEditMode = false
+    private var editCustomerPos = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +44,31 @@ class CustomerCreation : Fragment() {
         binding.viewmodelcustomercreation = this.viewModel
         binding.lifecycleOwner = this
 
+
+        parentFragmentManager.setFragmentResultListener(
+            "customkey", this, FragmentResultListener { _, result ->
+                var posCustomer: Int = result.getInt("position")
+                val customerEdit = customerList[posCustomer]
+
+                binding.customerCreationTietEmailCustomer.setText(customerEdit.email.toString())
+                binding.customerCreationTietNameCustomer.setText(customerEdit.name)
+
+                isAvailable(binding.customerCreationTietAddress, customerEdit.address)
+
+                isAvailable(binding.customerCreationTietAddress, customerEdit.address)
+                isAvailable(binding.customerCreationTietPhone, customerEdit.phone)
+                isAvailable(binding.customerCreationTietCity, customerEdit.city)
+                binding.customerCreationImgcAvatar.setImageResource(customerEdit.photo)
+                isEditMode = true
+                editCustomerPos = posCustomer
+            }
+        )
+
         return binding.root
+    }
+
+    private fun isAvailable(field: TextView, value: String) {
+        field.text = if (value != "No disponible") value else null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -88,18 +113,31 @@ class CustomerCreation : Fragment() {
         val address = binding.customerCreationTietAddress.text.toString()
         //val photo = binding.customerCreationImgcAvatar
 
+        if (isEditMode) {
+            val editCustomer = customerList[editCustomerPos]
+            val updatedCustomer = Customer(
+                id = editCustomer.id,
+                name = name,
+                email = Email(email),
+                phone = phone.ifEmpty { "No disponible" },
+                city = city.ifEmpty { "No disponible" },
+                address = address.ifEmpty { "No disponible" },
+                photo = R.drawable.kiwidiner_background
+            )
+            customerList[editCustomerPos] = updatedCustomer
 
-        val customer = Customer(
-            id = CustomerProvider.CustomerdataSet.size,
-            name = name,
-            email = email,
-            phone = phone.ifEmpty { "No disponible" },
-            city = city.ifEmpty { "No disponible" },
-            address = address.ifEmpty { "No disponible" },
-            photo = R.drawable.kiwidiner_background
-        )
-        CustomerProvider.CustomerdataSet.add(customer)
-        //adapter.notifyItemInserted(CustomerProvider.dataSet.size - 1)
+        } else {
+            val customer = Customer(
+                id = customerList.size + 1,
+                name = name,
+                email = Email(email),
+                phone = phone.ifEmpty { "No disponible" },
+                city = city.ifEmpty { "No disponible" },
+                address = address.ifEmpty { "No disponible" },
+                photo = R.drawable.kiwidiner_background
+            )
+            customerList.add(customer)
+        }
 
         findNavController().popBackStack()
     }

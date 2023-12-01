@@ -3,14 +3,12 @@ import com.moronlu18.invoice.R
 import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import com.moronlu18.invoice.base.BaseFragmentDialog
 
@@ -47,7 +45,7 @@ class MainFragment : Fragment() {
                     binding.imvAlert.setImageResource(R.drawable.btnalert)
                 }
             }
-            false
+           true
         }
 
         binding.cvCustomer.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_customer)
@@ -75,22 +73,11 @@ class MainFragment : Fragment() {
                 requireActivity().finish()
             }
         }
+
+
+
     }
 
-
-
-    //showConfirmationDialog()
-    private fun onfirmationDialog() {
-
-        AlertDialog.Builder(requireContext())
-            .setTitle("Confirmación")
-            .setMessage("¿Estás seguro de que quieres cerrar la aplicación?")
-            .setPositiveButton("Sí") { _, _ ->
-                requireActivity().finish()
-            }
-            .setNegativeButton("No", null)
-            .show()
-    }
 
     @SuppressLint("ClickableViewAccessibility")
     fun View.btnAnimationNav(idDestination: Int) {

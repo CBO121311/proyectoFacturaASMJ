@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.moronlu18.accounts.entity.Account
 import com.moronlu18.accounts.network.Resource
-import com.moronlu18.accounts.repository.UserRepository
 import com.moronlu18.firebase.AuthFirebase
 import kotlinx.coroutines.launch
 
@@ -18,6 +17,7 @@ class SignInViewModel : ViewModel() {
     //LiveData que controlan los datos introducidos en la IU
     var email = MutableLiveData<String>()
     var password = MutableLiveData<String>()
+
     //LiveData que tendrá su Observador en el Fragment y controla las excepciones/casos de uso de la operación Login.
     //Se hace privado, ya que no quiero que un fragment cambie esa propiedad
 
@@ -68,22 +68,26 @@ class SignInViewModel : ViewModel() {
                         password.value!!
                     )*/
 
-                    val result = AuthFirebase().login(email.value!!, password.value!!)
+                    //val result = AuthFirebase().login(email.value!!, password.value!!)
 
                     state.value = SignInState.Loading(false)
 
 
-                    when (result) {
+                    when (val result = AuthFirebase().login(email.value!!, password.value!!)) {
                              //esto es una clase sellada (Resource)
                         is Resource.Success<*> -> {
-                            val account = result.data as? Account
-                            if (account != null) {
+
+                            state.value = SignInState.Success(result.data as? Account)
+
+                            //val account = result.data as? Account
+
+                            /*if (account != null) {
                                 Log.i(TAG, "Información del dato $account")
                                 state.value = SignInState.Success(account)
                             } else {
                                 Log.e(TAG, "Error al convertir el resultado a Account")
                                 state.value = SignInState.AuthencationError("Error en la autenticación")
-                            }
+                            }*/
                             //ght123456@hotmail.es
                         }
 
@@ -93,6 +97,8 @@ class SignInViewModel : ViewModel() {
                             //De mientras está esto pausado.
                             state.value = SignInState.AuthencationError(result.exception.message!!)
                         }
+
+                        else -> {}
                     }
                 }
             }

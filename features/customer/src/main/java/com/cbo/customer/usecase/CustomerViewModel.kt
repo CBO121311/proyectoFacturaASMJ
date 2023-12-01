@@ -6,8 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.cbo.customer.ui.CustomerState
-import com.moronlu18.accounts.entity.Customer
-import com.moronlu18.accounts.repository.CustomerProvider
 import java.util.regex.Pattern
 
 const val TAG = "ViewModel"
@@ -15,9 +13,15 @@ const val TAG = "ViewModel"
 class CustomerViewModel : ViewModel() {
 
     var nameCustomer = MutableLiveData<String>()
-    var email = MutableLiveData<String>()
+    var emailCustomer = MutableLiveData<String>()
+    var phoneCustomer = MutableLiveData<String>()
+    var addressCustomer = MutableLiveData<String>()
+    var cityCustomer = MutableLiveData<String>()
 
     private var state = MutableLiveData<CustomerState>()
+
+    private val pattern = Pattern.compile("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")
+
 
 //Crear la clase sellada que permitirá gestionar las excepciones de la vista.
 
@@ -34,31 +38,18 @@ class CustomerViewModel : ViewModel() {
     }*/
 
 
-
     fun validateCredentials() {
-        Log.i(TAG, "El email es: ${email.value} y el nombre es ${nameCustomer.value}")
+        Log.i(TAG, "El email es: ${emailCustomer.value} y el nombre es ${nameCustomer.value}")
         // El viewModel comprueba todas las excepcicones
         when {
             TextUtils.isEmpty(nameCustomer.value) -> state.value = CustomerState.NameIsMandatory
-            TextUtils.isEmpty(email.value) -> state.value = CustomerState.EmailEmptyError
-            !isValidEmail(email.value) -> state.value = CustomerState.InvalidEmailFormat
+            TextUtils.isEmpty(emailCustomer.value) -> state.value = CustomerState.EmailEmptyError
+            !pattern.matcher(emailCustomer.value).matches() -> state.value = CustomerState.InvalidEmailFormat
             else->{
                 state.value = CustomerState.OnSuccess
             }
 
         }
-    }
-
-    /**
-     * Función para validar el formato de correo electrónico utilizando una expresión regular.
-     */
-    private fun isValidEmail(email: String?): Boolean {
-        if (email.isNullOrBlank()) {
-            return false
-        }
-
-        val emailpattern = Pattern.compile("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")
-        return emailpattern.matcher(email).matches()
     }
 
     /**

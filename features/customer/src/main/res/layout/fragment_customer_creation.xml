@@ -1,7 +1,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -14,7 +13,7 @@
         android:id="@+id/customer_creation_clayoutCustomer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
+        android:background="@color/white"
         tools:context="com.cbo.customer.ui.CustomerCreation">
 
         <androidx.constraintlayout.widget.Guideline
@@ -23,7 +22,6 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="229dp" />
-
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/customer_creation_glTop"
@@ -34,19 +32,14 @@
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/customer_creation_imgcAvatar"
-            android:layout_width="212dp"
-            android:layout_height="197dp"
+            android:layout_width="@dimen/cc_width_ivCustomer"
+            android:layout_height="@dimen/cc_height_ivCustomer"
             android:src="@drawable/kiwidiner_background"
             app:civ_border_color="@color/seed"
-            app:civ_border_width="4dp"
-            app:civ_shadow="false"
-            app:civ_shadow_color="#3f51b5"
-
-            app:civ_shadow_radius="10dp"
+            app:civ_border_width="@dimen/customer_border_ivCustomer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/customer_creation_glTop" />
-
 
 
         <androidx.cardview.widget.CardView
@@ -75,32 +68,33 @@
 
 
         <com.google.android.material.card.MaterialCardView
-
+            android:id="@+id/customer_creation_mcvFields"
+            style="@style/cvCustomerCreationCorner_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/cc_glhalf"
-            android:backgroundTint="@color/white"
-            style="@style/cvCustomerCreationCorner_style"
             app:layout_constraintVertical_bias="0.0">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/customer_creation_clFields"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="@dimen/cc_marginTop_clFields"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="@dimen/cc_padding_clFields">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/customer_creation_tilNameCustomer"
                     style="@style/customer_creation_tilStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="@dimen/cc_margin_til"
+                    android:layout_marginEnd="@dimen/cc_margin_til"
                     android:hint="@string/cc_til_hint_name"
                     app:errorEnabled="true"
                     app:helperText="@string/cc_til_helperText"
@@ -117,7 +111,6 @@
                         android:layout_height="wrap_content"
                         android:inputType="text"
                         android:maxLength="40"
-
                         android:text="@={viewmodelcustomercreation.nameCustomer}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -126,8 +119,8 @@
                     style="@style/customer_creation_tilStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="@dimen/cc_margin_til"
+                    android:layout_marginEnd="@dimen/cc_margin_til"
                     android:hint="@string/cc_til_hint_email"
                     app:errorEnabled="true"
                     app:helperText="@string/cc_til_helperText"
@@ -144,7 +137,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
                         android:maxLength="100"
-                        android:text="@={viewmodelcustomercreation.email}" />
+                        android:text="@={viewmodelcustomercreation.emailCustomer}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -152,8 +145,8 @@
                     style="@style/customer_creation_tilStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="@dimen/cc_margin_til"
+                    android:layout_marginEnd="@dimen/cc_margin_til"
                     android:hint="@string/cc_til_hint_phone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -175,9 +168,9 @@
                     style="@style/customer_creation_tilStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="@dimen/cc_margin_til"
+                    android:layout_marginTop="@dimen/cc_marginTop_til"
+                    android:layout_marginEnd="@dimen/cc_margin_til"
                     android:hint="@string/cc_til_hint_address"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -199,9 +192,9 @@
                     style="@style/customer_creation_tilStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="@dimen/cc_margin_til"
+                    android:layout_marginTop="@dimen/cc_marginTop_til"
+                    android:layout_marginEnd="@dimen/cc_margin_til"
                     android:hint="@string/cc_til_hint_city"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -221,18 +214,17 @@
 
                 <Button
                     android:id="@+id/customer_creation_btnSave"
+                    style="@style/customer_creation_btnStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="10dp"
-                    android:backgroundTint="@color/customer_color_seed"
+                    android:layout_marginStart="@dimen/cc_margin_button"
+                    android:layout_marginTop="@dimen/cc_margin_button"
+                    android:layout_marginEnd="@dimen/cc_margin_button"
+                    android:layout_marginBottom="@dimen/cc_margin_bottom_button"
                     android:drawableEnd="@drawable/ic_action_save"
                     android:onClick="@{()->viewmodelcustomercreation.validateCredentials()}"
                     android:padding="@dimen/cc_padding_btnSave"
                     android:text="@string/cc_btn_text_save"
-                    android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

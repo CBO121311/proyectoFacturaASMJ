@@ -18,5 +18,6 @@
     <color name="cd_color_fondo_1">#D58A72E3</color>
     <color name="cd_color_fondo_2">#528A72E3</color>
     <color name="customer_color_floatingbutton">#AF9DF1</color>
+    <color name="customer_color_cl_id">#9A8A72E3</color>
 
 </resources>

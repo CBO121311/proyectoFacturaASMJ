@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
+import com.moronlu18.accounts.entity.Account
 import com.moronlu18.accountsignin.R
 import com.moronlu18.accountsignin.databinding.FragmentAccountSignInBinding
 
@@ -88,7 +89,7 @@ class SignInFragment : Fragment() {
                 //is Es un data class.
                 is SignInState.AuthencationError -> showMessage(it.message)
                 is SignInState.Loading -> showProgressbar(it.value)
-                is SignInState.Success -> "Login correcto del usuario";
+                is SignInState.Success -> showMessageCorrect(it.account!!);
                 else -> onSuccess() //Todos los casos de uso tiene uno de éxito
             }
         })
@@ -172,6 +173,21 @@ class SignInFragment : Fragment() {
         findNavController().navigate(action)
 
     }
+
+
+    /**
+     * Función que muestra al usuario un mensaje
+     */
+
+    private fun showMessageCorrect(cuenta: Account) {
+        //Toast.makeText(requireContext(), "Mi primer MVVM $message", Toast.LENGTH_SHORT).show()
+        val action =
+            SignInFragmentDirections.actionAccountSignInToBaseFragmentDialog("Éxito", cuenta.email.toString())
+        //Navegamos al dialog
+        findNavController().navigate(action)
+
+    }
+
 
     /**
      * Función que muestra el error de Email Empty

@@ -8,11 +8,7 @@
     <string name="cc_btn_text_save">Guardar</string>
     <string name="cc_til_helperText">Requerido*</string>
     <string name="cc_descriptiontext_ibCustomer">Pulsa añadir una imagen</string>
-    <string name="cl_tvExampleName">Mr.Onion</string>
-    <string name="cl_tvExampleEmail">abc@hotmail.es</string>
-    <string name="cl_tvExamplePhone">No disponible</string>
-    <string name="cl_tvExampleCity">No disponible</string>
-    <string name="cl_tvExampleAddress">No disponible</string>
+
 
     <string name="cd_tvName">Nombre:</string>
     <string name="cd_tvExampleName">Mr. Kiwi</string>
@@ -28,4 +24,16 @@
 
     <string name="title_deleteCustomer">Confirmación</string>
     <string name="Content_deleteCustomer">¿Estás seguro de que quieres borrar el cliente?</string>
+    <string name="ftlbtnAdd">Añadir cliente</string>
+    <string name="cl_tvEmpty1">No tienes clientes…</string>
+    <string name="cl_tvEmpty2">Toca el botón \'+\' para añadir uno</string>
+    <string name="cl_cd_imgtdelete">Borrar cliente</string>
+    <string name="cl_cd_imgtedit">Editar cliente</string>
+    <string name="cl_tvExampleName">Mr.Onion</string>
+    <string name="cl_tvExampleEmail">abc@hotmail.es</string>
+    <string name="cl_tvExamplePhone">No disponible</string>
+    <string name="cl_tvExampleCity">No disponible</string>
+    <string name="cl_tvExampleAddress">No disponible</string>
+    <string name="cl_tvExampleId">123</string>
+    <string name="cd_cd_flbtnCorrect">Salir de detalles de cliente</string>
 </resources>

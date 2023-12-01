@@ -1,7 +1,10 @@
 package com.cbo.customer.ui
 
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -12,7 +15,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cbo.customer.adapter.CustomerAdapter
+import com.cbo.customer.usecase.TAG
 import com.moronlu18.accounts.entity.Customer
+import com.moronlu18.accounts.entity.Email
 import com.moronlu18.accounts.repository.CustomerProvider
 import com.moronlu18.customercreation.R
 
@@ -23,7 +28,7 @@ class CustomerList : Fragment() {
 
     private var _binding: FragmentCustomerListBinding? = null
     private val binding get() = _binding!!
-    private var customerMutableList: MutableList<Customer> = CustomerProvider.CustomerdataSet
+    private var customerList = CustomerProvider.CustomerdataSet
     private lateinit var adapter: CustomerAdapter
     private var isDeleting = false
 
@@ -47,6 +52,8 @@ class CustomerList : Fragment() {
             //createCliente()
             findNavController().navigate(R.id.action_customerList_to_customerCreation)
         }
+
+
     }
 
 
@@ -55,14 +62,23 @@ class CustomerList : Fragment() {
      */
     private fun initRecyclerViewClientes() {
         adapter = CustomerAdapter(
-            clientesList = customerMutableList,
+            clientesList = customerList,
             onClickListener = { cliente -> onItemSelected(cliente) },
-            onClickDelete = { position -> onDeletedItem(position) })
+            onClickDelete = { position -> onDeletedItem(position) },
+            onClickEdit = { position -> onEditItem(position) })
 
         updateEmptyView()
 
         binding.customerListRvClientes.layoutManager = LinearLayoutManager(requireContext())
         binding.customerListRvClientes.adapter = adapter
+    }
+
+    private fun onEditItem(position: Int) {
+        var bundle = Bundle();
+        bundle.putInt("position", position)
+
+        parentFragmentManager.setFragmentResult("customkey", bundle)
+        findNavController().navigate(R.id.action_customerList_to_customerCreation)
     }
 
 
@@ -71,10 +87,10 @@ class CustomerList : Fragment() {
      */
     private fun updateEmptyView() {
 
-        if (customerMutableList.isEmpty()) {
-            binding.llListEmpty.visibility = View.VISIBLE
+        if (customerList.isEmpty()) {
+            binding.customerListClEmpty.visibility = View.VISIBLE
         } else {
-            binding.llListEmpty.visibility = View.GONE
+            binding.customerListClEmpty.visibility = View.GONE
         }
     }
 
@@ -83,26 +99,53 @@ class CustomerList : Fragment() {
      */
     private fun onDeletedItem(position: Int) {
 
-        findNavController().navigate(
-            CustomerListDirections.actionCustomerListToBaseFragmentDialog2(
-                getString(com.moronlu18.invoice.R.string.title_fragmentDialogExit),
-                getString(com.moronlu18.invoice.R.string.Content_fragmentDialogExit)
+        if (!isDeleting) {
+            isDeleting = true
+            findNavController().navigate(
+                CustomerListDirections.actionCustomerListToBaseFragmentDialog2(
+                    getString(com.moronlu18.invoice.R.string.title_fragmentDialogExit),
+                    getString(R.string.Content_deleteCustomer)
+                )
             )
-        )
 
-        parentFragmentManager.setFragmentResultListener(
-            BaseFragmentDialog.request,
-            viewLifecycleOwner
-        ) { _, result ->
-            val success = result.getBoolean(BaseFragmentDialog.result, false)
-            if (success) {
-                customerMutableList.removeAt(position)
-                adapter.notifyItemRemoved(position)
-                updateEmptyView()
+            parentFragmentManager.setFragmentResultListener(
+                BaseFragmentDialog.request,
+                viewLifecycleOwner
+            ) { _, result ->
+                val success = result.getBoolean(BaseFragmentDialog.result, false)
+                if (success) {
+                    val customer1 = customerList[position]
+                    val existe = CustomerProvider.deleteCustomer(customer1)
+                    Log.i(TAG, "El cliente: ${existe}")
+                    if (!existe) {
+
+                        customerList.removeAt(position)
+                        adapter.notifyItemRemoved(position)
+                        updateEmptyView()
+
+                    } else {
+                        showConfirmationDialog()
+                    }
+
+
+                }
             }
         }
+
+        binding.customerListRvClientes.postDelayed({
+            isDeleting = false
+        }, 300)
+
     }
 
+    private fun showConfirmationDialog() {
+
+        AlertDialog.Builder(requireContext())
+            .setTitle("Aviso")
+            .setMessage("No puedes borrar un cliente referenciado a factura o tarea")
+            .setNegativeButton("Entendido", null)
+            .show()
+    }
 
     /**
      *  Envía un objeto customer al layout customerDetail utilizando SafeArgs
@@ -118,7 +161,6 @@ class CustomerList : Fragment() {
     /**
      * Creación del menu de customer_list
      */
-    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_customer_list, menu)
     }
@@ -129,16 +171,18 @@ class CustomerList : Fragment() {
      */
 
 
+    @SuppressLint("NotifyDataSetChanged")
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_cd_action_sortname -> {
-                customerMutableList.sortBy { it.name }
+                customerList.sortBy { it.name }
                 adapter.notifyDataSetChanged()
                 return true
             }
 
             R.id.menu_cd_action_sortid -> {
-                customerMutableList.sortBy { it.id }
+                customerList.sortBy { it.id }
                 adapter.notifyDataSetChanged()
                 return true
             }
@@ -164,11 +208,11 @@ class CustomerList : Fragment() {
         val clientes = Customer(
             3,
             "Tienda de verduras",
-            "abc@gmail.com",
+            Email("abc@gmail.com"),
             photo = R.drawable.kiwidiner_background
         );
-        customerMutableList.add(clientes)
-        adapter.notifyItemInserted(customerMutableList.size - 1)
+        customerList.add(clientes)
+        adapter.notifyItemInserted(customerList.size - 1)
         //LinearLayoutManager(requireContext()).scrollToPositionWithOffset(clientesMutableList.size-1, 4)
         //binding.customerListRvClientes.layoutManager?.scrollToPosition(clientesMutableList.size - 1)
     }

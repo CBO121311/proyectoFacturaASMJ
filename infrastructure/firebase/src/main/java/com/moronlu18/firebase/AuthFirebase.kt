@@ -11,27 +11,48 @@ import com.moronlu18.accounts.network.Resource
 
 
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 const val TAG = "ViewModel"
+
 class AuthFirebase {
     private var authFirebase = FirebaseAuth.getInstance()
     private lateinit var account: Account
 
-
+    //ght123456@hotmail.es
+    //Esto se queda suspendido, para algo hay un pause.
+    //
+    //user!!.hashCode()
+    //Lo que queremos recoger un dato de una función suspendida.
+    //user!!.uid
     suspend fun login(email: String, password: String): Resource {
-        return try {
-            val authResult: AuthResult = authFirebase.signInWithEmailAndPassword(email, password).await()
-            val user = authResult.user
-            account = Account.create(user!!.uid.toInt(), Email(user.email!!), password, null, AccountState.VERIFIED)
-            Resource.Success(account)
-        } catch (e: Exception) {
-            Resource.Error(e)
+        return withContext(Dispatchers.IO) {
+
+            try {
+
+                //Este pausa, indica que se pause que termina la operación.
+                val authResult: AuthResult =
+                    authFirebase.signInWithEmailAndPassword(email, password).await()
+                val user = authResult.user
+                account = Account.create(
+                    user!!.hashCode(),
+                    Email(email),
+                    password,
+                    authResult.user!!.displayName,
+                    AccountState.VERIFIED
+                )
+                Log.i(TAG, "El password es correcto")
+                Resource.Success(account)
+            } catch (e: Exception) {
+                Log.i(TAG, "El password es incorrecto")
+                Resource.Error(e)
+            }
         }
+
     }
 
+    /*
     suspend fun login1(email: String, password: String): Resource {
 
         //Este  código se ejecuta en un hilo especifico para operaciones entrada/salida (IO)
@@ -44,15 +65,15 @@ class AuthFirebase {
                     authFirebase.signInWithEmailAndPassword(email, password).await()
                 val user = authResult.user
                 account = Account.create(
-                   user!!.uid.toInt(),
+                   user!!.uid,
                     Email(email),
                     password,
                     authResult.additionalUserInfo!!.username,
                     AccountState.UNVERIFIED
                 )
                 //val account :Account = Account.create(us!!.uid.toInt(),user.email, password, null, AccountState.UNVERIFIED)
-                //ght123456@hotmail.es
 
+                Log.i(TAG, "El password es success")
                 Resource.Success(account)
             } catch (e: Exception) {
                 Log.i(TAG, "El password es incorrecto")
@@ -60,8 +81,9 @@ class AuthFirebase {
                 //Resource.Error(Exception("El password es incorrecto"))
             }
         }
+        Log.i(TAG, "El password es correcto")
         return Resource.Error(Exception("El password es incorrecto"))
-    }
+    }*/
 }
 
 

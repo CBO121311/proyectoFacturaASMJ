@@ -1,5 +1,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/customer_list_clayoutCustomer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,7 +14,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/customer_list_fltbtnAdd"
         android:layout_width="wrap_content"
@@ -21,47 +21,71 @@
         android:layout_marginEnd="@dimen/cl_flbtnMargin"
         android:layout_marginBottom="@dimen/cl_flbtnMargin"
         android:clickable="true"
+        android:contentDescription="@string/ftlbtnAdd"
         android:focusable="true"
         app:backgroundTint="@color/customer_color_floatingbutton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />
 
-    <LinearLayout
-        android:id="@+id/ll_listEmpty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/customer_list_clEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="167dp"
-            android:layout_height="127dp"
-            android:layout_gravity="center"
+            android:id="@+id/customer_list_imvempty"
+            android:layout_width="@dimen/cl_width_imvEmpty"
+            android:layout_height="@dimen/cl_height_imvEmpty"
+            android:layout_marginEnd="@dimen/cl_marginend_imvEmpty"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/kiwi_pobrev2" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/customer_creation_avNoData"
+            android:layout_width="@dimen/cl_width_avNoData"
+            android:layout_height="@dimen/cl_height_avNoData"
+            android:layout_marginTop="@dimen/cl_margintop_avNoData"
+            android:layout_marginEnd="@dimen/cl_margintend_avNoData"
+            app:layout_constraintBottom_toBottomOf="@+id/customer_list_imvempty"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/customer_list_imvempty"
+            app:layout_constraintTop_toTopOf="@+id/customer_list_imvempty"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/nodatabox" />
+
         <TextView
-            android:id="@+id/customer_list_tvempty"
+            android:id="@+id/customer_list_tvempty1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="No tienes clientes..."
+            android:text="@string/cl_tvEmpty1"
             android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:textSize="@dimen/cl_textSize_tvEmpty1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/customer_list_imvempty" />
 
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/customer_list_tvempty2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:text="Toca el botón '+' para añadir uno" />
+            android:text="@string/cl_tvEmpty2"
+            android:textSize="@dimen/cl_textSize_tvEmpty2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/customer_list_tvempty1" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

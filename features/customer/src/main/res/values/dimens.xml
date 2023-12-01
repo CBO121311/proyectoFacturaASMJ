@@ -4,26 +4,59 @@
     <dimen name="cc_general_margin">16dp</dimen>
     <dimen name="cc_cardView_marginTop">104dp</dimen>
     <dimen name="cc_padding_btnSave">17dp</dimen>
-    <dimen name="cc_marginBottom_btnSave">24dp</dimen>
     <dimen name="cc_padding_imgButton">8dp</dimen>
-    <dimen name="cc_width_ivCustomer">164dp</dimen>
-    <dimen name="cc_height_ivCustomer">142dp</dimen>
+    <dimen name="cc_padding_clFields">10dp</dimen>
+    <dimen name="cc_width_ivCustomer">212dp</dimen>
+    <dimen name="cc_height_ivCustomer">197dp</dimen>
+    <dimen name="customer_border_ivCustomer">4dp</dimen>
     <dimen name="cc_size_imgbtnCustomer">48dp</dimen>
     <dimen name="cc_radius_cvImgCustomer">100dp</dimen>
     <dimen name="cc_cardElevation_cvImgCustomer">2dp</dimen>
-    <dimen name="cl_size_ivCustomer">67dp</dimen>
-    <dimen name="cl_general_margin">4dp</dimen>
-    <dimen name="cl_flbtnMargin">24dp</dimen>
-    <dimen name="cl_item_cvMargin">4dp</dimen>
-    <dimen name="cl_item_cvElevation">4dp</dimen>
-    <dimen name="cl_tvMarginStart">16dp</dimen>
-    <dimen name="cl_tvMarginEnd">24dp</dimen>
-    <dimen name="cd_width_ivCustomer">200dp</dimen>
-    <dimen name="cd_height_ivCustomer">200dp</dimen>
+    <dimen name="cc_marginTop_clFields">5dp</dimen>
+    <dimen name="cc_margin_til">16dp</dimen>
+    <dimen name="cc_margin_button">16dp</dimen>
+    <dimen name="cc_margin_bottom_button">16dp</dimen>
+    <dimen name="cc_marginTop_til">8dp</dimen>
+
+
+
+    <dimen name="cd_height_ivCustomer">250dp</dimen>
     <dimen name="cd_marginTop_ivCustomer">60dp</dimen>
     <dimen name="cd_general_margin">24dp</dimen>
     <dimen name="cd_cv_marginTop">16dp</dimen>
     <dimen name="cd_LinearLayout_padding">8dp</dimen>
     <dimen name="cd_radius_cv">8dp</dimen>
     <dimen name="cd_cardElevation_cv">2dp</dimen>
+
+    <dimen name="cl_width_imvEmpty">167dp</dimen>
+    <dimen name="cl_height_imvEmpty">127dp</dimen>
+    <dimen name="cl_width_avNoData">200dp</dimen>
+    <dimen name="cl_height_avNoData">200dp</dimen>
+    <dimen name="cl_textSize_tvEmpty2">14sp</dimen>
+    <dimen name="cl_textSize_tvEmpty1">18sp</dimen>
+    <dimen name="cl_marginend_imvEmpty">50dp</dimen>
+    <dimen name="cl_margintop_avNoData">32dp</dimen>
+    <dimen name="cl_margintend_avNoData">70dp</dimen>
+    <dimen name="cl_width_ivCustomer">67dp</dimen>
+    <dimen name="cl_height_ivCustomer">64dp</dimen>
+    <dimen name="cl_general_margin">4dp</dimen>
+    <dimen name="cl_flbtnMargin">24dp</dimen>
+
+    <dimen name="cl_item_cvMargin">4dp</dimen>
+    <dimen name="cl_item_cvElevation">4dp</dimen>
+    <dimen name="cl_item_marginstart_civCustomer">25dp</dimen>
+    <dimen name="cl_item_margintop_ibDelete">10dp</dimen>
+
+    <dimen name="cl_tvMarginStart">16dp</dimen>
+    <dimen name="cl_tvMarginEnd">24dp</dimen>
+    <dimen name="cl_item_marginend_ibDelete">10dp</dimen>
+    <dimen name="cl_item_marginend_ibEdit">8dp</dimen>
+    <dimen name="cl_item_margintop_tvName">8dp</dimen>
+    <dimen name="cl_item_padding_tvId">2dp</dimen>
+    <dimen name="cl_item_marginend_ibPhone">10dp</dimen>
+    <dimen name="cl_item_marginend_tvName">16dp</dimen>
+    <dimen name="cl_item_marginbottom_tvCity">10dp</dimen>
+    <dimen name="cl_item_marginend_tvCity">16dp</dimen>
+
+
 </resources>

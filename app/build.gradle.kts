@@ -79,4 +79,9 @@ dependencies {
 
 
     implementation (platform("com.google.firebase:firebase-bom:32.3.1"))
+
+    //Libería de animaciones lottie
+    val lottieVersion = "3.4.0"
+    implementation ("com.airbnb.android:lottie:$lottieVersion")
+
 }

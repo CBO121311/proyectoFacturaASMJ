@@ -1,6 +1,6 @@
 package com.moronlu18.accounts.repository
 
-import android.provider.ContactsContract.CommonDataKinds.Email
+
 import com.moronlu18.accounts.entity.User
 import com.moronlu18.accounts.network.Resource
 import kotlinx.coroutines.Dispatchers
@@ -17,8 +17,8 @@ constructor privado. Y tiene un objeto que contiene el listado de usuarios.
 
 
 //El repositorio actualmente es estático
-class UserRepository private constructor() {
-
+class UserRepository private constructor() { //Estático
+    //Cuando usa UserRepository. llama a todos los métodos
 
     companion object {
 
@@ -54,9 +54,18 @@ class UserRepository private constructor() {
 
                 para garantizar que no falle
                 */
+
+                /*return Resource.Success(
+                    data = Account.st
+                )*/
+
             }
 
             return Resource.Error(Exception("El password es incorrecto"))
+        }
+
+        fun getUser(user: User): Boolean{
+            dataSet.find { user.email == it.email }.let { return true }//^^
         }
 
     }
