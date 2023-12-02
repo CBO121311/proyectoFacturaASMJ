@@ -89,7 +89,7 @@ class SignInFragment : Fragment() {
                 //is Es un data class.
                 is SignInState.AuthencationError -> showMessage(it.message)
                 is SignInState.Loading -> showProgressbar(it.value)
-                is SignInState.Success -> showMessageCorrect(it.account!!);
+                //is SignInState.Success -> showMessageCorrect(it.account!!);
                 else -> onSuccess() //Todos los casos de uso tiene uno de éxito
             }
         })
@@ -103,8 +103,11 @@ class SignInFragment : Fragment() {
         }
 
         binding.btnLayout.setOnClickListener {
+            //
             findNavController().navigate(R.id.action_accountSignIn_to_blankFragmentpRUEBA2)
         }
+
+
     }
 
     /**
@@ -215,6 +218,7 @@ class SignInFragment : Fragment() {
 
     private fun onSuccess() {
 
+        findNavController().navigate(R.id.action_accountSignIn_to_userListFragment)
         Toast.makeText(requireActivity(), "Caso de éxito en el login", Toast.LENGTH_LONG).show()
     }
 

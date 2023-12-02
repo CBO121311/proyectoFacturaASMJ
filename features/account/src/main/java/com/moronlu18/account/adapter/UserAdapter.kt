@@ -1,6 +1,5 @@
 package com.moronlu18.account.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,13 +8,18 @@ import com.moronlu18.accountsignin.databinding.FragmentLayoutUserItemBinding
 
 //Metemos como parametro a private val listener:OnUserClick. Que será mi listener
 class UserAdapter(
-    private val dataset: MutableList<User>,
-    private val context: Context,
+    //private val dataset: MutableList<User>, //El adapter nunca va  a tener los datos.
+    //private val context: Context,
     private val listener: OnUserClick,
     private val onItemClick: (user: User)->Unit //no devuelve nada.
     //private val onItemClick: (eventData:EventData)->Unit
 ) :
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+
+
+    //Se crea la colección de datos del adapter
+
+    private var dataset = arrayListOf<User>()
 
     /**
      * Esta interfaz es el contrato entre el Adapter y el fragmento que lo contiene.
@@ -45,7 +49,7 @@ class UserAdapter(
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val item = dataset.get(position)
-        holder.bind(item, context)
+        holder.bind(item)
     }
 
     /**
@@ -57,6 +61,16 @@ class UserAdapter(
         return dataset.size
     }
 
+    /**
+     * Función que actualiza los datos del adapter le dice a la vista que se invalide
+     * y vuelve a redibujarse
+     */
+    fun update(newDataSet:ArrayList<User>){
+        //Actualizar mi dataset y notidicar a la vista el cambio
+        //newDataSet = UserRepository.getUserList()
+        dataset = newDataSet
+        notifyDataSetChanged()
+    }
 
     /**
      * La clase viewHolde contiene todos los elementos de view o del layout XML que se ha inflado.
@@ -65,9 +79,10 @@ class UserAdapter(
     inner class UserViewHolder(private val binding: FragmentLayoutUserItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+
         //root
 
-        fun bind(item: com.moronlu18.accounts.entity.User, context: Context) {
+        fun bind(item: User) {
 
             with(binding) {
                 imgUser.text = item.name.substring(0, 1).uppercase()

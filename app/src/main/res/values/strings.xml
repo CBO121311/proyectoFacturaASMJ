@@ -40,4 +40,20 @@
 
     <string name="title_fragmentDialogExit">Confirmación</string>
     <string name="Content_fragmentDialogExit">¿Estás seguro de que quieres cerrar la aplicación?</string>
+
+
+
+    <string name="tvTitleMessage">Escribe el mensaje</string>
+    <string name="tvUserInfoText">Muestra información del usuario</string>
+    <string name="tvMessageText">Información del mensaje</string>
+    <string name="mal_title_about">Acerca de</string>
+    <string name="menu_aboutas">Sobre mi</string>
+    <string name="about_url_repos_GitHub" translatable="false">https://github.com/CBO121311/SendMessageViewBinding</string>
+    <string name="about_url_linkedin" translatable="false">https://www.linkedin.com/in/alecbo/</string>
+    <string name="abut_bifurcar_en_github">Bifurcar en GitHub</string>
+    <string name="about_alejandro_l_pez" translatable="false">Alejandro López</string>
+    <string name="about_alumno_2_dam">Alumno 2ºDAM</string>
+    <string name="about_mi_linkedin">Mi LinkedIn</string>
+    <string name="about_autor">Autor</string>
+    <string name="about_version">Versión</string>
 </resources>

@@ -14,9 +14,6 @@ class CustomerViewModel : ViewModel() {
 
     var nameCustomer = MutableLiveData<String>()
     var emailCustomer = MutableLiveData<String>()
-    var phoneCustomer = MutableLiveData<String>()
-    var addressCustomer = MutableLiveData<String>()
-    var cityCustomer = MutableLiveData<String>()
 
     private var state = MutableLiveData<CustomerState>()
 

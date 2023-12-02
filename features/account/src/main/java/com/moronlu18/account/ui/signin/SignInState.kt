@@ -12,7 +12,7 @@ sealed class SignInState {
 
     //todos estos son clases
     data class AuthencationError(var message: String) : SignInState()
-    data class Success(var account: Account?) : SignInState()
+    data class Success(var account: Account) : SignInState()
     data class AutethencationError(var message: String) : SignInState()
     /*data object Success:SignInState()
     Yo debo saber lo que sabe pasar la visa

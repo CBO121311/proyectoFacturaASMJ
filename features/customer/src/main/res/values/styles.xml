@@ -58,4 +58,31 @@
         <item name="android:background">@color/customer_color_cl_id</item>
     </style>
 
+
+    <style name="cvCustomerDetailCornerName_style" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/cvCustomerDetailCornerName</item>
+    </style>
+
+
+    <style name="cvCustomerDetailCornerName">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">8dp</item>
+        <item name="cornerSizeTopLeft">8dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
+
+
+    <style name="cvCustomerDetailCornerId_style" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/cvCustomerDetailCornerId</item>
+    </style>
+
+    <style name="cvCustomerDetailCornerId">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeBottomLeft">48dp</item>
+        <item name="cornerSizeBottomRight">48dp</item>
+    </style>
+
 </resources>

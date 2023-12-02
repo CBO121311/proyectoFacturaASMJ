@@ -37,7 +37,11 @@
     <fragment
         android:id="@+id/userListFragment"
         android:name="com.moronlu18.account.ui.UserListFragment"
-        android:label="UserListFragment" />
+        android:label="UserListFragment" >
+        <action
+            android:id="@+id/action_userListFragment_to_fragmentProgressDialog3"
+            app:destination="@id/fragmentProgressDialog" />
+    </fragment>
 
     <!--Asegurar que el IDE añade el cuadro de diálogo -->
 

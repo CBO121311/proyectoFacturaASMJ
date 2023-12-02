@@ -3,10 +3,12 @@ package com.moronlu18.accounts.repository
 
 import com.moronlu18.accounts.entity.User
 import com.moronlu18.accounts.network.Resource
+import com.moronlu18.accounts.network.ResourceList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import java.lang.Exception
+import java.util.ArrayList
 
 //import com.example.pruebasconclientes.data.model.User
 
@@ -64,8 +66,26 @@ class UserRepository private constructor() { //Estático
             return Resource.Error(Exception("El password es incorrecto"))
         }
 
-        fun getUser(user: User): Boolean{
-            dataSet.find { user.email == it.email }.let { return true }//^^
+        /**
+         * Esta función simula una consulta asíncrono y devuelve el conjunto de
+         * usuarios de la aplicación
+         */
+        //MutableList<User>
+        suspend fun getUserList(): ResourceList {
+            //Añadimos return, que devuelve la última línea de código
+            return withContext(Dispatchers.IO) {
+                delay(2000)
+                when{
+                    dataSet.isEmpty()-> ResourceList.Error(Exception("No hay datos"))
+
+
+                    //Hacer un cast
+                    else -> ResourceList.Success(dataSet as ArrayList<User>)
+
+                }
+            }
+           // return dataSet
+            //dataSet.find { user.email == it.email }.let { return true }//^^
         }
 
     }

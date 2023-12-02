@@ -64,6 +64,9 @@ class CustomerCreation : Fragment() {
             }
         )
 
+
+
+
         return binding.root
     }
 
@@ -73,7 +76,6 @@ class CustomerCreation : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
 
         //Prueba de galería

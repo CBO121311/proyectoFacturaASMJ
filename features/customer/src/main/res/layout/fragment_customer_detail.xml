@@ -7,7 +7,7 @@
 
         <variable
             name="viewnodelcustomerdetail"
-            type="com.cbo.customer.usecase.CustomerViewModel" />
+            type="com.cbo.customer.usecase.CustomerViewModelDetails" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,9 +16,45 @@
         android:layout_height="match_parent"
         tools:context="com.cbo.customer.ui.CustomerDetail">
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            app:layout_constraintEnd_toStartOf="@+id/customer_detail_ciPhoto"
+            app:layout_constraintStart_toStartOf="@+id/customer_detailglLeft"
+            app:layout_constraintTop_toTopOf="@+id/customer_detailglTop">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:background="@color/cd_color_fondo_2"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/customer_detail_tvId"
+                    style="@style/customer_detail_tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ID: " />
+
+                <TextView
+                    android:id="@+id/customer_detail_tvIdCustomer"
+                    style="@style/customer_detail_tvDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="@{viewnodelcustomerdetail.idCustomer}" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/customer_detail_cardNombre"
+            style="@style/cvCustomerDetailCornerName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/cd_cv_marginTop"
@@ -237,8 +273,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/cd_general_margin"
             android:clickable="true"
-            android:focusable="true"
             android:contentDescription="@string/cd_cd_flbtnCorrect"
+            android:focusable="true"
             app:backgroundTint="@color/customer_color_floatingbutton"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/customer_detailglRight"

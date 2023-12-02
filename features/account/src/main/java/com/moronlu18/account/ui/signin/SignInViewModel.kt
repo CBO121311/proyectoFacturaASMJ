@@ -70,14 +70,19 @@ class SignInViewModel : ViewModel() {
 
                     //val result = AuthFirebase().login(email.value!!, password.value!!)
 
+
+                    val result = AuthFirebase().login(email.value!!, password.value!!)
+
                     state.value = SignInState.Loading(false)
 
 
-                    when (val result = AuthFirebase().login(email.value!!, password.value!!)) {
+
+
+                    when (result) {
                              //esto es una clase sellada (Resource)
                         is Resource.Success<*> -> {
 
-                            state.value = SignInState.Success(result.data as? Account)
+                            state.value = SignInState.Success(result.data as Account)
 
                             //val account = result.data as? Account
 

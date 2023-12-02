@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.cbo.customer.adapter.CustomerAdapter
 import com.cbo.customer.usecase.CustomerViewModel
+import com.cbo.customer.usecase.CustomerViewModelDetails
 import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.accounts.repository.CustomerProvider
 import com.moronlu18.customercreation.R
@@ -24,7 +25,7 @@ import com.moronlu18.invoice.base.BaseFragmentDialog
 
 class CustomerDetail : Fragment() {
 
-    private val viewModel: CustomerViewModel by viewModels()
+    private val viewModel: CustomerViewModelDetails by viewModels()
     private val args: CustomerDetailArgs by navArgs()
     private var customerList = CustomerProvider.CustomerdataSet
 
@@ -57,6 +58,7 @@ class CustomerDetail : Fragment() {
         val custome: Customer = args.customer
 
         viewModel.let {
+            it.idCustomer.value = custome.id.toString()
             it.nameCustomer.value = custome.name
             it.emailCustomer.value = custome.email.toString()
             it.phoneCustomer.value = custome.phone

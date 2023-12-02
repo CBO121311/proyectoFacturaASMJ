@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/invoice_dashboard">
@@ -36,14 +35,14 @@
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/tvItem" />-->
 
-        <ImageView
+        <!--<ImageView
             android:id="@+id/imvAlert"
             android:layout_width="117dp"
             android:layout_height="101dp"
             android:layout_marginTop="24dp"
             android:src="@drawable/btnalert"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintTop_toBottomOf="@+id/cvInvoice" />
+            app:layout_constraintTop_toBottomOf="@+id/cvInvoice" />-->
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvSigIn"
@@ -273,6 +272,41 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvAbout"
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            app:cardCornerRadius="4dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/cvTask"
+            app:layout_constraintWidth_percent="0.43">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/imgabout" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/calibri"
+                    android:gravity="center"
+                    android:text="Acerca de"
+                    android:textColor="#3B414B"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvSignOut"
@@ -280,8 +314,8 @@
             android:layout_height="160dp"
             app:cardCornerRadius="4dp"
             app:cardUseCompatPadding="true"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/cvTask"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/cvInvoice"
             app:layout_constraintWidth_percent="0.43">
 
             <LinearLayout

@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.fragment.findNavController
 import com.moronlu18.invoice.base.BaseFragmentDialog
 
@@ -35,18 +37,20 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.imvAlert.setOnTouchListener { v, event ->
+        /*binding.imvAlert.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     binding.imvAlert.setImageResource(R.drawable.btnalertpressed)
+
                 }
 
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     binding.imvAlert.setImageResource(R.drawable.btnalert)
+
                 }
             }
            true
-        }
+        }*/
 
         binding.cvCustomer.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_customer)
         binding.cvTask.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_task)
@@ -73,9 +77,6 @@ class MainFragment : Fragment() {
                 requireActivity().finish()
             }
         }
-
-
-
     }
 
 
