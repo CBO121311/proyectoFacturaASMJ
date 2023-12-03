@@ -1,8 +1,8 @@
 package com.moronlu18.accounts.entity
 
 import android.os.Parcelable
-
 import kotlinx.parcelize.Parcelize
+import java.time.Instant
 
 @Parcelize
 data class Factura(
@@ -10,6 +10,6 @@ data class Factura(
     val customerId: Int,
     val number: Double,
     val status: InvoiceStatus,
-    val issuedDate: String,
-    val dueDate: String,
+    val issuedDate: Instant,
+    val dueDate: Instant,
     val lineItems: List<Item>?) : Parcelable

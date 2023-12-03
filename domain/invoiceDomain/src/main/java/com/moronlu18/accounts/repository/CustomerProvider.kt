@@ -104,23 +104,22 @@ class CustomerProvider private constructor() {
            }
            return false
        }
+        fun containsId(id:Int): Boolean {
+            for (item in CustomerdataSet) {
+                if(item.id == id) {
+                    return true
+                }
+            }
+            return false
+        }
         fun getNom(id:Int):String {
-            lateinit var nombre:String
+            var nombre = "Cliente"
             for(item in CustomerdataSet) {
                 if (item.id == id) {
                     nombre = item.name
                 }
             }
             return nombre
-        }
-        fun getId(nom:String):Int {
-            var id = 0
-            for(item in CustomerdataSet) {
-                if (item.name == nom) {
-                    id = item.id
-                }
-            }
-            return id
         }
 
     }

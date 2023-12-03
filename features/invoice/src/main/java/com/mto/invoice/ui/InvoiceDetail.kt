@@ -13,12 +13,12 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.moronlu18.accounts.entity.Factura
 import com.moronlu18.accounts.entity.Item
-import com.moronlu18.accounts.entity.Task
 import com.moronlu18.accounts.repository.CustomerProvider
 import com.moronlu18.accounts.repository.ItemProvider
 import com.moronlu18.invoicelist.databinding.FragmentInvoiceDetailBinding
 import com.mto.invoice.adapter.ItemAdapter
-import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 
 
 class InvoiceDetail : Fragment() {
@@ -38,11 +38,11 @@ class InvoiceDetail : Fragment() {
     ): View? {
 
         _binding = FragmentInvoiceDetailBinding.inflate(inflater, container, false)
-
+        val formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy").withZone(ZoneId.systemDefault())
         val invoice: Factura = args.invoice
         binding.invoiceDetailTcCliText.text = CustomerProvider.getNom(invoice.customerId)
-        binding.invoiceDetailTcFechaEmText.text = invoice.issuedDate
-        binding.invoiceDetailTcFechaFText.text = invoice.dueDate
+        binding.invoiceDetailTcFechaEmText.text = formatoFecha.format(invoice.issuedDate)
+        binding.invoiceDetailTcFechaFText.text = formatoFecha.format(invoice.dueDate)
         binding.invoiceDetailTvTotal.text = ItemProvider.getTotal(invoice.lineItems!!.toMutableList())
         binding.invoiceDetailTvEstado.text = invoice.status.toString()
         return binding.root;

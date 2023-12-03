@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
@@ -17,17 +17,15 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/invoice_creation_tilCliente"
-            android:layout_width="0dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
+            android:hint="@string/ie_tieCliente"
             app:endIconContentDescription="@string/tieCliente_description"
             app:endIconDrawable="@drawable/ic_action_user"
             app:endIconMode="custom"
             app:helperText="@string/tvObligatorio"
-            android:hint="@string/ie_tieCliente"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -36,10 +34,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/helvetica"
-                android:text="@={viewmodel.user}"
-                android:inputType="text"
-                />
+                android:inputType="number"
+                android:text="@={viewmodel.user}"/>
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/invoice_creation_tilFechaEm"
@@ -223,6 +221,21 @@
             android:textColor="#F44336"
             app:layout_constraintBottom_toTopOf="@+id/invoice_creation_cdArti"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/invoice_creation_btnCliText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:maxLines="2"
+            android:text="Cliente"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/invoice_creation_tilCliente"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

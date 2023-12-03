@@ -28,6 +28,10 @@ import com.mto.invoice.adapter.ItemCreationAdapter
 import com.mto.invoice.usecase.InvoiceCreationState
 import com.mto.invoice.usecase.InvoiceCreationViewModel
 import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 
@@ -47,6 +51,27 @@ class InvoiceCreation : Fragment() {
         }
 
         override fun afterTextChanged(s: Editable?) {
+            if(!s!!.isEmpty()) {
+                binding.invoiceCreationBtnCliText.text = CustomerProvider.getNom(binding.invoiceCreationTieCliente.text.toString().toInt())
+            }
+        }
+
+    }
+    inner class ListenerDates : TextWatcher {
+        private val contenedor: TextInputLayout
+        constructor(contenedor: TextInputLayout) {
+            this.contenedor = contenedor;
+        }
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            contenedor.isErrorEnabled = false
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+
         }
 
     }
@@ -71,13 +96,12 @@ class InvoiceCreation : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        // Inflate the layout for this fragment
         _binding = FragmentInvoiceCreationBinding.inflate(inflater, container, false)
         binding.viewmodel = this.viewmodel
         binding.lifecycleOwner = this
         binding.invoiceCreationTieCliente.addTextChangedListener(Listener(binding.invoiceCreationTilCliente))
-        binding.invoiceCreationTieFechaEm.addTextChangedListener(Listener(binding.invoiceCreationTilFechaEm))
-        binding.invoiceCreationTieFechaFin.addTextChangedListener(Listener(binding.invoiceCreationTilFechaFin))
+        binding.invoiceCreationTieFechaEm.addTextChangedListener(ListenerDates(binding.invoiceCreationTilFechaEm))
+        binding.invoiceCreationTieFechaFin.addTextChangedListener(ListenerDates(binding.invoiceCreationTilFechaFin))
         return binding.root;
     }
 
@@ -125,11 +149,11 @@ class InvoiceCreation : Fragment() {
 
     }
     private fun onSuccessCreate() {
-        val customId = CustomerProvider.getId(binding.invoiceCreationTieCliente.text.toString())
+        val customId = binding.invoiceCreationTieCliente.text.toString().toInt()
         val numb = ItemProvider.getTotal(itemMutableList).replace(',','.')
         val stat = binding.invoiceCreationSpEstado.selectedItem.toString()
-        val issued = binding.invoiceCreationTieFechaEm.text.toString()
-        val due = binding.invoiceCreationTieFechaFin.text.toString()
+        val issued = parseStringToInstant(binding.invoiceCreationTieFechaEm.text.toString())
+        val due = parseStringToInstant(binding.invoiceCreationTieFechaFin.text.toString())
         val items = itemMutableList.toList()
 
 
@@ -147,6 +171,16 @@ class InvoiceCreation : Fragment() {
         findNavController().popBackStack()
     }
 
+    private fun parseStringToInstant(dateString: String): Instant {
+        val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+
+        return try {
+            val localDate = LocalDate.parse(dateString, formatter)
+            localDate.atStartOfDay(ZoneOffset.UTC).toInstant()
+        } catch (e: Exception) {
+            Instant.now()
+        }
+    }
     private fun addItem() {
         if(itemMutableList.size != 0) {
             binding.invoiceCreationRvErrorAnadidos.text = ""
@@ -155,33 +189,7 @@ class InvoiceCreation : Fragment() {
         binding.invoiceCreationRvAnadidos.layoutManager = manager2
         binding.invoiceCreationRvAnadidos.adapter = AddItemCreationAdapter(itemMutableList, 1)
         binding.viewmodel?.adapter?.value = AddItemCreationAdapter(itemMutableList,1)
-        if(ItemSelected == null) {
-
-        } else {
-            //PINCHAR EL MISMO ITEM, CAMBIAR LA CANTIDAD DE UNIDADES EN EL ITEM VISIBLE, FALTA PICAR
-            /*if(itemMutableList.contains(ItemSelected)) {
-                var iterador = 0
-                var acumulador = 1
-                var primeraAparicion:Int = -1
-                for (item in itemMutableList) {
-                    if(item == ItemSelected) {
-                        if(primeraAparicion == -1) {
-                            primeraAparicion = iterador
-                        }
-                        acumulador++
-                    }else{
-                        iterador++
-                    }
-                }
-                itemMutableList.removeAt(primeraAparicion)
-                binding.invoiceCreationRvAnadidos.adapter = AddItemCreationAdapter(itemMutableList, acumulador)
-                itemMutableList.add(index = primeraAparicion,ItemSelected)
-                binding.invoiceCreationRvAnadidos.adapter!!.notifyDataSetChanged()
-            } else {
-                itemMutableList.add(ItemSelected)
-                binding.invoiceCreationRvAnadidos.adapter = AddItemCreationAdapter(itemMutableList, 1)
-                binding.invoiceCreationRvAnadidos.adapter!!.notifyDataSetChanged()
-            }*/
+        if(ItemSelected != null) {
             itemMutableList.add(ItemSelected)
             binding.invoiceCreationRvAnadidos.adapter!!.notifyDataSetChanged()
             binding.invoiceCreationRvErrorAnadidos.text = ""
