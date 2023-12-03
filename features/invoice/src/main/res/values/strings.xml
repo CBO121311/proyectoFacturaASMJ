@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="invoiceCreation">Creación de Factura</string>
+    <string name="invoiceList">Lista Facturas</string>
+    <string name="invoiceDetail">Detalle Factura</string>
+
     <string name="tvVacio">La lista de facturas está vacia</string>
     <string name="item_fa_Factura">Factura: </string>
     <string name="item_fa_Cliente">Cliente: </string>

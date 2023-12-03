@@ -4,6 +4,7 @@ import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.accounts.entity.Email
 import com.moronlu18.inovice.R
 
+
 class CustomerProvider private constructor() {
     companion object {
 
@@ -120,6 +121,15 @@ class CustomerProvider private constructor() {
                 }
             }
             return nombre
+        }
+        fun getPhoto(id:Int): Int {
+            var photo = 0
+            for(item in CustomerdataSet) {
+                if (item.id == id) {
+                    photo = item.photo
+                }
+            }
+            return photo
         }
 
     }

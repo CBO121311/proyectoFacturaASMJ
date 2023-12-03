@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/invoiceList"
         android:name="com.mto.invoice.ui.InvoiceList"
-        android:label="InvoiceList"
+        android:label="@string/invoiceList"
         tools:layout="@layout/fragment_invoice_list">
         <action
             android:id="@+id/action_invoiceList_to_invoiceCreation"
@@ -20,13 +20,13 @@
     <fragment
         android:id="@+id/invoiceCreation"
         android:name="com.mto.invoice.ui.InvoiceCreation"
-        android:label="InvoiceCreation"
+        android:label="@string/invoiceCreation"
         tools:layout="@layout/fragment_invoice_creation"
         />
     <fragment
         android:id="@+id/invoiceDetail"
         android:name="com.mto.invoice.ui.InvoiceDetail"
-        android:label="InvoiceDetail"
+        android:label="@string/invoiceDetail"
         tools:layout="@layout/fragment_invoice_detail">
 
         <argument
