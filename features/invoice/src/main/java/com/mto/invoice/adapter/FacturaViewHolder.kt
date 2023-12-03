@@ -19,7 +19,7 @@ class FacturaViewHolder(view: View): RecyclerView.ViewHolder(view){
         binding.itemFacturaIvtTotal.text ="Total: ${facturaModel.number}"
         binding.itemFacturaTvId.text = facturaModel.id.toString()
         binding.itemFacturaTvCliente.text =CustomerProvider.getNom(facturaModel.customerId)
-
+        binding.itemFacturaIvKiwi.setImageResource(CustomerProvider.getPhoto(facturaModel.id))
         itemView.setOnClickListener { onClickListener(facturaModel) }
         binding.invoiceItemBtnDelete.setOnClickListener { onClickDelete(adapterPosition) }
 
