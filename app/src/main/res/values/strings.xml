@@ -48,12 +48,22 @@
     <string name="tvMessageText">Información del mensaje</string>
     <string name="mal_title_about">Acerca de</string>
     <string name="menu_aboutas">Sobre mi</string>
-    <string name="about_url_repos_GitHub" translatable="false">https://github.com/CBO121311/SendMessageViewBinding</string>
-    <string name="about_url_linkedin" translatable="false">https://www.linkedin.com/in/alecbo/</string>
-    <string name="abut_bifurcar_en_github">Bifurcar en GitHub</string>
+
     <string name="about_alejandro_l_pez" translatable="false">Alejandro López</string>
     <string name="about_alumno_2_dam">Alumno 2ºDAM</string>
     <string name="about_mi_linkedin">Mi LinkedIn</string>
-    <string name="about_autor">Autor</string>
     <string name="about_version">Versión</string>
+    <string name="title_about">Acerca de</string>
+    <string name="title_splash">¡Bienvenido!</string>
+    <string name="about_authors">Autores</string>
+    <string name="about_authors_alex">Alejandro López Calderón</string>
+    <string name="about_authors_alexdesc">Jefe y encargado del módulo Customer</string>
+    <string name="about_authors_jess">Jessica Castro Ruiz</string>
+    <string name="about_authors_jessdesc">Encargado del módulo Item</string>
+    <string name="about_authors_mateo">Christian Mateo Tamayo Rivera</string>
+    <string name="about_authors_mateodesc">Encargado del módulo Invoice</string>
+    <string name="about_authors_sergdesc">Encargado del módulo Task</string>
+    <string name="about_authors_serg">Sergio García Vico</string>
+    <string name="about_versionapp">4.4</string>
+
 </resources>

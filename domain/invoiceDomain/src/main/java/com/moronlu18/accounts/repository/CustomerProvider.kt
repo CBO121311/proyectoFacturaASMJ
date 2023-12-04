@@ -2,8 +2,11 @@ package com.moronlu18.accounts.repository
 
 import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.accounts.entity.Email
+import com.moronlu18.accounts.network.ResourceList
 import com.moronlu18.inovice.R
-
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 
 class CustomerProvider private constructor() {
     companion object {
@@ -68,9 +71,91 @@ class CustomerProvider private constructor() {
             )
         }
 
-        /* fun getCustomerId(id: Int): Customer {
-             return dataSet.find { it.id == id }!!
-         }*/
+        /**
+         * Comprueba si el idCustomer es válido y si existe en el repositorio
+         */
+        fun isCustomerExistOrNumeric(idCli: String, currentClient: Customer): Boolean {
+
+            if (idCli.toIntOrNull() != null && idCli.toInt() > 0) {
+
+                return CustomerdataSet.any { it.id == idCli.toInt() && it.id != currentClient.id }
+            }
+            return false
+        }
+
+        /**
+         * Comprueba si el Customer está referenciado en otros repositorios y
+         * es seguro borrarlo
+         */
+        fun isCustomerSafeDelete(customerId: Int): Boolean {
+            val isReferenced = FacturaProvider.isCustomerReferenceFactura(customerId) ||
+                    TaskProvider.isCustomerReferenceTask(customerId)
+
+            if (isReferenced) {
+                return true
+            }
+            return false
+        }
+
+        /**
+         * Comprueba si tiene datos la lista con un tiempo de espera de dos segundos
+         */
+        suspend fun getCustomerList(): ResourceList {
+            return withContext(Dispatchers.IO) {
+                delay(2000)
+                when {
+                    CustomerdataSet.isEmpty() -> ResourceList.Error(Exception("No hay datos"))
+
+                    else -> ResourceList.Success(CustomerdataSet as ArrayList<Customer>)
+                }
+            }
+        }
+
+
+        fun getCustomerListNoLoading(): ResourceList {
+            return try {
+                if (CustomerdataSet.isEmpty()) {
+                    ResourceList.Error(Exception("No hay datos"))
+                } else {
+                    ResourceList.Success(CustomerdataSet as ArrayList<Customer>)
+                }
+            } catch (e: Exception) {
+                ResourceList.Error(e)
+            }
+        }
+
+
+        fun addOrUpdateCustomer(customer: Customer, pos: Int?) {
+
+            if (pos == null) {
+                CustomerdataSet.add(customer)
+            } else {
+                CustomerdataSet[pos] = customer
+            }
+        }
+
+        fun deleteCustomer(pos: Int) {
+            CustomerdataSet.removeAt(pos)
+        }
+
+        /**
+         * Obtener un Customer desde la posición
+         */
+        fun getCustomerPos(position: Int): Customer {
+            return CustomerdataSet[position]
+        }
+
+        /**
+         * Obtener el Id más alto dentro de la lista. Si es null devuelve cero.
+         */
+        fun getMaxCustomerid(): Int {
+            return CustomerdataSet.maxByOrNull { it.id }?.id ?: 0
+        }
+
+
+        fun getPosByCustomer(customer: Customer): Int {
+            return CustomerdataSet.indexOf(customer)
+        }
 
         fun getCustomer(): List<Customer>{
             return CustomerdataSet
@@ -87,16 +172,6 @@ class CustomerProvider private constructor() {
         }
 
 
-
-         fun deleteCustomer(customer: Customer): Boolean {
-            val isReferenced = FacturaProvider.isCustomerReferenceFactura(customer.id) ||
-                    TaskProvider.isCustomerReferenceTask(customer.id)
-
-            if (isReferenced) {
-                return true
-            }
-            return false
-        }
        fun contains(nombre:String?): Boolean {
            for (item in CustomerdataSet) {
                if(item.name == nombre) {
@@ -129,7 +204,7 @@ class CustomerProvider private constructor() {
                     photo = item.photo
                 }
             }
-            return photo
+            return id
         }
 
     }

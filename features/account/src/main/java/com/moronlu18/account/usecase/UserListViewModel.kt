@@ -36,10 +36,7 @@ class UserListViewModel : ViewModel() {
             state.value = UserListState.Loading(false)
 
             when (result) {
-                is ResourceList.Success<*> -> state.value =
-
-                    UserListState.Success(result.data as ArrayList<User>)
-
+                is ResourceList.Success<*> -> state.value = UserListState.Success(result.data as ArrayList<User>)
                 is ResourceList.Error -> state.value = UserListState.NoDataError
             }
 

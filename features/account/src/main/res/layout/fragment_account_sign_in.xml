@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.moronlu18.account.ui.signin.SignInViewModel" />
+            type="com.moronlu18.account.usecase.SignInViewModel" />
     </data>
 
     <LinearLayout

@@ -1,4 +1,4 @@
-package com.moronlu18.account.ui.signin
+package com.moronlu18.account.usecase
 
 import android.text.TextUtils
 import android.util.Log
@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.moronlu18.accounts.entity.Account
 import com.moronlu18.accounts.network.Resource
 import com.moronlu18.firebase.AuthFirebase
 import kotlinx.coroutines.launch
@@ -75,14 +74,13 @@ class SignInViewModel : ViewModel() {
 
                     state.value = SignInState.Loading(false)
 
-
-
-
                     when (result) {
                              //esto es una clase sellada (Resource)
                         is Resource.Success<*> -> {
 
-                            state.value = SignInState.Success(result.data as Account)
+                            //state.value = SignInState.Success(result.data as Account)
+
+                            state.value = SignInState.Success(result)
 
                             //val account = result.data as? Account
 

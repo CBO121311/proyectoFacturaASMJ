@@ -3,4 +3,5 @@
 
     <string name="errPasswordEmpty">Password vacío</string>
     <string name="errEmailEmpty">Email vacío</string>
+    <string name="errInvalidId">Id Inválido</string>
 </resources>

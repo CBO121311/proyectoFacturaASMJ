@@ -7,7 +7,7 @@
 
         <variable
             name="viewnodelcustomerdetail"
-            type="com.cbo.customer.usecase.CustomerViewModelDetails" />
+            type="com.cbo.customer.usecase.CustomerDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,14 +19,12 @@
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="2dp"
-            app:layout_constraintEnd_toStartOf="@+id/customer_detail_ciPhoto"
             app:layout_constraintStart_toStartOf="@+id/customer_detailglLeft"
             app:layout_constraintTop_toTopOf="@+id/customer_detailglTop">
 
             <LinearLayout
                 android:id="@+id/linearLayout"
-                android:layout_width="75dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:background="@color/cd_color_fondo_2"
                 android:orientation="horizontal"

@@ -21,18 +21,15 @@ import com.cbo.customer.usecase.CustomerViewModel
 import com.google.android.material.textfield.TextInputLayout
 import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.accounts.entity.Email
-import com.moronlu18.accounts.repository.CustomerProvider
 import com.moronlu18.customercreation.R
 import com.moronlu18.customercreation.databinding.FragmentCustomerCreationBinding
 
 
 class CustomerCreation : Fragment() {
-    private var customerList = CustomerProvider.CustomerdataSet
     private var _binding: FragmentCustomerCreationBinding? = null
     private val binding get() = _binding!!
     private lateinit var launcher: ActivityResultLauncher<Intent>
     private val viewModel: CustomerViewModel by viewModels()
-    private var isEditMode = false
     private var editCustomerPos = -1
 
     override fun onCreateView(
@@ -43,35 +40,29 @@ class CustomerCreation : Fragment() {
 
         binding.viewmodelcustomercreation = this.viewModel
         binding.lifecycleOwner = this
-
+        viewModel.setEditorMode(false)
 
         parentFragmentManager.setFragmentResultListener(
             "customkey", this, FragmentResultListener { _, result ->
                 var posCustomer: Int = result.getInt("position")
-                val customerEdit = customerList[posCustomer]
+                val customerEdit = viewModel.getCustomerByPosition(posCustomer)
+                viewModel.setEditorMode(true)
 
+                binding.customerCreationTietIdCustomer.setText(customerEdit.id.toString())
                 binding.customerCreationTietEmailCustomer.setText(customerEdit.email.toString())
                 binding.customerCreationTietNameCustomer.setText(customerEdit.name)
-
                 isAvailable(binding.customerCreationTietAddress, customerEdit.address)
-
                 isAvailable(binding.customerCreationTietAddress, customerEdit.address)
                 isAvailable(binding.customerCreationTietPhone, customerEdit.phone)
                 isAvailable(binding.customerCreationTietCity, customerEdit.city)
                 binding.customerCreationImgcAvatar.setImageResource(customerEdit.photo)
-                isEditMode = true
+                binding.customerCreationLlid.visibility = View.VISIBLE
                 editCustomerPos = posCustomer
+
+                viewModel.prevCustomer = customerEdit
             }
         )
-
-
-
-
         return binding.root
-    }
-
-    private fun isAvailable(field: TextView, value: String) {
-        field.text = if (value != "No disponible") value else null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -93,21 +84,21 @@ class CustomerCreation : Fragment() {
 
         viewModel.getState().observe(viewLifecycleOwner, Observer {
             when (it) {
-
-                CustomerState.NameIsMandatory -> setNameCustomerEmptyError()
-                CustomerState.EmailEmptyError -> setEmailEmptyError()
-                CustomerState.InvalidEmailFormat -> setEmailFormatError()
-                CustomerState.OnSuccess -> onSuccessCreate()
-                else -> {}//onSuccessCreate()
+                CustomerCreationState.InvalidId -> setInvalidIdError()
+                CustomerCreationState.NameIsMandatory -> setNameCustomerEmptyError()
+                CustomerCreationState.EmailEmptyError -> setEmailEmptyError()
+                CustomerCreationState.InvalidEmailFormat -> setEmailFormatError()
+                CustomerCreationState.OnSuccess -> onSuccessCreate()
             }
         })
+        binding.customerCreationTietIdCustomer.addTextChangedListener(CcWatcher(binding.customerCreationTilIdCustomer))
         binding.customerCreationTietNameCustomer.addTextChangedListener(CcWatcher(binding.customerCreationTilNameCustomer))
         binding.customerCreationTietEmailCustomer.addTextChangedListener(CcWatcher(binding.customerCreationTilCustomerEmail))
     }
 
 
     /**
-     * Función cuando crea con éxito un cliente.
+     * Función cuando crea con éxito o edita un cliente.
      */
     private fun onSuccessCreate() {
         val name = binding.customerCreationTietNameCustomer.text.toString()
@@ -115,12 +106,13 @@ class CustomerCreation : Fragment() {
         val phone = binding.customerCreationTietPhone.text.toString()
         val city = binding.customerCreationTietCity.text.toString()
         val address = binding.customerCreationTietAddress.text.toString()
-        //val photo = binding.customerCreationImgcAvatar
+        val id = binding.customerCreationTietIdCustomer.text.toString().toIntOrNull()
+            ?: viewModel.getNextCustomerId()
 
-        if (isEditMode) {
-            val editCustomer = customerList[editCustomerPos]
+        if (viewModel.getEditorMode()) {
+
             val updatedCustomer = Customer(
-                id = editCustomer.id,
+                id = id,
                 name = name,
                 email = Email(email),
                 phone = phone.ifEmpty { "No disponible" },
@@ -128,10 +120,12 @@ class CustomerCreation : Fragment() {
                 address = address.ifEmpty { "No disponible" },
                 photo = R.drawable.kiwidiner_background
             )
+
+            viewModel.updateCustomer(updatedCustomer, editCustomerPos)
 
         } else {
             val customer = Customer(
-                id = customerList.size + 1,
+                id = viewModel.getNextCustomerId(),
                 name = name,
                 email = Email(email),
                 phone = phone.ifEmpty { "No disponible" },
@@ -139,12 +133,18 @@ class CustomerCreation : Fragment() {
                 address = address.ifEmpty { "No disponible" },
                 photo = R.drawable.kiwidiner_background
             )
-            customerList.add(customer)
+            viewModel.addCustomer(customer)
         }
-
         findNavController().popBackStack()
     }
 
+    /**
+     * Comprueba si Customer tiene el valor "No disponible" en algunos de sus campos
+     * si lo es da un valor vacío para el TextView
+     */
+    private fun isAvailable(field: TextView, value: String) {
+        field.text = if (value != "No disponible") value else null
+    }
 
     /**
      * TextWatcher para anular el mensaje de error
@@ -162,6 +162,13 @@ class CustomerCreation : Fragment() {
         }
     }
 
+    /**
+     * Función que muestra el error de ID inválido
+     */
+    private fun setInvalidIdError() {
+        binding.customerCreationTilIdCustomer.error = "ID inválido"
+        binding.customerCreationTietIdCustomer.requestFocus()
+    }
 
     /**
      * Función que muestra el error de Nombre vacío

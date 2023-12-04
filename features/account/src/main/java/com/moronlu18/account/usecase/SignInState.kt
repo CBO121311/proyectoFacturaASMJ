@@ -1,6 +1,6 @@
-package com.moronlu18.account.ui.signin
+package com.moronlu18.account.usecase
 
-import com.moronlu18.accounts.entity.Account
+import com.moronlu18.accounts.network.Resource
 
 /*Esto es mi viewModel de SignIn que coge el genérico de Resource.
 La clase sellada engloba todos los errores*/
@@ -12,8 +12,9 @@ sealed class SignInState {
 
     //todos estos son clases
     data class AuthencationError(var message: String) : SignInState()
-    data class Success(var account: Account) : SignInState()
-    data class AutethencationError(var message: String) : SignInState()
+    data class Success(var account: Resource) : SignInState()
+
+    //data class AutethencationError(var message: String) : SignInState()
     /*data object Success:SignInState()
     Yo debo saber lo que sabe pasar la visa
     Quiero que el error aparezca tal como aparezca en FireBase

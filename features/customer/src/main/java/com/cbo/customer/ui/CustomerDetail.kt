@@ -12,32 +12,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.cbo.customer.adapter.CustomerAdapter
-import com.cbo.customer.usecase.CustomerViewModel
-import com.cbo.customer.usecase.CustomerViewModelDetails
+import com.cbo.customer.usecase.CustomerDetailViewModel
 import com.moronlu18.accounts.entity.Customer
-import com.moronlu18.accounts.repository.CustomerProvider
 import com.moronlu18.customercreation.R
 import com.moronlu18.customercreation.databinding.FragmentCustomerDetailBinding
 import com.moronlu18.invoice.base.BaseFragmentDialog
 
 class CustomerDetail : Fragment() {
 
-    private val viewModel: CustomerViewModelDetails by viewModels()
+    private val viewModel: CustomerDetailViewModel by viewModels()
     private val args: CustomerDetailArgs by navArgs()
-    private var customerList = CustomerProvider.CustomerdataSet
-
     private var _binding: FragmentCustomerDetailBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var adapter: CustomerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-
     }
 
     override fun onCreateView(
@@ -45,16 +38,24 @@ class CustomerDetail : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        adapter = CustomerAdapter(
-            clientesList = customerList,
-        )
-
         _binding = FragmentCustomerDetailBinding.inflate(inflater, container, false)
 
+        binding.viewnodelcustomerdetail = this.viewModel
+        binding.lifecycleOwner = this
 
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewnodelcustomerdetail = viewModel
 
+
+        viewModel.getState().observe(viewLifecycleOwner, Observer {
+            when (it) {
+                CustomerDetailState.OnSuccess -> onSuccess()
+                CustomerDetailState.ReferencedCustomer -> showReferencedCustomer()
+            }
+        })
+
+        return binding.root
+    }
+
+    private fun onSuccess() {
         val custome: Customer = args.customer
 
         viewModel.let {
@@ -63,14 +64,10 @@ class CustomerDetail : Fragment() {
             it.emailCustomer.value = custome.email.toString()
             it.phoneCustomer.value = custome.phone
             it.cityCustomer.value = custome.city
-            it.addressCustomer.value=custome.address
+            it.addressCustomer.value = custome.address
         }
-
         binding.customerDetailCiPhoto.setImageResource(custome.photo)
-
-        return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -80,8 +77,40 @@ class CustomerDetail : Fragment() {
         }
     }
 
+
     /**
-     * Crea el menú.
+     * Acción al eliminar un Customer del repositorio
+     * y comprueba si lo puede hacer
+     */
+    private fun deleteConfirmation() {
+        val possible = viewModel.isDeleteSafe(args.customer)
+        if (!possible) {
+
+            findNavController().navigate(
+                CustomerDetailDirections.actionCustomerDetailToBaseFragmentDialog2(
+                    getString(R.string.title_deleteCustomer),
+                    getString(R.string.Content_deleteCustomer)
+                )
+            )
+            parentFragmentManager.setFragmentResultListener(
+                BaseFragmentDialog.request,
+                viewLifecycleOwner
+            ) { _, result ->
+                val success = result.getBoolean(BaseFragmentDialog.result, false)
+                if (success) {
+                    viewModel.deleteCustomer(args.customer)
+
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        findNavController().popBackStack()
+                    }, 100)
+                }
+            }
+        }
+    }
+
+
+    /**
+     * Infla el menú
      */
     @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -92,6 +121,7 @@ class CustomerDetail : Fragment() {
 
     /**
      * Opciones al seleccionar el menú.
+     * Solo se ha dado al funcionalidad al borrado.
      */
     @SuppressLint("NotifyDataSetChanged")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -112,41 +142,25 @@ class CustomerDetail : Fragment() {
 
 
     /**
-     * Confirmación para hacer el borrado.
+     * Método muestra el AlertDialog de customer referenciado
      */
-    private fun deleteConfirmation() {
-
-
+    private fun showReferencedCustomer() {
         findNavController().navigate(
-            CustomerDetailDirections.actionCustomerDetailToBaseFragmentDialog2(
-                getString(com.moronlu18.invoice.R.string.title_fragmentDialogExit),
-                getString(com.moronlu18.invoice.R.string.Content_fragmentDialogExit)
+            CustomerDetailDirections.actionCustomerDetailToBaseFragmentDialogWarning(
+                getString(R.string.title_ad_warning),
+                getString(R.string.errReferencedCustomer)
             )
         )
-        //val prueba :Boolean = deleteCusto
-       // Log.i("TAG","${prueba}" )
-        parentFragmentManager.setFragmentResultListener(
-            BaseFragmentDialog.request,
-            viewLifecycleOwner
-        ) { _, result ->
-            val success = result.getBoolean(BaseFragmentDialog.result, false)
-            if (success) {
-                val position = CustomerProvider.CustomerdataSet.indexOf(args.customer)
-
-                if (position != -1) {
-                    CustomerProvider.CustomerdataSet.removeAt(position)
-                    adapter.notifyItemRemoved(position)
-
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        findNavController().popBackStack()
-                    }, 100)
-                }
-            }
-        }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.onSuccess()
     }
 }

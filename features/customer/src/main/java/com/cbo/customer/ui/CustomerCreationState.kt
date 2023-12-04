@@ -11,19 +11,18 @@ La clase sellada engloba todos los errores*/
  * 4. InvalidEmailFormat: email con formato inválido
  * 5. ReferencedCustomer: cliente referenciado.
  */
-sealed class CustomerState {
-    data object NameIsMandatory : CustomerState()
-    data object EmailEmptyError : CustomerState()
+sealed class CustomerCreationState {
+    data object NameIsMandatory : CustomerCreationState()
+    data object EmailEmptyError : CustomerCreationState()
 
-    data object NonExistentContact: CustomerState()
-    data object InvalidId: CustomerState()
-    data object InvalidEmailFormat: CustomerState()
+    //data object NonExistentContact: CustomerCreationState()
+    data object InvalidId : CustomerCreationState()
+    data object InvalidEmailFormat : CustomerCreationState()
 
+    //data object ReferencedCustomer: CustomerCreationState()
 
-    data object ReferencedCustomer: CustomerState()
-
-   //Escribe solo el nombre
-    data object OnSuccess : CustomerState()
+    //Escribe solo el nombre
+    data object OnSuccess : CustomerCreationState()
 
     //todos estos son clases
     //data class AuthencationError(var message: String) : CustomerState()

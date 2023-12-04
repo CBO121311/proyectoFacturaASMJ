@@ -1,4 +1,4 @@
-package com.moronlu18.account.ui.signin
+package com.moronlu18.account.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

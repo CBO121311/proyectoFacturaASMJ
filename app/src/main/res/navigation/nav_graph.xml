@@ -51,7 +51,7 @@
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.moronlu18.invoice.ui.SplashFragment"
-        android:label="fragment_splash"
+        android:label="@string/title_splash"
         tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_mainFragment"
@@ -83,6 +83,9 @@
         <action
             android:id="@+id/action_mainFragment_to_baseFragmentDialog"
             app:destination="@id/baseFragmentDialog" />
+        <action
+            android:id="@+id/action_mainFragment_to_about"
+            app:destination="@id/aboutMaterialFragment" />
     </fragment>
     <dialog
         android:id="@+id/baseFragmentDialog"
@@ -95,5 +98,9 @@
             android:name="message"
             app:argType="string" />
     </dialog>
+    <fragment
+        android:id="@+id/aboutMaterialFragment"
+        android:name="com.moronlu18.invoice.ui.AboutMaterialFragment"
+        android:label="@string/title_about" />
 
 </navigation>

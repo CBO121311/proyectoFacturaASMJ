@@ -1,10 +1,7 @@
 package com.cbo.customer.ui
 
 
-import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -12,13 +9,13 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cbo.customer.adapter.CustomerAdapter
-import com.cbo.customer.usecase.TAG
+import com.cbo.customer.usecase.CustomerListViewModel
 import com.moronlu18.accounts.entity.Customer
-import com.moronlu18.accounts.entity.Email
-import com.moronlu18.accounts.repository.CustomerProvider
 import com.moronlu18.customercreation.R
 
 import com.moronlu18.customercreation.databinding.FragmentCustomerListBinding
@@ -28,9 +25,10 @@ class CustomerList : Fragment() {
 
     private var _binding: FragmentCustomerListBinding? = null
     private val binding get() = _binding!!
-    private var customerList = CustomerProvider.CustomerdataSet
-    private lateinit var adapter: CustomerAdapter
+    private lateinit var customerAdapter: CustomerAdapter
     private var isDeleting = false
+    private val viewModel: CustomerListViewModel by viewModels()
+    private var isFirstTime = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,9 +37,12 @@ class CustomerList : Fragment() {
     ): View? {
         _binding = FragmentCustomerListBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
+
+        binding.viewmodelcustomerlist = this.viewModel
+        binding.lifecycleOwner = this
+
         return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,179 +50,184 @@ class CustomerList : Fragment() {
         initRecyclerViewClientes()
 
         binding.customerListFltbtnAdd.setOnClickListener {
-            //createCliente()
             findNavController().navigate(R.id.action_customerList_to_customerCreation)
         }
 
+        viewModel.getState().observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is CustomerListState.Loading -> showProgressBar(it.value)
+                CustomerListState.NoDataError -> showListEmptyView()
+                is CustomerListState.Success -> onSuccess(it.dataset)
+                CustomerListState.ReferencedCustomer -> showReferencedCustomer()
+                else -> {}
+            }
+        })
 
     }
-
 
     /**
      * Inicia el recycleview
      */
     private fun initRecyclerViewClientes() {
-        adapter = CustomerAdapter(
-            clientesList = customerList,
+        customerAdapter = CustomerAdapter(
             onClickListener = { cliente -> onItemSelected(cliente) },
             onClickDelete = { position -> onDeletedItem(position) },
             onClickEdit = { position -> onEditItem(position) })
 
-        updateEmptyView()
-
         binding.customerListRvClientes.layoutManager = LinearLayoutManager(requireContext())
-        binding.customerListRvClientes.adapter = adapter
+        binding.customerListRvClientes.adapter = customerAdapter
     }
 
-    private fun onEditItem(position: Int) {
-        var bundle = Bundle();
-        bundle.putInt("position", position)
+    /**
+     * Método que oculta la imagen noData si la lista tiene algo.
+     * Y actualiza el adapter.
+     */
+    private fun onSuccess(dataset: ArrayList<Customer>) {
 
-        parentFragmentManager.setFragmentResult("customkey", bundle)
-        findNavController().navigate(R.id.action_customerList_to_customerCreation)
+        binding.customerListClEmpty.visibility = View.GONE
+        binding.customerListRvClientes.visibility = View.VISIBLE
+        customerAdapter.update(dataset)
     }
 
 
     /**
-     * Comprueba si la lista está vacía.
+     * Método que realiza la acción de editar un item y comprueba si se puede
      */
-    private fun updateEmptyView() {
 
-        if (customerList.isEmpty()) {
-            binding.customerListClEmpty.visibility = View.VISIBLE
-        } else {
-            binding.customerListClEmpty.visibility = View.GONE
+    private fun onEditItem(position: Int) {
+
+        val customer = viewModel.getCustomerByPosition(position)
+        val possible = viewModel.isDeleteSafe(customer)
+        if (!possible) {
+            val bundle = Bundle();
+            bundle.putInt("position", position)
+
+            parentFragmentManager.setFragmentResult("customkey", bundle)
+            findNavController().navigate(R.id.action_customerList_to_customerCreation)
         }
     }
 
     /**
-     * Acción al eliminar un elemento del recycle.
+     * Acción al eliminar un Customer del recycle y comprueba si lo puede hacer
      */
     private fun onDeletedItem(position: Int) {
 
-        if (!isDeleting) {
-            isDeleting = true
+        isDeleting = true
+        val customer = viewModel.getCustomerByPosition(position)
+        val possible = viewModel.isDeleteSafe(customer)
+        if (!possible) {
             findNavController().navigate(
                 CustomerListDirections.actionCustomerListToBaseFragmentDialog2(
-                    getString(com.moronlu18.invoice.R.string.title_fragmentDialogExit),
+                    getString(R.string.title_deleteCustomer),
                     getString(R.string.Content_deleteCustomer)
                 )
             )
-
             parentFragmentManager.setFragmentResultListener(
                 BaseFragmentDialog.request,
                 viewLifecycleOwner
             ) { _, result ->
                 val success = result.getBoolean(BaseFragmentDialog.result, false)
                 if (success) {
-                    val customer1 = customerList[position]
-                    val existe = CustomerProvider.deleteCustomer(customer1)
-                    Log.i(TAG, "El cliente: ${existe}")
-                    if (!existe) {
-
-                        customerList.removeAt(position)
-                        adapter.notifyItemRemoved(position)
-                        updateEmptyView()
-
-                    } else {
-                        showConfirmationDialog()
-                    }
-
-
+                    customerAdapter.deleteCustomer(position)
+                    viewModel.getCustomerListNoLoading()
                 }
             }
-        }
-
-        binding.customerListRvClientes.postDelayed({
-            isDeleting = false
-        }, 300)
-
     }
+}
 
-    private fun showConfirmationDialog() {
 
-        AlertDialog.Builder(requireContext())
-            .setTitle("Aviso")
-            .setMessage("No puedes borrar un cliente referenciado a factura o tarea")
-            .setNegativeButton("Entendido", null)
-            .show()
-    }
-
-    /**
-     *  Envía un objeto customer al layout customerDetail utilizando SafeArgs
-     */
-    private fun onItemSelected(customer: Customer) {
-        findNavController().navigate(
-            CustomerListDirections.actionCustomerListToCustomerDetail(
-                customer
-            )
+/**
+ * Método muestra el AlertDialog de customer referenciado
+ */
+private fun showReferencedCustomer() {
+    findNavController().navigate(
+        CustomerListDirections.actionCustomerListToBaseFragmentDialogWarning(
+            getString(R.string.title_ad_warning),
+            getString(R.string.errReferencedCustomer)
         )
+    )
+}
+
+
+/**
+ * Método que muestra la imagen noData si la lista está vacía
+ */
+private fun showListEmptyView() {
+    binding.customerListClEmpty.visibility = View.VISIBLE
+    binding.customerListRvClientes.visibility = View.GONE
+}
+
+
+/**
+ * Si es true muestra el progressBar, si es false lo quita.
+ */
+private fun showProgressBar(value: Boolean) {
+
+    if (value) {
+        findNavController().navigate(R.id.action_customerList_to_fragmentProgressDialogKiwi)
+    } else {
+        findNavController().popBackStack()
     }
 
-    /**
-     * Creación del menu de customer_list
-     */
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_customer_list, menu)
-    }
+}
 
+/**
+ *  Envía un objeto customer al layout customerDetail utilizando SafeArgs
+ */
+private fun onItemSelected(customer: Customer) {
+    findNavController().navigate(
+        CustomerListDirections.actionCustomerListToCustomerDetail(
+            customer
+        )
+    )
+}
 
-    /**
-     * Opciones al seleccionar el menú. Actualmente solo hace el orden de la lista.
-     */
+/**
+ * Infla el menú de customerList
+ */
+override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    inflater.inflate(R.menu.menu_customer_list, menu)
+}
 
-
-    @SuppressLint("NotifyDataSetChanged")
-    @Deprecated("Deprecated in Java")
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.menu_cd_action_sortname -> {
-                customerList.sortBy { it.name }
-                adapter.notifyDataSetChanged()
-                return true
-            }
-
-            R.id.menu_cd_action_sortid -> {
-                customerList.sortBy { it.id }
-                adapter.notifyDataSetChanged()
-                return true
-            }
-
-            else -> return super.onOptionsItemSelected(item)
+/**
+ * Opciones al seleccionar el menú.
+ * Actualmente solo hace el orden de la lista.
+ */
+override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    when (item.itemId) {
+        R.id.menu_cd_action_sortname -> {
+            customerAdapter.sortName()
+            return true
         }
+
+        R.id.menu_cd_action_sortid -> {
+
+            customerAdapter.sortId()
+            return true
+        }
+
+        else -> return super.onOptionsItemSelected(item)
+    }
+}
+
+/**
+ * Al iniciar el Fragment obtiene la lista con el loading.
+ * En la siguientes utiliza una función igual pero sin el loading.
+ */
+override fun onStart() {
+    super.onStart()
+    if (isFirstTime) {
+        viewModel.getCustomerList()
+        isFirstTime = false
+    } else {
+        viewModel.getCustomerListNoLoading()
     }
 
-    //region Métodos de pruebas
-    /**
-     * Comparador por nombre, actualmente descartado
-     */
-    private val customerNameComparator = Comparator<Customer> { customer1, customer2 ->
-        customer1.name.compareTo(customer2.name)
-    }
+}
 
-    /**
-     * Crea un cliente
-     * Fines de prueba.
-     */
-    private fun createCliente() {
-
-        val clientes = Customer(
-            3,
-            "Tienda de verduras",
-            Email("abc@gmail.com"),
-            photo = R.drawable.kiwidiner_background
-        );
-        customerList.add(clientes)
-        adapter.notifyItemInserted(customerList.size - 1)
-        //LinearLayoutManager(requireContext()).scrollToPositionWithOffset(clientesMutableList.size-1, 4)
-        //binding.customerListRvClientes.layoutManager?.scrollToPosition(clientesMutableList.size - 1)
-    }
-
-    //endregion
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
+override fun onDestroyView() {
+    super.onDestroyView()
+    _binding = null
+}
 
 }

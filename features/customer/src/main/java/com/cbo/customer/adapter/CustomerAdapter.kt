@@ -12,11 +12,12 @@ import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.customercreation.databinding.ItemClienteBinding
 
 class CustomerAdapter(
-    private var clientesList: List<Customer>,
     private val onClickListener: ((Customer) -> Unit)? = null,
     private val onClickDelete: ((Int) -> Unit)? = null,
     private val onClickEdit: ((Int) -> Unit)? = null
 ) : RecyclerView.Adapter<CustomerAdapter.CustomerViewHolder>() {
+
+    private  var dataset = arrayListOf<Customer>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerViewHolder {
 
@@ -31,12 +32,34 @@ class CustomerAdapter(
     * */
     override fun getItemCount(): Int {
 
-        return clientesList.size
+        return dataset.size
     }
 
     override fun onBindViewHolder(holder: CustomerViewHolder, position: Int) {
-        val item = clientesList[position]
+        //val item = dataset.get(position)
+        val item = dataset[position]
         holder.bind(item, onClickListener, onClickDelete, onClickEdit)
+    }
+
+
+    fun update(newDataSet:ArrayList<Customer>){
+
+        dataset = newDataSet
+        dataset.sortBy { it.id }
+        notifyDataSetChanged()
+    }
+    fun sortId(){
+        dataset.sortBy { it.id }
+        notifyDataSetChanged()
+    }
+    fun sortName(){
+        dataset.sortBy { it.name }
+        notifyDataSetChanged()
+    }
+
+    fun deleteCustomer(position:Int){
+        dataset.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     inner class CustomerViewHolder(private val view: View) :
@@ -50,7 +73,6 @@ class CustomerAdapter(
             onClickEdit: ((Int) -> Unit)?
 
         ) {
-
             with(binding){
 
                 customerListTvName.text = clientesModel.name
@@ -70,8 +92,6 @@ class CustomerAdapter(
                 }
             }
             itemView.setOnClickListener { onClickListener?.invoke(clientesModel) }
-
-
         }
     }
 }

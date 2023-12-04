@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.moronlu18.account.adapter.UserAdapter
 import com.moronlu18.account.usecase.UserListState
 import com.moronlu18.account.usecase.UserListViewModel
 import com.moronlu18.accounts.entity.User
+import com.moronlu18.accountsignin.R
 import com.moronlu18.accountsignin.databinding.FragmentUserListBinding
 
 
@@ -22,8 +24,8 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick {
     private val binding get() = _binding!!
 
     //Esto lo da el proveedor por defecto
-    private val viewmodel:UserListViewModel by viewModels()
-    private lateinit var userAdapter:UserAdapter
+    private val viewModel: UserListViewModel by viewModels()
+    private lateinit var userAdapter: UserAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +38,8 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick {
         // Inflate the layout for this fragment
         _binding = FragmentUserListBinding.inflate(inflater, container, false)
 
-
+        binding.viewmodel = this.viewModel
+        binding.lifecycleOwner = this
         return binding.root
     }
 
@@ -47,10 +50,9 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick {
 
 
         //Creamos un observador
-        viewmodel.getState().observe(viewLifecycleOwner, Observer {
-            when(it){
+        viewModel.getState().observe(viewLifecycleOwner, Observer {
+            when (it) {
                 is UserListState.Loading -> showProgressBar(it.value)
-
                 UserListState.NoDataError -> showNoDataError()
                 is UserListState.Success -> onSuccess(it.dataset)
             }
@@ -64,7 +66,7 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick {
 
     override fun onStart() {
         super.onStart()
-        viewmodel.getUserList()
+        viewModel.getUserList()
     }
 
     //Cuando quiero que se adapte en tiempo de ejecución.
@@ -75,7 +77,7 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick {
      */
 
     //El adapter tiene los usuarios.
-    private fun onSuccess(dataset:ArrayList<User>){
+    private fun onSuccess(dataset: ArrayList<User>) {
         //Desactivar la animación y visualizar el recyclerView
         hideNoDataError()
 
@@ -86,7 +88,7 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick {
     private fun hideNoDataError() {
         println("hideNoData")
         binding.animationView.visibility = View.GONE
-        binding.rvUser.visibility=View.VISIBLE
+        binding.rvUser.visibility = View.VISIBLE
     }
 
 
@@ -94,21 +96,24 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick {
      * Función que muestra el error de que no hay datos
      */
     private fun showNoDataError() {
-        println("showNoDataErrror")
+        println("showNoDataError")
         binding.animationView.visibility = View.VISIBLE
-        binding.rvUser.visibility=View.GONE //No ocupa espacio.
+        binding.rvUser.visibility = View.GONE //No ocupa espacio.
 
     }
-
 
 
     /**
      * Mostar el progressbar en la vista
      */
     private fun showProgressBar(value: Boolean) {
-        println("showProgressBar")
+        if (value) {
+            findNavController().navigate(R.id.action_userListFragment_to_fragmentProgressDialog)
+        }else
+        {
+            findNavController().popBackStack()
+        }
     }
-
 
     /**
      * Función que inicializa el RecyclerView que muestra el listado de usuarios de la aplicación
@@ -129,10 +134,14 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick {
 
 
         //Crear el constructor primerario
-        userAdapter = UserAdapter(this){
+        userAdapter = UserAdapter(this) {
             //when(event){}
 
-            Toast.makeText(requireContext(),"Usuario Seleccionado mediante lambda $it", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                requireContext(),
+                "Usuario Seleccionado mediante lambda $it",
+                Toast.LENGTH_LONG
+            ).show()
         }
 
         /*adapter = UserAdapter(UserRepository.dataSet, requireContext(),this){
@@ -145,7 +154,7 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick {
         with(binding.rvUser) {
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
-            this.adapter =  userAdapter
+            this.adapter = userAdapter
         }
     }
 
@@ -154,11 +163,13 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick {
      */
 
     override fun userClick(user: com.moronlu18.accounts.entity.User) {
-        Toast.makeText(requireActivity(),"Pulsación corta en el usuario $user", Toast.LENGTH_LONG).show()
+        Toast.makeText(requireActivity(), "Pulsación corta en el usuario $user", Toast.LENGTH_LONG)
+            .show()
     }
 
     override fun userOnLongClick(user: com.moronlu18.accounts.entity.User) {
-        Toast.makeText(requireActivity(),"Pulsación larga en el usuario $user", Toast.LENGTH_LONG).show()
+        Toast.makeText(requireActivity(), "Pulsación larga en el usuario $user", Toast.LENGTH_LONG)
+            .show()
     }
 
 

@@ -1,4 +1,5 @@
 package com.moronlu18.invoice.ui
+
 import com.moronlu18.invoice.R
 import android.animation.AnimatorInflater
 import android.animation.AnimatorSet
@@ -58,7 +59,7 @@ class MainFragment : Fragment() {
         binding.cvItem.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_item)
         binding.cvSigIn.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_account)
         //binding.cvSignUp.btnAnimationNav(R.id.action_mainFragment_to_featureAccountSignUp)
-        binding.cvSignOut.setOnClickListener {
+        /*binding.cvSignOut.setOnClickListener {
 
             findNavController().navigate(
                 MainFragmentDirections.actionMainFragmentToBaseFragmentDialog(
@@ -66,7 +67,15 @@ class MainFragment : Fragment() {
                     getString(R.string.Content_fragmentDialogExit)
                 )
             )
-        }
+        }*/
+
+        binding.cvSignOut.btnAnimationNav(-1)
+
+        // binding.cvSignOut.btnAnimationNav()
+
+
+        binding.cvAbout.btnAnimationNav(R.id.action_mainFragment_to_about)
+
 
         parentFragmentManager.setFragmentResultListener(
             BaseFragmentDialog.request,
@@ -108,12 +117,21 @@ class MainFragment : Fragment() {
             }
             false
         }
-
-        setOnClickListener {
-            findNavController().navigate(idDestination)
+        if (idDestination == -1) {
+            setOnClickListener {
+                findNavController().navigate(
+                    MainFragmentDirections.actionMainFragmentToBaseFragmentDialog(
+                        getString(R.string.title_fragmentDialogExit),
+                        getString(R.string.Content_fragmentDialogExit)
+                    )
+                )
+            }
+        } else {
+            setOnClickListener {
+                findNavController().navigate(idDestination)
+            }
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

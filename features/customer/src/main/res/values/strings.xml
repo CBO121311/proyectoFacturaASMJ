@@ -36,4 +36,6 @@
     <string name="cl_tvExampleAddress">No disponible</string>
     <string name="cl_tvExampleId">123</string>
     <string name="cd_cd_flbtnCorrect">Salir de detalles de cliente</string>
+    <string name="errReferencedCustomer">No puedes borrar/editar un cliente referenciado a una factura o tarea</string>
+    <string name="title_ad_warning">Aviso</string>
 </resources>

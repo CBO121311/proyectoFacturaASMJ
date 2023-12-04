@@ -1,19 +1,21 @@
-package com.moronlu18.account.ui.signin
+package com.moronlu18.account.ui
 
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
-import com.moronlu18.accounts.entity.Account
+import com.moronlu18.account.usecase.SignInState
+import com.moronlu18.account.usecase.SignInViewModel
+import com.moronlu18.account.usecase.TAG
 import com.moronlu18.accountsignin.R
 import com.moronlu18.accountsignin.databinding.FragmentAccountSignInBinding
 
@@ -89,7 +91,7 @@ class SignInFragment : Fragment() {
                 //is Es un data class.
                 is SignInState.AuthencationError -> showMessage(it.message)
                 is SignInState.Loading -> showProgressbar(it.value)
-                //is SignInState.Success -> showMessageCorrect(it.account!!);
+                //is SignInState.Success -> showMessageCorrect();
                 else -> onSuccess() //Todos los casos de uso tiene uno de éxito
             }
         })
@@ -117,36 +119,8 @@ class SignInFragment : Fragment() {
     private fun showProgressbar(value: Boolean) {
         if (value)
             findNavController().navigate(R.id.action_accountSignIn_to_fragmentProgressDialog)
-        else{
+        else {
             findNavController().popBackStack()
-        }
-    }
-
-
-    //Me interesa acceder a las propiedas y funciones de la clase externa
-
-    //region Login Prueba
-    open inner class Login(private val textView: TextView) : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-        }
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        }
-
-        override fun afterTextChanged(s: Editable?) {
-            //til.isErrorEnabled = false
-            textView.error = null
-
-
-            when (textView.id) {
-                R.id.tietEmailSignIn -> {
-                    binding.tilEmailSignIn.error = null
-                    binding.tilPassword.isErrorEnabled = false
-                }
-
-                R.id.tietPassword -> binding.tilPassword.error = null
-
-            }
         }
     }
 
@@ -175,22 +149,10 @@ class SignInFragment : Fragment() {
         //Navegamos al dialog
         findNavController().navigate(action)
 
-    }
-
-
-    /**
-     * Función que muestra al usuario un mensaje
-     */
-
-    private fun showMessageCorrect(cuenta: Account) {
-        //Toast.makeText(requireContext(), "Mi primer MVVM $message", Toast.LENGTH_SHORT).show()
-        val action =
-            SignInFragmentDirections.actionAccountSignInToBaseFragmentDialog("Éxito", cuenta.email.toString())
-        //Navegamos al dialog
-        findNavController().navigate(action)
+        Toast.makeText(requireActivity(), "Caso de éxito en el login", Toast.LENGTH_LONG).show()
+        //findNavController().navigate(R.id.action_accountSignIn_to_userListFragment)
 
     }
-
 
     /**
      * Función que muestra el error de Email Empty
@@ -217,9 +179,18 @@ class SignInFragment : Fragment() {
     }
 
     private fun onSuccess() {
+        val action =
+            SignInFragmentDirections.actionAccountSignInToBaseFragmentDialog(
+                "Éxito",
+                "Login con exito"
+            )
+        findNavController().navigate(action)
 
+        findNavController().popBackStack()
         findNavController().navigate(R.id.action_accountSignIn_to_userListFragment)
-        Toast.makeText(requireActivity(), "Caso de éxito en el login", Toast.LENGTH_LONG).show()
+
+        Log.i(TAG, "Ha pasado por On Success")
+
     }
 
     override fun onDestroyView() {
@@ -227,6 +198,37 @@ class SignInFragment : Fragment() {
         _binding = null
     }
 }
+
+
+/*
+  //Me interesa acceder a las propiedas y funciones de la clase externa
+
+    //region Login Prueba
+    open inner class Login(private val textView: TextView) : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            //til.isErrorEnabled = false
+            textView.error = null
+
+
+            when (textView.id) {
+                R.id.tietEmailSignIn -> {
+                    binding.tilEmailSignIn.error = null
+                    binding.tilPassword.isErrorEnabled = false
+                }
+
+                R.id.tietPassword -> binding.tilPassword.error = null
+
+            }
+        }
+    }
+    */
+
 
 /*Es una función de suspensión no bloquea el hilo.
 Una corrutina es un conjunto de instrucciones que hace un trabajo.
