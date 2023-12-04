@@ -114,13 +114,21 @@ Inovice es la aplicación que se realizará de manera modular para el estudio de
  - Se ha implementado una excepción que evita que puedas crear una tarea si la fecha de finalización
 de la misma es anterior a la de la creación.
 ------------------------
- ## V3.4.1 (26/11/2023)
+ ## V3.4.1 (01/12/2023)
  *Escrito por CBO121311*
  - Añadido animación al splash y customList.
  - Ahora Email es un tipo de dato.
  - El botón editar de customer funciona.
  - Añadido excepción referenciado.
  - Diversos cambios de código, de databinding y unido viewholder.
+------------------------
+ ## V3.4.7 (04/12/2023)
+ *Escrito por CBO121311*
+ - Añadida layout Acerca de
+ - Añadido progressbar al customer
+ - Implementado de forma correcta la excepción ReferencedCustomer e InvalidId a través del viewModel
+ - Los capa view de customer se han adaptado para que no contacte de forma directa con el repositorio.
+
 
 # Icono
 
