@@ -60,7 +60,7 @@
                 android:layout_marginStart="8dp"
 
                 android:layout_marginEnd="@dimen/cc_margin_til"
-                android:hint="ID"
+                android:hint="@string/cc_hint_id"
                 android:padding="2dp"
                 app:errorEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"

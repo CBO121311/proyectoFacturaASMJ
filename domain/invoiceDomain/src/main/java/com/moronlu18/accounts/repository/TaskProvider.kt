@@ -55,6 +55,9 @@ class TaskProvider {
         }
 
 
+        /**
+         * Comprueba si el id de cliente está en Task
+         */
         fun isCustomerReferenceTask(idCli: Int): Boolean {
             return taskDataSet.any() { it.clientID == idCli }
         }

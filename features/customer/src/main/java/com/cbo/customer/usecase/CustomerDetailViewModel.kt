@@ -1,8 +1,10 @@
 package com.cbo.customer.usecase
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.cbo.customer.ui.CustomerDetailState
+import com.cbo.customer.ui.CustomerListState
 import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.accounts.repository.CustomerProvider
 
@@ -17,18 +19,18 @@ class CustomerDetailViewModel : ViewModel() {
     var cityCustomer = MutableLiveData<String>()
     private val repository = CustomerProvider
 
-    fun getState(): LiveData<CustomerDetailState> {
-        return state
-    }
 
-    fun onSuccess() {
-        state.value = CustomerDetailState.OnSuccess
-    }
+    /**
+     * Método que obtiene la posición del Customer en base al Customer en si.
+     */
     private fun getPositionById(customer: Customer): Int {
-
         return repository.getPosByCustomer(customer)
     }
 
+
+    /**
+     * Borra el cliente desde el viewModel
+     */
     fun deleteCustomer(customer: Customer) {
         val position = getPositionById(customer)
         if (position != -1) {
@@ -36,11 +38,32 @@ class CustomerDetailViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Comprueba si es seguro borrar un cliente porque podría estar referenciado.
+     * Devuelve True si no hay problema, false si lo hay.
+     */
     fun isDeleteSafe(customer: Customer): Boolean {
-        val isSafe = repository.isCustomerSafeDelete(customer.id)
-        if (isSafe) {
+        return if (repository.isCustomerSafeDelete(customer.id)) {
             state.value = CustomerDetailState.ReferencedCustomer
+            false
+        } else {
+            true
         }
-        return isSafe
+    }
+
+    /**
+     * Método que da el estado "onSuccess" en el contexto
+     * de la customerDetail.
+     */
+    fun onSuccess() {
+        state.value = CustomerDetailState.OnSuccess
+    }
+
+    /**
+     * Devuelve la variable State.
+     * No se puede modificar su valor fuera de ViewModel.
+     */
+    fun getState(): LiveData<CustomerDetailState> {
+        return state
     }
 }

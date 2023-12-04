@@ -25,17 +25,18 @@ class CustomerViewModel : ViewModel() {
     private val pattern = Pattern.compile("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")
     private val repository = CustomerProvider
 
+
+
+    /**
+     * Método que da distintos estados al comprobar si los datos está
+     * escrito de forma correcta.
+     */
     fun validateCredentials() {
         Log.i(
             TAG,
             "El email es: ${emailCustomer.value} y el nombre es ${nameCustomer.value} y ${idCustomer.value}"
         )
 
-        Log.i(
-            TAG,
-            "El editor está ${isEditor.value} y el previo customer existe $prevCustomer"
-        )
-        // El viewModel comprueba todas las excepcicones
         when {
             TextUtils.isEmpty(nameCustomer.value) -> state.value =
                 CustomerCreationState.NameIsMandatory
@@ -58,38 +59,56 @@ class CustomerViewModel : ViewModel() {
         }
     }
 
-
+    /**
+     * Añade un cliente al repositorio
+     */
     fun addCustomer(customer: Customer) {
         repository.addOrUpdateCustomer(customer, null)
     }
 
+    /**
+     * Actualiza un cliente al repositorio.
+     * Esto solo se hace en el modo editar
+     */
     fun updateCustomer(customer: Customer, posCustomer: Int) {
         repository.addOrUpdateCustomer(customer, posCustomer)
     }
 
+    /**
+     * Cambia el estado de editar.
+     */
     fun setEditorMode(isEditorMode: Boolean) {
         isEditor.value = isEditorMode
     }
 
+    /**
+     * Devuelve si actualmente está el modo editar.
+     * Si es nulo devuelve false.
+     */
     fun getEditorMode(): Boolean {
         return isEditor.value ?: false
     }
 
-
+    /**
+     * Devuelve el siguiente Id autogenerado, que es el máximo id +1
+     * Esto se utiliza en el modo crear, no el de editar.
+     */
     fun getNextCustomerId(): Int {
         val maxId = repository.getMaxCustomerid()
 
-        println("EL MAXIMO ID ES $maxId")
         return maxId + 1
     }
 
-
+    /**
+     * Obtiene el Customer en base a su posición de la lista.
+     * Se utiliza para editar el cliente
+     */
     fun getCustomerByPosition(posCustomer: Int): Customer {
         return repository.getCustomerPos(posCustomer)
     }
 
     /**
-     * Se crea solo la función de obtención de la variable State.
+     * Devuelve la variable State.
      * No se puede modificar su valor fuera de ViewModel.
      */
     fun getState(): LiveData<CustomerCreationState> {

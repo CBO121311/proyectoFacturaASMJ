@@ -17,13 +17,14 @@
         tools:context="com.cbo.customer.ui.CustomerDetail">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/customer_detail_cvid"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@+id/customer_detailglLeft"
             app:layout_constraintTop_toTopOf="@+id/customer_detailglTop">
 
             <LinearLayout
-                android:id="@+id/linearLayout"
+                android:id="@+id/customer_detail_llid"
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:background="@color/cd_color_fondo_2"
@@ -37,7 +38,7 @@
                     style="@style/customer_detail_tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="ID: " />
+                    android:text="@string/cd_tvId" />
 
                 <TextView
                     android:id="@+id/customer_detail_tvIdCustomer"

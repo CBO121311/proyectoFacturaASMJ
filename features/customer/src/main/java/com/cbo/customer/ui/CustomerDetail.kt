@@ -83,8 +83,8 @@ class CustomerDetail : Fragment() {
      * y comprueba si lo puede hacer
      */
     private fun deleteConfirmation() {
-        val possible = viewModel.isDeleteSafe(args.customer)
-        if (!possible) {
+
+        if (viewModel.isDeleteSafe(args.customer)) {
 
             findNavController().navigate(
                 CustomerDetailDirections.actionCustomerDetailToBaseFragmentDialog2(

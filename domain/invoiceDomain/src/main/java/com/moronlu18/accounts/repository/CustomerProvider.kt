@@ -12,11 +12,11 @@ class CustomerProvider private constructor() {
     companion object {
 
         var CustomerdataSet: MutableList<Customer> = mutableListOf()
-        private var idCliente : Int = 1
+        private var idCliente: Int = 1
+
         init {
             initDataSetCustomer()
         }
-
 
         private fun initDataSetCustomer() {
             CustomerdataSet.add(
@@ -88,17 +88,14 @@ class CustomerProvider private constructor() {
          * es seguro borrarlo
          */
         fun isCustomerSafeDelete(customerId: Int): Boolean {
-            val isReferenced = FacturaProvider.isCustomerReferenceFactura(customerId) ||
-                    TaskProvider.isCustomerReferenceTask(customerId)
 
-            if (isReferenced) {
-                return true
-            }
-            return false
+            return FacturaProvider.isCustomerReferenceFactura(customerId) ||
+                    TaskProvider.isCustomerReferenceTask(customerId)
         }
 
         /**
-         * Comprueba si tiene datos la lista con un tiempo de espera de dos segundos
+         * Comprueba si tiene datos la lista
+         * con un tiempo de espera de dos segundos
          */
         suspend fun getCustomerList(): ResourceList {
             return withContext(Dispatchers.IO) {
@@ -124,6 +121,9 @@ class CustomerProvider private constructor() {
             }
         }
 
+        /**
+         * Añade o actualiza el customer
+         */
 
         fun addOrUpdateCustomer(customer: Customer, pos: Int?) {
 
@@ -134,6 +134,9 @@ class CustomerProvider private constructor() {
             }
         }
 
+        /**
+         * Borra un customer dependiendo de su posición
+         */
         fun deleteCustomer(pos: Int) {
             CustomerdataSet.removeAt(pos)
         }
@@ -153,11 +156,14 @@ class CustomerProvider private constructor() {
         }
 
 
+        /**
+         * Devuelve la posición de la lista en base al customer.
+         */
         fun getPosByCustomer(customer: Customer): Int {
             return CustomerdataSet.indexOf(customer)
         }
 
-        fun getCustomer(): List<Customer>{
+        fun getCustomer(): List<Customer> {
             return CustomerdataSet
         }
 
@@ -172,34 +178,37 @@ class CustomerProvider private constructor() {
         }
 
 
-       fun contains(nombre:String?): Boolean {
-           for (item in CustomerdataSet) {
-               if(item.name == nombre) {
-                   return true
-               }
-           }
-           return false
-       }
-        fun containsId(id:Int): Boolean {
+        fun contains(nombre: String?): Boolean {
             for (item in CustomerdataSet) {
-                if(item.id == id) {
+                if (item.name == nombre) {
                     return true
                 }
             }
             return false
         }
-        fun getNom(id:Int):String {
+
+        fun containsId(id: Int): Boolean {
+            for (item in CustomerdataSet) {
+                if (item.id == id) {
+                    return true
+                }
+            }
+            return false
+        }
+
+        fun getNom(id: Int): String {
             var nombre = "Cliente"
-            for(item in CustomerdataSet) {
+            for (item in CustomerdataSet) {
                 if (item.id == id) {
                     nombre = item.name
                 }
             }
             return nombre
         }
-        fun getPhoto(id:Int): Int {
+
+        fun getPhoto(id: Int): Int {
             var photo = 0
-            for(item in CustomerdataSet) {
+            for (item in CustomerdataSet) {
                 if (item.id == id) {
                     photo = item.photo
                 }

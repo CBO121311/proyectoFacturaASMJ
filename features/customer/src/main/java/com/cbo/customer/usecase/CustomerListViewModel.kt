@@ -18,6 +18,7 @@ class CustomerListViewModel : ViewModel() {
 
     /**
      * Función que pide el listado de customer al repositorio
+     * Tiene una pantalla de carga
      * No tiene que devolver nada
      */
 
@@ -36,6 +37,12 @@ class CustomerListViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Función que pide el listado de customer al repositorio
+     * No tiene tiempo de carga
+     * Añadido por razones de exposición
+     */
+
     fun getCustomerListNoLoading() {
         viewModelScope.launch {
 
@@ -48,29 +55,31 @@ class CustomerListViewModel : ViewModel() {
         }
     }
 
-
-    /*fun refreshCustomerList() {
-        viewModelScope.launch {
-            when (val result = CustomerProvider.getCustomerList()) {
-                is ResourceList.Success<*> -> state.value =
-                    CustomerListState.Success(result.data as ArrayList<Customer>)
-
-                is ResourceList.Error -> state.value = CustomerListState.NoDataError
-            }
-        }
-    }*/
+    /**
+     * Obtiene el Customer en base a su posición de la lista.
+     */
 
     fun getCustomerByPosition(posCustomer: Int): Customer {
         return repository.getCustomerPos(posCustomer)
     }
+
+    /**
+     * Comprueba si es seguro borrar un cliente porque podría estar referenciado.
+     * Devuelve True si no hay problema, false si lo hay.
+     */
     fun isDeleteSafe(customer: Customer): Boolean {
-        val isSafe = repository.isCustomerSafeDelete(customer.id)
-        if (isSafe) {
+        return if (repository.isCustomerSafeDelete(customer.id)) {
             state.value = CustomerListState.ReferencedCustomer
+            false
+        } else {
+            true
         }
-        return isSafe
     }
 
+    /**
+     * Devuelve la variable State.
+     * No se puede modificar su valor fuera de ViewModel.
+     */
     fun getState(): LiveData<CustomerListState> {
         return state
     }

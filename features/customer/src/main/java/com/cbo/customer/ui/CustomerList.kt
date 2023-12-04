@@ -97,8 +97,7 @@ class CustomerList : Fragment() {
     private fun onEditItem(position: Int) {
 
         val customer = viewModel.getCustomerByPosition(position)
-        val possible = viewModel.isDeleteSafe(customer)
-        if (!possible) {
+        if (viewModel.isDeleteSafe(customer)) {
             val bundle = Bundle();
             bundle.putInt("position", position)
 
@@ -114,8 +113,7 @@ class CustomerList : Fragment() {
 
         isDeleting = true
         val customer = viewModel.getCustomerByPosition(position)
-        val possible = viewModel.isDeleteSafe(customer)
-        if (!possible) {
+        if (viewModel.isDeleteSafe(customer)) {
             findNavController().navigate(
                 CustomerListDirections.actionCustomerListToBaseFragmentDialog2(
                     getString(R.string.title_deleteCustomer),
@@ -132,102 +130,101 @@ class CustomerList : Fragment() {
                     viewModel.getCustomerListNoLoading()
                 }
             }
-    }
-}
-
-
-/**
- * Método muestra el AlertDialog de customer referenciado
- */
-private fun showReferencedCustomer() {
-    findNavController().navigate(
-        CustomerListDirections.actionCustomerListToBaseFragmentDialogWarning(
-            getString(R.string.title_ad_warning),
-            getString(R.string.errReferencedCustomer)
-        )
-    )
-}
-
-
-/**
- * Método que muestra la imagen noData si la lista está vacía
- */
-private fun showListEmptyView() {
-    binding.customerListClEmpty.visibility = View.VISIBLE
-    binding.customerListRvClientes.visibility = View.GONE
-}
-
-
-/**
- * Si es true muestra el progressBar, si es false lo quita.
- */
-private fun showProgressBar(value: Boolean) {
-
-    if (value) {
-        findNavController().navigate(R.id.action_customerList_to_fragmentProgressDialogKiwi)
-    } else {
-        findNavController().popBackStack()
+        }
     }
 
-}
 
-/**
- *  Envía un objeto customer al layout customerDetail utilizando SafeArgs
- */
-private fun onItemSelected(customer: Customer) {
-    findNavController().navigate(
-        CustomerListDirections.actionCustomerListToCustomerDetail(
-            customer
+    /**
+     * Método muestra el AlertDialog de customer referenciado
+     */
+    private fun showReferencedCustomer() {
+        findNavController().navigate(
+            CustomerListDirections.actionCustomerListToBaseFragmentDialogWarning(
+                getString(R.string.title_ad_warning),
+                getString(R.string.errReferencedCustomer)
+            )
         )
-    )
-}
+    }
 
-/**
- * Infla el menú de customerList
- */
-override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-    inflater.inflate(R.menu.menu_customer_list, menu)
-}
 
-/**
- * Opciones al seleccionar el menú.
- * Actualmente solo hace el orden de la lista.
- */
-override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    when (item.itemId) {
-        R.id.menu_cd_action_sortname -> {
-            customerAdapter.sortName()
-            return true
+    /**
+     * Método que muestra la imagen noData si la lista está vacía
+     */
+    private fun showListEmptyView() {
+        binding.customerListClEmpty.visibility = View.VISIBLE
+        binding.customerListRvClientes.visibility = View.GONE
+    }
+
+
+    /**
+     * Si es true muestra el progressBar, si es false lo quita.
+     */
+    private fun showProgressBar(value: Boolean) {
+
+        if (value) {
+            findNavController().navigate(R.id.action_customerList_to_fragmentProgressDialogKiwi)
+        } else {
+            findNavController().popBackStack()
         }
 
-        R.id.menu_cd_action_sortid -> {
+    }
 
-            customerAdapter.sortId()
-            return true
+    /**
+     *  Envía un objeto customer al layout customerDetail utilizando SafeArgs
+     */
+    private fun onItemSelected(customer: Customer) {
+        findNavController().navigate(
+            CustomerListDirections.actionCustomerListToCustomerDetail(
+                customer
+            )
+        )
+    }
+
+    /**
+     * Infla el menú de customerList
+     */
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_customer_list, menu)
+    }
+
+    /**
+     * Opciones al seleccionar el menú.
+     * Actualmente solo hace el orden de la lista.
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_cd_action_sortname -> {
+                customerAdapter.sortName()
+                return true
+            }
+
+            R.id.menu_cd_action_sortid -> {
+
+                customerAdapter.sortId()
+                return true
+            }
+
+            else -> return super.onOptionsItemSelected(item)
         }
-
-        else -> return super.onOptionsItemSelected(item)
-    }
-}
-
-/**
- * Al iniciar el Fragment obtiene la lista con el loading.
- * En la siguientes utiliza una función igual pero sin el loading.
- */
-override fun onStart() {
-    super.onStart()
-    if (isFirstTime) {
-        viewModel.getCustomerList()
-        isFirstTime = false
-    } else {
-        viewModel.getCustomerListNoLoading()
     }
 
-}
+    /**
+     * Al iniciar el Fragment obtiene la lista con el loading.
+     * En la siguientes utiliza una función igual pero sin el loading.
+     */
+    override fun onStart() {
+        super.onStart()
+        if (isFirstTime) {
+            viewModel.getCustomerList()
+            isFirstTime = false
+        } else {
+            viewModel.getCustomerListNoLoading()
+        }
+    }
 
-override fun onDestroyView() {
-    super.onDestroyView()
-    _binding = null
-}
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

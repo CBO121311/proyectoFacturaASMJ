@@ -20,6 +20,7 @@
     <string name="cd_tvExampleAddress">Calle Salamanca Nº27 (21110)</string>
     <string name="cd_tvCity">Ciudad:</string>
     <string name="cd_tvExampleCity">Málaga</string>
+    <string name="cd_cd_flbtnCorrect">Salir de detalles de cliente</string>
 
 
     <string name="title_deleteCustomer">Confirmación</string>
@@ -35,7 +36,8 @@
     <string name="cl_tvExampleCity">No disponible</string>
     <string name="cl_tvExampleAddress">No disponible</string>
     <string name="cl_tvExampleId">123</string>
-    <string name="cd_cd_flbtnCorrect">Salir de detalles de cliente</string>
-    <string name="errReferencedCustomer">No puedes borrar/editar un cliente referenciado a una factura o tarea</string>
-    <string name="title_ad_warning">Aviso</string>
+    <string name="cl_menu_edit">Editar</string>
+    <string name="cl_menu_delete">Borrar</string>
+    <string name="cc_hint_id">ID</string>
+    <string name="cd_tvId">ID:</string>
 </resources>
