@@ -204,7 +204,7 @@ class CustomerProvider private constructor() {
                     photo = item.photo
                 }
             }
-            return id
+            return photo
         }
 
     }
