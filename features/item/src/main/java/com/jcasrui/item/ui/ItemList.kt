@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.jcasrui.item.adapter.ItemAdapter
 import com.moronlu18.accounts.entity.Item
 import com.moronlu18.accounts.repository.ItemProvider
+import com.moronlu18.invoice.base.BaseFragmentDialog
 import com.moronlu18.itemcreation.R
 import com.moronlu18.itemcreation.databinding.FragmentItemListBinding
 
@@ -27,9 +28,11 @@ class ItemList : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentItemListBinding.inflate(inflater, container, false)
+
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_itemList_to_itemCreation)
         } // Esto hace que al pulsar un articulo en la lista se muestre la interfaz creation
+
         return binding.root
     }
 
@@ -38,9 +41,7 @@ class ItemList : Fragment() {
 
         initReciclerViewItem()
 
-        //binding.itemListRvItems.setOnClickListener{
-        //    findNavController().navigate(com.moronlu18.invoice.R.id.action_ItemListFragment_to_ItemCreationFragment)
-        //}
+
     }
 
     private fun initReciclerViewItem() {
@@ -48,19 +49,55 @@ class ItemList : Fragment() {
 
         adapter = ItemAdapter(
             itemList = itemMutableList,
-            onClickListener = { item -> onItemSelected(item) }
+            onClickListener = { item -> onItemSelected(item) },
+            onClickDelete = { position -> onDeleteItem(position) }
         )
+        updateEmptyView()
         binding.itemListRvItems.layoutManager = manager
-        binding.itemListRvItems.adapter = ItemAdapter(ItemProvider.dataSetItem) { item ->
-            onItemSelected(
-                item
+        binding.itemListRvItems.adapter = adapter
+    }
+
+    private fun onDeleteItem(position: Int) {
+
+        findNavController().navigate(
+            ItemListDirections.actionItemListToBaseFragmentDialog(
+                getString(R.string.title_deleteItem),
+                getString(R.string.content_deleteItem)
             )
+        )
+
+        parentFragmentManager.setFragmentResultListener(
+            BaseFragmentDialog.request,
+            viewLifecycleOwner
+        ) { _, result ->
+            val success = result.getBoolean(BaseFragmentDialog.result, false)
+            if (success) {
+                itemMutableList.removeAt(position)
+                adapter.notifyItemRemoved(position)
+                updateEmptyView()
+            }
         }
     }
 
+    private fun showReferencedItem(){
+        findNavController().navigate(
+            ItemListDirections.actionItemListToBaseFragmentDialogWarning(
+                getString(R.string.title_warning),
+                getString(R.string.content_warning)
+            )
+        )
+    }
+
     private fun onItemSelected(item: Item) {
-        //findNavController().navigate(R.id.action_itemList_to_itemDetail)
         findNavController().navigate(ItemListDirections.actionItemListToItemDetail(item))
+    }
+
+    private fun updateEmptyView() {
+        if (ItemProvider.dataSetItem.isEmpty()) {
+            binding.itemListConstraintLayoutEmpty.visibility = View.VISIBLE
+        } else {
+            binding.itemListConstraintLayoutEmpty.visibility = View.GONE
+        }
     }
 
     override fun onDestroyView() {

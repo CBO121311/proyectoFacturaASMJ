@@ -14,6 +14,12 @@
         <action
             android:id="@+id/action_itemList_to_itemDetail"
             app:destination="@id/itemDetail" />
+        <action
+            android:id="@+id/action_itemList_to_baseFragmentDialog"
+            app:destination="@id/baseFragmentDialog" />
+        <action
+            android:id="@+id/action_itemList_to_baseFragmentDialogWarning"
+            app:destination="@id/baseFragmentDialogWarning" />
     </fragment>
 
     <fragment
@@ -24,9 +30,32 @@
     <fragment
         android:id="@+id/itemDetail"
         android:name="com.jcasrui.item.ui.ItemDetail"
-        android:label="@string/title_itemdetail" >
+        android:label="@string/title_itemdetail">
         <argument
             android:name="item"
             app:argType="com.moronlu18.accounts.entity.Item" />
     </fragment>
+
+    <dialog
+        android:id="@+id/baseFragmentDialog"
+        android:name="com.moronlu18.invoice.base.BaseFragmentDialog"
+        android:label="BaseFragmentDialog" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="message"
+            app:argType="string" />
+    </dialog>
+    <dialog
+        android:id="@+id/baseFragmentDialogWarning"
+        android:name="com.moronlu18.invoice.base.BaseFragmentDialogWarning"
+        android:label="BaseFragmentDialogWarning" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="message"
+            app:argType="string" />
+    </dialog>
 </navigation>

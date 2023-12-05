@@ -9,6 +9,7 @@ import com.moronlu18.itemcreation.R
 class ItemAdapter(
     private val itemList: List<Item>,
     private val onClickListener: (Item) -> Unit,
+    private val onClickDelete: (Int) -> Unit,
 ) : RecyclerView.Adapter<ItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         // Encargado de coger los atributos y pintarlos
@@ -24,6 +25,6 @@ class ItemAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = itemList[position]
-        holder.render(item, onClickListener)
+        holder.render(item, onClickListener, onClickDelete)
     }
 }

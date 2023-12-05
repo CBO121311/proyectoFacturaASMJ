@@ -7,24 +7,32 @@
     <dimen name="item_marginSymbol">4dp</dimen>
     <dimen name="item_marginFab">16dp</dimen>
 
-    <dimen name="itemCreation_guideVertical">5dp</dimen>
-    <dimen name="itemCreation_guideHorizontal">20dp</dimen>
+    <dimen name="itemCreation_guideVertical">15dp</dimen>
+    <dimen name="itemCreation_guideHorizontal">15dp</dimen>
     <dimen name="itemCreation_paddingLayout">16dp</dimen>
-    <dimen name="itemCreation_heightBtn">50dp</dimen>
+    <dimen name="itemCreation_heightBtn">60dp</dimen>
     <dimen name="itemCreation_sizeSwitch">48dp</dimen>
+    <dimen name="itemCreation_paddingGeneral">10dp</dimen>
+    <dimen name="itemCreation_paddingSpinner">20dp</dimen>
 
     <dimen name="itemDetail_sizeImg">150dp</dimen>
     <dimen name="itemDetail_marginTopImg">50dp</dimen>
     <dimen name="itemDetail_radiusImg">75dp</dimen>
 
+    <dimen name="itemList_widthNoData">210dp</dimen>
+    <dimen name="itemList_heighthNoData">210dp</dimen>
+
     <dimen name="itemItem_marginGeneral">10dp</dimen>
-    <dimen name="itemItem_marginRate">40dp</dimen>
+    <dimen name="itemItem_marginRate">30dp</dimen>
+    <dimen name="itemItem_marginImg">10dp</dimen>
+    <dimen name="itemItem_marginDescrip">6dp</dimen>
+    <dimen name="itemItem_marginTaxable">30dp</dimen>
+    <dimen name="itemItem_marginTvType">100dp</dimen>
     <dimen name="itemItem_cardMargin">5dp</dimen>
     <dimen name="itemItem_cardRadius">12dp</dimen>
     <dimen name="itemItem_cardElevation">4dp</dimen>
+    <dimen name="itemItem_bordeWichtImg">2dp</dimen>
     <dimen name="itemItem_sizeImg">66dp</dimen>
-    <dimen name="itemItem_radiusImg">33dp</dimen>
-    <dimen name="itemItem_marginImg">10dp</dimen>
-    <dimen name="itemItem_marginDescrip">6dp</dimen>
-    <dimen name="itemItem_marginTaxable">20dp</dimen>
+    <dimen name="itemItem_widthHeightButton">25dp</dimen>
+    <dimen name="itemItem_marginId">8dp</dimen>
 </resources>

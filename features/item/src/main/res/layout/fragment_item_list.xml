@@ -26,4 +26,45 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="MissingConstraints" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/itemList_ConstraintLayoutEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/itemList_rvItems">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/itemList_avNoDataCart"
+            android:layout_width="@dimen/itemList_widthNoData"
+            android:layout_height="@dimen/itemList_heighthNoData"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/cart" />
+
+        <TextView
+            android:id="@+id/itemList_tvEmpty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No hay artículos ..."
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itemList_avNoDataCart" />
+
+        <TextView
+            android:id="@+id/itemList_tvAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Toca el botón '+' para añadir un artículo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/itemList_tvEmpty" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

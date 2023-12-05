@@ -31,16 +31,21 @@ class ItemDetail : Fragment() {
         _binding = FragmentItemDetailBinding.inflate(inflater, container, false)
 
         val article: Item = args.item
-        binding.itemDetailTvType.text = "Tipo:"
-        binding.itemDetailTvRate.text = "Precio:"
-        binding.itemDetailCbTaxable.text = "Impuestos:"
+        binding.itemDetailTvType.text = "Tipo"
+        binding.itemDetailTvRate.text = "Precio"
+        binding.itemDetailCbTaxable.text = "Impuestos"
 
-        binding.itemDetailIvImg.setImageResource(article.image)
+        binding.itemDetailCvImg.setImageResource(article.image)
         binding.itemDetailTvContentName.text = article.name
         binding.itemDetailTvContentDescription.text = article.description
         binding.itemDetailTvContentType.text = article.type.name
         binding.itemDetailTvContentRate.text = article.rate.toString()
         binding.itemDetailCbTaxable.text = article.taxable.toString()
+
+        binding.itemDetailBtnSave.setOnClickListener {
+            val fragmenManager = requireActivity().supportFragmentManager
+            fragmenManager.popBackStack()
+        }
 
         return binding.root
     }

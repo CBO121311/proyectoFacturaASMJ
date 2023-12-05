@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="title_deleteItem">Confirmación</string>
+    <string name="content_deleteItem">¿Estás seguro de que quieres borrar el artículo?</string>
+
     <string name="item_name">Nombre</string>
     <string name="item_description">Descripción</string>
-    <string name="item_tvRate">Tasa</string>
+    <string name="item_tvRate">Precio</string>
     <string name="item_tvTaxable">Impuestos</string>
     <string name="item_tvSymbolEuro">€</string>
 
     <string name="itemCreation_tvTypeItem">Tipo de artículo</string>
-    <string name="itemCreation_etRate">Insertar tasa</string>
+    <string name="itemCreation_etRate">Insertar Precio</string>
     <string name="itemCreation_btnDone">Añadir</string>
+    <string name="itemCreation_imgBtnAdd">Añadir una imagen</string>
+    <string name="itemCreation_tilRate">Precio</string>
 
     <string name="itemDetail_tvTypeText">Tipo</string>
     <string name="itemDetail_tvDescriptionImg">Imagen ilustrativa</string>
@@ -20,11 +25,15 @@
     <string name="itemDetail_tvTypePrueba">Artículo</string>
 
     <string name="itemList_fab">Añadir artículo</string>
+
     <string name="itemItem_tvDescriptionImg">Imagen ilustrativa</string>
     <string name="itemItem_tvType">Tipo:</string>
-    <string name="itemItem_tvRate">Tasa:</string>
+    <string name="itemItem_tvRate">Precio:</string>
     <string name="itemItem_tvNamePrueba">Reloj de pulsera</string>
     <string name="itemItem_tvTypePrueba">artículo</string>
     <string name="itemItem_tvDescriptionPrueba">Intrumento para indicar la hora, que se lleva en la muñeca</string>
-    <string name="itemItem_tvRatePrueba">5.52</string>
+    <string name="itemItem_tvRatePrueba">65.52</string>
+    <string name="itemItem_imgBtnDelete">Borrar</string>
+    <string name="itemItem_imgBtnEdit">Edit</string>
+    <string name="itemItem_tvId">23</string>
 </resources>

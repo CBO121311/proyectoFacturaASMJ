@@ -9,7 +9,7 @@ data class Item(
     val id: Int,
     val image: Int,
     val name: String,
-    val description: String,
+    val description: String = "Sin descripción",
     val type: ItemType,
     val rate: Double,
     val taxable: Boolean,

@@ -15,8 +15,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/itemItem_cvImg"
+        <!-- android:id="@+id/itemItem_cvImg"-->
+        <!--androidx.cardview.widget.CardView
+            android:id="@+id/itemItem_cImg"
             android:layout_width="@dimen/itemItem_sizeImg"
             android:layout_height="@dimen/itemItem_sizeImg"
             android:layout_marginStart="@dimen/itemItem_marginImg"
@@ -32,7 +33,31 @@
                 android:contentDescription="@string/itemItem_tvDescriptionImg"
                 android:scaleType="centerCrop"
                 android:src="@drawable/reloj" />
-        </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView-->
+
+        <TextView
+            android:id="@+id/itemItem_tvId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/itemItem_tvId"
+            android:layout_margin="@dimen/itemItem_marginId"
+            android:background="@color/purple_200"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/itemItem_cImg"
+            android:layout_width="@dimen/itemItem_sizeImg"
+            android:layout_height="@dimen/itemItem_sizeImg"
+            android:layout_marginStart="@dimen/itemItem_marginImg"
+            android:contentDescription="@string/itemItem_tvDescriptionImg"
+            android:src="@drawable/reloj"
+            app:civ_border_color="@color/purple_500"
+            app:civ_border_width="@dimen/itemItem_bordeWichtImg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/itemItem_tvName"
@@ -42,7 +67,7 @@
             android:textColor="@color/md_theme_light_primary"
             android:textSize="@dimen/item_sizeTitles"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/itemItem_cvImg"
+            app:layout_constraintStart_toEndOf="@+id/itemItem_cImg"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/itemItem_tvNamePrueba" />
 
@@ -50,21 +75,21 @@
             android:id="@+id/itemItem_tvType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/item_marginSymbol"
+            android:layout_marginStart="@dimen/itemItem_marginTvType"
+            android:layout_marginTop="@dimen/itemItem_marginGeneral"
             android:textSize="@dimen/item_sizeSubtitles"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/itemItem_tvName"
-            app:layout_constraintEnd_toStartOf="@+id/itemItem_tvTypeContent"
-            app:layout_constraintTop_toTopOf="@+id/itemItem_tvName"
+            app:layout_constraintStart_toEndOf="@+id/itemItem_cImg"
+            app:layout_constraintTop_toBottomOf="@+id/itemItem_tvDescription"
             tools:text="@string/itemItem_tvType" />
 
         <TextView
             android:id="@+id/itemItem_tvTypeContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/itemItem_marginGeneral"
+            android:layout_marginStart="@dimen/item_marginSymbol"
             app:layout_constraintBottom_toBottomOf="@+id/itemItem_tvType"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/itemItem_tvType"
             app:layout_constraintTop_toTopOf="@+id/itemItem_tvType"
             tools:text="@string/itemItem_tvTypePrueba" />
 
@@ -76,7 +101,7 @@
             android:layout_marginTop="@dimen/itemItem_marginDescrip"
             android:layout_marginEnd="@dimen/itemItem_marginGeneral"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/itemItem_cvImg"
+            app:layout_constraintStart_toEndOf="@+id/itemItem_cImg"
             app:layout_constraintTop_toBottomOf="@+id/itemItem_tvName"
             tools:text="@string/itemItem_tvDescriptionPrueba" />
 
@@ -88,9 +113,8 @@
             android:layout_marginTop="@dimen/itemItem_marginGeneral"
             android:textSize="@dimen/item_sizeSubtitles"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/itemItem_cvImg"
-            app:layout_constraintTop_toBottomOf="@+id/itemItem_tvDescription"
+            app:layout_constraintStart_toEndOf="@+id/itemItem_cImg"
+            app:layout_constraintTop_toBottomOf="@+id/itemItem_tvType"
             tools:text="@string/itemItem_tvRate" />
 
         <TextView
@@ -113,20 +137,54 @@
             app:layout_constraintStart_toEndOf="@+id/itemItem_tvRateContent"
             app:layout_constraintTop_toTopOf="@+id/itemItem_tvRateContent" />
 
-        <CheckBox
+        <TextView
+            android:id="@+id/itemItem_tvTaxable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_tvTaxable"
+            android:textSize="@dimen/item_sizeSubtitles"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/itemItem_tvSymbolEuro"
+            app:layout_constraintEnd_toStartOf="@+id/itemItem_cbTaxable"
+            app:layout_constraintTop_toTopOf="@+id/itemItem_tvSymbolEuro"
+            app:layout_constraintVertical_bias="0.25" />
+
+        <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/itemItem_cbTaxable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/itemItem_marginTaxable"
             android:checked="true"
             android:clickable="false"
-            android:text="@string/item_tvTaxable"
-            android:textSize="@dimen/item_sizeSubtitles"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/itemItem_tvRate"
+            app:layout_constraintBottom_toBottomOf="@+id/itemItem_tvTaxable"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/itemItem_tvRate" />
+            app:layout_constraintTop_toTopOf="@+id/itemItem_tvTaxable" />
 
+        <ImageButton
+            android:id="@+id/itemItem_imgBtnEdit"
+            android:layout_width="@dimen/itemItem_widthHeightButton"
+            android:layout_height="@dimen/itemItem_widthHeightButton"
+            android:background="@drawable/ic_action_edit"
+            android:clickable="true"
+            android:contentDescription="@string/itemItem_imgBtnEdit"
+            android:focusable="true"
+            android:src="@drawable/ic_action_edit"
+            app:layout_constraintEnd_toStartOf="@+id/itemItem_imgBtnDelete"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/itemItem_imgBtnDelete"
+            android:layout_width="@dimen/itemItem_widthHeightButton"
+            android:layout_height="@dimen/itemItem_widthHeightButton"
+            android:layout_marginEnd="@dimen/itemItem_marginGeneral"
+            android:background="@drawable/ic_action_delete"
+            android:clickable="true"
+            android:contentDescription="@string/itemItem_imgBtnDelete"
+            android:focusable="true"
+            android:src="@drawable/ic_action_delete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

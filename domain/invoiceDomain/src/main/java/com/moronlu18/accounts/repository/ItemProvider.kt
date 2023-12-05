@@ -9,6 +9,7 @@ class ItemProvider {
     companion object {
 
         var dataSetItem: MutableList<Item> = mutableListOf()
+        private var idItem: Int = 1
 
         init {
             initDataSetItem()
@@ -17,7 +18,7 @@ class ItemProvider {
         private fun initDataSetItem() {
             dataSetItem.add(
                 Item(
-                    1,
+                    idItem++,
                     R.drawable.pizza,
                     "Pizza",
                     "Producto sección precocinados",
@@ -29,7 +30,7 @@ class ItemProvider {
 
             dataSetItem.add(
                 Item(
-                    2,
+                    idItem++,
                     R.drawable.leche,
                     "Leche",
                     "Producto sección lacteos",
@@ -41,7 +42,7 @@ class ItemProvider {
 
             dataSetItem.add(
                 Item(
-                    3,
+                    idItem++,
                     R.drawable.manzana,
                     "Manzana",
                     "Producto sección fruta",
@@ -53,7 +54,7 @@ class ItemProvider {
 
             dataSetItem.add(
                 Item(
-                    4,
+                    idItem++,
                     R.drawable.panespelta,
                     "Pan de espelta",
                     "Producto sección panadería",
@@ -64,6 +65,30 @@ class ItemProvider {
             )
 
             dataSetItem.add(
+                Item(
+                    idItem++,
+                    R.drawable.servicio,
+                    "Repartidor",
+                    "Repartir productos a clientes",
+                    ItemType.SERVICIO,
+                    3.8,
+                    false
+                )
+            )
+        }
+
+        fun getTotal(lista: MutableList<Item>): String {
+            var suma: Double = 0.0
+            for (item in lista) {
+                suma += item.rate
+            }
+            return String.format("%.2f€", suma)
+        }
+    }
+}
+
+/*
+dataSetItem.add(
                 Item(
                     5,
                     R.drawable.zanahoria,
@@ -147,25 +172,4 @@ class ItemProvider {
                 )
             )
 
-            dataSetItem.add(
-                Item(
-                    12,
-                    R.drawable.servicio,
-                    "Repartidor",
-                    "Repartir productos a clientes",
-                    ItemType.SERVICIO,
-                    3.8,
-                    false
-                )
-            )
-
-        }
-        fun getTotal(lista: MutableList<Item>) : String {
-            var suma:Double = 0.0
-            for (item in lista) {
-                suma+= item.rate
-            }
-            return String.format("%.2f€",suma)
-        }
-    }
-}
+ */

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="title_deleteItem">Confirmation</string>
+    <string name="content_deleteItem">Are you sure you want to delete the article?</string>
+    <string name="title_warning">Warning</string>
+    <string name="content_warning">You cannot delete an item/service referenced to an invoice</string>
+
     <string name="item_name">Name</string>
     <string name="item_description">Description</string>
     <string name="item_tvRate">Rate</string>
@@ -26,5 +31,10 @@
     <string name="itemItem_tvNamePrueba">Wristwatch</string>
     <string name="itemItem_tvTypePrueba">item</string>
     <string name="itemItem_tvDescriptionPrueba">Instrument for telling time, worn on the wrist</string>
-    <string name="itemItem_tvRatePrueba">5.52</string>
+    <string name="itemItem_tvRatePrueba">65.52</string>
+    <string name="itemItem_imgBtnEdit">Edit</string>
+    <string name="itemItem_imgBtnDelete">Delete</string>
+    <string name="itemCreation_imgBtnAdd">Añadir una imagen</string>
+    <string name="itemCreation_tilRate">Rate</string>
+    <string name="itemItem_tvId">23</string>
 </resources>
