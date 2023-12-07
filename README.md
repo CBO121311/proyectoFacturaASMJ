@@ -7,7 +7,7 @@ Invoice versión 3, es la aplicación que se está realizando de manera modular 
 - Módelo más parecido a MVVM
 - Añadido Splash y about.
 
-# Icono
+# Logo
 
 <img src="ImagenesMuestra/ic_launcher_theme_kiwiv1_round.webp" width="200">
 
