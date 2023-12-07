@@ -18,24 +18,25 @@ Invoice versión 3, es la aplicación que se está realizando de manera modular 
 | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | 
 |<img src="ImagenesMuestra/CustomerCreation.png" width="300">|<img src="ImagenesMuestra/CustomerCreationEdit.png" width="300">|<img src="ImagenesMuestra/CustomerDetail.png" width="300">| <img src="ImagenesMuestra/CustomerList.png" width="300">|| <img src="ImagenesMuestra/CustomerList.png" width="300">|
 
-## Invoice
-|Creation|Detail|List| 
-| ------------------------------ | ------------------------------ | ------------------------------ | 
-|<img src="ImagenesMuestra/InvoiceCreation.png" width="300">|<img src="ImagenesMuestra/InvoiceDetail.png" width="300">| <img src="ImagenesMuestra/InvoiceList.png" width="300">|
-
 ## Item
 |Creation|Detail|List| 
 | ------------------------------ | ------------------------------ | ------------------------------ | 
 |<img src="ImagenesMuestra/ItemCreation.png" width="300">|<img src="ImagenesMuestra/ItemDetail.png" width="300">| <img src="ImagenesMuestra/ItemList.png" width="300">|
+
 ## Task
 |Creation|Detail|List| 
 | ------------------------------ | ------------------------------ | ------------------------------ | 
 |<img src="ImagenesMuestra/TaskCreation.png" width="300">|<img src="ImagenesMuestra/TaskDetail.png" width="300">| <img src="ImagenesMuestra/TaskList.png" width="300">|
 
+## Invoice
+|Creation|Detail|List| 
+| ------------------------------ | ------------------------------ | ------------------------------ | 
+|<img src="ImagenesMuestra/InvoiceCreation.png" width="300">|<img src="ImagenesMuestra/InvoiceDetail.png" width="300">| <img src="ImagenesMuestra/InvoiceList.png" width="300">|
+
 ## Extra
 |Dashboard|About|
 | ------------------------------ | ------------------------------ |
-|<img src="ImagenesMuestra/Dashboard.png" width="300">|<img src="ImagenesMuestra/AcercaDe.png" width="300">|
+|<img src="ImagenesMuestra/Dashboard.png" width="300">|<img src="ImagenesMuestra/About.png" width="300">|
 
 
 
