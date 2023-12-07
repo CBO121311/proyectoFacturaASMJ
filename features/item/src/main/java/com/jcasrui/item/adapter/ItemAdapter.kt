@@ -17,10 +17,6 @@ class ItemAdapter(
         return ItemViewHolder(layoutInflater.inflate(R.layout.item_item, parent, false))
     }
 
-    // Devolver el tamaño del listado
-    /*override fun getItemCount(): Int {
-        return itemList.size
-    }*/
     override fun getItemCount(): Int = itemList.size
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {

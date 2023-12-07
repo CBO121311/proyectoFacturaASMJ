@@ -2,5 +2,4 @@
 <resources>
     <string name="title_warning">Aviso</string>
     <string name="content_warning">No puedes borrar un artículo/servicio referenciado a una factura</string>
-
 </resources>

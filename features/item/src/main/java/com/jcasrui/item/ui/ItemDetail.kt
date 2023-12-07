@@ -31,16 +31,18 @@ class ItemDetail : Fragment() {
         _binding = FragmentItemDetailBinding.inflate(inflater, container, false)
 
         val article: Item = args.item
-        binding.itemDetailTvType.text = "Tipo"
-        binding.itemDetailTvRate.text = "Precio"
-        binding.itemDetailCbTaxable.text = "Impuestos"
 
         binding.itemDetailCvImg.setImageResource(article.image)
         binding.itemDetailTvContentName.text = article.name
         binding.itemDetailTvContentDescription.text = article.description
         binding.itemDetailTvContentType.text = article.type.name
         binding.itemDetailTvContentRate.text = article.rate.toString()
-        binding.itemDetailCbTaxable.text = article.taxable.toString()
+
+        if (article.taxable) {
+            binding.itemDetailTvTaxable.text = "Impuestos incluidos"
+        } else {
+            binding.itemDetailTvTaxable.text = "Sin impuestos"
+        }
 
         binding.itemDetailBtnSave.setOnClickListener {
             val fragmenManager = requireActivity().supportFragmentManager
@@ -55,6 +57,7 @@ class ItemDetail : Fragment() {
         inflater.inflate(R.menu.menu_item_detail, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

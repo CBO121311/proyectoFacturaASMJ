@@ -9,31 +9,30 @@
     <string name="item_tvTaxable">Impuestos</string>
     <string name="item_tvSymbolEuro">€</string>
 
-    <string name="itemCreation_tvTypeItem">Tipo de artículo</string>
-    <string name="itemCreation_etRate">Insertar Precio</string>
     <string name="itemCreation_btnDone">Añadir</string>
     <string name="itemCreation_imgBtnAdd">Añadir una imagen</string>
     <string name="itemCreation_tilRate">Precio</string>
+    <string name="itemCreation_tilHelperText">Obligatorio*</string>
 
-    <string name="itemDetail_tvTypeText">Tipo</string>
     <string name="itemDetail_tvDescriptionImg">Imagen ilustrativa</string>
-    <string name="itemDetail_actionEdit">Editar</string>
-    <string name="itemDetail_actionDelete">Borrar</string>
     <string name="itemDetail_tvNamePrueba">Manzana</string>
     <string name="itemDetail_tvDescriptionPrueba">Producto sección fruta</string>
     <string name="itemDetail_tvRatePrueba">1.40</string>
-    <string name="itemDetail_tvTypePrueba">Artículo</string>
+    <string name="itemDetail_tvTypeText">Tipo</string>
+    <string name="itemDetail_tvTypePrueba">ARTÍCULO</string>
+    <string name="itemDetail_tvTaxablePrueba">Impuestos incluidos</string>
+    <string name="itemDetail_actionEdit">Editar</string>
+    <string name="itemDetail_actionDelete">Borrar</string>
+    <string name="itemDetail_btnSave">Aceptar</string>
 
     <string name="itemList_fab">Añadir artículo</string>
+    <string name="itemList_tvEmptyText">No hay artículos ...</string>
+    <string name="itemList_tvAddText">Toca el botón \'+\' para añadir un artículo</string>
 
-    <string name="itemItem_tvDescriptionImg">Imagen ilustrativa</string>
-    <string name="itemItem_tvType">Tipo:</string>
-    <string name="itemItem_tvRate">Precio:</string>
-    <string name="itemItem_tvNamePrueba">Reloj de pulsera</string>
-    <string name="itemItem_tvTypePrueba">artículo</string>
-    <string name="itemItem_tvDescriptionPrueba">Intrumento para indicar la hora, que se lleva en la muñeca</string>
-    <string name="itemItem_tvRatePrueba">65.52</string>
-    <string name="itemItem_imgBtnDelete">Borrar</string>
-    <string name="itemItem_imgBtnEdit">Edit</string>
     <string name="itemItem_tvId">23</string>
+    <string name="itemItem_tvDescriptionImg">Imagen ilustrativa</string>
+    <string name="itemItem_tvNamePrueba">Reloj de pulsera</string>
+    <string name="itemItem_tvRatePrueba">65.52</string>
+    <string name="itemItem_imgBtnEdit">Editar</string>
+    <string name="itemItem_imgBtnDelete">Borrar</string>
 </resources>

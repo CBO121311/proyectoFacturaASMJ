@@ -2,6 +2,7 @@ package com.jcasrui.item.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
@@ -29,17 +30,12 @@ class ItemCreation : Fragment() {
     private val binding get() = _binding!!
     private lateinit var launcher: ActivityResultLauncher<Intent>
     private val viewModel: ItemViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private var selectedImageUri: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-
-        // Inflate the layout for this fragment
         _binding = FragmentItemCreationBinding.inflate(inflater, container, false)
 
         binding.viewmodelitemcreation = this.viewModel
@@ -51,15 +47,16 @@ class ItemCreation : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Abrir galería
         binding.itemCreationImgBtnAdd.setOnClickListener {
-            openGallery()
+            pickPhoto()
         }
 
         launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == Activity.RESULT_OK) {
                 val data: Intent? = it.data
-                val imgUri = data?.data
-                binding.itemCreationCivImagenItem.setImageURI(imgUri)
+                selectedImageUri = data?.data
+                binding.itemCreationCivImagenItem.setImageURI(selectedImageUri)
             }
         }
 
@@ -84,14 +81,14 @@ class ItemCreation : Fragment() {
         val name = binding.itemCreationTieName.text.toString()
         val description = binding.itemCreationTieDescription.text.toString()
         val rate = binding.itemCreationTieRate.text.toString().toDouble()
-        val taxable = binding.itemCreationTvTaxable.text.toString().toBoolean()
+        val taxable = binding.itemCreationSwitchTaxable.isChecked
 
         val item = Item(
             id = ItemProvider.dataSetItem.size + 1,
             image = R.drawable.cart,
             name = name,
             description = description.ifEmpty { "Sin descripción" },
-            type = itemTypeChoose(),
+            type = itemType(),
             rate = rate,
             taxable = taxable
         )
@@ -100,7 +97,7 @@ class ItemCreation : Fragment() {
         findNavController().popBackStack()
     }
 
-    private fun itemTypeChoose(): ItemType {
+    private fun itemType(): ItemType {
         return when (binding.itemCreationSpItemType.selectedItemId) {
             0L -> ItemType.ARTÍCULO
             1L -> ItemType.SERVICIO
@@ -118,11 +115,10 @@ class ItemCreation : Fragment() {
         binding.itemCreationTilRate.requestFocus()
     }
 
-    private fun openGallery() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        launcher.launch(intent)
+    private fun pickPhoto() {
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        launcher.launch(galleryIntent)
     }
-
 
     inner class textWatcher(private val til: TextInputLayout) : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

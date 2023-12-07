@@ -17,7 +17,7 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/item_marginFab"
+        android:layout_margin="@dimen/itemList_marginFab"
         android:clickable="true"
         android:contentDescription="@string/itemList_fab"
         android:focusable="true"
@@ -51,7 +51,7 @@
             android:id="@+id/itemList_tvEmpty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No hay artículos ..."
+            android:text="@string/itemList_tvEmptyText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/itemList_avNoDataCart" />
@@ -60,7 +60,7 @@
             android:id="@+id/itemList_tvAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Toca el botón '+' para añadir un artículo"
+            android:text="@string/itemList_tvAddText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/itemList_tvEmpty" />

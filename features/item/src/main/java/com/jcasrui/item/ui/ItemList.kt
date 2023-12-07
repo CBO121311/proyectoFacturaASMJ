@@ -21,7 +21,6 @@ class ItemList : Fragment() {
 
     private var itemMutableList: MutableList<Item> = ItemProvider.dataSetItem
     private lateinit var adapter: ItemAdapter
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,8 +39,6 @@ class ItemList : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initReciclerViewItem()
-
-
     }
 
     private fun initReciclerViewItem() {
@@ -58,7 +55,6 @@ class ItemList : Fragment() {
     }
 
     private fun onDeleteItem(position: Int) {
-
         findNavController().navigate(
             ItemListDirections.actionItemListToBaseFragmentDialog(
                 getString(R.string.title_deleteItem),
@@ -77,15 +73,6 @@ class ItemList : Fragment() {
                 updateEmptyView()
             }
         }
-    }
-
-    private fun showReferencedItem(){
-        findNavController().navigate(
-            ItemListDirections.actionItemListToBaseFragmentDialogWarning(
-                getString(R.string.title_warning),
-                getString(R.string.content_warning)
-            )
-        )
     }
 
     private fun onItemSelected(item: Item) {

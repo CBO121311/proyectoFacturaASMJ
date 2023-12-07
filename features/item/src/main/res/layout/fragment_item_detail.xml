@@ -5,16 +5,16 @@
     android:id="@+id/itemDetail_constrainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/item_paddingGeneral">
-
+    android:padding="@dimen/itemDetail_paddingGeneral">
 
     <com.mikhaellopez.circularimageview.CircularImageView
         android:id="@+id/itemDetail_cvImg"
-        android:layout_width="210dp"
-        android:layout_height="180dp"
+        android:layout_width="@dimen/itemDetail_civWidth"
+        android:layout_height="@dimen/itemDetail_civHeight"
+        android:contentDescription="@string/itemDetail_tvDescriptionImg"
         android:src="@drawable/manzana"
         app:civ_border_color="@color/purple_500"
-        app:civ_border_width="4dp"
+        app:civ_border_width="@dimen/itemDetail_civBorderHeight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,11 +23,11 @@
         android:id="@+id/itemDetail_cvInformation"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="25dp"
-        android:elevation="4dp"
-        app:cardCornerRadius="35dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        android:layout_marginTop="@dimen/itemDetail_cvMarginTopButton"
+        android:layout_marginBottom="@dimen/itemDetail_cvMarginTopButton"
+        android:elevation="@dimen/itemDetail_cvElevation"
+        app:cardCornerRadius="@dimen/itemDetail_cvCornerRaius"
+        app:layout_constraintBottom_toTopOf="@+id/itemDetail_btnSave"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemDetail_cvImg">
@@ -37,11 +37,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/itemDetail_glStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/itemDetail_guideBeginEnd" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/itemDetail_glEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/itemDetail_guideBeginEnd" />
+
             <TextView
                 android:id="@+id/itemDetail_tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="20dp"
+                android:paddingTop="@dimen/itemDetail_tvPaddingTop"
                 android:text="@string/item_name"
                 android:textSize="@dimen/item_sizeTitles"
                 android:textStyle="bold"
@@ -51,20 +65,22 @@
 
             <TextView
                 android:id="@+id/itemDetail_tvContentName"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:maxLength="30"
+                android:maxLines="2"
                 android:text="@string/itemDetail_tvNamePrueba"
+                android:textAlignment="center"
                 android:textSize="@dimen/item_sizeText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/itemDetail_glEnd"
+                app:layout_constraintStart_toStartOf="@+id/itemDetail_glStart"
                 app:layout_constraintTop_toBottomOf="@+id/itemDetail_tvName" />
-
 
             <TextView
                 android:id="@+id/itemDetail_tvDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/item_paddingGeneral"
+                android:layout_marginTop="@dimen/itemDetail_paddingGeneral"
                 android:text="@string/item_description"
                 android:textSize="@dimen/item_sizeTitles"
                 android:textStyle="bold"
@@ -74,19 +90,22 @@
 
             <TextView
                 android:id="@+id/item_detail_tvContentDescription"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:maxLength="100"
+                android:maxLines="3"
                 android:text="@string/itemDetail_tvDescriptionPrueba"
+                android:textAlignment="center"
                 android:textSize="@dimen/item_sizeText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/itemDetail_glEnd"
+                app:layout_constraintStart_toStartOf="@+id/itemDetail_glStart"
                 app:layout_constraintTop_toBottomOf="@+id/itemDetail_tvDescription" />
 
             <TextView
                 android:id="@+id/item_detail_tvType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/item_paddingGeneral"
+                android:layout_marginTop="@dimen/itemDetail_paddingGeneral"
                 android:text="@string/itemDetail_tvTypeText"
                 android:textSize="@dimen/item_sizeTitles"
                 android:textStyle="bold"
@@ -108,7 +127,7 @@
                 android:id="@+id/itemDetail_tvRate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/item_paddingGeneral"
+                android:layout_marginTop="@dimen/itemDetail_paddingGeneral"
                 android:text="@string/item_tvRate"
                 android:textSize="@dimen/item_sizeTitles"
                 android:textStyle="bold"
@@ -120,20 +139,21 @@
                 android:id="@+id/item_detail_tvContentRate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxLength="9"
+                android:maxLines="1"
                 android:text="@string/itemDetail_tvRatePrueba"
                 android:textSize="@dimen/item_sizeText"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/itemDetail_glEnd"
                 app:layout_constraintHorizontal_bias="0.48"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/itemDetail_glStart"
                 app:layout_constraintTop_toBottomOf="@+id/itemDetail_tvRate" />
-
 
             <TextView
                 android:id="@+id/itemDetail_tvSymbolEuro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/item_marginSymbol"
-                android:text="€"
+                android:text="@string/item_tvSymbolEuro"
                 android:textSize="@dimen/item_sizeText"
                 app:layout_constraintBottom_toBottomOf="@+id/item_detail_tvContentRate"
                 app:layout_constraintStart_toEndOf="@+id/item_detail_tvContentRate"
@@ -143,23 +163,13 @@
                 android:id="@+id/itemDetail_tvTaxable"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/item_paddingGeneral"
-                android:text="@string/item_tvTaxable"
+                android:layout_marginTop="@dimen/itemDetail_paddingGeneral"
+                android:text="@string/itemDetail_tvTaxablePrueba"
                 android:textSize="@dimen/item_sizeTitles"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/item_detail_tvContentRate" />
-
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/itemDetail_cbTaxable"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:clickable="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/itemDetail_tvTaxable" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -168,8 +178,8 @@
     <Button
         android:id="@+id/itemDetail_btnSave"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:text="Aceptar"
+        android:layout_height="@dimen/itemDetail_btnHeight"
+        android:text="@string/itemDetail_btnSave"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

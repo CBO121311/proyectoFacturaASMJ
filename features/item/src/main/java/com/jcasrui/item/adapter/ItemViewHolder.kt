@@ -14,17 +14,10 @@ class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         onClickListener: (Item) -> Unit,
         onClickDelete: (Int) -> Unit,
     ) {
-        binding.itemItemTvType.text = "Tipo:"
-        binding.itemItemTvRate.text = "Tasa:"
-        //binding.itemItemCbTaxable.text = "Impuestos:"
-
         binding.itemItemCImg.setImageResource(itemModel.image)
         binding.itemItemTvId.text = itemModel.id.toString()
         binding.itemItemTvName.text = itemModel.name
-        binding.itemItemTvDescription.text = itemModel.description
-        binding.itemItemTvTypeContent.text = itemModel.type.name
         binding.itemItemTvRateContent.text = itemModel.rate.toString()
-        //binding.itemItemCbTaxable.text = "Impuestos: ${itemModel.taxable}"
 
         itemView.setOnClickListener { onClickListener(itemModel) }
         binding.itemItemImgBtnDelete.setOnClickListener { onClickDelete(adapterPosition) }

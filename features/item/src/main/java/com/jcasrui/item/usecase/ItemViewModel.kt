@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.jcasrui.item.ui.ItemState
 
-const val TAG = "ViewModel"
+//const val TAG = "ViewModel"
 
 class ItemViewModel : ViewModel() {
     var nameItem = MutableLiveData<String>()
