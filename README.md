@@ -15,8 +15,8 @@ Invoice versión 3, es la aplicación que se está realizando de manera modular 
 
 ## Customer
 |Creation|Creation: Edit Version|Detail|List|
-| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ | 
-|<img src="ImagenesMuestra/CustomerCreation.png" width="300">|<img src="ImagenesMuestra/CustomerCreationEdit.png" width="300">|<img src="ImagenesMuestra/CustomerDetail.png" width="300">| <img src="ImagenesMuestra/CustomerList.png" width="300">|| <img src="ImagenesMuestra/CustomerList.png" width="300">|
+| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
+|<img src="ImagenesMuestra/CustomerCreation.png" width="220">|<img src="ImagenesMuestra/CustomerCreationEdit.png" width="220">|<img src="ImagenesMuestra/CustomerDetail.png" width="220">| <img src="ImagenesMuestra/CustomerList.png" width="220">|| <img src="ImagenesMuestra/CustomerList.png" width="220">|
 
 ## Item
 |Creation|Detail|List| 
