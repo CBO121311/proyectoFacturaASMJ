@@ -16,22 +16,22 @@ Invoice versión 3, es la aplicación que se está realizando de manera modular 
 ## Customer
 |Creation|Creation: Edit Version|Detail|List|
 | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
-|<img src="ImagenesMuestra/CustomerCreation.png" width="220">|<img src="ImagenesMuestra/CustomerCreationEdit.png" width="220">|<img src="ImagenesMuestra/CustomerDetail.png" width="220">| <img src="ImagenesMuestra/CustomerList.png" width="220">|| <img src="ImagenesMuestra/CustomerList.png" width="220">|
+|<img src="ImagenesMuestra/CustomerCreation.png" width="200">|<img src="ImagenesMuestra/CustomerCreationEdit.png" width="200">|<img src="ImagenesMuestra/CustomerDetail.png" width="200">| <img src="ImagenesMuestra/CustomerList.png" width="200">|| <img src="ImagenesMuestra/CustomerList.png" width="200">|
 
 ## Item
 |Creation|Detail|List| 
 | ------------------------------ | ------------------------------ | ------------------------------ | 
-|<img src="ImagenesMuestra/ItemCreation.png" width="300">|<img src="ImagenesMuestra/ItemDetail.png" width="300">| <img src="ImagenesMuestra/ItemList.png" width="300">|
+|<img src="ImagenesMuestra/ItemCreation.png" width="250">|<img src="ImagenesMuestra/ItemDetail.png" width="250">| <img src="ImagenesMuestra/ItemList.png" width="250">|
 
 ## Task
 |Creation|Detail|List| 
 | ------------------------------ | ------------------------------ | ------------------------------ | 
-|<img src="ImagenesMuestra/TaskCreation.png" width="300">|<img src="ImagenesMuestra/TaskDetail.png" width="300">| <img src="ImagenesMuestra/TaskList.png" width="300">|
+|<img src="ImagenesMuestra/TaskCreation.png" width="250">|<img src="ImagenesMuestra/TaskDetail.png" width="250">| <img src="ImagenesMuestra/TaskList.png" width="250">|
 
 ## Invoice
 |Creation|Detail|List| 
 | ------------------------------ | ------------------------------ | ------------------------------ | 
-|<img src="ImagenesMuestra/InvoiceCreation.png" width="300">|<img src="ImagenesMuestra/InvoiceDetail.png" width="300">| <img src="ImagenesMuestra/InvoiceList.png" width="300">|
+|<img src="ImagenesMuestra/InvoiceCreation.png" width="250">|<img src="ImagenesMuestra/InvoiceDetail.png" width="250">| <img src="ImagenesMuestra/InvoiceList.png" width="250">|
 
 ## Extra
 |Dashboard|About|
