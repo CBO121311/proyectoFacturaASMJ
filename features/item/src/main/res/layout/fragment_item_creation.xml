@@ -166,7 +166,7 @@
                         android:id="@+id/itemCreation_tieRate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal|textCapSentences"
+                        android:inputType="numberDecimal"
                         android:lines="1"
                         android:maxLength="9"
                         android:maxLines="1"
