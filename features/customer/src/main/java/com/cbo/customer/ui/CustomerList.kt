@@ -78,17 +78,6 @@ class CustomerList : Fragment() {
         binding.customerListRvClientes.adapter = customerAdapter
     }
 
-    /**
-     * Método que oculta la imagen noData si la lista tiene algo.
-     * Y actualiza el adapter.
-     */
-    private fun onSuccess(dataset: ArrayList<Customer>) {
-
-        binding.customerListClEmpty.visibility = View.GONE
-        binding.customerListRvClientes.visibility = View.VISIBLE
-        customerAdapter.update(dataset)
-    }
-
 
     /**
      * Método que realiza la acción de editar un item y comprueba si se puede
@@ -135,7 +124,20 @@ class CustomerList : Fragment() {
 
 
     /**
-     * Método muestra el AlertDialog de customer referenciado
+     * Método que oculta la imagen noData si la lista tiene algo.
+     * Y actualiza el adapter.
+     */
+    private fun onSuccess(dataset: ArrayList<Customer>) {
+
+        binding.customerListClEmpty.visibility = View.GONE
+        binding.customerListRvClientes.visibility = View.VISIBLE
+        customerAdapter.update(dataset)
+    }
+
+
+
+    /**
+     * Función que muestra el AlertDialog del estado ReferencedCustomer
      */
     private fun showReferencedCustomer() {
         findNavController().navigate(

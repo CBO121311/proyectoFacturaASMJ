@@ -7,13 +7,13 @@
     <fragment
         android:id="@+id/accountSignIn"
         android:name="com.moronlu18.account.ui.SignInFragment"
-        android:label="SignUpFragment" >
+        android:label="SignInFragment" >
         <action
             android:id="@+id/action_accountSignIn_to_accountSignUp"
             app:destination="@id/accountSignUp" />
         <action
             android:id="@+id/action_accountSignIn_to_blankFragmentpRUEBA2"
-            app:destination="@id/blankFragmentpRUEBA2" />
+            app:destination="@id/SignInFragmentV2" />
         <action
             android:id="@+id/action_accountSignIn_to_baseFragmentDialog"
             app:destination="@id/baseFragmentDialog" />
@@ -27,11 +27,11 @@
     <fragment
         android:id="@+id/accountSignUp"
         android:name="com.moronlu18.account.ui.SignUpFragment"
-        android:label="AccountSignUp" />
+        android:label="SignInFragment" />
     <fragment
-        android:id="@+id/blankFragmentpRUEBA2"
+        android:id="@+id/SignInFragmentV2"
         android:name="com.moronlu18.account.ui.SignInv2"
-        android:label="BlankFragmentpRUEBA" />
+        android:label="SignInFragmentV2" />
     <fragment
         android:id="@+id/userListFragment"
         android:name="com.moronlu18.account.ui.UserListFragment"

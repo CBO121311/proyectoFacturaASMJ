@@ -43,8 +43,6 @@ class CustomerDetail : Fragment() {
         binding.viewnodelcustomerdetail = this.viewModel
         binding.lifecycleOwner = this
 
-
-
         viewModel.getState().observe(viewLifecycleOwner, Observer {
             when (it) {
                 CustomerDetailState.OnSuccess -> onSuccess()
@@ -53,20 +51,6 @@ class CustomerDetail : Fragment() {
         })
 
         return binding.root
-    }
-
-    private fun onSuccess() {
-        val custome: Customer = args.customer
-
-        viewModel.let {
-            it.idCustomer.value = custome.id.toString()
-            it.nameCustomer.value = custome.name
-            it.emailCustomer.value = custome.email.toString()
-            it.phoneCustomer.value = custome.phone
-            it.cityCustomer.value = custome.city
-            it.addressCustomer.value = custome.address
-        }
-        binding.customerDetailCiPhoto.setImageResource(custome.photo)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -79,8 +63,25 @@ class CustomerDetail : Fragment() {
 
 
     /**
+     * Si el estado éxito, usando el databinding se inserta los datos en el layout
+     */
+    private fun onSuccess() {
+        val aCustomer: Customer = args.customer
+
+        viewModel.let {
+            it.idCustomer.value = aCustomer.id.toString()
+            it.nameCustomer.value = aCustomer.name
+            it.emailCustomer.value = aCustomer.email.toString()
+            it.phoneCustomer.value = aCustomer.phone
+            it.cityCustomer.value = aCustomer.city
+            it.addressCustomer.value = aCustomer.address
+        }
+        binding.customerDetailCiPhoto.setImageResource(aCustomer.photo)
+    }
+
+
+    /**
      * Acción al eliminar un Customer del repositorio
-     * y comprueba si lo puede hacer
      */
     private fun deleteConfirmation() {
 
@@ -142,7 +143,7 @@ class CustomerDetail : Fragment() {
 
 
     /**
-     * Método muestra el AlertDialog de customer referenciado
+     * Función que muestra el AlertDialog si el estado es ReferencedCustomer
      */
     private fun showReferencedCustomer() {
         findNavController().navigate(
@@ -152,7 +153,6 @@ class CustomerDetail : Fragment() {
             )
         )
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
