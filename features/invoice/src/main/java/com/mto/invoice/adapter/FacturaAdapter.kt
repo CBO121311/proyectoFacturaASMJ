@@ -7,10 +7,11 @@ import com.moronlu18.invoicelist.R
 import com.moronlu18.accounts.entity.Factura
 
 class FacturaAdapter(
-    private val facturaList:List<Factura>,
     private val onClickListener:(Factura) -> Unit,
-    private val onClickDelete:(Int) -> Unit
+    private val onClickDelete:((Int) -> Unit)? = null
 ) : RecyclerView.Adapter<FacturaViewHolder>(){
+
+    private var facturaList = arrayListOf<Factura>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FacturaViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context);
@@ -20,6 +21,16 @@ class FacturaAdapter(
     override fun onBindViewHolder(holder: FacturaViewHolder, position: Int) {
         val item = facturaList[position]
         holder.render(item, onClickListener, onClickDelete)
+    }
+
+    fun update(newDataSet:ArrayList<Factura>){
+        facturaList = newDataSet
+        notifyDataSetChanged()
+    }
+
+    fun deleteInvoice(position: Int) {
+        facturaList.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     override fun getItemCount(): Int = facturaList.size

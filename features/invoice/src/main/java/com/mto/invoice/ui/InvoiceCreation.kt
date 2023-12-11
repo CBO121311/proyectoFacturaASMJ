@@ -167,7 +167,7 @@ class InvoiceCreation : Fragment() {
             lineItems = items
 
         )
-        FacturaProvider.dataSet.add(invoice)
+        viewmodel.addRepository(invoice)
         findNavController().popBackStack()
     }
 

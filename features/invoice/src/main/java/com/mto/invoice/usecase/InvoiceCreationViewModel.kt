@@ -4,7 +4,9 @@ import android.text.TextUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.moronlu18.accounts.entity.Factura
 import com.moronlu18.accounts.repository.CustomerProvider
+import com.moronlu18.accounts.repository.FacturaProvider
 import com.mto.invoice.adapter.AddItemCreationAdapter
 import java.time.LocalDate
 import java.time.ZoneOffset
@@ -49,6 +51,10 @@ class InvoiceCreationViewModel: ViewModel() {
         } catch (e:Exception) {
             return false
         }
+    }
+
+    fun addRepository(factura: Factura) {
+        FacturaProvider.dataSet.add(factura)
     }
 
 
