@@ -32,6 +32,10 @@ class FacturaAdapter(
         facturaList.removeAt(position)
         notifyItemRemoved(position)
     }
+    fun sort() {
+        facturaList.sortBy { it.customerId }
+        notifyDataSetChanged()
+    }
 
     override fun getItemCount(): Int = facturaList.size
 

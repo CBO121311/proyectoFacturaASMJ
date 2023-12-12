@@ -3,8 +3,13 @@ package com.mto.invoice.ui
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -12,12 +17,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.moronlu18.invoicelist.R
 import com.mto.invoice.adapter.FacturaAdapter
 import com.moronlu18.accounts.entity.Factura
+import com.moronlu18.invoice.base.BaseFragmentDialog
+import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.invoicelist.databinding.FragmentInvoiceListBinding
 import com.mto.invoice.usecase.InvoiceListState
 import com.mto.invoice.usecase.InvoiceListViewModel
 
 
-class InvoiceList : Fragment() {
+class InvoiceList : Fragment(), MenuProvider {
 
     private var _binding : FragmentInvoiceListBinding? = null
     private val binding get() = _binding!!
@@ -44,6 +51,8 @@ class InvoiceList : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setUpToolbar()
+
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_invoiceList_to_invoiceCreation)
         }
@@ -55,6 +64,7 @@ class InvoiceList : Fragment() {
                 InvoiceListState.NoDataSet -> showNoData()
                 is InvoiceListState.Success -> onSuccess(it.dataset)
 
+                else -> {}
             }
         })
     }
@@ -68,11 +78,23 @@ class InvoiceList : Fragment() {
         binding.invoiceListRvFacturas.adapter = adapter
     }
     private fun onDeleteItem(position: Int) {
-        adapter.deleteInvoice(position)
-        if(adapter.itemCount == 0) {
-            binding.invoiceCreationLayoutVacio.visibility = View.VISIBLE
-            binding.invoiceListRvFacturas.visibility = View.GONE
-        }
+            findNavController().navigate(
+                InvoiceListDirections.actionInvoiceListToBaseFragmentDialog2(
+                    getString(R.string.title_deleteInvoice),
+                    getString(R.string.Content_deleteInvoice)
+                )
+            )
+            parentFragmentManager.setFragmentResultListener(
+                BaseFragmentDialog.request,
+                viewLifecycleOwner
+            ) { _, result ->
+                val success = result.getBoolean(BaseFragmentDialog.result, false)
+                if (success) {
+                    adapter.deleteInvoice(position)
+                    viewmodel.getInvoiceList()
+                }
+            }
+
     }
     private fun onItemSelected(invoice: Factura) {
         findNavController().navigate(InvoiceListDirections.actionInvoiceListToInvoiceDetail(invoice))
@@ -98,5 +120,31 @@ class InvoiceList : Fragment() {
     private fun showNoData() {
         binding.invoiceListRvFacturas.visibility = View.GONE
         binding.invoiceCreationLayoutVacio.visibility = View.VISIBLE
+    }
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.menu_invoice_list, menu)
+    }
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
+            R.id.menu_cd_action_order -> {
+                adapter.sort()
+                return true
+            }
+            R.id.menu_cd_action_refresh -> {
+                viewmodel.getInvoiceList()
+                return true
+
+            }
+            else -> false
+        }
+    }
+
+    private fun setUpToolbar() {
+        (requireActivity() as? MainActivity)?.toolbar?.apply {
+            visibility = View.VISIBLE
+        }
+        val menuhost: MenuHost = requireActivity()
+        menuhost.addMenuProvider(this, viewLifecycleOwner)
     }
 }

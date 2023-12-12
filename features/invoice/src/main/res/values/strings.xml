@@ -52,4 +52,8 @@
     <string name="tvAñadidos">Añadidos</string>
     <string name="ie_tvTotal">Total: </string>
     <string name="ie_itemItem_tvNamePrueba">Reloj de pulsera</string>
+
+    <string name="title_deleteInvoice">Confirmacion</string>
+    <string name="Content_deleteInvoice">¿Estás seguro de que quieres borrar el cliente?</string>
+
 </resources>

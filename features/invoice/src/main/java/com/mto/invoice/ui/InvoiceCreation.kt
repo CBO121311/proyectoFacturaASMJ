@@ -18,9 +18,6 @@ import com.google.android.material.textfield.TextInputLayout
 import com.moronlu18.accounts.entity.Factura
 import com.moronlu18.accounts.entity.InvoiceStatus
 import com.moronlu18.accounts.entity.Item
-import com.moronlu18.accounts.repository.CustomerProvider
-import com.moronlu18.accounts.repository.FacturaProvider
-import com.moronlu18.accounts.repository.ItemProvider
 import com.moronlu18.invoicelist.R
 import com.moronlu18.invoicelist.databinding.FragmentInvoiceCreationBinding
 import com.mto.invoice.adapter.AddItemCreationAdapter
@@ -37,44 +34,6 @@ import java.util.Locale
 
 
 class InvoiceCreation : Fragment() {
-    inner class Listener : TextWatcher {
-        private val contenedor: TextInputLayout
-        constructor(contenedor: TextInputLayout) {
-            this.contenedor = contenedor;
-        }
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-        }
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            contenedor.isErrorEnabled = false
-        }
-
-        override fun afterTextChanged(s: Editable?) {
-            if(!s!!.isEmpty()) {
-                binding.invoiceCreationBtnCliText.text = CustomerProvider.getNom(binding.invoiceCreationTieCliente.text.toString().toInt())
-            }
-        }
-
-    }
-    inner class ListenerDates : TextWatcher {
-        private val contenedor: TextInputLayout
-        constructor(contenedor: TextInputLayout) {
-            this.contenedor = contenedor;
-        }
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-        }
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            contenedor.isErrorEnabled = false
-        }
-
-        override fun afterTextChanged(s: Editable?) {
-
-        }
-
-    }
 
     private var _binding: FragmentInvoiceCreationBinding? = null
     private val binding get() = _binding!!
@@ -150,7 +109,7 @@ class InvoiceCreation : Fragment() {
     }
     private fun onSuccessCreate() {
         val customId = binding.invoiceCreationTieCliente.text.toString().toInt()
-        val numb = ItemProvider.getTotal(itemMutableList).replace(',','.')
+        val numb = viewmodel.giveTotal(itemMutableList).replace(',','.')
         val stat = binding.invoiceCreationSpEstado.selectedItem.toString()
         val issued = parseStringToInstant(binding.invoiceCreationTieFechaEm.text.toString())
         val due = parseStringToInstant(binding.invoiceCreationTieFechaFin.text.toString())
@@ -158,7 +117,7 @@ class InvoiceCreation : Fragment() {
 
 
         val invoice = Factura(
-            id = FacturaProvider.dataSet.size + 1,
+            id = viewmodel.giveId() + 1,
             customerId = customId,
             number = numb.subSequence(0,numb.length -1).toString().toDouble(),
             status = parse(stat),
@@ -193,7 +152,7 @@ class InvoiceCreation : Fragment() {
             itemMutableList.add(ItemSelected)
             binding.invoiceCreationRvAnadidos.adapter!!.notifyDataSetChanged()
             binding.invoiceCreationRvErrorAnadidos.text = ""
-            binding.invoiceCreationTvTotalText.text = ItemProvider.getTotal(itemMutableList).toString()
+            binding.invoiceCreationTvTotalText.text =viewmodel.giveTotal(itemMutableList)
         }
 
     }
@@ -205,9 +164,8 @@ class InvoiceCreation : Fragment() {
 
     private fun initReciclerView() {
         val manager = LinearLayoutManager(requireContext())
-
         binding.invoiceCreationRvDisponibles.layoutManager = manager
-        binding.invoiceCreationRvDisponibles.adapter = ItemCreationAdapter(ItemProvider.dataSetItem) { item ->
+        binding.invoiceCreationRvDisponibles.adapter = ItemCreationAdapter(viewmodel.giveListItem()) { item ->
             onItemSelected(
                 item
             )
@@ -274,6 +232,46 @@ class InvoiceCreation : Fragment() {
     private fun setEndDateFormatError() {
         binding.invoiceCreationTilFechaFin.error =  getString(R.string.errDateFormat)
         binding.invoiceCreationTieFechaFin.requestFocus()
+    }
+
+    inner class Listener : TextWatcher {
+        private val contenedor: TextInputLayout
+        constructor(contenedor: TextInputLayout) {
+            this.contenedor = contenedor;
+        }
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            contenedor.isErrorEnabled = false
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+            if(!s!!.isEmpty()) {
+                binding.invoiceCreationBtnCliText.text = viewmodel.giveNom()
+
+            }
+        }
+
+    }
+    inner class ListenerDates : TextWatcher {
+        private val contenedor: TextInputLayout
+        constructor(contenedor: TextInputLayout) {
+            this.contenedor = contenedor;
+        }
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            contenedor.isErrorEnabled = false
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+
+        }
+
     }
 
 

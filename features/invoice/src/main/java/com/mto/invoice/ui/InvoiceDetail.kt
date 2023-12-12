@@ -3,33 +3,33 @@ package com.mto.invoice.ui
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.moronlu18.accounts.entity.Factura
 import com.moronlu18.accounts.entity.Item
-import com.moronlu18.accounts.repository.CustomerProvider
-import com.moronlu18.accounts.repository.ItemProvider
 import com.moronlu18.invoicelist.databinding.FragmentInvoiceDetailBinding
 import com.mto.invoice.adapter.ItemAdapter
+import com.mto.invoice.usecase.InvoiceDetailViewModel
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 
-class InvoiceDetail : Fragment() {
+class InvoiceDetail : Fragment(){
 
     private val args: InvoiceDetailArgs by navArgs()
     private var _binding: FragmentInvoiceDetailBinding? = null
+    private val viewmodel: InvoiceDetailViewModel by viewModels()
+
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+
     }
 
     override fun onCreateView(
@@ -40,10 +40,10 @@ class InvoiceDetail : Fragment() {
         _binding = FragmentInvoiceDetailBinding.inflate(inflater, container, false)
         val formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy").withZone(ZoneId.systemDefault())
         val invoice: Factura = args.invoice
-        binding.invoiceDetailTcCliText.text = CustomerProvider.getNom(invoice.customerId)
+        binding.invoiceDetailTcCliText.text = viewmodel.giveNom(invoice.customerId)
         binding.invoiceDetailTcFechaEmText.text = formatoFecha.format(invoice.issuedDate)
         binding.invoiceDetailTcFechaFText.text = formatoFecha.format(invoice.dueDate)
-        binding.invoiceDetailTvTotal.text = ItemProvider.getTotal(invoice.lineItems!!.toMutableList())
+        binding.invoiceDetailTvTotal.text = viewmodel.giveTotal(invoice.lineItems!!.toMutableList())
         binding.invoiceDetailTvEstado.text = invoice.status.toString()
         return binding.root;
 
@@ -80,11 +80,9 @@ class InvoiceDetail : Fragment() {
 
 
     }
-    @Deprecated("Deprecated in Java")
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
-        inflater.inflate(com.moronlu18.invoicelist.R.menu.menu_invoice_detail, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
+
+
+
 
 }

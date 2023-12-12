@@ -5,7 +5,6 @@ import com.moronlu18.accounts.network.ResourceList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-
 class FacturaProvider private constructor() {
     companion object {
         var dataSet: MutableList<Factura> = mutableListOf()
@@ -19,12 +18,14 @@ class FacturaProvider private constructor() {
                 }
             }
         }
-
         /**
          * Comprueba si el id de cliente está en Invoice
          */
         fun isCustomerReferenceFactura(idCli: Int): Boolean {
             return dataSet.any() { it.customerId == idCli }
+        }
+       fun obtainsId(): Int {
+            return dataSet.maxByOrNull { it.id } ?.id?: 0
         }
     }
 }
