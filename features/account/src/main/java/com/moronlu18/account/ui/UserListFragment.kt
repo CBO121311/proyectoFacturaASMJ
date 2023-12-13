@@ -3,22 +3,32 @@ package com.moronlu18.account.ui
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.moronlu18.account.adapter.UserAdapter
 import com.moronlu18.account.usecase.UserListState
 import com.moronlu18.account.usecase.UserListViewModel
 import com.moronlu18.accounts.entity.User
 import com.moronlu18.accountsignin.R
 import com.moronlu18.accountsignin.databinding.FragmentUserListBinding
+import com.moronlu18.invoice.ui.MainActivity
 
 
-class UserListFragment : Fragment(), UserAdapter.OnUserClick {
+//Aquí te doy permiso para el menu
+//Basicamente es un contrato para que yo te considere mi proveedor de menú.
+class UserListFragment : Fragment(), UserAdapter.OnUserClick, MenuProvider {
 
     private var _binding: FragmentUserListBinding? = null
     private val binding get() = _binding!!
@@ -45,6 +55,11 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //Funcion que personaliza el botón flotante
+        setUpFab()
+
+        //Función que personal el menu de la Toolbar
+        setUpToolbar()
 
         setUpUserRecycler()
 
@@ -59,8 +74,9 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick {
         })
     }
 
+
     /**
-     * Cuando el faragment se inicia debe pedir el lsitado de usarios al viewmodel. infreaestructura
+     * Cuando el fragment se inicia debe pedir el lsitado de usarios al viewmodel. infreaestructura
      */
 
 
@@ -109,8 +125,7 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick {
     private fun showProgressBar(value: Boolean) {
         if (value) {
             findNavController().navigate(R.id.action_userListFragment_to_fragmentProgressDialog)
-        }else
-        {
+        } else {
             findNavController().popBackStack()
         }
     }
@@ -170,6 +185,84 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick {
     override fun userOnLongClick(user: com.moronlu18.accounts.entity.User) {
         Toast.makeText(requireActivity(), "Pulsación larga en el usuario $user", Toast.LENGTH_LONG)
             .show()
+    }
+
+    /**
+     * Esta función personaliza el comportamiento del botón flotante de la activity
+     */
+    private fun setUpFab() {
+        //requireActivity te devuelve el contenedor padre.
+        //Los fragment siempre viene de un activity por eso.
+        //val fab = (requireActivity() as? MainActivity)?.fab
+
+
+        //Apply simplifica la inicialización del objeto fab, son modismos
+
+        //Todo quitar comentario cuando pueda
+        /* (requireActivity() as? MainActivity)?.fab?.apply {
+            visibility = View.VISIBLE
+            setOnClickListener { view ->
+                //Aquí la acción del listener
+                Snackbar.make(view, "Soy el Fragment", Snackbar.LENGTH_LONG).show()
+            }
+        }*/
+
+
+        /*fab?.visibility = View.VISIBLE
+        fab?.setOnClickListener { view->
+            //Aquí la acción del listener
+            Snackbar.make(view,"Soy el Fragment",Snackbar.LENGTH_LONG).show()
+        }*/
+
+
+        //Un modismo es para simplifcar código. Así que el de arriba no sirve.
+    }
+
+    /**
+     * Esta función personaliza el comportamiento de la Toolbar de la Activity
+     */
+    //Si quieres ser proveedor de menú.
+    private fun setUpToolbar() {
+        //Modismo Apply de Kotlin
+        (requireActivity() as? MainActivity)?.toolbar?.apply {
+            visibility = View.VISIBLE
+        }
+        //Es un menu que añade a la clase Provider
+
+        val menuHost: MenuHost = requireActivity()
+
+        //El menú está condicionado al ciclo de vida a ese provider.
+        //Solo va a estar visible al ciclo de vida a ese fragment
+        //viewLifecycleOwner = ciclo de vida del fragmento.
+        //Lifecycle.State.RESUMED es opcional, solo se utiliza el resume
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+
+    /**
+     * Se añade las opciones del menu definidas en R.menu.menu_list_user
+     * al menú principal
+     */
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.menu_list_user,menu)
+    }
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when(menuItem.itemId){
+            R.id.action_sort-> {
+                userAdapter.sort()
+                return  true
+            }
+
+            R.id.action_refresh ->{
+                viewModel.getUserList()
+                //userAdapter.notifyDataSetChanged()
+                return true
+            }
+
+            else -> false
+        }
+
     }
 
 

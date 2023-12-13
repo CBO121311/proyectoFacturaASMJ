@@ -73,6 +73,16 @@ class UserAdapter(
     }
 
     /**
+     * Función que ordena el data en base a una propiedad personalizada
+     */
+    fun sort() {
+        //Orden personalizado se estable mediante una propiedad (no es orden natural)
+        dataset.sortBy { it.name }
+        notifyDataSetChanged()
+    }
+
+
+    /**
      * La clase viewHolde contiene todos los elementos de view o del layout XML que se ha inflado.
      */
     //Hay que poner inner para acceder al listener, es decir hacerlo interna(?)
@@ -112,4 +122,7 @@ class UserAdapter(
         }
 
     }
+
+
+
 }
