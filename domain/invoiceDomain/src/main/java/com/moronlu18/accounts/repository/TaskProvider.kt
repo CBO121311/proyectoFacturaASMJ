@@ -3,6 +3,9 @@ package com.moronlu18.accounts.repository
 import com.moronlu18.accounts.entity.Task
 import com.moronlu18.accounts.enum.TaskStatus
 import com.moronlu18.accounts.enum.TypeTask
+import com.moronlu18.accounts.network.ResourceList
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.time.Instant
 
 class TaskProvider {
@@ -54,6 +57,18 @@ class TaskProvider {
             )
         }
 
+        suspend fun getTaskList(): ResourceList {
+            return withContext(Dispatchers.IO) {
+                when {
+                    taskDataSet.isEmpty() -> ResourceList.Error(Exception("Lista de Tareas vacia"))
+                    else -> ResourceList.Success(taskDataSet as ArrayList<Task>)
+                }
+            }
+        }
+
+        fun getTasks(): List<Task> {
+            return taskDataSet
+        }
 
         /**
          * Comprueba si el id de cliente está en Task

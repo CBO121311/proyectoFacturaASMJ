@@ -5,10 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.moronlu18.accounts.entity.Customer
-import com.moronlu18.accounts.entity.Item
 import com.moronlu18.accounts.entity.Task
 import com.moronlu18.accounts.repository.CustomerProvider
-import com.moronlu18.accounts.repository.ItemProvider
 import com.moronlu18.accounts.repository.TaskProvider
 import com.sergiogv98.tasklist.ui.TaskState
 import java.time.Instant
@@ -16,7 +14,7 @@ import java.time.LocalDate
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
-class TaskViewModel : ViewModel() {
+class TaskCreationViewModel : ViewModel() {
 
     var taskName = MutableLiveData<String>()
     var customerName = MutableLiveData<String>()

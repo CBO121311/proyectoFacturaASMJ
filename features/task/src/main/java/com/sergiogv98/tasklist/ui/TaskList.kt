@@ -1,26 +1,27 @@
 package com.sergiogv98.tasklist.ui
 
 import com.moronlu18.accounts.entity.Task
-import com.moronlu18.accounts.repository.TaskProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.moronlu18.invoice.base.BaseFragmentDialog
 import com.moronlu18.tasklist.R
 import com.sergiogv98.tasklist.adapter.TaskAdapter
 import com.moronlu18.tasklist.databinding.FragmentTaskListBinding
+import com.sergiogv98.usecase.TaskListViewModel
 
 
 class TaskList : Fragment() {
 
 
-    private var _binding:FragmentTaskListBinding? = null
+    private var _binding: FragmentTaskListBinding? = null
     private val binding get() = _binding!!
-    private var taskMutableList: MutableList<Task> = TaskProvider.taskDataSet
+    private val viewModel: TaskListViewModel by viewModels()
     private lateinit var adapter: TaskAdapter
 
     override fun onCreateView(
@@ -28,8 +29,10 @@ class TaskList : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentTaskListBinding.inflate(inflater,container,false)
+        _binding = FragmentTaskListBinding.inflate(inflater, container, false)
 
+        binding.viewmodel = this.viewModel
+        binding.lifecycleOwner = this
         binding.taskListAddTask.setOnClickListener {
             findNavController().navigate(R.id.action_taskList_to_taskCreation)
         }
@@ -42,17 +45,23 @@ class TaskList : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerViewTask()
+
+        viewModel.getTaskList()
+        viewModel.getState().observe(viewLifecycleOwner) {
+            when (it) {
+                TaskListState.NoData -> showNoData()
+                is TaskListState.Success -> onSuccess(it.dataset)
+            }
+        }
     }
 
-    private fun initRecyclerViewTask(){
+    private fun initRecyclerViewTask() {
 
         adapter = TaskAdapter(
-            taskList = taskMutableList,
-            onClickListener = { task ->  onItemSelected(task)},
-            onClickDeleted = { position -> onDeletedItem(position)}
+            taskList = viewModel.getTasks(),
+            onClickListener = { task -> onItemSelected(task) },
+            onClickDeleted = { position -> onDeletedItem(position) }
         )
-
-        updateEmptyView()
 
         binding.taskListRecyclerTasks.layoutManager = LinearLayoutManager(requireContext())
         binding.taskListRecyclerTasks.adapter = adapter
@@ -64,6 +73,7 @@ class TaskList : Fragment() {
     fun onItemSelected(task: Task) {
         findNavController().navigate(TaskListDirections.actionTaskListToTaskDetail(task))
     }
+
     private fun onDeletedItem(position: Int) {
 
         findNavController().navigate(
@@ -79,19 +89,24 @@ class TaskList : Fragment() {
         ) { _, result ->
             val success = result.getBoolean(BaseFragmentDialog.result, false)
             if (success) {
-                taskMutableList.removeAt(position)
+                viewModel.deleteTask(position)
                 adapter.notifyItemRemoved(position)
-                updateEmptyView()
+                if(viewModel.getTasks().isEmpty()) {
+                    showNoData()
+                }
             }
         }
     }
 
-    private fun updateEmptyView(){
-        if(taskMutableList.isEmpty()){
-            binding.taskListLlEmpty.visibility = View.VISIBLE
-        } else {
-            binding.taskListLlEmpty.visibility = View.GONE
-        }
+    private fun showNoData() {
+        binding.taskListRecyclerTasks.visibility = View.GONE
+        binding.taskListLlEmpty.visibility = View.VISIBLE
+    }
+
+    private fun onSuccess(dataset: ArrayList<Task>) {
+        binding.taskListRecyclerTasks.visibility = View.VISIBLE
+        binding.taskListLlEmpty.visibility = View.GONE
+        adapter.update(dataset)
     }
 
     override fun onDestroyView() {

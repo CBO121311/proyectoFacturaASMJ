@@ -18,7 +18,7 @@ import com.moronlu18.accounts.entity.Task
 import com.moronlu18.accounts.enum.TaskStatus
 import com.moronlu18.accounts.enum.TypeTask
 import com.moronlu18.tasklist.databinding.FragmentTaskCreationBinding
-import com.sergiogv98.usecase.TaskViewModel
+import com.sergiogv98.usecase.TaskCreationViewModel
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.LocalDate
@@ -32,7 +32,7 @@ class TaskCreation : Fragment() {
     private var _binding: FragmentTaskCreationBinding? = null
     private val binding get() = _binding!!
     private val calendar = Calendar.getInstance()
-    private val viewModel: TaskViewModel by viewModels()
+    private val viewModel: TaskCreationViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -19,5 +19,11 @@ class TaskAdapter(private var taskList: List<Task>,
         val item = taskList[position]
         holder.render(item, onClickListener!!, onClickDeleted!!)
     }
+
+    fun update(newDataSet:ArrayList<Task>){
+        taskList = newDataSet
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int = taskList.size
 }

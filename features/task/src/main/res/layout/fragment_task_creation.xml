@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewmodeltaskcreation"
-            type="com.sergiogv98.usecase.TaskViewModel" />
+            type="com.sergiogv98.usecase.TaskCreationViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
