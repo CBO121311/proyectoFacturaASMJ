@@ -4,6 +4,12 @@ import android.text.TextUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.moronlu18.accounts.entity.Customer
+import com.moronlu18.accounts.entity.Item
+import com.moronlu18.accounts.entity.Task
+import com.moronlu18.accounts.repository.CustomerProvider
+import com.moronlu18.accounts.repository.ItemProvider
+import com.moronlu18.accounts.repository.TaskProvider
 import com.sergiogv98.tasklist.ui.TaskState
 import java.time.Instant
 import java.time.LocalDate
@@ -26,13 +32,31 @@ class TaskViewModel : ViewModel() {
             isValidDate(dateCreation.value, dateEnd.value) -> state.value =
                 TaskState.IncorrectDateRange
 
-            else -> state.value = TaskState.OnSuccess
+            else -> {
+                state.value = TaskState.OnSuccess
+            }
         }
     }
 
 
     fun getState(): LiveData<TaskState> {
         return state
+    }
+
+    fun taskGiveId(): Int {
+        return (TaskProvider.taskDataSet.size + 1).coerceAtLeast(1)
+    }
+
+    fun taskGiveCustomerId(nameCustomer: String): Customer? {
+        return CustomerProvider.getCustomer().find { it.name == nameCustomer }
+    }
+
+    fun giveListCustomer() : List<String> {
+        return CustomerProvider.getCustomer().map { it.name }
+    }
+
+    fun addTaskRepository(task: Task){
+        TaskProvider.taskDataSet.add(task)
     }
 
     private fun isValidDate(fechCrea: String?, fechEnd: String?): Boolean {
@@ -55,4 +79,6 @@ class TaskViewModel : ViewModel() {
 
         return fechaEnd.isBefore(fechaCreation)
     }
+
+
 }

@@ -17,8 +17,6 @@ import com.google.android.material.textfield.TextInputLayout
 import com.moronlu18.accounts.entity.Task
 import com.moronlu18.accounts.enum.TaskStatus
 import com.moronlu18.accounts.enum.TypeTask
-import com.moronlu18.accounts.repository.CustomerProvider
-import com.moronlu18.accounts.repository.TaskProvider
 import com.moronlu18.tasklist.databinding.FragmentTaskCreationBinding
 import com.sergiogv98.usecase.TaskViewModel
 import java.text.SimpleDateFormat
@@ -40,7 +38,6 @@ class TaskCreation : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentTaskCreationBinding.inflate(inflater, container, false)
         binding.viewmodeltaskcreation = this.viewModel
         binding.lifecycleOwner = this
@@ -48,7 +45,7 @@ class TaskCreation : Fragment() {
             ArrayAdapter(
                 requireContext(),
                 R.layout.simple_dropdown_item_1line,
-                CustomerProvider.getCustomer().map { it.name }
+                viewModel.giveListCustomer()
             )
         )
 
@@ -109,14 +106,14 @@ class TaskCreation : Fragment() {
 
     private fun onSuccessCreate() {
         val selectedClientName = binding.autoCompleteTxt.text.toString()
-        val selectedClient = CustomerProvider.getCustomer().find { it.name == selectedClientName }
+        val selectedClient = viewModel.taskGiveCustomerId(selectedClientName)
         val nameTask = binding.taskCreationTxvTaskName.text.toString()
         val description = binding.taskCreationTxvDescription.text.toString()
         val fechaCreation =processDate(binding.taskCreationButtonDateCreation.text.toString())
         val fechaEnd = processDate(binding.taskCreationButtonDateEnd.text.toString())
 
         val task = Task(
-            id = (TaskProvider.taskDataSet.size + 1).coerceAtLeast(1),
+            id = viewModel.taskGiveId(),
             clientID = selectedClient!!.id,
             nomTask = nameTask,
             typeTask = taskTypeChoose(),
@@ -125,8 +122,7 @@ class TaskCreation : Fragment() {
             fechCreation = fechaCreation,
             fechFinalization = fechaEnd
         )
-        TaskProvider.taskDataSet.add(task)
-
+        viewModel.addTaskRepository(task)
         findNavController().popBackStack()
     }
 
