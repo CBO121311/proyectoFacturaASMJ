@@ -71,12 +71,11 @@ class TaskList : Fragment() {
     /**
      * Envía un objeto (Task) al layout taskDetail utilizando SafeArgs
      */
-    fun onItemSelected(task: Task) {
+    private fun onItemSelected(task: Task) {
         findNavController().navigate(TaskListDirections.actionTaskListToTaskDetail(task))
     }
 
     private fun onEditItem(position: Int){
-        val task = viewModel.getTaskByPosition(position)
         val bundle = Bundle()
         bundle.putInt("taskPosition", position)
         parentFragmentManager.setFragmentResult("taskkey", bundle)
@@ -110,11 +109,13 @@ class TaskList : Fragment() {
     private fun showNoData() {
         binding.taskListRecyclerTasks.visibility = View.GONE
         binding.taskListLlEmpty.visibility = View.VISIBLE
+        binding.taskListLlEmptyImg.playAnimation()
     }
 
     private fun onSuccess(dataset: ArrayList<Task>) {
         binding.taskListRecyclerTasks.visibility = View.VISIBLE
         binding.taskListLlEmpty.visibility = View.GONE
+        binding.taskListLlEmptyImg.cancelAnimation()
         adapter.update(dataset)
     }
 
