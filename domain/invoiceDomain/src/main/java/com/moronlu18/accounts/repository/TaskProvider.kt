@@ -6,6 +6,7 @@ import com.moronlu18.accounts.enum.TypeTask
 import com.moronlu18.accounts.network.ResourceList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.text.FieldPosition
 import java.time.Instant
 
 class TaskProvider {
@@ -68,6 +69,10 @@ class TaskProvider {
 
         fun getTasks(): List<Task> {
             return taskDataSet
+        }
+
+        fun updateTasks(task: Task, position: Int){
+            taskDataSet[position] = task
         }
 
         /**

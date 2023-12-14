@@ -33,6 +33,10 @@ class TaskListViewModel: ViewModel() {
         TaskProvider.taskDataSet.removeAt(position)
     }
 
+    fun getTaskByPosition(position: Int): Task{
+        return TaskProvider.taskDataSet[position]
+    }
+
     fun getState(): LiveData<TaskListState> {
         return state;
     }

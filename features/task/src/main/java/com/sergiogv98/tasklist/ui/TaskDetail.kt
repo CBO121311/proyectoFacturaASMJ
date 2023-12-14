@@ -60,51 +60,6 @@ class TaskDetail : Fragment() {
         }
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-
-            R.id.task_details_button_delete -> {
-                deleteConfirmation()
-                true
-            }
-
-            R.id.task_details_button_edit -> {
-                true
-            }
-
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun deleteConfirmation() {
-
-        findNavController().navigate(
-            TaskListDirections.actionTaskListToBaseFragmentDialog2(
-                getString(com.moronlu18.invoice.R.string.title_fragmentDialogExit),
-                getString(R.string.delete_task_info)
-            )
-        )
-        parentFragmentManager.setFragmentResultListener(
-            BaseFragmentDialog.request,
-            viewLifecycleOwner
-        ) { _, result ->
-            val success = result.getBoolean(BaseFragmentDialog.result, false)
-            if (success) {
-                val position = TaskProvider.taskDataSet.indexOf(args.task)
-
-                if (position != -1) {
-                    TaskProvider.taskDataSet.removeAt(position)
-                    adapter.notifyItemRemoved(position)
-
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        findNavController().popBackStack()
-                    }, 100)
-                }
-            }
-        }
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -229,7 +229,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/task_creation_status" />
 
-        <TextView
+        <!--<TextView
             android:id="@+id/task_date_error_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -238,7 +238,7 @@
             app:layout_constraintBottom_toTopOf="@+id/task_creation_text_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/task_creation_button_date_creation" />
+            app:layout_constraintTop_toBottomOf="@+id/task_creation_button_date_creation" />-->
 
         <ImageView
             android:id="@+id/task_creation_img_calendar_creation"

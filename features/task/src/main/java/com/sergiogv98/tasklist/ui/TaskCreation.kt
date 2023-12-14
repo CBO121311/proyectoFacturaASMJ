@@ -13,6 +13,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.moronlu18.accounts.entity.Task
 import com.moronlu18.accounts.enum.TaskStatus
@@ -33,6 +34,7 @@ class TaskCreation : Fragment() {
     private val binding get() = _binding!!
     private val calendar = Calendar.getInstance()
     private val viewModel: TaskCreationViewModel by viewModels()
+    private var editTaskPos = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +43,38 @@ class TaskCreation : Fragment() {
         _binding = FragmentTaskCreationBinding.inflate(inflater, container, false)
         binding.viewmodeltaskcreation = this.viewModel
         binding.lifecycleOwner = this
+        viewModel.setEditorMode(false)
+
+        parentFragmentManager.setFragmentResultListener(
+            "taskkey", this
+        ) { _, result ->
+            var posTask: Int = result.getInt("taskPosition")
+            val taskEdit = viewModel.taskGive(posTask)
+            viewModel.setEditorMode(true)
+
+
+
+            binding.autoCompleteTxt.setText(viewModel.giveClientName(taskEdit.clientID))
+            binding.taskCreationTxvTaskName.setText(taskEdit.nomTask)
+            binding.taskCreationButtonDateCreation.text = processDateString(taskEdit.fechCreation)
+            binding.taskCreationButtonDateEnd.text = processDateString(taskEdit.fechFinalization)
+            binding.taskCreationTxvDescription.setText(taskEdit.descTask)
+
+            //Hacer funciones para la eleccion de tipo de tarea y los radio button
+
+            binding.autoCompleteTxt.setAdapter(
+                ArrayAdapter(
+                    requireContext(),
+                    R.layout.simple_dropdown_item_1line,
+                    viewModel.giveListCustomer()
+                )
+            )
+
+            editTaskPos = posTask
+            viewModel.prevTask = taskEdit
+        }
+
+
         binding.autoCompleteTxt.setAdapter(
             ArrayAdapter(
                 requireContext(),
@@ -79,6 +113,14 @@ class TaskCreation : Fragment() {
             }
         }
 
+        binding.autoCompleteTxt.setAdapter(
+            ArrayAdapter(
+                requireContext(),
+                R.layout.simple_dropdown_item_1line,
+                viewModel.giveListCustomer()
+            )
+        )
+
     }
 
     override fun onDestroyView() {
@@ -109,20 +151,34 @@ class TaskCreation : Fragment() {
         val selectedClient = viewModel.taskGiveCustomerId(selectedClientName)
         val nameTask = binding.taskCreationTxvTaskName.text.toString()
         val description = binding.taskCreationTxvDescription.text.toString()
-        val fechaCreation =processDate(binding.taskCreationButtonDateCreation.text.toString())
+        val fechaCreation = processDate(binding.taskCreationButtonDateCreation.text.toString())
         val fechaEnd = processDate(binding.taskCreationButtonDateEnd.text.toString())
 
-        val task = Task(
-            id = viewModel.taskGiveId(),
-            clientID = selectedClient!!.id,
-            nomTask = nameTask,
-            typeTask = taskTypeChoose(),
-            taskStatus = taskStatusChoose(),
-            descTask = description,
-            fechCreation = fechaCreation,
-            fechFinalization = fechaEnd
-        )
-        viewModel.addTaskRepository(task)
+        if (viewModel.getEditorMode()) {
+            val updateTask = Task(
+                id = editTaskPos,
+                clientID = selectedClient!!.id,
+                nomTask = nameTask,
+                typeTask = taskTypeChoose(),
+                taskStatus = taskStatusChoose(),
+                descTask = description,
+                fechCreation = fechaCreation,
+                fechFinalization = fechaEnd
+            )
+            viewModel.updateTask(updateTask, editTaskPos)
+        } else {
+            val task = Task(
+                id = viewModel.taskGiveId(),
+                clientID = selectedClient!!.id,
+                nomTask = nameTask,
+                typeTask = taskTypeChoose(),
+                taskStatus = taskStatusChoose(),
+                descTask = description,
+                fechCreation = fechaCreation,
+                fechFinalization = fechaEnd
+            )
+            viewModel.addTaskRepository(task)
+        }
         findNavController().popBackStack()
     }
 
@@ -135,6 +191,10 @@ class TaskCreation : Fragment() {
         } catch (e: Exception) {
             Instant.now()
         }
+    }
+
+    private fun processDateString(date: Instant): String {
+        return date.toString().substring(0, 10)
     }
 
     private fun taskTypeChoose(): TypeTask {
@@ -158,18 +218,26 @@ class TaskCreation : Fragment() {
         }
     }
 
-    private fun setTaskNameEmptyError(){
-        binding.taskCreationTaskTilName.error = getString(com.moronlu18.tasklist.R.string.name_error)
+    private fun setTaskNameEmptyError() {
+        binding.taskCreationTaskTilName.error =
+            getString(com.moronlu18.tasklist.R.string.name_error)
         binding.taskCreationTaskTilName.requestFocus()
     }
 
-    private fun setTaskCustomerEmptyError(){
-        binding.taskCreationTaskDropdown.error = getString(com.moronlu18.tasklist.R.string.client_error)
+    private fun setTaskCustomerEmptyError() {
+        binding.taskCreationTaskDropdown.error =
+            getString(com.moronlu18.tasklist.R.string.client_error)
         binding.taskCreationTaskDropdown.requestFocus()
     }
+
     private fun setDateValidationError() {
-        binding.taskDateErrorInfo.text = getString(com.moronlu18.tasklist.R.string.date_error)
-        binding.taskCreationTaskDropdown.requestFocus()
+        //binding.taskDateErrorInfo.text = getString(com.moronlu18.tasklist.R.string.date_error)
+        //binding.taskDateErrorInfo.requestFocus()
+        Snackbar.make(
+            binding.taskCreationView,
+            getString(com.moronlu18.tasklist.R.string.date_error),
+            Snackbar.ANIMATION_MODE_SLIDE
+        ).show()
     }
 
     inner class GeneralTextWatcher(private val til: TextInputLayout) : TextWatcher {

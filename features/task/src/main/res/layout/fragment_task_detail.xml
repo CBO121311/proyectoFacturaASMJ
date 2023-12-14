@@ -72,30 +72,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task_details_profile_view" />
 
-    <ImageButton
-        android:id="@+id/task_details_button_delete"
-        android:layout_width="@dimen/task_details_button_width"
-        android:layout_height="@dimen/task_details_button_height"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_task_details_delete"
-        app:layout_constraintBottom_toBottomOf="@+id/task_details_profile_view"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageButton
-        android:id="@+id/task_details_button_edit"
-        android:layout_width="@dimen/task_details_button_width"
-        android:layout_height="@dimen/task_details_button_height"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_task_details_edit"
-        app:layout_constraintBottom_toBottomOf="@+id/task_details_profile_view"
-        app:layout_constraintEnd_toStartOf="@+id/task_details_button_delete"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/task_details_task_name"
         style="@style/tv_task_details_task_name"

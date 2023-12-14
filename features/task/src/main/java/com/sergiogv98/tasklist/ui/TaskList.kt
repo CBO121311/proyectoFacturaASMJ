@@ -60,7 +60,8 @@ class TaskList : Fragment() {
         adapter = TaskAdapter(
             taskList = viewModel.getTasks(),
             onClickListener = { task -> onItemSelected(task) },
-            onClickDeleted = { position -> onDeletedItem(position) }
+            onClickDeleted = { position -> onDeletedItem(position) },
+            onClickEdit = { position -> onEditItem(position) }
         )
 
         binding.taskListRecyclerTasks.layoutManager = LinearLayoutManager(requireContext())
@@ -72,6 +73,14 @@ class TaskList : Fragment() {
      */
     fun onItemSelected(task: Task) {
         findNavController().navigate(TaskListDirections.actionTaskListToTaskDetail(task))
+    }
+
+    private fun onEditItem(position: Int){
+        val task = viewModel.getTaskByPosition(position)
+        val bundle = Bundle()
+        bundle.putInt("taskPosition", position)
+        parentFragmentManager.setFragmentResult("taskkey", bundle)
+        findNavController().navigate(R.id.action_taskList_to_taskCreation)
     }
 
     private fun onDeletedItem(position: Int) {

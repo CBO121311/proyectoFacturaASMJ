@@ -9,6 +9,7 @@ import com.moronlu18.accounts.entity.Task
 import com.moronlu18.accounts.repository.CustomerProvider
 import com.moronlu18.accounts.repository.TaskProvider
 import com.sergiogv98.tasklist.ui.TaskState
+import java.text.FieldPosition
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneOffset
@@ -20,8 +21,10 @@ class TaskCreationViewModel : ViewModel() {
     var customerName = MutableLiveData<String>()
     var dateCreation = MutableLiveData<String>()
     var dateEnd = MutableLiveData<String>()
+    var prevTask: Task? = null
 
     private var state = MutableLiveData<TaskState>()
+    private var isEditor = MutableLiveData<Boolean>()
 
     fun validateTask() {
         when {
@@ -49,12 +52,32 @@ class TaskCreationViewModel : ViewModel() {
         return CustomerProvider.getCustomer().find { it.name == nameCustomer }
     }
 
+    fun taskGive(position: Int): Task{
+        return TaskProvider.taskDataSet[position]
+    }
+
     fun giveListCustomer() : List<String> {
         return CustomerProvider.getCustomer().map { it.name }
     }
 
+    fun giveClientName(id: Int): String{
+        return CustomerProvider.getCustomerNameById(id).toString()
+    }
+
     fun addTaskRepository(task: Task){
         TaskProvider.taskDataSet.add(task)
+    }
+
+    fun updateTask(task: Task, position: Int){
+        TaskProvider.updateTasks(task, position)
+    }
+
+    fun setEditorMode(editorMode: Boolean){
+        isEditor.value = editorMode
+    }
+
+    fun getEditorMode(): Boolean {
+        return isEditor.value?: false
     }
 
     private fun isValidDate(fechCrea: String?, fechEnd: String?): Boolean {
