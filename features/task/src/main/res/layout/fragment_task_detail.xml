@@ -1,242 +1,251 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/task_details_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.sergiogv98.tasklist.ui.TaskDetail">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <View
-        android:id="@+id/task_details_profile_view"
-        android:layout_width="@dimen/task_details_profile_width"
-        android:layout_height="@dimen/task_details_profile_height"
-        android:background="@color/background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.sergiogv98.usecase.TaskDetailViewModel" />
+    </data>
 
-    <TextView
-        android:id="@+id/task_details_client_txt"
-        style="@style/tv_txt_client_task_details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/task_details_client_txt_margin_top"
-        android:text="@string/task_details_txt_client"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_conversion_absoluteHeight="35dp"
-        tools:layout_conversion_absoluteWidth="82dp" />
-
-    <TextView
-        android:id="@+id/task_details_client_name_txt"
-        style="@style/tv_client_task_details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/task_details_client_name_txt_margin_top"
-        android:gravity="center"
-        android:text=""
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_details_client_txt"
-        tools:layout_conversion_absoluteHeight="24dp"
-        tools:layout_conversion_absoluteWidth="147dp" />
-
-
-    <com.mikhaellopez.circularimageview.CircularImageView
-        android:id="@+id/task_details_client_image_view"
-        android:layout_width="@dimen/task_details_img_width_height"
-        android:layout_height="@dimen/task_details_img_width_height"
-        android:src="@drawable/client_profile"
-        app:layout_constraintBottom_toBottomOf="@+id/task_details_profile_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/task_details_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="205dp" />
+        tools:context="com.sergiogv98.tasklist.ui.TaskDetail">
 
-    <View
-        android:id="@+id/task_details_task_view"
-        android:layout_width="@dimen/task_details_task_width"
-        android:layout_height="@dimen/task_details_task_height"
-        android:layout_marginTop="@dimen/task_details_task_margin_top"
-        android:background="@color/md_theme_light_primaryContainer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_details_profile_view" />
-
-    <TextView
-        android:id="@+id/task_details_task_name"
-        style="@style/tv_task_details_task_name"
-        android:layout_width="@dimen/task_details_task_name_width"
-        android:layout_height="@dimen/task_details_task_name_height"
-        android:layout_marginEnd="@dimen/task_details_task_name_margin_end"
-        android:gravity="center"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="@+id/task_details_task_view"
-        app:layout_constraintEnd_toStartOf="@+id/task_details_status_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/task_details_task_view" />
-
-    <Button
-        android:id="@+id/task_details_status_button"
-        style="@style/button_task_details_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:enabled="false"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="@+id/task_details_task_view"
-        app:layout_constraintEnd_toEndOf="@+id/task_details_task_view"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/task_details_task_view" />
-
-    <View
-        android:id="@+id/task_details_task_type_view"
-        android:layout_width="@dimen/task_details_task_type_width"
-        android:layout_height="@dimen/task_details_task_type_height"
-        android:layout_marginTop="@dimen/task_details_task_type_margin_top"
-        android:background="@color/md_theme_light_inversePrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_details_task_view" />
-
-    <TextView
-        android:id="@+id/task_details_task_type"
-        style="@style/tv_task_details_general"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/task_details_task_type_name_margin_top"
-        android:text="@string/task_details_type_task"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/task_details_task_type_view" />
-
-    <TextView
-        android:id="@+id/task_details_task_type_name"
-        style="@style/tv_taks_details_general"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="@+id/task_details_task_type_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_details_task_type" />
-
-    <View
-        android:id="@+id/task_details_task_creation_view"
-        android:layout_width="@dimen/task_details_task_creation_width"
-        android:layout_height="@dimen/task_details_task_creation_height"
-        android:layout_marginTop="@dimen/task_details_task_creation_margin_top"
-        android:background="@color/md_theme_light_primaryContainer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_details_task_type_view" />
-
-    <TextView
-        android:id="@+id/task_details_date_creation_name"
-        style="@style/tv_task_details_general"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/task_details_task_creation_name_margin_top"
-        android:layout_marginEnd="@dimen/task_details_task_creation_name_margin_end"
-        android:text="@string/task_details_txt_date_creation"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/task_details_task_creation_view" />
-
-    <TextView
-        android:id="@+id/task_details_date_creation"
-        style="@style/tv_taks_details_general"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="@+id/task_details_task_creation_view"
-        app:layout_constraintEnd_toEndOf="@+id/task_details_date_creation_name"
-        app:layout_constraintStart_toStartOf="@+id/task_details_date_creation_name"
-        app:layout_constraintTop_toBottomOf="@+id/task_details_date_creation_name" />
-
-
-    <TextView
-        android:id="@+id/task_details_date_end_name"
-        style="@style/tv_task_details_general"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/task_details_date_end_name_margin_start"
-        android:layout_marginTop="@dimen/task_details_date_end_margin_top"
-        android:text="@string/task_details_txt_date_end"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/task_details_date_creation_name"
-        app:layout_constraintTop_toTopOf="@+id/task_details_task_creation_view" />
-
-    <TextView
-        android:id="@+id/task_details_date_end"
-        style="@style/tv_taks_details_general"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="@+id/task_details_task_creation_view"
-        app:layout_constraintEnd_toEndOf="@+id/task_details_date_end_name"
-        app:layout_constraintStart_toStartOf="@+id/task_details_date_end_name"
-        app:layout_constraintTop_toBottomOf="@+id/task_details_date_end_name" />
-
-    <View
-        android:id="@+id/task_details_task_description_view"
-        android:layout_width="@dimen/task_details_task_description_width"
-        android:layout_height="@dimen/task_details_task_description_height"
-        android:layout_marginTop="@dimen/task_details_task_description_margin_top"
-        android:background="@color/md_theme_light_inversePrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_details_task_creation_view" />
-
-    <TextView
-        android:id="@+id/task_details_task_description_name"
-        style="@style/tv_task_details_general"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/task_details_task_description_name_margin_top"
-        android:text="@string/task_details_txt_description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/task_details_task_description_view" />
-
-    <ScrollView
-        android:id="@+id/task_details_scroll_view"
-        android:layout_width="@dimen/task_details_scroll_view_width"
-        android:layout_height="@dimen/task_details_scroll_view_height"
-        android:layout_marginBottom="@dimen/task_details_scroll_view_margin_bottom"
-        app:layout_constraintBottom_toBottomOf="@+id/task_details_task_description_view"
-        app:layout_constraintEnd_toEndOf="@+id/task_details_task_description_view"
-        app:layout_constraintStart_toStartOf="parent">
-
+        <View
+            android:id="@+id/task_details_profile_view"
+            android:layout_width="@dimen/task_details_profile_width"
+            android:layout_height="@dimen/task_details_profile_height"
+            android:background="@color/background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/task_details_description"
+            android:id="@+id/task_details_client_txt"
+            style="@style/tv_txt_client_task_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/task_details_client_txt_margin_top"
+            android:text="@string/task_details_txt_client"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_conversion_absoluteHeight="35dp"
+            tools:layout_conversion_absoluteWidth="82dp" />
+
+        <TextView
+            android:id="@+id/task_details_client_name_txt"
+            style="@style/tv_client_task_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/task_details_client_name_txt_margin_top"
+            android:gravity="center"
+            android:text=""
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/task_details_client_txt"
+            tools:layout_conversion_absoluteHeight="24dp"
+            tools:layout_conversion_absoluteWidth="147dp" />
+
+
+        <com.mikhaellopez.circularimageview.CircularImageView
+            android:id="@+id/task_details_client_image_view"
+            android:layout_width="@dimen/task_details_img_width_height"
+            android:layout_height="@dimen/task_details_img_width_height"
+            android:src="@drawable/client_profile"
+            app:layout_constraintBottom_toBottomOf="@+id/task_details_profile_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="205dp" />
+
+        <View
+            android:id="@+id/task_details_task_view"
+            android:layout_width="@dimen/task_details_task_width"
+            android:layout_height="@dimen/task_details_task_height"
+            android:layout_marginTop="@dimen/task_details_task_margin_top"
+            android:background="@color/md_theme_light_primaryContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/task_details_profile_view" />
+
+        <TextView
+            android:id="@+id/task_details_task_name"
+            style="@style/tv_task_details_task_name"
+            android:layout_width="@dimen/task_details_task_name_width"
+            android:layout_height="@dimen/task_details_task_name_height"
+            android:layout_marginEnd="@dimen/task_details_task_name_margin_end"
+            android:gravity="center"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/task_details_task_view"
+            app:layout_constraintEnd_toStartOf="@+id/task_details_status_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/task_details_task_view" />
+
+        <Button
+            android:id="@+id/task_details_status_button"
+            style="@style/button_task_details_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/task_details_task_view"
+            app:layout_constraintEnd_toEndOf="@+id/task_details_task_view"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="@+id/task_details_task_view" />
+
+        <View
+            android:id="@+id/task_details_task_type_view"
+            android:layout_width="@dimen/task_details_task_type_width"
+            android:layout_height="@dimen/task_details_task_type_height"
+            android:layout_marginTop="@dimen/task_details_task_type_margin_top"
+            android:background="@color/md_theme_light_inversePrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/task_details_task_view" />
+
+        <TextView
+            android:id="@+id/task_details_task_type"
+            style="@style/tv_task_details_general"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/task_details_task_type_name_margin_top"
+            android:text="@string/task_details_type_task"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/task_details_task_type_view" />
+
+        <TextView
+            android:id="@+id/task_details_task_type_name"
             style="@style/tv_taks_details_general"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="" />
-    </ScrollView>
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/task_details_task_type_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/task_details_task_type" />
 
-    <Button
-        android:id="@+id/task_details_button_back"
-        android:layout_width="@dimen/task_details_button_back_width"
-        android:layout_height="wrap_content"
-        android:text="@string/task_details_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_details_task_description_view" />
+        <View
+            android:id="@+id/task_details_task_creation_view"
+            android:layout_width="@dimen/task_details_task_creation_width"
+            android:layout_height="@dimen/task_details_task_creation_height"
+            android:layout_marginTop="@dimen/task_details_task_creation_margin_top"
+            android:background="@color/md_theme_light_primaryContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/task_details_task_type_view" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/task_details_date_creation_name"
+            style="@style/tv_task_details_general"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/task_details_task_creation_name_margin_top"
+            android:layout_marginEnd="@dimen/task_details_task_creation_name_margin_end"
+            android:text="@string/task_details_txt_date_creation"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/task_details_task_creation_view" />
+
+        <TextView
+            android:id="@+id/task_details_date_creation"
+            style="@style/tv_taks_details_general"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/task_details_task_creation_view"
+            app:layout_constraintEnd_toEndOf="@+id/task_details_date_creation_name"
+            app:layout_constraintStart_toStartOf="@+id/task_details_date_creation_name"
+            app:layout_constraintTop_toBottomOf="@+id/task_details_date_creation_name" />
+
+
+        <TextView
+            android:id="@+id/task_details_date_end_name"
+            style="@style/tv_task_details_general"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/task_details_date_end_name_margin_start"
+            android:layout_marginTop="@dimen/task_details_date_end_margin_top"
+            android:text="@string/task_details_txt_date_end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/task_details_date_creation_name"
+            app:layout_constraintTop_toTopOf="@+id/task_details_task_creation_view" />
+
+        <TextView
+            android:id="@+id/task_details_date_end"
+            style="@style/tv_taks_details_general"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/task_details_task_creation_view"
+            app:layout_constraintEnd_toEndOf="@+id/task_details_date_end_name"
+            app:layout_constraintStart_toStartOf="@+id/task_details_date_end_name"
+            app:layout_constraintTop_toBottomOf="@+id/task_details_date_end_name" />
+
+        <View
+            android:id="@+id/task_details_task_description_view"
+            android:layout_width="@dimen/task_details_task_description_width"
+            android:layout_height="@dimen/task_details_task_description_height"
+            android:layout_marginTop="@dimen/task_details_task_description_margin_top"
+            android:background="@color/md_theme_light_inversePrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/task_details_task_creation_view" />
+
+        <TextView
+            android:id="@+id/task_details_task_description_name"
+            style="@style/tv_task_details_general"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/task_details_task_description_name_margin_top"
+            android:text="@string/task_details_txt_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/task_details_task_description_view" />
+
+        <ScrollView
+            android:id="@+id/task_details_scroll_view"
+            android:layout_width="@dimen/task_details_scroll_view_width"
+            android:layout_height="@dimen/task_details_scroll_view_height"
+            android:layout_marginBottom="@dimen/task_details_scroll_view_margin_bottom"
+            app:layout_constraintBottom_toBottomOf="@+id/task_details_task_description_view"
+            app:layout_constraintEnd_toEndOf="@+id/task_details_task_description_view"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <TextView
+                android:id="@+id/task_details_description"
+                style="@style/tv_taks_details_general"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="" />
+        </ScrollView>
+
+        <Button
+            android:id="@+id/task_details_button_back"
+            android:layout_width="@dimen/task_details_button_back_width"
+            android:layout_height="wrap_content"
+            android:text="@string/task_details_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/task_details_task_description_view" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

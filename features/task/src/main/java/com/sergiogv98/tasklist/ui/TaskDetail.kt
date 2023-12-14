@@ -1,30 +1,23 @@
 package com.sergiogv98.tasklist.ui
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.moronlu18.accounts.entity.Task
-import com.moronlu18.accounts.repository.CustomerProvider
-import com.moronlu18.accounts.repository.TaskProvider
-import com.moronlu18.invoice.base.BaseFragmentDialog
-import com.moronlu18.tasklist.R
 import com.moronlu18.tasklist.databinding.FragmentTaskDetailBinding
 import com.sergiogv98.tasklist.adapter.TaskAdapter
+import com.sergiogv98.usecase.TaskDetailViewModel
 
 
 class TaskDetail : Fragment() {
 
     private var _binding: FragmentTaskDetailBinding? = null
-    private var taskMutableList: MutableList<Task> = TaskProvider.taskDataSet
     private val binding get() = _binding!!
+    private val viewModel: TaskDetailViewModel by viewModels()
     private val args: TaskDetailArgs by navArgs()
     private lateinit var adapter: TaskAdapter
 
@@ -33,20 +26,25 @@ class TaskDetail : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        _binding = FragmentTaskDetailBinding.inflate(inflater, container, false)
+        binding.viewmodel = this.viewModel
+        binding.lifecycleOwner = this
+
+        var taskMutableList: MutableList<Task> = viewModel.getTaskDataSet()
+
         adapter = TaskAdapter(
             taskList = taskMutableList,
         )
 
-        _binding = FragmentTaskDetailBinding.inflate(inflater, container, false)
-        val tarea: Task = args.task
-        binding.taskDetailsClientImageView.setImageResource(CustomerProvider.getCustomerPhotoById(tarea.clientID))
-        binding.taskDetailsClientNameTxt.text = CustomerProvider.getCustomerNameById(tarea.clientID)
-        binding.taskDetailsTaskName.text = tarea.nomTask
-        binding.taskDetailsStatusButton.text = tarea.taskStatus.toString().replaceRange(1, tarea.taskStatus.toString().length, tarea.taskStatus.toString().substring(1).lowercase())
-        binding.taskDetailsTaskTypeName.text = tarea.typeTask.toString().replaceRange(1, tarea.typeTask.toString().length, tarea.typeTask.toString().substring(1).lowercase())
-        binding.taskDetailsDateCreation.text = tarea.fechCreation.toString().substring(0, tarea.fechCreation.toString().lastIndexOf("T"))
-        binding.taskDetailsDateEnd.text = tarea.fechFinalization.toString().substring(0, tarea.fechFinalization.toString().lastIndexOf("T"))
-        binding.taskDetailsDescription.text = tarea.descTask
+        val task: Task = args.task
+        binding.taskDetailsClientImageView.setImageResource(viewModel.getCustomerPhoto(task.clientID))
+        binding.taskDetailsClientNameTxt.text = viewModel.getCustomerName(task.clientID)
+        binding.taskDetailsTaskName.text = task.nomTask
+        binding.taskDetailsStatusButton.text = task.taskStatus.toString().replaceRange(1, task.taskStatus.toString().length, task.taskStatus.toString().substring(1).lowercase())
+        binding.taskDetailsTaskTypeName.text = task.typeTask.toString().replaceRange(1, task.typeTask.toString().length, task.typeTask.toString().substring(1).lowercase())
+        binding.taskDetailsDateCreation.text = task.fechCreation.toString().substring(0, task.fechCreation.toString().lastIndexOf("T"))
+        binding.taskDetailsDateEnd.text = task.fechFinalization.toString().substring(0, task.fechFinalization.toString().lastIndexOf("T"))
+        binding.taskDetailsDescription.text = task.descTask
 
         return binding.root
     }
