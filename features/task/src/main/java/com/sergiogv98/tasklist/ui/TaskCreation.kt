@@ -26,6 +26,7 @@ import java.time.LocalDate
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 class TaskCreation : Fragment() {
@@ -59,29 +60,16 @@ class TaskCreation : Fragment() {
             binding.taskCreationButtonDateCreation.text = processDateString(taskEdit.fechCreation)
             binding.taskCreationButtonDateEnd.text = processDateString(taskEdit.fechFinalization)
             binding.taskCreationTxvDescription.setText(taskEdit.descTask)
+            binding.taskCreationTypeTaskList.setSelection(returnTaskType(taskEdit))
+            setTaskStatusInRadioGroup(taskEdit)
 
-            //Hacer funciones para la eleccion de tipo de tarea y los radio button
-
-            binding.autoCompleteTxt.setAdapter(
-                ArrayAdapter(
-                    requireContext(),
-                    R.layout.simple_dropdown_item_1line,
-                    viewModel.giveListCustomer()
-                )
-            )
-
+            clientDropDownInit()
             editTaskPos = posTask
             viewModel.prevTask = taskEdit
         }
 
 
-        binding.autoCompleteTxt.setAdapter(
-            ArrayAdapter(
-                requireContext(),
-                R.layout.simple_dropdown_item_1line,
-                viewModel.giveListCustomer()
-            )
-        )
+        clientDropDownInit()
 
         binding.autoCompleteTxt.addTextChangedListener(GeneralTextWatcher(binding.taskCreationTaskDropdown))
         binding.taskCreationTxvTaskName.addTextChangedListener(GeneralTextWatcher(binding.taskCreationTaskTilName))
@@ -113,14 +101,6 @@ class TaskCreation : Fragment() {
             }
         }
 
-        binding.autoCompleteTxt.setAdapter(
-            ArrayAdapter(
-                requireContext(),
-                R.layout.simple_dropdown_item_1line,
-                viewModel.giveListCustomer()
-            )
-        )
-
     }
 
     override fun onDestroyView() {
@@ -144,6 +124,16 @@ class TaskCreation : Fragment() {
         )
         datePickerDialog.show();
 
+    }
+
+    private fun clientDropDownInit(){
+        binding.autoCompleteTxt.setAdapter(
+            ArrayAdapter(
+                requireContext(),
+                R.layout.simple_dropdown_item_1line,
+                viewModel.giveListCustomer()
+            )
+        )
     }
 
     private fun onSuccessCreate() {
@@ -194,7 +184,11 @@ class TaskCreation : Fragment() {
     }
 
     private fun processDateString(date: Instant): String {
-        return date.toString().substring(0, 10)
+        val inputDate = Date.from(date)
+        val selectedDate = Calendar.getInstance()
+        selectedDate.time = inputDate
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        return dateFormat.format(selectedDate.time)
     }
 
     private fun taskTypeChoose(): TypeTask {
@@ -208,15 +202,36 @@ class TaskCreation : Fragment() {
         }
     }
 
+    private fun returnTaskType(task: Task): Int {
+        return when(task.typeTask){
+            TypeTask.PRIVADA -> 0
+            TypeTask.LLAMAR -> 1
+            TypeTask.VISITA -> 2
+        }
+    }
+
     private fun taskStatusChoose(): TaskStatus {
         return when (binding.taskCreationStatus.checkedRadioButtonId) {
             binding.taskCreationRdbPendiente.id -> TaskStatus.PENDIENTE
             binding.taskCreationRdbModificada.id -> TaskStatus.MODIFICADA
             binding.taskCreationRdbVencida.id -> TaskStatus.VENCIDA
             binding.taskCreationRdbFinalizada.id -> TaskStatus.FINALIZADA
-            else -> TaskStatus.FINALIZADA
+            else -> TaskStatus.PENDIENTE
         }
     }
+
+    private fun setTaskStatusInRadioGroup(task: Task) {
+        val statusRadioGroup = binding.taskCreationStatus
+
+        val radioButtonId = when (task.taskStatus) {
+            TaskStatus.PENDIENTE -> binding.taskCreationRdbPendiente.id
+            TaskStatus.MODIFICADA -> binding.taskCreationRdbModificada.id
+            TaskStatus.VENCIDA -> binding.taskCreationRdbVencida.id
+            TaskStatus.FINALIZADA -> binding.taskCreationRdbFinalizada.id
+        }
+        statusRadioGroup.check(radioButtonId)
+    }
+
 
     private fun setTaskNameEmptyError() {
         binding.taskCreationTaskTilName.error =
@@ -231,8 +246,6 @@ class TaskCreation : Fragment() {
     }
 
     private fun setDateValidationError() {
-        //binding.taskDateErrorInfo.text = getString(com.moronlu18.tasklist.R.string.date_error)
-        //binding.taskDateErrorInfo.requestFocus()
         Snackbar.make(
             binding.taskCreationView,
             getString(com.moronlu18.tasklist.R.string.date_error),

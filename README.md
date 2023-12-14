@@ -170,7 +170,7 @@ de la misma es anterior a la de la creación.
 ------------------------
  ### V3.5.1 (14/12/2023)
  *Escrito por SergioGV98*
- - Implementación de la función editar una tarea. (Faltan retoques, se eliminará este mensaje cuando se arregle.)
+ - Implementación de la función editar una tarea.
  - Nueva forma de mostrar el error de la fecha.
  - Eliminación de código innecesario y limpieza de la interfaz.
 
