@@ -107,6 +107,10 @@ class CustomerViewModel : ViewModel() {
         return repository.getCustomerPos(posCustomer)
     }
 
+    fun sortRefresh(){
+        repository.CustomerdataSet.sortBy { it.id }
+    }
+
     /**
      * Devuelve la variable State.
      * No se puede modificar su valor fuera de ViewModel.

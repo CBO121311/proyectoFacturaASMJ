@@ -31,14 +31,14 @@ class UserRepository private constructor() { //Estático
         }
 
         private fun initDataSetUser() {
-            dataSet.add(User("Alejandro", "López", "cb2@hotmail.es"))
+            dataSet.add(User("Alejandro", "López", "zb2@hotmail.es"))
+            dataSet.add(User("Koba", "1234", "vfrv2@hotmail.es"))
+            dataSet.add(User("Zanahoria", "Veeee", "cbb@hotmail.es"))
+            dataSet.add(User("Rim", "Ra", "uf@hotmail.es"))
+            dataSet.add(User("Mallorca", "López", "bb2@hotmail.es"))
             dataSet.add(User("Paella", "1234", "vfrv2@hotmail.es"))
             dataSet.add(User("Cebolla", "Veeee", "cbb@hotmail.es"))
-            dataSet.add(User("Rabano", "Ra", "rf@hotmail.es"))
-            dataSet.add(User("Alejandro", "López", "cb2@hotmail.es"))
-            dataSet.add(User("Paella", "1234", "vfrv2@hotmail.es"))
-            dataSet.add(User("Cebolla", "Veeee", "cbb@hotmail.es"))
-            dataSet.add(User("Rabano", "Ra", "rf@hotmail.es"))
+            dataSet.add(User("Rabano", "Ra", "ef@hotmail.es"))
         }
 
 
@@ -87,8 +87,5 @@ class UserRepository private constructor() { //Estático
            // return dataSet
             //dataSet.find { user.email == it.email }.let { return true }//^^
         }
-
     }
-
-
 }

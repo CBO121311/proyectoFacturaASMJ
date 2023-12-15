@@ -34,10 +34,21 @@ class MainFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (requireActivity() as? MainActivity)?.toolbar?.setNavigationOnClickListener {
+            if (findNavController().currentDestination?.id == R.id.mainFragment) {
+                //activity?.finish()
+                activity?.moveTaskToBack(true)
+            } else {
+                findNavController().popBackStack()
+            }
+        }
+
+
+        //Para el botón rojo
         /*binding.imvAlert.setOnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {

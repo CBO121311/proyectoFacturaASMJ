@@ -16,7 +16,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.moronlu18.account.adapter.UserAdapter
 import com.moronlu18.account.usecase.UserListState
 import com.moronlu18.account.usecase.UserListViewModel
@@ -250,13 +249,25 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick, MenuProvider {
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return when(menuItem.itemId){
             R.id.action_sort-> {
-                userAdapter.sort()
+
+
+                viewModel.sortPreestablecido()
+                //userAdapter.sort()
+                //userAdapter.sortabc()
+                //viewModel.getUserList()
+
+
+                viewModel.getUserList()
                 return  true
             }
 
             R.id.action_refresh ->{
-                viewModel.getUserList()
+                viewModel.sortNatural()
+
+                //viewModel.getUserList()
                 //userAdapter.notifyDataSetChanged()
+
+                viewModel.getUserList()
                 return true
             }
 

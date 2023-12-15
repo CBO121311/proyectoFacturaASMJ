@@ -64,6 +64,6 @@
     <string name="about_authors_mateodesc">Encargado del módulo Invoice</string>
     <string name="about_authors_sergdesc">Encargado del módulo Task</string>
     <string name="about_authors_serg">Sergio García Vico</string>
-    <string name="about_versionapp">3.5.0</string>
+    <string name="about_versionapp">3.5.2</string>
 
 </resources>

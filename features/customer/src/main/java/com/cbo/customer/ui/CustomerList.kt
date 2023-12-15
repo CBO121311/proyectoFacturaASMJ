@@ -8,8 +8,11 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,8 +23,9 @@ import com.moronlu18.customercreation.R
 
 import com.moronlu18.customercreation.databinding.FragmentCustomerListBinding
 import com.moronlu18.invoice.base.BaseFragmentDialog
+import com.moronlu18.invoice.ui.MainActivity
 
-class CustomerList : Fragment() {
+class CustomerList : Fragment(), MenuProvider {
 
     private var _binding: FragmentCustomerListBinding? = null
     private val binding get() = _binding!!
@@ -36,7 +40,6 @@ class CustomerList : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCustomerListBinding.inflate(inflater, container, false)
-        setHasOptionsMenu(true)
 
         binding.viewmodelcustomerlist = this.viewModel
         binding.lifecycleOwner = this
@@ -47,6 +50,7 @@ class CustomerList : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setUpToolbar()
         initRecyclerViewClientes()
 
         binding.customerListFltbtnAdd.setOnClickListener {
@@ -135,7 +139,6 @@ class CustomerList : Fragment() {
     }
 
 
-
     /**
      * Función que muestra el AlertDialog del estado ReferencedCustomer
      */
@@ -182,33 +185,55 @@ class CustomerList : Fragment() {
         )
     }
 
+
+    /**
+     *
+     *  Esta función personaliza el comportamiento de la Toolbar de la Activity
+     */
+
+    private fun setUpToolbar() {
+
+        (requireActivity() as? MainActivity)?.toolbar?.apply {
+            visibility = View.VISIBLE
+        }
+
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+
+
     /**
      * Infla el menú de customerList
      */
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_customer_list, menu)
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.menu_customer_list, menu)
     }
+
 
     /**
      * Opciones al seleccionar el menú.
      * Actualmente solo hace el orden de la lista.
      */
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
+
+            R.id.menu_cd_action_refresh -> {
+                viewModel.sortRefresh()
+                viewModel.getCustomerListNoLoading()
+                true
+            }
+
             R.id.menu_cd_action_sortname -> {
-                customerAdapter.sortName()
-                return true
+                viewModel.sortName()
+                viewModel.getCustomerListNoLoading()
+                true
             }
 
-            R.id.menu_cd_action_sortid -> {
-
-                customerAdapter.sortId()
-                return true
-            }
-
-            else -> return super.onOptionsItemSelected(item)
+            else -> false
         }
     }
+
 
     /**
      * Al iniciar el Fragment obtiene la lista con el loading.
@@ -228,5 +253,4 @@ class CustomerList : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }

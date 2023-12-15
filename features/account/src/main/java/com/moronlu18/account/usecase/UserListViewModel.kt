@@ -36,7 +36,10 @@ class UserListViewModel : ViewModel() {
             state.value = UserListState.Loading(false)
 
             when (result) {
-                is ResourceList.Success<*> -> state.value = UserListState.Success(result.data as ArrayList<User>)
+                is ResourceList.Success<*> -> {
+                    state.value = UserListState.Success(result.data as ArrayList<User>)
+                }
+
                 is ResourceList.Error -> state.value = UserListState.NoDataError
             }
 
@@ -54,4 +57,16 @@ class UserListViewModel : ViewModel() {
             //state.value = UserListState.Loading(false)
         }
     }
+
+    fun sortNatural() {
+        //Orden personalizado se estable mediante una propiedad (no es orden natural)
+        UserRepository.dataSet.sort()
+
+    }
+
+    fun sortPreestablecido() {
+        UserRepository.dataSet.sortBy { it.email }
+
+    }
+
 }

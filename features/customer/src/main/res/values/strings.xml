@@ -40,4 +40,6 @@
     <string name="cl_menu_delete">Borrar</string>
     <string name="cc_hint_id">ID</string>
     <string name="cd_tvId">ID:</string>
+    <string name="menu_title_refresh_customerList">Ordenar Id</string>
+    <string name="menu_title_sortName_customerList">Ordenar Nombre</string>
 </resources>

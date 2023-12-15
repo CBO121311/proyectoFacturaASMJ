@@ -45,15 +45,7 @@ class CustomerAdapter(
     fun update(newDataSet:ArrayList<Customer>){
 
         dataset = newDataSet
-        dataset.sortBy { it.id }
-        notifyDataSetChanged()
-    }
-    fun sortId(){
-        dataset.sortBy { it.id }
-        notifyDataSetChanged()
-    }
-    fun sortName(){
-        dataset.sortBy { it.name }
+        //dataset.sort()
         notifyDataSetChanged()
     }
 

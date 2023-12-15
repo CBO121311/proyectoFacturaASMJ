@@ -15,6 +15,10 @@ data class Customer(
     val city: String="No disponible",
     val address:String="No disponible",
     val photo:Int
-) : Parcelable
+) : Parcelable,Comparable<Customer> {
+    override fun compareTo(other: Customer): Int {
+        return name.lowercase().compareTo(other.name.lowercase())
+    }
+}
 
 

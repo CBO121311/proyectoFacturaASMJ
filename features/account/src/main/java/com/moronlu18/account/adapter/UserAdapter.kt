@@ -68,16 +68,34 @@ class UserAdapter(
     fun update(newDataSet:ArrayList<User>){
         //Actualizar mi dataset y notidicar a la vista el cambio
         //newDataSet = UserRepository.getUserList()
+        //-------------------------------- Modificar
+
         dataset = newDataSet
         notifyDataSetChanged()
+
+        //-----------------------------------
+        /*
+        dataset.clear()
+        newDataSet?.let { dataset.addAll(it) }
+        notifyDataSetChanged()
+*/
+
     }
 
     /**
      * Función que ordena el data en base a una propiedad personalizada
      */
-    fun sort() {
+    fun sortEmail() {
         //Orden personalizado se estable mediante una propiedad (no es orden natural)
-        dataset.sortBy { it.name }
+        dataset.sortBy { it.email }
+        notifyDataSetChanged()
+    }
+
+
+
+    fun sortabc() {
+        //Orden personalizado se estable mediante una propiedad (no es orden natural)
+        dataset.sort()
         notifyDataSetChanged()
     }
 

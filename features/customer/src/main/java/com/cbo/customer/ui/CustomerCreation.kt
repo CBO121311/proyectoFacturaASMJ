@@ -134,6 +134,7 @@ class CustomerCreation : Fragment() {
                 photo = R.drawable.kiwidiner_background
             )
             viewModel.addCustomer(customer)
+            viewModel.sortRefresh()
         }
         findNavController().popBackStack()
     }

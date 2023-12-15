@@ -40,7 +40,6 @@ class SplashFragment : Fragment() {
     @SuppressLint("ResourceType")
     private fun animationLogo() {
 
-
          binding.imgLogo.animate().apply {
              duration = 1500
              scaleXBy(0.5f)

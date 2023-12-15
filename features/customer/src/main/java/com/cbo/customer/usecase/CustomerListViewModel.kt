@@ -76,6 +76,25 @@ class CustomerListViewModel : ViewModel() {
         }
     }
 
+
+
+    /**
+     * Ordena la lista de datos de clientes
+     * en orden personalizado según el id.
+     */
+    fun sortRefresh(){
+        repository.CustomerdataSet.sortBy { it.id }
+    }
+
+    /**
+     *  Ordena la lista de datos de clientes
+     *  en orden natural según el nombre.
+     */
+    fun sortName(){
+        repository.CustomerdataSet.sort()
+    }
+
+
     /**
      * Devuelve la variable State.
      * No se puede modificar su valor fuera de ViewModel.
