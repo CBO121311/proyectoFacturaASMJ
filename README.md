@@ -173,4 +173,8 @@ de la misma es anterior a la de la creación.
  - Implementación de la función editar una tarea.
  - Nueva forma de mostrar el error de la fecha.
  - Eliminación de código innecesario y limpieza de la interfaz.
-
+------------------------
+ ### V3.5.2 (15/12/2023)
+ *Escrito por CBO121311*
+ - Si retrocedes usando el toolbar desde el propio dashboard ya no te lleva al fragment_splash. Pone la aplicación en segundo plano.
+ - Actualizado la barra de toolbar del customer y el orden del repositorio.
