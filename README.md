@@ -181,6 +181,6 @@ de la misma es anterior a la de la creación.
  - ------------------------
  ### V3.5.3 (16/12/2023)
  *Escrito por CBO121311*
- - Arreglado el error de que si el nombre o email del customer está en blanco, tendrá el de estado de Empty.
+ - Arreglado el error de que si el nombre o email del customer está en blanco no tenía el estado Empty.
  - El botón Registro (SignUp) ya funciona.
  - Limpieza de comentarios en el módulo account.
