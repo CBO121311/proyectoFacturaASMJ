@@ -13,14 +13,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
-import com.jcasrui.item.usecase.ItemViewModel
+import com.jcasrui.item.usecase.ItemCreationViewModel
 import com.moronlu18.accounts.entity.Item
 import com.moronlu18.accounts.enum.ItemType
-import com.moronlu18.accounts.repository.ItemProvider
 import com.moronlu18.itemcreation.R
 import com.moronlu18.itemcreation.databinding.FragmentItemCreationBinding
 
@@ -29,8 +29,9 @@ class ItemCreation : Fragment() {
     private var _binding: FragmentItemCreationBinding? = null
     private val binding get() = _binding!!
     private lateinit var launcher: ActivityResultLauncher<Intent>
-    private val viewModel: ItemViewModel by viewModels()
+    private val viewModel: ItemCreationViewModel by viewModels()
     private var selectedImageUri: Uri? = null
+    private var editPosItem = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +41,25 @@ class ItemCreation : Fragment() {
 
         binding.viewmodelitemcreation = this.viewModel
         binding.lifecycleOwner = this
+        viewModel.setEditor(false)
+
+        parentFragmentManager.setFragmentResultListener(
+            "itemKey", this, FragmentResultListener { _, result ->
+                val positionItem: Int = result.getInt("itemPosition")
+                val itemEdit = viewModel.getPositionItem(positionItem)
+                viewModel.setEditor(true)
+
+                binding.itemCreationTieName.setText(itemEdit.name)
+                binding.itemCreationTieDescription.setText(itemEdit.description)
+                binding.itemCreationSpItemType.setSelection(itemType(itemEdit))
+                binding.itemCreationTieRate.setText(itemEdit.rate.toString())
+                binding.itemCreationSwitchTaxable.isChecked
+
+                editPosItem = positionItem
+
+                viewModel.prevItem = itemEdit
+            }
+        )
 
         return binding.root
     }
@@ -70,11 +90,12 @@ class ItemCreation : Fragment() {
         })
 
         binding.itemCreationBtnSave.setOnClickListener {
-            val fragmenManager = requireActivity().supportFragmentManager
-            fragmenManager.popBackStack()
+            val fragmentManager = requireActivity().supportFragmentManager
+            fragmentManager.popBackStack()
         }
 
-        binding.itemCreationTieName.addTextChangedListener(textWatcher(binding.itemCreationTilName))
+        binding.itemCreationTieName.addTextChangedListener(CreationTextWatcher(binding.itemCreationTilName))
+        binding.itemCreationTieRate.addTextChangedListener(CreationTextWatcher(binding.itemCreationTilName))
     }
 
     private fun onSuccessCreate() {
@@ -83,25 +104,44 @@ class ItemCreation : Fragment() {
         val rate = binding.itemCreationTieRate.text.toString().toDouble()
         val taxable = binding.itemCreationSwitchTaxable.isChecked
 
-        val item = Item(
-            id = ItemProvider.dataSetItem.size + 1,
-            image = R.drawable.cart,
-            name = name,
-            description = description.ifEmpty { "Sin descripción" },
-            type = itemType(),
-            rate = rate,
-            taxable = taxable
-        )
-
-        ItemProvider.dataSetItem.add(item)
+        if (viewModel.getEditor()) {
+            val updateItem = Item(
+                id = editPosItem + 1,
+                image = R.drawable.cart,
+                name = name,
+                description = description.ifEmpty { "Sin descripción" },
+                type = chooseItemType(),
+                rate = rate,
+                taxable = taxable
+            )
+            viewModel.updateItem(updateItem, editPosItem)
+        } else {
+            val item = Item(
+                id = viewModel.getNextId(),
+                image = R.drawable.cart,
+                name = name,
+                description = description.ifEmpty { "Sin descripción" },
+                type = chooseItemType(),
+                rate = rate,
+                taxable = taxable
+            )
+            viewModel.addItem(item)
+        }
         findNavController().popBackStack()
     }
 
-    private fun itemType(): ItemType {
+    private fun chooseItemType(): ItemType {
         return when (binding.itemCreationSpItemType.selectedItemId) {
             0L -> ItemType.ARTÍCULO
             1L -> ItemType.SERVICIO
             else -> ItemType.ARTÍCULO
+        }
+    }
+
+    private fun itemType(item: Item): Int {
+        return when (item.type) {
+            ItemType.ARTÍCULO -> 0
+            ItemType.SERVICIO -> 1
         }
     }
 
@@ -120,7 +160,7 @@ class ItemCreation : Fragment() {
         launcher.launch(galleryIntent)
     }
 
-    inner class textWatcher(private val til: TextInputLayout) : TextWatcher {
+    inner class CreationTextWatcher(private val til: TextInputLayout) : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
         }
 

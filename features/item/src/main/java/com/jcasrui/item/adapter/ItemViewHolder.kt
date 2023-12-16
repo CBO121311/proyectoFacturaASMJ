@@ -9,17 +9,19 @@ import com.moronlu18.itemcreation.databinding.ItemItemBinding
 class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val binding = ItemItemBinding.bind(view)
-    fun render(
+    fun bind(
         itemModel: Item,
-        onClickListener: (Item) -> Unit,
-        onClickDelete: (Int) -> Unit,
+        onClickListener: ((Item) -> Unit)? = null,
+        onClickEdit: ((Int) -> Unit)? = null,
+        onClickDelete: ((Int) -> Unit)? = null,
     ) {
         binding.itemItemCImg.setImageResource(itemModel.image)
         binding.itemItemTvId.text = itemModel.id.toString()
         binding.itemItemTvName.text = itemModel.name
         binding.itemItemTvRateContent.text = itemModel.rate.toString()
 
-        itemView.setOnClickListener { onClickListener(itemModel) }
-        binding.itemItemImgBtnDelete.setOnClickListener { onClickDelete(adapterPosition) }
+        binding.itemItemImgBtnEdit.setOnClickListener { onClickEdit?.invoke(adapterPosition) }
+        binding.itemItemImgBtnDelete.setOnClickListener { onClickDelete?.invoke(adapterPosition) }
+        itemView.setOnClickListener { onClickListener?.invoke(itemModel) }
     }
 }

@@ -11,29 +11,32 @@
     <string name="item_tvTaxable">Is taxable</string>
     <string name="item_tvSymbolEuro">€</string>
 
+    <string name="itemCreation_imgBtnAdd">Add an image</string>
+    <string name="itemCreation_tilRate">Rate</string>
+    <string name="itemCreation_tilHelperText">Mandatory*</string>
     <string name="itemCreation_btnDone">Add</string>
+    <string name="itemDetail_btnSave">Save</string>
 
     <string name="itemDetail_tvTypeText">Type</string>
     <string name="itemDetail_tvDescriptionImg">Illustrative image</string>
     <string name="itemDetail_actionEdit">Edit</string>
     <string name="itemDetail_actionDelete">Delete</string>
+    <string name="itemDetail_actionRefresh">Refresh</string>
+    <string name="itemDetail_actionSort">Sort</string>
     <string name="itemDetail_tvNamePrueba">Apple</string>
     <string name="itemDetail_tvDescriptionPrueba">Fruit section product</string>
     <string name="itemDetail_tvRatePrueba">1.40</string>
     <string name="itemDetail_tvTypePrueba">Item</string>
+    <string name="itemDetail_tvTaxablePrueba">Taxes included</string>
 
     <string name="itemList_fab">Add item</string>
+    <string name="itemList_tvEmptyText">There are no articles...</string>
+    <string name="itemList_tvAddText">Tap the \'+\' button to add an item</string>
+
     <string name="itemItem_tvDescriptionImg">Illustrative image</string>
     <string name="itemItem_tvNamePrueba">Wristwatch</string>
     <string name="itemItem_tvRatePrueba">65.52</string>
     <string name="itemItem_imgBtnEdit">Edit</string>
     <string name="itemItem_imgBtnDelete">Delete</string>
-    <string name="itemCreation_imgBtnAdd">Add an image</string>
-    <string name="itemCreation_tilRate">Rate</string>
     <string name="itemItem_tvId">23</string>
-    <string name="itemDetail_tvTaxablePrueba">Taxes included</string>
-    <string name="itemCreation_tilHelperText">Mandatory*</string>
-    <string name="itemDetail_btnSave">Save</string>
-    <string name="itemList_tvEmptyText">There are no articles...</string>
-    <string name="itemList_tvAddText">Tap the \'+\' button to add an item</string>
 </resources>

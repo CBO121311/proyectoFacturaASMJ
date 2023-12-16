@@ -77,6 +77,22 @@ class ItemProvider {
             )
         }
 
+        fun getMaxId(): Int {
+            return dataSetItem.maxByOrNull { it.id }?.id ?: 0
+        }
+
+        fun addUpdateItem(item: Item, positionItem: Int) {
+            dataSetItem[positionItem] = item
+        }
+
+        fun getPosition(position: Int): Item {
+            return dataSetItem[position]
+        }
+
+        fun referencedItem(idItem: Int): Boolean {
+            return FacturaProvider.itemReferenceInvoice(idItem)
+        }
+
         fun getTotal(lista: MutableList<Item>): String {
             var suma: Double = 0.0
             for (item in lista) {

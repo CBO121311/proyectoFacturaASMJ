@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodelitemcreation"
-            type="com.jcasrui.item.usecase.ItemViewModel" />
+            type="com.jcasrui.item.usecase.ItemCreationViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:hint="@string/item_name"
-                    android:paddingTop="@dimen/itemCreation_paddingSpinner"
+                    android:paddingTop="@dimen/itemCreation_paddingtilName"
                     app:errorEnabled="true"
                     app:helperText="@string/itemCreation_tilHelperText"
                     app:layout_constraintEnd_toStartOf="@+id/itemCreation_glEnd"
@@ -139,7 +139,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/item_description"
                         android:inputType="textMultiLine|textCapSentences|textAutoCorrect"
-                        android:lines="1"
+                        android:lines="2"
                         android:maxLength="100"
                         android:maxLines="3"
                         android:overScrollMode="always"
@@ -173,35 +173,61 @@
                         android:text="@={viewmodelitemcreation.rateItem}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/itemCreation_spItemType"
+                <RelativeLayout
+                    android:id="@+id/itemCreation_rlItemType"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:entries="@array/itemType_array"
-                    android:paddingTop="@dimen/itemCreation_paddingSpinner"
-                    android:paddingBottom="@dimen/itemCreation_paddingGeneral"
+                    android:layout_marginTop="@dimen/itemCreation_paddingGeneral"
+                    android:background="@drawable/spinner_border"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toStartOf="@+id/itemCreation_glEnd"
                     app:layout_constraintStart_toStartOf="@+id/itemCreation_glStart"
-                    app:layout_constraintTop_toBottomOf="@+id/itemCreation_tilRate" />
+                    app:layout_constraintTop_toBottomOf="@+id/itemCreation_tilRate">
+
+                    <Spinner
+                        android:id="@+id/itemCreation_spItemType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/itemCreation_paddingGeneral"
+                        android:background="@android:color/transparent"
+                        android:entries="@array/itemType_array"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/itemCreation_paddingGeneral"
+                        android:paddingBottom="@dimen/itemCreation_paddingGeneral"
+                        android:spinnerMode="dropdown" />
+
+                    <ImageView
+                        android:id="@+id/itemCreation_ivItemType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/itemCreation_paddingGeneral"
+                        android:src="@drawable/ic_action_arrow" />
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/itemCreation_tvTaxable"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/itemCreation_tvMarginStart"
-                    android:paddingTop="@dimen/itemCreation_paddingGeneral"
+                    android:layout_marginTop="20dp"
                     android:text="@string/item_tvTaxable"
                     android:textSize="@dimen/item_sizeTitles"
                     app:layout_constraintStart_toStartOf="@+id/itemCreation_glStart"
-                    app:layout_constraintTop_toBottomOf="@+id/itemCreation_spItemType" />
+                    app:layout_constraintTop_toBottomOf="@+id/itemCreation_rlItemType" />
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/itemCreation_SwitchTaxable"
-                    android:layout_width="@dimen/itemCreation_sizeSwitch"
-                    android:layout_height="@dimen/itemCreation_sizeSwitch"
-                    android:layout_marginStart="@dimen/itemCreation_switchMarginStart"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
                     android:checked="false"
-                    android:paddingTop="@dimen/itemCreation_switchPaddingTop"
                     app:layout_constraintBottom_toBottomOf="@+id/itemCreation_tvTaxable"
                     app:layout_constraintStart_toEndOf="@+id/itemCreation_tvTaxable"
                     app:layout_constraintTop_toTopOf="@+id/itemCreation_tvTaxable" />

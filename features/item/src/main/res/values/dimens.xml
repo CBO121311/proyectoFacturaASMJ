@@ -9,9 +9,9 @@
     <dimen name="itemCreation_guideHorizontal">15dp</dimen>
     <dimen name="itemCreation_paddingLayout">16dp</dimen>
     <dimen name="itemCreation_heightBtn">60dp</dimen>
-    <dimen name="itemCreation_sizeSwitch">48dp</dimen>
     <dimen name="itemCreation_paddingGeneral">10dp</dimen>
-    <dimen name="itemCreation_paddingSpinner">20dp</dimen>
+    <dimen name="itemCreation_paddingtilName">20dp</dimen>
+    <dimen name="itemCreation_paddingtvTaxable">20dp</dimen>
     <dimen name="itemCreation_civWidth">210dp</dimen>
     <dimen name="itemCreation_civHeight">180dp</dimen>
     <dimen name="itemCreation_civBorderWidth">4dp</dimen>
@@ -23,8 +23,6 @@
     <dimen name="itemCreation_cvMarginButton">25dp</dimen>
     <dimen name="itemCreation_cvCRadius">35dp</dimen>
     <dimen name="itemCreation_tvMarginStart">7dp</dimen>
-    <dimen name="itemCreation_switchMarginStart">12dp</dimen>
-    <dimen name="itemCreation_switchPaddingTop">13dp</dimen>
 
     <dimen name="itemDetail_paddingGeneral">25dp</dimen>
     <dimen name="itemDetail_civWidth">210dp</dimen>

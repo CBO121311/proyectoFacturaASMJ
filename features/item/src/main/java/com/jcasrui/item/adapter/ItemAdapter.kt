@@ -8,11 +8,14 @@ import com.moronlu18.itemcreation.R
 
 class ItemAdapter(
     private val itemList: List<Item>,
-    private val onClickListener: (Item) -> Unit,
-    private val onClickDelete: (Int) -> Unit,
+    private val onClickListener: ((Item) -> Unit)? = null,
+    private val onClickEdit: ((Int) -> Unit)? = null,
+    private val onClickDelete: ((Int) -> Unit)? = null,
 ) : RecyclerView.Adapter<ItemViewHolder>() {
+
+    private var dataset = arrayListOf<Item>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        // Encargado de coger los atributos y pintarlos
         val layoutInflater = LayoutInflater.from(parent.context)
         return ItemViewHolder(layoutInflater.inflate(R.layout.item_item, parent, false))
     }
@@ -21,6 +24,22 @@ class ItemAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = itemList[position]
-        holder.render(item, onClickListener, onClickDelete)
+        holder.bind(item, onClickListener, onClickEdit, onClickDelete)
+    }
+
+    /**
+     * Actuzaliza los datos del adapter
+     */
+    fun update(newDataSet: ArrayList<Item>) {
+        dataset = newDataSet
+        notifyDataSetChanged()
+    }
+
+    /**
+     * Función que ordena el dataset en base a una propiedad personalizada
+     */
+    fun sort() {
+        dataset.sortBy { it.rate }
+        notifyDataSetChanged()
     }
 }

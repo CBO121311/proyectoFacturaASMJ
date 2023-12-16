@@ -120,5 +120,11 @@ class FacturaProvider private constructor() {
         fun obtainsId(): Int {
             return dataSet.maxByOrNull { it.id }?.id ?: 0
         }
+
+        fun itemReferenceInvoice(idItem: Int): Boolean {
+            return dataSet.any { invoice ->
+                invoice.lineItems?.any { it.id == idItem } ?: false
+            }
+        }
     }
 }
