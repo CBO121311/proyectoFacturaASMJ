@@ -178,3 +178,9 @@ de la misma es anterior a la de la creación.
  *Escrito por CBO121311*
  - Si retrocedes usando el toolbar desde el propio dashboard ya no te lleva al fragment_splash. Pone la aplicación en segundo plano.
  - Actualizado la barra de toolbar del customer y el orden del repositorio.
+ - ------------------------
+ ### V3.5.3 (16/12/2023)
+ *Escrito por CBO121311*
+ - Arreglado el error de que si el nombre o email del customer está en blanco, tendrá el de estado de Empty.
+ - El botón Registro (SignUp) ya funciona.
+ - Limpieza de comentarios en el módulo account.
