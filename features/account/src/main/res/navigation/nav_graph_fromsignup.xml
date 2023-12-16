@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@id/nav_graph_fromsignup"
+    app:startDestination="@id/signUpFragment">
+
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.moronlu18.account.ui.SignUpFragment"
+        android:label="SignUpFragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_userListFragment2"
+            app:destination="@id/userListFragment2" />
+        <action
+            android:id="@+id/action_signUpFragment_to_fragmentProgressDialog"
+            app:destination="@id/fragmentProgressDialog" />
+    </fragment>
+    <fragment
+        android:id="@+id/userListFragment2"
+        android:name="com.moronlu18.account.ui.UserListFragment"
+        android:label="UserListFragment" >
+        <action
+            android:id="@id/action_userListFragment_to_fragmentProgressDialog"
+            app:destination="@id/fragmentProgressDialog" />
+    </fragment>
+    <dialog
+        android:id="@id/fragmentProgressDialog"
+        android:name="com.moronlu18.invoice.base.FragmentProgressDialog"
+        android:label="FragmentProgressDialog" />
+</navigation>

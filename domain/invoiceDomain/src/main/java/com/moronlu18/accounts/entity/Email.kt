@@ -14,6 +14,6 @@ data class Email(val value: String) {
     }
 
     override fun toString(): String {
-        return value
+        return value.lowercase()
     }
 }

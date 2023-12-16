@@ -81,8 +81,7 @@ class MainFragment : Fragment() {
         }*/
 
         binding.cvSignOut.btnAnimationNav(-1)
-
-        // binding.cvSignOut.btnAnimationNav()
+        binding.cvSignUp.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_fromsignup)
 
 
         binding.cvAbout.btnAnimationNav(R.id.action_mainFragment_to_about)

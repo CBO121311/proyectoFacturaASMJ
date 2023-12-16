@@ -1,6 +1,5 @@
 package com.cbo.customer.usecase
 
-import android.text.TextUtils
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -38,10 +37,10 @@ class CustomerViewModel : ViewModel() {
         )
 
         when {
-            TextUtils.isEmpty(nameCustomer.value) -> state.value =
+            nameCustomer.value.isNullOrBlank() -> state.value =
                 CustomerCreationState.NameIsMandatory
 
-            TextUtils.isEmpty(emailCustomer.value) -> state.value =
+            emailCustomer.value.isNullOrBlank() -> state.value =
                 CustomerCreationState.EmailEmptyError
 
             !pattern.matcher(emailCustomer.value.toString()).matches() -> state.value =

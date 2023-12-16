@@ -14,39 +14,47 @@
      en el fichero /res/navigation/
      SOLO SE AÑADE EL + EN ESTE CÓDIGO -->
 
-   <!-- <include-dynamic android:id="@+id/nav_graph_account"
-        app:graphPackage="$(applicationId).account"
-        app:graphResName="nav_graph_account"
-        app:moduleName="account"
-        > </include-dynamic> -->
+    <!-- <include-dynamic android:id="@+id/nav_graph_account"
+         app:graphPackage="$(applicationId).account"
+         app:graphResName="nav_graph_account"
+         app:moduleName="account"
+         > </include-dynamic> -->
 
-    <include-dynamic android:id="@+id/nav_graph_customer"
+    <include-dynamic
+        android:id="@+id/nav_graph_customer"
         app:graphPackage="${applicationId}.customer"
         app:graphResName="nav_graph_customer"
-        app:moduleName="customer"
-        />
+        app:moduleName="customer" />
 
-    <include-dynamic android:id="@+id/nav_graph_task"
+    <include-dynamic
+        android:id="@+id/nav_graph_task"
         app:graphPackage="${applicationId}.task"
         app:graphResName="nav_graph_task"
-        app:moduleName="task"
-        />
-    <include-dynamic android:id="@+id/nav_graph_invoice"
+        app:moduleName="task" />
+    <include-dynamic
+        android:id="@+id/nav_graph_invoice"
         app:graphPackage="${applicationId}.invoice"
         app:graphResName="nav_graph_invoice"
-        app:moduleName="invoice"
-        />
-    <include-dynamic android:id="@+id/nav_graph_item"
+        app:moduleName="invoice" />
+    <include-dynamic
+        android:id="@+id/nav_graph_item"
         app:graphPackage="${applicationId}.item"
         app:graphResName="nav_graph_item"
-        app:moduleName="item"
-        />
+        app:moduleName="item" />
 
-    <include-dynamic android:id="@+id/nav_graph_account"
+    <include-dynamic
+        android:id="@+id/nav_graph_account"
         app:graphPackage="${applicationId}.account"
         app:graphResName="nav_graph_account"
-        app:moduleName="account"
-        />
+        app:moduleName="account" />
+
+    <include-dynamic
+        android:id="@+id/nav_graph_fromsignup"
+        app:graphPackage="${applicationId}.account"
+        app:graphResName="nav_graph_fromsignup"
+        app:moduleName="account">
+
+    </include-dynamic>
 
     <fragment
         android:id="@+id/splashFragment"
@@ -86,11 +94,14 @@
         <action
             android:id="@+id/action_mainFragment_to_about"
             app:destination="@id/aboutMaterialFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_nav_graph_fromsignup"
+            app:destination="@id/nav_graph_fromsignup" />
     </fragment>
     <dialog
         android:id="@+id/baseFragmentDialog"
         android:name="com.moronlu18.invoice.base.BaseFragmentDialog"
-        android:label="BaseFragmentDialog" >
+        android:label="BaseFragmentDialog">
         <argument
             android:name="title"
             app:argType="string" />

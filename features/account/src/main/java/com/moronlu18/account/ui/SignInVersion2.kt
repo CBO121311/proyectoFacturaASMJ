@@ -7,11 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.moronlu18.accountsignin.R
 
-class SignInv2 : Fragment() {
+class SignInVersion2 : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    /**
+     * Este SignIn es un modelo que hice en su momento.
+     * Se usará en un futuro.
+     */
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

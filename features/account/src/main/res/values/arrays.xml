@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="typeuser">
-        <item>User</item>
-        <item>Admin</item>
-        <item>Guess</item>
-        <item>Client</item>
+    <string-array name="typeuseresp">
+        <item>Usuario</item>
+        <item>Administrador</item>
+        <item>Invitado</item>
+        <item>Cliente</item>
+    </string-array>
+    <string-array name="typeperfilesp">
+        <item>Privado</item>
+        <item>Publico</item>
+        <item>Vacío</item>
     </string-array>
 
+    <string-array name="typeusereng">
+        <item>User</item>
+        <item>Admin</item>
+        <item>Guest</item>
+        <item>Client</item>
+    </string-array>
 </resources>
