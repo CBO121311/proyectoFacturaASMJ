@@ -8,5 +8,6 @@ import com.moronlu18.accounts.entity.Item
 sealed class ItemListState {
     data object ReferencedItem : ItemListState()
     data object NoData : ItemListState()
+    data object OnSuccess : ItemListState()
     data class Success(val dataset: ArrayList<Item>) : ItemListState()
 }

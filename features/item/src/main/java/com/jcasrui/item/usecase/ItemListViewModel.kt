@@ -32,6 +32,10 @@ class ItemListViewModel : ViewModel() {
         }
     }
 
+    fun onSuccess(){
+        state.value = ItemListState.OnSuccess
+    }
+
     fun getState(): LiveData<ItemListState> {
         return state
     }

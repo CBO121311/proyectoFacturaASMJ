@@ -177,6 +177,7 @@ class ItemList : Fragment(), MenuProvider {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        viewModel.onSuccess()
         _binding = null
     }
 }
