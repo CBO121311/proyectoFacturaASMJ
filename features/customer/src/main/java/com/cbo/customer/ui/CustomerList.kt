@@ -1,11 +1,13 @@
 package com.cbo.customer.ui
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.MenuHost
@@ -25,7 +27,7 @@ import com.moronlu18.customercreation.databinding.FragmentCustomerListBinding
 import com.moronlu18.invoice.base.BaseFragmentDialog
 import com.moronlu18.invoice.ui.MainActivity
 
-class CustomerList : Fragment(), MenuProvider {
+class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
 
     private var _binding: FragmentCustomerListBinding? = null
     private val binding get() = _binding!!
@@ -51,7 +53,7 @@ class CustomerList : Fragment(), MenuProvider {
         super.onViewCreated(view, savedInstanceState)
 
         setUpToolbar()
-        initRecyclerViewClientes()
+        initRecyclerViewCustomer()
 
         binding.customerListFltbtnAdd.setOnClickListener {
             findNavController().navigate(R.id.action_customerList_to_customerCreation)
@@ -72,16 +74,77 @@ class CustomerList : Fragment(), MenuProvider {
     /**
      * Inicia el recycleview
      */
-    private fun initRecyclerViewClientes() {
-        customerAdapter = CustomerAdapter(
-            onClickListener = { cliente -> onItemSelected(cliente) },
-            onClickDelete = { position -> onDeletedItem(position) },
-            onClickEdit = { position -> onEditItem(position) })
-
+    private fun initRecyclerViewCustomer() {
+        customerAdapter = CustomerAdapter(this)
         binding.customerListRvClientes.layoutManager = LinearLayoutManager(requireContext())
         binding.customerListRvClientes.adapter = customerAdapter
     }
 
+    /**
+     *  Envía un objeto customer al layout customerDetail utilizando SafeArgs
+     */
+    override fun customerClick(customer: Customer) {
+        findNavController().navigate(
+            CustomerListDirections.actionCustomerListToCustomerDetail(
+                customer
+            )
+        )
+    }
+
+    override fun customerOnLongClick(customer: Customer) {
+        //showToolbarMenu()
+        onDeletedItem(customer)
+    }
+
+    override fun customerEditClick(position: Int) {
+        onEditItem(position)
+    }
+
+
+
+    private fun setUpToolbar() {
+        (requireActivity() as? MainActivity)?.toolbar?.apply {
+            visibility = View.VISIBLE
+        }
+
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+    /**
+     *  Esta función personaliza el comportamiento de la Toolbar de la Activity
+     */
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun showToolbarMenu() {
+        (requireActivity() as? MainActivity)?.toolbar?.apply {
+            visibility = View.VISIBLE
+        }
+
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+        // Configura un listener de clic en otro lugar para ocultar el Toolbar
+        val rootView = (activity as? MainActivity)?.findViewById<View>(android.R.id.content)
+        rootView?.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                hideToolbarMenu()
+            }
+            false
+        }
+    }
+
+    /**
+     * Oculta los botones del menú en el Toolbar
+     */
+    private fun hideToolbarMenu() {
+        (requireActivity() as? MainActivity)?.toolbar?.apply {
+            visibility = View.VISIBLE
+        }
+
+        val menuHost: MenuHost = requireActivity()
+        menuHost.removeMenuProvider(this)
+    }
 
     /**
      * Método que realiza la acción de editar un item y comprueba si se puede
@@ -89,23 +152,22 @@ class CustomerList : Fragment(), MenuProvider {
 
     private fun onEditItem(position: Int) {
 
-        val customer = viewModel.getCustomerByPosition(position)
-        if (viewModel.isDeleteSafe(customer)) {
+        //val customer = viewModel.getCustomerByPosition(position)
+        //if (viewModel.isDeleteSafe(customer)) {
             val bundle = Bundle();
             bundle.putInt("position", position)
 
             parentFragmentManager.setFragmentResult("customkey", bundle)
             findNavController().navigate(R.id.action_customerList_to_customerCreation)
-        }
+        //}
     }
 
     /**
      * Acción al eliminar un Customer del recycle y comprueba si lo puede hacer
      */
-    private fun onDeletedItem(position: Int) {
+    private fun onDeletedItem(customer: Customer) {
 
         isDeleting = true
-        val customer = viewModel.getCustomerByPosition(position)
         if (viewModel.isDeleteSafe(customer)) {
             findNavController().navigate(
                 CustomerListDirections.actionCustomerListToBaseFragmentDialog2(
@@ -119,7 +181,7 @@ class CustomerList : Fragment(), MenuProvider {
             ) { _, result ->
                 val success = result.getBoolean(BaseFragmentDialog.result, false)
                 if (success) {
-                    customerAdapter.deleteCustomer(position)
+                    customerAdapter.deleteCustomer(customer)
                     viewModel.getCustomerListNoLoading()
                 }
             }
@@ -174,32 +236,6 @@ class CustomerList : Fragment(), MenuProvider {
 
     }
 
-    /**
-     *  Envía un objeto customer al layout customerDetail utilizando SafeArgs
-     */
-    private fun onItemSelected(customer: Customer) {
-        findNavController().navigate(
-            CustomerListDirections.actionCustomerListToCustomerDetail(
-                customer
-            )
-        )
-    }
-
-
-    /**
-     *
-     *  Esta función personaliza el comportamiento de la Toolbar de la Activity
-     */
-
-    private fun setUpToolbar() {
-
-        (requireActivity() as? MainActivity)?.toolbar?.apply {
-            visibility = View.VISIBLE
-        }
-
-        val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
-    }
 
 
 
@@ -219,14 +255,12 @@ class CustomerList : Fragment(), MenuProvider {
         return when (menuItem.itemId) {
 
             R.id.menu_cd_action_refresh -> {
-                viewModel.sortRefresh()
-                viewModel.getCustomerListNoLoading()
+                viewModel.getCustomerList()
                 true
             }
 
             R.id.menu_cd_action_sortname -> {
-                viewModel.sortName()
-                viewModel.getCustomerListNoLoading()
+                customerAdapter.sortName()
                 true
             }
 
@@ -249,8 +283,11 @@ class CustomerList : Fragment(), MenuProvider {
         }
     }
 
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }

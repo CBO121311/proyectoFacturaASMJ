@@ -66,17 +66,21 @@ class CustomerDetail : Fragment() {
      * Si el estado éxito, usando el databinding se inserta los datos en el layout
      */
     private fun onSuccess() {
-        val aCustomer: Customer = args.customer
+        val customer: Customer = args.customer
 
         viewModel.let {
-            it.idCustomer.value = aCustomer.id.toString()
-            it.nameCustomer.value = aCustomer.name
-            it.emailCustomer.value = aCustomer.email.toString()
-            it.phoneCustomer.value = aCustomer.phone
-            it.cityCustomer.value = aCustomer.city
-            it.addressCustomer.value = aCustomer.address
+            it.idCustomer.value = customer.id.toString()
+            it.nameCustomer.value = customer.name
+            it.emailCustomer.value = customer.email.toString()
+            it.phoneCustomer.value = customer.phone
+            it.cityCustomer.value = customer.city
+            it.addressCustomer.value = customer.address
         }
-        binding.customerDetailCiPhoto.setImageResource(aCustomer.photo)
+        if (customer.phototrial != null) {
+            binding.customerDetailCiPhoto.setImageResource(customer.phototrial!!)
+        } else {
+            binding.customerDetailCiPhoto.setImageBitmap(customer.photo)
+        }
     }
 
 

@@ -19,7 +19,20 @@ class FacturaViewHolder(view: View): RecyclerView.ViewHolder(view){
         binding.itemFacturaIvtTotal.text ="Total: ${facturaModel.number}"
         binding.itemFacturaTvId.text = facturaModel.id.toString()
         binding.itemFacturaTvCliente.text =CustomerProvider.getNom(facturaModel.customerId)
-        binding.itemFacturaIvKiwi.setImageResource(CustomerProvider.getPhoto(facturaModel.customerId))
+
+
+        //Todo Cambiado por el tema de la foto.
+
+        val customer = CustomerProvider.getCustomerbyID(facturaModel.customerId)
+
+        if (customer?.phototrial != null) {
+            binding.itemFacturaIvKiwi.setImageResource(customer.phototrial!!)
+        } else {
+            binding.itemFacturaIvKiwi.setImageBitmap(customer?.photo)
+        }
+        //binding.itemFacturaIvKiwi.setImageResource(CustomerProvider.getPhoto(facturaModel.customerId))
+
+
         itemView.setOnClickListener { onClickListener?.invoke(facturaModel) }
         binding.invoiceItemBtnDelete.setOnClickListener {
             onClickDelete?.invoke(

@@ -1,5 +1,6 @@
 package com.cbo.customer.usecase
 
+
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -22,6 +23,11 @@ class CustomerListViewModel : ViewModel() {
      * No tiene que devolver nada
      */
 
+
+    //init {
+    // repository.initDataSetCustomer(application)
+    //}
+
     fun getCustomerList() {
         viewModelScope.launch {
             state.value = CustomerListState.Loading(true)
@@ -29,8 +35,11 @@ class CustomerListViewModel : ViewModel() {
             state.value = CustomerListState.Loading(false)
             Log.i("viewModel", "He pasado por getCustomerList")
             when (result) {
-                is ResourceList.Success<*> -> state.value =
-                    CustomerListState.Success(result.data as ArrayList<Customer>)
+                is ResourceList.Success<*> -> {
+                    val lista = result.data as ArrayList<Customer>
+                    lista.sortBy { it.id }
+                    state.value = CustomerListState.Success(lista)
+                }
 
                 is ResourceList.Error -> state.value = CustomerListState.NoDataError
             }
@@ -47,8 +56,11 @@ class CustomerListViewModel : ViewModel() {
         viewModelScope.launch {
 
             when (val result = CustomerProvider.getCustomerListNoLoading()) {
-                is ResourceList.Success<*> -> state.value =
-                    CustomerListState.Success(result.data as ArrayList<Customer>)
+                is ResourceList.Success<*> -> {
+                    val lista = result.data as ArrayList<Customer>
+                    lista.sortBy { it.id }
+                    state.value = CustomerListState.Success(lista)
+                }
 
                 is ResourceList.Error -> state.value = CustomerListState.NoDataError
             }
@@ -74,24 +86,6 @@ class CustomerListViewModel : ViewModel() {
         } else {
             true
         }
-    }
-
-
-
-    /**
-     * Ordena la lista de datos de clientes
-     * en orden personalizado según el id.
-     */
-    fun sortRefresh(){
-        repository.CustomerdataSet.sortBy { it.id }
-    }
-
-    /**
-     *  Ordena la lista de datos de clientes
-     *  en orden natural según el nombre.
-     */
-    fun sortName(){
-        repository.CustomerdataSet.sort()
     }
 
 

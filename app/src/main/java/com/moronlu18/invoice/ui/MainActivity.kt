@@ -9,10 +9,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
-//import android.widget.Toolbar
 import androidx.core.content.ContextCompat
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.moronlu18.invoice.R
 import com.moronlu18.invoice.databinding.ActivityMainBinding
 
@@ -50,6 +47,7 @@ class MainActivity : AppCompatActivity() {
 
         //Cambia el color del toolbar.
         binding.toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.seed));
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

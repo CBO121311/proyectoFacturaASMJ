@@ -11,7 +11,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/customer_list_ccCardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless">
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/customer_list_ivCliente"
@@ -27,32 +28,18 @@
 
 
         <ImageButton
-            android:id="@+id/customer_list_imgbtnDelete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/cl_item_margintop_ibDelete"
-            android:layout_marginEnd="@dimen/cl_item_marginend_ibDelete"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:contentDescription="@string/cl_cd_imgtdelete"
-            android:focusable="true"
-            android:src="@drawable/ic_action_delete"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageButton
             android:id="@+id/customer_list_imgtnEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/cl_item_marginend_ibEdit"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:contentDescription="@string/cl_cd_imgtedit"
             android:focusable="true"
             android:src="@drawable/ic_action_edit"
-            app:layout_constraintBottom_toBottomOf="@+id/customer_list_imgbtnDelete"
-            app:layout_constraintEnd_toStartOf="@+id/customer_list_imgbtnDelete"
-            app:layout_constraintTop_toTopOf="@+id/customer_list_imgbtnDelete" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/customer_list_tvName"

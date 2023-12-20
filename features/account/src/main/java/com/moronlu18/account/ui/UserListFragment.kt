@@ -64,6 +64,7 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick, MenuProvider {
                 is UserListState.Loading -> showProgressBar(it.value)
                 UserListState.NoDataError -> showNoDataError()
                 is UserListState.Success -> onSuccess(it.dataset)
+                else -> {}
             }
         })
     }

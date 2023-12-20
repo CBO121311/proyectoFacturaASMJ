@@ -12,12 +12,17 @@ import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.customercreation.databinding.ItemClienteBinding
 
 class CustomerAdapter(
-    private val onClickListener: ((Customer) -> Unit)? = null,
-    private val onClickDelete: ((Int) -> Unit)? = null,
-    private val onClickEdit: ((Int) -> Unit)? = null
+    private val listener: OnCustomerClick
 ) : RecyclerView.Adapter<CustomerAdapter.CustomerViewHolder>() {
 
-    private  var dataset = arrayListOf<Customer>()
+    private var dataset = arrayListOf<Customer>()
+
+
+    interface OnCustomerClick { //Este elemento es público
+        fun customerClick(customer: Customer)
+        fun customerOnLongClick(customer: Customer)
+        fun customerEditClick(position: Int)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerViewHolder {
 
@@ -25,33 +30,31 @@ class CustomerAdapter(
         return CustomerViewHolder(layoutInflater.inflate(R.layout.item_cliente, parent, false))
     }
 
-    /*
-    *    val layoutInflater = LayoutInflater.from(parent.context)
-            return CustomerViewHolder(layoutInflater.inflate(R.layout.item_cliente, parent, false))
-
-    * */
     override fun getItemCount(): Int {
 
         return dataset.size
     }
 
     override fun onBindViewHolder(holder: CustomerViewHolder, position: Int) {
-        //val item = dataset.get(position)
         val item = dataset[position]
-        holder.bind(item, onClickListener, onClickDelete, onClickEdit)
+        holder.bind(item)
     }
 
 
-    fun update(newDataSet:ArrayList<Customer>){
+    fun update(newDataSet: ArrayList<Customer>) {
 
         dataset = newDataSet
-        //dataset.sort()
         notifyDataSetChanged()
     }
 
-    fun deleteCustomer(position:Int){
-        dataset.removeAt(position)
-        notifyItemRemoved(position)
+    fun deleteCustomer(customer: Customer) {
+        dataset.remove(customer)
+        notifyDataSetChanged()
+    }
+
+    fun sortName(){
+        dataset.sort()
+        notifyDataSetChanged()
     }
 
     inner class CustomerViewHolder(private val view: View) :
@@ -59,31 +62,36 @@ class CustomerAdapter(
 
         private val binding = ItemClienteBinding.bind(view)
         fun bind(
-            clientesModel: Customer,
-            onClickListener: ((Customer) -> Unit)? = null,
-            onClickDelete: ((Int) -> Unit)? = null,
-            onClickEdit: ((Int) -> Unit)?
+            customer: Customer
 
         ) {
-            with(binding){
+            with(binding) {
 
-                customerListTvName.text = clientesModel.name
-                customerListTvEmail.text = clientesModel.email.toString()
-                customerListTvCity.text = clientesModel.city
-                customerListTvPhone.text = clientesModel.phone
-                customerListTvid.text = clientesModel.id.toString()
-                customerListIvCliente.setImageResource(clientesModel.photo)
+                customerListTvName.text = customer.name
+                customerListTvEmail.text = customer.email.toString()
+                customerListTvCity.text = customer.city
+                customerListTvPhone.text = customer.phone
+                customerListTvid.text = customer.id.toString()
+                //customerListIvCliente.setImageResource(customer.photo)
+                if (customer.phototrial != null) {
+                    customerListIvCliente.setImageResource(customer.phototrial!!)
+                } else {
+                    customerListIvCliente.setImageBitmap(customer.photo)
+                }
+
+
+                root.setOnClickListener {
+                    listener.customerClick(customer)
+                }
+                root.setOnLongClickListener {
+                    listener.customerOnLongClick(customer)
+                    true
+                }
 
                 customerListImgtnEdit.setOnClickListener {
-                    onClickEdit?.invoke(adapterPosition)
-                }
-                customerListImgbtnDelete.setOnClickListener {
-                    onClickDelete?.invoke(
-                        adapterPosition
-                    )
+                    listener.customerEditClick(adapterPosition)
                 }
             }
-            itemView.setOnClickListener { onClickListener?.invoke(clientesModel) }
         }
     }
 }

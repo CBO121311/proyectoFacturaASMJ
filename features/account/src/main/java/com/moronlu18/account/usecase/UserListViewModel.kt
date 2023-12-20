@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.moronlu18.accounts.entity.User
-import com.moronlu18.accounts.entity.UserSignUp
 import com.moronlu18.accounts.network.ResourceList
 import com.moronlu18.accounts.repository.UserRepository
 import kotlinx.coroutines.launch
@@ -33,13 +32,10 @@ class UserListViewModel : ViewModel() {
 
             when (result) {
                 is ResourceList.Success<*> -> {
-
-
-
                     state.value = UserListState.Success(result.data as ArrayList<User>)
                 }
-
                 is ResourceList.Error -> state.value = UserListState.NoDataError
+                else -> {}
             }
         }
     }

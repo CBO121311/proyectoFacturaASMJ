@@ -11,6 +11,7 @@ import kotlinx.coroutines.withContext
 class CustomerProvider private constructor() {
     companion object {
 
+
         var CustomerdataSet: MutableList<Customer> = mutableListOf()
         private var idCliente: Int = 1
 
@@ -19,25 +20,20 @@ class CustomerProvider private constructor() {
         }
 
         private fun initDataSetCustomer() {
+            //val resourceId = R.drawable.kiwituxedo
+            //val bitmap = BitmapFactory.decodeResource(context.resources, resourceId)
+
+
             CustomerdataSet.add(
                 Customer(
                     idCliente++,
                     "Mr.Kiwi",
-                    Email("kiwi@boss.com"),
-                    "+34 123456789",
-                    address = "Calle Plkjhgfd, 123",
-                    photo = R.drawable.kiwituxedo
-                )
-            )
-            CustomerdataSet.add(
-                Customer(
-                    idCliente++,
-                    "Juan Pérez",
-                    Email("juan@example.com"),
+                    Email("mrkiwi@example.com"),
                     "+54 9 3541 12-3456",
                     "Madrid",
                     "Calle Principal, 123",
-                    photo = R.drawable.liontuxedo
+                    phototrial = R.drawable.kiwituxedo
+                    //phototrial = R.drawable.kiwituxedo
                 )
             )
 
@@ -48,7 +44,8 @@ class CustomerProvider private constructor() {
                     Email("maria@example.com"),
                     "+525590633791",
                     "Barcelona",
-                    "Avenida Central, 456", R.drawable.elephantuxedo
+                    "Avenida Central, 456", //R.drawable.elephantuxedo
+                    phototrial = R.drawable.elephantuxedo
                 )
             )
             CustomerdataSet.add(
@@ -58,7 +55,9 @@ class CustomerProvider private constructor() {
                     Email("luis@example.com"),
                     "+34 111223344",
                     "Valencia",
-                    "Paseo de la Playa, 789", R.drawable.kangorutuxedo
+                    "Paseo de la Playa, 789",
+                    phototrial = R.drawable.kangorutuxedo
+                    //photo = bitmap
                 )
             )
             CustomerdataSet.add(
@@ -66,7 +65,7 @@ class CustomerProvider private constructor() {
                     idCliente,
                     "Alejandro López",
                     Email("al@example.com"),
-                    photo = R.drawable.cbotuxedo
+                    phototrial = R.drawable.cbotuxedo
                 )
             )
         }
@@ -163,18 +162,22 @@ class CustomerProvider private constructor() {
             return CustomerdataSet.indexOf(customer)
         }
 
-        fun getCustomer(): List<Customer> {
+
+        /**
+         * Devuelve el customer por el id
+         */
+        fun getCustomerbyID(id: Int): Customer? {
+            return CustomerdataSet.find { it.id == id }
+        }
+
+
+        fun getListCustomer(): List<Customer> {
             return CustomerdataSet
         }
 
         fun getCustomerNameById(customerId: Int): String? {
             val customer = CustomerdataSet.find { it.id == customerId }
             return customer?.name
-        }
-
-        fun getCustomerPhotoById(customerId: Int): Int {
-            val customer = CustomerdataSet.find { it.id == customerId }
-            return customer?.photo ?: R.drawable.cebolla
         }
 
 
@@ -206,15 +209,23 @@ class CustomerProvider private constructor() {
             return nombre
         }
 
-        fun getPhoto(id: Int): Int {
-            var photo = 0
-            for (item in CustomerdataSet) {
-                if (item.id == id) {
-                    photo = item.photo
-                }
-            }
-            return photo
-        }
-
     }
 }
+//Todo Eliminado dos funciones de relleno
+/*
+fun getCustomerPhotoById(customerId: Int): Int {
+    val customer = CustomerdataSet.find { it.id == customerId }
+    return customer?.photo ?: R.drawable.cebolla
+}
+
+/*
+fun getPhoto(id: Int): Int {
+    var photo = 0
+    for (item in CustomerdataSet) {
+        if (item.id == id) {
+            photo = item.photo
+        }
+    }
+    return photo
+}
+*/

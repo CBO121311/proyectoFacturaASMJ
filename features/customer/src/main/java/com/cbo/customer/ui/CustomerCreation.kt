@@ -2,6 +2,8 @@ package com.cbo.customer.ui
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
@@ -9,6 +11,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -21,7 +24,6 @@ import com.cbo.customer.usecase.CustomerViewModel
 import com.google.android.material.textfield.TextInputLayout
 import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.accounts.entity.Email
-import com.moronlu18.customercreation.R
 import com.moronlu18.customercreation.databinding.FragmentCustomerCreationBinding
 
 
@@ -55,7 +57,13 @@ class CustomerCreation : Fragment() {
                 isAvailable(binding.customerCreationTietAddress, customerEdit.address)
                 isAvailable(binding.customerCreationTietPhone, customerEdit.phone)
                 isAvailable(binding.customerCreationTietCity, customerEdit.city)
-                binding.customerCreationImgcAvatar.setImageResource(customerEdit.photo)
+
+                if (customerEdit.phototrial != null) {
+                    binding.customerCreationImgcAvatar.setImageResource(customerEdit.phototrial!!)
+                } else {
+                    binding.customerCreationImgcAvatar.setImageBitmap(customerEdit.photo)
+                }
+
                 binding.customerCreationLlid.visibility = View.VISIBLE
                 editCustomerPos = posCustomer
 
@@ -89,6 +97,7 @@ class CustomerCreation : Fragment() {
                 CustomerCreationState.EmailEmptyError -> setEmailEmptyError()
                 CustomerCreationState.InvalidEmailFormat -> setEmailFormatError()
                 CustomerCreationState.OnSuccess -> onSuccessCreate()
+                else -> {}
             }
         })
         binding.customerCreationTietIdCustomer.addTextChangedListener(CcWatcher(binding.customerCreationTilIdCustomer))
@@ -101,24 +110,23 @@ class CustomerCreation : Fragment() {
      * Función cuando crea con éxito o edita un cliente.
      */
     private fun onSuccessCreate() {
-        val name = binding.customerCreationTietNameCustomer.text.toString()
-        val email = binding.customerCreationTietEmailCustomer.text.toString()
-        val phone = binding.customerCreationTietPhone.text.toString()
-        val city = binding.customerCreationTietCity.text.toString()
-        val address = binding.customerCreationTietAddress.text.toString()
         val id = binding.customerCreationTietIdCustomer.text.toString().toIntOrNull()
             ?: viewModel.getNextCustomerId()
 
+        //todo
         if (viewModel.getEditorMode()) {
 
             val updatedCustomer = Customer(
                 id = id,
-                name = name,
-                email = Email(email),
-                phone = phone.ifEmpty { "No disponible" },
-                city = city.ifEmpty { "No disponible" },
-                address = address.ifEmpty { "No disponible" },
-                photo = R.drawable.kiwidiner_background
+                name = binding.customerCreationTietNameCustomer.text.toString(),
+                email = Email(binding.customerCreationTietEmailCustomer.text.toString()),
+                phone = binding.customerCreationTietPhone.text.toString()
+                    .ifEmpty { "No disponible" },
+                city = binding.customerCreationTietCity.text.toString().ifEmpty { "No disponible" },
+                address = binding.customerCreationTietAddress.text.toString()
+                    .ifEmpty { "No disponible" },
+                photo = getbitMap(binding.customerCreationImgcAvatar),
+                phototrial = null
             )
 
             viewModel.updateCustomer(updatedCustomer, editCustomerPos)
@@ -126,18 +134,28 @@ class CustomerCreation : Fragment() {
         } else {
             val customer = Customer(
                 id = viewModel.getNextCustomerId(),
-                name = name,
-                email = Email(email),
-                phone = phone.ifEmpty { "No disponible" },
-                city = city.ifEmpty { "No disponible" },
-                address = address.ifEmpty { "No disponible" },
-                photo = R.drawable.kiwidiner_background
+                name = binding.customerCreationTietNameCustomer.text.toString(),
+                email = Email(binding.customerCreationTietEmailCustomer.text.toString()),
+                phone = binding.customerCreationTietPhone.text.toString()
+                    .ifEmpty { "No disponible" },
+                city = binding.customerCreationTietCity.text.toString().ifEmpty { "No disponible" },
+                address = binding.customerCreationTietAddress.text.toString()
+                    .ifEmpty { "No disponible" },
+                photo = getbitMap(binding.customerCreationImgcAvatar), phototrial = null
             )
             viewModel.addCustomer(customer)
             viewModel.sortRefresh()
         }
         findNavController().popBackStack()
     }
+
+    private fun getbitMap(imageView: ImageView): Bitmap {
+        val bitmap = Bitmap.createBitmap(imageView.width, imageView.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        imageView.draw(canvas)
+        return bitmap
+    }
+
 
     /**
      * Comprueba si Customer tiene el valor "No disponible" en algunos de sus campos

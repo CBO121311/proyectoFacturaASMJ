@@ -61,6 +61,8 @@ class SignUpViewModel : ViewModel() {
                         is Resource.Error -> {
                             state.value = SignUpState.AuthencationError(result.exception.message!!)
                         }
+
+                        else -> {}
                     }
                 }
             }

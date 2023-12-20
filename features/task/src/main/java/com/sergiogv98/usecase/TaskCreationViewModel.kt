@@ -48,7 +48,7 @@ class TaskCreationViewModel : ViewModel() {
     }
 
     fun taskGiveCustomerId(nameCustomer: String): Customer? {
-        return CustomerProvider.getCustomer().find { it.name == nameCustomer }
+        return CustomerProvider.getListCustomer().find { it.name == nameCustomer }
     }
 
     fun taskGive(position: Int): Task{
@@ -56,7 +56,7 @@ class TaskCreationViewModel : ViewModel() {
     }
 
     fun giveListCustomer() : List<String> {
-        return CustomerProvider.getCustomer().map { it.name }
+        return CustomerProvider.getListCustomer().map { it.name }
     }
 
     fun giveClientName(id: Int): String{
