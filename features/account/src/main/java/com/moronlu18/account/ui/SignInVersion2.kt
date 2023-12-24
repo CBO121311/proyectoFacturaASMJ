@@ -20,5 +20,6 @@ class SignInVersion2 : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_signinv2, container, false)
+        //return inflater.inflate(R.layout.fragment_signinv2, container, false)
     }
 }

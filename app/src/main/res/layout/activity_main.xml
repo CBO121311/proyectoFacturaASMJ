@@ -10,7 +10,8 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:background="@color/seed">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -33,6 +34,6 @@
         android:visibility="gone"
         app:srcCompat="@drawable/ic_action_add"
         app:backgroundTint="#AF9DF1"
-        android:contentDescription="Botón que será heredado entre los fragment" />
+        android:contentDescription="@string/contentDescriptionfab" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

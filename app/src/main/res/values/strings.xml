@@ -59,13 +59,14 @@
     <string name="about_authors_alex" translatable="false">Alejandro López Calderón</string>
     <string name="about_authors_alexdesc">Jefe y encargado del módulo Customer</string>
     <string name="about_authors_jess" translatable="false">Jessica Castro Ruiz</string>
-    <string name="about_authors_jessdesc">Encargado del módulo Item</string>
+    <string name="about_authors_jessdesc">Encargada del módulo Item</string>
     <string name="about_authors_mateo" translatable="false">Christian Mateo Tamayo Rivera</string>
     <string name="about_authors_mateodesc">Encargado del módulo Invoice</string>
     <string name="about_authors_sergdesc">Encargado del módulo Task</string>
     <string name="about_authors_serg" translatable="false">Sergio García Vico</string>
-    <string name="about_versionapp" translatable="false">3.6.0</string>
+    <string name="about_versionapp" translatable="false">3.6.1</string>
     <string name="progress_dialog_title">Esperando...</string>
     <string name="dialog_warning_title">Entendido</string>
+    <string name="contentDescriptionfab" translatable="false">Botón que será heredado entre los fragment</string>
 
 </resources>

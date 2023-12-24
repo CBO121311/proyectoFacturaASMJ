@@ -53,4 +53,5 @@ dependencies {
     //Libería de animaciones lottie
     val lottieVersion = "3.4.0"
     implementation ("com.airbnb.android:lottie:$lottieVersion")
+    implementation ("com.mikhaellopez:circularimageview:4.3.1")
 }

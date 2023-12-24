@@ -13,8 +13,6 @@
         <action
             android:id="@+id/action_customerList_to_customerCreation"
             app:destination="@id/customerCreation"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
             app:popEnterAnim="@android:anim/fade_in"
             app:popExitAnim="@android:anim/fade_out" />
         <action
@@ -52,7 +50,9 @@
             app:destination="@id/baseFragmentDialogWarning" />
         <action
             android:id="@+id/action_customerDetail_to_customerCreation"
-            app:destination="@id/customerCreation" />
+            app:destination="@id/customerCreation"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <dialog
         android:id="@+id/baseFragmentDialog2"

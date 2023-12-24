@@ -9,7 +9,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.moronlu18.invoice.R
@@ -44,12 +43,6 @@ class MainActivity : AppCompatActivity() {
              Snackbar.make(view, "No me dejes así, pon una función o hazla no visible <_<", Snackbar.LENGTH_LONG)
                  .setAction("Action", null).show()
          }
-
-
-
-        //Cambia el color del toolbar.
-        binding.toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.seed));
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

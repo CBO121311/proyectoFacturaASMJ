@@ -25,22 +25,21 @@ class CustomerProvider private constructor() {
                     idCliente++,
                     "Mr.Kiwi",
                     Email("mrkiwi@example.com"),
-                    "+54 9 3541 12-3456",
-                    "Madrid",
-                    "Calle Principal, 123",
+                    "+64 21 123 456",
+                    "Auckland",
+                    "Main Street, 123",
                     phototrial = R.drawable.kiwituxedo
-                    //phototrial = R.drawable.kiwituxedo
                 )
             )
 
             CustomerdataSet.add(
                 Customer(
                     idCliente++,
-                    "María López",
+                    "Maria Schmidt",
                     Email("maria@example.com"),
-                    "+525590633791",
-                    "Barcelona",
-                    "Avenida Central, 456", //R.drawable.elephantuxedo
+                    "+49 123456789",
+                    "Berlín",
+                    "Kurfürstendamm, 123", //R.drawable.elephantuxedo
                     phototrial = R.drawable.elephantuxedo
                 )
             )
@@ -49,11 +48,10 @@ class CustomerProvider private constructor() {
                     idCliente++,
                     "Luis García",
                     Email("luis@example.com"),
-                    "+34 111223344",
+                    "+34 687223344",
                     "Valencia",
-                    "Paseo de la Playa, 789",
+                    "Avenida Reino de Valencia, 789",
                     phototrial = R.drawable.kangorutuxedo
-                    //photo = bitmap
                 )
             )
             CustomerdataSet.add(

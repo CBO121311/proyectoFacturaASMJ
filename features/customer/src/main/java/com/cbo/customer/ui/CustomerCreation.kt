@@ -58,31 +58,13 @@ class CustomerCreation : Fragment() {
             openGallery()
         }
 
-
-        //Si es editar
         parentFragmentManager.setFragmentResultListener(
             "customkey", this, FragmentResultListener { _, result ->
-                var posCustomer: Int = result.getInt("customposition")
+                val posCustomer: Int = result.getInt("customposition")
                 val customerEdit = viewModel.getCustomerByPosition(posCustomer)
                 viewModel.setEditorMode(true)
 
-                binding.customerCreationTietIdCustomer.setText(customerEdit.id.toString())
-                binding.customerCreationTietEmailCustomer.setText(customerEdit.email.toString())
-                binding.customerCreationTietNameCustomer.setText(customerEdit.name)
-                binding.customerCreationTietAddress.setText(customerEdit.address)
-                binding.customerCreationTietPhone.setText(customerEdit.phone)
-                binding.customerCreationTietCity.setText(customerEdit.city)
-
-                if (customerEdit.phototrial != null) {
-                    binding.customerCreationImgcAvatar.setImageResource(customerEdit.phototrial!!)
-                } else {
-                    binding.customerCreationImgcAvatar.setImageBitmap(customerEdit.photo)
-                }
-
-                binding.customerCreationLlid.visibility = View.VISIBLE
-                editCustomerPos = posCustomer
-
-                viewModel.prevCustomer = customerEdit
+                setUpEditMode(customerEdit, posCustomer)
             }
         )
 
@@ -103,6 +85,39 @@ class CustomerCreation : Fragment() {
     }
 
     /**
+     * Configura la interfaz y establece los valores para el modo de edición.
+     */
+    private fun setUpEditMode(customerEdit: Customer, posCustomer: Int) {
+        binding.customerCreationTietIdCustomer.setText(customerEdit.id.toString())
+        binding.customerCreationTietEmailCustomer.setText(customerEdit.email.toString())
+        binding.customerCreationTietNameCustomer.setText(customerEdit.name)
+        binding.customerCreationTietAddress.setText(customerEdit.address)
+
+        val phone = customerEdit.phone
+        val spaceIndex = phone.indexOf(" ")
+
+        binding.customerCreationCcp.setCountryForPhoneCode(
+            if (spaceIndex != -1) phone.substring(0, spaceIndex).toInt() else 34
+        )
+        binding.customerCreationTietPhone.setText(
+            if (spaceIndex != -1) phone.substring(spaceIndex + 1) else phone
+        )
+
+        binding.customerCreationTietCity.setText(customerEdit.city)
+
+        if (customerEdit.phototrial != null) {
+            binding.customerCreationImgcAvatar.setImageResource(customerEdit.phototrial!!)
+        } else {
+            binding.customerCreationImgcAvatar.setImageBitmap(customerEdit.photo)
+        }
+
+        binding.customerCreationLlid.visibility = View.VISIBLE
+        editCustomerPos = posCustomer
+        viewModel.prevCustomer = customerEdit
+    }
+
+
+    /**
      * Se le llama en caso de éxito.
      * Realiza las acciones necesarias para la creación o edición de un cliente si tiene éxito.
      */
@@ -110,13 +125,23 @@ class CustomerCreation : Fragment() {
         val id = binding.customerCreationTietIdCustomer.text.toString().toIntOrNull()
             ?: viewModel.getNextCustomerId()
 
+        val phone: String = if (binding.customerCreationTietPhone.text.toString().isNotBlank()) {
+            String.format(
+                binding.customerCreationCcp.selectedCountryCodeWithPlus + " " +
+                        binding.customerCreationTietPhone.text.toString()
+            )
+        } else {
+            ""
+        }
+
+
         if (viewModel.getEditorMode()) {
 
             val updatedCustomer = Customer(
                 id = id,
                 name = binding.customerCreationTietNameCustomer.text.toString(),
                 email = Email(binding.customerCreationTietEmailCustomer.text.toString()),
-                phone = binding.customerCreationTietPhone.text.toString(),
+                phone = phone,
                 city = binding.customerCreationTietCity.text.toString(),
                 address = binding.customerCreationTietAddress.text.toString(),
                 photo = getbitMap(binding.customerCreationImgcAvatar),
@@ -130,12 +155,13 @@ class CustomerCreation : Fragment() {
                 id = viewModel.getNextCustomerId(),
                 name = binding.customerCreationTietNameCustomer.text.toString(),
                 email = Email(binding.customerCreationTietEmailCustomer.text.toString()),
-                phone = binding.customerCreationTietPhone.text.toString(),
+                phone = phone,
                 city = binding.customerCreationTietCity.text.toString(),
                 address = binding.customerCreationTietAddress.text.toString(),
                 photo = getbitMap(binding.customerCreationImgcAvatar),
                 phototrial = null
             )
+
             viewModel.addCustomer(customer)
             viewModel.sortRefresh()
         }

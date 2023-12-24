@@ -7,7 +7,7 @@
     <string name="customer_error_EmptyEmail">Empty Email</string>
     <string name="cc_til_hint_name">Name</string>
     <string name="cc_til_hint_email">Email</string>
-    <string name="cc_til_hint_phone">Phone number</string>
+    <string name="cc_til_hint_phone">Phone Number</string>
     <string name="cc_til_hint_address">Address</string>
     <string name="cc_til_hint_city">City</string>
     <string name="cc_btn_text_save">Save</string>

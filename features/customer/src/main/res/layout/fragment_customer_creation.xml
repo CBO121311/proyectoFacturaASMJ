@@ -180,16 +180,27 @@
                         android:text="@={viewmodelcustomercreation.emailCustomer}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/customer_creation_ccp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:ccp_defaultNameCode="ES"
+                    app:layout_constraintBottom_toTopOf="@+id/customer_creation_tilAddress"
+                    app:layout_constraintStart_toStartOf="@+id/customer_creation_tilCustomerEmail"
+                    app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilCustomerEmail">
+
+                </com.hbb20.CountryCodePicker>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/customer_creation_tilPhone"
                     style="@style/customer_creation_tilStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/cc_margin_til"
                     android:layout_marginEnd="@dimen/cc_margin_til"
                     android:hint="@string/cc_til_hint_phone"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/customer_creation_ccp"
                     app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilCustomerEmail"
                     app:startIconDrawable="@drawable/ic_action_phone"
                     app:startIconTint="@color/customer_color_seed">
