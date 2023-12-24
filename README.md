@@ -156,6 +156,16 @@ de la misma es anterior a la de la creación.
  - Las fotos de la galería ya lo puede obtener como dato el propio repositorio. Para ello se ha tenido que modificar levemente alguno de los otros módulos para que siguiese funcionando.
  - Eliminar ya se hace con una pulsación larga.
  - Limpieza de código.
+ - ------------------------
+ ### V3.6.0 (24/12/2023)
+ *Escrito por CBO121311*
+ - Añadido el botón flotante en el mainActivity para que se modifique su utilización en los distintos fragments.
+ - De Customer:
+     - Aparece un Popup Menu al hacer pulsación larga en la lista customer.
+     - Implementado edición en el detail.
+     - Añadido o modificado los comentarios de las funciones de customer.
+     - Internacionalizado los String de Customer y los del App.
+     - Modificaciones leves en el diseño de las layout.
 
 ## Características generales
 - Se ha hecho el nav-graph utilizando include-dynamic y cada navegación funciona de forma independiente.
