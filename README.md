@@ -1,45 +1,5 @@
 Invoice versión 3, es la aplicación que se está realizando de manera modular para el estudio de todo el temario de la asignatura ✨DEINT.✨
 
-## Características generales
-- Se ha hecho el nav-graph utilizando include-dynamic y cada navegación funciona de forma independiente.
-- Añadir y eliminar son funcionables. En Customer funciona el Editar.
-- Control de distintas excepciones utilizando el viewModel
-- Módelo más parecido a MVVM
-- Añadido Splash y about.
-
-# Logo
-
-<img src="ImagenesMuestra/ic_launcher_theme_kiwiv1_round.webp" width="200">
-
-# Capas de Layout
-
-## Customer
-|Creation|Creation: Edit Version|Detail|List|
-| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
-|<img src="ImagenesMuestra/CustomerCreation.png" width="200">|<img src="ImagenesMuestra/CustomerCreationEdit.png" width="200">|<img src="ImagenesMuestra/CustomerDetail.png" width="200">| <img src="ImagenesMuestra/CustomerList.png" width="200">|| <img src="ImagenesMuestra/CustomerList.png" width="200">|
-
-## Item
-|Creation|Detail|List| 
-| ------------------------------ | ------------------------------ | ------------------------------ | 
-|<img src="ImagenesMuestra/ItemCreation.png" width="250">|<img src="ImagenesMuestra/ItemDetail.png" width="250">| <img src="ImagenesMuestra/ItemList.png" width="250">|
-
-## Task
-|Creation|Detail|List| 
-| ------------------------------ | ------------------------------ | ------------------------------ | 
-|<img src="ImagenesMuestra/TaskCreation.png" width="250">|<img src="ImagenesMuestra/TaskDetail.png" width="250">| <img src="ImagenesMuestra/TaskList.png" width="250">|
-
-## Invoice
-|Creation|Detail|List| 
-| ------------------------------ | ------------------------------ | ------------------------------ | 
-|<img src="ImagenesMuestra/InvoiceCreation.png" width="250">|<img src="ImagenesMuestra/InvoiceDetail.png" width="250">| <img src="ImagenesMuestra/InvoiceList.png" width="250">|
-
-## Extra
-|Dashboard|About|
-| ------------------------------ | ------------------------------ |
-|<img src="ImagenesMuestra/Dashboard.png" width="300">|<img src="ImagenesMuestra/About.png" width="300">|
-
-
-
  ## Historial de versiones
 
  ### V3.0.1 (13/11/2023)
@@ -184,3 +144,54 @@ de la misma es anterior a la de la creación.
  - Arreglado el error de que si el nombre o email del customer está en blanco no tenía el estado Empty.
  - El botón Registro (SignUp) ya funciona.
  - Limpieza de comentarios en el módulo account.
+ - ------------------------
+ ### V3.5.3 (16/12/2023)
+ *Escrito por CBO121311*
+ - Arreglado el error de que si el nombre o email del customer está en blanco no tenía el estado Empty.
+ - El botón Registro (SignUp) ya funciona.
+ - Limpieza de comentarios en el módulo account.
+ - ------------------------
+ ### V3.5.4 (20/12/2023)
+ *Escrito por CBO121311*
+ - Las fotos de la galería ya lo puede obtener como dato el propio repositorio. Para ello se ha tenido que modificar levemente alguno de los otros módulos para que siguiese funcionando.
+ - Eliminar ya se hace con una pulsación larga.
+ - Limpieza de código.
+
+## Características generales
+- Se ha hecho el nav-graph utilizando include-dynamic y cada navegación funciona de forma independiente.
+- Añadir y eliminar son funcionables. En Customer funciona el Editar.
+- Control de distintas excepciones utilizando el viewModel
+- Módelo más parecido a MVVM
+- Añadido Splash y about.
+
+# Logo
+
+<img src="ImagenesMuestra/ic_launcher_theme_kiwiv1_round.webp" width="200">
+
+# Capas de Layout
+
+## Customer
+|Creation|Creation: Edit Version|Detail|List|
+| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
+|<img src="ImagenesMuestra/CustomerCreation.png" width="200">|<img src="ImagenesMuestra/CustomerCreationEdit.png" width="200">|<img src="ImagenesMuestra/CustomerDetail.png" width="200">| <img src="ImagenesMuestra/CustomerList.png" width="200">|| <img src="ImagenesMuestra/CustomerList.png" width="200">|
+
+## Item
+|Creation|Detail|List| 
+| ------------------------------ | ------------------------------ | ------------------------------ | 
+|<img src="ImagenesMuestra/ItemCreation.png" width="250">|<img src="ImagenesMuestra/ItemDetail.png" width="250">| <img src="ImagenesMuestra/ItemList.png" width="250">|
+
+## Task
+|Creation|Detail|List| 
+| ------------------------------ | ------------------------------ | ------------------------------ | 
+|<img src="ImagenesMuestra/TaskCreation.png" width="250">|<img src="ImagenesMuestra/TaskDetail.png" width="250">| <img src="ImagenesMuestra/TaskList.png" width="250">|
+
+## Invoice
+|Creation|Detail|List| 
+| ------------------------------ | ------------------------------ | ------------------------------ | 
+|<img src="ImagenesMuestra/InvoiceCreation.png" width="250">|<img src="ImagenesMuestra/InvoiceDetail.png" width="250">| <img src="ImagenesMuestra/InvoiceList.png" width="250">|
+
+## Extra
+|Dashboard|About|
+| ------------------------------ | ------------------------------ |
+|<img src="ImagenesMuestra/Dashboard.png" width="300">|<img src="ImagenesMuestra/About.png" width="300">|
+
