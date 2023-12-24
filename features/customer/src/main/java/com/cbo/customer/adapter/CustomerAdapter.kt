@@ -21,8 +21,6 @@ class CustomerAdapter(
     interface OnCustomerClick {
         fun customerClick(position: Int)
         fun customerOnLongClick(view: View, position: Int, customer: Customer)
-        fun customerEditClick(position: Int)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerViewHolder {
@@ -104,9 +102,9 @@ class CustomerAdapter(
                     customeItemIvCheck.visibility = View.GONE
                 }
                 root.setOnLongClickListener {
-
-                    listener.customerOnLongClick(view, adapterPosition, customer)
                     selectedPosition = adapterPosition
+                    listener.customerOnLongClick(view, adapterPosition, customer)
+
                     notifyDataSetChanged()
                     true
                 }

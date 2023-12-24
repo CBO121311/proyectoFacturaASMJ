@@ -97,14 +97,6 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
     }
 
     /**
-     * Se ejecuta al hacer clic en el botón de edición de un elemento de la lista.
-     */
-    override fun customerEditClick(position: Int) {
-        onEditItem(position)
-    }
-
-
-    /**
      * Se le llama en caso de éxito.
      * Acción cuando se obtiene con éxito la lista de clientes.
      * Actualiza la interfaz de usuario para mostrar la lista de clientes.
@@ -136,7 +128,7 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
     private fun onEditItem(position: Int) {
 
         val bundle = Bundle();
-        bundle.putInt("position", position)
+        bundle.putInt("customposition", position)
 
         parentFragmentManager.setFragmentResult("customkey", bundle)
         findNavController().navigate(R.id.action_customerList_to_customerCreation)
@@ -207,7 +199,6 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
                     Handler(Looper.getMainLooper()).postDelayed({
                         onEditItem(position)
                     }, doubleClickDelay)
-
                     true
                 }
 
