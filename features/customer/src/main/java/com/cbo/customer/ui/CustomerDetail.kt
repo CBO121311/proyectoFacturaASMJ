@@ -31,8 +31,10 @@ class CustomerDetail : Fragment(),MenuProvider {
     private var _binding: FragmentCustomerDetailBinding? = null
     private val binding get() = _binding!!
     private var customer: Customer? = null
-
     private var posCostumer:Int= 0
+    private val doubleClickDelay = 200L
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -148,13 +150,18 @@ class CustomerDetail : Fragment(),MenuProvider {
         return when (menuItem.itemId) {
 
             R.id.menu_cd_action_delete -> {
-                deleteConfirmation()
+
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    deleteConfirmation()
+                }, doubleClickDelay)
                 true
             }
 
             R.id.menu_cd_action_edit -> {
-
-                onEditItem(customer!!)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    onEditItem(customer!!)
+                }, doubleClickDelay)
                 true
             }
 

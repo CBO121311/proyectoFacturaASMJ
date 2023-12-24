@@ -15,11 +15,13 @@ class CustomerAdapter(
 
     private var dataset = arrayListOf<Customer>()
 
+    //Cuando no hay ninguna posición seleccionada.
+    private var selectedPosition = RecyclerView.NO_POSITION
+
     interface OnCustomerClick {
         fun customerClick(position: Int)
-        fun customerOnLongClick(customer: Customer)
+        fun customerOnLongClick(view: View, position: Int, customer: Customer)
         fun customerEditClick(position: Int)
-        fun showContextMenu(view: View, position: Int, customer: Customer)
 
     }
 
@@ -39,10 +41,8 @@ class CustomerAdapter(
     }
 
     /**
-     * Actualiza los datos del adaptador con un nuevo conjunto de clientes
-     * y notifica se realice un cambio.
+     * Actualiza los datos del adaptador con nuevo datos de clientes y notifica.
      *
-     * @param newDataSet Nuevo conjunto de clientes.
      */
     fun update(newDataSet: ArrayList<Customer>) {
 
@@ -51,10 +51,8 @@ class CustomerAdapter(
     }
 
     /**
-     * Elimina un cliente específico del conjunto de datos del adaptador
-     * y notifica que se realice un cambio.
+     * Elimina un cliente específico de los datos del adaptador y notifica.
      *
-     * @param customer Cliente a eliminar.
      */
     fun deleteCustomer(customer: Customer) {
         dataset.remove(customer)
@@ -62,11 +60,18 @@ class CustomerAdapter(
     }
 
     /**
-     * Ordena el conjunto de datos del adaptador por nombre y
-     * notifica que se realice un cambio.
+     * Ordena los datos del adaptador por nombre y notifica.
      */
     fun sortName() {
         dataset.sort()
+        notifyDataSetChanged()
+    }
+
+    /**
+     * Desmarca la posición seleccionada y notifica.
+     */
+    fun clearSelection() {
+        selectedPosition = RecyclerView.NO_POSITION
         notifyDataSetChanged()
     }
 
@@ -96,11 +101,20 @@ class CustomerAdapter(
 
                 root.setOnClickListener {
                     listener.customerClick(adapterPosition)
+                    customeItemIvCheck.visibility = View.GONE
                 }
                 root.setOnLongClickListener {
-                    listener.showContextMenu(view, adapterPosition, customer)
-                    //listener.customerOnLongClick(customer)
+
+                    listener.customerOnLongClick(view, adapterPosition, customer)
+                    selectedPosition = adapterPosition
+                    notifyDataSetChanged()
                     true
+                }
+
+                if (adapterPosition == selectedPosition) {
+                    customeItemIvCheck.visibility = View.VISIBLE
+                } else {
+                    customeItemIvCheck.visibility = View.GONE
                 }
             }
         }
@@ -108,8 +122,6 @@ class CustomerAdapter(
         /**
          * Función para proporcionar un valor predeterminado ("N/a") si el valor dado es nulo o vacío.
          *
-         * @param value El valor a evaluar.
-         * @return El valor original si no es nulo o vacío; de lo contrario, devuelve "N/a".
          */
         private fun isValue(value: String?): String {
 
