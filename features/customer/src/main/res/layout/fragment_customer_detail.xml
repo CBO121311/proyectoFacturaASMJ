@@ -266,18 +266,5 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="16dp" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/customer_detail_flbtncorrect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/cd_general_margin"
-            android:clickable="true"
-            android:contentDescription="@string/cd_cd_flbtnCorrect"
-            android:focusable="true"
-            app:backgroundTint="@color/customer_color_floatingbutton"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/customer_detailglRight"
-            app:srcCompat="@drawable/ic_action_correct" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.cbo.customer.ui.CustomerDetailState
-import com.cbo.customer.ui.CustomerListState
 import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.accounts.repository.CustomerProvider
 
@@ -21,18 +20,10 @@ class CustomerDetailViewModel : ViewModel() {
 
 
     /**
-     * Método que obtiene la posición del Customer en base al Customer en si.
-     */
-    private fun getPositionById(customer: Customer): Int {
-        return repository.getPosByCustomer(customer)
-    }
-
-
-    /**
-     * Borra el cliente desde el viewModel
+     * Borra el cliente desde el ViewModel.
      */
     fun deleteCustomer(customer: Customer) {
-        val position = getPositionById(customer)
+        val position = getPositionByCustomer(customer)
         if (position != -1) {
             repository.deleteCustomer(position)
         }
@@ -40,7 +31,7 @@ class CustomerDetailViewModel : ViewModel() {
 
     /**
      * Comprueba si es seguro borrar un cliente porque podría estar referenciado.
-     * Devuelve True si no hay problema, false si lo hay.
+     * Devuelve true si no hay problema, false si lo hay.
      */
     fun isDeleteSafe(customer: Customer): Boolean {
         return if (repository.isCustomerSafeDelete(customer.id)) {
@@ -52,16 +43,28 @@ class CustomerDetailViewModel : ViewModel() {
     }
 
     /**
-     * Método que da el estado "onSuccess" en el contexto
-     * de la customerDetail.
+     * Método que obtiene la posición del cliente en la lista
+     */
+    fun getPositionByCustomer(customer: Customer): Int {
+        return repository.getPosByCustomer(customer)
+    }
+
+    /**
+     * Obtiene el cliente en base a su posición en la lista.
+     */
+    fun getCustomerByPosition(posCustomer: Int): Customer {
+        return repository.getCustomerPos(posCustomer)
+    }
+
+    /**
+     * Método que establece el estado "onSuccess" en el contexto de CustomerDetail.
      */
     fun onSuccess() {
         state.value = CustomerDetailState.OnSuccess
     }
 
     /**
-     * Devuelve la variable State.
-     * No se puede modificar su valor fuera de ViewModel.
+     * Devuelve la variable State. No se puede modificar su valor fuera del ViewModel.
      */
     fun getState(): LiveData<CustomerDetailState> {
         return state

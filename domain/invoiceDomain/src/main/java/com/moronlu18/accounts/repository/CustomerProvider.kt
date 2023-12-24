@@ -11,7 +11,6 @@ import kotlinx.coroutines.withContext
 class CustomerProvider private constructor() {
     companion object {
 
-
         var CustomerdataSet: MutableList<Customer> = mutableListOf()
         private var idCliente: Int = 1
 
@@ -20,9 +19,6 @@ class CustomerProvider private constructor() {
         }
 
         private fun initDataSetCustomer() {
-            //val resourceId = R.drawable.kiwituxedo
-            //val bitmap = BitmapFactory.decodeResource(context.resources, resourceId)
-
 
             CustomerdataSet.add(
                 Customer(
@@ -68,10 +64,12 @@ class CustomerProvider private constructor() {
                     phototrial = R.drawable.cbotuxedo
                 )
             )
+
         }
 
         /**
-         * Comprueba si el idCustomer es válido y si existe en el repositorio
+         * Comprueba si el idCustomer es válido y si existe en el repositorio.
+         * Devuelve true si es válido y existe, false en caso contrario.
          */
         fun isCustomerExistOrNumeric(idCli: String, currentClient: Customer): Boolean {
 
@@ -83,8 +81,8 @@ class CustomerProvider private constructor() {
         }
 
         /**
-         * Comprueba si el Customer está referenciado en otros repositorios y
-         * es seguro borrarlo
+         * Comprueba si el Customer está referenciado en otros repositorios y es seguro borrarlo.
+         * Devuelve true si es seguro borrarlo, false en caso contrario.
          */
         fun isCustomerSafeDelete(customerId: Int): Boolean {
 
@@ -93,8 +91,8 @@ class CustomerProvider private constructor() {
         }
 
         /**
-         * Comprueba si tiene datos la lista
-         * con un tiempo de espera de dos segundos
+         * Obtiene la lista de customers con un tiempo de espera de dos segundos.
+         * Devuelve un objeto ResourceList.
          */
         suspend fun getCustomerList(): ResourceList {
             return withContext(Dispatchers.IO) {
@@ -107,7 +105,10 @@ class CustomerProvider private constructor() {
             }
         }
 
-
+        /**
+         * Obtiene la lista de customers sin tiempo de espera.
+         * Devuelve un objeto ResourceList.
+         */
         fun getCustomerListNoLoading(): ResourceList {
             return try {
                 if (CustomerdataSet.isEmpty()) {
@@ -121,9 +122,8 @@ class CustomerProvider private constructor() {
         }
 
         /**
-         * Añade o actualiza el customer
+         * Añade o actualiza un customer en el repositorio.
          */
-
         fun addOrUpdateCustomer(customer: Customer, pos: Int?) {
 
             if (pos == null) {
@@ -134,21 +134,21 @@ class CustomerProvider private constructor() {
         }
 
         /**
-         * Borra un customer dependiendo de su posición
+         * Borra un customer del repositorio según su posición.
          */
         fun deleteCustomer(pos: Int) {
             CustomerdataSet.removeAt(pos)
         }
 
         /**
-         * Obtener un Customer desde la posición
+         * Obtiene un customer del repositorio según su posición.
          */
         fun getCustomerPos(position: Int): Customer {
             return CustomerdataSet[position]
         }
 
         /**
-         * Obtener el Id más alto dentro de la lista. Si es null devuelve cero.
+         * Obtiene el Id más alto dentro de la lista. Si es null, devuelve cero.
          */
         fun getMaxCustomerid(): Int {
             return CustomerdataSet.maxByOrNull { it.id }?.id ?: 0
@@ -156,7 +156,7 @@ class CustomerProvider private constructor() {
 
 
         /**
-         * Devuelve la posición de la lista en base al customer.
+         * Obtiene la posición de la lista en base a un customer.
          */
         fun getPosByCustomer(customer: Customer): Int {
             return CustomerdataSet.indexOf(customer)
@@ -164,7 +164,7 @@ class CustomerProvider private constructor() {
 
 
         /**
-         * Devuelve el customer por el id
+         * Obtiene un customer del repositorio según su id.
          */
         fun getCustomerbyID(id: Int): Customer? {
             return CustomerdataSet.find { it.id == id }
@@ -211,21 +211,3 @@ class CustomerProvider private constructor() {
 
     }
 }
-//Todo Eliminado dos funciones de relleno
-/*
-fun getCustomerPhotoById(customerId: Int): Int {
-    val customer = CustomerdataSet.find { it.id == customerId }
-    return customer?.photo ?: R.drawable.cebolla
-}
-
-/*
-fun getPhoto(id: Int): Int {
-    var photo = 0
-    for (item in CustomerdataSet) {
-        if (item.id == id) {
-            photo = item.photo
-        }
-    }
-    return photo
-}
-*/

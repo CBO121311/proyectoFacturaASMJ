@@ -10,6 +10,8 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.moronlu18.invoice.R
 import com.moronlu18.invoice.databinding.ActivityMainBinding
 
@@ -22,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     //Popriedades de acceso al botón flotante de la Activity principal
 
     //Todo quitar comentario
-    //val fab: FloatingActionButton get() = binding.fab
+    val fab: FloatingActionButton get() = binding.fab
     val toolbar: Toolbar get() = binding.toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,11 +39,11 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        //Todo quitar comentario
-        /*binding.fab.setOnClickListener { view ->
-             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+
+        binding.fab.setOnClickListener { view ->
+             Snackbar.make(view, "No me dejes así, pon una función o hazla no visible <_<", Snackbar.LENGTH_LONG)
                  .setAction("Action", null).show()
-         }*/
+         }
 
 
 

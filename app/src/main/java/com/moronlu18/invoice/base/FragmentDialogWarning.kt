@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
+import com.moronlu18.invoice.R
 
 
 class BaseFragmentDialogWarning : DialogFragment() {
@@ -16,7 +17,7 @@ class BaseFragmentDialogWarning : DialogFragment() {
         builder.setMessage(message)
 
         builder.setNegativeButton(
-            "Entendido"
+            getString(R.string.dialog_warning_title)
         )
         { _, _ -> dismiss() }
         return builder.create()

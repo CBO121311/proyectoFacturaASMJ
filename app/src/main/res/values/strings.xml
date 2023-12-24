@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Invoice</string>
 
-    <string name="title_accountsigin">Sig In</string>
-    <string name="title_accountsignup">Sign Up</string>
+    <string name="title_accountsigin">Iniciar sesión</string>
+    <string name="title_accountsignup">Registrarse</string>
     <string name="title_customercreation">Creación de Cliente</string>
-    <string name="title_firebase">Firebase</string>
-    <string name="title_printer">Printer</string>
+    <string name="title_firebase" translatable="false">Firebase</string>
+    <string name="title_printer" translatable="false">Printer</string>
     <string name="title_customerdetail">Detalle Cliente</string>
     <string name="title_customerlist">Lista Clientes</string>
     <string name="title_invoicecreation">Creación Factura</string>
@@ -21,24 +21,24 @@
     <string name="title_taskdetail">Detalle de tarea</string>
     <string name="title_tasklist">Lista de tareas</string>
 
-    <string name="imgLogo_decscription">Icono</string>
+    <string name="imgLogo_decscription">Logo</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configuración</string>
 
     <string name="btSignIn">Login</string>
     <string name="btSignUp">Registro</string>
     <string name="mainFragment">Pantalla Inicial</string>
     <string name="app_tvCustomer">Clientes</string>
-    <string name="app_tvInvoice">Factura</string>
+    <string name="app_tvInvoice">Facturas</string>
     <string name="app_tvItem">Articulos</string>
     <string name="app_tvTask">Tareas</string>
     <string name="app_btnCreation">Creación</string>
     <string name="app_btnDetail">Detalles</string>
     <string name="app_btnList">Listado</string>
     <string name="app_btnTest">Prueba</string>
-    <string name="title_baseui">baseui</string>
+    <string name="title_baseui" translatable="false">baseui</string>
 
-    <string name="title_fragmentDialogExit">Confirmación</string>
+    <string name="title_fragmentDialogExit">Desconectarte</string>
     <string name="Content_fragmentDialogExit">¿Estás seguro de que quieres cerrar la aplicación?</string>
 
 
@@ -56,14 +56,16 @@
     <string name="title_about">Acerca de</string>
     <string name="title_splash">¡Bienvenido!</string>
     <string name="about_authors">Autores</string>
-    <string name="about_authors_alex">Alejandro López Calderón</string>
+    <string name="about_authors_alex" translatable="false">Alejandro López Calderón</string>
     <string name="about_authors_alexdesc">Jefe y encargado del módulo Customer</string>
-    <string name="about_authors_jess">Jessica Castro Ruiz</string>
+    <string name="about_authors_jess" translatable="false">Jessica Castro Ruiz</string>
     <string name="about_authors_jessdesc">Encargado del módulo Item</string>
-    <string name="about_authors_mateo">Christian Mateo Tamayo Rivera</string>
+    <string name="about_authors_mateo" translatable="false">Christian Mateo Tamayo Rivera</string>
     <string name="about_authors_mateodesc">Encargado del módulo Invoice</string>
     <string name="about_authors_sergdesc">Encargado del módulo Task</string>
-    <string name="about_authors_serg">Sergio García Vico</string>
-    <string name="about_versionapp">3.5.2</string>
+    <string name="about_authors_serg" translatable="false">Sergio García Vico</string>
+    <string name="about_versionapp" translatable="false">3.6.0</string>
+    <string name="progress_dialog_title">Esperando...</string>
+    <string name="dialog_warning_title">Entendido</string>
 
 </resources>

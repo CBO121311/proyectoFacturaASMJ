@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/customer_list_cvItemCustomer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -27,19 +26,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <ImageButton
-            android:id="@+id/customer_list_imgtnEdit"
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/item_barrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:contentDescription="@string/cl_cd_imgtedit"
-            android:focusable="true"
-            android:src="@drawable/ic_action_edit"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:barrierDirection="start"
+            app:constraint_referenced_ids="customer_list_tvName,
+            customer_list_tvEmail,customer_list_tvCity" />
 
         <TextView
             android:id="@+id/customer_list_tvName"
@@ -52,7 +45,7 @@
             android:maxLength="40"
             android:maxLines="2"
             android:text="@string/cd_tvExampleName"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/item_guide_limit2"
             app:layout_constraintStart_toEndOf="@+id/customer_list_ivCliente"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,7 +56,7 @@
             android:layout_height="wrap_content"
             android:maxLength="100"
             android:text="@string/cl_tvExampleEmail"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/item_guide_limit2"
             app:layout_constraintStart_toStartOf="@+id/customer_list_tvName"
             app:layout_constraintTop_toBottomOf="@+id/customer_list_tvName" />
 
@@ -75,9 +68,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/cl_item_marginend_ibPhone"
             android:maxLength="18"
-            android:text="@string/cl_tvExamplePhone"
+            android:text="@string/customer_NotAvailable"
+            app:layout_constraintBottom_toBottomOf="@+id/customer_list_tvCity"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/customer_list_tvEmail" />
+            app:layout_constraintStart_toStartOf="@+id/item_guide_limit1" />
 
         <TextView
             android:id="@+id/customer_list_tvCity"
@@ -88,21 +82,21 @@
             android:layout_marginBottom="@dimen/cl_item_marginbottom_tvCity"
             android:maxLength="30"
             android:maxLines="2"
-            android:text="@string/cl_tvExampleCity"
+            android:text="@string/customer_NotAvailable"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline5"
+            app:layout_constraintEnd_toStartOf="@+id/item_guide_limit1"
             app:layout_constraintStart_toStartOf="@+id/customer_list_tvName"
             app:layout_constraintTop_toBottomOf="@+id/customer_list_tvEmail" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
+            android:id="@+id/item_guide_limit2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="318dp" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline5"
+            android:id="@+id/item_guide_limit1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -111,6 +105,7 @@
         <TextView
             android:id="@+id/customer_list_tvid"
             style="@style/cd_style_ItemtvId"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/cl_item_padding_tvId"

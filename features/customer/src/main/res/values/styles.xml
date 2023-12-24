@@ -53,7 +53,8 @@
     </style>
 
     <style name="cd_style_ItemtvId">
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">13.5sp</item>
+        <item name="android:textColor">@color/black</item>
         <item name="android:fontFamily">@font/helvetica</item>
         <item name="android:background">@color/customer_color_cl_id</item>
     </style>
@@ -84,5 +85,4 @@
         <item name="cornerSizeBottomLeft">48dp</item>
         <item name="cornerSizeBottomRight">48dp</item>
     </style>
-
 </resources>

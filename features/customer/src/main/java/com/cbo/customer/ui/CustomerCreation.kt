@@ -12,7 +12,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -24,7 +23,9 @@ import com.cbo.customer.usecase.CustomerViewModel
 import com.google.android.material.textfield.TextInputLayout
 import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.accounts.entity.Email
+import com.moronlu18.customercreation.R
 import com.moronlu18.customercreation.databinding.FragmentCustomerCreationBinding
+import com.moronlu18.invoice.ui.MainActivity
 
 
 class CustomerCreation : Fragment() {
@@ -44,19 +45,33 @@ class CustomerCreation : Fragment() {
         binding.lifecycleOwner = this
         viewModel.setEditorMode(false)
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setUpGallery()
+        setUpFab()
+
+        binding.customerCreationImgbtnCustomer.setOnClickListener {
+            openGallery()
+        }
+
+
+        //Si es editar
         parentFragmentManager.setFragmentResultListener(
             "customkey", this, FragmentResultListener { _, result ->
-                var posCustomer: Int = result.getInt("position")
+                var posCustomer: Int = result.getInt("customposition")
                 val customerEdit = viewModel.getCustomerByPosition(posCustomer)
                 viewModel.setEditorMode(true)
 
                 binding.customerCreationTietIdCustomer.setText(customerEdit.id.toString())
                 binding.customerCreationTietEmailCustomer.setText(customerEdit.email.toString())
                 binding.customerCreationTietNameCustomer.setText(customerEdit.name)
-                isAvailable(binding.customerCreationTietAddress, customerEdit.address)
-                isAvailable(binding.customerCreationTietAddress, customerEdit.address)
-                isAvailable(binding.customerCreationTietPhone, customerEdit.phone)
-                isAvailable(binding.customerCreationTietCity, customerEdit.city)
+                binding.customerCreationTietAddress.setText(customerEdit.address)
+                binding.customerCreationTietPhone.setText(customerEdit.phone)
+                binding.customerCreationTietCity.setText(customerEdit.city)
 
                 if (customerEdit.phototrial != null) {
                     binding.customerCreationImgcAvatar.setImageResource(customerEdit.phototrial!!)
@@ -70,26 +85,8 @@ class CustomerCreation : Fragment() {
                 viewModel.prevCustomer = customerEdit
             }
         )
-        return binding.root
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-        //Prueba de galería
-        binding.customerCreationImgbtnCustomer.setOnClickListener {
-            openGallery()
-        }
-
-        launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == Activity.RESULT_OK) {
-                val data: Intent? = it.data
-                val imageUri = data?.data
-                binding.customerCreationImgcAvatar.setImageURI(imageUri)
-            }
-        }
-
+        //El observable
         viewModel.getState().observe(viewLifecycleOwner, Observer {
             when (it) {
                 CustomerCreationState.InvalidId -> setInvalidIdError()
@@ -105,26 +102,23 @@ class CustomerCreation : Fragment() {
         binding.customerCreationTietEmailCustomer.addTextChangedListener(CcWatcher(binding.customerCreationTilCustomerEmail))
     }
 
-
     /**
-     * Función cuando crea con éxito o edita un cliente.
+     * Se le llama en caso de éxito.
+     * Realiza las acciones necesarias para la creación o edición de un cliente si tiene éxito.
      */
     private fun onSuccessCreate() {
         val id = binding.customerCreationTietIdCustomer.text.toString().toIntOrNull()
             ?: viewModel.getNextCustomerId()
 
-        //todo
         if (viewModel.getEditorMode()) {
 
             val updatedCustomer = Customer(
                 id = id,
                 name = binding.customerCreationTietNameCustomer.text.toString(),
                 email = Email(binding.customerCreationTietEmailCustomer.text.toString()),
-                phone = binding.customerCreationTietPhone.text.toString()
-                    .ifEmpty { "No disponible" },
-                city = binding.customerCreationTietCity.text.toString().ifEmpty { "No disponible" },
-                address = binding.customerCreationTietAddress.text.toString()
-                    .ifEmpty { "No disponible" },
+                phone = binding.customerCreationTietPhone.text.toString(),
+                city = binding.customerCreationTietCity.text.toString(),
+                address = binding.customerCreationTietAddress.text.toString(),
                 photo = getbitMap(binding.customerCreationImgcAvatar),
                 phototrial = null
             )
@@ -136,18 +130,37 @@ class CustomerCreation : Fragment() {
                 id = viewModel.getNextCustomerId(),
                 name = binding.customerCreationTietNameCustomer.text.toString(),
                 email = Email(binding.customerCreationTietEmailCustomer.text.toString()),
-                phone = binding.customerCreationTietPhone.text.toString()
-                    .ifEmpty { "No disponible" },
-                city = binding.customerCreationTietCity.text.toString().ifEmpty { "No disponible" },
-                address = binding.customerCreationTietAddress.text.toString()
-                    .ifEmpty { "No disponible" },
-                photo = getbitMap(binding.customerCreationImgcAvatar), phototrial = null
+                phone = binding.customerCreationTietPhone.text.toString(),
+                city = binding.customerCreationTietCity.text.toString(),
+                address = binding.customerCreationTietAddress.text.toString(),
+                photo = getbitMap(binding.customerCreationImgcAvatar),
+                phototrial = null
             )
             viewModel.addCustomer(customer)
             viewModel.sortRefresh()
         }
         findNavController().popBackStack()
     }
+
+
+    /**
+     * Configura el launcher para el resultado de la galería.
+     */
+    private fun setUpGallery() {
+
+        launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = it.data
+                val imageUri = data?.data
+                binding.customerCreationImgcAvatar.setImageURI(imageUri)
+            }
+        }
+    }
+
+
+    /**
+     * Obtiene un Bitmap a partir de la imagen actual de la ImageView.
+     */
 
     private fun getbitMap(imageView: ImageView): Bitmap {
         val bitmap = Bitmap.createBitmap(imageView.width, imageView.height, Bitmap.Config.ARGB_8888)
@@ -156,17 +169,19 @@ class CustomerCreation : Fragment() {
         return bitmap
     }
 
-
     /**
-     * Comprueba si Customer tiene el valor "No disponible" en algunos de sus campos
-     * si lo es da un valor vacío para el TextView
+     * Configura la visibilidad del botón flotante.
+     * En este fragment se ha ocultado.
      */
-    private fun isAvailable(field: TextView, value: String) {
-        field.text = if (value != "No disponible") value else null
+    private fun setUpFab() {
+        (requireActivity() as? MainActivity)?.fab?.apply {
+            visibility = View.GONE
+        }
     }
 
+
     /**
-     * TextWatcher para anular el mensaje de error
+     * TextWatcher para anular el mensaje de error en un TextInputLayout.
      */
     open inner class CcWatcher(private val til: TextInputLayout) : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -182,45 +197,50 @@ class CustomerCreation : Fragment() {
     }
 
     /**
-     * Función que muestra el error de ID inválido
+     * Muestra un mensaje de error cuando el id del cliente no es válido.
      */
     private fun setInvalidIdError() {
-        binding.customerCreationTilIdCustomer.error = "ID inválido"
+        binding.customerCreationTilIdCustomer.error = getString(R.string.customer_error_Invalidid)
         binding.customerCreationTietIdCustomer.requestFocus()
     }
 
     /**
-     * Función que muestra el error de Nombre vacío
+     * Muestra un mensaje de error cuando el nombre del cliente está vacío.
      */
     private fun setNameCustomerEmptyError() {
-        binding.customerCreationTilNameCustomer.error = "Nombre vacío"
+        binding.customerCreationTilNameCustomer.error = getString(R.string.customer_error_EmptyName)
         binding.customerCreationTilNameCustomer.requestFocus()
     }
 
     /**
-     * Función que muestra el error de Email vacío
+     * Muestra un mensaje de error cuando el correo electrónico está vacío.
      */
     private fun setEmailEmptyError() {
-        binding.customerCreationTilCustomerEmail.error = "Email vacío"
+        binding.customerCreationTilCustomerEmail.error =
+            getString(R.string.customer_error_EmptyEmail)
         binding.customerCreationTilCustomerEmail.requestFocus()
     }
 
     /**
-     * Función que muestra el error de formato de Email
+     * Muestra un mensaje de error cuando el formato del correo electrónico es incorrecto.
      */
     private fun setEmailFormatError() {
-        binding.customerCreationTilCustomerEmail.error = "Formato de Email erróneo"
+        binding.customerCreationTilCustomerEmail.error =
+            getString(R.string.customer_error_FormatEmail)
         binding.customerCreationTilCustomerEmail.requestFocus()
     }
 
     /**
-     * Abre la galería.
+     * Abre la galería para permitir al usuario seleccionar una imagen del dispositivo.
      */
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         launcher.launch(intent)
     }
 
+    /**
+     * Liberamos la referencia al binding.
+     */
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

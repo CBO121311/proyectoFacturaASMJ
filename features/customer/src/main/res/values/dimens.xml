@@ -52,7 +52,7 @@
     <dimen name="cl_item_marginend_ibDelete">10dp</dimen>
     <dimen name="cl_item_marginend_ibEdit">8dp</dimen>
     <dimen name="cl_item_margintop_tvName">8dp</dimen>
-    <dimen name="cl_item_padding_tvId">2dp</dimen>
+    <dimen name="cl_item_padding_tvId">3dp</dimen>
     <dimen name="cl_item_marginend_ibPhone">10dp</dimen>
     <dimen name="cl_item_marginend_tvName">16dp</dimen>
     <dimen name="cl_item_marginbottom_tvCity">10dp</dimen>

@@ -1,6 +1,6 @@
 package com.cbo.customer.usecase
 
-import android.util.Log
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +9,6 @@ import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.accounts.repository.CustomerProvider
 import java.util.regex.Pattern
 
-const val TAG = "ViewModel"
 
 class CustomerViewModel : ViewModel() {
 
@@ -25,16 +24,10 @@ class CustomerViewModel : ViewModel() {
     private val repository = CustomerProvider
 
 
-
     /**
-     * Método que da distintos estados al comprobar si los datos está
-     * escrito de forma correcta.
+     * Método que valida distintos estados al comprobar si los datos están escritos correctamente.
      */
     fun validateCredentials() {
-        Log.i(
-            TAG,
-            "El email es: ${emailCustomer.value} y el nombre es ${nameCustomer.value} y ${idCustomer.value}"
-        )
 
         when {
             nameCustomer.value.isNullOrBlank() -> state.value =
@@ -59,15 +52,13 @@ class CustomerViewModel : ViewModel() {
     }
 
     /**
-     * Añade un cliente al repositorio
+     * Añade un cliente al repositorio.
      */
     fun addCustomer(customer: Customer) {
         repository.addOrUpdateCustomer(customer, null)
     }
-
     /**
-     * Actualiza un cliente al repositorio.
-     * Esto solo se hace en el modo editar
+     * Actualiza un cliente en el repositorio. Esto solo se hace en el modo editar.
      */
     fun updateCustomer(customer: Customer, posCustomer: Int) {
         repository.addOrUpdateCustomer(customer, posCustomer)
@@ -89,8 +80,8 @@ class CustomerViewModel : ViewModel() {
     }
 
     /**
-     * Devuelve el siguiente Id autogenerado, que es el máximo id +1
-     * Esto se utiliza en el modo crear, no el de editar.
+     * Devuelve el siguiente ID autogenerado, que es el máximo ID + 1.
+     * Esto se utiliza en el modo crear, no en el de editar.
      */
     fun getNextCustomerId(): Int {
         val maxId = repository.getMaxCustomerid()
@@ -99,20 +90,22 @@ class CustomerViewModel : ViewModel() {
     }
 
     /**
-     * Obtiene el Customer en base a su posición de la lista.
-     * Se utiliza para editar el cliente
+     * Obtiene el Customer en base a su posición en la lista.
+     * Se utiliza para editar el cliente.
      */
     fun getCustomerByPosition(posCustomer: Int): Customer {
         return repository.getCustomerPos(posCustomer)
     }
-
+    /**
+     * Ordena la lista de cliente de manera personalizado en base al id
+     */
     fun sortRefresh(){
         repository.CustomerdataSet.sortBy { it.id }
     }
 
     /**
      * Devuelve la variable State.
-     * No se puede modificar su valor fuera de ViewModel.
+     * No se puede modificar su valor fuera del ViewModel.
      */
     fun getState(): LiveData<CustomerCreationState> {
         return state

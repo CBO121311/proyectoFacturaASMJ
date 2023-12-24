@@ -31,7 +31,7 @@ class FragmentProgressDialogKiwi : DialogFragment() {
         // Crea un cuadro de diálogo con el diseño inflado
         val builder = AlertDialog.Builder(requireContext())
         builder.setView(view)
-        builder.setTitle("Esperando...")
+        builder.setTitle(getString(R.string.progress_dialog_title))
 
         builder.setCancelable(false)
 

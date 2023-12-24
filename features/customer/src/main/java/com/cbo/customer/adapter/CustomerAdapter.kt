@@ -5,9 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-//import com.example.pruebasconclientes.R
 import com.moronlu18.customercreation.R
-//import com.example.pruebasconclientes.data.Clientes
 import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.customercreation.databinding.ItemClienteBinding
 
@@ -17,11 +15,12 @@ class CustomerAdapter(
 
     private var dataset = arrayListOf<Customer>()
 
-
-    interface OnCustomerClick { //Este elemento es público
-        fun customerClick(customer: Customer)
+    interface OnCustomerClick {
+        fun customerClick(position: Int)
         fun customerOnLongClick(customer: Customer)
         fun customerEditClick(position: Int)
+        fun showContextMenu(view: View, position: Int, customer: Customer)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerViewHolder {
@@ -31,7 +30,6 @@ class CustomerAdapter(
     }
 
     override fun getItemCount(): Int {
-
         return dataset.size
     }
 
@@ -40,22 +38,38 @@ class CustomerAdapter(
         holder.bind(item)
     }
 
-
+    /**
+     * Actualiza los datos del adaptador con un nuevo conjunto de clientes
+     * y notifica se realice un cambio.
+     *
+     * @param newDataSet Nuevo conjunto de clientes.
+     */
     fun update(newDataSet: ArrayList<Customer>) {
 
         dataset = newDataSet
         notifyDataSetChanged()
     }
 
+    /**
+     * Elimina un cliente específico del conjunto de datos del adaptador
+     * y notifica que se realice un cambio.
+     *
+     * @param customer Cliente a eliminar.
+     */
     fun deleteCustomer(customer: Customer) {
         dataset.remove(customer)
         notifyDataSetChanged()
     }
 
-    fun sortName(){
+    /**
+     * Ordena el conjunto de datos del adaptador por nombre y
+     * notifica que se realice un cambio.
+     */
+    fun sortName() {
         dataset.sort()
         notifyDataSetChanged()
     }
+
 
     inner class CustomerViewHolder(private val view: View) :
         RecyclerView.ViewHolder(view) {
@@ -69,28 +83,40 @@ class CustomerAdapter(
 
                 customerListTvName.text = customer.name
                 customerListTvEmail.text = customer.email.toString()
-                customerListTvCity.text = customer.city
-                customerListTvPhone.text = customer.phone
+                customerListTvCity.text = isValue(customer.city)
+                customerListTvPhone.text = isValue(customer.phone)
+
                 customerListTvid.text = customer.id.toString()
-                //customerListIvCliente.setImageResource(customer.photo)
+
                 if (customer.phototrial != null) {
                     customerListIvCliente.setImageResource(customer.phototrial!!)
                 } else {
                     customerListIvCliente.setImageBitmap(customer.photo)
                 }
 
-
                 root.setOnClickListener {
-                    listener.customerClick(customer)
+                    listener.customerClick(adapterPosition)
                 }
                 root.setOnLongClickListener {
-                    listener.customerOnLongClick(customer)
+                    listener.showContextMenu(view, adapterPosition, customer)
+                    //listener.customerOnLongClick(customer)
                     true
                 }
+            }
+        }
 
-                customerListImgtnEdit.setOnClickListener {
-                    listener.customerEditClick(adapterPosition)
-                }
+        /**
+         * Función para proporcionar un valor predeterminado ("N/a") si el valor dado es nulo o vacío.
+         *
+         * @param value El valor a evaluar.
+         * @return El valor original si no es nulo o vacío; de lo contrario, devuelve "N/a".
+         */
+        private fun isValue(value: String?): String {
+
+            return if (value.isNullOrBlank()) {
+                "N/a"
+            } else {
+                value
             }
         }
     }

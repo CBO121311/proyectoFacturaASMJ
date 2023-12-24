@@ -1,6 +1,9 @@
 package com.moronlu18.invoice.ui
 
 import android.content.Context
+import android.os.Bundle
+import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.danielstone.materialaboutlibrary.MaterialAboutFragment
 import com.danielstone.materialaboutlibrary.items.MaterialAboutActionItem
 import com.danielstone.materialaboutlibrary.model.MaterialAboutCard
@@ -8,6 +11,11 @@ import com.danielstone.materialaboutlibrary.model.MaterialAboutList
 import com.moronlu18.invoice.R
 
 class AboutMaterialFragment :MaterialAboutFragment() {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpFab()
+    }
 
      override fun getMaterialAboutList(context: Context): MaterialAboutList {
         val authorCard: MaterialAboutCard.Builder = MaterialAboutCard.Builder()
@@ -44,18 +52,6 @@ class AboutMaterialFragment :MaterialAboutFragment() {
                  .build()
          )
 
-       /* authorCard.addItem( MaterialAboutActionItem.Builder()
-            .text(R.string.abut_bifurcar_en_github)
-          //  .icon(R.drawable.ic_action_share)
-            .setOnClickAction {
-                val intent = Intent(
-                    Intent.ACTION_VIEW,
-                    //Uri.parse(getString(R.string.about_url_repos_GitHub))
-                )
-              //  startActivity(intent)
-            }
-            .build())*/
-
         val cardBuilder: MaterialAboutCard.Builder = MaterialAboutCard.Builder()
         cardBuilder.addItem(
             MaterialAboutActionItem.Builder()
@@ -69,4 +65,16 @@ class AboutMaterialFragment :MaterialAboutFragment() {
             .addCard(cardBuilder.build())
             .build()
     }
+
+
+    private fun setUpFab() {
+        (requireActivity() as? MainActivity)?.fab?.apply {
+            visibility = View.VISIBLE
+            setImageResource(R.drawable.ic_action_check)
+            setOnClickListener { view ->
+               findNavController().popBackStack()
+            }
+        }
+    }
+
 }

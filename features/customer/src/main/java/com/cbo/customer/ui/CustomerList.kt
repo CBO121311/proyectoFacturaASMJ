@@ -1,15 +1,17 @@
 package com.cbo.customer.ui
 
 
-import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
+import androidx.annotation.RequiresApi
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -53,11 +55,8 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
         super.onViewCreated(view, savedInstanceState)
 
         setUpToolbar()
+        setUpFab()
         initRecyclerViewCustomer()
-
-        binding.customerListFltbtnAdd.setOnClickListener {
-            findNavController().navigate(R.id.action_customerList_to_customerCreation)
-        }
 
         viewModel.getState().observe(viewLifecycleOwner, Observer {
             when (it) {
@@ -68,11 +67,10 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
                 else -> {}
             }
         })
-
     }
 
     /**
-     * Inicia el recycleview
+     * Inicializa y configura el RecyclerView para mostrar la lista de clientes.
      */
     private fun initRecyclerViewCustomer() {
         customerAdapter = CustomerAdapter(this)
@@ -81,89 +79,68 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
     }
 
     /**
-     *  Envía un objeto customer al layout customerDetail utilizando SafeArgs
+     * Se ejecuta al hacer clic en un elemento de la lista.
      */
-    override fun customerClick(customer: Customer) {
-        findNavController().navigate(
-            CustomerListDirections.actionCustomerListToCustomerDetail(
-                customer
-            )
-        )
+    override fun customerClick(position: Int) {
+        navigateDetailCustomer(position)
     }
 
+    /**
+     * Se ejecuta al mantener pulsado un elemento de la lista.
+     */
     override fun customerOnLongClick(customer: Customer) {
-        //showToolbarMenu()
         onDeletedItem(customer)
     }
 
+    /**
+     * Se ejecuta al hacer clic en el botón de edición de un elemento de la lista.
+     */
     override fun customerEditClick(position: Int) {
         onEditItem(position)
     }
 
 
+    /**
+     * Se le llama en caso de éxito.
+     * Acción cuando se obtiene con éxito la lista de clientes.
+     * Actualiza la interfaz de usuario para mostrar la lista de clientes.
+     */
+    private fun onSuccess(dataset: ArrayList<Customer>) {
 
-    private fun setUpToolbar() {
-        (requireActivity() as? MainActivity)?.toolbar?.apply {
-            visibility = View.VISIBLE
-        }
-
-        val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        binding.customerListClEmpty.visibility = View.GONE
+        binding.customerListRvClientes.visibility = View.VISIBLE
+        customerAdapter.update(dataset)
     }
 
+
     /**
-     *  Esta función personaliza el comportamiento de la Toolbar de la Activity
+     * Navega a la pantalla de detalle del cliente cuando se hace clic en un cliente de la lista.
      */
+    private fun navigateDetailCustomer(position: Int) {
 
-    @SuppressLint("ClickableViewAccessibility")
-    private fun showToolbarMenu() {
-        (requireActivity() as? MainActivity)?.toolbar?.apply {
-            visibility = View.VISIBLE
-        }
+        val bundle = Bundle()
+        bundle.putInt("detailposition", position)
+        parentFragmentManager.setFragmentResult("detailkey", bundle)
 
-        val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
-
-        // Configura un listener de clic en otro lugar para ocultar el Toolbar
-        val rootView = (activity as? MainActivity)?.findViewById<View>(android.R.id.content)
-        rootView?.setOnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                hideToolbarMenu()
-            }
-            false
-        }
+        findNavController().navigate(R.id.action_customerList_to_customerDetail)
     }
 
-    /**
-     * Oculta los botones del menú en el Toolbar
-     */
-    private fun hideToolbarMenu() {
-        (requireActivity() as? MainActivity)?.toolbar?.apply {
-            visibility = View.VISIBLE
-        }
-
-        val menuHost: MenuHost = requireActivity()
-        menuHost.removeMenuProvider(this)
-    }
 
     /**
-     * Método que realiza la acción de editar un item y comprueba si se puede
+     * Envía la posición de la lista de cliente al que se desea editar.
      */
-
     private fun onEditItem(position: Int) {
 
-        //val customer = viewModel.getCustomerByPosition(position)
-        //if (viewModel.isDeleteSafe(customer)) {
-            val bundle = Bundle();
-            bundle.putInt("position", position)
+        val bundle = Bundle();
+        bundle.putInt("position", position)
 
-            parentFragmentManager.setFragmentResult("customkey", bundle)
-            findNavController().navigate(R.id.action_customerList_to_customerCreation)
-        //}
+        parentFragmentManager.setFragmentResult("customkey", bundle)
+        findNavController().navigate(R.id.action_customerList_to_customerCreation)
     }
 
     /**
-     * Acción al eliminar un Customer del recycle y comprueba si lo puede hacer
+     * Comprueba si es seguro realizar la eliminación del cliente.
+     * Muestra un alertdialog de confirmación si es capaz de eliminarlo.
      */
     private fun onDeletedItem(customer: Customer) {
 
@@ -190,57 +167,54 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
 
 
     /**
-     * Método que oculta la imagen noData si la lista tiene algo.
-     * Y actualiza el adapter.
+     * Configura el toolbar para que sea visible.
      */
-    private fun onSuccess(dataset: ArrayList<Customer>) {
-
-        binding.customerListClEmpty.visibility = View.GONE
-        binding.customerListRvClientes.visibility = View.VISIBLE
-        customerAdapter.update(dataset)
-    }
-
-
-    /**
-     * Función que muestra el AlertDialog del estado ReferencedCustomer
-     */
-    private fun showReferencedCustomer() {
-        findNavController().navigate(
-            CustomerListDirections.actionCustomerListToBaseFragmentDialogWarning(
-                getString(R.string.title_ad_warning),
-                getString(R.string.errReferencedCustomer)
-            )
-        )
-    }
-
-
-    /**
-     * Método que muestra la imagen noData si la lista está vacía
-     */
-    private fun showListEmptyView() {
-        binding.customerListClEmpty.visibility = View.VISIBLE
-        binding.customerListRvClientes.visibility = View.GONE
-    }
-
-
-    /**
-     * Si es true muestra el progressBar, si es false lo quita.
-     */
-    private fun showProgressBar(value: Boolean) {
-
-        if (value) {
-            findNavController().navigate(R.id.action_customerList_to_fragmentProgressDialogKiwi)
-        } else {
-            findNavController().popBackStack()
+    private fun setUpToolbar() {
+        (requireActivity() as? MainActivity)?.toolbar?.apply {
+            visibility = View.VISIBLE
         }
 
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
 
+    /**
+     * Muestra un menu popup al hacer pulsación larga de la lista de clientes.
+     */
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    override fun showContextMenu(view: View, position: Int, customer: Customer) {
+        val popupMenu = PopupMenu(requireContext(), view, Gravity.END)
+
+        popupMenu.inflate(R.menu.menu_pop_item)
+        popupMenu.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menupop_see -> {
+                    navigateDetailCustomer(position)
+                    true
+                }
+
+                R.id.menupop_edit -> {
+                    onEditItem(position)
+                    true
+                }
+
+                R.id.menupop_remove -> {
+                    onDeletedItem(customer)
+                    true
+                }
+
+                else -> true
+            }
+        }
+        popupMenu.setForceShowIcon(true)
+        popupMenu.show()
+    }
 
 
     /**
-     * Infla el menú de customerList
+     * Infla el menú de la lista de clientes.
      */
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.menu_customer_list, menu)
@@ -248,8 +222,8 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
 
 
     /**
-     * Opciones al seleccionar el menú.
-     * Actualmente solo hace el orden de la lista.
+     * Se llama cuando se selecciona se selecciona una de las opciones del toolbar.
+     * Actualmente ordena la lista y refresca la lista.
      */
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return when (menuItem.itemId) {
@@ -270,8 +244,58 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
 
 
     /**
-     * Al iniciar el Fragment obtiene la lista con el loading.
-     * En la siguientes utiliza una función igual pero sin el loading.
+     * Configura el botón flotante para que sea visible y se le añade un ícono.
+     * Al pulsarlo navega a la creación de cliente.
+     */
+    private fun setUpFab() {
+        (requireActivity() as? MainActivity)?.fab?.apply {
+            visibility = View.VISIBLE
+            setImageResource(R.drawable.ic_action_add)
+            setOnClickListener {
+                findNavController().navigate(R.id.action_customerList_to_customerCreation)
+            }
+        }
+    }
+
+
+    /**
+     * Muestra alertDialog de advertencia cuando se intenta eliminar un cliente referenciado.
+     */
+    private fun showReferencedCustomer() {
+        findNavController().navigate(
+            CustomerListDirections.actionCustomerListToBaseFragmentDialogWarning(
+                getString(R.string.title_ad_warning),
+                getString(R.string.errReferencedCustomer)
+            )
+        )
+    }
+
+
+    /**
+     * Muestra la vista de lista vacía y oculta el RecyclerView.
+     */
+    private fun showListEmptyView() {
+        binding.customerListClEmpty.visibility = View.VISIBLE
+        binding.customerListRvClientes.visibility = View.GONE
+    }
+
+
+    /**
+     * Muestra o quita el ProgressBar según el valor proporcionado.
+     */
+    private fun showProgressBar(value: Boolean) {
+
+        if (value) {
+            findNavController().navigate(R.id.action_customerList_to_fragmentProgressDialogKiwi)
+        } else {
+            findNavController().popBackStack()
+        }
+    }
+
+
+    /**
+     * Se llama al iniciar el Fragment. Obtiene la lista con el loading la primera vez.
+     * En las siguientes llamadas utiliza una función pero sin el loading.
      */
     override fun onStart() {
         super.onStart()
@@ -283,11 +307,11 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
         }
     }
 
-
+    /**
+     * Liberamos la referencia al binding.
+     */
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }

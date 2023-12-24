@@ -12,13 +12,12 @@ data class Customer(
     val id: Int,
     val name: String,
     val email: @RawValue Email,
-    val phone: String="No disponible",
-    val city: String="No disponible",
-    val address:String="No disponible",
-    val photo:Bitmap? = null,
+    val phone: String = "",
+    val city: String = "",
+    val address: String = "",
+    val photo: Bitmap? = null,
     val phototrial: Int? = null
-    //val photo:Uri? = null
-) : Parcelable,Comparable<Customer> {
+) : Parcelable, Comparable<Customer> {
     override fun compareTo(other: Customer): Int {
         return name.lowercase().compareTo(other.name.lowercase())
     }

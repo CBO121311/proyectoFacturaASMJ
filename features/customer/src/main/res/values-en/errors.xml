@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="errReferencedCustomer">You cannot delete/edit a customer referenced to an invoice or task</string>
+    <string name="title_ad_warning">Warning</string>
+    <string name="customer_error_Invalidid">Invalid ID</string>
+    <string name="customer_error_EmptyName">Empty Name</string>
+    <string name="customer_error_EmptyEmail">Empty Email</string>
+    <string name="cc_til_hint_name">Name</string>
+    <string name="cc_til_hint_email">Email</string>
+    <string name="cc_til_hint_phone">Phone number</string>
+    <string name="cc_til_hint_address">Address</string>
+    <string name="cc_til_hint_city">City</string>
+    <string name="cc_btn_text_save">Save</string>
+    <string name="cc_til_helperText">Required</string>
+    <string name="cc_descriptiontext_ibCustomer">Click add an image</string>
+    <string name="cd_tvName">Name</string>
+    <string name="cd_tvEmail">Email</string>
+    <string name="cd_tvPhone">Phone Number:</string>
+    <string name="cd_tvAddress">Address:</string>
+    <string name="cd_tvCity">City:</string>
+    <string name="cd_cd_flbtnCorrect">Exit customer details</string>
+    <string name="title_deleteCustomer">Delete customer</string>
+    <string name="Content_deleteCustomer">Are you sure to delete this customer?</string>
+    <string name="ftlbtnAdd">Add customer</string>
+    <string name="cl_tvEmpty1">You don\'t have clients...</string>
+    <string name="cl_tvEmpty2">Tap the \'+\' button to add one</string>
+    <string name="cl_cd_imgtdelete">Delete customer</string>
+    <string name="cl_cd_imgtedit">Edit customer</string>
+    <string name="cl_menu_edit">Edit</string>
+    <string name="cl_menu_delete">Delete</string>
+    <string name="menu_title_refresh_customerList">Sort Id</string>
+    <string name="menu_title_sortName_customerList">Sort Name</string>
+    <string name="cl_popmenu_title_See">View</string>
+    <string name="cl_popmenu_title_edit">Edit</string>
+    <string name="cl_popmenu_title_delete">Delete</string>
+    <string name="customer_NotAvailable">Not Available</string>
+    <string name="customer_error_FormatEmail">Wrong email format</string>
+</resources>

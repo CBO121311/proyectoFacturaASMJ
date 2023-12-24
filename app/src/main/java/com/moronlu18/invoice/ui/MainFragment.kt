@@ -10,8 +10,8 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.moronlu18.invoice.base.BaseFragmentDialog
 
 import com.moronlu18.invoice.databinding.FragmentMainBinding
@@ -32,6 +32,8 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setUpFab()
 
         (requireActivity() as? MainActivity)?.toolbar?.setNavigationOnClickListener {
             if (findNavController().currentDestination?.id == R.id.mainFragment) {
@@ -68,6 +70,25 @@ class MainFragment : Fragment() {
 
 
     }
+
+    private fun setUpFab() {
+        (requireActivity() as? MainActivity)?.fab?.apply {
+            visibility = View.VISIBLE
+            setImageResource(R.drawable.ic_action_alert)
+            setOnClickListener { view ->
+
+                if (findNavController().currentDestination?.id == R.id.mainFragment) {
+                    Snackbar.make(view, "Implementación futura", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show()
+                } else {
+                    Snackbar.make(view, "No me dejes así, pon una función o hazla no visible <_<\"", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show()
+                }
+            }
+        }
+    }
+
+
 
     @SuppressLint("ClickableViewAccessibility")
     fun View.btnAnimationNav(idDestination: Int) {
