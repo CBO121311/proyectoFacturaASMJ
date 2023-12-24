@@ -167,6 +167,11 @@ de la misma es anterior a la de la creación.
      - Añadido o modificado los comentarios de las funciones de customer.
      - Internacionalizado los String de Customer y los del App.
      - Modificaciones leves en el diseño de las layout.
+  - ------------------------
+ ### V3.6.1 (24/12/2023)
+ *Escrito por CBO121311*
+ - Añadido prefijo al customer creation.
+ - Y POR FIN, arreglé el error en que el teclado del móvil tapaba los textinputlayout.
 
 ## Características generales
 - Se ha hecho el nav-graph utilizando include-dynamic y cada navegación funciona de forma independiente.
