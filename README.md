@@ -160,6 +160,7 @@ de la misma es anterior a la de la creación.
  ### V3.6.0 (24/12/2023)
  *Escrito por CBO121311*
  - Añadido el botón flotante en el mainActivity para que se modifique su utilización en los distintos fragments.
+ - Actualización leve del Dashboard
  - De Customer:
      - Aparece un Popup Menu al hacer pulsación larga en la lista customer.
      - Implementado edición en el detail.
