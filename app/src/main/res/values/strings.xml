@@ -40,6 +40,7 @@
 
     <string name="title_fragmentDialogExit">Desconectarte</string>
     <string name="Content_fragmentDialogExit">¿Estás seguro de que quieres cerrar la aplicación?</string>
+    <string name="Content_taskDialogExit">¿Estás seguro de que quieres borrar la tarea?</string>
 
 
 

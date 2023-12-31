@@ -4,19 +4,26 @@ import com.moronlu18.accounts.entity.Task
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.moronlu18.invoice.base.BaseFragmentDialog
+import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.tasklist.R
 import com.sergiogv98.tasklist.adapter.TaskAdapter
 import com.moronlu18.tasklist.databinding.FragmentTaskListBinding
 import com.sergiogv98.usecase.TaskListViewModel
 
 
-class TaskList : Fragment() {
+class TaskList : Fragment(), MenuProvider {
 
 
     private var _binding: FragmentTaskListBinding? = null
@@ -44,11 +51,13 @@ class TaskList : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setUpToolBar()
         initRecyclerViewTask()
 
         viewModel.getTaskList()
         viewModel.getState().observe(viewLifecycleOwner) {
             when (it) {
+                is TaskListState.Loading -> showProgressBar(it.value)
                 TaskListState.NoData -> showNoData()
                 is TaskListState.Success -> onSuccess(it.dataset)
             }
@@ -86,7 +95,7 @@ class TaskList : Fragment() {
 
         findNavController().navigate(
             TaskListDirections.actionTaskListToBaseFragmentDialog2(
-                getString(com.moronlu18.invoice.R.string.title_fragmentDialogExit),
+                getString(com.moronlu18.invoice.R.string.Content_taskDialogExit),
                 getString(R.string.delete_task_info)
             )
         )
@@ -112,6 +121,11 @@ class TaskList : Fragment() {
         binding.taskListLlEmptyImg.playAnimation()
     }
 
+    private fun showNothing(){
+        binding.taskListRecyclerTasks.visibility = View.GONE
+        binding.taskListLlEmpty.visibility = View.GONE
+    }
+
     private fun onSuccess(dataset: ArrayList<Task>) {
         binding.taskListRecyclerTasks.visibility = View.VISIBLE
         binding.taskListLlEmpty.visibility = View.GONE
@@ -122,5 +136,44 @@ class TaskList : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun showProgressBar(value: Boolean) {
+
+        if (value) {
+            showNothing()
+            findNavController().navigate(R.id.action_taskList_to_fragmentProgressDialogKiwi)
+        } else {
+            findNavController().popBackStack()
+        }
+    }
+
+    private fun setUpToolBar(){
+        (requireActivity() as? MainActivity)?.toolbar?.apply {
+            visibility = View.VISIBLE
+        }
+
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.menu_task_list, menu)
+    }
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId){
+            R.id.menu_action_refresh -> {
+                viewModel.getTaskList()
+                true
+            }
+
+            R.id.menu_action_sort -> {
+                adapter.toggleSortOrder()
+                true
+            }
+
+            else -> false
+        }
     }
 }

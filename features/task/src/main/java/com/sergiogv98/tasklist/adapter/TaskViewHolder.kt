@@ -8,7 +8,7 @@ import com.moronlu18.tasklist.databinding.ItemTaskBinding
 
 class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    val binding = ItemTaskBinding.bind(view)
+    private val binding = ItemTaskBinding.bind(view)
 
     fun render(
         task: Task,
@@ -16,7 +16,7 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         onClickDeleted: (Int) -> Unit,
         onClickEdit: (Int) -> Unit
     ) {
-        binding.taskClientName.text = CustomerProvider.getCustomerNameById(task.clientID)
+        binding.taskClientName.text = CustomerProvider.getCustomerNameById(task.clientID.id)
         binding.taskName.text = task.nomTask
         binding.taskDescription.text = task.descTask
         binding.taskCreationDate.text = task.fechCreation.toString().substring(0, task.fechCreation.toString().lastIndexOf("T"))

@@ -28,4 +28,7 @@
 
     <string name="dropdown">Dropdown Menu</string>
     <string name="select">Cliente seleccionado</string>
+    <string name="title_taskDialogExit">¿Quieres borrar la tarea?</string>
+    <string name="menu_title_refresh">Refrescar lista de tareas</string>
+    <string name="menu_title_sort">Ordenar alfabeticamente</string>
 </resources>

@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_taskList_to_baseFragmentDialog2"
             app:destination="@id/baseFragmentDialog2" />
+        <action
+            android:id="@+id/action_taskList_to_fragmentProgressDialogKiwi"
+            app:destination="@id/fragmentProgressDialogKiwi" />
     </fragment>
     <fragment
         android:id="@+id/taskDetail"
@@ -52,4 +55,8 @@
             android:name="message"
             app:argType="string" />
     </dialog>
+    <dialog
+        android:id="@+id/fragmentProgressDialogKiwi"
+        android:name="com.moronlu18.invoice.base.FragmentProgressDialogKiwi"
+        android:label="FragmentProgressDialogKiwi" />
 </navigation>

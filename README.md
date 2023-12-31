@@ -173,6 +173,13 @@ de la misma es anterior a la de la creación.
  - Añadido prefijo al customer creation.
  - Y POR FIN, arreglé el error en que el teclado del móvil tapaba los textinputlayout.
 
+ ### V3.6.3 (31/12/2023)
+ *Escrito por SergioGV98*
+ - Se han incorporado botones en el menú de la lista de tareas para refrescar y ordenar la lista.
+ - Se ha introducido una pantalla de carga al cargar la lista de tareas.
+ - Se ha actualizado la lógica de manejo de clientes; ahora se utiliza el tipo Customer en lugar de representarlos como enteros.
+ - Se han realizado diversos ajustes y correcciones en varias partes del código para mejorar la calidad y la legibilidad.
+
 ## Características generales
 - Se ha hecho el nav-graph utilizando include-dynamic y cada navegación funciona de forma independiente.
 - Añadir y eliminar son funcionables. En Customer funciona el Editar.

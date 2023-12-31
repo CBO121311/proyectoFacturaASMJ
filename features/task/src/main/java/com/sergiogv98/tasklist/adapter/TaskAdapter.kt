@@ -13,6 +13,8 @@ class TaskAdapter(
     private val onClickEdit: ((Int) -> Unit)? = null,
 ) : RecyclerView.Adapter<TaskViewHolder>() {
 
+    private var isAscendingOrder = true
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return TaskViewHolder(layoutInflater.inflate(R.layout.item_task, parent, false))
@@ -25,6 +27,20 @@ class TaskAdapter(
 
     fun update(newDataSet: ArrayList<Task>) {
         taskList = newDataSet
+        notifyDataSetChanged()
+    }
+
+    fun toggleSortOrder() {
+        isAscendingOrder = !isAscendingOrder
+        sortTasks()
+    }
+
+    private fun sortTasks() {
+        taskList = if (isAscendingOrder) {
+            taskList.sortedBy { it.nomTask }
+        } else {
+            taskList.sortedByDescending { it.nomTask }
+        }
         notifyDataSetChanged()
     }
 

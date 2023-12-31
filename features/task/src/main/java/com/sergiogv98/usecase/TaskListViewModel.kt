@@ -16,7 +16,9 @@ class TaskListViewModel: ViewModel() {
 
     fun getTaskList(){
         viewModelScope.launch {
+            state.value = TaskListState.Loading(true)
             var result = TaskProvider.getTaskList()
+            state.value = TaskListState.Loading(false)
 
             when(result){
                 is ResourceList.Success<*> -> state.value = TaskListState.Success(result.data as ArrayList<Task>)

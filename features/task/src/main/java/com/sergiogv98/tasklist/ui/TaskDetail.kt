@@ -40,7 +40,7 @@ class TaskDetail : Fragment() {
 
 
         //TODO Cambiado por mi por el tema de la foto
-        val customer = viewModel.getCustomerPhoto(task.clientID)
+        val customer = viewModel.getCustomerPhoto(task.clientID.id)
 
         if (customer.phototrial != null) {
             binding.taskDetailsClientImageView.setImageResource(customer.phototrial!!)
@@ -50,7 +50,7 @@ class TaskDetail : Fragment() {
         //binding.taskDetailsClientImageView.setImageResource(viewModel.getCustomerPhoto(task.clientID))
 
 
-        binding.taskDetailsClientNameTxt.text = viewModel.getCustomerName(task.clientID)
+        binding.taskDetailsClientNameTxt.text = viewModel.getCustomerName(task.clientID.id)
         binding.taskDetailsTaskName.text = task.nomTask
         binding.taskDetailsStatusButton.text = task.taskStatus.toString().replaceRange(1, task.taskStatus.toString().length, task.taskStatus.toString().substring(1).lowercase())
         binding.taskDetailsTaskTypeName.text = task.typeTask.toString().replaceRange(1, task.typeTask.toString().length, task.typeTask.toString().substring(1).lowercase())

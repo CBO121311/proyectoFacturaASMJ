@@ -33,6 +33,7 @@
     <string name="app_btnTest">Trial</string>
     <string name="title_fragmentDialogExit">Sign Out</string>
     <string name="Content_fragmentDialogExit">Are you sure to close the application?</string>
+    <string name="Content_taskDialogExit">Are you sure to delete the application?</string>
     <string name="tvTitleMessage">Write the message</string>
     <string name="tvUserInfoText">Shows user information</string>
     <string name="tvMessageText">Message information</string>

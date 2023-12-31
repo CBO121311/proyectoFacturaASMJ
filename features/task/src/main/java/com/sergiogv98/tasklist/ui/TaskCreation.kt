@@ -55,7 +55,7 @@ class TaskCreation : Fragment() {
 
 
 
-            binding.autoCompleteTxt.setText(viewModel.giveClientName(taskEdit.clientID))
+            binding.autoCompleteTxt.setText(viewModel.giveClientName(taskEdit.clientID.id))
             binding.taskCreationTxvTaskName.setText(taskEdit.nomTask)
             binding.taskCreationButtonDateCreation.text = processDateString(taskEdit.fechCreation)
             binding.taskCreationButtonDateEnd.text = processDateString(taskEdit.fechFinalization)
@@ -147,7 +147,7 @@ class TaskCreation : Fragment() {
         if (viewModel.getEditorMode()) {
             val updateTask = Task(
                 id = editTaskPos,
-                clientID = selectedClient!!.id,
+                clientID = selectedClient!!,
                 nomTask = nameTask,
                 typeTask = taskTypeChoose(),
                 taskStatus = taskStatusChoose(),
@@ -159,7 +159,7 @@ class TaskCreation : Fragment() {
         } else {
             val task = Task(
                 id = viewModel.taskGiveId(),
-                clientID = selectedClient!!.id,
+                clientID = selectedClient!!,
                 nomTask = nameTask,
                 typeTask = taskTypeChoose(),
                 taskStatus = taskStatusChoose(),
