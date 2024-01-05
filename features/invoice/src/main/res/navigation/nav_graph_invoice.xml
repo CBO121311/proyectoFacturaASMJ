@@ -17,8 +17,9 @@
             android:id="@+id/action_invoiceList_to_invoiceDetail"
             app:destination="@id/invoiceDetail" />
         <action
-            android:id="@+id/action_invoiceList_to_baseFragmentDialog2"
-            app:destination="@id/baseFragmentDialog2" />
+            android:id="@+id/action_invoiceList_to_fragmentProgressDialogKiwi"
+            app:destination="@id/fragmentProgressDialogKiwi" />
+
     </fragment>
     <fragment
         android:id="@+id/invoiceCreation"
@@ -31,10 +32,12 @@
         android:name="com.mto.invoice.ui.InvoiceDetail"
         android:label="@string/invoiceDetail"
         tools:layout="@layout/fragment_invoice_detail">
-
-        <argument
-            android:name="invoice"
-            app:argType="com.moronlu18.accounts.entity.Factura" />
+        <action
+            android:id="@+id/action_invoiceDetail_to_invoiceCreation"
+            app:destination="@id/invoiceCreation" />
+        <action
+            android:id="@+id/action_invoiceDetail_to_baseFragmentDialog2"
+            app:destination="@id/baseFragmentDialog2" />
     </fragment>
     <dialog
         android:id="@+id/baseFragmentDialog2"
@@ -46,4 +49,8 @@
         <argument android:name="message"
             app:argType="string" />
     </dialog>
+    <dialog
+        android:id="@+id/fragmentProgressDialogKiwi"
+        android:name="com.moronlu18.invoice.base.FragmentProgressDialogKiwi"
+        android:label="FragmentProgressDialogKiwi" />
 </navigation>

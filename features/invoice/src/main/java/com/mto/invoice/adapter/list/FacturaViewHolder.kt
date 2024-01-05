@@ -1,9 +1,8 @@
-package com.mto.invoice.adapter
+package com.mto.invoice.adapter.list
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.moronlu18.accounts.entity.Factura
-import com.moronlu18.accounts.repository.CustomerProvider
 import com.moronlu18.invoicelist.databinding.ItemFacturaBinding
 
 class FacturaViewHolder(view: View): RecyclerView.ViewHolder(view){
@@ -13,17 +12,17 @@ class FacturaViewHolder(view: View): RecyclerView.ViewHolder(view){
     fun render(
         facturaModel: Factura,
         onClickListener: (Factura) -> Unit,
-        onClickDelete:  ((Int) -> Unit)? = null,
+
     ) {
 
         binding.itemFacturaIvtTotal.text ="Total: ${facturaModel.number}"
         binding.itemFacturaTvId.text = facturaModel.id.toString()
-        binding.itemFacturaTvCliente.text =CustomerProvider.getNom(facturaModel.customerId)
+        binding.itemFacturaTvCliente.text =facturaModel.customer.name
 
 
         //Todo Cambiado por el tema de la foto.
 
-        val customer = CustomerProvider.getCustomerbyID(facturaModel.customerId)
+        val customer = facturaModel.customer
 
         if (customer?.phototrial != null) {
             binding.itemFacturaIvKiwi.setImageResource(customer.phototrial!!)
@@ -34,11 +33,6 @@ class FacturaViewHolder(view: View): RecyclerView.ViewHolder(view){
 
 
         itemView.setOnClickListener { onClickListener?.invoke(facturaModel) }
-        binding.invoiceItemBtnDelete.setOnClickListener {
-            onClickDelete?.invoke(
-                adapterPosition
-            )
-        }
 
 
     }

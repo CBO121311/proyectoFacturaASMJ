@@ -11,13 +11,11 @@ import android.view.ViewGroup
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.moronlu18.invoicelist.R
-import com.mto.invoice.adapter.FacturaAdapter
+import com.mto.invoice.adapter.list.FacturaAdapter
 import com.moronlu18.accounts.entity.Factura
-import com.moronlu18.invoice.base.BaseFragmentDialog
 import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.invoicelist.databinding.FragmentInvoiceListBinding
 import com.mto.invoice.usecase.InvoiceListState
@@ -32,11 +30,6 @@ class InvoiceList : Fragment(), MenuProvider {
     private lateinit var adapter: FacturaAdapter
     private var start:Boolean = true
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,81 +38,81 @@ class InvoiceList : Fragment(), MenuProvider {
         _binding = FragmentInvoiceListBinding.inflate(inflater,container,false)
         binding.viewmodel = this.viewmodel
         binding.lifecycleOwner = this
+
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setUpToolbar()
-
-        binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_invoiceList_to_invoiceCreation)
-        }
-
+        setUpFab()
         initRecyclerView()
-        viewmodel.getInvoiceList()
-        viewmodel.getState().observe(viewLifecycleOwner, Observer {
+
+        viewmodel.getState().observe(viewLifecycleOwner) {
             when (it) {
+                is InvoiceListState.Loading -> showProgressBar(it.value)
                 InvoiceListState.NoDataSet -> showNoData()
                 is InvoiceListState.Success -> onSuccess(it.dataset)
-
-                else -> {}
             }
-        })
+        }
     }
+
 
     fun initRecyclerView() {
         adapter = FacturaAdapter(
-            onClickListener = {Factura -> onItemSelected(Factura)},
-            onClickDelete = {position -> onDeleteItem(position)}
+            onClickListener = {factura -> navigateInvoiceDetail(viewmodel.getPosByInvoice(factura))},
+
         )
         binding.invoiceListRvFacturas.layoutManager = LinearLayoutManager(requireContext())
         binding.invoiceListRvFacturas.adapter = adapter
     }
-    private fun onDeleteItem(position: Int) {
-            findNavController().navigate(
-                InvoiceListDirections.actionInvoiceListToBaseFragmentDialog2(
-                    getString(R.string.title_deleteInvoice),
-                    getString(R.string.Content_deleteInvoice)
-                )
-            )
-            parentFragmentManager.setFragmentResultListener(
-                BaseFragmentDialog.request,
-                viewLifecycleOwner
-            ) { _, result ->
-                val success = result.getBoolean(BaseFragmentDialog.result, false)
-                if (success) {
-                    adapter.deleteInvoice(position)
-                    viewmodel.getInvoiceList()
-                }
-            }
+/*    private fun onEditItem(position: Int) {
+        val bundle = Bundle();
+        bundle.putInt("detailposition", position)
+        parentFragmentManager.setFragmentResult("detailkey", bundle)
+        findNavController().navigate(R.id.action_invoiceList_to_invoiceCreation)
 
-    }
-    private fun onItemSelected(invoice: Factura) {
-        findNavController().navigate(InvoiceListDirections.actionInvoiceListToInvoiceDetail(invoice))
+    }*/
+    private fun navigateInvoiceDetail(position: Int) {
 
+        val bundle = Bundle()
+        bundle.putInt("detailposition", position)
+        parentFragmentManager.setFragmentResult("detailkey", bundle)
+
+        findNavController().navigate(R.id.action_invoiceList_to_invoiceDetail)
     }
     private fun onSuccess(dataset: ArrayList<Factura>) {
         binding.invoiceCreationLayoutVacio.visibility = View.GONE
         binding.invoiceListRvFacturas.visibility = View.VISIBLE
         adapter.update(dataset)
     }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
     override fun onStart() {
         super.onStart()
         if (start) {
             viewmodel.getInvoiceList()
             start = false
+        }else {
+            viewmodel.getListWithoutLoading()
         }
     }
 
     private fun showNoData() {
         binding.invoiceListRvFacturas.visibility = View.GONE
         binding.invoiceCreationLayoutVacio.visibility = View.VISIBLE
+    }
+
+    private fun showLayoutEmpty() {
+        binding.invoiceListRvFacturas.visibility = View.GONE
+        binding.invoiceCreationLayoutVacio.visibility = View.GONE
+    }
+    private fun showProgressBar(value: Boolean) {
+        if (value) {
+            showLayoutEmpty()
+            findNavController().navigate(R.id.action_invoiceList_to_fragmentProgressDialogKiwi)
+        } else {
+            findNavController().popBackStack()
+        }
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -146,5 +139,19 @@ class InvoiceList : Fragment(), MenuProvider {
         }
         val menuhost: MenuHost = requireActivity()
         menuhost.addMenuProvider(this, viewLifecycleOwner)
+    }
+    private fun setUpFab() {
+        (requireActivity() as? MainActivity)?.fab?.apply {
+            visibility = View.VISIBLE
+            setImageResource(R.drawable.ic_action_add)
+            setOnClickListener {
+                findNavController().navigate(R.id.action_invoiceList_to_invoiceCreation)
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

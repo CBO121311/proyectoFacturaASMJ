@@ -7,7 +7,7 @@ import java.time.Instant
 @Parcelize
 data class Factura(
     val id:Int,
-    val customerId: Int,
+    val customer: Customer,
     val number: Double,
     val status: InvoiceStatus,
     val issuedDate: Instant,

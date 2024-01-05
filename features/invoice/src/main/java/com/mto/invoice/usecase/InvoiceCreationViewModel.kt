@@ -4,12 +4,13 @@ import android.text.TextUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.accounts.entity.Factura
 import com.moronlu18.accounts.entity.Item
 import com.moronlu18.accounts.repository.CustomerProvider
 import com.moronlu18.accounts.repository.FacturaProvider
 import com.moronlu18.accounts.repository.ItemProvider
-import com.mto.invoice.adapter.AddItemCreationAdapter
+import com.mto.invoice.adapter.creation.ItemCreationAdapter
 import java.time.LocalDate
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
@@ -19,9 +20,10 @@ import java.util.regex.Pattern
 class InvoiceCreationViewModel: ViewModel() {
 
     var user = MutableLiveData<String>()
-    var adapter = MutableLiveData<AddItemCreationAdapter>()
+    var adapter = MutableLiveData<ItemCreationAdapter>()
     var startDate = MutableLiveData<String>()
     var endDate = MutableLiveData<String>()
+    private var isEditor = MutableLiveData<Boolean>()
     private val pattern = Pattern.compile("([0-9]{2,})([/])([0-9]{2,})([/])([0-9]{4,})")
     private var state = MutableLiveData<InvoiceCreationState>()
     fun validateAll() {
@@ -35,6 +37,7 @@ class InvoiceCreationViewModel: ViewModel() {
             !pattern.matcher(endDate.value).matches() -> state.value = InvoiceCreationState.EndDateFormatError
             incorrectRange(startDate.value.toString(), endDate.value.toString()) -> state.value = InvoiceCreationState.IncorrectDateRange
             adapter.value == null -> state.value = InvoiceCreationState.AtLeastOneItem
+            adapter.value!!.itemCount == 0 -> state.value = InvoiceCreationState.AtLeastOneItem
             else -> {
                 state.value = InvoiceCreationState.OnSuccess
             }
@@ -58,6 +61,17 @@ class InvoiceCreationViewModel: ViewModel() {
     fun addRepository(factura: Factura) {
         FacturaProvider.dataSet.add(factura)
     }
+    fun editRepository(factura: Factura, posInvoice: Int) {
+        FacturaProvider.addOrUpdateInvoice(factura, posInvoice)
+    }
+
+    fun getInvoicePos(position:Int): Factura {
+        return FacturaProvider.getInvoicePos(position)
+    }
+    fun getCustomerById(id:Int): Customer? {
+        return CustomerProvider.getCustomerbyID(id)
+
+    }
 
     fun giveId(): Int {
         return FacturaProvider.obtainsId()
@@ -65,12 +79,21 @@ class InvoiceCreationViewModel: ViewModel() {
     fun giveNom(): String {
         return CustomerProvider.getNom(user.value.toString().toInt())
     }
+    fun giveIdEditor(factura: Factura): Int {
+        return FacturaProvider.obtainsIdByInvoice(factura)
+    }
 
     fun giveTotal(lista: MutableList<Item>) : String{
         return ItemProvider.getTotal(lista)
     }
     fun giveListItem(): MutableList<Item> {
         return ItemProvider.dataSetItem
+    }
+    fun setEditorMode(isEditorMode: Boolean) {
+        isEditor.value = isEditorMode
+    }
+    fun getEditorMode(): Boolean {
+        return isEditor.value ?: false
     }
 
 

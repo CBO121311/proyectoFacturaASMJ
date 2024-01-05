@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
@@ -107,14 +107,26 @@
 
         <Button
             android:id="@+id/invoice_creation_btnArticulo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="152dp"
+            android:layout_height="40dp"
             android:layout_marginTop="60dp"
             android:fontFamily="@font/helvetica"
             android:text="@string/btnAñadir"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.118"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/invoice_creation_tilFechaFin" />
+
+        <Button
+            android:id="@+id/invoice_creation_btnDeleteArticulo"
+            android:layout_width="154dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="28dp"
+            android:backgroundTint="#FF0000"
+            android:fontFamily="@font/helvetica"
+            android:text="@string/ie_borrarArticulo"
+            app:layout_constraintBaseline_toBaselineOf="@+id/invoice_creation_btnArticulo"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/invoice_creation_cdArti"
@@ -167,15 +179,14 @@
             android:id="@+id/invoice_creation_tvArtDisponibles"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:fontFamily="@font/helvetica"
             android:text="@string/tvDisponibles"
             android:textStyle="bold"
-            android:fontFamily="@font/helvetica"
             app:layout_constraintBottom_toTopOf="@+id/invoice_creation_cdArti"
-            app:layout_constraintEnd_toStartOf="@+id/invoice_creation_btnArticulo"
-            app:layout_constraintHorizontal_bias="0.508"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/invoice_creation_tilFechaFin"
-            app:layout_constraintVertical_bias="0.753" />
+            app:layout_constraintVertical_bias="0.923" />
 
         <TextView
             android:id="@+id/invoice_creation_tvAñadidos"
@@ -186,7 +197,7 @@
             android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@+id/invoice_creation_tvArtDisponibles"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.573"
+            app:layout_constraintHorizontal_bias="0.838"
             app:layout_constraintStart_toEndOf="@+id/invoice_creation_btnArticulo" />
 
         <TextView
@@ -216,11 +227,11 @@
             android:id="@+id/invoice_creation_rvErrorAnadidos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="80dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="8dp"
             android:textColor="#F44336"
             app:layout_constraintBottom_toTopOf="@+id/invoice_creation_cdArti"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/invoice_creation_tvAñadidos"
+            app:layout_constraintStart_toEndOf="@+id/invoice_creation_tvArtDisponibles" />
 
         <Button
             android:id="@+id/invoice_creation_btnCliText"

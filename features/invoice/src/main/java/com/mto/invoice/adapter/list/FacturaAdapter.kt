@@ -1,4 +1,4 @@
-package com.mto.invoice.adapter
+package com.mto.invoice.adapter.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,8 +7,7 @@ import com.moronlu18.invoicelist.R
 import com.moronlu18.accounts.entity.Factura
 
 class FacturaAdapter(
-    private val onClickListener:(Factura) -> Unit,
-    private val onClickDelete:((Int) -> Unit)? = null
+    private val onClickListener:(Factura) -> Unit
 ) : RecyclerView.Adapter<FacturaViewHolder>(){
 
     private var facturaList = arrayListOf<Factura>()
@@ -20,7 +19,7 @@ class FacturaAdapter(
 
     override fun onBindViewHolder(holder: FacturaViewHolder, position: Int) {
         val item = facturaList[position]
-        holder.render(item, onClickListener, onClickDelete)
+        holder.render(item, onClickListener)
     }
 
     fun update(newDataSet:ArrayList<Factura>){
@@ -28,12 +27,9 @@ class FacturaAdapter(
         notifyDataSetChanged()
     }
 
-    fun deleteInvoice(position: Int) {
-        facturaList.removeAt(position)
-        notifyItemRemoved(position)
-    }
     fun sort() {
-        facturaList.sortBy { it.customerId }
+        //ToDo ordenar por el nombre del cliente
+        facturaList.sortBy { it.customer }
         notifyDataSetChanged()
     }
 

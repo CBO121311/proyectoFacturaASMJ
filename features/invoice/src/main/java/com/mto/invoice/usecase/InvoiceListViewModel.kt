@@ -11,23 +11,52 @@ import kotlinx.coroutines.launch
 
 //Tener una referencia al objeto eliminado por si se ejecuta un undo/control+z
 
-class InvoiceListViewModel: ViewModel() {
+class InvoiceListViewModel : ViewModel() {
 
     private var state = MutableLiveData<InvoiceListState>()
     private lateinit var invoiceDeleted: Factura
 
+    /**
+     * Función que pide el listado con una pantalla de carga
+     */
     fun getInvoiceList() {
         viewModelScope.launch {
+            state.value = InvoiceListState.Loading(true)
             val result = FacturaProvider.getInvoiceList()
+            state.value = InvoiceListState.Loading(false)
+
             when (result) {
                 is ResourceList.Success<*> -> state.value =
                     InvoiceListState.Success(result.data as ArrayList<Factura>)
+
                 is ResourceList.Error -> state.value = InvoiceListState.NoDataSet
             }
         }
     }
 
-    fun getState() : LiveData<InvoiceListState> {
+    /**
+     * Función que devuelve la lista sin carga llamada cuando se borra una factura
+     */
+    fun getListWithoutLoading() {
+        viewModelScope.launch {
+
+            when (val result = FacturaProvider.getListWithoutLoading()) {
+                is ResourceList.Success<*> -> {
+                    state.value = InvoiceListState.Success(result.data as ArrayList<Factura>)
+                }
+
+                is ResourceList.Error -> state.value = InvoiceListState.NoDataSet
+            }
+        }
+    }
+    fun getPosByInvoice(factura: Factura): Int {
+        return FacturaProvider.getPosByInvoice(factura)
+    }
+
+    /**
+     * Función que devuelve la variable state
+     */
+    fun getState(): LiveData<InvoiceListState> {
         return state
     }
 }

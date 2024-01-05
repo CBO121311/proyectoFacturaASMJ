@@ -1,4 +1,4 @@
-package com.mto.invoice.adapter
+package com.mto.invoice.adapter.detail
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
