@@ -1,4 +1,4 @@
-package com.mto.invoice.adapter
+package com.mto.invoice.adapter.list
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +13,7 @@ class FacturaViewHolder(view: View): RecyclerView.ViewHolder(view){
     fun render(
         facturaModel: Factura,
         onClickListener: (Factura) -> Unit,
-        onClickDelete:  ((Int) -> Unit)? = null,
+
     ) {
 
         binding.itemFacturaIvtTotal.text ="Total: ${facturaModel.number}"
@@ -34,11 +34,6 @@ class FacturaViewHolder(view: View): RecyclerView.ViewHolder(view){
 
 
         itemView.setOnClickListener { onClickListener?.invoke(facturaModel) }
-        binding.invoiceItemBtnDelete.setOnClickListener {
-            onClickDelete?.invoke(
-                adapterPosition
-            )
-        }
 
 
     }

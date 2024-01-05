@@ -1,11 +1,10 @@
-package com.mto.invoice.adapter
+package com.mto.invoice.adapter.detail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.moronlu18.accounts.entity.Item
 import com.moronlu18.invoicelist.R
-
 
 
 class ItemAdapter(private val itemList: List<Item>, private val onClickListener: (Item) -> Unit): RecyclerView.Adapter<ItemViewHolder>(){
