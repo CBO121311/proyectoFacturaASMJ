@@ -186,6 +186,15 @@ de la misma es anterior a la de la creación.
 - Control de distintas excepciones utilizando el viewModel
 - Módelo más parecido a MVVM
 - Añadido Splash y about.
+- ------------------------  
+ ### V3.6.7 (05/01/2024)
+ *Escrito por mateotamayoo*
+ - Se eliminan los Floating Actions Buttons para usar el de la actividad principal
+ - Añadida pantalla de carga en la lista de facturas
+ - Añadido botón de borrado de artículo en la creación de factura
+ - Cambio de ubicación de los botones de editar y borrar al menú de detalles
+ - Edición de factura habilitada
+ - ------------------------
 
 # Logo
 
