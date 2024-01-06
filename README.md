@@ -194,6 +194,7 @@ de la misma es anterior a la de la creación.
  - Añadido botón de borrado de artículo en la creación de factura
  - Cambio de ubicación de los botones de editar y borrar al menú de detalles
  - Edición de factura habilitada
+ - Data class Factura cambia sus miembros, se utiliza un objeto de la clase customer en vez del id del customer
  - ------------------------
 
 # Logo
