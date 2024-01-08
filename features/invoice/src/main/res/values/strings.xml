@@ -6,6 +6,7 @@
 
     <string name="tvVacio" translatable="false">La lista de facturas está vacia</string>
     <string name="item_fa_Factura" translatable="false">Factura: </string>
+    <string name="item_fa_EstadoText" translatable="false">Estado: </string>
     <string name="item_fa_Cliente" translatable="false">Cliente: </string>
     <string name="item_fa_FechaEm" translatable="false">F.emisión: </string>
     <string name="item_fa_FechaFi" translatable="false">F.finalización: </string>

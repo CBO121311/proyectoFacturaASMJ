@@ -1,5 +1,6 @@
 package com.mto.invoice.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -84,7 +85,23 @@ class InvoiceDetail : Fragment(), MenuProvider {
             it.endDate.value = formatoFecha.format(factura.dueDate)
             it.status.value = factura.status.toString()
             it.total.value = viewmodeldetail.giveTotal(factura.lineItems!!.toMutableList())
+            binding.invoiceDetailTvEstado.setTextColor(setColorEstado(factura.status.toString()))
             initReciclerView()
+        }
+
+    }
+
+    /**
+     * Función que devuelve un entero que representa un color,
+     * en función del estado de la factura
+     */
+    fun setColorEstado(status: String): Int {
+        if (status.equals("Pendiente")) {
+            return Color.parseColor("#FF1100")
+        }else if(status.equals("Pagada")) {
+            return Color.parseColor("#217C00")
+        }else {
+            return Color.parseColor("#978303")
         }
 
     }

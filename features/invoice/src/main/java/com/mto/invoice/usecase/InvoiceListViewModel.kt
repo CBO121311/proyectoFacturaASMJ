@@ -26,8 +26,12 @@ class InvoiceListViewModel : ViewModel() {
             state.value = InvoiceListState.Loading(false)
 
             when (result) {
-                is ResourceList.Success<*> -> state.value =
-                    InvoiceListState.Success(result.data as ArrayList<Factura>)
+                is ResourceList.Success<*> -> {
+                    val facturas = result.data as ArrayList<Factura>
+                    facturas.sortBy { it.id }
+                    state.value = InvoiceListState.Success(facturas)
+                }
+
 
                 is ResourceList.Error -> state.value = InvoiceListState.NoDataSet
             }
@@ -42,13 +46,16 @@ class InvoiceListViewModel : ViewModel() {
 
             when (val result = FacturaProvider.getListWithoutLoading()) {
                 is ResourceList.Success<*> -> {
-                    state.value = InvoiceListState.Success(result.data as ArrayList<Factura>)
+                    val facturas = result.data as ArrayList<Factura>
+                    facturas.sortBy { it.id }
+                    state.value = InvoiceListState.Success(facturas)
                 }
 
                 is ResourceList.Error -> state.value = InvoiceListState.NoDataSet
             }
         }
     }
+
     fun getPosByInvoice(factura: Factura): Int {
         return FacturaProvider.getPosByInvoice(factura)
     }

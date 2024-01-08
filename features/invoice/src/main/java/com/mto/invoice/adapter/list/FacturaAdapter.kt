@@ -28,8 +28,7 @@ class FacturaAdapter(
     }
 
     fun sort() {
-        //ToDo ordenar por el nombre del cliente
-        facturaList.sortBy { it.customer }
+        facturaList.sortBy { it.customer.name }
         notifyDataSetChanged()
     }
 

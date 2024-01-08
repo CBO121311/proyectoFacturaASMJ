@@ -18,7 +18,7 @@
 
     <dimen name="invoice_creation_dimenComun">350dp</dimen>
     <dimen name="invoice_creationHeightComun">220dp</dimen>
-
+    <dimen name="animation_invoice">200dp</dimen>
     <dimen name="ic_itemItem_tamCardView">150dp</dimen>
     <dimen name="ic_itemItem_textSizeTitulo">18sp</dimen>
     <dimen name="ic_itemItem_textSizesubTitulo">10sp</dimen>
