@@ -195,6 +195,9 @@ de la misma es anterior a la de la creación.
  - Cambio de ubicación de los botones de editar y borrar al menú de detalles
  - Edición de factura habilitada
  - Data class Factura cambia sus miembros, se utiliza un objeto de la clase customer en vez del id del customer
+ - Cambio en los items del recycler view de Invoice List, se añade el estado de la factura
+ - Se ordena en Invoice List por el nombre del cliente
+ - Se añade animación en la interfaz de Invoice List
  - ------------------------
 
 # Logo
