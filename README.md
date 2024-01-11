@@ -204,7 +204,8 @@ de la misma es anterior a la de la creación.
  - Añadido las preferencias.
  - Se ha cambiado el fondo del tasklist a uno que más corresponde a la aplicación.
  - Se cambió la forma de subir la foto del customer.
- - Arreglado pequeños errores en el módulo customer.
+ - Corregido el error del ColorSecondary del tema de la aplicación, que no corresponde con el que era.
+ - Arreglado pequeños detalles en el módulo customer
  - ------------------------
  
 
