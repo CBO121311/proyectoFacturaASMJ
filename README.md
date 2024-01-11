@@ -199,6 +199,14 @@ de la misma es anterior a la de la creación.
  - Se ordena en Invoice List por el nombre del cliente
  - Se añade animación en la interfaz de Invoice List
  - ------------------------
+ ### V3.6.8 (11/01/2024)
+ *Escrito por CBO121311*
+ - Añadido las preferencias.
+ - Se ha cambiado el fondo del tasklist a uno que más corresponde a la aplicación.
+ - Se cambió la forma de subir la foto del customer.
+ - Arreglado pequeños errores en el módulo customer.
+ - ------------------------
+ 
 
 # Logo
 
