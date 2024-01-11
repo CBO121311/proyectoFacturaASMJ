@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="key_account">Cuentas</string>
+    <string name="summary_account">Información de la cuenta de usuario</string>
+    <string name="title_account">Cuentas de usuario</string>
+    <string name="title_active_notification">Activar Notificaciones</string>
+
+    <string name="listpreference_title_ringtone">Tono Notificación</string>
+    <string name="key_active_notification" translatable="false">active_preference</string>
+    <string name="key_notification" translatable="false">notification</string>
+    <string name="key_email" translatable="false">pr_email</string>
+    <string name="key_password" translatable="false">pr_password</string>
+    <string name="etp_title_email">Email</string>
+    <string name="etp_title_password">Contraseña del usuario</string>
+
+</resources>

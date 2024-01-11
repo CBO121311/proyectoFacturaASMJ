@@ -54,5 +54,5 @@ dependencies {
     implementation ("com.airbnb.android:lottie:$lottieVersion")
 
     //CountryCodePickerProject
-    implementation ("com.hbb20:ccp:2.5.0")
+    implementation ("com.hbb20:ccp:2.7.3")
 }

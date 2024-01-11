@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Fondo del CardView (puedes ajustar esto según tu necesidad) -->
+    <item android:drawable="@drawable/task_item_background" />
+
+    <!-- Degradado blanco transparente -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#88AB99EA"
+            android:endColor="#2AA18CEF"
+            android:angle="90" />
+        </shape>
+    </item>
+
+</layer-list>

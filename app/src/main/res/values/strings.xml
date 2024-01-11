@@ -43,7 +43,6 @@
     <string name="Content_taskDialogExit">¿Estás seguro de que quieres borrar la tarea?</string>
 
 
-
     <string name="tvTitleMessage">Escribe el mensaje</string>
     <string name="tvUserInfoText">Muestra información del usuario</string>
     <string name="tvMessageText">Información del mensaje</string>
@@ -69,5 +68,6 @@
     <string name="progress_dialog_title">Esperando...</string>
     <string name="dialog_warning_title">Entendido</string>
     <string name="contentDescriptionfab" translatable="false">Botón que será heredado entre los fragment</string>
+
 
 </resources>

@@ -4,6 +4,7 @@ package com.cbo.customer.ui
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -25,14 +26,17 @@ import com.moronlu18.customercreation.databinding.FragmentCustomerDetailBinding
 import com.moronlu18.invoice.base.BaseFragmentDialog
 import com.moronlu18.invoice.ui.MainActivity
 
-class CustomerDetail : Fragment(),MenuProvider {
+class CustomerDetail : Fragment(), MenuProvider {
 
     private val viewModel: CustomerDetailViewModel by viewModels()
     private var _binding: FragmentCustomerDetailBinding? = null
     private val binding get() = _binding!!
     private var customer: Customer? = null
-    private var posCostumer:Int= 0
+    private var posCostumer: Int = 0
     private val doubleClickDelay = 200L
+
+    //prevenir doble click
+    private var mLastClickTime: Long = 0
 
 
     override fun onCreateView(
@@ -62,9 +66,8 @@ class CustomerDetail : Fragment(),MenuProvider {
             }
         })
 
-        parentFragmentManager.setFragmentResultListener("detailkey",this,
-            FragmentResultListener{
-                _,result->
+        parentFragmentManager.setFragmentResultListener("detailkey", this,
+            FragmentResultListener { _, result ->
                 posCostumer = result.getInt("detailposition")
                 customer = viewModel.getCustomerByPosition(posCostumer)
             }
@@ -147,21 +150,21 @@ class CustomerDetail : Fragment(),MenuProvider {
      * Invocado cuando se selecciona un elemento del menú de opciones.
      */
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+
+        if (SystemClock.elapsedRealtime() - mLastClickTime < doubleClickDelay) {
+            return true;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
+
         return when (menuItem.itemId) {
 
             R.id.menu_cd_action_delete -> {
-
-
-                Handler(Looper.getMainLooper()).postDelayed({
-                    deleteConfirmation()
-                }, doubleClickDelay)
+                deleteConfirmation()
                 true
             }
 
             R.id.menu_cd_action_edit -> {
-                Handler(Looper.getMainLooper()).postDelayed({
-                    onEditItem(customer!!)
-                }, doubleClickDelay)
+                onEditItem(customer!!)
                 true
             }
 

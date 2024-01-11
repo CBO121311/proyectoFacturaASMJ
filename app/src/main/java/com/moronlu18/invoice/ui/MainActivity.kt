@@ -9,6 +9,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.moronlu18.invoice.R
@@ -18,6 +20,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+
+    //Mi controlador
+    private lateinit var navController: NavController
 
     //Todas las propiedades son publicas
     //Popriedades de acceso al botón flotante de la Activity principal
@@ -34,15 +39,29 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
+        navController = navHostFragment.navController
+
+        //Yo le digo que se configure la barra de navegación con este grafo
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
+        //Si utilizo estas tres últimos líneas de código puedo resetear la barra de navegación.
+
+
+        /*val navController = findNavController(R.id.nav_host_fragment_content_main) as NavHostController
+        navController = navHostFragment.navController*/
+
 
         binding.fab.setOnClickListener { view ->
-             Snackbar.make(view, "No me dejes así, pon una función o hazla no visible <_<", Snackbar.LENGTH_LONG)
-                 .setAction("Action", null).show()
-         }
+            Snackbar.make(
+                view,
+                "No me dejes así, pon una función o hazla no visible <_<",
+                Snackbar.LENGTH_LONG
+            )
+                .setAction("Action", null).show()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -60,7 +79,12 @@ class MainActivity : AppCompatActivity() {
         //binding.fab.visibility = View.VISIBLE
 
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_settings -> {
+                //La navegación se realiza directamente utilizando el id del fragment.
+                navController.navigate(R.id.settingsFragment)
+                true
+            }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

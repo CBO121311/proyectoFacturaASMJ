@@ -56,6 +56,10 @@ class SignUpViewModel : ViewModel() {
 
                             state.value = SignUpState.OnSuccess(result.data as User)
                             //state.value = UserListState.Success(result.data as ArrayList<User>)
+
+
+
+                            //Locator.userPreferencesRepository
                         }
 
                         is Resource.Error -> {

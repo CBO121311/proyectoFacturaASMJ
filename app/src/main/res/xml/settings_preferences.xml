@@ -1,0 +1,39 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Preference
+        android:icon="@drawable/ic_person"
+        android:key="@string/key_account"
+        android:summary="@string/summary_account"
+        android:title="@string/title_account" />
+    <PreferenceCategory
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Configuración Notificaciones">
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:key="@string/key_active_notification"
+            android:summary="Activación de las notificaciones"
+            android:title="@string/title_active_notification" />
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/ringtone_entries"
+            android:entryValues="@array/ringtone_values"
+            android:key="@string/key_notification"
+            android:title="@string/listpreference_title_ringtone" />
+    </PreferenceCategory>
+
+
+    <!--<ListPreference
+        app:defaultValue="reply"
+        app:entries="@array/reply_entries"
+        app:entryValues="@array/reply_values"
+        app:key="reply"
+        app:title="@string/reply_title"
+        app:useSimpleSummaryProvider="true" />-->
+
+
+</PreferenceScreen>

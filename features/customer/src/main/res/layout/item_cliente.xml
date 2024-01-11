@@ -31,11 +31,11 @@
             android:layout_width="27dp"
             android:layout_height="28dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/check_color"
-            android:visibility="gone"
+            android:src="@drawable/check_v2"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/customer_list_ivCliente"
             app:layout_constraintEnd_toEndOf="@+id/customer_list_ivCliente"
-            app:tint="@color/customer_color_floatingbutton" />
+             />
 
 
         <androidx.constraintlayout.widget.Barrier

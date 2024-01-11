@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.os.SystemClock
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.Menu
@@ -40,6 +41,9 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
     private val viewModel: CustomerListViewModel by viewModels()
     private var isFirstTime = true
     private val doubleClickDelay = 200L
+
+    //prevenir doble click
+    private var mLastClickTime: Long = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -93,7 +97,7 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
      */
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun customerOnLongClick(view: View, position: Int, customer: Customer) {
-        showPopUpMenu(view,position,customer)
+        showPopUpMenu(view, position, customer)
     }
 
     /**
@@ -186,37 +190,34 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
         popupMenu.inflate(R.menu.menu_pop_item)
 
         popupMenu.setOnMenuItemClickListener {
+
+            //SystemClock.elapsedRealtime() obtener el tiempo actual en milisegundos
+            if (SystemClock.elapsedRealtime() - mLastClickTime < doubleClickDelay) {
+                return@setOnMenuItemClickListener true;
+            }
+            mLastClickTime = SystemClock.elapsedRealtime();
+
             when (it.itemId) {
                 R.id.menupop_see -> {
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        navigateDetailCustomer(position)
-                    },doubleClickDelay)
-
+                    navigateDetailCustomer(position)
                     true
                 }
 
                 R.id.menupop_edit -> {
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        onEditItem(position)
-                    }, doubleClickDelay)
+                    onEditItem(position)
                     true
                 }
 
                 R.id.menupop_remove -> {
-
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        onDeletedItem(customer)
-                    }, doubleClickDelay)
+                    onDeletedItem(customer)
                     true
                 }
 
-                else ->false
+                else -> false
             }
         }
         popupMenu.setOnDismissListener {
-            Handler(Looper.getMainLooper()).postDelayed({
-                customerAdapter.clearSelection()
-            }, doubleClickDelay)
+            customerAdapter.clearSelection()
         }
 
         popupMenu.setForceShowIcon(true)

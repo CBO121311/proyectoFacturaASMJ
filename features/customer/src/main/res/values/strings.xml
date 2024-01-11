@@ -43,4 +43,7 @@
     <string name="cl_popmenu_title_edit">Editar</string>
     <string name="cl_popmenu_title_delete">Eliminar</string>
     <string name="customer_NotAvailable">N/a</string>
+
+    <string name="ccp_dialog_title" translatable="false">Selecciona un pais</string>
+    <string name="ccp_select_country" translatable="false">Seleccionar un país</string>
 </resources>

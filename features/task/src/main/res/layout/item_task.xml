@@ -18,7 +18,7 @@
             android:id="@+id/task_item_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/task_details"
+            android:background="@drawable/task_item_backgroundv2"
             android:padding="@dimen/task_item_constraint_padding">
 
             <TextView

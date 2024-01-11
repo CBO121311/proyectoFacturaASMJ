@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Preference category">
+
+        <EditTextPreference
+            android:key="@string/key_email"
+            android:singleLine="true"
+            android:title="@string/etp_title_email" />
+        <EditTextPreference
+            android:key="@string/key_password"
+            android:singleLine="true"
+            android:title="@string/etp_title_password" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

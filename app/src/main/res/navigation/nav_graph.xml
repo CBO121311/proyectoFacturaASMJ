@@ -113,5 +113,17 @@
         android:id="@+id/aboutMaterialFragment"
         android:name="com.moronlu18.invoice.ui.AboutMaterialFragment"
         android:label="@string/title_about" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.moronlu18.invoice.ui.preferences.SettingsFragment"
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsFragment_to_acccountFragment"
+            app:destination="@id/acccountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/acccountFragment"
+        android:name="com.moronlu18.invoice.ui.preferences.AcccountFragment"
+        android:label="AcccountFragment" />
 
 </navigation>

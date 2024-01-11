@@ -1,11 +1,10 @@
 package com.cbo.customer.ui
 
-import android.app.Activity
-import android.content.Intent
+
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -31,7 +30,7 @@ import com.moronlu18.invoice.ui.MainActivity
 class CustomerCreation : Fragment() {
     private var _binding: FragmentCustomerCreationBinding? = null
     private val binding get() = _binding!!
-    private lateinit var launcher: ActivityResultLauncher<Intent>
+    private lateinit var launcher: ActivityResultLauncher<String>
     private val viewModel: CustomerViewModel by viewModels()
     private var editCustomerPos = -1
 
@@ -54,10 +53,6 @@ class CustomerCreation : Fragment() {
         setUpGallery()
         setUpFab()
 
-        binding.customerCreationImgbtnCustomer.setOnClickListener {
-            openGallery()
-        }
-
         parentFragmentManager.setFragmentResultListener(
             "customkey", this, FragmentResultListener { _, result ->
                 val posCustomer: Int = result.getInt("customposition")
@@ -67,6 +62,7 @@ class CustomerCreation : Fragment() {
                 setUpEditMode(customerEdit, posCustomer)
             }
         )
+
 
         //El observable
         viewModel.getState().observe(viewLifecycleOwner, Observer {
@@ -82,6 +78,9 @@ class CustomerCreation : Fragment() {
         binding.customerCreationTietIdCustomer.addTextChangedListener(CcWatcher(binding.customerCreationTilIdCustomer))
         binding.customerCreationTietNameCustomer.addTextChangedListener(CcWatcher(binding.customerCreationTilNameCustomer))
         binding.customerCreationTietEmailCustomer.addTextChangedListener(CcWatcher(binding.customerCreationTilCustomerEmail))
+        //binding.customerCreationCcp.changeDefaultLanguage(CountryCodePicker.Language.DUTCH)
+        //binding.customerCreationCcp.setAutoDetectedCountry(true)
+
     }
 
     /**
@@ -170,16 +169,17 @@ class CustomerCreation : Fragment() {
 
 
     /**
-     * Configura el launcher para el resultado de la galería.
+     * Configura la galería para permitir al usuario seleccionar una imagen del dispositivo.
      */
     private fun setUpGallery() {
 
-        launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == Activity.RESULT_OK) {
-                val data: Intent? = it.data
-                val imageUri = data?.data
-                binding.customerCreationImgcAvatar.setImageURI(imageUri)
+        launcher= registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            if (uri != null) {
+                binding.customerCreationImgcAvatar.setImageURI(uri)
             }
+        }
+        binding.customerCreationImgbtnCustomer.setOnClickListener {
+            launcher.launch("image/*")
         }
     }
 
@@ -254,14 +254,6 @@ class CustomerCreation : Fragment() {
         binding.customerCreationTilCustomerEmail.error =
             getString(R.string.customer_error_FormatEmail)
         binding.customerCreationTilCustomerEmail.requestFocus()
-    }
-
-    /**
-     * Abre la galería para permitir al usuario seleccionar una imagen del dispositivo.
-     */
-    private fun openGallery() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        launcher.launch(intent)
     }
 
     /**

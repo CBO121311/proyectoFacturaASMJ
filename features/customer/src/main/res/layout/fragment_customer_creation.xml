@@ -34,13 +34,14 @@
             android:id="@+id/customer_creation_imgcAvatar"
             android:layout_width="@dimen/cc_width_ivCustomer"
             android:layout_height="@dimen/cc_height_ivCustomer"
-            android:src="@drawable/kiwidiner_background"
+            android:scaleType="centerCrop"
             app:civ_border_color="@color/seed"
+            android:src="@drawable/kiwidiner_background"
+
             app:civ_border_width="@dimen/customer_border_ivCustomer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/customer_creation_glTop" />
-
 
         <LinearLayout
             android:id="@+id/customer_creation_llid"
@@ -89,7 +90,6 @@
             app:cardBackgroundColor="#A18EE6"
             app:cardCornerRadius="@dimen/cc_radius_cvImgCustomer"
             app:cardElevation="@dimen/cc_cardElevation_cvImgCustomer"
-
             app:layout_constraintBottom_toBottomOf="@+id/customer_creation_imgcAvatar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.645"
@@ -104,7 +104,8 @@
                 android:contentDescription="@string/cc_descriptiontext_ibCustomer"
                 android:focusable="true"
                 android:padding="@dimen/cc_padding_imgButton"
-                android:src="@drawable/ic_action_altimage" />
+                android:src="@drawable/ic_action_altimage"
+                app:tint="@color/white" />
         </androidx.cardview.widget.CardView>
 
 
@@ -185,12 +186,15 @@
                     android:id="@+id/customer_creation_ccp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:ccpDialog_backgroundColor="@color/customer_backgroundcolor_cc_ccp"
+                    app:ccp_autoDetectLanguage="true"
+                    app:ccp_countryPreference="ES,US"
                     app:ccp_defaultNameCode="ES"
+                    app:ccp_showArrow="false"
+                    app:ccp_showNameCode="false"
                     app:layout_constraintBottom_toTopOf="@+id/customer_creation_tilAddress"
                     app:layout_constraintStart_toStartOf="@+id/customer_creation_tilCustomerEmail"
-                    app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilCustomerEmail">
-
-                </com.hbb20.CountryCodePicker>
+                    app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilCustomerEmail"/>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/customer_creation_tilPhone"

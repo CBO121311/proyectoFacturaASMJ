@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <dist:module dist:instant="true" />
+    <!--Escribimos android:name="InvoiceApplication", para que herede de Application  -->
     <application
+        android:name="InvoiceApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
