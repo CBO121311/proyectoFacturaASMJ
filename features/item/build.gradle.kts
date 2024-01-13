@@ -52,4 +52,6 @@ dependencies {
     //Libería de animaciones lottie
     val lottieVersion = "3.4.0"
     implementation ("com.airbnb.android:lottie:$lottieVersion")
+
+    implementation ("androidx.preference:preference-ktx:1.2.1")
 }
