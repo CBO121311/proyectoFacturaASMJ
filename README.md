@@ -207,6 +207,12 @@ de la misma es anterior a la de la creación.
  - Corregido el error del ColorSecondary del tema de la aplicación, que no corresponde con el que era.
  - Arreglado pequeños detalles en el módulo customer
  - ------------------------
+  ### V3.7.1 (13/01/2024)
+ *Escrito por CBO121311*
+ - Añadido las preferencias los tipos de orden de los módulos y los tamaños textos del dashborad
+ - Se ha dado funcionalidad el ordenar de customer y los del texto.
+ - Todos las enumeraciones se han añadido en una carpeta
+ - ------------------------
  
 
 # Logo
