@@ -56,7 +56,5 @@ dependencies {
     //CountryCodePickerProject
     implementation ("com.hbb20:ccp:2.7.3")
 
-    implementation ("androidx.preference:preference-ktx:1.1.1")
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
-
+    implementation ("androidx.preference:preference-ktx:1.2.1")
 }
