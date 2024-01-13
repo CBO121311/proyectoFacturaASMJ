@@ -116,6 +116,115 @@ class FacturaProvider private constructor() {
                     )
                 )
             )
+            dataSet.add(
+                Factura(
+                    id = 3,
+                    customer = Customer(
+                        4,
+                        "Zariel García",
+                        Email("garc@example.com"),
+                        "+34 687223344",
+                        "Valencia",
+                        "Avenida Reino de Valencia, 789",
+                        phototrial = R.drawable.kangorutuxedo
+                    ),
+                    number = 3.46,
+                    status = InvoiceStatus.Pagada,
+                    issuedDate = Instant.now(),
+                    dueDate = Instant.now().plus(Duration.ofDays(15)),
+                    lineItems = listOf(
+                        Item(
+                            3,
+                            R.drawable.manzana,
+                            "Manzana",
+                            "Producto sección fruta",
+                            ItemType.ARTÍCULO,
+                            0.42,
+                            true
+                        ),
+                        Item(
+                            2,
+                            R.drawable.leche,
+                            "Leche",
+                            "Producto sección lacteos",
+                            ItemType.ARTÍCULO,
+                            1.20,
+                            true
+                        ), Item(
+                            4,
+                            R.drawable.panespelta,
+                            "Pan de espelta",
+                            "Producto sección panadería",
+                            ItemType.ARTÍCULO,
+                            0.92,
+                            false
+                        ),Item(
+                            4,
+                            R.drawable.panespelta,
+                            "Pan de espelta",
+                            "Producto sección panadería",
+                            ItemType.ARTÍCULO,
+                            0.92,
+                            false
+                        )
+                    )
+                )
+            )
+            dataSet.add(
+                Factura(
+                    id = 4,
+                    customer = Customer(
+                        1,
+                        "Mr.Kiwi",
+                        Email("kiwi@example.com"),
+                        "+64 21 123 456",
+                        "Auckland",
+                        "Main Street, 123",
+                        phototrial = R.drawable.kiwituxedo
+                    ),
+                    number = 3.46,
+                    status = InvoiceStatus.Vencida,
+                    issuedDate = Instant.now(),
+                    dueDate = Instant.now().plus(Duration.ofDays(15)),
+                    lineItems = listOf(
+                        Item(
+                            3,
+                            R.drawable.manzana,
+                            "Manzana",
+                            "Producto sección fruta",
+                            ItemType.ARTÍCULO,
+                            0.42,
+                            true
+                        ),
+                        Item(
+                            2,
+                            R.drawable.leche,
+                            "Leche",
+                            "Producto sección lacteos",
+                            ItemType.ARTÍCULO,
+                            1.20,
+                            true
+                        ), Item(
+                            4,
+                            R.drawable.panespelta,
+                            "Pan de espelta",
+                            "Producto sección panadería",
+                            ItemType.ARTÍCULO,
+                            0.92,
+                            false
+                        ),Item(
+                            4,
+                            R.drawable.panespelta,
+                            "Pan de espelta",
+                            "Producto sección panadería",
+                            ItemType.ARTÍCULO,
+                            0.92,
+                            false
+                        )
+                    )
+                )
+            )
+
         }
 
 

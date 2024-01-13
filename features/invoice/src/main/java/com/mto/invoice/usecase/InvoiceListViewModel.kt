@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.moronlu18.accounts.entity.Factura
 import com.moronlu18.accounts.network.ResourceList
 import com.moronlu18.accounts.repository.FacturaProvider
+import com.moronlu18.invoice.Locator
 import kotlinx.coroutines.launch
 
 //Tener una referencia al objeto eliminado por si se ejecuta un undo/control+z
@@ -28,7 +29,15 @@ class InvoiceListViewModel : ViewModel() {
             when (result) {
                 is ResourceList.Success<*> -> {
                     val facturas = result.data as ArrayList<Factura>
-                    facturas.sortBy { it.id }
+
+                    val sortPreference = Locator.settingsPreferencesRepository.getSortInvoice()
+                    when(sortPreference){
+                        "id" -> facturas.sortBy { it.id }
+                        "name_asc" -> facturas.sortBy { it.customer.name }
+                        "name_desc" -> facturas.sortByDescending { it.customer.name }
+                        "status" -> facturas.sortBy { it.status.toString() }
+                        "total" -> facturas.sortBy { it.number.toString() }
+                    }
                     state.value = InvoiceListState.Success(facturas)
                 }
 
@@ -47,7 +56,15 @@ class InvoiceListViewModel : ViewModel() {
             when (val result = FacturaProvider.getListWithoutLoading()) {
                 is ResourceList.Success<*> -> {
                     val facturas = result.data as ArrayList<Factura>
-                    facturas.sortBy { it.id }
+                    val sortPreference = Locator.settingsPreferencesRepository.getSortInvoice()
+
+                    when(sortPreference){
+                        "id" -> facturas.sortBy { it.id }
+                        "name_asc" -> facturas.sortBy { it.customer.name }
+                        "name_desc" -> facturas.sortByDescending { it.customer.name }
+                        "status" -> facturas.sortBy { it.status.toString() }
+                        "total" -> facturas.sortBy { it.number.toString() }
+                    }
                     state.value = InvoiceListState.Success(facturas)
                 }
 

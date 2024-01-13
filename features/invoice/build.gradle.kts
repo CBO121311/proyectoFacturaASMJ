@@ -49,4 +49,6 @@ dependencies {
 
     val lottieVersion = "3.4.0"
     implementation ("com.airbnb.android:lottie:$lottieVersion")
+
+    api("androidx.preference:preference:1.2.1")
 }

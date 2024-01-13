@@ -105,6 +105,22 @@ class DataStorePreferencesRepository(private val dataStore: DataStore<Preference
         }
     }
 
+    fun getSortInvoice(): String {
+        return runBlocking {
+            dataStore.data.map { preferences ->
+                preferences[INVOICESORT] ?: "status"
+            }.first()
+        }
+    }
+
+    fun saveSortInvoice(sort: String) {
+        runBlocking {
+            dataStore.edit { preferences ->
+                preferences[INVOICESORT] = sort
+            }
+        }
+    }
+
 
 
     companion object {

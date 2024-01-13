@@ -62,12 +62,18 @@
         <item>ID</item>
         <item>Nombre cliente A-Z</item>
         <item>Nombre cliente Z-A</item>
+        <item>Estado</item>
+        <item>Total</item>
+
+
     </string-array>
 
     <string-array name="sort_invoice_values">
         <item>id</item>
         <item>name_asc</item>
         <item>name_desc</item>
+        <item>status</item>
+        <item>total</item>
     </string-array>
 
 
