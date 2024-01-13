@@ -95,7 +95,7 @@ class TaskList : Fragment(), MenuProvider {
 
         findNavController().navigate(
             TaskListDirections.actionTaskListToBaseFragmentDialog2(
-                getString(com.moronlu18.invoice.R.string.Content_taskDialogExit),
+                getString(R.string.delete_task_info_general),
                 getString(R.string.delete_task_info)
             )
         )

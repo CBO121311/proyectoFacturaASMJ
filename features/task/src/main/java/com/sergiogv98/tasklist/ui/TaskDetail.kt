@@ -9,9 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.moronlu18.accounts.entity.Task
 import com.moronlu18.invoice.ui.MainActivity
+import com.moronlu18.tasklist.R
 import com.moronlu18.tasklist.databinding.FragmentTaskDetailBinding
 import com.sergiogv98.tasklist.adapter.TaskAdapter
 import com.sergiogv98.usecase.TaskDetailViewModel
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 
 class TaskDetail : Fragment() {
@@ -51,7 +55,17 @@ class TaskDetail : Fragment() {
 
         binding.taskDetailsClientNameTxt.text = viewModel.getCustomerName(task.clientID.id)
         binding.taskDetailsTaskName.text = task.nomTask
-        binding.taskDetailsStatusButton.text = task.taskStatus.toString().replaceRange(1, task.taskStatus.toString().length, task.taskStatus.toString().substring(1).lowercase())
+        val currentDate = Date()
+        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
+
+        val taskEndDate = sdf.parse(task.fechFinalization.toString())
+
+        if (currentDate.after(taskEndDate)) {
+            binding.taskDetailsStatusButton.text = getString(R.string.task_vencida)
+        } else {
+            binding.taskDetailsStatusButton.text = task.taskStatus.toString().replaceRange(1, task.taskStatus.toString().length, task.taskStatus.toString().substring(1).lowercase())
+        }
+
         binding.taskDetailsTaskTypeName.text = task.typeTask.toString().replaceRange(1, task.typeTask.toString().length, task.typeTask.toString().substring(1).lowercase())
         binding.taskDetailsDateCreation.text = task.fechCreation.toString().substring(0, task.fechCreation.toString().lastIndexOf("T"))
         binding.taskDetailsDateEnd.text = task.fechFinalization.toString().substring(0, task.fechFinalization.toString().lastIndexOf("T"))

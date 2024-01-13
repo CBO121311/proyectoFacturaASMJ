@@ -22,7 +22,8 @@
     <string name="title_list_task">Lista de tareas</string>
     <string name="title_task_creation">Creacción de la Tarea</string>
     <string name="title_task_detail">Detalle de la Tarea</string>
-    <string name="delete_task_info">¿Estás seguro de que quieres borrar la tarea?</string>
+    <string name="delete_task_info_general">Al confirmar esta acción, eliminarás la tarea seleccionada.</string>
+    <string name="delete_task_info">¿Estás seguro de que deseas proceder con la eliminación?</string>
     <string name="task_creation_date_creation_txt">Fecha de creación</string>
     <string name="task_creation_date_fin_txt">Fecha de finalización</string>
 
@@ -31,4 +32,5 @@
     <string name="title_taskDialogExit">¿Quieres borrar la tarea?</string>
     <string name="menu_title_refresh">Refrescar lista de tareas</string>
     <string name="menu_title_sort">Ordenar alfabeticamente</string>
+    <string name="task_vencida">Vencida</string>
 </resources>
