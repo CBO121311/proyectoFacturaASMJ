@@ -30,6 +30,7 @@ class TaskList : Fragment(), MenuProvider {
     private val binding get() = _binding!!
     private val viewModel: TaskListViewModel by viewModels()
     private lateinit var adapter: TaskAdapter
+    private var firstCharge = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,24 +38,23 @@ class TaskList : Fragment(), MenuProvider {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentTaskListBinding.inflate(inflater, container, false)
-
         binding.viewmodel = this.viewModel
         binding.lifecycleOwner = this
-        binding.taskListAddTask.setOnClickListener {
-            findNavController().navigate(R.id.action_taskList_to_taskCreation)
-        }
-
         return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setUpToolBar()
         initRecyclerViewTask()
-
-        viewModel.getTaskList()
+        if (firstCharge) {
+            viewModel.getTaskList(firstCharge)
+            firstCharge = false
+        } else {
+            viewModel.getTaskList(firstCharge)
+        }
+        setUpFab(false)
         viewModel.getState().observe(viewLifecycleOwner) {
             when (it) {
                 is TaskListState.Loading -> showProgressBar(it.value)
@@ -84,7 +84,7 @@ class TaskList : Fragment(), MenuProvider {
         findNavController().navigate(TaskListDirections.actionTaskListToTaskDetail(task))
     }
 
-    private fun onEditItem(position: Int){
+    private fun onEditItem(position: Int) {
         val bundle = Bundle()
         bundle.putInt("taskPosition", position)
         parentFragmentManager.setFragmentResult("taskkey", bundle)
@@ -108,7 +108,7 @@ class TaskList : Fragment(), MenuProvider {
             if (success) {
                 viewModel.deleteTask(position)
                 adapter.notifyItemRemoved(position)
-                if(viewModel.getTasks().isEmpty()) {
+                if (viewModel.getTasks().isEmpty()) {
                     showNoData()
                 }
             }
@@ -121,7 +121,7 @@ class TaskList : Fragment(), MenuProvider {
         binding.taskListLlEmptyImg.playAnimation()
     }
 
-    private fun showNothing(){
+    private fun showNothing() {
         binding.taskListRecyclerTasks.visibility = View.GONE
         binding.taskListLlEmpty.visibility = View.GONE
     }
@@ -142,13 +142,29 @@ class TaskList : Fragment(), MenuProvider {
 
         if (value) {
             showNothing()
+            setUpFab(true)
             findNavController().navigate(R.id.action_taskList_to_fragmentProgressDialogKiwi)
         } else {
+            setUpFab(false)
             findNavController().popBackStack()
         }
     }
 
-    private fun setUpToolBar(){
+    private fun setUpFab(charge: Boolean) {
+        (requireActivity() as? MainActivity)?.fab?.apply {
+            visibility = if(charge){
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
+            setImageResource(com.moronlu18.invoice.R.drawable.ic_action_add)
+            setOnClickListener {
+                findNavController().navigate(R.id.action_taskList_to_taskCreation)
+            }
+        }
+    }
+
+    private fun setUpToolBar() {
         (requireActivity() as? MainActivity)?.toolbar?.apply {
             visibility = View.VISIBLE
         }
@@ -162,9 +178,9 @@ class TaskList : Fragment(), MenuProvider {
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        return when (menuItem.itemId){
+        return when (menuItem.itemId) {
             R.id.menu_action_refresh -> {
-                viewModel.getTaskList()
+                viewModel.getTaskList(firstCharge)
                 true
             }
 

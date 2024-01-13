@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.moronlu18.accounts.entity.Task
+import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.tasklist.databinding.FragmentTaskDetailBinding
 import com.sergiogv98.tasklist.adapter.TaskAdapter
 import com.sergiogv98.usecase.TaskDetailViewModel
@@ -29,7 +30,7 @@ class TaskDetail : Fragment() {
         _binding = FragmentTaskDetailBinding.inflate(inflater, container, false)
         binding.viewmodel = this.viewModel
         binding.lifecycleOwner = this
-
+        setUpFab()
         var taskMutableList: MutableList<Task> = viewModel.getTaskDataSet()
 
         adapter = TaskAdapter(
@@ -47,8 +48,6 @@ class TaskDetail : Fragment() {
         } else {
             binding.taskDetailsClientImageView.setImageBitmap(customer.photo)
         }
-        //binding.taskDetailsClientImageView.setImageResource(viewModel.getCustomerPhoto(task.clientID))
-
 
         binding.taskDetailsClientNameTxt.text = viewModel.getCustomerName(task.clientID.id)
         binding.taskDetailsTaskName.text = task.nomTask
@@ -67,6 +66,12 @@ class TaskDetail : Fragment() {
         binding.taskDetailsButtonBack.setOnClickListener {
             val fragmentManager = requireActivity().supportFragmentManager
             fragmentManager.popBackStack()
+        }
+    }
+
+    private fun setUpFab() {
+        (requireActivity() as? MainActivity)?.fab?.apply {
+            visibility = View.GONE
         }
     }
 

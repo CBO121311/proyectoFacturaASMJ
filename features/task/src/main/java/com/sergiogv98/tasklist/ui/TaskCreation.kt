@@ -18,6 +18,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.moronlu18.accounts.entity.Task
 import com.moronlu18.accounts.enum.TaskStatus
 import com.moronlu18.accounts.enum.TypeTask
+import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.tasklist.databinding.FragmentTaskCreationBinding
 import com.sergiogv98.usecase.TaskCreationViewModel
 import java.text.SimpleDateFormat
@@ -44,6 +45,7 @@ class TaskCreation : Fragment() {
         _binding = FragmentTaskCreationBinding.inflate(inflater, container, false)
         binding.viewmodeltaskcreation = this.viewModel
         binding.lifecycleOwner = this
+        setUpFab()
         viewModel.setEditorMode(false)
 
         parentFragmentManager.setFragmentResultListener(
@@ -251,6 +253,12 @@ class TaskCreation : Fragment() {
             getString(com.moronlu18.tasklist.R.string.date_error),
             Snackbar.ANIMATION_MODE_SLIDE
         ).show()
+    }
+
+    private fun setUpFab() {
+        (requireActivity() as? MainActivity)?.fab?.apply {
+            visibility = View.INVISIBLE
+        }
     }
 
     inner class GeneralTextWatcher(private val til: TextInputLayout) : TextWatcher {
