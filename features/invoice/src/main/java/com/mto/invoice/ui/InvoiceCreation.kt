@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.moronlu18.accounts.entity.Factura
-import com.moronlu18.accounts.entity.InvoiceStatus
+import com.moronlu18.accounts.enum_entity.InvoiceStatus
 import com.moronlu18.accounts.entity.Item
 import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.invoicelist.R

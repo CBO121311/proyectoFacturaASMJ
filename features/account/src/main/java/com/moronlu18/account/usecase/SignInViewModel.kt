@@ -35,7 +35,6 @@ class SignInViewModel : ViewModel() {
             TextUtils.isEmpty(email.value) -> state.value = SignInState.EmailEmptyError
             TextUtils.isEmpty(password.value) -> state.value = SignInState.PasswordEmptyError
 
-
             else -> {
                 /*Se crea una corrutina que suspende el hilo principal hasta que el
                 bloque with Context el repositorio termina de ejecutarse.
@@ -50,7 +49,7 @@ class SignInViewModel : ViewModel() {
                     state.value = SignInState.Loading(false)
 
                     when (result) {
-                             //esto es una clase sellada (Resource)
+                        //esto es una clase sellada (Resource)
                         is Resource.Success<*> -> {
 
                             //state.value = SignInState.Success(result)
@@ -59,11 +58,17 @@ class SignInViewModel : ViewModel() {
                             //state.value = SignInState.Success(result.data as? Account)
 
                             val account = result.data as Account
+
+
                             state.value = SignInState.Success(account)
-                            Locator.userPreferencesRepository.saveUser(account.email!!.toString(),account.password!!,account.id)
 
                             //guardar la información del usuario en el almacén de datos user_preferences
-                            //Locator.userPreferencesRepository.saveUser(email.value, password.value,account.id)
+                            Locator.userPreferencesRepository.saveUser(
+                                account.email.value,
+                                account.password.toString(),
+                                account.id
+                            )
+
                         }
 
                         is Resource.Error -> {
@@ -72,8 +77,6 @@ class SignInViewModel : ViewModel() {
                             //De mientras está esto pausado.
                             state.value = SignInState.AuthencationError(result.exception.message!!)
                         }
-
-                        else -> {}
                     }
                 }
             }
@@ -88,8 +91,6 @@ class SignInViewModel : ViewModel() {
     fun getState(): LiveData<SignInState> {
         return state
     }
-
-
 
 
 }

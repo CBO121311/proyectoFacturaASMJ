@@ -12,7 +12,7 @@ class CustomerProvider private constructor() {
     companion object {
 
         var CustomerdataSet: MutableList<Customer> = mutableListOf()
-        private var idCliente: Int = 1
+        private var idCustomer: Int = 1
 
         init {
             initDataSetCustomer()
@@ -22,9 +22,9 @@ class CustomerProvider private constructor() {
 
             CustomerdataSet.add(
                 Customer(
-                    idCliente++,
+                    idCustomer++,
                     "Mr.Kiwi",
-                    Email("mrkiwi@example.com"),
+                    Email("kiwi@example.com"),
                     "+64 21 123 456",
                     "Auckland",
                     "Main Street, 123",
@@ -34,35 +34,36 @@ class CustomerProvider private constructor() {
 
             CustomerdataSet.add(
                 Customer(
-                    idCliente++,
+                    idCustomer++,
                     "Maria Schmidt",
-                    Email("maria@example.com"),
+                    Email("schmidt@example.com"),
                     "+49 123456789",
                     "Berlín",
                     "Kurfürstendamm, 123", //R.drawable.elephantuxedo
                     phototrial = R.drawable.elephantuxedo
                 )
             )
+
             CustomerdataSet.add(
                 Customer(
-                    idCliente++,
-                    "Luis García",
-                    Email("luis@example.com"),
+                    idCustomer++,
+                    "Alejandro López",
+                    Email("cebolla@example.com"),
+                    phototrial = R.drawable.cbotuxedo
+                )
+            )
+
+            CustomerdataSet.add(
+                Customer(
+                    idCustomer,
+                    "Zariel García",
+                    Email("garc@example.com"),
                     "+34 687223344",
                     "Valencia",
                     "Avenida Reino de Valencia, 789",
                     phototrial = R.drawable.kangorutuxedo
                 )
             )
-            CustomerdataSet.add(
-                Customer(
-                    idCliente,
-                    "Alejandro López",
-                    Email("al@example.com"),
-                    phototrial = R.drawable.cbotuxedo
-                )
-            )
-
         }
 
         /**

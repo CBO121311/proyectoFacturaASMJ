@@ -3,9 +3,9 @@ package com.moronlu18.accounts.repository
 import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.accounts.entity.Email
 import com.moronlu18.accounts.entity.Factura
-import com.moronlu18.accounts.entity.InvoiceStatus
+import com.moronlu18.accounts.enum_entity.InvoiceStatus
 import com.moronlu18.accounts.entity.Item
-import com.moronlu18.accounts.enum.ItemType
+import com.moronlu18.accounts.enum_entity.ItemType
 import com.moronlu18.accounts.network.ResourceList
 import com.moronlu18.inovice.R
 import kotlinx.coroutines.Dispatchers

@@ -1,7 +1,7 @@
 package com.moronlu18.accounts.entity
 
 import android.os.Parcelable
-import com.moronlu18.accounts.enum.ItemType
+import com.moronlu18.accounts.enum_entity.ItemType
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

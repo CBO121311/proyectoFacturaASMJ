@@ -1,4 +1,4 @@
-package com.moronlu18.accounts.entity
+package com.moronlu18.accounts.enum_entity
 
 enum class AccountState {
 VERIFIED,UNVERIFIED

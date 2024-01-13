@@ -1,8 +1,6 @@
 package com.moronlu18.account.ui
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.fragment.app.Fragment
@@ -18,8 +16,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.moronlu18.account.usecase.SignUpState
 import com.moronlu18.account.usecase.SignUpViewModel
-import com.moronlu18.accounts.entity.TypePerfil
-import com.moronlu18.accounts.entity.TypeUser
+import com.moronlu18.accounts.enum_entity.TypePerfil
+import com.moronlu18.accounts.enum_entity.TypeUser
 import com.moronlu18.accounts.entity.User
 import com.moronlu18.accountsignin.R
 import com.moronlu18.accountsignin.databinding.FragmentAccountSignUpBinding

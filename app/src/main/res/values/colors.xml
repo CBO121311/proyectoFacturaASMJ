@@ -69,4 +69,5 @@
     <color name="md_theme_dark_surfaceTint">#CCBEFF</color>
     <color name="md_theme_dark_outlineVariant">#48454E</color>
     <color name="md_theme_dark_scrim">#000000</color>
+    <color name="dashboard_button_textColor">#3B414B</color>
 </resources>

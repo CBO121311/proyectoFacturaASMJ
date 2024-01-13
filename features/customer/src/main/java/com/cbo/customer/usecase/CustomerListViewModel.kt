@@ -9,6 +9,7 @@ import com.cbo.customer.ui.CustomerListState
 import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.accounts.network.ResourceList
 import com.moronlu18.accounts.repository.CustomerProvider
+import com.moronlu18.invoice.Locator
 import kotlinx.coroutines.launch
 
 class CustomerListViewModel : ViewModel() {
@@ -29,9 +30,17 @@ class CustomerListViewModel : ViewModel() {
 
             when (result) {
                 is ResourceList.Success<*> -> {
-                    val lista = result.data as ArrayList<Customer>
-                    lista.sortBy { it.id }
-                    state.value = CustomerListState.Success(lista)
+                    val list = result.data as ArrayList<Customer>
+
+                    val sortPreference = Locator.settingsPreferencesRepository.getSortCustomer()
+                    when(sortPreference){
+                        "id" -> list.sortBy { it.id }
+                        "name_asc" -> list.sortBy { it.name }
+                        "name_desc" -> list.sortByDescending { it.name }
+                        "email" -> list.sortBy { it.email.toString() }
+                    }
+
+                    state.value = CustomerListState.Success(list)
                 }
 
                 is ResourceList.Error -> state.value = CustomerListState.NoDataError
@@ -48,9 +57,17 @@ class CustomerListViewModel : ViewModel() {
 
             when (val result = CustomerProvider.getCustomerListNoLoading()) {
                 is ResourceList.Success<*> -> {
-                    val lista = result.data as ArrayList<Customer>
-                    lista.sortBy { it.id }
-                    state.value = CustomerListState.Success(lista)
+                    val list = result.data as ArrayList<Customer>
+
+                    val sortPreference = Locator.settingsPreferencesRepository.getSortCustomer()
+                    when(sortPreference){
+                        "id" -> list.sortBy { it.id }
+                        "name_asc" -> list.sortBy { it.name }
+                        "name_desc" -> list.sortByDescending { it.name }
+                        "email" -> list.sortBy { it.email.toString() }
+                    }
+
+                    state.value = CustomerListState.Success(list)
                 }
 
                 is ResourceList.Error -> state.value = CustomerListState.NoDataError

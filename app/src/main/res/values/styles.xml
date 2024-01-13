@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="dashboard_button_txv_normal" parent="">
+        <item name="android:textSize">16sp</item>
+        <item name="android:color">@color/dashboard_button_textColor</item>
+        <item name="android:fontFamily">@font/calibri</item>
+    </style>
+
+    <style name="dashboard_button_txv_big" parent="">
+        <item name="android:textSize">28sp</item>
+        <item name="android:color">@color/dashboard_button_textColor</item>
+        <item name="android:fontFamily">@font/calibri</item>
+    </style>
+
+
+</resources>

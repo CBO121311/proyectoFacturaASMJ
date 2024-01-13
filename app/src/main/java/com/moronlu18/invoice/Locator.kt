@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import androidx.datastore.preferences.preferencesDataStore
 import com.moronlu18.invoice.data.preferences.UserPreferencesRepository
+import com.moronlu18.invoice.ui.preferences.DataStorePreferencesRepository
 
 //Creamos un object para que no crear una instancia en cada fragment.
 //Locator te da los objetos que tu necesitas no lo hace.
@@ -26,8 +27,10 @@ object Locator {
     //Solo el repositorio de la aplicación
     //user_preferences es un xml y este XML es accesible al repositorio.
     //Y todos preguntaran a este locator.
-    private val Context.userStore by preferencesDataStore(name = "user_preferences")
 
+    //crea un fichero que se acaba de guardar en files-> datastore
+    private val Context.userStore by preferencesDataStore(name = "user")
+    private val Context.settingsStore by preferencesDataStore(name = "settings")
 
     //lazy =Se inicialice la primera que lo llames.
     //Este es único para todos.
@@ -35,5 +38,9 @@ object Locator {
 
         //UserPreferencesRepository(application.userStore) //para evitar el nulo se hace requiereApplication.
         UserPreferencesRepository(requireApplication.userStore)
+    }
+
+    val settingsPreferencesRepository by lazy {
+        DataStorePreferencesRepository(requireApplication.settingsStore)
     }
 }

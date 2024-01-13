@@ -64,10 +64,21 @@
     <string name="about_authors_mateodesc">Encargado del módulo Invoice</string>
     <string name="about_authors_sergdesc">Encargado del módulo Task</string>
     <string name="about_authors_serg" translatable="false">Sergio García Vico</string>
-    <string name="about_versionapp" translatable="false">3.6.1</string>
+    <string name="about_versionapp" translatable="false">3.7.1</string>
     <string name="progress_dialog_title">Esperando...</string>
     <string name="dialog_warning_title">Entendido</string>
     <string name="contentDescriptionfab" translatable="false">Botón que será heredado entre los fragment</string>
 
+    <string name="dashboard_txvCustomer">Clientes</string>
+    <string name="dashboard_txvTask">Tareas</string>
+    <string name="dashboard_txvInvoice">Facturas</string>
+    <string name="dashboard_txvSignOut">Desconectar</string>
+    <string name="dashboard_txvAbout">Acerca de</string>
+    <string name="dashboard_txvItem">Artículos</string>
+    <string name="dashboard_txvSignUp">Registro</string>
+    <string name="dashboard_txvSignIn">Login</string>
+
+    <string name="pr_label_setting">Configuración</string>
+    <string name="pr_label_account">Configuración de Cuenta</string>
 
 </resources>

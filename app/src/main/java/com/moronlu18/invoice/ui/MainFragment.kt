@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import com.moronlu18.invoice.Locator
 import com.moronlu18.invoice.base.BaseFragmentDialog
 
 import com.moronlu18.invoice.databinding.FragmentMainBinding
@@ -68,9 +69,32 @@ class MainFragment : Fragment() {
             }
         }
 
+        applyTextStylePreference()
 
     }
+    /**
+     * Aplica el estilo del texto a los TextView en función de la preferencia de tamaño de texto.
+     */
+    private fun applyTextStylePreference() {
+        val bigOrNo = Locator.settingsPreferencesRepository.getBoolean("key_setting_text", false)
 
+        val tvxDashboard = listOf(
+            binding.buttonTxvCustomer,
+            binding.buttonTxvItem,
+            binding.buttonTxvSignIn,
+            binding.buttonTxvSignUp,
+            binding.buttonTxvTask,
+            binding.buttonTxvSignOut,
+            binding.buttonTxvAbout,
+            binding.buttonTxvInvoice
+        )
+
+        val tvxStyle =
+            if (bigOrNo) R.style.dashboard_button_txv_big else R.style.dashboard_button_txv_normal
+        tvxDashboard.forEach { it.setTextAppearance(tvxStyle) }
+    }
+    
+    
     private fun setUpFab() {
         (requireActivity() as? MainActivity)?.fab?.apply {
             visibility = View.VISIBLE
@@ -81,13 +105,16 @@ class MainFragment : Fragment() {
                     Snackbar.make(view, "Implementación futura", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show()
                 } else {
-                    Snackbar.make(view, "No me dejes así, pon una función o hazla no visible <_<\"", Snackbar.LENGTH_LONG)
+                    Snackbar.make(
+                        view,
+                        "No me dejes así, pon una función o hazla no visible <_<\"",
+                        Snackbar.LENGTH_LONG
+                    )
                         .setAction("Action", null).show()
                 }
             }
         }
     }
-
 
 
     @SuppressLint("ClickableViewAccessibility")

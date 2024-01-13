@@ -1,4 +1,4 @@
-package com.moronlu18.accounts.enum
+package com.moronlu18.accounts.enum_entity
 
 enum class TaskStatus {
     PENDIENTE,

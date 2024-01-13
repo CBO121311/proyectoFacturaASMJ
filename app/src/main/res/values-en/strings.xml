@@ -51,4 +51,26 @@
     <string name="about_authors_sergdesc">Task module manager</string>
     <string name="progress_dialog_title">Waiting...</string>
     <string name="dialog_warning_title">Understood</string>
+    <string name="dashboard_txvCustomer">Customers</string>
+    <string name="dashboard_txvTask">Tasks</string>
+    <string name="dashboard_txvInvoice">Invoices</string>
+    <string name="dashboard_txvSignOut">Sign Out</string>
+    <string name="dashboard_txvAbout">About</string>
+    <string name="dashboard_txvItem">Item</string>
+    <string name="dashboard_txvSignUp">Sign Up</string>
+    <string name="dashboard_txvSignIn">Sign In</string>
+    <string name="pr_title_item">Items</string>
+    <string name="pr_title_invoice">Invoices</string>
+    <string name="summary_account">User account information</string>
+    <string name="title_account">User account</string>
+    <string name="title_active_notification">Enable Notifications</string>
+    <string name="listpreference_title_ringtone">Notification Tone</string>
+    <string name="etp_title_email">Email</string>
+    <string name="etp_title_password">User password</string>
+    <string name="pr_title_customer">Customers</string>
+    <string name="pr_title_task">Tasks</string>
+    <string name="pc_title_setting_notificaction">Settings Notifications</string>
+    <string name="pc_title_setting_sort">Sort settings</string>
+    <string name="pr_label_setting">Setting</string>
+    <string name="pr_label_account">Account Setting</string>
 </resources>

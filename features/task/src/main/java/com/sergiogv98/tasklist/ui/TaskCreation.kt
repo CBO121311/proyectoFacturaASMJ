@@ -16,8 +16,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 import com.moronlu18.accounts.entity.Task
-import com.moronlu18.accounts.enum.TaskStatus
-import com.moronlu18.accounts.enum.TypeTask
+import com.moronlu18.accounts.enum_entity.TaskStatus
+import com.moronlu18.accounts.enum_entity.TypeTask
 import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.tasklist.databinding.FragmentTaskCreationBinding
 import com.sergiogv98.usecase.TaskCreationViewModel

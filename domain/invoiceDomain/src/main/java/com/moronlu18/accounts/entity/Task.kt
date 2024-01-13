@@ -1,8 +1,8 @@
 package com.moronlu18.accounts.entity
 
 import android.os.Parcelable
-import com.moronlu18.accounts.enum.TaskStatus
-import com.moronlu18.accounts.enum.TypeTask
+import com.moronlu18.accounts.enum_entity.TaskStatus
+import com.moronlu18.accounts.enum_entity.TypeTask
 import kotlinx.parcelize.Parcelize
 import java.time.Instant
 

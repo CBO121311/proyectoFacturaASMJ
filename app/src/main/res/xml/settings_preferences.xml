@@ -9,31 +9,56 @@
     <PreferenceCategory
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Configuración Notificaciones">
+        android:title="@string/pc_title_setting_notificaction">
         <SwitchPreference
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:defaultValue="false"
             android:key="@string/key_active_notification"
             android:summary="Activación de las notificaciones"
             android:title="@string/title_active_notification" />
         <ListPreference
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:entries="@array/ringtone_entries"
             android:entryValues="@array/ringtone_values"
             android:key="@string/key_notification"
             android:title="@string/listpreference_title_ringtone" />
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="Configuración de texto">
 
-    <!--<ListPreference
-        app:defaultValue="reply"
-        app:entries="@array/reply_entries"
-        app:entryValues="@array/reply_values"
-        app:key="reply"
-        app:title="@string/reply_title"
-        app:useSimpleSummaryProvider="true" />-->
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/key_setting_text"
+            android:title="Textos grandes"
+            android:summaryOn="Activado"
+            android:summaryOff="Desactivado"
+            />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pc_title_setting_sort">
+        <ListPreference
+            android:entries="@array/sort_customer_entries"
+            android:entryValues="@array/sort_customer_values"
+            android:key="@string/key_sort_customer"
+            android:summary="@string/preference_empty"
+            android:title="@string/pr_title_customer" />
+        <ListPreference
+            android:entries="@array/sort_item_entries"
+            android:entryValues="@array/sort_item_values"
+            android:key="@string/key_sort_item"
+            android:summary="@string/preference_empty"
+            android:title="@string/pr_title_item" />
+        <ListPreference
+            android:entries="@array/sort_task_entries"
+            android:entryValues="@array/sort_task_values"
+            android:key="@string/key_sort_task"
+            android:summary="@string/preference_empty"
+            android:title="@string/pr_title_task" />
+        <ListPreference
+            android:entries="@array/sort_invoice_entries"
+            android:entryValues="@array/sort_invoice_values"
+            android:key="@string/key_sort_invoice"
+            android:summary="@string/preference_empty"
+            android:title="@string/pr_title_invoice" />
+    </PreferenceCategory>
 
 
 </PreferenceScreen>

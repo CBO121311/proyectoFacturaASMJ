@@ -1,8 +1,8 @@
 package com.moronlu18.accounts.repository
 
 import com.moronlu18.accounts.entity.Task
-import com.moronlu18.accounts.enum.TaskStatus
-import com.moronlu18.accounts.enum.TypeTask
+import com.moronlu18.accounts.enum_entity.TaskStatus
+import com.moronlu18.accounts.enum_entity.TypeTask
 import com.moronlu18.accounts.network.ResourceList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

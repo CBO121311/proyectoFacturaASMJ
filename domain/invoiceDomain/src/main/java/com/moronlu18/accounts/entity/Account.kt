@@ -1,5 +1,7 @@
 package com.moronlu18.accounts.entity
 
+import com.moronlu18.accounts.enum_entity.AccountState
+
 
 //Patrón factory.
 //Crea objeto de si mismo.
@@ -62,7 +64,7 @@ class Account private constructor(
                 email = email,
                 password=password,
                 displayName = displayName,
-                state=AccountState.UNVERIFIED, //state=state,
+                state= AccountState.UNVERIFIED, //state=state,
                 businessProfile = BusinessProfile(),
             )
         }

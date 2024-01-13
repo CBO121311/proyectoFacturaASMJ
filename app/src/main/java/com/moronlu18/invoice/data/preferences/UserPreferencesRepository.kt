@@ -7,6 +7,12 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 /**
  * Esta clase contiene todos los métodos necesrarios para leer y guardar datos del usuario.
@@ -25,13 +31,51 @@ class UserPreferencesRepository(private val dataStore: DataStore<Preferences>) {
 
         //GlobalScope.launch {  }
 
-        dataStore.edit { preferences ->
-            preferences[EMAIL] = email
-            preferences[PASSWORD] = password
-            preferences[ID] = id
+        GlobalScope.launch(Dispatchers.IO) {
+            dataStore.edit { preferences ->
+                preferences[EMAIL] = email
+                preferences[PASSWORD] = password
+                preferences[ID] = id
+            }
         }
+        //Utilizo clave valor para leerlo
     }
 
+    fun getEmail(): String {
+
+        //dataStore.data es el flujo y esto cogiendo el Email
+        return runBlocking {
+            dataStore.data.map { preferences ->
+                //Quiero leer dentro de este data
+                preferences[EMAIL] ?: "none"
+            }.first() //dame el primer valor
+        }
+
+        //Lo recogemos cuando utilizamos el collect.
+        //Recordamos que lo llamamos desde una corrutina o una función suspendida.
+
+    }
+
+    fun getPassword(): String {
+        return runBlocking {
+            dataStore.data.map { preferences ->
+                //No queremos propagar los nulos.
+                preferences[PASSWORD] ?: "none"
+            }.first() //dame el primer valor
+        }
+
+
+    }
+
+    //Cuidado con los nulls
+    fun savePassword(newPassword: String) {
+        runBlocking {
+            dataStore.edit { preferences -> preferences[PASSWORD] = newPassword }
+        }
+
+    }
+
+    //cada preferencia escribimos que tipo es.
     companion object {
         private val EMAIL = stringPreferencesKey("email")
         private val PASSWORD = stringPreferencesKey("password")

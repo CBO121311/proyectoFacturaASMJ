@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="key_account">Cuentas</string>
+    <string name="key_account" translatable="false">key_account</string>
+
     <string name="summary_account">Información de la cuenta de usuario</string>
-    <string name="title_account">Cuentas de usuario</string>
+    <string name="title_account">Cuenta de usuario</string>
     <string name="title_active_notification">Activar Notificaciones</string>
 
     <string name="listpreference_title_ringtone">Tono Notificación</string>
     <string name="key_active_notification" translatable="false">active_preference</string>
-    <string name="key_notification" translatable="false">notification</string>
-    <string name="key_email" translatable="false">pr_email</string>
-    <string name="key_password" translatable="false">pr_password</string>
-    <string name="etp_title_email">Email</string>
+    <string name="key_notification" translatable="false">key_notification</string>
+    <string name="key_email" translatable="false">key_email</string>
+    <string name="key_password" translatable="false">key_password</string>
+    <string name="etp_title_email">Correo electrónico</string>
     <string name="etp_title_password">Contraseña del usuario</string>
+    <string name="pr_title_customer">Clientes</string>
+    <string name="pr_title_task">Tareas</string>
+    <string name="pr_title_item">Artículos</string>
+    <string name="pr_title_invoice">Facturas</string>
+
+    <string name="pc_title_setting_notificaction">Configuración notificaciones</string>
+    <string name="pc_title_setting_sort">Configuración de ordenación</string>
+    <string name="preference_empty" translatable="false">none</string>
+    <string name="key_sort_invoice" translatable="false">key_sort_invoice</string>
+    <string name="key_sort_task" translatable="false">key_sort_task</string>
+    <string name="key_sort_item" translatable="false">key_sort_item</string>
+    <string name="key_sort_customer" translatable="false">key_sort_customer</string>
+    <string name="key_setting_text" translatable="false">key_setting_text</string>
 
 </resources>

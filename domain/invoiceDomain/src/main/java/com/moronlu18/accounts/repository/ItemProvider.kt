@@ -1,7 +1,7 @@
 package com.moronlu18.accounts.repository
 
 import com.moronlu18.accounts.entity.Item
-import com.moronlu18.accounts.enum.ItemType
+import com.moronlu18.accounts.enum_entity.ItemType
 import com.moronlu18.inovice.R
 
 
