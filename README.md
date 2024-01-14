@@ -173,6 +173,7 @@ de la misma es anterior a la de la creación.
  - Añadido prefijo al customer creation.
  - Y POR FIN, arreglé el error en que el teclado del móvil tapaba los textinputlayout.
 
+- ------------------------
  ### V3.6.3 (31/12/2023)
  *Escrito por SergioGV98*
  - Se han incorporado botones en el menú de la lista de tareas para refrescar y ordenar la lista.
@@ -186,6 +187,7 @@ de la misma es anterior a la de la creación.
 - Control de distintas excepciones utilizando el viewModel
 - Módelo más parecido a MVVM
 - Añadido Splash y about.
+
 - ------------------------  
  ### V3.6.7 (05/01/2024)
  *Escrito por mateotamayoo*
@@ -198,7 +200,8 @@ de la misma es anterior a la de la creación.
  - Cambio en los items del recycler view de Invoice List, se añade el estado de la factura
  - Se ordena en Invoice List por el nombre del cliente
  - Se añade animación en la interfaz de Invoice List
- - ------------------------
+
+- ------------------------
  ### V3.6.8 (11/01/2024)
  *Escrito por CBO121311*
  - Añadido las preferencias.
@@ -206,14 +209,38 @@ de la misma es anterior a la de la creación.
  - Se cambió la forma de subir la foto del customer.
  - Corregido el error del ColorSecondary del tema de la aplicación, que no corresponde con el que era.
  - Arreglado pequeños detalles en el módulo customer
- - ------------------------
+
+- ------------------------
+ ### V3.6.9 (13/01/2024)
+ *Escrito por SergioGV98*
+ - Se ha eliminado el FAB (Floating Action Button) de creación de tarea y se ha utilizado el de la aplicación general.
+ - Se han corregido varios errores relacionados con la carga de la lista de tareas.
+
+- ------------------------
+ ### V3.7.0 (13/01/2024)
+ *Escrito por SergioGV98*
+ - Los iconos de las tarjetas han sido eliminados y reemplazados por un menú accesible mediante pulsación larga.
+ - Ahora, al visualizar la información de una tarea, se incluye la indicación 'Vencida' si la fecha de finalización ha pasado.
+
+- ------------------------
   ### V3.7.1 (13/01/2024)
  *Escrito por CBO121311*
  - Añadido las preferencias los tipos de orden de los módulos y los tamaños textos del dashborad
  - Se ha dado funcionalidad el ordenar de customer y los del texto.
  - Todos las enumeraciones se han añadido en una carpeta
- - ------------------------
- 
+
+- ------------------------
+ ### V3.7.2 (14/01/2024)
+ *Escrito por SergioGV98*
+ - Se han incorporado ajustes en la configuración de tareas, permitiendo a los usuarios ordenar la información según la ID, el nombre del cliente (tanto de manera ascendente como descendente) y por nombre de la tarea.
+
+
+## Características generales
+- Se ha hecho el nav-graph utilizando include-dynamic y cada navegación funciona de forma independiente.
+- Añadir y eliminar son funcionables. En Customer funciona el Editar.
+- Control de distintas excepciones utilizando el viewModel
+- Módelo más parecido a MVVM
+- Añadido Splash y about.
 
 # Logo
 

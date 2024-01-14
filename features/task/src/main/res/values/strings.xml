@@ -33,4 +33,6 @@
     <string name="menu_title_refresh">Refrescar lista de tareas</string>
     <string name="menu_title_sort">Ordenar alfabeticamente</string>
     <string name="task_vencida">Vencida</string>
+    <string name="menu_edit">Editar</string>
+    <string name="menu_delete">Eliminar</string>
 </resources>

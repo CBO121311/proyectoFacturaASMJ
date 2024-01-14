@@ -45,6 +45,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         initPreferencesSortCustomer()
         initPreferencesInvoice()
+        initPreferencesSortTask()
         initPreferencesBigText()
     }
 
@@ -77,6 +78,22 @@ class SettingsFragment : PreferenceFragmentCompat() {
         sort?.setOnPreferenceChangeListener { _, newValue ->
 
             Locator.settingsPreferencesRepository.saveSortInvoice(newValue as String)
+            Handler(Looper.getMainLooper()).post {
+                updateSortSummary(sort)
+            }
+            true
+        }
+    }
+
+    private fun initPreferencesSortTask() {
+        val sort = preferenceManager.findPreference<ListPreference>("key_sort_task")
+
+        sort?.value = Locator.settingsPreferencesRepository.getSortTask()
+        updateSortSummary(sort)
+
+        sort?.setOnPreferenceChangeListener { _, newValue ->
+
+            Locator.settingsPreferencesRepository.saveSortTask(newValue as String)
             Handler(Looper.getMainLooper()).post {
                 updateSortSummary(sort)
             }

@@ -29,7 +29,6 @@ class TaskAdapter(
         taskList = newDataSet
         notifyDataSetChanged()
     }
-
     fun toggleSortOrder() {
         isAscendingOrder = !isAscendingOrder
         sortTasks()

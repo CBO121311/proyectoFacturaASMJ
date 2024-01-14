@@ -180,7 +180,7 @@ class TaskList : Fragment(), MenuProvider {
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return when (menuItem.itemId) {
             R.id.menu_action_refresh -> {
-                viewModel.getTaskList(firstCharge)
+                viewModel.getTaskList(true)
                 true
             }
 

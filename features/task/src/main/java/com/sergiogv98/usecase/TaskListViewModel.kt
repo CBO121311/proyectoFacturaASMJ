@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.moronlu18.accounts.entity.Task
 import com.moronlu18.accounts.network.ResourceList
 import com.moronlu18.accounts.repository.TaskProvider
+import com.moronlu18.invoice.Locator
 import com.sergiogv98.tasklist.ui.TaskListState
 import kotlinx.coroutines.launch
 
@@ -27,7 +28,18 @@ class TaskListViewModel: ViewModel() {
             }
 
             when(result){
-                is ResourceList.Success<*> -> state.value = TaskListState.Success(result.data as ArrayList<Task>)
+                is ResourceList.Success<*> -> {
+                    val task = result.data as ArrayList<Task>
+
+                    when(Locator.settingsPreferencesRepository.getSortTask()){
+                        "id" -> task.sortBy { it.id }
+                        "name_customer_asc" -> task.sortBy { it.clientID.name }
+                        "name_customer_desc" -> task.sortByDescending { it.clientID.name }
+                        "name_task" -> task.sortBy { it.nomTask }
+                    }
+
+                    state.value = TaskListState.Success(task)
+                }
                 is ResourceList.Error -> state.value = TaskListState.NoData
             }
         }
