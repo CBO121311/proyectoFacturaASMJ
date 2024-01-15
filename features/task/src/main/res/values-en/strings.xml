@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="task_details_txt_client">Client</string>
+    <string name="task_details_type_task">Task Type</string>
+    <string name="task_details_txt_date_creation">Creation Date</string>
+    <string name="task_details_txt_date_end">End Date</string>
+    <string name="task_details_txt_description">Task Description</string>
+    <string name="task_details_button">Accept</string>
+    <string name="task_creation_txv_hint_nombre_cliente">Client Name</string>
+    <string name="task_creation_txv_hint_nombre_tarea">Task Name</string>
+    <string name="task_creation_txv_descripcion">Description</string>
+    <string name="task_creation_txt_button_pendiente">Pending</string>
+    <string name="task_creation_txt_button_modificada">Modified</string>
+    <string name="task_creation_txt_button_vencida">Expired</string>
+    <string name="task_creation_txt_button_finalizada">Completed</string>
+    <string name="task_creation_button_add">Create Task</string>
+    <string name="task_creation_txt_button_fecha_creacion">Creation Date</string>
+    <string name="task_creation_txt_button_fecha_finalizacion">End Date</string>
+    <string name="task_list_empty_list">You have no tasks...</string>
+    <string name="task_list_customer_help_text">Required field</string>
+    <string name="task_list_task_help_text">Required field</string>
+    <string name="title_list_task">Task List</string>
+    <string name="title_task_creation">Task Creation</string>
+    <string name="title_task_detail">Task Details</string>
+    <string name="delete_task_info_general">By confirming this action, you will delete the selected task.</string>
+    <string name="delete_task_info">Are you sure you want to proceed with the deletion?</string>
+    <string name="task_creation_date_creation_txt">Creation Date</string>
+    <string name="task_creation_date_fin_txt">End Date</string>
+
+    <string name="dropdown">Dropdown Menu</string>
+    <string name="select">Selected Client</string>
+    <string name="title_taskDialogExit">Do you want to delete the task?</string>
+    <string name="menu_title_refresh">Refresh Task List</string>
+    <string name="menu_title_sort">Sort Alphabetically</string>
+    <string name="task_vencida">Expired</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_delete">Delete</string>
+
+</resources>
