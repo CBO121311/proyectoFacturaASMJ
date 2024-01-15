@@ -57,10 +57,10 @@ class TaskCreation : Fragment() {
 
 
 
-            binding.autoCompleteTxt.setText(viewModel.giveClientName(taskEdit.clientID.id))
+            binding.autoCompleteTxt.setText(viewModel.giveClientName(taskEdit.customerID.id))
             binding.taskCreationTxvTaskName.setText(taskEdit.nomTask)
-            binding.taskCreationButtonDateCreation.text = processDateString(taskEdit.fechCreation)
-            binding.taskCreationButtonDateEnd.text = processDateString(taskEdit.fechFinalization)
+            binding.taskCreationButtonDateCreation.text = processDateString(taskEdit.dateCreation)
+            binding.taskCreationButtonDateEnd.text = processDateString(taskEdit.dateFinalization)
             binding.taskCreationTxvDescription.setText(taskEdit.descTask)
             binding.taskCreationTypeTaskList.setSelection(returnTaskType(taskEdit))
             setTaskStatusInRadioGroup(taskEdit)
@@ -143,31 +143,31 @@ class TaskCreation : Fragment() {
         val selectedClient = viewModel.taskGiveCustomerId(selectedClientName)
         val nameTask = binding.taskCreationTxvTaskName.text.toString()
         val description = binding.taskCreationTxvDescription.text.toString()
-        val fechaCreation = processDate(binding.taskCreationButtonDateCreation.text.toString())
-        val fechaEnd = processDate(binding.taskCreationButtonDateEnd.text.toString())
+        val dateCreation = processDate(binding.taskCreationButtonDateCreation.text.toString())
+        val dateEnd = processDate(binding.taskCreationButtonDateEnd.text.toString())
 
         if (viewModel.getEditorMode()) {
             val updateTask = Task(
                 id = editTaskPos,
-                clientID = selectedClient!!,
+                customerID = selectedClient!!,
                 nomTask = nameTask,
                 typeTask = taskTypeChoose(),
                 taskStatus = taskStatusChoose(),
                 descTask = description,
-                fechCreation = fechaCreation,
-                fechFinalization = fechaEnd
+                dateCreation = dateCreation,
+                dateFinalization = dateEnd
             )
             viewModel.updateTask(updateTask, editTaskPos)
         } else {
             val task = Task(
                 id = viewModel.taskGiveId(),
-                clientID = selectedClient!!,
+                customerID = selectedClient!!,
                 nomTask = nameTask,
                 typeTask = taskTypeChoose(),
                 taskStatus = taskStatusChoose(),
                 descTask = description,
-                fechCreation = fechaCreation,
-                fechFinalization = fechaEnd
+                dateCreation = dateCreation,
+                dateFinalization = dateEnd
             )
             viewModel.addTaskRepository(task)
         }

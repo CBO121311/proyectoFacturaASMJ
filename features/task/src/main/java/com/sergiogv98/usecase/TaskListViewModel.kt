@@ -24,7 +24,7 @@ class TaskListViewModel: ViewModel() {
                 result = TaskProvider.getTaskList()
                 state.value = TaskListState.Loading(false)
             } else {
-                result = TaskProvider.getTaskList()
+                result = TaskProvider.getTaskListNoCharge()
             }
 
             when(result){
@@ -33,8 +33,8 @@ class TaskListViewModel: ViewModel() {
 
                     when(Locator.settingsPreferencesRepository.getSortTask()){
                         "id" -> task.sortBy { it.id }
-                        "name_customer_asc" -> task.sortBy { it.clientID.name }
-                        "name_customer_desc" -> task.sortByDescending { it.clientID.name }
+                        "name_customer_asc" -> task.sortBy { it.customerID.name }
+                        "name_customer_desc" -> task.sortByDescending {  it.customerID.name }
                         "name_task" -> task.sortBy { it.nomTask }
                     }
 

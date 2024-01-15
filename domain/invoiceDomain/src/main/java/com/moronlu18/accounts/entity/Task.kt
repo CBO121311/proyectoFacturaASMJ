@@ -9,11 +9,11 @@ import java.time.Instant
 @Parcelize
 data class Task(
     val id: Int,
-    val clientID: Customer,
+    val customerID: Customer,
     val nomTask: String,
     val typeTask: TypeTask,
     val taskStatus: TaskStatus,
     val descTask: String,
-    val fechCreation: Instant,
-    val fechFinalization: Instant
+    val dateCreation: Instant,
+    val dateFinalization: Instant
 ) : Parcelable

@@ -68,6 +68,15 @@ class TaskProvider {
             }
         }
 
+        suspend fun getTaskListNoCharge(): ResourceList {
+            return withContext(Dispatchers.IO) {
+                when {
+                    taskDataSet.isEmpty() -> ResourceList.Error(Exception("Lista de Tareas vacia"))
+                    else -> ResourceList.Success(taskDataSet as ArrayList<Task>)
+                }
+            }
+        }
+
         fun getTasks(): List<Task> {
             return taskDataSet
         }
@@ -80,7 +89,7 @@ class TaskProvider {
          * Comprueba si el id de cliente está en Task
          */
         fun isCustomerReferenceTask(idCli: Int): Boolean {
-            return taskDataSet.any() { it.clientID.id == idCli }
+            return taskDataSet.any() { it.customerID.id == idCli }
         }
     }
 }

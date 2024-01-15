@@ -26,11 +26,11 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         this.onClickDeleted = onClickDeleted
         this.onClickEdit = onClickEdit
 
-        binding.taskClientName.text = CustomerProvider.getCustomerNameById(task.clientID.id)
+        binding.taskClientName.text = CustomerProvider.getCustomerNameById(task.customerID.id)
         binding.taskName.text = task.nomTask
         binding.taskDescription.text = task.descTask
-        binding.taskCreationDate.text = task.fechCreation.toString().substring(0, task.fechCreation.toString().lastIndexOf("T"))
-        binding.taskEndDate.text = task.fechFinalization.toString().substring(0, task.fechFinalization.toString().lastIndexOf("T"))
+        binding.taskCreationDate.text = task.dateCreation.toString().substring(0, task.dateCreation.toString().lastIndexOf("T"))
+        binding.taskEndDate.text = task.dateFinalization.toString().substring(0, task.dateFinalization.toString().lastIndexOf("T"))
 
         itemView.setOnClickListener { onClickListener(task) }
         itemView.setOnLongClickListener {
