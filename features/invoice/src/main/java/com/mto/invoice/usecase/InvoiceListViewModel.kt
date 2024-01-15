@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.moronlu18.accounts.entity.Factura
+import com.moronlu18.accounts.entity.Invoice
 import com.moronlu18.accounts.network.ResourceList
-import com.moronlu18.accounts.repository.FacturaProvider
+import com.moronlu18.accounts.repository.InvoiceProvider
 import com.moronlu18.invoice.Locator
 import kotlinx.coroutines.launch
 
@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 class InvoiceListViewModel : ViewModel() {
 
     private var state = MutableLiveData<InvoiceListState>()
-    private lateinit var invoiceDeleted: Factura
+    private lateinit var invoiceDeleted: Invoice
 
     /**
      * Función que pide el listado con una pantalla de carga
@@ -23,22 +23,22 @@ class InvoiceListViewModel : ViewModel() {
     fun getInvoiceList() {
         viewModelScope.launch {
             state.value = InvoiceListState.Loading(true)
-            val result = FacturaProvider.getInvoiceList()
+            val result = InvoiceProvider.getInvoiceList()
             state.value = InvoiceListState.Loading(false)
 
             when (result) {
                 is ResourceList.Success<*> -> {
-                    val facturas = result.data as ArrayList<Factura>
+                    val invoices = result.data as ArrayList<Invoice>
 
                     val sortPreference = Locator.settingsPreferencesRepository.getSortInvoice()
                     when(sortPreference){
-                        "id" -> facturas.sortBy { it.id }
-                        "name_asc" -> facturas.sortBy { it.customer.name }
-                        "name_desc" -> facturas.sortByDescending { it.customer.name }
-                        "status" -> facturas.sortBy { it.status.toString() }
-                        "total" -> facturas.sortBy { it.number.toString() }
+                        "id" -> invoices.sortBy { it.id }
+                        "name_asc" -> invoices.sortBy { it.customer.name }
+                        "name_desc" -> invoices.sortByDescending { it.customer.name }
+                        "status" -> invoices.sortBy { it.status.toString() }
+                        "total" -> invoices.sortBy { it.number.toString() }
                     }
-                    state.value = InvoiceListState.Success(facturas)
+                    state.value = InvoiceListState.Success(invoices)
                 }
 
 
@@ -53,19 +53,19 @@ class InvoiceListViewModel : ViewModel() {
     fun getListWithoutLoading() {
         viewModelScope.launch {
 
-            when (val result = FacturaProvider.getListWithoutLoading()) {
+            when (val result = InvoiceProvider.getListWithoutLoading()) {
                 is ResourceList.Success<*> -> {
-                    val facturas = result.data as ArrayList<Factura>
+                    val invoices = result.data as ArrayList<Invoice>
                     val sortPreference = Locator.settingsPreferencesRepository.getSortInvoice()
 
                     when(sortPreference){
-                        "id" -> facturas.sortBy { it.id }
-                        "name_asc" -> facturas.sortBy { it.customer.name }
-                        "name_desc" -> facturas.sortByDescending { it.customer.name }
-                        "status" -> facturas.sortBy { it.status.toString() }
-                        "total" -> facturas.sortBy { it.number.toString() }
+                        "id" -> invoices.sortBy { it.id }
+                        "name_asc" -> invoices.sortBy { it.customer.name }
+                        "name_desc" -> invoices.sortByDescending { it.customer.name }
+                        "status" -> invoices.sortBy { it.status.toString() }
+                        "total" -> invoices.sortBy { it.number.toString() }
                     }
-                    state.value = InvoiceListState.Success(facturas)
+                    state.value = InvoiceListState.Success(invoices)
                 }
 
                 is ResourceList.Error -> state.value = InvoiceListState.NoDataSet
@@ -73,8 +73,8 @@ class InvoiceListViewModel : ViewModel() {
         }
     }
 
-    fun getPosByInvoice(factura: Factura): Int {
-        return FacturaProvider.getPosByInvoice(factura)
+    fun getPosByInvoice(invoice: Invoice): Int {
+        return InvoiceProvider.getPosByInvoice(invoice)
     }
 
     /**

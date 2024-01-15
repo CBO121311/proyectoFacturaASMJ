@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 import java.time.Instant
 
 @Parcelize
-data class Factura(
+data class Invoice(
     val id:Int,
     val customer: Customer,
     val number: Double,

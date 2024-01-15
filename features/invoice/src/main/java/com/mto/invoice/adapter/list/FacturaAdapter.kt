@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.moronlu18.invoicelist.R
-import com.moronlu18.accounts.entity.Factura
+import com.moronlu18.accounts.entity.Invoice
 
 class FacturaAdapter(
-    private val onClickListener:(Factura) -> Unit
+    private val onClickListener:(Invoice) -> Unit
 ) : RecyclerView.Adapter<FacturaViewHolder>(){
 
-    private var facturaList = arrayListOf<Factura>()
+    private var invoiceList = arrayListOf<Invoice>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FacturaViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context);
@@ -18,20 +18,20 @@ class FacturaAdapter(
     }
 
     override fun onBindViewHolder(holder: FacturaViewHolder, position: Int) {
-        val item = facturaList[position]
+        val item = invoiceList[position]
         holder.render(item, onClickListener)
     }
 
-    fun update(newDataSet:ArrayList<Factura>){
-        facturaList = newDataSet
+    fun update(newDataSet:ArrayList<Invoice>){
+        invoiceList = newDataSet
         notifyDataSetChanged()
     }
 
     fun sort() {
-        facturaList.sortBy { it.customer.name }
+        invoiceList.sortBy { it.customer.name }
         notifyDataSetChanged()
     }
 
-    override fun getItemCount(): Int = facturaList.size
+    override fun getItemCount(): Int = invoiceList.size
 
 }

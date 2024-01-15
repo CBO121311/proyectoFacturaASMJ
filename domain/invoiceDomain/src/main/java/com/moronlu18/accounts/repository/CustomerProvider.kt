@@ -85,7 +85,7 @@ class CustomerProvider private constructor() {
          */
         fun isCustomerSafeDelete(customerId: Int): Boolean {
 
-            return FacturaProvider.isCustomerReferenceFactura(customerId) ||
+            return InvoiceProvider.isCustomerReferenceFactura(customerId) ||
                     TaskProvider.isCustomerReferenceTask(customerId)
         }
 

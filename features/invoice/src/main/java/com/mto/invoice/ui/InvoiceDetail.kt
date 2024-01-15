@@ -20,7 +20,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.moronlu18.accounts.entity.Factura
+import com.moronlu18.accounts.entity.Invoice
 import com.moronlu18.accounts.entity.Item
 import com.moronlu18.invoice.base.BaseFragmentDialog
 import com.moronlu18.invoice.ui.MainActivity
@@ -38,7 +38,7 @@ class InvoiceDetail : Fragment(), MenuProvider {
     private var _binding: FragmentInvoiceDetailBinding? = null
     private val viewmodeldetail: InvoiceDetailViewModel by viewModels()
     private val doubleClickDelay = 200L
-    private lateinit var factura: Factura
+    private lateinit var invoice: Invoice
     private var posInvoice: Int = 0
 
     private val binding get() = _binding!!
@@ -68,7 +68,7 @@ class InvoiceDetail : Fragment(), MenuProvider {
         parentFragmentManager.setFragmentResultListener("detailkey", this,
             FragmentResultListener { _, result ->
                 posInvoice = result.getInt("detailposition")
-                factura = viewmodeldetail.getInvoiceByPos(posInvoice)
+                invoice = viewmodeldetail.getInvoiceByPos(posInvoice)
             }
         )
 
@@ -80,12 +80,12 @@ class InvoiceDetail : Fragment(), MenuProvider {
             DateTimeFormatter.ofPattern("dd/MM/yyyy").withZone(ZoneId.systemDefault())
 
         viewmodeldetail.let {
-            it.user.value = factura.customer.name
-            it.startDate.value = formatoFecha.format(factura.issuedDate)
-            it.endDate.value = formatoFecha.format(factura.dueDate)
-            it.status.value = factura.status.toString()
-            it.total.value = viewmodeldetail.giveTotal(factura.lineItems!!.toMutableList())
-            binding.invoiceDetailTvEstado.setTextColor(setColorEstado(factura.status.toString()))
+            it.user.value = invoice.customer.name
+            it.startDate.value = formatoFecha.format(invoice.issuedDate)
+            it.endDate.value = formatoFecha.format(invoice.dueDate)
+            it.status.value = primerCaracterMayuscula(invoice.status.toString())
+            it.total.value = viewmodeldetail.giveTotal(invoice.lineItems!!.toMutableList())
+            binding.invoiceDetailTvEstado.setTextColor(setColorEstado(invoice.status.toString()))
             initReciclerView()
         }
 
@@ -96,14 +96,22 @@ class InvoiceDetail : Fragment(), MenuProvider {
      * en función del estado de la factura
      */
     fun setColorEstado(status: String): Int {
-        if (status.equals("Pendiente")) {
-            return Color.parseColor("#FF1100")
-        }else if(status.equals("Pagada")) {
-            return Color.parseColor("#217C00")
+        return if (status.equals("PENDIENTE")) {
+             Color.parseColor("#FF1100")
+        }else if(status.equals("PAGADA")) {
+             Color.parseColor("#217C00")
         }else {
-            return Color.parseColor("#978303")
+             Color.parseColor("#978303")
         }
 
+    }
+
+    /**
+     * Función que recibe un string y lo devuelve con todas las letras, menos la primera,
+     * a minúscula
+     */
+    fun primerCaracterMayuscula(texto: String): String {
+        return texto.substring(0, 1) + texto.substring(1).lowercase()
     }
 
 
@@ -112,7 +120,7 @@ class InvoiceDetail : Fragment(), MenuProvider {
 
         binding.invoiceDetailRvArticulos.layoutManager = manager
         binding.invoiceDetailRvArticulos.adapter =
-            ItemAdapter(factura.lineItems!!.toMutableList()) { item ->
+            ItemAdapter(invoice.lineItems!!.toMutableList()) { item ->
                 onItemSelected(
                     item
                 )
@@ -164,7 +172,7 @@ class InvoiceDetail : Fragment(), MenuProvider {
 
             R.id.menu_cd_action_edit -> {
                 Handler(Looper.getMainLooper()).postDelayed({
-                    onEditItem(factura)
+                    onEditItem(invoice)
                 }, doubleClickDelay)
                 true
             }
@@ -180,12 +188,12 @@ class InvoiceDetail : Fragment(), MenuProvider {
     override fun onResume() {
         super.onResume()
 
-        factura = viewmodeldetail.getInvoiceByPos(posInvoice)
+        invoice = viewmodeldetail.getInvoiceByPos(posInvoice)
         viewmodeldetail.onSuccess()
     }
 
-    private fun onEditItem(factura: Factura) {
-        val posInvoice = viewmodeldetail.getPosByInvoice(factura)
+    private fun onEditItem(invoice: Invoice) {
+        val posInvoice = viewmodeldetail.getPosByInvoice(invoice)
         val bundle = Bundle();
         bundle.putInt("position", posInvoice)
         parentFragmentManager.setFragmentResult("invoicekey", bundle)
@@ -206,7 +214,7 @@ class InvoiceDetail : Fragment(), MenuProvider {
         ) { _, result ->
             val success = result.getBoolean(BaseFragmentDialog.result, false)
             if (success) {
-                viewmodeldetail.deleteInvoice(factura)
+                viewmodeldetail.deleteInvoice(invoice)
                 Handler(Looper.getMainLooper()).postDelayed({
                     findNavController().popBackStack()
                 }, 100)

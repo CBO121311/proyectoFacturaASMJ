@@ -5,10 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.moronlu18.accounts.entity.Customer
-import com.moronlu18.accounts.entity.Factura
+import com.moronlu18.accounts.entity.Invoice
 import com.moronlu18.accounts.entity.Item
 import com.moronlu18.accounts.repository.CustomerProvider
-import com.moronlu18.accounts.repository.FacturaProvider
+import com.moronlu18.accounts.repository.InvoiceProvider
 import com.moronlu18.accounts.repository.ItemProvider
 import com.mto.invoice.adapter.creation.ItemCreationAdapter
 import java.time.LocalDate
@@ -58,15 +58,15 @@ class InvoiceCreationViewModel: ViewModel() {
         }
     }
 
-    fun addRepository(factura: Factura) {
-        FacturaProvider.dataSet.add(factura)
+    fun addRepository(invoice: Invoice) {
+        InvoiceProvider.dataSet.add(invoice)
     }
-    fun editRepository(factura: Factura, posInvoice: Int) {
-        FacturaProvider.addOrUpdateInvoice(factura, posInvoice)
+    fun editRepository(invoice: Invoice, posInvoice: Int) {
+        InvoiceProvider.addOrUpdateInvoice(invoice, posInvoice)
     }
 
-    fun getInvoicePos(position:Int): Factura {
-        return FacturaProvider.getInvoicePos(position)
+    fun getInvoicePos(position:Int): Invoice {
+        return InvoiceProvider.getInvoicePos(position)
     }
     fun getCustomerById(id:Int): Customer? {
         return CustomerProvider.getCustomerbyID(id)
@@ -74,13 +74,13 @@ class InvoiceCreationViewModel: ViewModel() {
     }
 
     fun giveId(): Int {
-        return FacturaProvider.obtainsId()
+        return InvoiceProvider.obtainsId()
     }
     fun giveNom(): String {
         return CustomerProvider.getNom(user.value.toString().toInt())
     }
-    fun giveIdEditor(factura: Factura): Int {
-        return FacturaProvider.obtainsIdByInvoice(factura)
+    fun giveIdEditor(invoice: Invoice): Int {
+        return InvoiceProvider.obtainsIdByInvoice(invoice)
     }
 
     fun giveTotal(lista: MutableList<Item>) : String{

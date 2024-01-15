@@ -16,7 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import com.moronlu18.accounts.entity.Factura
+import com.moronlu18.accounts.entity.Invoice
 import com.moronlu18.accounts.enum_entity.InvoiceStatus
 import com.moronlu18.accounts.entity.Item
 import com.moronlu18.invoice.ui.MainActivity
@@ -124,12 +124,12 @@ class InvoiceCreation : Fragment() {
     }
 
     private fun parse(text: String): InvoiceStatus {
-        if ("Pagada".equals(text)) {
-            return InvoiceStatus.Pagada
-        } else if ("Vencida".equals(text)) {
-            return InvoiceStatus.Vencida
+        if ("PAGADA".equals(text)) {
+            return InvoiceStatus.PAGADA
+        } else if ("VENCIDA".equals(text)) {
+            return InvoiceStatus.VENCIDA
         } else {
-            return InvoiceStatus.Pendiente
+            return InvoiceStatus.PENDIENTE
         }
 
     }
@@ -143,7 +143,7 @@ class InvoiceCreation : Fragment() {
         val items = itemMutableList.toList()
 
         if(viewmodel.getEditorMode()) {
-            val editInvoice = Factura(
+            val editInvoice = Invoice(
                 id = viewmodel.giveIdEditor(viewmodel.getInvoicePos(InvoiceSelected)),
                 customer = viewmodel.getCustomerById(customId)!!,
                 number = numb.subSequence(0, numb.length - 1).toString().toDouble(),
@@ -154,7 +154,7 @@ class InvoiceCreation : Fragment() {
             )
             viewmodel.editRepository(editInvoice,InvoiceSelected)
         }else {
-            val invoice = Factura(
+            val invoice = Invoice(
                 id = viewmodel.giveId() + 1,
                 customer = viewmodel.getCustomerById(customId)!!,
                 number = numb.subSequence(0, numb.length - 1).toString().toDouble(),

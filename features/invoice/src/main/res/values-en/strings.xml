@@ -1,2 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="invoiceCreation">Invoice Creation</string>
+    <string name="invoiceList">Invoice List</string>
+    <string name="invoiceDetail">Invoice Detail</string>
+    <string name="tvVacio">Invoice list is empty</string>
+    <string name="item_fa_Factura">Invoice:</string>
+    <string name="item_fa_EstadoText">Status:</string>
+    <string name="item_fa_Cliente">Customer:</string>
+    <string name="item_fa_FechaEm">D.broadcast:</string>
+    <string name="item_fa_FechaFi">D.end:</string>
+    <string name="item_fa_Total">Total:</string>
+    <string name="item_fa_Estado">Earring</string>
+    <string name="invoice_item_btnEdi">Edit button</string>
+    <string name="invoice_item_btnDelete">Delete button</string>
+    <string name="invoice_item_ivKiwi">Kiwi</string>
+    <string name="tieCliente">Customer:</string>
+    <string name="tieFechaEm">D.broadcast:</string>
+    <string name="tieFechaFin">D.end</string>
+    <string name="tieArticulosFactura">Items in invoice</string>
+    <string name="tvTotal">Total:</string>
+    <string name="invoice_detail_descCalendar">Calendar image</string>
+    <string name="invoice_detail_descUser">Calendar user</string>
+    <string name="tvPendiente">Earring</string>
+    <string name="tvDatos">Invoice data</string>
+    <string name="itemList_fab_text">Add item</string>
+    <string name="itemItem_tvType_text">Type:</string>
+    <string name="itemItem_tvRate_text">Rate:</string>
+    <string name="itemItem_tvTaxable_text">Taxes:</string>
+    <string name="itemItem_tvNamePrueba">wristwatch</string>
+    <string name="itemItem_tvTypePrueba">item</string>
+    <string name="itemItem_tvDescriptionPrueba">Instrument for telling time, worn on the wrist</string>
+    <string name="itemItem_tvDescriptionImg">illustrative image</string>
+    <string name="ie_tbFacturas">Invoices</string>
+    <string name="ie_tieCliente">Customer</string>
+    <string name="ie_tieFechaEm">D.broadcast</string>
+    <string name="ie_tieFechaFin">D.end</string>
+    <string name="btnAñadir">Add item</string>
+    <string name="tieCliente_description">User image</string>
+    <string name="tieArticulos">Items</string>
+    <string name="tvObligatorio">*mandatory</string>
+    <string name="tvDisponibles">Available</string>
+    <string name="tvAñadidos">Added</string>
+    <string name="ie_tvTotal">Total:</string>
+    <string name="ie_itemItem_tvNamePrueba">wristwatch</string>
+    <string name="ie_borrarArticulo">Delete item</string>
+    <string name="title_deleteInvoice">Confirmation</string>
+    <string name="Content_deleteInvoice">Are you sure you want to delete the invoice?</string>
+    <string name="cl_menu_edit">Edit</string>
+    <string name="cl_menu_delete">Delete</string>
+</resources>

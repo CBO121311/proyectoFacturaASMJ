@@ -90,7 +90,7 @@ class ItemProvider {
         }
 
         fun referencedItem(idItem: Int): Boolean {
-            return FacturaProvider.itemReferenceInvoice(idItem)
+            return InvoiceProvider.itemReferenceInvoice(idItem)
         }
 
         fun getTotal(lista: MutableList<Item>): String {
