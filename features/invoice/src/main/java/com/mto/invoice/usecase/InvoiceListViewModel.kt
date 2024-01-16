@@ -36,7 +36,6 @@ class InvoiceListViewModel : ViewModel() {
                         "name_asc" -> invoices.sortBy { it.customer.name }
                         "name_desc" -> invoices.sortByDescending { it.customer.name }
                         "status" -> invoices.sortBy { it.status.toString() }
-                        "total" -> invoices.sortBy { it.number.toString() }
                     }
                     state.value = InvoiceListState.Success(invoices)
                 }
@@ -63,7 +62,6 @@ class InvoiceListViewModel : ViewModel() {
                         "name_asc" -> invoices.sortBy { it.customer.name }
                         "name_desc" -> invoices.sortByDescending { it.customer.name }
                         "status" -> invoices.sortBy { it.status.toString() }
-                        "total" -> invoices.sortBy { it.number.toString() }
                     }
                     state.value = InvoiceListState.Success(invoices)
                 }

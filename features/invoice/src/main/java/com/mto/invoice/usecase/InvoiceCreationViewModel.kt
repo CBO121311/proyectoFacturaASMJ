@@ -82,9 +82,11 @@ class InvoiceCreationViewModel: ViewModel() {
     fun giveIdEditor(invoice: Invoice): Int {
         return InvoiceProvider.obtainsIdByInvoice(invoice)
     }
-
     fun giveTotal(lista: MutableList<Item>) : String{
         return ItemProvider.getTotal(lista)
+    }
+    fun giveNumber():String {
+        return InvoiceProvider.giveNumberInvoice()
     }
     fun giveListItem(): MutableList<Item> {
         return ItemProvider.dataSetItem

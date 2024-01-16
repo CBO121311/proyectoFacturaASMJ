@@ -17,7 +17,7 @@ class FacturaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         ) {
 
-        binding.itemFacturaIvtTotal.text = "Total: ${invoiceModel.number}"
+        binding.itemFacturaIvtNumber.text = invoiceModel.number
         binding.itemFacturaTvId.text = invoiceModel.id.toString()
         binding.itemFacturaTvCliente.text = invoiceModel.customer.name
         with(binding.itemFacturaEstado) {

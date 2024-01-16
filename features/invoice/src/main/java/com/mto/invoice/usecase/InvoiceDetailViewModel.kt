@@ -16,12 +16,18 @@ class InvoiceDetailViewModel: ViewModel() {
     var status = MutableLiveData<String>()
     var startDate = MutableLiveData<String>()
     var endDate = MutableLiveData<String>()
+    var number = MutableLiveData<String>()
     var adapter = MutableLiveData<ItemAdapter>()
     var total = MutableLiveData<String>()
+
     private var state = MutableLiveData<InvoiceDetailState>()
 
     fun giveTotal(lista: MutableList<Item>): String {
         return ItemProvider.getTotal(lista)
+    }
+
+    fun giveNumber():String {
+        return InvoiceProvider.giveNumberInvoice()
     }
 
     fun getPosByInvoice(invoice: Invoice): Int {

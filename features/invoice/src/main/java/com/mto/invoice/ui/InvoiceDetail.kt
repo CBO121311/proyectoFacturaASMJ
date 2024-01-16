@@ -84,6 +84,7 @@ class InvoiceDetail : Fragment(), MenuProvider {
             it.startDate.value = formatoFecha.format(invoice.issuedDate)
             it.endDate.value = formatoFecha.format(invoice.dueDate)
             it.status.value = primerCaracterMayuscula(invoice.status.toString())
+            it.number.value = viewmodeldetail.giveNumber()
             it.total.value = viewmodeldetail.giveTotal(invoice.lineItems!!.toMutableList())
             binding.invoiceDetailTvEstado.setTextColor(setColorEstado(invoice.status.toString()))
             initReciclerView()

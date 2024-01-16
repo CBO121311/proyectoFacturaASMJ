@@ -9,7 +9,7 @@ import java.time.Instant
 data class Invoice(
     val id:Int,
     val customer: Customer,
-    val number: Double,
+    val number: String,
     val status: InvoiceStatus,
     val issuedDate: Instant,
     val dueDate: Instant,

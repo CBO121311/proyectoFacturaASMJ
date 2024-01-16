@@ -32,7 +32,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/item_factura_ivtTotal"
+                android:id="@+id/item_factura_ivtNumber"
                 style="@style/ilFac"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                 android:layout_marginEnd="24dp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/item_factura_tvCliente"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:text="@string/item_fa_Total" />
+                tools:text="@string/tvNumber" />
 
             <TextView
                 android:id="@+id/item_factura_tvId"

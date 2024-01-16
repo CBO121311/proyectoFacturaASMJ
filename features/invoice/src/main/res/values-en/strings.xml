@@ -48,4 +48,5 @@
     <string name="Content_deleteInvoice">Are you sure you want to delete the invoice?</string>
     <string name="cl_menu_edit">Edit</string>
     <string name="cl_menu_delete">Delete</string>
+    <string name="tvNumber">Number</string>
 </resources>

@@ -13,6 +13,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import java.time.Duration
 import java.time.Instant
+import java.util.Calendar
+import kotlin.random.Random
 
 class InvoiceProvider private constructor() {
     companion object {
@@ -35,7 +37,7 @@ class InvoiceProvider private constructor() {
                         "Main Street, 123",
                         phototrial = R.drawable.kiwituxedo
                     ),
-                    number =  3.72,
+                    number =  giveNumberInvoice(),
                     status = InvoiceStatus.PENDIENTE,
                     issuedDate = Instant.now(),
                     dueDate = Instant.now().plus(Duration.ofDays(30)),
@@ -74,7 +76,7 @@ class InvoiceProvider private constructor() {
                         "Kurfürstendamm, 123", //R.drawable.elephantuxedo
                         phototrial = R.drawable.elephantuxedo
                     ),
-                    number = 3.46,
+                    number = giveNumberInvoice(),
                     status = InvoiceStatus.PAGADA,
                     issuedDate = Instant.now(),
                     dueDate = Instant.now().plus(Duration.ofDays(15)),
@@ -128,7 +130,7 @@ class InvoiceProvider private constructor() {
                         "Avenida Reino de Valencia, 789",
                         phototrial = R.drawable.kangorutuxedo
                     ),
-                    number = 3.46,
+                    number = giveNumberInvoice(),
                     status = InvoiceStatus.PAGADA,
                     issuedDate = Instant.now(),
                     dueDate = Instant.now().plus(Duration.ofDays(15)),
@@ -182,7 +184,7 @@ class InvoiceProvider private constructor() {
                         "Main Street, 123",
                         phototrial = R.drawable.kiwituxedo
                     ),
-                    number = 3.46,
+                    number = giveNumberInvoice(),
                     status = InvoiceStatus.VENCIDA,
                     issuedDate = Instant.now(),
                     dueDate = Instant.now().plus(Duration.ofDays(15)),
@@ -227,6 +229,34 @@ class InvoiceProvider private constructor() {
 
         }
 
+        /**
+         * Función que genera un string aleatorio para el número de la factura
+         * que comienza por los cuatro digitos del año actual
+         */
+        fun generateNumberInvoice(): String {
+            val añoActual = Calendar.getInstance().get(Calendar.YEAR).toString()
+            val longitudRestante = 8 - añoActual.length
+            val caracteresAleatorios = (1..longitudRestante)
+                .map { Random.nextInt(0, 10).toString() }
+                .joinToString("")
+
+            return añoActual + caracteresAleatorios
+        }
+
+        /**
+         * Función que asigna un número a la factura comprobando que no
+         * exista en ninguna otra
+         */
+        fun giveNumberInvoice():String {
+            lateinit var numberInvoice:String
+            val numbers = dataSet.map { it.number }
+            do {
+                numberInvoice = generateNumberInvoice()
+            }while (numbers.contains(numberInvoice))
+            return numberInvoice
+
+
+        }
 
         suspend fun getInvoiceList(): ResourceList {
             return withContext(Dispatchers.IO) {

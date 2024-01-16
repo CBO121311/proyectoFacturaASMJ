@@ -146,7 +146,7 @@ class InvoiceCreation : Fragment() {
             val editInvoice = Invoice(
                 id = viewmodel.giveIdEditor(viewmodel.getInvoicePos(InvoiceSelected)),
                 customer = viewmodel.getCustomerById(customId)!!,
-                number = numb.subSequence(0, numb.length - 1).toString().toDouble(),
+                number = viewmodel.giveNumber(),
                 status = parse(stat),
                 issuedDate = issued,
                 dueDate = due,
@@ -157,7 +157,7 @@ class InvoiceCreation : Fragment() {
             val invoice = Invoice(
                 id = viewmodel.giveId() + 1,
                 customer = viewmodel.getCustomerById(customId)!!,
-                number = numb.subSequence(0, numb.length - 1).toString().toDouble(),
+                number = viewmodel.giveNumber(),
                 status = parse(stat),
                 issuedDate = issued,
                 dueDate = due,
