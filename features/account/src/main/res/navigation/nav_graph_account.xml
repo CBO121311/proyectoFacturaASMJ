@@ -2,36 +2,29 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@id/nav_graph_account"
-    app:startDestination="@id/accountSignIn">
+    app:startDestination="@id/AccountSignInFragment">
 
-    <fragment
-        android:id="@+id/accountSignIn"
-        android:name="com.moronlu18.account.ui.SignInFragment"
-        android:label="@string/title_accountsigin" >
-        <action
-            android:id="@+id/action_accountSignIn_to_blankFragmentpRUEBA2"
-            app:destination="@id/SignInFragmentV2" />
-        <action
-            android:id="@+id/action_accountSignIn_to_baseFragmentDialog"
-            app:destination="@id/baseFragmentDialog" />
-        <action
-            android:id="@+id/action_accountSignIn_to_fragmentProgressDialog"
-            app:destination="@id/fragmentProgressDialog" />
-        <action
-            android:id="@+id/action_accountSignIn_to_userListFragment"
-            app:destination="@id/userListFragment" />
-        <action
-            android:id="@+id/action_accountSignIn_to_accountSignUp"
-            app:destination="@id/accountSignUp" />
-    </fragment>
     <fragment
         android:id="@+id/accountSignUp"
         android:name="com.moronlu18.account.ui.SignUpFragment"
         android:label="@string/title_accountsignup" />
     <fragment
-        android:id="@+id/SignInFragmentV2"
-        android:name="com.moronlu18.account.ui.SignInVersion2"
-        android:label="SignInFragmentV2" />
+        android:id="@+id/AccountSignInFragment"
+        android:name="com.moronlu18.account.ui.SignInFragment"
+        android:label="@string/title_label_SignIn" >
+        <action
+            android:id="@+id/action_SignInFragmentV2_to_baseFragmentDialog"
+            app:destination="@id/baseFragmentDialog" />
+        <action
+            android:id="@+id/action_SignInFragmentV2_to_userListFragment"
+            app:destination="@id/userListFragment" />
+        <action
+            android:id="@+id/action_SignInFragmentV2_to_accountSignUp"
+            app:destination="@id/accountSignUp" />
+        <action
+            android:id="@+id/action_SignInFragmentV2_to_fragmentProgressDialog"
+            app:destination="@id/fragmentProgressDialog" />
+    </fragment>
     <fragment
         android:id="@+id/userListFragment"
         android:name="com.moronlu18.account.ui.UserListFragment"

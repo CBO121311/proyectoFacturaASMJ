@@ -32,7 +32,7 @@ class CustomerListViewModel : ViewModel() {
                 is ResourceList.Success<*> -> {
                     val list = result.data as ArrayList<Customer>
 
-                    val sortPreference = Locator.settingsPreferencesRepository.getSortCustomer()
+                    val sortPreference = Locator.settingsPreferencesRepository.getSettingValue("customersort","id")
                     when(sortPreference){
                         "id" -> list.sortBy { it.id }
                         "name_asc" -> list.sortBy { it.name }
@@ -59,7 +59,7 @@ class CustomerListViewModel : ViewModel() {
                 is ResourceList.Success<*> -> {
                     val list = result.data as ArrayList<Customer>
 
-                    val sortPreference = Locator.settingsPreferencesRepository.getSortCustomer()
+                    val sortPreference = Locator.settingsPreferencesRepository.getSettingValue("customersort","id")
                     when(sortPreference){
                         "id" -> list.sortBy { it.id }
                         "name_asc" -> list.sortBy { it.name }

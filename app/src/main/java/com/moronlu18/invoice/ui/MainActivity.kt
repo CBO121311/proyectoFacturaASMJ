@@ -20,14 +20,11 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-
-    //Mi controlador
     private lateinit var navController: NavController
 
     //Todas las propiedades son publicas
-    //Popriedades de acceso al botón flotante de la Activity principal
+    //Propiedades de acceso al botón flotante de la Activity principal y b. herramientas
 
-    //Todo quitar comentario
     val fab: FloatingActionButton get() = binding.fab
     val toolbar: Toolbar get() = binding.toolbar
 
@@ -94,4 +91,6 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
+
+
 }

@@ -14,9 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.moronlu18.invoice.Locator
 import com.moronlu18.invoice.base.BaseFragmentDialog
-
 import com.moronlu18.invoice.databinding.FragmentMainBinding
-
 
 class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
@@ -27,14 +25,14 @@ class MainFragment : Fragment() {
     ): View? {
 
         _binding = FragmentMainBinding.inflate(inflater, container, false)
+
         return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setUpFab()
+
 
         (requireActivity() as? MainActivity)?.toolbar?.setNavigationOnClickListener {
             if (findNavController().currentDestination?.id == R.id.mainFragment) {
@@ -45,12 +43,13 @@ class MainFragment : Fragment() {
             }
         }
 
+        //setUpFab()
+
         binding.cvCustomer.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_customer)
         binding.cvTask.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_task)
         binding.cvInvoice.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_invoice)
         binding.cvItem.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_item)
         binding.cvSigIn.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_account)
-
 
         binding.cvSignOut.btnAnimationNav(-1)
         binding.cvSignUp.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_fromsignup)
@@ -70,7 +69,6 @@ class MainFragment : Fragment() {
         }
 
         applyTextStylePreference()
-
     }
     /**
      * Aplica el estilo del texto a los TextView en función de la preferencia de tamaño de texto.
@@ -157,6 +155,13 @@ class MainFragment : Fragment() {
                 findNavController().navigate(idDestination)
             }
         }
+    }
+
+
+
+    override fun onStart() {
+        super.onStart()
+
     }
 
     override fun onDestroyView() {

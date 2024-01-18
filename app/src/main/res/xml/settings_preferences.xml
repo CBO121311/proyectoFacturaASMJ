@@ -6,7 +6,38 @@
         android:key="@string/key_account"
         android:summary="@string/summary_account"
         android:title="@string/title_account" />
+
     <PreferenceCategory
+        android:title="@string/pc_title_setting_design">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:summaryOn="@string/sp_summary_on"
+            android:summaryOff="@string/sp_summary_off"
+            android:key="@string/key_night_mode"
+            android:title="@string/sp_title_modenight" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="@string/key_setting_text"
+            android:title="@string/sp_title_bigText"
+            android:summaryOn="@string/sp_summary_on"
+            android:summaryOff="@string/sp_summary_off"
+            />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/pc_title_setting_language">
+        <ListPreference
+            android:defaultValue="en"
+            android:entries="@array/language_entries"
+            android:entryValues="@array/language_values"
+            android:title="@string/pc_title_language"
+            android:key="@string/key_language"
+            android:summary="@string/pc_summary_language"
+            />
+    </PreferenceCategory>
+
+   <!-- <PreferenceCategory
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:title="@string/pc_title_setting_notificaction">
@@ -20,18 +51,7 @@
             android:entryValues="@array/ringtone_values"
             android:key="@string/key_notification"
             android:title="@string/listpreference_title_ringtone" />
-    </PreferenceCategory>
-
-    <PreferenceCategory android:title="Configuración de texto">
-
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="@string/key_setting_text"
-            android:title="Textos grandes"
-            android:summaryOn="Activado"
-            android:summaryOff="Desactivado"
-            />
-    </PreferenceCategory>
+    </PreferenceCategory>-->
 
     <PreferenceCategory android:title="@string/pc_title_setting_sort">
         <ListPreference

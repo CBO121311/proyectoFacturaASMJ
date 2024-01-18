@@ -28,15 +28,7 @@
     <string name="btSignIn">Login</string>
     <string name="btSignUp">Registro</string>
     <string name="mainFragment">Pantalla Inicial</string>
-    <string name="app_tvCustomer">Clientes</string>
-    <string name="app_tvInvoice">Facturas</string>
-    <string name="app_tvItem">Articulos</string>
-    <string name="app_tvTask">Tareas</string>
-    <string name="app_btnCreation">Creación</string>
-    <string name="app_btnDetail">Detalles</string>
-    <string name="app_btnList">Listado</string>
-    <string name="app_btnTest">Prueba</string>
-    <string name="title_baseui" translatable="false">baseui</string>
+
 
     <string name="title_fragmentDialogExit">Desconectarte</string>
     <string name="Content_fragmentDialogExit">¿Estás seguro de que quieres cerrar la aplicación?</string>
@@ -64,7 +56,7 @@
     <string name="about_authors_mateodesc">Encargado del módulo Invoice</string>
     <string name="about_authors_sergdesc">Encargado del módulo Task</string>
     <string name="about_authors_serg" translatable="false">Sergio García Vico</string>
-    <string name="about_versionapp" translatable="false">3.7.1</string>
+    <string name="about_versionapp" translatable="false">3.7.5</string>
     <string name="progress_dialog_title">Esperando...</string>
     <string name="dialog_warning_title">Entendido</string>
     <string name="contentDescriptionfab" translatable="false">Botón que será heredado entre los fragment</string>
@@ -78,7 +70,6 @@
     <string name="dashboard_txvSignUp">Registro</string>
     <string name="dashboard_txvSignIn">Login</string>
 
-    <string name="pr_label_setting">Configuración</string>
-    <string name="pr_label_account">Configuración de Cuenta</string>
 
+    <string name="iv_descr_ivAnimation">Animacion de Inicio</string>
 </resources>

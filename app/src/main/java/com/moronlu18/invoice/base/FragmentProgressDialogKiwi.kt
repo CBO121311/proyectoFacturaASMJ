@@ -35,7 +35,10 @@ class FragmentProgressDialogKiwi : DialogFragment() {
 
         builder.setCancelable(false)
 
+
         // Devuelve el cuadro de diálogo creado
-        return builder.create()
+        return builder.create().apply {
+            setCanceledOnTouchOutside(false)
+        }
     }
 }

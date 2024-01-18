@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewmodelcustomercreation"
             type="com.cbo.customer.usecase.CustomerViewModel" />
@@ -13,7 +12,6 @@
         android:id="@+id/customer_creation_clayoutCustomer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
         tools:context="com.cbo.customer.ui.CustomerCreation">
 
         <androidx.constraintlayout.widget.Guideline
@@ -104,8 +102,7 @@
                 android:contentDescription="@string/cc_descriptiontext_ibCustomer"
                 android:focusable="true"
                 android:padding="@dimen/cc_padding_imgButton"
-                android:src="@drawable/ic_action_altimage"
-                app:tint="@color/white" />
+                android:src="@drawable/ic_action_altimage"/>
         </androidx.cardview.widget.CardView>
 
 
@@ -115,7 +112,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:backgroundTint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/cc_glhalf">
@@ -239,7 +235,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text"
-                        android:maxLength="100" />
+                        android:maxLength="50" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout

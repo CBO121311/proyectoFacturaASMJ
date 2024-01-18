@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="language_entries">
+        <item>English</item>
+        <item>Spanish</item>
+    </string-array>
+
+    <string-array name="sort_customer_entries">
+        <item>ID</item>
+        <item>Name A-Z</item>
+        <item>Name Z-A</item>
+        <item>Email</item>
+    </string-array>
+
+    <string-array name="sort_invoice_entries">
+        <item>ID</item>
+        <item>Customer name A-Z</item>
+        <item>Customer name Z-A</item>
+        <item>State</item>
+    </string-array>
+    
+    <string-array name="sort_task_entries">
+        <item>ID</item>
+        <item>Customer name A-Z</item>
+        <item>Customer name Z-A</item>
+        <item>Task name</item>
+    </string-array>
+</resources>

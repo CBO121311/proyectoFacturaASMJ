@@ -1,10 +1,13 @@
 package com.moronlu18.invoice.ui.preferences
 
 
+
+import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.findNavController
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -13,18 +16,24 @@ import androidx.preference.SwitchPreference
 import com.moronlu18.invoice.Locator
 import com.moronlu18.invoice.R
 import com.moronlu18.invoice.ui.MainActivity
+import java.util.Locale
+
 
 class SettingsFragment : PreferenceFragmentCompat() {
 
     //Para que podamos navegar de nuevo en setting estan en él.
     private var isInSettingFragment = false
 
+    override fun onStart() {
+        super.onStart()
+        setUpFab()
+    }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
 
 
         setPreferencesFromResource(R.xml.settings_preferences, rootKey)
-        setUpFab()
+        //setUpFab()
 
         //Obtener el DataStore que se quiere que utilicen los componentes visuales de las Preferencias.
 
@@ -47,6 +56,65 @@ class SettingsFragment : PreferenceFragmentCompat() {
         initPreferencesInvoice()
         initPreferencesSortTask()
         initPreferencesBigText()
+        initPreferencesLanguage()
+        initPreferencesNight()
+    }
+
+    private fun initPreferencesNight() {
+        val nightMode = preferenceManager.findPreference<SwitchPreference>("key_night_mode")
+
+        nightMode?.isChecked =
+            Locator.settingsPreferencesRepository.getBoolean("key_night_mode", false)
+
+        nightMode?.setOnPreferenceChangeListener { _, newValue ->
+            Locator.settingsPreferencesRepository.putBoolean(
+                "key_night_mode",
+                newValue as Boolean
+            )
+            if (newValue) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+
+            true
+        }
+    }
+
+    private fun initPreferencesLanguage() {
+        val language = preferenceManager.findPreference<ListPreference>("key_language")
+
+        language?.value =
+            Locator.settingsPreferencesRepository.getSettingValue("key_language", "es")
+        updateSummary(language)
+
+        language?.setOnPreferenceChangeListener { _, newValue ->
+
+            Locator.settingsPreferencesRepository.putSettingValue(
+                "key_language",
+                newValue as String
+            )
+
+            Handler(Looper.getMainLooper()).post {
+                updateSummary(language)
+            }
+            updateLanguages(newValue)
+
+            true
+        }
+    }
+
+    /**
+     * Actualiza el lenguaje de la aplicación
+     */
+    private fun updateLanguages(language: String) {
+        val newLocale = Locale(language)
+        Locale.setDefault(newLocale)
+
+        val configuration = Configuration()
+        configuration.setLocale(newLocale)
+        resources.updateConfiguration(configuration, resources.displayMetrics)
+        activity?.recreate()
     }
 
 
@@ -56,14 +124,18 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private fun initPreferencesSortCustomer() {
         val sort = preferenceManager.findPreference<ListPreference>("key_sort_customer")
 
-        sort?.value = Locator.settingsPreferencesRepository.getSortCustomer()
-        updateSortSummary(sort)
+        sort?.value = Locator.settingsPreferencesRepository.getSettingValue("customersort", "id")
+        updateSummary(sort)
 
         sort?.setOnPreferenceChangeListener { _, newValue ->
 
-            Locator.settingsPreferencesRepository.saveSortCustomer(newValue as String)
+            Locator.settingsPreferencesRepository.putSettingValue(
+                "customersort",
+                newValue as String
+            )
+
             Handler(Looper.getMainLooper()).post {
-                updateSortSummary(sort)
+                updateSummary(sort)
             }
             true
         }
@@ -73,13 +145,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val sort = preferenceManager.findPreference<ListPreference>("key_sort_invoice")
 
         sort?.value = Locator.settingsPreferencesRepository.getSortInvoice()
-        updateSortSummary(sort)
+        updateSummary(sort)
 
         sort?.setOnPreferenceChangeListener { _, newValue ->
 
             Locator.settingsPreferencesRepository.saveSortInvoice(newValue as String)
             Handler(Looper.getMainLooper()).post {
-                updateSortSummary(sort)
+                updateSummary(sort)
             }
             true
         }
@@ -89,26 +161,31 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val sort = preferenceManager.findPreference<ListPreference>("key_sort_task")
 
         sort?.value = Locator.settingsPreferencesRepository.getSortTask()
-        updateSortSummary(sort)
+        updateSummary(sort)
 
         sort?.setOnPreferenceChangeListener { _, newValue ->
 
             Locator.settingsPreferencesRepository.saveSortTask(newValue as String)
             Handler(Looper.getMainLooper()).post {
-                updateSortSummary(sort)
+                updateSummary(sort)
             }
             true
         }
     }
 
     /**
-     * Actualiza el summary con la preferencia del orden actual
+     * Actualiza el summary con la preferencia seleccionada
      */
-    private fun updateSortSummary(sort: ListPreference?) {
-        sort?.let {
-            val index = it.findIndexOfValue(it.value)
-            it.summary = if (index != -1) it.entries[index] else it.value
+    private fun updateSummary(listOption: ListPreference?) {
+
+        var index = listOption?.findIndexOfValue(listOption.value)
+
+        if (index == -1){
+            index = 0
         }
+
+        val currEntry = listOption?.entries?.get(index!!)
+        listOption?.summary = currEntry
     }
 
     /**

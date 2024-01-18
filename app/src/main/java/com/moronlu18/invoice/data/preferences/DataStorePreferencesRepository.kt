@@ -60,7 +60,9 @@ class DataStorePreferencesRepository(private val dataStore: DataStore<Preference
         return getSettingValue(key, defValue.toString()).toBoolean()
     }
 
-
+    /**
+     * Almacena el valor de una preferencia utilizando DataStore
+     */
     fun putSettingValue(key: String, value: String?) {
         val key_pref = stringPreferencesKey(key)
         CoroutineScope(Dispatchers.IO).launch {
@@ -71,12 +73,15 @@ class DataStorePreferencesRepository(private val dataStore: DataStore<Preference
         }
     }
 
+    /**
+     * Obtiene el valor de una preferencia utilizando DataStore
+     */
     fun getSettingValue (key: String, defValue: String?): String? =
         runBlocking {
             val key_pref = stringPreferencesKey(key)
 
             dataStore.data.map { preferences ->
-                preferences[key_pref] ?: "none"
+                preferences[key_pref] ?: defValue
             }.first()
         }
 
@@ -89,21 +94,6 @@ class DataStorePreferencesRepository(private val dataStore: DataStore<Preference
     }
 
 
-    fun getSortCustomer(): String {
-        return runBlocking {
-            dataStore.data.map { preferences ->
-                preferences[CUSTOMERSORT] ?: "id"
-            }.first()
-        }
-    }
-
-    fun saveSortCustomer(sort: String) {
-        runBlocking {
-            dataStore.edit { preferences ->
-                preferences[CUSTOMERSORT] = sort
-            }
-        }
-    }
 
     fun getSortInvoice(): String {
         return runBlocking {
@@ -140,7 +130,6 @@ class DataStorePreferencesRepository(private val dataStore: DataStore<Preference
 
 
     companion object {
-        private val CUSTOMERSORT = stringPreferencesKey("customersort")
         private val ITEMSORT = stringPreferencesKey("itemsort")
         private val TASKSORT = stringPreferencesKey("tasksort")
         private val INVOICESORT = stringPreferencesKey("invoicesort")

@@ -23,14 +23,6 @@
     <string name="btSignIn">Sign In</string>
     <string name="btSignUp">Sign Up</string>
     <string name="mainFragment">Home Screen</string>
-    <string name="app_tvCustomer">Customers</string>
-    <string name="app_tvInvoice">Invoices</string>
-    <string name="app_tvItem">Items</string>
-    <string name="app_tvTask">Tasks</string>
-    <string name="app_btnCreation">Creation</string>
-    <string name="app_btnDetail">Detail</string>
-    <string name="app_btnList">List</string>
-    <string name="app_btnTest">Trial</string>
     <string name="title_fragmentDialogExit">Sign Out</string>
     <string name="Content_fragmentDialogExit">Are you sure to close the application?</string>
     <string name="Content_taskDialogExit">Are you sure to delete the application?</string>
@@ -56,7 +48,7 @@
     <string name="dashboard_txvInvoice">Invoices</string>
     <string name="dashboard_txvSignOut">Sign Out</string>
     <string name="dashboard_txvAbout">About</string>
-    <string name="dashboard_txvItem">Item</string>
+    <string name="dashboard_txvItem">Items</string>
     <string name="dashboard_txvSignUp">Sign Up</string>
     <string name="dashboard_txvSignIn">Sign In</string>
     <string name="pr_title_item">Items</string>
@@ -73,4 +65,13 @@
     <string name="pc_title_setting_sort">Sort settings</string>
     <string name="pr_label_setting">Setting</string>
     <string name="pr_label_account">Account Setting</string>
+    <string name="iv_descr_ivAnimation">Startup Animation</string>
+    <string name="pc_title_setting_language">Language settings</string>
+    <string name="pc_title_setting_design">Appearance settings</string>
+    <string name="sp_summary_on">Enabled</string>
+    <string name="sp_summary_off">Disabled</string>
+    <string name="sp_title_modenight">Night Mode</string>
+    <string name="sp_title_bigText">Large text</string>
+    <string name="pc_title_language">Language</string>
+    <string name="pc_summary_language">Select language</string>
 </resources>

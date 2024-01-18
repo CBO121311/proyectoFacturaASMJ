@@ -3,7 +3,6 @@ package com.moronlu18.account.ui
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,18 +14,15 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
 import com.moronlu18.account.usecase.SignInState
 import com.moronlu18.account.usecase.SignInViewModel
-import com.moronlu18.account.usecase.TAG
 import com.moronlu18.accountsignin.R
-import com.moronlu18.accountsignin.databinding.FragmentAccountSignInBinding
+import com.moronlu18.accountsignin.databinding.FragmentAccountSigninBinding
 
 
 class SignInFragment : Fragment() {
 
-    private var _binding: FragmentAccountSignInBinding? =
+    private var _binding: FragmentAccountSigninBinding? =
         null
     private val binding get() = _binding!!
-
-
     private val viewModel: SignInViewModel by viewModels()
 
     override fun onCreateView(
@@ -34,7 +30,7 @@ class SignInFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentAccountSignInBinding.inflate(inflater, container, false)
+        _binding = FragmentAccountSigninBinding.inflate(inflater, container, false)
 
         binding.viewmodel = this.viewModel
         binding.lifecycleOwner = this
@@ -60,14 +56,14 @@ class SignInFragment : Fragment() {
 
 
         //Este código no es necesario ya que se implemente databinding
-        binding.btListUser.setOnClickListener {
+        /*binding.btListUser.setOnClickListener {
             findNavController().navigate(R.id.action_accountSignIn_to_userListFragment)
         }
 
         binding.btnLayout.setOnClickListener {
             //
             findNavController().navigate(R.id.action_accountSignIn_to_blankFragmentpRUEBA2)
-        }
+        }*/
 
 
         /*binding.btSignUpInSignIn.setOnClickListener {
@@ -82,7 +78,7 @@ class SignInFragment : Fragment() {
      */
     private fun showProgressbar(value: Boolean) {
         if (value)
-            findNavController().navigate(R.id.action_accountSignIn_to_fragmentProgressDialog)
+            findNavController().navigate(R.id.action_SignInFragmentV2_to_fragmentProgressDialog)
         else {
             findNavController().popBackStack()
         }
@@ -108,7 +104,7 @@ class SignInFragment : Fragment() {
 
     private fun showMessage(message: String) {
         val action =
-            SignInFragmentDirections.actionAccountSignInToBaseFragmentDialog("Error", message)
+            SignInFragmentDirections.actionSignInFragmentV2ToBaseFragmentDialog("Error", message)
         //Navegamos al dialog
         findNavController().navigate(action)
 
@@ -137,15 +133,14 @@ class SignInFragment : Fragment() {
 
     private fun onSuccess() {
         val action =
-            SignInFragmentDirections.actionAccountSignInToBaseFragmentDialog(
+            SignInFragmentDirections.actionSignInFragmentV2ToBaseFragmentDialog(
                 "Éxito",
                 "Login con exito"
             )
         findNavController().navigate(action)
 
         findNavController().popBackStack()
-        findNavController().navigate(R.id.action_accountSignIn_to_userListFragment)
-
+        findNavController().navigate(R.id.action_SignInFragmentV2_to_userListFragment)
     }
 
     override fun onDestroyView() {

@@ -5,31 +5,18 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="24dp"
+    android:background="@color/seed"
     tools:context=".ui.SplashFragment">
 
     <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="153dp"
-        android:layout_height="144dp"
-        android:layout_gravity="center"
-        android:contentDescription="@string/imgLogo_decscription"
-        android:src="@drawable/kiwiv1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.389" />
-
-    <TextView
-        android:id="@+id/textView"
+        android:id="@+id/ivAnimation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="¡Bienvenido!"
-        android:textSize="60dp"
+        android:src="@drawable/animation_kiwi"
+        android:contentDescription="@string/iv_descr_ivAnimation"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgLogo" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
