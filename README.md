@@ -9,7 +9,8 @@ Invoice versión 3, es la aplicación que se está realizando de manera modular 
  - Añadido las preferencias de idioma y modo Noche.
  - Actualizado el SplashFragment y SignInFragment.
  - Añadido más palabras en inglés.
- - Se prevenió varios errores relacionados con las preferencias
+ - Se quitó varios errores relacionados con las preferencias
+ - Ahora si pulsas fuera del DialogFragment cuando estás esperando un pantalla de carga no se quita ese cuadro.
 
  ### V3.7.2 (14/01/2024)
  *Escrito por SergioGV98*
