@@ -2,6 +2,14 @@ Invoice versión 3, es la aplicación que se está realizando de manera modular 
 
  ## Historial de versiones
 
+- ------------------------
+### V3.7.5 (18/01/2024)
+ *Escrito por CBO121311*
+ - Insertado correctamente el tema noche.(sip, estaba mal)
+ - Añadido las preferencias de idioma y modo Noche.
+ - Actualizado el SplashFragment y SignInFragment.
+ - Añadido más palabras en inglés.
+ - Se prevenió varios errores relacionados con las preferencias
 
  ### V3.7.2 (14/01/2024)
  *Escrito por SergioGV98*
