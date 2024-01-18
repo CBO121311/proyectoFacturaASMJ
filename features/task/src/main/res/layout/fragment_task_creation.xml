@@ -65,6 +65,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/task_creation_txv_hint_nombre_tarea"
                 android:inputType="text"
+                android:maxLength="70"
                 android:text="@={viewmodeltaskcreation.taskName}"
                 android:textColor="@color/white" />
         </com.google.android.material.textfield.TextInputLayout>
