@@ -67,13 +67,6 @@ class InvoiceList : Fragment(), MenuProvider {
         binding.invoiceListRvFacturas.layoutManager = LinearLayoutManager(requireContext())
         binding.invoiceListRvFacturas.adapter = adapter
     }
-/*    private fun onEditItem(position: Int) {
-        val bundle = Bundle();
-        bundle.putInt("detailposition", position)
-        parentFragmentManager.setFragmentResult("detailkey", bundle)
-        findNavController().navigate(R.id.action_invoiceList_to_invoiceCreation)
-
-    }*/
     private fun navigateInvoiceDetail(position: Int) {
 
         val bundle = Bundle()
