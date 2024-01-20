@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.accounts.entity.Invoice
 import com.moronlu18.accounts.entity.Item
+import com.moronlu18.accounts.entity.Line_Item
 import com.moronlu18.accounts.repository.CustomerProvider
 import com.moronlu18.accounts.repository.InvoiceProvider
 import com.moronlu18.accounts.repository.ItemProvider
@@ -82,7 +83,13 @@ class InvoiceCreationViewModel: ViewModel() {
     fun giveIdEditor(invoice: Invoice): Int {
         return InvoiceProvider.obtainsIdByInvoice(invoice)
     }
+    fun giveItemById(id:Int): Item {
+        return ItemProvider.getItemById(id)!!
+    }
     fun giveTotal(lista: MutableList<Item>) : String{
+        return ItemProvider.getTotalItems(lista)
+    }
+    fun giveTotalLineItem(lista: MutableList<Line_Item>) : String{
         return ItemProvider.getTotal(lista)
     }
     fun giveNumber():String {

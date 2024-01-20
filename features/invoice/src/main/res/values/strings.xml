@@ -16,6 +16,10 @@
     <string name="invoice_item_btnDelete">Botón de borrado</string>
     <string name="invoice_item_ivKiwi">Kiwi</string>
 
+    <string name="invoiceStatusPendiente">Pendiente</string>
+    <string name="invoiceStatusPagada">Pagada</string>
+    <string name="invoiceStatusVencida">Vencidad</string>
+
     <string name="tieCliente">Cliente:</string>
     <string name="tieFechaEm">Fecha de emisión: </string>
     <string name="tieFechaFin">Fecha de finalización: </string>

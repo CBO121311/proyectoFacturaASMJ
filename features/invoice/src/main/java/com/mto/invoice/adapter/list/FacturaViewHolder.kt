@@ -4,6 +4,8 @@ import android.graphics.Color
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.moronlu18.accounts.entity.Invoice
+import com.moronlu18.accounts.enum_entity.InvoiceStatus
+import com.moronlu18.invoicelist.R
 
 import com.moronlu18.invoicelist.databinding.ItemFacturaBinding
 
@@ -21,11 +23,10 @@ class FacturaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         binding.itemFacturaTvId.text = invoiceModel.id.toString()
         binding.itemFacturaTvCliente.text = invoiceModel.customer.name
         with(binding.itemFacturaEstado) {
-            text = primerCaracterMayuscula(invoiceModel.status.toString())
-            setTextColor(setColorEstado(invoiceModel.status.toString()))
+            text = giveStatusText(invoiceModel.status)
+            setTextColor(setColorEstado(invoiceModel.status))
 
         }
-
 
         //Todo Cambiado por el tema de la foto.
 
@@ -43,27 +44,31 @@ class FacturaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     }
 
     /**
-     * Función que devuelve un entero que representa un color,
-     * en función del estado de la factura
+     * Funcion que devuelve un texto en funcion del tipo de factura
      */
-    fun setColorEstado(status: String): Int {
-        return if (status.equals("PENDIENTE")) {
-            Color.parseColor("#FF1100")
-        } else if (status.equals("PAGADA")) {
-            Color.parseColor("#217C00")
+    fun giveStatusText(tipo: InvoiceStatus): String {
+        return if (tipo == InvoiceStatus.PENDIENTE) {
+            itemView.context.getString(R.string.invoiceStatusPendiente)
+        } else if (tipo == InvoiceStatus.PAGADA) {
+            itemView.context.getString(R.string.invoiceStatusPagada)
         } else {
-            Color.parseColor("#978303")
+            itemView.context.getString(R.string.invoiceStatusVencida)
         }
 
     }
 
     /**
-     * Función que recibe un string y lo devuelve con todas las letras, menos la primera,
-     * a minúscula
+     * Función que devuelve un entero que representa un color,
+     * en función del estado de la factura
      */
-    fun primerCaracterMayuscula(texto: String): String {
-        // Obtener el primer carácter en mayúscula y concatenarlo con el resto del texto
-        return texto.substring(0, 1) + texto.substring(1).lowercase()
+    fun setColorEstado(status: InvoiceStatus): Int {
+        return if (status.equals(InvoiceStatus.PENDIENTE)) {
+            Color.parseColor("#FF1100")
+        } else if (status.equals(InvoiceStatus.PAGADA)) {
+            Color.parseColor("#217C00")
+        } else {
+            Color.parseColor("#978303")
+        }
 
     }
 }

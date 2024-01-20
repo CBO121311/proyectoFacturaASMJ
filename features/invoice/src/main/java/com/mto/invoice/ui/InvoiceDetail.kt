@@ -22,6 +22,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.moronlu18.accounts.entity.Invoice
 import com.moronlu18.accounts.entity.Item
+import com.moronlu18.accounts.entity.Line_Item
+import com.moronlu18.accounts.enum_entity.InvoiceStatus
 import com.moronlu18.invoice.base.BaseFragmentDialog
 import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.invoicelist.R
@@ -83,7 +85,7 @@ class InvoiceDetail : Fragment(), MenuProvider {
             it.user.value = invoice.customer.name
             it.startDate.value = formatoFecha.format(invoice.issuedDate)
             it.endDate.value = formatoFecha.format(invoice.dueDate)
-            it.status.value = primerCaracterMayuscula(invoice.status.toString())
+            it.status.value = giveStatusText(invoice.status)
             it.number.value = viewmodeldetail.giveNumber()
             it.total.value = viewmodeldetail.giveTotal(invoice.lineItems!!.toMutableList())
             binding.invoiceDetailTvEstado.setTextColor(setColorEstado(invoice.status.toString()))
@@ -108,11 +110,17 @@ class InvoiceDetail : Fragment(), MenuProvider {
     }
 
     /**
-     * Función que recibe un string y lo devuelve con todas las letras, menos la primera,
-     * a minúscula
+     * Funcion que devuelve un texto en funcin del tipo de factura
      */
-    fun primerCaracterMayuscula(texto: String): String {
-        return texto.substring(0, 1) + texto.substring(1).lowercase()
+    fun giveStatusText(tipo: InvoiceStatus): String {
+        return if(tipo == InvoiceStatus.PENDIENTE) {
+            getString(R.string.invoiceStatusPendiente)
+        }else if(tipo == InvoiceStatus.PAGADA) {
+            getString(R.string.invoiceStatusPagada)
+        }else {
+            getString(R.string.invoiceStatusVencida)
+        }
+
     }
 
 
@@ -121,11 +129,27 @@ class InvoiceDetail : Fragment(), MenuProvider {
 
         binding.invoiceDetailRvArticulos.layoutManager = manager
         binding.invoiceDetailRvArticulos.adapter =
-            ItemAdapter(invoice.lineItems!!.toMutableList()) { item ->
+            ItemAdapter(getListLineItem(invoice.lineItems!!.toMutableList())) { item ->
                 onItemSelected(
                     item
                 )
             }
+    }
+
+    /**
+     * Función que obtiene una lista mutable de items dada una lista de objetos line_item
+     */
+    private fun getListLineItem(lista: MutableList<Line_Item>): MutableList<Item> {
+        val listaMutable: MutableList<Item> = mutableListOf()
+        var acumulador = 0
+        for (item in lista) {
+            while (acumulador < item.quantity) {
+                listaMutable.add(viewmodeldetail.giveItemById(item.item_id))
+                acumulador++;
+            }
+            acumulador = 0
+        }
+        return listaMutable
     }
 
     override fun onDestroyView() {

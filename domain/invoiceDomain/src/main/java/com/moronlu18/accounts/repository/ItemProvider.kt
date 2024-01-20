@@ -1,6 +1,7 @@
 package com.moronlu18.accounts.repository
 
 import com.moronlu18.accounts.entity.Item
+import com.moronlu18.accounts.entity.Line_Item
 import com.moronlu18.accounts.enum_entity.ItemType
 import com.moronlu18.inovice.R
 
@@ -93,7 +94,21 @@ class ItemProvider {
             return InvoiceProvider.itemReferenceInvoice(idItem)
         }
 
-        fun getTotal(lista: MutableList<Item>): String {
+        /**
+         * Función que devuelve un item dado un id
+         */
+        fun getItemById(id:Int): Item? {
+            return dataSetItem.find { it.id == id }
+        }
+
+        fun getTotal(lista: MutableList<Line_Item>): String {
+            var suma: Double = 0.0
+            for (item in lista) {
+                suma += item.price
+            }
+            return String.format("%.2f€", suma)
+        }
+        fun getTotalItems(lista: MutableList<Item>): String {
             var suma: Double = 0.0
             for (item in lista) {
                 suma += item.rate

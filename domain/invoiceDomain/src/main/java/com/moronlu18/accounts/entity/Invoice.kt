@@ -13,4 +13,4 @@ data class Invoice(
     val status: InvoiceStatus,
     val issuedDate: Instant,
     val dueDate: Instant,
-    val lineItems: List<Item>?) : Parcelable
+    val lineItems: List<Line_Item>?) : Parcelable

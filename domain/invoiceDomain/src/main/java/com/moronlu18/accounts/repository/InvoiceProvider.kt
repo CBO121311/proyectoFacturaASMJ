@@ -4,8 +4,7 @@ import com.moronlu18.accounts.entity.Customer
 import com.moronlu18.accounts.entity.Email
 import com.moronlu18.accounts.entity.Invoice
 import com.moronlu18.accounts.enum_entity.InvoiceStatus
-import com.moronlu18.accounts.entity.Item
-import com.moronlu18.accounts.enum_entity.ItemType
+import com.moronlu18.accounts.entity.Line_Item
 import com.moronlu18.accounts.network.ResourceList
 import com.moronlu18.inovice.R
 import kotlinx.coroutines.Dispatchers
@@ -37,30 +36,28 @@ class InvoiceProvider private constructor() {
                         "Main Street, 123",
                         phototrial = R.drawable.kiwituxedo
                     ),
-                    number =  giveNumberInvoice(),
+                    number = giveNumberInvoice(),
                     status = InvoiceStatus.PENDIENTE,
                     issuedDate = Instant.now(),
                     dueDate = Instant.now().plus(Duration.ofDays(30)),
                     lineItems = listOf(
-                        Item(
+                        Line_Item(
                             1,
-                            R.drawable.pizza,
-                            "Pizza",
-                            "Producto sección precocinados",
-                            ItemType.ARTÍCULO,
+                            1,
+                            1,
                             2.52,
-                            true
-                        ),
-                        Item(
+                            1,
+
+                            ),
+                        Line_Item(
+                            1,
                             2,
-                            R.drawable.leche,
-                            "Leche",
-                            "Producto sección lacteos",
-                            ItemType.ARTÍCULO,
+                            1,
                             1.20,
-                            true
+                            1,
+                        ),
+
                         )
-                    )
                 )
             )
 
@@ -81,41 +78,23 @@ class InvoiceProvider private constructor() {
                     issuedDate = Instant.now(),
                     dueDate = Instant.now().plus(Duration.ofDays(15)),
                     lineItems = listOf(
-                        Item(
-                            3,
-                            R.drawable.manzana,
-                            "Manzana",
-                            "Producto sección fruta",
-                            ItemType.ARTÍCULO,
-                            0.42,
-                            true
-                        ),
-                        Item(
+                        Line_Item(
                             2,
-                            R.drawable.leche,
-                            "Leche",
-                            "Producto sección lacteos",
-                            ItemType.ARTÍCULO,
-                            1.20,
-                            true
-                        ), Item(
+                            3,
+                            1,
+                            0.42,
+                            1,
+
+                            ),
+                        Line_Item(
+                            2,
                             4,
-                            R.drawable.panespelta,
-                            "Pan de espelta",
-                            "Producto sección panadería",
-                            ItemType.ARTÍCULO,
+                            1,
                             0.92,
-                            false
-                        ),Item(
-                            4,
-                            R.drawable.panespelta,
-                            "Pan de espelta",
-                            "Producto sección panadería",
-                            ItemType.ARTÍCULO,
-                            0.92,
-                            false
+                            1,
+                        ),
+
                         )
-                    )
                 )
             )
             dataSet.add(
@@ -135,41 +114,23 @@ class InvoiceProvider private constructor() {
                     issuedDate = Instant.now(),
                     dueDate = Instant.now().plus(Duration.ofDays(15)),
                     lineItems = listOf(
-                        Item(
+                        Line_Item(
                             3,
-                            R.drawable.manzana,
-                            "Manzana",
-                            "Producto sección fruta",
-                            ItemType.ARTÍCULO,
-                            0.42,
-                            true
-                        ),
-                        Item(
+                            3,
                             2,
-                            R.drawable.leche,
-                            "Leche",
-                            "Producto sección lacteos",
-                            ItemType.ARTÍCULO,
-                            1.20,
-                            true
-                        ), Item(
+                            0.84,
+                            1,
+
+                            ),
+                        Line_Item(
+                            3,
                             4,
-                            R.drawable.panespelta,
-                            "Pan de espelta",
-                            "Producto sección panadería",
-                            ItemType.ARTÍCULO,
-                            0.92,
-                            false
-                        ),Item(
-                            4,
-                            R.drawable.panespelta,
-                            "Pan de espelta",
-                            "Producto sección panadería",
-                            ItemType.ARTÍCULO,
-                            0.92,
-                            false
+                            2,
+                            1.84,
+                            1,
+                        ),
+
                         )
-                    )
                 )
             )
             dataSet.add(
@@ -189,41 +150,22 @@ class InvoiceProvider private constructor() {
                     issuedDate = Instant.now(),
                     dueDate = Instant.now().plus(Duration.ofDays(15)),
                     lineItems = listOf(
-                        Item(
-                            3,
-                            R.drawable.manzana,
-                            "Manzana",
-                            "Producto sección fruta",
-                            ItemType.ARTÍCULO,
-                            0.42,
-                            true
-                        ),
-                        Item(
+                        Line_Item(
+                            4,
+                            1,
                             2,
-                            R.drawable.leche,
-                            "Leche",
-                            "Producto sección lacteos",
-                            ItemType.ARTÍCULO,
-                            1.20,
-                            true
-                        ), Item(
+                            5.04,
+                            1,
+                            ),
+                        Line_Item(
                             4,
-                            R.drawable.panespelta,
-                            "Pan de espelta",
-                            "Producto sección panadería",
-                            ItemType.ARTÍCULO,
-                            0.92,
-                            false
-                        ),Item(
-                            4,
-                            R.drawable.panespelta,
-                            "Pan de espelta",
-                            "Producto sección panadería",
-                            ItemType.ARTÍCULO,
-                            0.92,
-                            false
+                            5,
+                            1,
+                            3.8,
+                            1,
+                        ),
+
                         )
-                    )
                 )
             )
 
@@ -234,25 +176,25 @@ class InvoiceProvider private constructor() {
          * que comienza por los cuatro digitos del año actual
          */
         fun generateNumberInvoice(): String {
-            val añoActual = Calendar.getInstance().get(Calendar.YEAR).toString()
-            val longitudRestante = 8 - añoActual.length
+            val anyoActual = Calendar.getInstance().get(Calendar.YEAR).toString()
+            val longitudRestante = 8 - anyoActual.length
             val caracteresAleatorios = (1..longitudRestante)
                 .map { Random.nextInt(0, 10).toString() }
                 .joinToString("")
 
-            return añoActual + caracteresAleatorios
+            return anyoActual + caracteresAleatorios
         }
 
         /**
          * Función que asigna un número a la factura comprobando que no
          * exista en ninguna otra
          */
-        fun giveNumberInvoice():String {
-            lateinit var numberInvoice:String
+        fun giveNumberInvoice(): String {
+            lateinit var numberInvoice: String
             val numbers = dataSet.map { it.number }
             do {
                 numberInvoice = generateNumberInvoice()
-            }while (numbers.contains(numberInvoice))
+            } while (numbers.contains(numberInvoice))
             return numberInvoice
 
 
@@ -267,6 +209,7 @@ class InvoiceProvider private constructor() {
                 }
             }
         }
+
         fun getListWithoutLoading(): ResourceList {
             return try {
                 if (dataSet.isEmpty()) {
@@ -286,6 +229,7 @@ class InvoiceProvider private constructor() {
                 dataSet[pos] = invoice
             }
         }
+
         fun deleteInvoice(pos: Int) {
             dataSet.removeAt(pos)
         }
@@ -294,7 +238,7 @@ class InvoiceProvider private constructor() {
             return dataSet.indexOf(invoice)
         }
 
-        fun getInvoicePos(position:Int): Invoice {
+        fun getInvoicePos(position: Int): Invoice {
             return dataSet[position]
         }
 
@@ -308,10 +252,11 @@ class InvoiceProvider private constructor() {
         fun obtainsId(): Int {
             return dataSet.maxByOrNull { it.id }?.id ?: 0
         }
+
         fun obtainsIdByInvoice(invoice: Invoice): Int {
             var id = 0
             for (item in dataSet) {
-                if(item == invoice) {
+                if (item == invoice) {
                     id = item.id
                 }
             }
@@ -319,8 +264,9 @@ class InvoiceProvider private constructor() {
         }
 
         fun itemReferenceInvoice(idItem: Int): Boolean {
-            return dataSet.any { invoice ->
-                invoice.lineItems?.any { it.id == idItem } ?: false
+            val listaItems = dataSet.map { it.lineItems }
+            return listaItems.any { item ->
+                item?.any { it.item_id == idItem } ?: false
             }
         }
     }
