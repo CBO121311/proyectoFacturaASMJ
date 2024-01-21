@@ -111,27 +111,9 @@ class DataStorePreferencesRepository(private val dataStore: DataStore<Preference
         }
     }
 
-    fun getSortTask():String{
-        return runBlocking {
-            dataStore.data.map { preferences ->
-                preferences[TASKSORT] ?: "id"
-            }.first()
-        }
-    }
-
-    fun saveSortTask(sort: String) {
-        runBlocking {
-            dataStore.edit { preferences ->
-                preferences[TASKSORT] = sort
-            }
-        }
-    }
-
-
 
     companion object {
         private val ITEMSORT = stringPreferencesKey("itemsort")
-        private val TASKSORT = stringPreferencesKey("tasksort")
         private val INVOICESORT = stringPreferencesKey("invoicesort")
     }
 }

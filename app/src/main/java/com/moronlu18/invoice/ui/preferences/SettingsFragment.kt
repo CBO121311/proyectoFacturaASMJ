@@ -160,12 +160,15 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private fun initPreferencesSortTask() {
         val sort = preferenceManager.findPreference<ListPreference>("key_sort_task")
 
-        sort?.value = Locator.settingsPreferencesRepository.getSortTask()
+        sort?.value = Locator.settingsPreferencesRepository.getSettingValue("tasksort", "id")
         updateSummary(sort)
 
         sort?.setOnPreferenceChangeListener { _, newValue ->
 
-            Locator.settingsPreferencesRepository.saveSortTask(newValue as String)
+            Locator.settingsPreferencesRepository.putSettingValue(
+                "tasksort",
+                newValue as String
+            )
             Handler(Looper.getMainLooper()).post {
                 updateSummary(sort)
             }
