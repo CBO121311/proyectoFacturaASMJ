@@ -21,6 +21,8 @@ import com.google.android.material.textfield.TextInputLayout
 import com.jcasrui.item.usecase.ItemCreationViewModel
 import com.moronlu18.accounts.entity.Item
 import com.moronlu18.accounts.enum_entity.ItemType
+import com.moronlu18.accounts.enum_entity.VatType
+import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.itemcreation.R
 import com.moronlu18.itemcreation.databinding.FragmentItemCreationBinding
 
@@ -52,8 +54,9 @@ class ItemCreation : Fragment() {
                 binding.itemCreationTieName.setText(itemEdit.name)
                 binding.itemCreationTieDescription.setText(itemEdit.description)
                 binding.itemCreationSpItemType.setSelection(itemType(itemEdit))
-                binding.itemCreationTieRate.setText(itemEdit.rate.toString())
-                binding.itemCreationSwitchTaxable.isChecked
+                binding.itemCreationSpVatType.setSelection(vatType(itemEdit))
+                binding.itemCreationTieRate.setText(itemEdit.price.toString())
+                //binding.itemCreationSwitchTaxable.isChecked
 
                 editPosItem = positionItem
 
@@ -66,6 +69,8 @@ class ItemCreation : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setUpFab()
 
         // Abrir galería
         binding.itemCreationImgBtnAdd.setOnClickListener {
@@ -101,29 +106,31 @@ class ItemCreation : Fragment() {
     private fun onSuccessCreate() {
         val name = binding.itemCreationTieName.text.toString()
         val description = binding.itemCreationTieDescription.text.toString()
-        val rate = binding.itemCreationTieRate.text.toString().toDouble()
-        val taxable = binding.itemCreationSwitchTaxable.isChecked
+        val price = binding.itemCreationTieRate.text.toString().toDouble()
+        //val taxable = binding.itemCreationSwitchTaxable.isChecked
 
         if (viewModel.getEditor()) {
             val updateItem = Item(
                 id = editPosItem + 1,
-                image = R.drawable.cart,
-                name = name,
-                description = description.ifEmpty { "Sin descripción" },
                 type = chooseItemType(),
-                rate = rate,
-                taxable = taxable
+                vat = chooseVatType(),
+                name = name,
+                price = price,
+                description = description.ifEmpty { "Sin descripción" },
+                photo = R.drawable.cart,
+                //taxable = taxable
             )
             viewModel.updateItem(updateItem, editPosItem)
         } else {
             val item = Item(
                 id = viewModel.getNextId(),
-                image = R.drawable.cart,
-                name = name,
-                description = description.ifEmpty { "Sin descripción" },
                 type = chooseItemType(),
-                rate = rate,
-                taxable = taxable
+                vat = chooseVatType(),
+                name = name,
+                price = price,
+                description = description.ifEmpty { "Sin descripción" },
+                photo = R.drawable.cart,
+                //taxable = taxable
             )
             viewModel.addItem(item)
         }
@@ -132,16 +139,37 @@ class ItemCreation : Fragment() {
 
     private fun chooseItemType(): ItemType {
         return when (binding.itemCreationSpItemType.selectedItemId) {
-            0L -> ItemType.ARTÍCULO
-            1L -> ItemType.SERVICIO
-            else -> ItemType.ARTÍCULO
+            0L -> ItemType.PRODUCT
+            1L -> ItemType.SERVICE
+            else -> ItemType.PRODUCT
         }
     }
 
     private fun itemType(item: Item): Int {
         return when (item.type) {
-            ItemType.ARTÍCULO -> 0
-            ItemType.SERVICIO -> 1
+            ItemType.PRODUCT -> 0
+            ItemType.SERVICE -> 1
+        }
+    }
+
+    private fun chooseVatType(): VatType {
+        return when (binding.itemCreationSpVatType.selectedItemId) {
+            0L -> VatType.ZERO
+            1L -> VatType.FOUR
+            2L -> VatType.FIVE
+            3L -> VatType.TEN
+            4L -> VatType.TWENTYONE
+            else -> VatType.TWENTYONE
+        }
+    }
+
+    private fun vatType(item: Item): Int {
+        return when (item.vat) {
+            VatType.ZERO -> 0
+            VatType.FOUR -> 1
+            VatType.FIVE -> 2
+            VatType.TEN -> 3
+            VatType.TWENTYONE -> 4
         }
     }
 
@@ -169,6 +197,12 @@ class ItemCreation : Fragment() {
 
         override fun afterTextChanged(s: Editable?) {
             til.error = null
+        }
+    }
+
+    private fun setUpFab() {
+        (requireActivity() as? MainActivity)?.fab?.apply {
+            visibility = View.GONE
         }
     }
 

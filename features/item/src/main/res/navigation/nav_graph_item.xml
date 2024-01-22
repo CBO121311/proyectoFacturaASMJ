@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_itemList_to_baseFragmentDialogWarning"
             app:destination="@id/baseFragmentDialogWarning" />
+        <action
+            android:id="@+id/action_itemList_to_fragmentProgressDialogKiwi"
+            app:destination="@id/fragmentProgressDialogKiwi" />
     </fragment>
 
     <fragment
@@ -34,6 +37,15 @@
         <argument
             android:name="item"
             app:argType="com.moronlu18.accounts.entity.Item" />
+        <action
+            android:id="@+id/action_itemDetail_to_itemCreation"
+            app:destination="@id/itemCreation" />
+        <action
+            android:id="@+id/action_itemDetail_to_baseFragmentDialog"
+            app:destination="@id/baseFragmentDialog" />
+        <action
+            android:id="@+id/action_itemDetail_to_baseFragmentDialogWarning"
+            app:destination="@id/baseFragmentDialogWarning" />
     </fragment>
 
     <dialog
@@ -58,4 +70,8 @@
             android:name="message"
             app:argType="string" />
     </dialog>
+    <dialog
+        android:id="@+id/fragmentProgressDialogKiwi"
+        android:name="com.moronlu18.invoice.base.FragmentProgressDialogKiwi"
+        android:label="FragmentProgressDialogKiwi" />
 </navigation>

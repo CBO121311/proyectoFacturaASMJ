@@ -7,7 +7,7 @@
 
     <string name="item_name">Name</string>
     <string name="item_description">Description</string>
-    <string name="item_tvRate">Rate</string>
+    <string name="item_tvPrice">Rate</string>
     <string name="item_tvTaxable">Is taxable</string>
     <string name="item_tvSymbolEuro">€</string>
 
@@ -17,7 +17,8 @@
     <string name="itemCreation_btnDone">Add</string>
     <string name="itemDetail_btnSave">Save</string>
 
-    <string name="itemDetail_tvTypeText">Type</string>
+    <string name="itemDetail_tvItemTypeText">Type</string>
+    <string name="itemDetail_tvVatTypeText">Vat rate</string>
     <string name="itemDetail_tvDescriptionImg">Illustrative image</string>
     <string name="itemDetail_actionEdit">Edit</string>
     <string name="itemDetail_actionDelete">Delete</string>
@@ -26,7 +27,8 @@
     <string name="itemDetail_tvNamePrueba">Apple</string>
     <string name="itemDetail_tvDescriptionPrueba">Fruit section product</string>
     <string name="itemDetail_tvRatePrueba">1.40</string>
-    <string name="itemDetail_tvTypePrueba">Item</string>
+    <string name="itemDetail_tvItemTypePrueba">Item</string>
+    <string name="itemDetail_tvVatTypePrueba">FOUR</string>
     <string name="itemDetail_tvTaxablePrueba">Taxes included</string>
 
     <string name="itemList_fab">Add item</string>

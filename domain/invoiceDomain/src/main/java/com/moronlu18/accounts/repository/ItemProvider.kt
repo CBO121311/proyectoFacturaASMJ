@@ -3,6 +3,7 @@ package com.moronlu18.accounts.repository
 import com.moronlu18.accounts.entity.Item
 import com.moronlu18.accounts.entity.Line_Item
 import com.moronlu18.accounts.enum_entity.ItemType
+import com.moronlu18.accounts.enum_entity.VatType
 import com.moronlu18.inovice.R
 
 
@@ -20,60 +21,60 @@ class ItemProvider {
             dataSetItem.add(
                 Item(
                     idItem++,
-                    R.drawable.pizza,
+                    ItemType.PRODUCT,
+                    VatType.TWENTYONE,
                     "Pizza",
-                    "Producto sección precocinados",
-                    ItemType.ARTÍCULO,
                     2.52,
-                    true
+                    "Producto sección precocinados",
+                    R.drawable.pizza
                 )
             )
 
             dataSetItem.add(
                 Item(
                     idItem++,
-                    R.drawable.leche,
+                    ItemType.PRODUCT,
+                    VatType.TWENTYONE,
                     "Leche",
-                    "Producto sección lacteos",
-                    ItemType.ARTÍCULO,
                     1.20,
-                    true
+                    "Producto sección lacteos",
+                    R.drawable.leche,
                 )
             )
 
             dataSetItem.add(
                 Item(
                     idItem++,
-                    R.drawable.manzana,
+                    ItemType.PRODUCT,
+                    VatType.TWENTYONE,
                     "Manzana",
-                    "Producto sección fruta",
-                    ItemType.ARTÍCULO,
                     0.42,
-                    true
+                    "Producto sección fruta",
+                    R.drawable.manzana
                 )
             )
 
             dataSetItem.add(
                 Item(
                     idItem++,
-                    R.drawable.panespelta,
+                    ItemType.PRODUCT,
+                    VatType.FIVE,
                     "Pan de espelta",
-                    "Producto sección panadería",
-                    ItemType.ARTÍCULO,
                     0.92,
-                    false
+                    "Producto sección panadería",
+                    R.drawable.panespelta
                 )
             )
 
             dataSetItem.add(
                 Item(
                     idItem++,
-                    R.drawable.servicio,
+                    ItemType.SERVICE,
+                    VatType.TEN,
                     "Repartidor",
-                    "Repartir productos a clientes",
-                    ItemType.SERVICIO,
                     3.8,
-                    false
+                    "Repartir productos a clientes",
+                    R.drawable.servicio,
                 )
             )
         }
@@ -88,6 +89,9 @@ class ItemProvider {
 
         fun getPosition(position: Int): Item {
             return dataSetItem[position]
+        }
+        fun getPositionItem(item: Item): Int {
+            return dataSetItem.indexOf(item)
         }
 
         fun referencedItem(idItem: Int): Boolean {
@@ -111,7 +115,7 @@ class ItemProvider {
         fun getTotalItems(lista: MutableList<Item>): String {
             var suma: Double = 0.0
             for (item in lista) {
-                suma += item.rate
+                suma += item.price
             }
             return String.format("%.2f€", suma)
         }

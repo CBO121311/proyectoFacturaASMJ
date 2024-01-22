@@ -186,7 +186,7 @@ class InvoiceCreation : Fragment() {
                     invoice_id = id,
                     item_id = item.id,
                     quantity = 1,
-                    price = item.rate,
+                    price = item.price,
                     iva = 1
                 )
                 lista.add(creacion);
@@ -199,14 +199,14 @@ class InvoiceCreation : Fragment() {
                     invoice_id = id,
                     item_id = item.id,
                     quantity = 1,
-                    price = item.rate,
+                    price = item.price,
                     iva = 1
                 )
                 for (itemMutable in itemMutableList.sortedBy { it.id }) {
                     if (item.id == itemMutable.id) {
                         if(!primerObjeto) {
                             creacion.quantity++;
-                            creacion.price = creacion.price + item.rate;
+                            creacion.price = creacion.price + item.price;
                         }
                         primerObjeto = false
 

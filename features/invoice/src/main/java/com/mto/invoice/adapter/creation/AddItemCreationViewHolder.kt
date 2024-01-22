@@ -9,7 +9,7 @@ class AddItemCreationViewHolder (view: View) : RecyclerView.ViewHolder(view)  {
     val binding = ItemItemcreationBinding.bind(view)
     fun render(itemModel: Item) {
         binding.invoicecItemItemTvName.text = itemModel.name
-        binding.invoicecItemItemTvRate.text = "P/U: " + itemModel.rate.toString()
+        binding.invoicecItemItemTvRate.text = "P/U: " + itemModel.price.toString()
         binding.invoiceItemItemTvUnidades.text ="1"
 
     }

@@ -6,6 +6,7 @@ package com.jcasrui.item.ui
  * 3. InvalidId: el id del artículo es inválido.?
  */
 sealed class ItemState {
+    data object ReferencedItem : ItemState()
     data object NameIsMandatory : ItemState()
     data object RateIsMandatory : ItemState()
 

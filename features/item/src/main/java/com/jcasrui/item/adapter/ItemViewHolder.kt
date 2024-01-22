@@ -15,13 +15,13 @@ class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         onClickEdit: ((Int) -> Unit)? = null,
         onClickDelete: ((Int) -> Unit)? = null,
     ) {
-        binding.itemItemCImg.setImageResource(itemModel.image)
+        binding.itemItemCImg.setImageResource(itemModel.photo)
         binding.itemItemTvId.text = itemModel.id.toString()
         binding.itemItemTvName.text = itemModel.name
-        binding.itemItemTvRateContent.text = itemModel.rate.toString()
+        binding.itemItemTvRateContent.text = itemModel.price.toString()
 
-        binding.itemItemImgBtnEdit.setOnClickListener { onClickEdit?.invoke(adapterPosition) }
-        binding.itemItemImgBtnDelete.setOnClickListener { onClickDelete?.invoke(adapterPosition) }
+        //binding.itemItemImgBtnEdit.setOnClickListener { onClickEdit?.invoke(adapterPosition) }
+        //binding.itemItemImgBtnDelete.setOnClickListener { onClickDelete?.invoke(adapterPosition) }
         itemView.setOnClickListener { onClickListener?.invoke(itemModel) }
     }
 }

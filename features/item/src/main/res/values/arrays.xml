@@ -4,4 +4,11 @@
         <item>Artículo</item>
         <item>Servicio</item>
     </string-array>
+    <string-array name="vatType_array">
+        <item>0%</item>
+        <item>4%</item>
+        <item>5%</item>
+        <item>10%</item>
+        <item>21%</item>
+</string-array>
 </resources>

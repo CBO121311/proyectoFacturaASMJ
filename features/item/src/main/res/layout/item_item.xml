@@ -89,6 +89,7 @@
             app:layout_constraintStart_toEndOf="@+id/itemItem_tvRateContent"
             app:layout_constraintTop_toTopOf="@+id/itemItem_tvRateContent" />
 
+        <!--
         <ImageButton
             android:id="@+id/itemItem_imgBtnEdit"
             android:layout_width="@dimen/itemItem_widthHeightButton"
@@ -115,6 +116,7 @@
             android:src="@drawable/ic_action_delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+            -->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

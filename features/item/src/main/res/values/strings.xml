@@ -5,7 +5,7 @@
 
     <string name="item_name">Nombre</string>
     <string name="item_description">Descripción</string>
-    <string name="item_tvRate">Precio</string>
+    <string name="item_tvPrice">Precio</string>
     <string name="item_tvTaxable">Impuestos</string>
     <string name="item_tvSymbolEuro">€</string>
 
@@ -15,11 +15,13 @@
     <string name="itemCreation_tilHelperText">Obligatorio*</string>
 
     <string name="itemDetail_tvDescriptionImg">Imagen ilustrativa</string>
-    <string name="itemDetail_tvTypeText">Tipo</string>
+    <string name="itemDetail_tvItemTypeText">Tipo</string>
+    <string name="itemDetail_tvVatTypeText">Tipo de iva</string>
     <string name="itemDetail_tvNamePrueba">Manzana</string>
     <string name="itemDetail_tvDescriptionPrueba">Producto sección fruta</string>
     <string name="itemDetail_tvRatePrueba">1.40</string>
-    <string name="itemDetail_tvTypePrueba">ARTÍCULO</string>
+    <string name="itemDetail_tvItemTypePrueba">ARTÍCULO</string>
+    <string name="itemDetail_tvVatTypePrueba">CUATRO</string>
     <string name="itemDetail_tvTaxablePrueba">Impuestos incluidos</string>
     <string name="itemDetail_actionEdit">Editar</string>
     <string name="itemDetail_actionDelete">Borrar</string>

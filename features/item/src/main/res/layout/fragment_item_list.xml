@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewmodelitemlist"
             type="com.jcasrui.item.usecase.ItemListViewModel" />
@@ -20,20 +21,20 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/itemList_marginFab"
-            android:clickable="true"
-            android:contentDescription="@string/itemList_fab"
-            android:focusable="true"
-            android:src="@android:drawable/ic_input_add"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:ignore="MissingConstraints" />
-
+        <!--
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/itemList_marginFab"
+                    android:clickable="true"
+                    android:contentDescription="@string/itemList_fab"
+                    android:focusable="true"
+                    android:src="@android:drawable/ic_input_add"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:ignore="MissingConstraints" />
+        -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/itemList_ConstraintLayoutEmpty"
             android:layout_width="match_parent"

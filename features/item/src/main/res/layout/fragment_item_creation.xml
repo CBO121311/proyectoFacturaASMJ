@@ -211,27 +211,65 @@
                         android:src="@drawable/ic_action_arrow" />
                 </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/itemCreation_tvTaxable"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/itemCreation_tvMarginStart"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/item_tvTaxable"
-                    android:textSize="@dimen/item_sizeTitles"
-                    app:layout_constraintStart_toStartOf="@+id/itemCreation_glStart"
-                    app:layout_constraintTop_toBottomOf="@+id/itemCreation_rlItemType" />
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/itemCreation_SwitchTaxable"
+                <RelativeLayout
+                    android:id="@+id/itemCreation_rlVatType"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:checked="false"
-                    app:layout_constraintBottom_toBottomOf="@+id/itemCreation_tvTaxable"
-                    app:layout_constraintStart_toEndOf="@+id/itemCreation_tvTaxable"
-                    app:layout_constraintTop_toTopOf="@+id/itemCreation_tvTaxable" />
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/spinner_border"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toStartOf="@+id/itemCreation_glEnd"
+                    app:layout_constraintStart_toStartOf="@+id/itemCreation_glStart"
+                    app:layout_constraintTop_toBottomOf="@+id/itemCreation_rlItemType">
 
+                    <Spinner
+                        android:id="@+id/itemCreation_spVatType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/itemCreation_paddingGeneral"
+                        android:background="@android:color/transparent"
+                        android:entries="@array/vatType_array"
+                        android:gravity="center"
+                        android:paddingTop="@dimen/itemCreation_paddingGeneral"
+                        android:paddingBottom="@dimen/itemCreation_paddingGeneral"
+                        android:spinnerMode="dropdown" />
+
+                    <ImageView
+                        android:id="@+id/itemCreation_ivVatType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/itemCreation_paddingGeneral"
+                        android:src="@drawable/ic_action_arrow" />
+                </RelativeLayout>
+                <!--
+                                <TextView
+                                    android:id="@+id/itemCreation_tvTaxable"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/itemCreation_tvMarginStart"
+                                    android:layout_marginTop="20dp"
+                                    android:text="@string/item_tvTaxable"
+                                    android:textSize="@dimen/item_sizeTitles"
+                                    app:layout_constraintStart_toStartOf="@+id/itemCreation_glStart"
+                                    app:layout_constraintTop_toBottomOf="@+id/itemCreation_rlItemType" />
+
+                                <androidx.appcompat.widget.SwitchCompat
+                                    android:id="@+id/itemCreation_SwitchTaxable"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:checked="false"
+                                    app:layout_constraintBottom_toBottomOf="@+id/itemCreation_tvTaxable"
+                                    app:layout_constraintStart_toEndOf="@+id/itemCreation_tvTaxable"
+                                    app:layout_constraintTop_toTopOf="@+id/itemCreation_tvTaxable" />
+                -->
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>

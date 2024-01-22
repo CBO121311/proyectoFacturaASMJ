@@ -114,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/itemDetail_paddingGeneral"
-                    android:text="@string/itemDetail_tvTypeText"
+                    android:text="@string/itemDetail_tvItemTypeText"
                     android:textSize="@dimen/item_sizeTitles"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -125,7 +125,7 @@
                     android:id="@+id/itemDetail_tvContentType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/itemDetail_tvTypePrueba"
+                    android:text="@string/itemDetail_tvItemTypePrueba"
                     android:textSize="@dimen/item_sizeText"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -136,7 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/itemDetail_paddingGeneral"
-                    android:text="@string/item_tvRate"
+                    android:text="@string/item_tvPrice"
                     android:textSize="@dimen/item_sizeTitles"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -168,6 +168,29 @@
                     app:layout_constraintTop_toTopOf="@+id/item_detail_tvContentRate" />
 
                 <TextView
+                    android:id="@+id/item_detail_tvVat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/itemDetail_paddingGeneral"
+                    android:text="@string/itemDetail_tvVatTypeText"
+                    android:textSize="@dimen/item_sizeTitles"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/item_detail_tvContentRate" />
+
+                <TextView
+                    android:id="@+id/itemDetail_tvContentVat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/itemDetail_tvVatTypePrueba"
+                    android:textSize="@dimen/item_sizeText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/item_detail_tvVat" />
+
+                <!--
+                <TextView
                     android:id="@+id/itemDetail_tvTaxable"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -178,7 +201,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/item_detail_tvContentRate" />
-
+-->
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
@@ -188,6 +211,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/itemDetail_btnHeight"
             android:text="@string/itemDetail_btnSave"
+            android:textSize="@dimen/item_sizeText"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -14,7 +14,7 @@ class ItemCreationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun render(itemModel: Item, onClickListener: (Item) -> Unit) {
 
         binding.invoicecItemItemTvName.text = itemModel.name
-        binding.invoicecItemItemTvRate.text = "Unidad: " + itemModel.rate.toString()
+        binding.invoicecItemItemTvRate.text = "Unidad: " + itemModel.price.toString()
 
         itemView.setOnClickListener { onClickListener(itemModel) }
     }

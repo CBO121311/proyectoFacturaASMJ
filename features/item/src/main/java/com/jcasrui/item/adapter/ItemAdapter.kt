@@ -39,7 +39,7 @@ class ItemAdapter(
      * Función que ordena el dataset en base a una propiedad personalizada
      */
     fun sort() {
-        dataset.sortBy { it.rate }
+        dataset.sortBy { it.price }
         notifyDataSetChanged()
     }
 }

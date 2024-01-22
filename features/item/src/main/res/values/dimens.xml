@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="item_sizeTitles">20sp</dimen>
+    <dimen name="item_sizeTitles">18sp</dimen>
     <dimen name="item_sizeText">18sp</dimen>
     <dimen name="item_sizeSubtitles">16sp</dimen>
     <dimen name="item_marginSymbol">4dp</dimen>
@@ -8,7 +8,7 @@
     <dimen name="itemCreation_guideVertical">15dp</dimen>
     <dimen name="itemCreation_guideHorizontal">15dp</dimen>
     <dimen name="itemCreation_paddingLayout">16dp</dimen>
-    <dimen name="itemCreation_heightBtn">60dp</dimen>
+    <dimen name="itemCreation_heightBtn">50dp</dimen>
     <dimen name="itemCreation_paddingGeneral">10dp</dimen>
     <dimen name="itemCreation_paddingtilName">20dp</dimen>
     <dimen name="itemCreation_paddingtvTaxable">20dp</dimen>

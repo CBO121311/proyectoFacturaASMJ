@@ -16,8 +16,8 @@ class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         binding.invoicedItemItemTvName.text = itemModel.name
         binding.invoicedItemItemTvDescription.text = itemModel.description
         binding.invoicedItemItemTvTypeContent.text = itemModel.type.name
-        binding.invoicedItemItemTvRateContent.text = itemModel.rate.toString()
-        binding.invoicedItemItemIvItem.setImageResource(itemModel.image)
+        binding.invoicedItemItemTvRateContent.text = itemModel.price.toString()
+        binding.invoicedItemItemIvItem.setImageResource(itemModel.photo)
         itemView.setOnClickListener { onClickListener(itemModel) }
     }
 }

@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <item
-        android:id="@+id/menuItemList_actionRefresh"
+        android:id="@+id/menuItemDetail_actionEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:icon="@drawable/ic_action_refresh"
-        android:title="@string/itemDetail_actionRefresh"
+        android:icon="@drawable/ic_action_edit"
+        android:title="@string/itemDetail_actionEdit"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/menuItemList_actionSort"
+        android:id="@+id/menuItemDetail_actionDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:icon="@drawable/ic_action_sort"
-        android:title="@string/itemDetail_actionSort"
+        android:icon="@drawable/ic_action_delete"
+        android:title="@string/itemDetail_actionDelete"
         app:showAsAction="ifRoom" />
 </menu>
