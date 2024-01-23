@@ -1,6 +1,6 @@
 package com.moronlu18.account.usecase
 
-import com.moronlu18.accounts.entity.User
+import com.moronlu18.data.account.User
 
 sealed class UserListState(){
 

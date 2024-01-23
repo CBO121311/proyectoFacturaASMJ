@@ -4,11 +4,11 @@ package com.mto.invoice.usecase
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.moronlu18.accounts.entity.Invoice
 import com.moronlu18.accounts.entity.Item
-import com.moronlu18.accounts.entity.Line_Item
-import com.moronlu18.accounts.repository.InvoiceProvider
-import com.moronlu18.accounts.repository.ItemProvider
+import com.moronlu18.data.invoice.Invoice
+import com.moronlu18.data.invoice.Line_Item
+import com.moronlu18.repository.InvoiceProvider
+import com.moronlu18.repository.ItemProvider
 import com.mto.invoice.adapter.detail.ItemAdapter
 
 class InvoiceDetailViewModel: ViewModel() {

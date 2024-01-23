@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.moronlu18.customercreation.R
-import com.moronlu18.accounts.entity.Customer
+import com.moronlu18.data.customer.Customer
 import com.moronlu18.customercreation.databinding.ItemClienteBinding
 
 class CustomerAdapter(

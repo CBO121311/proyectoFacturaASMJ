@@ -1,6 +1,6 @@
 package com.cbo.customer.ui
 
-import com.moronlu18.accounts.entity.Customer
+import com.moronlu18.data.customer.Customer
 
 sealed class CustomerListState {
 

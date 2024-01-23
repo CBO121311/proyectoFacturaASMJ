@@ -20,8 +20,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.cbo.customer.usecase.CustomerViewModel
 import com.google.android.material.textfield.TextInputLayout
-import com.moronlu18.accounts.entity.Customer
-import com.moronlu18.accounts.entity.Email
+import com.moronlu18.data.customer.Customer
+import com.moronlu18.data.account.Email
 import com.moronlu18.customercreation.R
 import com.moronlu18.customercreation.databinding.FragmentCustomerCreationBinding
 import com.moronlu18.invoice.ui.MainActivity
@@ -93,13 +93,14 @@ class CustomerCreation : Fragment() {
         binding.customerCreationTietAddress.setText(customerEdit.address)
 
         val phone = customerEdit.phone
-        val spaceIndex = phone.indexOf(" ")
+        val spaceIndex = phone?.indexOf(" ")
 
         binding.customerCreationCcp.setCountryForPhoneCode(
-            if (spaceIndex != -1) phone.substring(0, spaceIndex).toInt() else 34
+            spaceIndex?.let { phone.substring(0,it).toInt() } ?:34
+
         )
         binding.customerCreationTietPhone.setText(
-            if (spaceIndex != -1) phone.substring(spaceIndex + 1) else phone
+            spaceIndex?.let { phone.substring(it +1) } ?:phone
         )
 
         binding.customerCreationTietCity.setText(customerEdit.city)

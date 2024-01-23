@@ -5,11 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.moronlu18.accounts.entity.Email
-import com.moronlu18.accounts.entity.User
-import com.moronlu18.accounts.entity.UserSignUp
-import com.moronlu18.accounts.network.Resource
-import com.moronlu18.accounts.repository.UserRepository
+import com.moronlu18.data.account.User
+import com.moronlu18.data.account.UserSignUp
+import com.moronlu18.network.Resource
+import com.moronlu18.repository.UserRepository
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 
@@ -44,8 +43,10 @@ class SignUpViewModel : ViewModel() {
                     Log.i("viewModel", "He pasado por aquí")
 
 
-                    val result = UserRepository.existEmailUser(User(name.value!!,
-                        Email(email.value!!))
+                    val result = UserRepository.existEmailUser(
+                        User(name.value!!,
+                            email.value!!
+                        )
                     )
 
                     state.value = SignUpState.Loading(false)

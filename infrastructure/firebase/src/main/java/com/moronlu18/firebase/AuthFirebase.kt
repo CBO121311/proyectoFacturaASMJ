@@ -3,10 +3,10 @@ package com.moronlu18.firebase
 import android.util.Log
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
-import com.moronlu18.accounts.entity.Account
-import com.moronlu18.accounts.enum_entity.AccountState
-import com.moronlu18.accounts.entity.Email
-import com.moronlu18.accounts.network.Resource
+import com.moronlu18.data.account.Account
+import com.moronlu18.data.account.AccountState
+import com.moronlu18.data.account.Email
+import com.moronlu18.network.Resource
 //import com.moronlu18.accounts.network.Resource
 
 
@@ -40,7 +40,7 @@ class AuthFirebase {
                     Email(email),
                     password,
                     authResult.user!!.displayName,
-                    AccountState.VERIFIED
+                    AccountState.VERIFIED,1
                 )
                 Log.i(TAG, "El password es correcto")
                 Resource.Success(account)

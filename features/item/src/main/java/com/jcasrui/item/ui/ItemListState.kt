@@ -2,6 +2,7 @@ package com.jcasrui.item.ui
 
 import com.moronlu18.accounts.entity.Item
 
+
 /*
  * ReferencedItem: artículo referenciado.
  */

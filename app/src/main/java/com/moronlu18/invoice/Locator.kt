@@ -12,17 +12,16 @@ import com.moronlu18.invoice.ui.preferences.DataStorePreferencesRepository
 //El que lo hace el repositorio.
 
 object Locator {
-    private var application: Application? = null
+    public var application: Application? = null
 
     //inline hace una variable inmovil en el mismo momento. Y hace las dos operaciones a la vez.
-    private inline val requireApplication
+     public inline val requireApplication
         get() = application ?: error("Missing call: initWith(application)")
 
     //Esto debe iniciar para poder crear el contexto de los datos (?)
     fun initWith(application: Application) {
         this.application = application
     }
-
 
     //Solo el repositorio de la aplicación
     //user_preferences es un xml y este XML es accesible al repositorio.
@@ -35,7 +34,6 @@ object Locator {
     //lazy =Se inicialice la primera que lo llames.
     //Este es único para todos.
     val userPreferencesRepository by lazy {
-
         //UserPreferencesRepository(application.userStore) //para evitar el nulo se hace requiereApplication.
         UserPreferencesRepository(requireApplication.userStore)
     }

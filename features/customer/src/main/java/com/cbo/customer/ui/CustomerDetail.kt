@@ -20,7 +20,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.cbo.customer.usecase.CustomerDetailViewModel
-import com.moronlu18.accounts.entity.Customer
+import com.moronlu18.data.customer.Customer
 import com.moronlu18.customercreation.R
 import com.moronlu18.customercreation.databinding.FragmentCustomerDetailBinding
 import com.moronlu18.invoice.base.BaseFragmentDialog
@@ -151,6 +151,7 @@ class CustomerDetail : Fragment(), MenuProvider {
      */
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
 
+        //Evitar la doble pulsación.
         if (SystemClock.elapsedRealtime() - mLastClickTime < doubleClickDelay) {
             return true;
         }

@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.moronlu18.accounts.entity.Invoice
-import com.moronlu18.accounts.network.ResourceList
-import com.moronlu18.accounts.repository.InvoiceProvider
+import com.moronlu18.data.invoice.Invoice
+import com.moronlu18.network.ResourceList
+import com.moronlu18.repository.InvoiceProvider
 import com.moronlu18.invoice.Locator
 import kotlinx.coroutines.launch
 

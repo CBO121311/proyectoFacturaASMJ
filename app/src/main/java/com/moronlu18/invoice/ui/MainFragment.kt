@@ -11,7 +11,6 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import com.moronlu18.invoice.Locator
 import com.moronlu18.invoice.base.BaseFragmentDialog
 import com.moronlu18.invoice.databinding.FragmentMainBinding
@@ -43,7 +42,7 @@ class MainFragment : Fragment() {
             }
         }
 
-        //setUpFab()
+        setUpFab()
 
         binding.cvCustomer.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_customer)
         binding.cvTask.btnAnimationNav(R.id.action_mainFragment_to_nav_graph_task)
@@ -95,22 +94,7 @@ class MainFragment : Fragment() {
     
     private fun setUpFab() {
         (requireActivity() as? MainActivity)?.fab?.apply {
-            visibility = View.VISIBLE
-            setImageResource(R.drawable.ic_action_alert)
-            setOnClickListener { view ->
-
-                if (findNavController().currentDestination?.id == R.id.mainFragment) {
-                    Snackbar.make(view, "Implementación futura", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show()
-                } else {
-                    Snackbar.make(
-                        view,
-                        "No me dejes así, pon una función o hazla no visible <_<\"",
-                        Snackbar.LENGTH_LONG
-                    )
-                        .setAction("Action", null).show()
-                }
-            }
+            visibility = View.GONE
         }
     }
 

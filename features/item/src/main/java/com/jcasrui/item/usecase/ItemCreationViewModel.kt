@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.jcasrui.item.ui.ItemState
 import com.moronlu18.accounts.entity.Item
-import com.moronlu18.accounts.repository.ItemProvider
+import com.moronlu18.repository.ItemProvider
 
 //const val TAG = "ViewModel"
 class ItemCreationViewModel : ViewModel() {

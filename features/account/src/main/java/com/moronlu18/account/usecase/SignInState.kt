@@ -1,6 +1,6 @@
 package com.moronlu18.account.usecase
 
-import com.moronlu18.accounts.entity.Account
+import com.moronlu18.data.account.Account
 
 sealed class SignInState {
     data object EmailEmptyError : SignInState()

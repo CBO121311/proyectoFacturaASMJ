@@ -3,7 +3,7 @@ package com.moronlu18.account.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.moronlu18.accounts.entity.User
+import com.moronlu18.data.account.User
 import com.moronlu18.accountsignin.databinding.FragmentLayoutUserItemBinding
 
 class UserAdapter(

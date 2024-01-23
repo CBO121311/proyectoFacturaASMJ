@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cbo.customer.ui.CustomerListState
-import com.moronlu18.accounts.entity.Customer
-import com.moronlu18.accounts.network.ResourceList
-import com.moronlu18.accounts.repository.CustomerProvider
+import com.moronlu18.data.customer.Customer
+import com.moronlu18.network.ResourceList
+import com.moronlu18.repository.CustomerProvider
 import com.moronlu18.invoice.Locator
 import kotlinx.coroutines.launch
 

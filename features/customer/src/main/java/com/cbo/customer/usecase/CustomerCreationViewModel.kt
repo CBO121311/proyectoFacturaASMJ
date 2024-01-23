@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.cbo.customer.ui.CustomerCreationState
-import com.moronlu18.accounts.entity.Customer
-import com.moronlu18.accounts.repository.CustomerProvider
+import com.moronlu18.data.customer.Customer
+import com.moronlu18.repository.CustomerProvider
 import java.util.regex.Pattern
 
 

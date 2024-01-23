@@ -3,13 +3,39 @@ package com.jcasrui.item.usecase
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.jcasrui.item.ui.ItemListState
 import com.moronlu18.accounts.entity.Item
-import com.moronlu18.accounts.repository.ItemProvider
+import com.moronlu18.invoice.Locator
+import com.moronlu18.network.ResourceList
+import com.moronlu18.repository.ItemProvider
+import kotlinx.coroutines.launch
 
 class ItemListViewModel : ViewModel() {
 
     private var state = MutableLiveData<ItemListState>()
+
+    fun getItemList() {
+        viewModelScope.launch {
+            state.value = ItemListState.Loading(true)
+            val result = ItemProvider.getItemList()
+            state.value = ItemListState.Loading(false)
+
+            when (result) {
+                is ResourceList.Success<*> -> {
+                    val resultList = result.data as ArrayList<Item>
+
+                    when(Locator.settingsPreferencesRepository.getSettingValue("itemsort","id")){
+                        "id" -> resultList.sortBy { it.id }
+                        "name_item" -> resultList.sortBy { it.name}
+                        "price" -> resultList.sortBy { it.price }
+                    }
+                    state.value = ItemListState.Success(resultList)
+                }
+                is ResourceList.Error -> state.value = ItemListState.NoData
+            }
+        }
+    }
 
     fun getItem(): List<Item> {
         return ItemProvider.dataSetItem

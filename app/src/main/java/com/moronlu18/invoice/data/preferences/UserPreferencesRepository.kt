@@ -29,8 +29,6 @@ class UserPreferencesRepository(private val dataStore: DataStore<Preferences>) {
     //lo del asíncrono, esto no pasa nada hacerlo porque son lecturas cortas.
     suspend fun saveUser(email: String, password: String, id: Int) {
 
-        //GlobalScope.launch {  }
-
         GlobalScope.launch(Dispatchers.IO) {
             dataStore.edit { preferences ->
                 preferences[EMAIL] = email

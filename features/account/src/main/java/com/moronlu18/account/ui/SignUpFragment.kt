@@ -16,9 +16,9 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.moronlu18.account.usecase.SignUpState
 import com.moronlu18.account.usecase.SignUpViewModel
-import com.moronlu18.accounts.enum_entity.TypePerfil
-import com.moronlu18.accounts.enum_entity.TypeUser
-import com.moronlu18.accounts.entity.User
+import com.moronlu18.data.account.TypePerfil
+import com.moronlu18.data.account.TypeUser
+import com.moronlu18.data.account.User
 import com.moronlu18.accountsignin.R
 import com.moronlu18.accountsignin.databinding.FragmentAccountSignUpBinding
 

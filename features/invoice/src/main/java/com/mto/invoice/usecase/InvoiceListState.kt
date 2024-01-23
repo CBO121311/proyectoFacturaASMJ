@@ -1,6 +1,6 @@
 package com.mto.invoice.usecase
 
-import com.moronlu18.accounts.entity.Invoice
+import com.moronlu18.data.invoice.Invoice
 
 sealed class InvoiceListState {
     data object NoDataSet: InvoiceListState()

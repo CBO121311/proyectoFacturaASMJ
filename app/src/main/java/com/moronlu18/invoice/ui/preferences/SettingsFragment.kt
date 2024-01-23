@@ -1,13 +1,13 @@
 package com.moronlu18.invoice.ui.preferences
 
 
-
+import android.app.AlertDialog
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.findNavController
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -52,12 +52,21 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
 
-        initPreferencesSortCustomer()
+        initPreferencesCustomer()
         initPreferencesInvoice()
         initPreferencesSortTask()
         initPreferencesBigText()
         initPreferencesLanguage()
         initPreferencesNight()
+        initPreferencesItem()
+    }
+
+
+    private fun restartActivity() {
+        val intent = Intent(activity, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        activity?.finish()
     }
 
     private fun initPreferencesNight() {
@@ -67,19 +76,42 @@ class SettingsFragment : PreferenceFragmentCompat() {
             Locator.settingsPreferencesRepository.getBoolean("key_night_mode", false)
 
         nightMode?.setOnPreferenceChangeListener { _, newValue ->
-            Locator.settingsPreferencesRepository.putBoolean(
+            /*Locator.settingsPreferencesRepository.putBoolean(
                 "key_night_mode",
                 newValue as Boolean
             )
+
             if (newValue) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            }
+            }*/
+
+
+            showConfirmationDialog(newValue as Boolean)
+
+            //restartActivity()
 
             true
         }
     }
+
+    private fun showConfirmationDialog(newNightMode: Boolean) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Confirmación")
+        builder.setMessage("¿Deseas reiniciar la aplicación para aplicar el cambio?")
+        builder.setPositiveButton("Sí") { _, _ ->
+            Locator.settingsPreferencesRepository.putBoolean("key_night_mode", newNightMode)
+            restartActivity()
+        }
+        builder.setNegativeButton("Cancelar") { _, _ ->
+            val nightModeSwitch =
+                preferenceManager.findPreference<SwitchPreference>("key_night_mode")
+            nightModeSwitch?.isChecked = !newNightMode
+        }
+        builder.show()
+    }
+
 
     private fun initPreferencesLanguage() {
         val language = preferenceManager.findPreference<ListPreference>("key_language")
@@ -121,7 +153,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     /**
      * Inicializa la preferencia de orden de la lista de clientes
      */
-    private fun initPreferencesSortCustomer() {
+    private fun initPreferencesCustomer() {
         val sort = preferenceManager.findPreference<ListPreference>("key_sort_customer")
 
         sort?.value = Locator.settingsPreferencesRepository.getSettingValue("customersort", "id")
@@ -131,6 +163,26 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
             Locator.settingsPreferencesRepository.putSettingValue(
                 "customersort",
+                newValue as String
+            )
+
+            Handler(Looper.getMainLooper()).post {
+                updateSummary(sort)
+            }
+            true
+        }
+    }
+
+    private fun initPreferencesItem() {
+        val sort = preferenceManager.findPreference<ListPreference>("key_sort_item")
+
+        sort?.value = Locator.settingsPreferencesRepository.getSettingValue("itemsort", "id")
+        updateSummary(sort)
+
+        sort?.setOnPreferenceChangeListener { _, newValue ->
+
+            Locator.settingsPreferencesRepository.putSettingValue(
+                "itemsort",
                 newValue as String
             )
 
@@ -176,6 +228,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
     }
 
+
+
     /**
      * Actualiza el summary con la preferencia seleccionada
      */
@@ -183,7 +237,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         var index = listOption?.findIndexOfValue(listOption.value)
 
-        if (index == -1){
+        if (index == -1) {
             index = 0
         }
 

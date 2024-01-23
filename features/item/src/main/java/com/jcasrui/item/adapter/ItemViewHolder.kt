@@ -23,5 +23,9 @@ class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         //binding.itemItemImgBtnEdit.setOnClickListener { onClickEdit?.invoke(adapterPosition) }
         //binding.itemItemImgBtnDelete.setOnClickListener { onClickDelete?.invoke(adapterPosition) }
         itemView.setOnClickListener { onClickListener?.invoke(itemModel) }
+
+        itemView.setOnLongClickListener{
+            onClickDelete?.invoke(adapterPosition)
+            true}
     }
 }

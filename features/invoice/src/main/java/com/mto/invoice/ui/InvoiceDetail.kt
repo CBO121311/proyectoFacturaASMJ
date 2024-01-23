@@ -20,10 +20,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.moronlu18.accounts.entity.Invoice
 import com.moronlu18.accounts.entity.Item
-import com.moronlu18.accounts.entity.Line_Item
-import com.moronlu18.accounts.enum_entity.InvoiceStatus
+import com.moronlu18.data.invoice.Invoice
+import com.moronlu18.data.invoice.InvoiceStatus
+import com.moronlu18.data.invoice.Line_Item
 import com.moronlu18.invoice.base.BaseFragmentDialog
 import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.invoicelist.R

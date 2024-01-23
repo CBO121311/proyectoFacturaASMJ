@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.moronlu18.accounts.entity.Task
-import com.moronlu18.accounts.network.ResourceList
-import com.moronlu18.accounts.repository.TaskProvider
+import com.moronlu18.data.task.Task
+import com.moronlu18.network.ResourceList
+import com.moronlu18.repository.TaskProvider
 import com.moronlu18.invoice.Locator
 import com.sergiogv98.tasklist.ui.TaskListState
 import kotlinx.coroutines.launch
@@ -33,8 +33,8 @@ class TaskListViewModel: ViewModel() {
 
                     when(Locator.settingsPreferencesRepository.getSettingValue("tasksort","id")){
                         "id" -> task.sortBy { it.id }
-                        "name_customer_asc" -> task.sortBy { it.customerID.name }
-                        "name_customer_desc" -> task.sortByDescending {  it.customerID.name }
+                        "name_customer_asc" -> task.sortBy { it.customerId.name }
+                        "name_customer_desc" -> task.sortByDescending {  it.customerId.name }
                         "name_task" -> task.sortBy { it.nomTask }
                     }
 

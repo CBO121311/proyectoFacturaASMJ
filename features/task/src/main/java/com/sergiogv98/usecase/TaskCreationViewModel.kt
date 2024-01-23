@@ -4,10 +4,10 @@ import android.text.TextUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.moronlu18.accounts.entity.Customer
-import com.moronlu18.accounts.entity.Task
-import com.moronlu18.accounts.repository.CustomerProvider
-import com.moronlu18.accounts.repository.TaskProvider
+import com.moronlu18.data.customer.Customer
+import com.moronlu18.data.task.Task
+import com.moronlu18.repository.CustomerProvider
+import com.moronlu18.repository.TaskProvider
 import com.sergiogv98.tasklist.ui.TaskState
 import java.time.Instant
 import java.time.LocalDate
@@ -51,7 +51,7 @@ class TaskCreationViewModel : ViewModel() {
         return CustomerProvider.getListCustomer().find { it.name == nameCustomer }
     }
 
-    fun taskGive(position: Int): Task{
+    fun taskGive(position: Int): Task {
         return TaskProvider.taskDataSet[position]
     }
 

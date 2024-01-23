@@ -50,7 +50,7 @@ class ItemList : Fragment(), MenuProvider {
         setUpFab()
         setUpToolbar()
         initRecyclerViewItem()
-
+        viewModel.getItemList()
         /*
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_itemList_to_itemCreation)
@@ -58,8 +58,8 @@ class ItemList : Fragment(), MenuProvider {
 
         viewModel.getState().observe(viewLifecycleOwner, Observer {
             when (it) {
-                ItemListState.NoData -> showNoData()
                 is ItemListState.Loading -> showProgressBar(it.value)
+                ItemListState.NoData -> showNoData()
                 is ItemListState.Success -> onSuccess(it.dataset)
                 ItemListState.ReferencedItem -> showReferencedItem()
                 else -> {}
@@ -71,7 +71,6 @@ class ItemList : Fragment(), MenuProvider {
         val manager = LinearLayoutManager(requireContext())
 
         adapter = ItemAdapter(
-            itemList = viewModel.getItem(),
             onClickListener = { item -> onItemSelected(item) },
             //onClickEdit = { position -> onEditItem(position) },
             onClickDelete = { position -> onDeleteItem(position) }
@@ -165,15 +164,14 @@ class ItemList : Fragment(), MenuProvider {
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return when (menuItem.itemId) {
             R.id.menuItemList_actionRefresh -> {
-                viewModel.getItem()     // orden natural
+                viewModel.getItemList()
                 return true
             }
 
             R.id.menuItemList_actionSort -> {
-                adapter.sort()          // orden personalizado
+                adapter.sort()
                 return true
             }
-
             else -> false
         }
     }
@@ -196,9 +194,10 @@ class ItemList : Fragment(), MenuProvider {
         }
     }
 
+
+
     override fun onDestroyView() {
         super.onDestroyView()
-        viewModel.onSuccess()
         _binding = null
     }
 }

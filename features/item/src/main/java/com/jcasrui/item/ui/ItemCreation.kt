@@ -20,8 +20,8 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
 import com.jcasrui.item.usecase.ItemCreationViewModel
 import com.moronlu18.accounts.entity.Item
-import com.moronlu18.accounts.enum_entity.ItemType
-import com.moronlu18.accounts.enum_entity.VatType
+import com.moronlu18.data.item.ItemType
+import com.moronlu18.data.item.VatType
 import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.itemcreation.R
 import com.moronlu18.itemcreation.databinding.FragmentItemCreationBinding

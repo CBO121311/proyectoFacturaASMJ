@@ -15,9 +15,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
-import com.moronlu18.accounts.entity.Task
-import com.moronlu18.accounts.enum_entity.TaskStatus
-import com.moronlu18.accounts.enum_entity.TypeTask
+import com.moronlu18.data.task.Task
+import com.moronlu18.data.task.TaskStatus
+import com.moronlu18.data.task.TypeTask
 import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.tasklist.databinding.FragmentTaskCreationBinding
 import com.sergiogv98.usecase.TaskCreationViewModel
@@ -57,7 +57,7 @@ class TaskCreation : Fragment() {
 
 
 
-            binding.autoCompleteTxt.setText(viewModel.giveClientName(taskEdit.customerID.id))
+            binding.autoCompleteTxt.setText(viewModel.giveClientName(taskEdit.customerId.id))
             binding.taskCreationTxvTaskName.setText(taskEdit.nomTask)
             binding.taskCreationButtonDateCreation.text = processDateString(taskEdit.dateCreation)
             binding.taskCreationButtonDateEnd.text = processDateString(taskEdit.dateFinalization)
@@ -149,7 +149,7 @@ class TaskCreation : Fragment() {
         if (viewModel.getEditorMode()) {
             val updateTask = Task(
                 id = editTaskPos,
-                customerID = selectedClient!!,
+                customerId = selectedClient!!,
                 nomTask = nameTask,
                 typeTask = taskTypeChoose(),
                 taskStatus = taskStatusChoose(),
@@ -161,7 +161,7 @@ class TaskCreation : Fragment() {
         } else {
             val task = Task(
                 id = viewModel.taskGiveId(),
-                customerID = selectedClient!!,
+                customerId = selectedClient!!,
                 nomTask = nameTask,
                 typeTask = taskTypeChoose(),
                 taskStatus = taskStatusChoose(),

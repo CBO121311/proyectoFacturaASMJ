@@ -3,8 +3,9 @@ package com.mto.invoice.adapter.list
 import android.graphics.Color
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.moronlu18.accounts.entity.Invoice
-import com.moronlu18.accounts.enum_entity.InvoiceStatus
+import com.moronlu18.data.invoice.Invoice
+import com.moronlu18.data.invoice.InvoiceStatus
+
 import com.moronlu18.invoicelist.R
 
 import com.moronlu18.invoicelist.databinding.ItemFacturaBinding

@@ -1,6 +1,6 @@
 package com.sergiogv98.tasklist.adapter
 
-import com.moronlu18.accounts.entity.Task
+import com.moronlu18.data.task.Task
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

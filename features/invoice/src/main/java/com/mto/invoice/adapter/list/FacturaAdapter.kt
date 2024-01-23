@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.moronlu18.invoicelist.R
-import com.moronlu18.accounts.entity.Invoice
+import com.moronlu18.data.invoice.Invoice
 
 class FacturaAdapter(
     private val onClickListener:(Invoice) -> Unit

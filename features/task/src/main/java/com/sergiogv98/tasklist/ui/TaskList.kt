@@ -1,6 +1,6 @@
 package com.sergiogv98.tasklist.ui
 
-import com.moronlu18.accounts.entity.Task
+import com.moronlu18.data.task.Task
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater

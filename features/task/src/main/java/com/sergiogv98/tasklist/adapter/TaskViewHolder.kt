@@ -1,10 +1,10 @@
 package com.sergiogv98.tasklist.adapter
 
-import com.moronlu18.accounts.entity.Task
+import com.moronlu18.data.task.Task
 import android.view.View
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
-import com.moronlu18.accounts.repository.CustomerProvider
+import com.moronlu18.repository.CustomerProvider
 import com.moronlu18.tasklist.R
 import com.moronlu18.tasklist.databinding.ItemTaskBinding
 
@@ -26,7 +26,7 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         this.onClickDeleted = onClickDeleted
         this.onClickEdit = onClickEdit
 
-        binding.taskClientName.text = CustomerProvider.getCustomerNameById(task.customerID.id)
+        binding.taskClientName.text = CustomerProvider.getCustomerNameById(task.customerId.id)
         binding.taskName.text = task.nomTask
         binding.taskDescription.text = task.descTask
         binding.taskCreationDate.text = task.dateCreation.toString().substring(0, task.dateCreation.toString().lastIndexOf("T"))

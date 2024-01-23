@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.moronlu18.accounts.entity.User
-import com.moronlu18.accounts.network.ResourceList
-import com.moronlu18.accounts.repository.UserRepository
+import com.moronlu18.data.account.User
+import com.moronlu18.network.ResourceList
+import com.moronlu18.repository.UserRepository
 import kotlinx.coroutines.launch
 
 class UserListViewModel : ViewModel() {

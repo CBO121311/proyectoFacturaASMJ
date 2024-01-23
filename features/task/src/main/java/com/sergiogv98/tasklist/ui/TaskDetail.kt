@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.moronlu18.accounts.entity.Task
+import com.moronlu18.data.task.Task
 import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.tasklist.R
 import com.moronlu18.tasklist.databinding.FragmentTaskDetailBinding
@@ -45,7 +45,7 @@ class TaskDetail : Fragment() {
 
 
         //TODO Cambiado por mi por el tema de la foto
-        val customer = viewModel.getCustomerPhoto(task.customerID.id)
+        val customer = viewModel.getCustomerPhoto(task.customerId.id)
 
         if (customer.phototrial != null) {
             binding.taskDetailsClientImageView.setImageResource(customer.phototrial!!)
@@ -53,7 +53,7 @@ class TaskDetail : Fragment() {
             binding.taskDetailsClientImageView.setImageBitmap(customer.photo)
         }
 
-        binding.taskDetailsClientNameTxt.text = viewModel.getCustomerName(task.customerID.id)
+        binding.taskDetailsClientNameTxt.text = viewModel.getCustomerName(task.customerId.id)
         binding.taskDetailsTaskName.text = task.nomTask
         val currentDate = Date()
         val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())

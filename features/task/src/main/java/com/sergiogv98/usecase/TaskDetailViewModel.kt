@@ -1,11 +1,11 @@
 package com.sergiogv98.usecase
 
 import androidx.lifecycle.ViewModel
-import com.moronlu18.accounts.entity.Customer
-import com.moronlu18.accounts.entity.Task
-import com.moronlu18.accounts.repository.CustomerProvider.Companion.getCustomerNameById
-import com.moronlu18.accounts.repository.CustomerProvider.Companion.getCustomerbyID
-import com.moronlu18.accounts.repository.TaskProvider
+import com.moronlu18.data.customer.Customer
+import com.moronlu18.data.task.Task
+import com.moronlu18.repository.CustomerProvider.Companion.getCustomerNameById
+import com.moronlu18.repository.CustomerProvider.Companion.getCustomerbyID
+import com.moronlu18.repository.TaskProvider
 
 class TaskDetailViewModel : ViewModel() {
 

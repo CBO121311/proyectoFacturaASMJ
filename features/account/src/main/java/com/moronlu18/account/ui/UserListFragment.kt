@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.moronlu18.account.adapter.UserAdapter
 import com.moronlu18.account.usecase.UserListState
 import com.moronlu18.account.usecase.UserListViewModel
-import com.moronlu18.accounts.entity.User
+import com.moronlu18.data.account.User
 import com.moronlu18.accountsignin.R
 import com.moronlu18.accountsignin.databinding.FragmentUserListBinding
 import com.moronlu18.invoice.ui.MainActivity
@@ -173,7 +173,7 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick, MenuProvider {
      * AlertDialog para borrar
      */
 
-    private fun showConfirmationDialog(user:User) {
+    private fun showConfirmationDialog(user: User) {
 
         AlertDialog.Builder(requireContext())
             .setTitle("Confirmación")

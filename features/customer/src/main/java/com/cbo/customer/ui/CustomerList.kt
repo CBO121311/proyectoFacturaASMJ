@@ -3,8 +3,6 @@ package com.cbo.customer.ui
 
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.os.SystemClock
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -25,7 +23,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cbo.customer.adapter.CustomerAdapter
 import com.cbo.customer.usecase.CustomerListViewModel
-import com.moronlu18.accounts.entity.Customer
+import com.moronlu18.data.customer.Customer
 import com.moronlu18.customercreation.R
 
 import com.moronlu18.customercreation.databinding.FragmentCustomerListBinding
