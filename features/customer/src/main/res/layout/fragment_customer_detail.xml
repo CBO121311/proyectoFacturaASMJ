@@ -25,11 +25,11 @@
 
             <LinearLayout
                 android:id="@+id/customer_detail_llid"
-                android:layout_width="60dp"
+                android:layout_width="@dimen/cd_llid_width"
                 android:layout_height="wrap_content"
                 android:background="@color/cd_color_fondo_2"
                 android:orientation="horizontal"
-                android:padding="5dp"
+                android:padding="@dimen/cd_llid_padding"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 

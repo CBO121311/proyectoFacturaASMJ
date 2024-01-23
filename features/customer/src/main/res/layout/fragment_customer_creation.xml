@@ -45,7 +45,7 @@
             android:id="@+id/customer_creation_llid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/cc_llid_marginTop"
             android:orientation="horizontal"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,14 +53,13 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/customer_creation_tilIdCustomer"
-                style="@style/customer_creation_tilStyle"
-                android:layout_width="90dp"
+                android:layout_width="@dimen/cc_til_IdCustomer_width"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="@dimen/cc_llidCustomer_marginStart"
 
                 android:layout_marginEnd="@dimen/cc_margin_til"
                 android:hint="@string/cc_hint_id"
-                android:padding="2dp"
+                android:padding="@dimen/cc_llidCustomer_padding"
                 app:errorEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +72,7 @@
                     style="customer_creation_tietStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#548A72E3"
+                    android:background="@color/cc_tiet_idCustomer_background"
                     android:inputType="number"
                     android:maxLength="3"
                     android:text="@={viewmodelcustomercreation.idCustomer}" />
@@ -85,7 +84,7 @@
             android:id="@+id/customer_creation_cvImgCustomer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#A18EE6"
+            app:cardBackgroundColor="@color/cc_cvImagCustomer_backgroundColor"
             app:cardCornerRadius="@dimen/cc_radius_cvImgCustomer"
             app:cardElevation="@dimen/cc_cardElevation_cvImgCustomer"
             app:layout_constraintBottom_toBottomOf="@+id/customer_creation_imgcAvatar"
@@ -111,7 +110,7 @@
             style="@style/cvCustomerCreationCorner_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/cc_mcvField_marginTop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/cc_glhalf">
@@ -127,7 +126,6 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/customer_creation_tilNameCustomer"
-                    style="@style/customer_creation_tilStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/cc_margin_til"
@@ -153,7 +151,6 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/customer_creation_tilCustomerEmail"
-                    style="@style/customer_creation_tilStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/cc_margin_til"
@@ -194,7 +191,6 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/customer_creation_tilPhone"
-                    style="@style/customer_creation_tilStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/cc_margin_til"
@@ -216,7 +212,6 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/customer_creation_tilAddress"
-                    style="@style/customer_creation_tilStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/cc_margin_til"
@@ -240,7 +235,6 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/customer_creation_tilCity"
-                    style="@style/customer_creation_tilStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/cc_margin_til"

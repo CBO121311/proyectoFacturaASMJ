@@ -233,7 +233,11 @@ class CustomerDetail : Fragment(), MenuProvider {
      */
     override fun onStart() {
         super.onStart()
+
+        //Todo Remedio temporal hasta que se solucione idioma
+        customer = viewModel.getCustomerByPosition(posCostumer)
         viewModel.onSuccess()
+
     }
 
     /**
@@ -241,9 +245,8 @@ class CustomerDetail : Fragment(), MenuProvider {
      */
     override fun onResume() {
         super.onResume()
-
-        customer = viewModel.getCustomerByPosition(posCostumer)
-        viewModel.onSuccess()
+            customer = viewModel.getCustomerByPosition(posCostumer)
+            viewModel.onSuccess()
     }
 
 

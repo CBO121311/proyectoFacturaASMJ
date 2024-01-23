@@ -47,6 +47,8 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick, MenuProvider {
         return binding.root
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //Funcion que personaliza el botón flotante
@@ -209,7 +211,6 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick, MenuProvider {
                 viewModel.getUserList()
                 return true
             }
-
             else -> false
         }
     }

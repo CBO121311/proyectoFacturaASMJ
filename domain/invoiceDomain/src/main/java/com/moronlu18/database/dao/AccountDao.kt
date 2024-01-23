@@ -26,7 +26,7 @@ interface AccountDao {
     @Query("SELECT * FROM account")
     fun selectAll(): List<Account> // recoger el id
 
-    @Query("SELECT * FROM account JOIN businnesprofile ON account.businessProfile =businnesprofile.id")
+    @Query("SELECT * FROM account JOIN businessprofile ON account.businessProfile =businessprofile.id")
     fun loadAccountAndBusinessProfile(): Map<Account, BusinessProfile> // me devuelve account y perfil dentro de un mapa
     //  El de arriba es 1:1
     //si tuvieramos una relación de 1.N invoice JOin invoice on objeto

@@ -19,26 +19,31 @@
     <string name="pc_title_setting_sort">Configuración de ordenación</string>
     <string name="pc_title_setting_language">Configuración de idioma</string>
     <string name="pc_title_setting_design">Configuración de apariencia</string>
+
+
     <string name="sp_summary_on">Activado</string>
     <string name="sp_summary_off">Desactivado</string>
     <string name="sp_title_modenight">Modo Noche</string>
     <string name="sp_title_bigText">Texto grande</string>
     <string name="pc_title_language">Idioma</string>
     <string name="pc_summary_language">Seleccionar idioma</string>
-    <string name="key_language" translatable="false">key_language</string>
-    <string name="key_night_mode" translatable="false">key_night_mode</string>
     <string name="pr_label_setting">Configuración</string>
     <string name="pr_label_account">Configuración de Cuenta</string>
 
-
+    <string name="key_language" translatable="false">key_language</string>
+    <string name="key_night_mode" translatable="false">key_night_mode</string>
     <string name="key_email" translatable="false">key_email</string>
     <string name="key_password" translatable="false">key_password</string>
     <string name="key_setting_text" translatable="false">key_setting_text</string>
     <string name="preference_empty" translatable="false">none</string>
     <string name="key_sort_customer" translatable="false">key_sort_customer</string>
-
     <string name="key_sort_invoice" translatable="false">key_sort_invoice</string>
     <string name="key_sort_task" translatable="false">key_sort_task</string>
     <string name="key_sort_item" translatable="false">key_sort_item</string>
 
+
+    <string name="pr_alertdialog_restart_message">Debes reiniciar la aplicación para aplicar los cambios</string>
+    <string name="pr_alertdialog_restart_title">Confirmación</string>
+    <string name="pr_alertdialog_restart_positive">Aceptar</string>
+    <string name="pr_alertdialog_restart_cancel">Cancelar</string>
 </resources>

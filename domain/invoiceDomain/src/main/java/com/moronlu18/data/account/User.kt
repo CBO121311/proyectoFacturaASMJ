@@ -17,7 +17,6 @@ data class User(@PrimaryKey val name: String, val email: String) : Comparable<Us
     override fun compareTo(other: User): Int {
         return name.lowercase().compareTo(other.name.lowercase())
     }
-
 }
 
 

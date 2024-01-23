@@ -28,8 +28,8 @@
 
         <ImageView
             android:id="@+id/custome_item_ivCheck"
-            android:layout_width="27dp"
-            android:layout_height="28dp"
+            android:layout_width="@dimen/ci_ivCheck_width"
+            android:layout_height="@dimen/customer_item_ivCheck_height"
             android:layout_centerInParent="true"
             android:src="@drawable/check_v2"
             android:visibility="visible"

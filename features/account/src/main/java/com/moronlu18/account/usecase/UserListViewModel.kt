@@ -13,6 +13,22 @@ class UserListViewModel : ViewModel() {
 
     private var state = MutableLiveData<UserListState>()
 
+    //    private var userRepository
+//    val result = userRepository.get
+    //result userRepository.getUserList().asLiveData
+    //result.value.isEmpty() == true ->
+
+
+    //Los flow está dando  una secuencia de valores de User. pero puede tener un error en el tema del Resource.
+
+    /*fun getUser():Flow<List<User>>{
+
+        //InvoiceDatabase.getInstance()?.userDao?.All
+    }*/
+
+    //ForeignKey(entity = User::class, parent)
+
+
     fun getState(): LiveData<UserListState> {
         return state
     }

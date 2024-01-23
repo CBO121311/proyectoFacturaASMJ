@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 //nombre dirección y n
 
-@Entity(tableName = "businnesprofile")
+@Entity(tableName = "businessprofile")
 data class BusinessProfile(
     @PrimaryKey val id:Int,
     val name: String = "",

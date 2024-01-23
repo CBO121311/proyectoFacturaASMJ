@@ -15,6 +15,6 @@ interface BusinessProfileDao {
 
     // @Query("SELECT * FROM businnessProfile WHERE id=businessProfileId")
     //Con =: coge el valor de la función que le pasemos como parametro.
-    @Query("SELECT * FROM businnesprofile WHERE id=:businessProfileId")
+    @Query("SELECT * FROM businessprofile WHERE id=:businessProfileId")
     fun selectBusinessProfile(businessProfileId: Int): BusinessProfile
 }

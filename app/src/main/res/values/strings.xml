@@ -56,7 +56,7 @@
     <string name="about_authors_mateodesc">Encargado del módulo Invoice</string>
     <string name="about_authors_sergdesc">Encargado del módulo Task</string>
     <string name="about_authors_serg" translatable="false">Sergio García Vico</string>
-    <string name="about_versionapp" translatable="false">3.7.5</string>
+    <string name="about_versionapp" translatable="false">3.7.7</string>
     <string name="progress_dialog_title">Esperando...</string>
     <string name="dialog_warning_title">Entendido</string>
     <string name="contentDescriptionfab" translatable="false">Botón que será heredado entre los fragment</string>
@@ -72,4 +72,5 @@
 
 
     <string name="iv_descr_ivAnimation">Animacion de Inicio</string>
+
 </resources>

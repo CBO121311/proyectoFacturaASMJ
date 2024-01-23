@@ -74,4 +74,8 @@
     <string name="sp_title_bigText">Large text</string>
     <string name="pc_title_language">Language</string>
     <string name="pc_summary_language">Select language</string>
+    <string name="pr_alertdialog_restart_title">Confirmation</string>
+    <string name="pr_alertdialog_restart_positive">Accept</string>
+    <string name="pr_alertdialog_restart_cancel">Cancel</string>
+    <string name="pr_alertdialog_restart_message">You must restart the application to apply the changes</string>
 </resources>

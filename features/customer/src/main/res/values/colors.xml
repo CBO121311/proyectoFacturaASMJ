@@ -21,4 +21,6 @@
     <color name="customer_color_cl_id">#9A8A72E3</color>
 
     <color name="customer_backgroundcolor_cc_ccp">#A492E6</color>
+    <color name="cc_tiet_idCustomer_background">#548A72E3</color>
+    <color name="cc_cvImagCustomer_backgroundColor">#A18EE6</color>
 </resources>

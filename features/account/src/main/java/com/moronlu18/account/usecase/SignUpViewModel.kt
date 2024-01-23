@@ -9,6 +9,7 @@ import com.moronlu18.data.account.User
 import com.moronlu18.data.account.UserSignUp
 import com.moronlu18.network.Resource
 import com.moronlu18.repository.UserRepository
+import com.moronlu18.repository.UserRepositoryv2
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 
@@ -26,7 +27,9 @@ class SignUpViewModel : ViewModel() {
         viewModelScope.launch {
 
 
+            UserRepositoryv2.selectAll()
             when {
+
                 name.value.isNullOrBlank() -> state.value = SignUpState.NameEmptyError
                 email.value.isNullOrBlank() -> state.value = SignUpState.EmailEmptyError
                 !pattern.matcher(email.value!!).matches() -> state.value =

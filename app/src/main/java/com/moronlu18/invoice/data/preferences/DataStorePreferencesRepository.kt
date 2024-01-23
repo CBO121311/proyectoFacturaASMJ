@@ -112,7 +112,6 @@ class DataStorePreferencesRepository(private val dataStore: DataStore<Preference
 
 
     companion object {
-        private val ITEMSORT = stringPreferencesKey("itemsort")
         private val INVOICESORT = stringPreferencesKey("invoicesort")
     }
 }

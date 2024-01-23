@@ -86,8 +86,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }*/
-
-
             showConfirmationDialog(newValue as Boolean)
 
             //restartActivity()
@@ -98,13 +96,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun showConfirmationDialog(newNightMode: Boolean) {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Confirmación")
-        builder.setMessage("¿Deseas reiniciar la aplicación para aplicar el cambio?")
-        builder.setPositiveButton("Sí") { _, _ ->
+        builder.setTitle(getString(R.string.pr_alertdialog_restart_title))
+        builder.setMessage(getString(R.string.pr_alertdialog_restart_message))
+        builder.setPositiveButton(getString(R.string.pr_alertdialog_restart_positive)) { _, _ ->
             Locator.settingsPreferencesRepository.putBoolean("key_night_mode", newNightMode)
             restartActivity()
         }
-        builder.setNegativeButton("Cancelar") { _, _ ->
+        builder.setNegativeButton(getString(R.string.pr_alertdialog_restart_cancel)) { _, _ ->
             val nightModeSwitch =
                 preferenceManager.findPreference<SwitchPreference>("key_night_mode")
             nightModeSwitch?.isChecked = !newNightMode
@@ -226,7 +224,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     /**
-     * Actualiza el summary con la preferencia seleccionada
+     * Actualiza el summary con la preferencia seleccionada.
+     * Si no existe escogerá el primer valor siempre.
      */
     private fun updateSummary(listOption: ListPreference?) {
 
