@@ -34,7 +34,7 @@
             android:layout_marginTop="@dimen/itemDetail_cvMarginTopButton"
             android:layout_marginBottom="@dimen/itemDetail_cvMarginTopButton"
             android:elevation="@dimen/itemDetail_cvElevation"
-            app:cardCornerRadius="@dimen/itemDetail_cvCornerRaius"
+            app:cardCornerRadius="@dimen/itemDetail_cvCornerRadius"
             app:layout_constraintBottom_toTopOf="@+id/itemDetail_btnSave"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

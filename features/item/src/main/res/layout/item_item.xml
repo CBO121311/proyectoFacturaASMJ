@@ -42,7 +42,7 @@
             android:contentDescription="@string/itemItem_tvDescriptionImg"
             android:src="@drawable/reloj"
             app:civ_border_color="@color/purple_500"
-            app:civ_border_width="@dimen/itemItem_bordeWichtImg"
+            app:civ_border_width="@dimen/itemItem_borderWitchImg"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -49,8 +49,8 @@
 
             <ImageButton
                 android:id="@+id/itemCreation_imgBtnAdd"
-                android:layout_width="@dimen/itemCretion_imgBtnWidthHeight"
-                android:layout_height="@dimen/itemCretion_imgBtnWidthHeight"
+                android:layout_width="@dimen/itemCreation_imgBtnWidthHeight"
+                android:layout_height="@dimen/itemCreation_imgBtnWidthHeight"
                 android:background="@color/md_theme_light_secondaryContainer"
                 android:clickable="true"
                 android:contentDescription="@string/itemCreation_imgBtnAdd"

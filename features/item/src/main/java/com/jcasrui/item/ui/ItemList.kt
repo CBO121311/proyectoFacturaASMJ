@@ -51,6 +51,7 @@ class ItemList : Fragment(), MenuProvider {
         setUpToolbar()
         initRecyclerViewItem()
         viewModel.getItemList()
+
         /*
         binding.fab.setOnClickListener {
             findNavController().navigate(R.id.action_itemList_to_itemCreation)
@@ -58,8 +59,8 @@ class ItemList : Fragment(), MenuProvider {
 
         viewModel.getState().observe(viewLifecycleOwner, Observer {
             when (it) {
-                is ItemListState.Loading -> showProgressBar(it.value)
                 ItemListState.NoData -> showNoData()
+                is ItemListState.Loading -> showProgressBar(it.value)
                 is ItemListState.Success -> onSuccess(it.dataset)
                 ItemListState.ReferencedItem -> showReferencedItem()
                 else -> {}
@@ -172,6 +173,7 @@ class ItemList : Fragment(), MenuProvider {
                 adapter.sort()
                 return true
             }
+
             else -> false
         }
     }
@@ -193,8 +195,6 @@ class ItemList : Fragment(), MenuProvider {
             findNavController().popBackStack()
         }
     }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()

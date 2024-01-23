@@ -16,7 +16,7 @@ data class Item(
     val description: String = "",
     //val photo: Int? = null,
     val photo: Int,
-) : Parcelable, Comparable<Item>,Entity<Int>(id){
+) : Parcelable, Comparable<Item>, Entity<Int>(id) {
     override fun compareTo(other: Item): Int {
         return name.lowercase().compareTo(other.name.lowercase())
     }

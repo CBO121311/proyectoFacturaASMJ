@@ -89,12 +89,12 @@ class ItemDetail : Fragment(), MenuProvider{
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return when (menuItem.itemId) {
             R.id.menuItemDetail_actionEdit -> {
-                editItem(item!!)     // editar artículo
+                //editItem(item!!)     // editar artículo
                 true
             }
 
             R.id.menuItemDetail_actionDelete -> {
-                deleteItem()   // borrar artículo
+                //deleteItem()   // borrar artículo
                 true
             }
 
@@ -119,6 +119,7 @@ class ItemDetail : Fragment(), MenuProvider{
     /**
      * Eliminar un artículo
      */
+
     private fun deleteItem() {
         if (viewModel.deleteItemSafe(item!!)) {
             findNavController().navigate(

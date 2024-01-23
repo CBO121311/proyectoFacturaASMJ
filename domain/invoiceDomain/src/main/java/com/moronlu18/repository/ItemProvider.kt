@@ -1,6 +1,5 @@
 package com.moronlu18.repository
 
-
 import com.moronlu18.accounts.entity.Item
 import com.moronlu18.data.invoice.Line_Item
 import com.moronlu18.data.item.ItemType
@@ -11,7 +10,6 @@ import com.moronlu18.network.ResourceList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
-
 
 class ItemProvider {
     companion object {
@@ -85,18 +83,6 @@ class ItemProvider {
             )
         }
 
-
-        suspend fun getItemList(): ResourceList {
-            return withContext(Dispatchers.IO) {
-                delay(2000)
-                when {
-                    dataSetItem.isEmpty() -> ResourceList.Error(Exception("No data"))
-                    else -> ResourceList.Success(dataSetItem  as ArrayList<Item>)
-                }
-            }
-        }
-
-
         fun getMaxId(): Int {
             return dataSetItem.maxByOrNull { it.id }?.id ?: 0
         }
@@ -108,6 +94,7 @@ class ItemProvider {
         fun getPosition(position: Int): Item {
             return dataSetItem[position]
         }
+
         fun getPositionItem(item: Item): Int {
             return dataSetItem.indexOf(item)
         }
@@ -116,10 +103,20 @@ class ItemProvider {
             return InvoiceProvider.itemReferenceInvoice(idItem)
         }
 
+        suspend fun getItemList(): ResourceList {
+            return withContext(Dispatchers.IO) {
+                delay(2000)
+                when {
+                    dataSetItem.isEmpty() -> ResourceList.Error(Exception("No data"))
+                    else -> ResourceList.Success(dataSetItem as ArrayList<Item>)
+                }
+            }
+        }
+
         /**
          * Función que devuelve un item dado un id
          */
-        fun getItemById(id:Int): Item? {
+        fun getItemById(id: Int): Item? {
             return dataSetItem.find { it.id == id }
         }
 
@@ -130,6 +127,7 @@ class ItemProvider {
             }
             return String.format("%.2f€", suma)
         }
+
         fun getTotalItems(lista: MutableList<Item>): String {
             var suma: Double = 0.0
             for (item in lista) {

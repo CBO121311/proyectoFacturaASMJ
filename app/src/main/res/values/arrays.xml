@@ -30,13 +30,15 @@
     <string-array name="sort_item_entries">
         <item>ID</item>
         <item>Nombre</item>
-        <item>Precio</item>
+        <item>Precio ascendente</item>
+        <item>Precio descendente</item>
     </string-array>
 
     <string-array name="sort_item_values">
         <item>id</item>
         <item>name_item</item>
-        <item>price</item>
+        <item>price_asc</item>
+        <item>price_desc</item>
     </string-array>
 
     <!--Task -->

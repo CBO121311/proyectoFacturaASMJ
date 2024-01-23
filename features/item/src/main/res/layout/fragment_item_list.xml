@@ -48,7 +48,7 @@
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/itemList_avNoDataCart"
                 android:layout_width="@dimen/itemList_widthNoData"
-                android:layout_height="@dimen/itemList_heighthNoData"
+                android:layout_height="@dimen/itemList_heightNoData"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

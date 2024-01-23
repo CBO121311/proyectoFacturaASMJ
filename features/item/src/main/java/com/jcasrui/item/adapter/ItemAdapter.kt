@@ -19,7 +19,9 @@ class ItemAdapter(
         return ItemViewHolder(layoutInflater.inflate(R.layout.item_item, parent, false))
     }
 
-    override fun getItemCount(): Int = dataset.size
+    override fun getItemCount(): Int {
+        return dataset.size
+    }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset[position]
@@ -38,7 +40,8 @@ class ItemAdapter(
      * Función que ordena el dataset en base a una propiedad personalizada
      */
     fun sort() {
-        dataset.sorted()
+        //dataset.sortBy { it.name }
+        dataset.sort()
         notifyDataSetChanged()
     }
 }
