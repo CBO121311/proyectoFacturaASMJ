@@ -212,6 +212,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val sort = preferenceManager.findPreference<ListPreference>("key_sort_item")
         sort?.value = Locator.settingsPreferencesRepository.getSettingValue("itemsort", "id")
         updateSummary(sort)
+
         sort?.setOnPreferenceChangeListener { _, newValue ->
             Locator.settingsPreferencesRepository.putSettingValue(
                 "itemsort",

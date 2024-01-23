@@ -59,8 +59,8 @@ class ItemList : Fragment(), MenuProvider {
 
         viewModel.getState().observe(viewLifecycleOwner, Observer {
             when (it) {
-                ItemListState.NoData -> showNoData()
                 is ItemListState.Loading -> showProgressBar(it.value)
+                ItemListState.NoData -> showNoData()
                 is ItemListState.Success -> onSuccess(it.dataset)
                 ItemListState.ReferencedItem -> showReferencedItem()
                 else -> {}
