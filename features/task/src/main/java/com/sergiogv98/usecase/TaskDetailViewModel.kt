@@ -32,5 +32,9 @@ class TaskDetailViewModel : ViewModel() {
         return getCustomerNameById(customerId)
     }
 
+    fun getPositionByTask(task: Task): Int{
+        return TaskProvider.getPositionByTask(task)
+    }
+
 
 }

@@ -77,12 +77,20 @@ class TaskProvider {
             }
         }
 
+        fun getTaskPosition(position: Int): Task {
+            return taskDataSet[position]
+        }
+
         fun getTasks(): List<Task> {
             return taskDataSet
         }
 
         fun updateTasks(task: Task, position: Int){
             taskDataSet[position] = task
+        }
+
+        fun getPositionByTask(task: Task): Int{
+            return taskDataSet.indexOf(task)
         }
 
         /**

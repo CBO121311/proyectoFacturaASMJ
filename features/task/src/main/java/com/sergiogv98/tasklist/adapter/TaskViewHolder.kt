@@ -35,7 +35,7 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         itemView.setOnClickListener { onClickListener(task) }
         itemView.setOnLongClickListener {
             showContextMenu(it)
-            true  // Indica que el evento ha sido manejado correctamente
+            true
         }
     }
 

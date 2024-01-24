@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.moronlu18.data.task.Task
 import com.moronlu18.invoice.ui.MainActivity
@@ -24,6 +25,7 @@ class TaskDetail : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: TaskDetailViewModel by viewModels()
     private val args: TaskDetailArgs by navArgs()
+    private lateinit var taskMoment: Task
     private lateinit var adapter: TaskAdapter
 
     override fun onCreateView(
@@ -41,7 +43,7 @@ class TaskDetail : Fragment() {
             taskList = taskMutableList,
         )
 
-        val task: Task = args.task
+        var task: Task = args.task
 
 
         //TODO Cambiado por mi por el tema de la foto
@@ -71,6 +73,10 @@ class TaskDetail : Fragment() {
         binding.taskDetailsDateEnd.text = task.dateFinalization.toString().substring(0, task.dateFinalization.toString().lastIndexOf("T"))
         binding.taskDetailsDescription.text = task.descTask
 
+        binding.taskDetailsButtonEdit.setOnClickListener {
+            onEditItem(task)
+        }
+
         return binding.root
     }
 
@@ -87,6 +93,15 @@ class TaskDetail : Fragment() {
         (requireActivity() as? MainActivity)?.fab?.apply {
             visibility = View.GONE
         }
+    }
+
+    private fun onEditItem(task: Task) {
+        val posTask = viewModel.getPositionByTask(task)
+        val bundle = Bundle();
+        bundle.putInt("taskPositionEdit", posTask)
+
+        parentFragmentManager.setFragmentResult("taskKeyEdit", bundle)
+        findNavController().navigate(R.id.action_taskDetail_to_taskCreation)
     }
 
     override fun onDestroyView() {

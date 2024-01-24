@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_taskDetail_to_baseFragmentDialog2"
             app:destination="@id/baseFragmentDialog2" />
+        <action
+            android:id="@+id/action_taskDetail_to_taskCreation"
+            app:destination="@id/taskCreation" />
     </fragment>
     <fragment
         android:id="@+id/taskCreation"
