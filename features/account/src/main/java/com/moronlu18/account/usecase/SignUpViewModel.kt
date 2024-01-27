@@ -8,8 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.moronlu18.data.account.User
 import com.moronlu18.data.account.UserSignUp
 import com.moronlu18.network.Resource
-import com.moronlu18.repository.UserRepository
-import com.moronlu18.repository.UserRepositoryv2
+import com.moronlu18.repository.UserRepositoryQuitar
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 
@@ -27,7 +26,7 @@ class SignUpViewModel : ViewModel() {
         viewModelScope.launch {
 
 
-            UserRepositoryv2.selectAll()
+            //UserRepositoryv2.selectAll()
             when {
 
                 name.value.isNullOrBlank() -> state.value = SignUpState.NameEmptyError
@@ -46,7 +45,7 @@ class SignUpViewModel : ViewModel() {
                     Log.i("viewModel", "He pasado por aquí")
 
 
-                    val result = UserRepository.existEmailUser(
+                    val result = UserRepositoryQuitar.existEmailUser(
                         User(name.value!!,
                             email.value!!
                         )
@@ -61,7 +60,7 @@ class SignUpViewModel : ViewModel() {
                             state.value = SignUpState.OnSuccess(result.data as User)
                             //state.value = UserListState.Success(result.data as ArrayList<User>)
 
-
+                            //val result = userRepository()
 
                             //Locator.userPreferencesRepository
                         }
@@ -87,10 +86,10 @@ class SignUpViewModel : ViewModel() {
 
 
     fun addUserSignUp(user: UserSignUp) {
-        UserRepository.addUser(user.toUser())
+        UserRepositoryQuitar.addUser(user.toUser())
     }
 
     fun addUserDirect(user: User) {
-        UserRepository.addUser(user)
+        UserRepositoryQuitar.addUser(user)
     }
 }

@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.moronlu18.accounts.entity.Item
-import com.moronlu18.data.invoice.Line_Item
+import com.moronlu18.data.invoice.LineItem
 import com.moronlu18.data.invoice.Invoice
 import com.moronlu18.data.invoice.InvoiceStatus
 import com.moronlu18.invoice.ui.MainActivity
@@ -70,14 +70,14 @@ class InvoiceCreation : Fragment() {
                 InvoiceSelected = posFactura
                 val invoiceEdit = viewmodel.getInvoicePos(posFactura)
                 viewmodel.setEditorMode(true)
-                binding.invoiceCreationTieCliente.setText(invoiceEdit.customer.id.toString())
+                binding.invoiceCreationTieCliente.setText(invoiceEdit.customerId.id.toString())
                 val formatoFecha =
                     DateTimeFormatter.ofPattern("dd/MM/yyyy").withZone(ZoneId.systemDefault())
                 binding.invoiceCreationTieFechaEm.setText(formatoFecha.format(invoiceEdit.issuedDate))
                 binding.invoiceCreationTieFechaFin.setText(formatoFecha.format(invoiceEdit.dueDate))
-                itemMutableList = getListLineItem(invoiceEdit.lineItems as MutableList<Line_Item>)
+                itemMutableList = getListLineItem(invoiceEdit.lineItems as MutableList<LineItem>)
                 initReciclerView()
-                binding.invoiceCreationTvTotalText.setText(viewmodel.giveTotalLineItem(invoiceEdit.lineItems as MutableList<Line_Item>))
+                binding.invoiceCreationTvTotalText.setText(viewmodel.giveTotalLineItem(invoiceEdit.lineItems as MutableList<LineItem>))
             }
         )
         return binding.root;
@@ -145,7 +145,7 @@ class InvoiceCreation : Fragment() {
             idInvoice = viewmodel.giveIdEditor(viewmodel.getInvoicePos(InvoiceSelected))
             val editInvoice = Invoice(
                 id = idInvoice,
-                customer = viewmodel.getCustomerById(customId)!!,
+                customerId = viewmodel.getCustomerById(customId)!!,
                 number = viewmodel.giveNumber(),
                 status = parse(stat),
                 issuedDate = issued,
@@ -157,7 +157,7 @@ class InvoiceCreation : Fragment() {
             idInvoice = viewmodel.giveId() + 1
             val invoice = Invoice(
                 id = idInvoice,
-                customer = viewmodel.getCustomerById(customId)!!,
+                customerId = viewmodel.getCustomerById(customId)!!,
                 number = viewmodel.giveNumber(),
                 status = parse(stat),
                 issuedDate = issued,
@@ -176,15 +176,15 @@ class InvoiceCreation : Fragment() {
      * unicos para crear los line_items y la lista original de items, esto para conocer la cantidad
      * de veces que se repiten los items y aumentar la cantidad y el precio del objeto creado
      */
-    private fun createListLineItems(id: Int, itemMutableList: MutableList<Item>): List<Line_Item> {
+    private fun createListLineItems(id: Int, itemMutableList: MutableList<Item>): List<LineItem> {
         val listaUnicos: List<Item> = itemMutableList.distinctBy { it.id }
-        val lista: MutableList<Line_Item> = mutableListOf()
-        var creacion: Line_Item
+        val lista: MutableList<LineItem> = mutableListOf()
+        var creacion: LineItem
         if (listaUnicos.size == itemMutableList.size) {
             for (item in listaUnicos) {
-                creacion = Line_Item(
-                    invoice_id = id,
-                    item_id = item.id,
+                creacion = LineItem(
+                    invoiceId = id,
+                    itemId = item.id,
                     quantity = 1,
                     price = item.price,
                     iva = 1
@@ -195,9 +195,9 @@ class InvoiceCreation : Fragment() {
         } else {
             var primerObjeto = true
             for (item in listaUnicos) {
-                creacion = Line_Item(
-                    invoice_id = id,
-                    item_id = item.id,
+                creacion = LineItem(
+                    invoiceId = id,
+                    itemId = item.id,
                     quantity = 1,
                     price = item.price,
                     iva = 1
@@ -340,12 +340,12 @@ class InvoiceCreation : Fragment() {
     /**
      * Función que obtiene una lista mutable de items dada una lista de objetos line_item
      */
-    private fun getListLineItem(lista: MutableList<Line_Item>): MutableList<Item> {
+    private fun getListLineItem(lista: MutableList<LineItem>): MutableList<Item> {
         val listaMutable: MutableList<Item> = mutableListOf()
         var acumulador = 0
         for (item in lista) {
             while (acumulador < item.quantity) {
-                listaMutable.add(viewmodel.giveItemById(item.item_id))
+                listaMutable.add(viewmodel.giveItemById(item.itemId))
                 acumulador++;
             }
             acumulador = 0

@@ -2,6 +2,8 @@ package com.moronlu18.account.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.moronlu18.data.account.User
 import com.moronlu18.accountsignin.databinding.FragmentLayoutUserItemBinding
@@ -10,10 +12,10 @@ class UserAdapter(
     private val listener: OnUserClick,
     private val onItemClick: (user: User) -> Unit,
     //private val onItemDelete: (user:User) -> Unit
-) :
-    RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+) : ListAdapter<User, UserAdapter.UserViewHolder>(USER_COMPARATOR) { //del tipo que hemos establecido.
+   // RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
-    private var dataset = arrayListOf<User>()
+    //private var dataset = arrayListOf<User>() ya que tiene una lista interna
 
     /**
      * Esta interfaz es el contrato entre el Adapter y el fragmento que lo contiene.
@@ -33,39 +35,36 @@ class UserAdapter(
 
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        val item = dataset.get(position)
+        //Ya no tengo un dataset, sino lista interna
+        //Se accede a un elemento de la lista interna de ListAdapter mediante el método
+        //getItem(position)
+        val item = getItem(position)
         holder.bind(item)
     }
 
-    /**
-     * Función que devuelve el número de elementos y por tanto se llamará al método onCreateViewHolder,
-     * tantas veces como item se visualicen en el RecyclerView
-     * Item se visualen en el RecyclerView
-     */
+    /*
+    //ListAdapter hereda de recyclerView
     override fun getItemCount(): Int {
         return dataset.size
     }
-
-    /**
-     * Función que actualiza los datos del adapter le dice a la vista que se invalide
-     * y vuelve a redibujarse
-     */
     fun update(newDataSet: ArrayList<User>) {
 
         dataset = newDataSet
         notifyDataSetChanged()
-    }
+    }*/
 
     /**
      * Función que ordena el data en base a una propiedad personalizada
      */
-    fun sortEmail() {
-        dataset.sortBy { it.email.toString() }
+    fun sort() {
+        //Orden personalizada se establece utilizando currentList.
+        currentList.sortBy { it.email }
+
         notifyDataSetChanged()
     }
 
     fun removeUser(user: User) {
-        dataset.remove(user)
+        currentList.remove(user)
         notifyDataSetChanged()
     }
 
@@ -93,6 +92,24 @@ class UserAdapter(
                     true
                 }
             }
+        }
+    }
+
+
+    //Hacer comparator.
+    //Esto se ejecuta cuando se hace submit y le paso los nuevos datos del flujo.
+    companion object{
+        //es una clase anonima (??) objeto anonimo (??)
+        private val USER_COMPARATOR = object:DiffUtil.ItemCallback<User>() {
+            override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
+                return oldItem === newItem
+            }
+
+            override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
+                return oldItem.name == newItem.name
+            }
+
+
         }
     }
 }

@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.moronlu18.accounts.entity.Item
 import com.moronlu18.data.invoice.Invoice
 import com.moronlu18.data.invoice.InvoiceStatus
-import com.moronlu18.data.invoice.Line_Item
+import com.moronlu18.data.invoice.LineItem
 import com.moronlu18.invoice.base.BaseFragmentDialog
 import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.invoicelist.R
@@ -82,7 +82,7 @@ class InvoiceDetail : Fragment(), MenuProvider {
             DateTimeFormatter.ofPattern("dd/MM/yyyy").withZone(ZoneId.systemDefault())
 
         viewmodeldetail.let {
-            it.user.value = invoice.customer.name
+            it.user.value = invoice.customerId.name
             it.startDate.value = formatoFecha.format(invoice.issuedDate)
             it.endDate.value = formatoFecha.format(invoice.dueDate)
             it.status.value = giveStatusText(invoice.status)
@@ -139,12 +139,12 @@ class InvoiceDetail : Fragment(), MenuProvider {
     /**
      * Función que obtiene una lista mutable de items dada una lista de objetos line_item
      */
-    private fun getListLineItem(lista: MutableList<Line_Item>): MutableList<Item> {
+    private fun getListLineItem(lista: MutableList<LineItem>): MutableList<Item> {
         val listaMutable: MutableList<Item> = mutableListOf()
         var acumulador = 0
         for (item in lista) {
             while (acumulador < item.quantity) {
-                listaMutable.add(viewmodeldetail.giveItemById(item.item_id))
+                listaMutable.add(viewmodeldetail.giveItemById(item.itemId))
                 acumulador++;
             }
             acumulador = 0

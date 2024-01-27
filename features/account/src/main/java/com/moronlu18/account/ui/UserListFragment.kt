@@ -65,10 +65,20 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick, MenuProvider {
             when (it) {
                 is UserListState.Loading -> showProgressBar(it.value)
                 UserListState.NoDataError -> showNoDataError()
-                is UserListState.Success -> onSuccess(it.dataset)
+                is UserListState.Success -> onSuccess()
                 else -> {}
             }
         })
+
+        //Este OBSERVADOR de un Livedata se ejecutará SIEMPRE que haya cambios en la tabla
+        //user de la base datos. El adapter se actualiza a través del
+        // COMPARATOR del adaptar
+
+
+        //Mira la diferencia. El submit es algo del propio de ListAdapter
+        viewModel.allUser.observe(viewLifecycleOwner) {
+            it.let { userAdapter.submitList(it) }
+        }
     }
 
 
@@ -86,12 +96,14 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick, MenuProvider {
      */
 
     //El adapter tiene los usuarios.
-    private fun onSuccess(dataset: ArrayList<User>) {
+    private fun onSuccess() {
         //Desactivar la animación y visualizar el recyclerView
         hideNoDataError()
 
+
+
         //Si es éxito
-        userAdapter.update(dataset)
+        //userAdapter.update(dataset)
     }
 
     private fun hideNoDataError() {

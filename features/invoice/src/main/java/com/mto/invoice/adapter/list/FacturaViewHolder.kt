@@ -22,7 +22,7 @@ class FacturaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         binding.itemFacturaIvtNumber.text = invoiceModel.number
         binding.itemFacturaTvId.text = invoiceModel.id.toString()
-        binding.itemFacturaTvCliente.text = invoiceModel.customer.name
+        binding.itemFacturaTvCliente.text = invoiceModel.customerId.name
         with(binding.itemFacturaEstado) {
             text = giveStatusText(invoiceModel.status)
             setTextColor(setColorEstado(invoiceModel.status))
@@ -32,10 +32,10 @@ class FacturaViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         //Todo Cambiado por el tema de la foto.
 
 
-        if (invoiceModel.customer?.phototrial != null) {
-            binding.itemFacturaIvKiwi.setImageResource(invoiceModel.customer.phototrial!!)
+        if (invoiceModel.customerId?.phototrial != null) {
+            binding.itemFacturaIvKiwi.setImageResource(invoiceModel.customerId.phototrial!!)
         } else {
-            binding.itemFacturaIvKiwi.setImageBitmap(invoiceModel.customer?.photo)
+            binding.itemFacturaIvKiwi.setImageBitmap(invoiceModel.customerId?.photo)
         }
         //binding.itemFacturaIvKiwi.setImageResource(CustomerProvider.getPhoto(facturaModel.customerId))
 

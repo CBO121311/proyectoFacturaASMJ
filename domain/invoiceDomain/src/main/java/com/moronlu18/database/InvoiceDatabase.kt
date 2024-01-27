@@ -37,16 +37,15 @@ abstract class InvoiceDatabase : RoomDatabase() {
 
     companion object {
         @Volatile
-        private var instance: InvoiceDatabase? = null
+        private var INSTANCE: InvoiceDatabase? = null
 
         //Nosotros no propagamos desde el getInstance
-        fun getInstance(): InvoiceDatabase? {
-            if (instance == null) {
-                synchronized(InvoiceDatabase::class) {
-                    instance = buildDatabase()
-                }
+        fun getInstance(): InvoiceDatabase {
+            return INSTANCE ?: synchronized(InvoiceDatabase::class){
+                val instance = buildDatabase()
+                INSTANCE = instance
+                instance //Uno es nullable y otro no lo es
             }
-            return instance
         }
 
         //El contexto
@@ -61,12 +60,14 @@ abstract class InvoiceDatabase : RoomDatabase() {
                 .addTypeConverter(AccountIdTypeConverter())
                 .addTypeConverter(EmailTypeConverter())
                 .addCallback(
-                    RoomDbInitializer(instance)
+                    RoomDbInitializer(INSTANCE)
+                    //Es una clase que implemente que la interfaz
                 ).build()
         }
     }
 
-    class RoomDbInitializer(val instance: InvoiceDatabase?) : RoomDatabase.Callback() {
+    //Solo se le llama cuando se crea la base de datos
+    class RoomDbInitializer(private val instance: InvoiceDatabase?) : Callback() {
 
         private val applicationScope = CoroutineScope(SupervisorJob())
 
@@ -82,6 +83,23 @@ abstract class InvoiceDatabase : RoomDatabase() {
         }
 
         private suspend fun populateUsers() {
+            //Ejecuta este código si no es nulo
+            instance.let { invoiceDatabase ->
+                invoiceDatabase?.userDao()?.insert(
+                    User("Alejandro", "abc@hotmail.es"))
+                invoiceDatabase?.userDao()?.insert(
+                    User("Cristian", "rim@hotmail.es"))
+                invoiceDatabase?.userDao()?.insert(
+                    User("Sergio", "123cab@hotmail.es"))
+                invoiceDatabase?.userDao()?.insert(
+                    User("Jessica", "paella@hotmail.com"))
+                invoiceDatabase?.userDao()?.insert(
+                    User("Pedro","op@hotmail.es"))
+                invoiceDatabase?.userDao()?.insert(
+                    User("Carlos", "mesa@gmail.com"))
+
+            }
+            //viewModelScope.launch(Dispatcher.IO){userRepository.insert}
         }
     }
 }

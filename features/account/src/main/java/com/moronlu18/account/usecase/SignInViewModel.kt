@@ -8,15 +8,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.moronlu18.data.account.Account
-import com.moronlu18.data.account.AccountId
-import com.moronlu18.data.account.AccountState
-import com.moronlu18.data.account.Email
 import com.moronlu18.data.account.User
-import com.moronlu18.database.InvoiceDatabase
 import com.moronlu18.network.Resource
 import com.moronlu18.firebase.AuthFirebase
 import com.moronlu18.repository.UserRepository
-import com.moronlu18.repository.UserRepositoryv2
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 const val TAG = "ViewModel"
@@ -28,13 +24,17 @@ class SignInViewModel : ViewModel() {
     private var state = MutableLiveData<SignInState>()
 
 
-
     /**
      * Esta función se ejecuta directamente desde el fichero xml al user
      *  DataBinding android:onClick="@{()->viewmodel.validateCredentials()}"
      */
 
     fun validateCredentials() {
+
+        viewModelScope.launch(Dispatchers.IO) {
+            UserRepository.insert(User("Ddd", "cbo@hotmail.es"))
+        }
+
         Log.i(TAG, "El email es: ${email.value} y el password es ${password.value}")
 
         when {
@@ -78,13 +78,13 @@ class SignInViewModel : ViewModel() {
                             )
                             Locator.userPreferencesRepository.insert(User("Lourdes","", email.value))*/
 
-                           /* Account.create(
-                                1,
-                                Email("cbo@hotmail.es"),
-                                "123","22",
-                                AccountState.VERIFIED,
-                                2
-                            )*/
+                            /* Account.create(
+                                 1,
+                                 Email("cbo@hotmail.es"),
+                                 "123","22",
+                                 AccountState.VERIFIED,
+                                 2
+                             )*/
 
                         }
 

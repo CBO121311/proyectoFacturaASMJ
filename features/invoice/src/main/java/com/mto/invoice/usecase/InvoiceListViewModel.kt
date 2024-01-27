@@ -33,8 +33,8 @@ class InvoiceListViewModel : ViewModel() {
                     val sortPreference = Locator.settingsPreferencesRepository.getSortInvoice()
                     when(sortPreference){
                         "id" -> invoices.sortBy { it.id }
-                        "name_asc" -> invoices.sortBy { it.customer.name }
-                        "name_desc" -> invoices.sortByDescending { it.customer.name }
+                        "name_asc" -> invoices.sortBy { it.customerId.name }
+                        "name_desc" -> invoices.sortByDescending { it.customerId.name }
                         "status" -> invoices.sortBy { it.status.toString() }
                     }
                     state.value = InvoiceListState.Success(invoices)
@@ -59,8 +59,8 @@ class InvoiceListViewModel : ViewModel() {
 
                     when(sortPreference){
                         "id" -> invoices.sortBy { it.id }
-                        "name_asc" -> invoices.sortBy { it.customer.name }
-                        "name_desc" -> invoices.sortByDescending { it.customer.name }
+                        "name_asc" -> invoices.sortBy { it.customerId.name }
+                        "name_desc" -> invoices.sortByDescending { it.customerId.name }
                         "status" -> invoices.sortBy { it.status.toString() }
                     }
                     state.value = InvoiceListState.Success(invoices)

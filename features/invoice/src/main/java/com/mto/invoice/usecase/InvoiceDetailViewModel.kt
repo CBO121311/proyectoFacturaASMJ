@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.moronlu18.accounts.entity.Item
 import com.moronlu18.data.invoice.Invoice
-import com.moronlu18.data.invoice.Line_Item
+import com.moronlu18.data.invoice.LineItem
 import com.moronlu18.repository.InvoiceProvider
 import com.moronlu18.repository.ItemProvider
 import com.mto.invoice.adapter.detail.ItemAdapter
@@ -23,7 +23,7 @@ class InvoiceDetailViewModel: ViewModel() {
 
     private var state = MutableLiveData<InvoiceDetailState>()
 
-    fun giveTotal(lista: MutableList<Line_Item>): String {
+    fun giveTotal(lista: MutableList<LineItem>): String {
         return ItemProvider.getTotal(lista)
     }
 

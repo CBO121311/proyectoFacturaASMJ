@@ -5,7 +5,7 @@ import com.moronlu18.data.account.User
 sealed class UserListState(){
 
     data object NoDataError: UserListState()
-    data class Success (val dataset: ArrayList<User>): UserListState()
+    data object Success : UserListState() //Ya tengo los datos en el repositorio.
     data class Loading(val value:Boolean): UserListState()
 
 }

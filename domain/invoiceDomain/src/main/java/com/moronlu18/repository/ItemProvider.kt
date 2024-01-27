@@ -1,7 +1,7 @@
 package com.moronlu18.repository
 
 import com.moronlu18.accounts.entity.Item
-import com.moronlu18.data.invoice.Line_Item
+import com.moronlu18.data.invoice.LineItem
 import com.moronlu18.data.item.ItemType
 
 import com.moronlu18.data.item.VatType
@@ -120,7 +120,7 @@ class ItemProvider {
             return dataSetItem.find { it.id == id }
         }
 
-        fun getTotal(lista: MutableList<Line_Item>): String {
+        fun getTotal(lista: MutableList<LineItem>): String {
             var suma: Double = 0.0
             for (item in lista) {
                 suma += item.price

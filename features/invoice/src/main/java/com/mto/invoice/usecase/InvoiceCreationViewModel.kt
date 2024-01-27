@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.moronlu18.accounts.entity.Item
 import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.invoice.Invoice
-import com.moronlu18.data.invoice.Line_Item
+import com.moronlu18.data.invoice.LineItem
 import com.moronlu18.repository.CustomerProvider
 import com.moronlu18.repository.InvoiceProvider
 import com.moronlu18.repository.ItemProvider
@@ -89,7 +89,7 @@ class InvoiceCreationViewModel: ViewModel() {
     fun giveTotal(lista: MutableList<Item>) : String{
         return ItemProvider.getTotalItems(lista)
     }
-    fun giveTotalLineItem(lista: MutableList<Line_Item>) : String{
+    fun giveTotalLineItem(lista: MutableList<LineItem>) : String{
         return ItemProvider.getTotal(lista)
     }
     fun giveNumber():String {

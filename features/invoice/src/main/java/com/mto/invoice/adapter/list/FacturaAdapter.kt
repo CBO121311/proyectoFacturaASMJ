@@ -28,7 +28,7 @@ class FacturaAdapter(
     }
 
     fun sort() {
-        invoiceList.sortBy { it.customer.name }
+        invoiceList.sortBy { it.customerId.name }
         notifyDataSetChanged()
     }
 

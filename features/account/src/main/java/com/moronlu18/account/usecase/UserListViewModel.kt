@@ -3,18 +3,29 @@ package com.moronlu18.account.usecase
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.moronlu18.data.account.User
-import com.moronlu18.network.ResourceList
+import com.moronlu18.repository.UserRepositoryQuitar
 import com.moronlu18.repository.UserRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class UserListViewModel : ViewModel() {
 
     private var state = MutableLiveData<UserListState>()
 
-    //    private var userRepository
-//    val result = userRepository.get
+
+    private var userRepository = UserRepository()
+
+    //La secuencia de usuario, está vinculado al ciclo de vida del viewmodel
+    var allUser = userRepository.getUserList().asLiveData()
+
+    //Esto será siempre null si lo dejamos así.
+    //private var allUser: LiveData<List<User>>? = MutableLiveData<List<User>>()
+
+    //private var userRepository
+    //val result = userRepository.get
     //result userRepository.getUserList().asLiveData
     //result.value.isEmpty() == true ->
 
@@ -35,32 +46,28 @@ class UserListViewModel : ViewModel() {
 
     /**
      * Función que pide el listado de usuarios al repositorio
-     * No tiene que devolver nada
      */
     fun getUserList() {
+
+
         //Iniciar la corrutina
         viewModelScope.launch {
-            state.value = UserListState.Loading(true)
+            //La carga de los datos es asíncrono y se realiza en la creación del viewModelo.
+            // No cuando la vista llama al método GetUserList
 
-            val result = UserRepository.getUserList()
 
-            state.value = UserListState.Loading(false)
-
-            when (result) {
-                is ResourceList.Success<*> -> {
-                    state.value = UserListState.Success(result.data as ArrayList<User>)
-                }
-                is ResourceList.Error -> state.value = UserListState.NoDataError
-                else -> {}
+            when {
+                allUser.value?.isEmpty() == true -> state.value = UserListState.NoDataError
+                else -> state.value = UserListState.Success
             }
         }
     }
 
     fun sortNatural() {
-        UserRepository.dataSet.sort()
+        UserRepositoryQuitar.dataSet.sort()
     }
 
     fun sortPreestablecido() {
-        UserRepository.dataSet.sortBy { it.email.toString().lowercase() }
+        UserRepositoryQuitar.dataSet.sortBy { it.email.toString().lowercase() }
     }
 }

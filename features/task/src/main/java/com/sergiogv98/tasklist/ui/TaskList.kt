@@ -48,6 +48,7 @@ class TaskList : Fragment(), MenuProvider {
         super.onViewCreated(view, savedInstanceState)
         setUpToolBar()
         initRecyclerViewTask()
+
         if (firstCharge) {
             viewModel.getTaskList(firstCharge)
             firstCharge = false
