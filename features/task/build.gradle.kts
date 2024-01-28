@@ -52,5 +52,4 @@ dependencies {
     implementation ("com.airbnb.android:lottie:$lottieVersion")
 
     implementation ("androidx.preference:preference-ktx:1.2.1")
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
 }

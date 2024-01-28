@@ -23,7 +23,7 @@ class TaskProvider {
             taskDataSet.add(
                 Task(
                     1,
-                    CustomerProvider.CustomerdataSet[1],
+                    CustomerProvider.CustomerdataSet[1].id,
                     "Hacer la presentación",
                     TypeTask.LLAMAR,
                     TaskStatus.PENDIENTE,
@@ -35,7 +35,7 @@ class TaskProvider {
             taskDataSet.add(
                 Task(
                     2,
-                    CustomerProvider.CustomerdataSet[2],
+                    CustomerProvider.CustomerdataSet[2].id,
                     "Completar informe",
                     TypeTask.LLAMAR,
                     TaskStatus.PENDIENTE,
@@ -47,7 +47,7 @@ class TaskProvider {
             taskDataSet.add(
                 Task(
                     3,
-                    CustomerProvider.CustomerdataSet[3],
+                    CustomerProvider.CustomerdataSet[3].id,
                     "Entrenamiento en línea",
                     TypeTask.VISITA,
                     TaskStatus.VENCIDA,
@@ -97,7 +97,7 @@ class TaskProvider {
          * Comprueba si el id de cliente está en Task
          */
         fun isCustomerReferenceTask(idCli: Int): Boolean {
-            return taskDataSet.any() { it.customerId.id == idCli }
+            return taskDataSet.any() { it.customerId.value as Int == idCli }
         }
     }
 }
