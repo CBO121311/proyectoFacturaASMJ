@@ -89,7 +89,7 @@ class CustomerAdapter(
                 customerListTvCity.text = isValue(customer.city)
                 customerListTvPhone.text = isValue(customer.phone)
 
-                customerListTvid.text = customer.id.toString()
+                customerListTvid.text = customer.id.value.toString()
 
                 if (customer.phototrial != null) {
                     customerListIvCliente.setImageResource(customer.phototrial!!)

@@ -82,7 +82,7 @@ class CustomerDetail : Fragment(), MenuProvider {
     private fun onSuccess() {
 
         viewModel.let {
-            it.idCustomer.value = customer?.id.toString()
+            it.idCustomer.value = customer?.id?.value.toString()
             it.nameCustomer.value = customer?.name
             it.emailCustomer.value = customer?.email.toString()
             it.phoneCustomer.value = isValue(customer?.phone)

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.moronlu18.accounts.entity.Item
+import com.moronlu18.data.base.InvoiceId
 import com.moronlu18.data.invoice.LineItem
 import com.moronlu18.data.invoice.Invoice
 import com.moronlu18.data.invoice.InvoiceStatus
@@ -70,7 +71,9 @@ class InvoiceCreation : Fragment() {
                 InvoiceSelected = posFactura
                 val invoiceEdit = viewmodel.getInvoicePos(posFactura)
                 viewmodel.setEditorMode(true)
-                binding.invoiceCreationTieCliente.setText(invoiceEdit.customerId.id.toString())
+                //Todo Modificado
+                //binding.invoiceCreationTieCliente.setText(invoiceEdit.customerId.id.toString())
+                binding.invoiceCreationTieCliente.setText(invoiceEdit.customerId.value)
                 val formatoFecha =
                     DateTimeFormatter.ofPattern("dd/MM/yyyy").withZone(ZoneId.systemDefault())
                 binding.invoiceCreationTieFechaEm.setText(formatoFecha.format(invoiceEdit.issuedDate))
@@ -144,8 +147,8 @@ class InvoiceCreation : Fragment() {
         if (viewmodel.getEditorMode()) {
             idInvoice = viewmodel.giveIdEditor(viewmodel.getInvoicePos(InvoiceSelected))
             val editInvoice = Invoice(
-                id = idInvoice,
-                customerId = viewmodel.getCustomerById(customId)!!,
+                id = InvoiceId(idInvoice),
+                customerId = viewmodel.getCustomerById(customId)!!.id,
                 number = viewmodel.giveNumber(),
                 status = parse(stat),
                 issuedDate = issued,
@@ -156,8 +159,8 @@ class InvoiceCreation : Fragment() {
         } else {
             idInvoice = viewmodel.giveId() + 1
             val invoice = Invoice(
-                id = idInvoice,
-                customerId = viewmodel.getCustomerById(customId)!!,
+                id = InvoiceId(idInvoice),
+                customerId = viewmodel.getCustomerById(customId)!!.id,
                 number = viewmodel.giveNumber(),
                 status = parse(stat),
                 issuedDate = issued,
@@ -183,7 +186,7 @@ class InvoiceCreation : Fragment() {
         if (listaUnicos.size == itemMutableList.size) {
             for (item in listaUnicos) {
                 creacion = LineItem(
-                    invoiceId = id,
+                    invoiceId = InvoiceId(id),
                     itemId = item.id,
                     quantity = 1,
                     price = item.price,
@@ -196,7 +199,7 @@ class InvoiceCreation : Fragment() {
             var primerObjeto = true
             for (item in listaUnicos) {
                 creacion = LineItem(
-                    invoiceId = id,
+                    invoiceId = InvoiceId(id),
                     itemId = item.id,
                     quantity = 1,
                     price = item.price,
@@ -345,7 +348,7 @@ class InvoiceCreation : Fragment() {
         var acumulador = 0
         for (item in lista) {
             while (acumulador < item.quantity) {
-                listaMutable.add(viewmodel.giveItemById(item.itemId))
+                listaMutable.add(viewmodel.giveItemById(item.itemId.value))
                 acumulador++;
             }
             acumulador = 0

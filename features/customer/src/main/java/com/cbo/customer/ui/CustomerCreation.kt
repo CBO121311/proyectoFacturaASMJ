@@ -24,6 +24,7 @@ import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.account.Email
 import com.moronlu18.customercreation.R
 import com.moronlu18.customercreation.databinding.FragmentCustomerCreationBinding
+import com.moronlu18.data.base.CustomerId
 import com.moronlu18.invoice.ui.MainActivity
 
 
@@ -87,7 +88,7 @@ class CustomerCreation : Fragment() {
      * Configura la interfaz y establece los valores para el modo de edición.
      */
     private fun setUpEditMode(customerEdit: Customer, posCustomer: Int) {
-        binding.customerCreationTietIdCustomer.setText(customerEdit.id.toString())
+        binding.customerCreationTietIdCustomer.setText(customerEdit.id.value.toString())
         binding.customerCreationTietEmailCustomer.setText(customerEdit.email.toString())
         binding.customerCreationTietNameCustomer.setText(customerEdit.name)
         binding.customerCreationTietAddress.setText(customerEdit.address)
@@ -138,7 +139,7 @@ class CustomerCreation : Fragment() {
         if (viewModel.getEditorMode()) {
 
             val updatedCustomer = Customer(
-                id = id,
+                id = CustomerId(id),
                 name = binding.customerCreationTietNameCustomer.text.toString(),
                 email = Email(binding.customerCreationTietEmailCustomer.text.toString()),
                 phone = phone,
@@ -152,7 +153,7 @@ class CustomerCreation : Fragment() {
 
         } else {
             val customer = Customer(
-                id = viewModel.getNextCustomerId(),
+                id = CustomerId(viewModel.getNextCustomerId()),
                 name = binding.customerCreationTietNameCustomer.text.toString(),
                 email = Email(binding.customerCreationTietEmailCustomer.text.toString()),
                 phone = phone,

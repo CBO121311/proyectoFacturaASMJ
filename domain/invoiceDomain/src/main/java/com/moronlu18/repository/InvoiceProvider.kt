@@ -2,6 +2,9 @@ package com.moronlu18.repository
 
 
 import com.moronlu18.data.account.Email
+import com.moronlu18.data.base.CustomerId
+import com.moronlu18.data.base.InvoiceId
+import com.moronlu18.data.base.ItemId
 import com.moronlu18.data.invoice.LineItem
 import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.invoice.Invoice
@@ -27,35 +30,25 @@ class InvoiceProvider private constructor() {
         private fun initDataSetFactura() {
             dataSet.add(
                 Invoice(
-                    id = 1,
-                    customerId = Customer(
-                        1,
-                        "Mr.Kiwi",
-                        Email("mrkiwi@example.com"),
-                        "+64 21 123 456",
-                        "Auckland",
-                        "Main Street, 123",
-                        phototrial = R.drawable.kiwituxedo
-                    ),
+                    id = InvoiceId(1),
+                    customerId = CustomerId(1),
                     number = giveNumberInvoice(),
                     status = InvoiceStatus.PENDIENTE,
                     issuedDate = Instant.now(),
                     dueDate = Instant.now().plus(Duration.ofDays(30)),
                     lineItems = listOf(
                         LineItem(
+                            InvoiceId(1),
+                            ItemId(1),
                             1,
-                            1,
-                            1,
-                            2.52,
-                            1,
-
+                            2.4,
+                            21,
                             ),
                         LineItem(
+                            InvoiceId(1),
+                            ItemId(2),
                             1,
-                            2,
-                            1,
-                            1.20,
-                            1,
+                            4.56,21
                         ),
 
                         )
@@ -64,32 +57,24 @@ class InvoiceProvider private constructor() {
 
             dataSet.add(
                 Invoice(
-                    id = 2,
-                    customerId = Customer(
-                        2,
-                        "Maria Schmidt",
-                        Email("maria@example.com"),
-                        "+49 123456789",
-                        "Berlín",
-                        "Kurfürstendamm, 123", //R.drawable.elephantuxedo
-                        phototrial = R.drawable.elephantuxedo
-                    ),
+                    id = InvoiceId(2),
+                    CustomerId(2),
                     number = giveNumberInvoice(),
                     status = InvoiceStatus.PAGADA,
                     issuedDate = Instant.now(),
                     dueDate = Instant.now().plus(Duration.ofDays(15)),
                     lineItems = listOf(
                         LineItem(
-                            2,
-                            3,
+                            InvoiceId(2),
+                            ItemId(3),
                             1,
                             0.42,
                             1,
 
                             ),
                         LineItem(
-                            2,
-                            4,
+                            InvoiceId(2),
+                            ItemId(4),
                             1,
                             0.92,
                             1,
@@ -100,32 +85,24 @@ class InvoiceProvider private constructor() {
             )
             dataSet.add(
                 Invoice(
-                    id = 3,
-                    customerId = Customer(
-                        4,
-                        "Zariel García",
-                        Email("garc@example.com"),
-                        "+34 687223344",
-                        "Valencia",
-                        "Avenida Reino de Valencia, 789",
-                        phototrial = R.drawable.kangorutuxedo
-                    ),
+                    id = InvoiceId(3),
+                   customerId = CustomerId(4),
                     number = giveNumberInvoice(),
                     status = InvoiceStatus.PAGADA,
                     issuedDate = Instant.now(),
                     dueDate = Instant.now().plus(Duration.ofDays(15)),
                     lineItems = listOf(
                         LineItem(
-                            3,
-                            3,
+                            InvoiceId(3),
+                            ItemId(3),
                             2,
                             0.84,
                             1,
 
                             ),
                         LineItem(
-                            3,
-                            4,
+                            InvoiceId(3),
+                            ItemId(4),
                             2,
                             1.84,
                             1,
@@ -136,34 +113,26 @@ class InvoiceProvider private constructor() {
             )
             dataSet.add(
                 Invoice(
-                    id = 4,
-                    customerId = Customer(
-                        1,
-                        "Mr.Kiwi",
-                        Email("kiwi@example.com"),
-                        "+64 21 123 456",
-                        "Auckland",
-                        "Main Street, 123",
-                        phototrial = R.drawable.kiwituxedo
-                    ),
+                    id = InvoiceId(4),
+                    customerId = CustomerId(4),
                     number = giveNumberInvoice(),
                     status = InvoiceStatus.VENCIDA,
                     issuedDate = Instant.now(),
                     dueDate = Instant.now().plus(Duration.ofDays(15)),
                     lineItems = listOf(
                         LineItem(
-                            4,
-                            1,
+                            InvoiceId(4),
+                            ItemId(1),
                             2,
                             5.04,
-                            1,
+                            10,
                             ),
                         LineItem(
-                            4,
-                            5,
+                            InvoiceId(4),
+                            ItemId(5),
                             1,
                             3.8,
-                            1,
+                            21,
                         ),
 
                         )
@@ -247,18 +216,18 @@ class InvoiceProvider private constructor() {
          * Comprueba si el id de cliente está en Invoice
          */
         fun isCustomerReferenceFactura(idCli: Int): Boolean {
-            return dataSet.any() { it.customerId.id == idCli }
+            return dataSet.any() { it.customerId.value == idCli }
         }
 
         fun obtainsId(): Int {
-            return dataSet.maxByOrNull { it.id }?.id ?: 0
+            return dataSet.maxByOrNull { it.id.value as Int }?.id?.value ?: 0
         }
 
         fun obtainsIdByInvoice(invoice: Invoice): Int {
             var id = 0
             for (item in dataSet) {
                 if (item == invoice) {
-                    id = item.id
+                    id = item.id.value
                 }
             }
             return id
@@ -267,7 +236,7 @@ class InvoiceProvider private constructor() {
         fun itemReferenceInvoice(idItem: Int): Boolean {
             val listaItems = dataSet.map { it.lineItems }
             return listaItems.any { item ->
-                item?.any { it.itemId == idItem } ?: false
+                item?.any { it.itemId.value == idItem } ?: false
             }
         }
     }

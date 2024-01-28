@@ -81,7 +81,7 @@ class CustomerListViewModel : ViewModel() {
      * Devuelve true si no hay problema, false si lo hay.
      */
     fun isDeleteSafe(customer: Customer): Boolean {
-        return if (repository.isCustomerSafeDelete(customer.id)) {
+        return if (repository.isCustomerSafeDelete(customer.id.value)) {
             state.value = CustomerListState.ReferencedCustomer
             false
         } else {

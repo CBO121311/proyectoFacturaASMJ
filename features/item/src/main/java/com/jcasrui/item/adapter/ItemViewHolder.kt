@@ -16,7 +16,7 @@ class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         onClickDelete: ((Int) -> Unit)? = null,
     ) {
         binding.itemItemCImg.setImageResource(itemModel.photo)
-        binding.itemItemTvId.text = itemModel.id.toString()
+        binding.itemItemTvId.text = itemModel.id.value.toString()
         binding.itemItemTvName.text = itemModel.name
         binding.itemItemTvRateContent.text = itemModel.price.toString()
 

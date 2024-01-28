@@ -28,7 +28,7 @@ class ItemListViewModel : ViewModel() {
     }
 
     fun deleteItemSafe(item: Item): Boolean {
-        return if (ItemProvider.referencedItem(item.id)) {
+        return if (ItemProvider.referencedItem(item.id.value)) {
             state.value = ItemListState.ReferencedItem
             false
         } else {

@@ -21,6 +21,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.moronlu18.accounts.entity.Item
+import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.invoice.Invoice
 import com.moronlu18.data.invoice.InvoiceStatus
 import com.moronlu18.data.invoice.LineItem
@@ -28,6 +29,7 @@ import com.moronlu18.invoice.base.BaseFragmentDialog
 import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.invoicelist.R
 import com.moronlu18.invoicelist.databinding.FragmentInvoiceDetailBinding
+import com.moronlu18.repository.CustomerProvider
 import com.mto.invoice.adapter.detail.ItemAdapter
 import com.mto.invoice.usecase.InvoiceDetailState
 import com.mto.invoice.usecase.InvoiceDetailViewModel
@@ -81,8 +83,16 @@ class InvoiceDetail : Fragment(), MenuProvider {
         val formatoFecha =
             DateTimeFormatter.ofPattern("dd/MM/yyyy").withZone(ZoneId.systemDefault())
 
+        fun getCustomerbyID(id: Int): Customer? {
+            return CustomerProvider.CustomerdataSet.find { it.id.value == id }
+        }
+
+        //TODO cambio de de CBO que cambia un customerId por un customer.
+        val customer = getCustomerbyID(invoice.customerId.value)
+
         viewmodeldetail.let {
-            it.user.value = invoice.customerId.name
+            //it.user.value = invoice.customerId.name
+            it.user.value = customer?.name
             it.startDate.value = formatoFecha.format(invoice.issuedDate)
             it.endDate.value = formatoFecha.format(invoice.dueDate)
             it.status.value = giveStatusText(invoice.status)
@@ -144,7 +154,7 @@ class InvoiceDetail : Fragment(), MenuProvider {
         var acumulador = 0
         for (item in lista) {
             while (acumulador < item.quantity) {
-                listaMutable.add(viewmodeldetail.giveItemById(item.itemId))
+                listaMutable.add(viewmodeldetail.giveItemById(item.itemId.value))
                 acumulador++;
             }
             acumulador = 0

@@ -1,6 +1,7 @@
 package com.moronlu18.repository
 
 import com.moronlu18.accounts.entity.Item
+import com.moronlu18.data.base.ItemId
 import com.moronlu18.data.invoice.LineItem
 import com.moronlu18.data.item.ItemType
 
@@ -24,7 +25,7 @@ class ItemProvider {
         private fun initDataSetItem() {
             dataSetItem.add(
                 Item(
-                    idItem++,
+                    ItemId(idItem++),
                     ItemType.PRODUCT,
                     VatType.TWENTYONE,
                     "Pizza",
@@ -36,7 +37,7 @@ class ItemProvider {
 
             dataSetItem.add(
                 Item(
-                    idItem++,
+                    ItemId(idItem++),
                     ItemType.PRODUCT,
                     VatType.TWENTYONE,
                     "Leche",
@@ -48,7 +49,7 @@ class ItemProvider {
 
             dataSetItem.add(
                 Item(
-                    idItem++,
+                    ItemId(idItem++),
                     ItemType.PRODUCT,
                     VatType.TWENTYONE,
                     "Manzana",
@@ -60,7 +61,7 @@ class ItemProvider {
 
             dataSetItem.add(
                 Item(
-                    idItem++,
+                    ItemId(idItem++),
                     ItemType.PRODUCT,
                     VatType.FIVE,
                     "Pan de espelta",
@@ -72,7 +73,7 @@ class ItemProvider {
 
             dataSetItem.add(
                 Item(
-                    idItem++,
+                    ItemId(idItem++),
                     ItemType.SERVICE,
                     VatType.TEN,
                     "Repartidor",
@@ -84,9 +85,8 @@ class ItemProvider {
         }
 
         fun getMaxId(): Int {
-            return dataSetItem.maxByOrNull { it.id }?.id ?: 0
+            return dataSetItem.maxByOrNull { it.id.value as Int }?.id?.value as Int? ?: 0
         }
-
         fun addUpdateItem(item: Item, positionItem: Int) {
             dataSetItem[positionItem] = item
         }
@@ -117,7 +117,7 @@ class ItemProvider {
          * Función que devuelve un item dado un id
          */
         fun getItemById(id: Int): Item? {
-            return dataSetItem.find { it.id == id }
+            return dataSetItem.find { it.id.value == id }
         }
 
         fun getTotal(lista: MutableList<LineItem>): String {

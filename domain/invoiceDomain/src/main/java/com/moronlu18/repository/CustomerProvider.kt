@@ -2,6 +2,7 @@ package com.moronlu18.repository
 
 import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.account.Email
+import com.moronlu18.data.base.CustomerId
 import com.moronlu18.network.ResourceList
 import com.moronlu18.inovice.R
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +23,7 @@ class CustomerProvider private constructor() {
 
             CustomerdataSet.add(
                 Customer(
-                    idCustomer++,
+                    CustomerId(idCustomer++),
                     "Mr.Kiwi",
                     Email("kiwi@example.com"),
                     "+64 21 123 456",
@@ -34,7 +35,7 @@ class CustomerProvider private constructor() {
 
             CustomerdataSet.add(
                 Customer(
-                    idCustomer++,
+                    CustomerId(idCustomer++),
                     "Maria Schmidt",
                     Email("schmidt@example.com"),
                     "+49 123456789",
@@ -46,7 +47,7 @@ class CustomerProvider private constructor() {
 
             CustomerdataSet.add(
                 Customer(
-                    idCustomer++,
+                    CustomerId(idCustomer++),
                     "Alejandro López",
                     Email("cebolla@example.com"),
                     phototrial = R.drawable.cbotuxedo
@@ -55,7 +56,7 @@ class CustomerProvider private constructor() {
 
             CustomerdataSet.add(
                 Customer(
-                    idCustomer,
+                    CustomerId(idCustomer),
                     "Zariel García",
                     Email("garc@example.com"),
                     "+34 687223344",
@@ -74,7 +75,7 @@ class CustomerProvider private constructor() {
 
             if (idCli.toIntOrNull() != null && idCli.toInt() > 0) {
 
-                return CustomerdataSet.any { it.id == idCli.toInt() && it.id != currentClient.id }
+                return CustomerdataSet.any { it.id.value == idCli.toInt() && it.id != currentClient.id }
             }
             return false
         }
@@ -150,7 +151,7 @@ class CustomerProvider private constructor() {
          * Obtiene el Id más alto dentro de la lista. Si es null, devuelve cero.
          */
         fun getMaxCustomerid(): Int {
-            return CustomerdataSet.maxByOrNull { it.id }?.id ?: 0
+            return CustomerdataSet.maxByOrNull { it.id.value as Int }?.id?.value  ?: 0
         }
 
 
@@ -166,7 +167,7 @@ class CustomerProvider private constructor() {
          * Obtiene un customer del repositorio según su id.
          */
         fun getCustomerbyID(id: Int): Customer? {
-            return CustomerdataSet.find { it.id == id }
+            return CustomerdataSet.find { it.id.value == id }
         }
 
 
@@ -175,7 +176,7 @@ class CustomerProvider private constructor() {
         }
 
         fun getCustomerNameById(customerId: Int): String? {
-            val customer = CustomerdataSet.find { it.id == customerId }
+            val customer = CustomerdataSet.find { it.id.value == customerId }
             return customer?.name
         }
 
@@ -191,7 +192,7 @@ class CustomerProvider private constructor() {
 
         fun containsId(id: Int): Boolean {
             for (item in CustomerdataSet) {
-                if (item.id == id) {
+                if (item.id.value == id) {
                     return true
                 }
             }
@@ -201,7 +202,7 @@ class CustomerProvider private constructor() {
         fun getNom(id: Int): String {
             var nombre = "Cliente"
             for (item in CustomerdataSet) {
-                if (item.id == id) {
+                if (item.id.value == id) {
                     nombre = item.name
                 }
             }

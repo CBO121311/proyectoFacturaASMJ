@@ -100,7 +100,7 @@ class CustomerViewModel : ViewModel() {
      * Ordena la lista de cliente de manera personalizado en base al id
      */
     fun sortRefresh(){
-        repository.CustomerdataSet.sortBy { it.id }
+        repository.CustomerdataSet.sort()
     }
 
     /**

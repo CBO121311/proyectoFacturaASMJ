@@ -22,7 +22,7 @@ class ItemDetailViewModel : ViewModel() {
     }
 
     fun deleteItemSafe(item: Item): Boolean {
-        return if (ItemProvider.referencedItem(item.id)) {
+        return if (ItemProvider.referencedItem(item.id.value)) {
             state.value = ItemState.ReferencedItem
             false
         } else {

@@ -20,6 +20,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputLayout
 import com.jcasrui.item.usecase.ItemCreationViewModel
 import com.moronlu18.accounts.entity.Item
+import com.moronlu18.data.base.ItemId
 import com.moronlu18.data.item.ItemType
 import com.moronlu18.data.item.VatType
 import com.moronlu18.invoice.ui.MainActivity
@@ -111,7 +112,7 @@ class ItemCreation : Fragment() {
 
         if (viewModel.getEditor()) {
             val updateItem = Item(
-                id = editPosItem + 1,
+                id = ItemId(editPosItem + 1),
                 type = chooseItemType(),
                 vat = chooseVatType(),
                 name = name,
@@ -123,7 +124,7 @@ class ItemCreation : Fragment() {
             viewModel.updateItem(updateItem, editPosItem)
         } else {
             val item = Item(
-                id = viewModel.getNextId(),
+                id = ItemId(viewModel.getNextId()),
                 type = chooseItemType(),
                 vat = chooseVatType(),
                 name = name,
