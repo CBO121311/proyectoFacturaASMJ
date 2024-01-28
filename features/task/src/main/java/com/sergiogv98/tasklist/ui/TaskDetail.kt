@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.task.Task
 import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.tasklist.R
@@ -25,7 +27,6 @@ class TaskDetail : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: TaskDetailViewModel by viewModels()
     private val args: TaskDetailArgs by navArgs()
-    private lateinit var taskMoment: Task
     private lateinit var adapter: TaskAdapter
 
     override fun onCreateView(
@@ -47,7 +48,7 @@ class TaskDetail : Fragment() {
 
 
         //TODO Cambiado por mi por el tema de la foto
-        val customer = viewModel.getCustomerPhoto(task.customerId.id)
+        val customer = viewModel.getCustomerPhoto(task.customerId.value as Int)
 
         if (customer.phototrial != null) {
             binding.taskDetailsClientImageView.setImageResource(customer.phototrial!!)
@@ -55,7 +56,7 @@ class TaskDetail : Fragment() {
             binding.taskDetailsClientImageView.setImageBitmap(customer.photo)
         }
 
-        binding.taskDetailsClientNameTxt.text = viewModel.getCustomerName(task.customerId.id)
+        binding.taskDetailsClientNameTxt.text = customer.name
         binding.taskDetailsTaskName.text = task.nomTask
         val currentDate = Date()
         val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault())
@@ -87,6 +88,7 @@ class TaskDetail : Fragment() {
             val fragmentManager = requireActivity().supportFragmentManager
             fragmentManager.popBackStack()
         }
+
     }
 
     private fun setUpFab() {

@@ -4,10 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.task.Task
 import com.moronlu18.network.ResourceList
 import com.moronlu18.repository.TaskProvider
 import com.moronlu18.invoice.Locator
+import com.moronlu18.repository.CustomerProvider
 import com.sergiogv98.tasklist.ui.TaskListState
 import kotlinx.coroutines.launch
 
@@ -33,8 +35,8 @@ class TaskListViewModel: ViewModel() {
 
                     when(Locator.settingsPreferencesRepository.getSettingValue("tasksort","id")){
                         "id" -> task.sortBy { it.id }
-                        "name_customer_asc" -> task.sortBy { it.customerId.name }
-                        "name_customer_desc" -> task.sortByDescending {  it.customerId.name }
+                        "name_customer_asc" -> task.sortBy { getCustomer(it.customerId.value as Int)}
+                        "name_customer_desc" -> task.sortByDescending {  getCustomer(it.customerId.value as Int)}
                         "name_task" -> task.sortBy { it.nomTask }
                     }
 
@@ -43,6 +45,10 @@ class TaskListViewModel: ViewModel() {
                 is ResourceList.Error -> state.value = TaskListState.NoData
             }
         }
+    }
+
+    private fun getCustomer(customerId: Int): Customer {
+        return CustomerProvider.getCustomerPos(customerId)
     }
 
     fun getTasks(): List<Task> {

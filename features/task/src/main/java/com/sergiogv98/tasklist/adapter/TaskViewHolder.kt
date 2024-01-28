@@ -26,7 +26,7 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         this.onClickDeleted = onClickDeleted
         this.onClickEdit = onClickEdit
 
-        binding.taskClientName.text = CustomerProvider.getCustomerNameById(task.customerId.id)
+        binding.taskClientName.text = CustomerProvider.getCustomerNameById(task.customerId.value as Int)
         binding.taskName.text = task.nomTask
         binding.taskDescription.text = task.descTask
         binding.taskCreationDate.text = task.dateCreation.toString().substring(0, task.dateCreation.toString().lastIndexOf("T"))
