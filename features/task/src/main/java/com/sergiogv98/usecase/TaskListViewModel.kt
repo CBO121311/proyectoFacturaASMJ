@@ -34,7 +34,7 @@ class TaskListViewModel: ViewModel() {
                     val task = result.data as ArrayList<Task>
 
                     when(Locator.settingsPreferencesRepository.getSettingValue("tasksort","id")){
-                        "id" -> task.sortBy { it.id }
+                        "id" -> task.sortBy { it.id.value as Int }
                         "name_customer_asc" -> task.sortBy { getCustomer(it.customerId.value as Int)}
                         "name_customer_desc" -> task.sortByDescending {  getCustomer(it.customerId.value as Int)}
                         "name_task" -> task.sortBy { it.nomTask }

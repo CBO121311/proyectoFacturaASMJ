@@ -4,6 +4,7 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.moronlu18.data.base.CustomerId
+import com.moronlu18.data.base.TaskId
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 import java.time.Instant
@@ -12,7 +13,7 @@ import java.time.Instant
 @Parcelize
 data class Task(
     @PrimaryKey
-    val id: Int,
+    val id: @RawValue TaskId,
     val customerId: @RawValue CustomerId,
     val nomTask: String,
     val typeTask: TypeTask,

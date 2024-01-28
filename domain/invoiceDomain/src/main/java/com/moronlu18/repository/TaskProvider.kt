@@ -1,5 +1,6 @@
 package com.moronlu18.repository
 
+import com.moronlu18.data.base.TaskId
 import com.moronlu18.data.task.Task
 import com.moronlu18.data.task.TaskStatus
 import com.moronlu18.data.task.TypeTask
@@ -22,7 +23,7 @@ class TaskProvider {
         private fun initDataSetTask() {
             taskDataSet.add(
                 Task(
-                    1,
+                    TaskId(1),
                     CustomerProvider.CustomerdataSet[1].id,
                     "Hacer la presentación",
                     TypeTask.LLAMAR,
@@ -34,7 +35,7 @@ class TaskProvider {
             )
             taskDataSet.add(
                 Task(
-                    2,
+                    TaskId(2),
                     CustomerProvider.CustomerdataSet[2].id,
                     "Completar informe",
                     TypeTask.LLAMAR,
@@ -46,7 +47,7 @@ class TaskProvider {
             )
             taskDataSet.add(
                 Task(
-                    3,
+                    TaskId(3),
                     CustomerProvider.CustomerdataSet[3].id,
                     "Entrenamiento en línea",
                     TypeTask.VISITA,

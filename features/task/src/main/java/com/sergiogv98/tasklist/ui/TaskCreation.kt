@@ -15,6 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
+import com.moronlu18.data.base.TaskId
 import com.moronlu18.data.task.Task
 import com.moronlu18.data.task.TaskStatus
 import com.moronlu18.data.task.TypeTask
@@ -160,7 +161,7 @@ class TaskCreation : Fragment() {
 
         if (viewModel.getEditorMode()) {
             val updateTask = Task(
-                id = editTaskPos,
+                id = TaskId(editTaskPos),
                 customerId = selectedClient!!.id,
                 nomTask = nameTask,
                 typeTask = taskTypeChoose(),
@@ -172,7 +173,7 @@ class TaskCreation : Fragment() {
             viewModel.updateTask(updateTask, editTaskPos)
         } else {
             val task = Task(
-                id = viewModel.taskGiveId(),
+                id = TaskId(viewModel.taskGiveId()),
                 customerId = selectedClient!!.id,
                 nomTask = nameTask,
                 typeTask = taskTypeChoose(),
