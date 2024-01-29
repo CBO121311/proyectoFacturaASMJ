@@ -24,6 +24,8 @@ import com.moronlu18.data.account.User
 import com.moronlu18.accountsignin.R
 import com.moronlu18.accountsignin.databinding.FragmentUserListBinding
 import com.moronlu18.invoice.ui.MainActivity
+import com.moronlu18.invoice.utils.Utils
+import com.moronlu18.invoice.utils.Utils.showToast
 
 
 //Aquí te doy permiso para el menu
@@ -61,14 +63,16 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick, MenuProvider {
 
 
         //Creamos un observador
-        viewModel.getState().observe(viewLifecycleOwner, Observer {
+
+
+
+        /*viewModel.getState().observe(viewLifecycleOwner, Observer {
             when (it) {
                 is UserListState.Loading -> showProgressBar(it.value)
                 UserListState.NoDataError -> showNoDataError()
                 is UserListState.Success -> onSuccess()
-                else -> {}
             }
-        })
+        })*/
 
         //Este OBSERVADOR de un Livedata se ejecutará SIEMPRE que haya cambios en la tabla
         //user de la base datos. El adapter se actualiza a través del
@@ -163,7 +167,9 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick, MenuProvider {
         //1. ¿Cómo quiero que se muestren los elementos de la lista?
         with(binding.rvUser) {
             layoutManager = LinearLayoutManager(requireContext())
-            setHasFixedSize(true)
+            //El recyclerview es dinámico ya que utilizamos listadapter y se modifica el número
+            //de elementos. Se debe quitar setHasFixedSize();
+            //setHasFixedSize(true) //No se actualiza el recycler view
             this.adapter = userAdapter
         }
     }
@@ -173,8 +179,15 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick, MenuProvider {
      */
 
     override fun userClick(user: User) {
-        Toast.makeText(requireActivity(), "Pulsación corta en el usuario $user", Toast.LENGTH_LONG)
-            .show()
+        //Toast.makeText(requireActivity(), "Pulsación corta en el usuario $user", Toast.LENGTH_LONG).show()
+
+        //Todos los módulos tienen acceso al App.
+
+        //La diferencia es que dentro de un objeto lo de Util y no
+        //requireActivity().showToast("Pulsación corta en el usuario $user")
+
+        Utils.showToast(requireContext(),"Pulsación corta a través del $user")
+
     }
 
     override fun userOnLongClick(user: User) {
@@ -212,7 +225,8 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick, MenuProvider {
         return when(menuItem.itemId){
             R.id.action_sort-> {
                 //Ordenado por nombre
-                viewModel.sortNatural()
+                //viewModel.sortNatural()
+                userAdapter.sort()
                 viewModel.getUserList()
                 return  true
             }

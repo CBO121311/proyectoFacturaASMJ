@@ -1,6 +1,7 @@
 package com.moronlu18.database.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.ForeignKey
 import androidx.room.Insert
 import androidx.room.Query
@@ -15,5 +16,8 @@ interface UserDao {
     @Query("SELECT * FROM user")
     fun selectAll(): Flow<List<User>>
 
+
+    @Delete
+    fun delete(user: User)
     //Debemos crear una funcion por cada eelemnto
 }

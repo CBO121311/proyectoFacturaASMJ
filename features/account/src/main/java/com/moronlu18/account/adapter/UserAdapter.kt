@@ -58,9 +58,9 @@ class UserAdapter(
      */
     fun sort() {
         //Orden personalizada se establece utilizando currentList.
-        currentList.sortBy { it.email }
-
-        notifyDataSetChanged()
+        //currentList.sortBy { it.email } //esta lista magnifica, pero esta lista es inmutable
+        //notifyDataSetChanged()
+        submitList(currentList.sortedBy { it.email })
     }
 
     fun removeUser(user: User) {

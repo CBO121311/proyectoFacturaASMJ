@@ -17,7 +17,9 @@ import kotlinx.coroutines.withContext
 const val TAG = "ViewModel"
 
 class AuthFirebase {
-    private var authFirebase = FirebaseAuth.getInstance()
+    //private lateinit var authFirebase = FirebaseAuth.getInstance()
+
+    private lateinit var authFirebase : FirebaseAuth
     private lateinit var account: Account
 
     //ght123456@hotmail.es
@@ -34,9 +36,16 @@ class AuthFirebase {
                 //Este pausa, indica que se pause que termina la operación.
                 val authResult: AuthResult =
                     authFirebase.signInWithEmailAndPassword(email, password).await()
-                val user = authResult.user
+                //val user = authResult.user
+
+
+                //AccountId(Interger.parseInt(authResult.user.hashCode().toString())),
+                //Email(email),
+                //password,
+                //authResult.user!!.displayName
+
                 account = Account.create(
-                    user!!.hashCode(),
+                    authResult.user!!.hashCode(),
                     Email(email),
                     password,
                     authResult.user!!.displayName,

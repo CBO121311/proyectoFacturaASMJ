@@ -100,7 +100,8 @@ class SignUpFragment : Fragment() {
                 SignUpState.PasswordEmptyError -> setPasswordEmptyError()
                 SignUpState.PasswordNotEquals -> setPasswordEqualsError()
                 is SignUpState.Loading -> showProgressbar(it.value)
-                is SignUpState.AuthencationError -> setEmailEquals(it.message)
+                is SignUpState.AuthencationError -> setEmailEquals(it.message) // hay que añadir
+                //SignUpState.OnSuccess ->
                 is SignUpState.OnSuccess -> {
                     if (!onSuccessHandle) {
                         onSuccess(it.user)

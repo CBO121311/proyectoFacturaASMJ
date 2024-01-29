@@ -8,8 +8,12 @@ import androidx.lifecycle.viewModelScope
 import com.moronlu18.data.account.User
 import com.moronlu18.data.account.UserSignUp
 import com.moronlu18.network.Resource
+import com.moronlu18.repository.UserRepository
 import com.moronlu18.repository.UserRepositoryQuitar
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import java.util.regex.Pattern
 
 class SignUpViewModel : ViewModel() {
@@ -23,53 +27,105 @@ class SignUpViewModel : ViewModel() {
     private val pattern = Pattern.compile("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")
 
     fun validateSignUp() {
-        viewModelScope.launch {
 
 
-            //UserRepositoryv2.selectAll()
-            when {
+        //UserRepositoryv2.selectAll()
+        when {
 
-                name.value.isNullOrBlank() -> state.value = SignUpState.NameEmptyError
-                email.value.isNullOrBlank() -> state.value = SignUpState.EmailEmptyError
-                !pattern.matcher(email.value!!).matches() -> state.value =
-                    SignUpState.EmailFormatError
+            name.value.isNullOrBlank() -> state.value = SignUpState.NameEmptyError
+            email.value.isNullOrBlank() -> state.value = SignUpState.EmailEmptyError
+            !pattern.matcher(email.value!!).matches() -> state.value =
+                SignUpState.EmailFormatError
 
-                password1.value.isNullOrBlank() -> state.value = SignUpState.PasswordEmptyError
-                password2.value.isNullOrBlank() -> state.value = SignUpState.PasswordEmptyError
-                !isEqualPassword(password1.value!!, password2.value!!) -> state.value =
-                    SignUpState.PasswordNotEquals
+            password1.value.isNullOrBlank() -> state.value = SignUpState.PasswordEmptyError
+            password2.value.isNullOrBlank() -> state.value = SignUpState.PasswordEmptyError
+            !isEqualPassword(password1.value!!, password2.value!!) -> state.value =
+                SignUpState.PasswordNotEquals
 
-                else -> {
+            else -> {
+                //postValue es asíncrono y no tenemos seguridad que lo haga.
+                state.postValue(SignUpState.Loading(true))
+                viewModelScope.launch(Dispatchers.IO) {
 
-                    state.value = SignUpState.Loading(true)
-                    Log.i("viewModel", "He pasado por aquí")
+
+                    //para solucionar uno de los errores   withContext(Dispatchers.Main)
+                    //utilizar el postValue que está dentro del liveData
+                    //Que actualiza el hilo
+                    //Todo Cambio de idea, se utiliza el contexto.
 
 
+                    /*withContext(Dispatchers.Main){
+
+                        state.value = SignUpState.Loading(true)
+                    }*/
+
+                    //state.postValue(SignUpState.Loading(true))
+                    //Por qué post?, porque ya tengo un LiveData
+                    //Y el procesador ya sabe donde ejecutar esta sentencia
+
+                    //Log.i("viewModel", "He pasado por aquí")
+
+                    //
                     val result = UserRepositoryQuitar.existEmailUser(
-                        User(name.value!!,
+                        User(
+                            name.value!!,
                             email.value!!
                         )
                     )
 
-                    state.value = SignUpState.Loading(false)
+
+
+                    //Todo Lourdes añadir
+                    //necesitamos el result.
+                    //val result= userRepository.insert(user);
+
+
+                    //Todo esto quiero que se haga antes
+                    /*runBlocking {
+                        state.postValue(SignUpState.Loading(false))
+                    }*/
+
+
+                    //UserRepository.insert(User("ABnnB","ABC"));
+
+
+
+                    withContext(Dispatchers.Main){
+
+                       state.value = SignUpState.Loading(false)
+                    }
+
+
+
 
                     when (result) {
 
+                        is Resource.Error -> {
+
+                            withContext(Dispatchers.Main){
+                                state.value = SignUpState.AuthencationError(result.exception.message!!)
+                            }
+
+                            //Todo Esta líenea es el que hay que añadir
+                            //state.value = SignUpState.SignUpError(result.exception.message ?: "Unknown Error")
+
+                            //state.value = SignUpState.AuthencationError(result.exception.message!!)
+
+                            //state.postValue(SignUpState.AuthencationError(result.exception.message!!))
+                        }
+
+
                         is Resource.Success<*> -> {
 
-                            state.value = SignUpState.OnSuccess(result.data as User)
-                            //state.value = UserListState.Success(result.data as ArrayList<User>)
+                            withContext(Dispatchers.Main){
+                                state.value = SignUpState.OnSuccess(result.data as User)
+                            }
 
-                            //val result = userRepository()
+                            //state.value = SignUpState.OnSuccess(result.data as User)
+                            //state.postValue(SignUpState.OnSuccess(result.data as User))
 
-                            //Locator.userPreferencesRepository
+                            //state.postValue(SignUpState.OnSuccess)
                         }
-
-                        is Resource.Error -> {
-                            state.value = SignUpState.AuthencationError(result.exception.message!!)
-                        }
-
-                        else -> {}
                     }
                 }
             }

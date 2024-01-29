@@ -66,12 +66,18 @@ class CustomerDetail : Fragment(), MenuProvider {
             }
         })
 
-        parentFragmentManager.setFragmentResultListener("detailkey", this,
-            FragmentResultListener { _, result ->
-                posCostumer = result.getInt("detailposition")
-                customer = viewModel.getCustomerByPosition(posCostumer)
-            }
-        )
+        if(customer == null){
+
+
+            parentFragmentManager.setFragmentResultListener("detailkey", this,
+                FragmentResultListener { _, result ->
+                    posCostumer = result.getInt("detailposition")
+                    customer = viewModel.getCustomerByPosition(posCostumer)
+                }
+            )
+
+        }
+
     }
 
 

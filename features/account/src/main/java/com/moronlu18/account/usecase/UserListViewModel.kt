@@ -48,18 +48,10 @@ class UserListViewModel : ViewModel() {
      * Función que pide el listado de usuarios al repositorio
      */
     fun getUserList() {
-
-
-        //Iniciar la corrutina
-        viewModelScope.launch {
-            //La carga de los datos es asíncrono y se realiza en la creación del viewModelo.
-            // No cuando la vista llama al método GetUserList
-
-
-            when {
-                allUser.value?.isEmpty() == true -> state.value = UserListState.NoDataError
-                else -> state.value = UserListState.Success
-            }
+        //El flow tiene ya de por si una corrutina, podemos el viewmodelscope launch.
+        when {
+            allUser.value?.isEmpty() == true -> state.value = UserListState.NoDataError
+            else -> state.value = UserListState.Success
         }
     }
 
@@ -69,5 +61,13 @@ class UserListViewModel : ViewModel() {
 
     fun sortPreestablecido() {
         UserRepositoryQuitar.dataSet.sortBy { it.email.toString().lowercase() }
+    }
+
+
+    fun delete(user: User){
+        //No puede bloquear el hilo principal (Dispatchers.IO)
+        viewModelScope.launch(Dispatchers.IO) {
+            userRepository.delete(user);
+        }
     }
 }

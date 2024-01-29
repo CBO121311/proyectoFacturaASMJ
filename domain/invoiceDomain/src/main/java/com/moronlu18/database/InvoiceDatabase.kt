@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 
 @Database(
     entities = [Account::class, BusinessProfile::class, User::class],
-    version = 1,
+    version = 1, //version hace que no pete ya que lo borra constantemente.
     exportSchema = false
 )
 //Hay que decir que convertidores vamos a utilizar
