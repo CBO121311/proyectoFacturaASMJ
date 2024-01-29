@@ -15,6 +15,7 @@ class TaskProvider {
     companion object {
 
         var taskDataSet: MutableList<Task> = mutableListOf()
+        private var idTask: Int = 1
 
         init {
             initDataSetTask()
@@ -23,7 +24,7 @@ class TaskProvider {
         private fun initDataSetTask() {
             taskDataSet.add(
                 Task(
-                    TaskId(1),
+                    TaskId(idTask++),
                     CustomerProvider.CustomerdataSet[1].id,
                     "Hacer la presentación",
                     TypeTask.LLAMAR,
@@ -35,7 +36,7 @@ class TaskProvider {
             )
             taskDataSet.add(
                 Task(
-                    TaskId(2),
+                    TaskId(idTask++),
                     CustomerProvider.CustomerdataSet[2].id,
                     "Completar informe",
                     TypeTask.LLAMAR,
@@ -47,7 +48,7 @@ class TaskProvider {
             )
             taskDataSet.add(
                 Task(
-                    TaskId(3),
+                    TaskId(idTask++),
                     CustomerProvider.CustomerdataSet[3].id,
                     "Entrenamiento en línea",
                     TypeTask.VISITA,
@@ -98,7 +99,7 @@ class TaskProvider {
          * Comprueba si el id de cliente está en Task
          */
         fun isCustomerReferenceTask(idCli: Int): Boolean {
-            return taskDataSet.any() { it.customerId.value as Int == idCli }
+            return taskDataSet.any() { it.customerId.value == idCli }
         }
     }
 }
