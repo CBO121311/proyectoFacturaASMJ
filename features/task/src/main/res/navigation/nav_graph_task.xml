@@ -32,9 +32,6 @@
         android:name="com.sergiogv98.tasklist.ui.TaskDetail"
         android:label="@string/title_task_detail"
         tools:layout="@layout/fragment_task_detail" >
-        <argument
-            android:name="task"
-            app:argType="com.moronlu18.data.task.Task" />
         <action
             android:id="@+id/action_taskDetail_to_baseFragmentDialog2"
             app:destination="@id/baseFragmentDialog2" />

@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menu_see"
+        android:icon="@drawable/ic_sort"
+        android:title="@string/menu_see"/>
+
+    <item
         android:id="@+id/menu_edit"
         android:icon="@drawable/ic_sort"
         android:title="@string/menu_edit"/>

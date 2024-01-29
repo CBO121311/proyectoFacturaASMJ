@@ -35,4 +35,5 @@
     <string name="task_vencida">Vencida</string>
     <string name="menu_edit">Editar</string>
     <string name="menu_delete">Eliminar</string>
+    <string name="menu_see">Ver</string>
 </resources>

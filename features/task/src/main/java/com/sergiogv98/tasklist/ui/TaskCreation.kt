@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,18 +47,7 @@ class TaskCreation : Fragment() {
         _binding = FragmentTaskCreationBinding.inflate(inflater, container, false)
         binding.viewmodeltaskcreation = this.viewModel
         binding.lifecycleOwner = this
-        setUpFab()
         viewModel.setEditorMode(false)
-
-        setFragmentResultListener("taskkey", "taskPosition") { posTask ->
-            handleFragmentResult(posTask)
-        }
-
-        setFragmentResultListener("taskKeyEdit", "taskPositionEdit") { posTaskEdit ->
-            handleFragmentResult(posTaskEdit)
-        }
-
-
         clientDropDownInit()
 
         binding.autoCompleteTxt.addTextChangedListener(GeneralTextWatcher(binding.taskCreationTaskDropdown))
@@ -68,6 +58,21 @@ class TaskCreation : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setUpFab()
+        parentFragmentManager.setFragmentResultListener(
+            "taskkey", this
+        ) { _, result ->
+            val posTask: Int = result.getInt("taskposition")
+            val taskEdit = viewModel.taskGive(posTask)
+            viewModel.setEditorMode(true)
+            setTaskContent(taskEdit)
+            Log.d("taskkey", taskEdit.toString())
+            clientDropDownInit()
+            editTaskPos = posTask
+            viewModel.prevTask = taskEdit
+        }
+
         binding.taskCreationImgCalendarCreation.setOnClickListener {
             showDatePicker(binding.taskCreationButtonDateCreation)
         }
@@ -83,29 +88,13 @@ class TaskCreation : Fragment() {
 
         viewModel.getState().observe(viewLifecycleOwner) {
             when (it) {
-                TaskState.TitleIsMandatory -> setTaskNameEmptyError()
-                TaskState.CustomerUnspecified -> setTaskCustomerEmptyError()
-                TaskState.IncorrectDateRange -> setDateValidationError()
+                TaskCreationState.TitleIsMandatory -> setTaskNameEmptyError()
+                TaskCreationState.CustomerUnspecified -> setTaskCustomerEmptyError()
+                TaskCreationState.IncorrectDateRange -> setDateValidationError()
                 else -> onSuccessCreate()
             }
         }
 
-    }
-
-    private fun setFragmentResultListener(key: String, positionKey: String, callback: (Int) -> Unit) {
-        parentFragmentManager.setFragmentResultListener(key, this) { _, result ->
-            val posTask: Int = result.getInt(positionKey)
-            callback(posTask)
-        }
-    }
-
-    private fun handleFragmentResult(posTask: Int) {
-        val taskEdit = viewModel.taskGive(posTask)
-        viewModel.setEditorMode(true)
-        setTaskContent(taskEdit)
-        clientDropDownInit()
-        editTaskPos = posTask
-        viewModel.prevTask = taskEdit
     }
 
     private fun setTaskContent(task: Task) {
@@ -116,11 +105,6 @@ class TaskCreation : Fragment() {
         binding.taskCreationTxvDescription.setText(task.descTask)
         binding.taskCreationTypeTaskList.setSelection(returnTaskType(task))
         setTaskStatusInRadioGroup(task)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun showDatePicker(button: Button) {
@@ -285,5 +269,10 @@ class TaskCreation : Fragment() {
             til.error = null
         }
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

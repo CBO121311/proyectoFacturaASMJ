@@ -8,7 +8,7 @@ import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.task.Task
 import com.moronlu18.repository.CustomerProvider
 import com.moronlu18.repository.TaskProvider
-import com.sergiogv98.tasklist.ui.TaskState
+import com.sergiogv98.tasklist.ui.TaskCreationState
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneOffset
@@ -22,24 +22,24 @@ class TaskCreationViewModel : ViewModel() {
     var dateEnd = MutableLiveData<String>()
     var prevTask: Task? = null
 
-    private var state = MutableLiveData<TaskState>()
+    private var state = MutableLiveData<TaskCreationState>()
     private var isEditor = MutableLiveData<Boolean>()
 
     fun validateTask() {
         when {
-            TextUtils.isEmpty(customerName.value) -> state.value = TaskState.CustomerUnspecified
-            TextUtils.isEmpty(taskName.value) -> state.value = TaskState.TitleIsMandatory
+            TextUtils.isEmpty(customerName.value) -> state.value = TaskCreationState.CustomerUnspecified
+            TextUtils.isEmpty(taskName.value) -> state.value = TaskCreationState.TitleIsMandatory
             isValidDate(dateCreation.value, dateEnd.value) -> state.value =
-                TaskState.IncorrectDateRange
+                TaskCreationState.IncorrectDateRange
 
             else -> {
-                state.value = TaskState.OnSuccess
+                state.value = TaskCreationState.OnSuccess
             }
         }
     }
 
 
-    fun getState(): LiveData<TaskState> {
+    fun getState(): LiveData<TaskCreationState> {
         return state
     }
 

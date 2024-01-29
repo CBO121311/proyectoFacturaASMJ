@@ -13,35 +13,52 @@ import com.moronlu18.repository.CustomerProvider
 import com.sergiogv98.tasklist.ui.TaskListState
 import kotlinx.coroutines.launch
 
-class TaskListViewModel: ViewModel() {
+class TaskListViewModel : ViewModel() {
 
     private var state = MutableLiveData<TaskListState>()
 
-    fun getTaskList(firstCharge: Boolean){
+    fun getTaskList() {
         viewModelScope.launch {
-            lateinit var result: Any
+            state.value = TaskListState.Loading(true)
+            val result = TaskProvider.getTaskList()
+            state.value = TaskListState.Loading(false)
 
-            if (firstCharge) {
-                state.value = TaskListState.Loading(true)
-                result = TaskProvider.getTaskList()
-                state.value = TaskListState.Loading(false)
-            } else {
-                result = TaskProvider.getTaskListNoCharge()
-            }
-
-            when(result){
+            when (result) {
                 is ResourceList.Success<*> -> {
                     val task = result.data as ArrayList<Task>
 
-                    when(Locator.settingsPreferencesRepository.getSettingValue("tasksort","id")){
+                    when (Locator.settingsPreferencesRepository.getSettingValue("tasksort", "id")) {
                         "id" -> task.sortBy { it.id.value }
-                        "name_customer_asc" -> task.sortBy { getCustomer(it.customerId.value -1)}
-                        "name_customer_desc" -> task.sortByDescending {  getCustomer(it.customerId.value -1)}
+                        "name_customer_asc" -> task.sortBy { getCustomer(it.customerId.value - 1) }
+                        "name_customer_desc" -> task.sortByDescending { getCustomer(it.customerId.value - 1) }
                         "name_task" -> task.sortBy { it.nomTask }
                     }
 
                     state.value = TaskListState.Success(task)
                 }
+
+                is ResourceList.Error -> state.value = TaskListState.NoData
+            }
+        }
+    }
+
+    fun getTaskListNoLoading() {
+        viewModelScope.launch {
+
+            when (val result = TaskProvider.getTaskList()) {
+                is ResourceList.Success<*> -> {
+                    val task = result.data as ArrayList<Task>
+
+                    when (Locator.settingsPreferencesRepository.getSettingValue("tasksort", "id")) {
+                        "id" -> task.sortBy { it.id.value }
+                        "name_customer_asc" -> task.sortBy { getCustomer(it.customerId.value - 1) }
+                        "name_customer_desc" -> task.sortByDescending { getCustomer(it.customerId.value - 1) }
+                        "name_task" -> task.sortBy { it.nomTask }
+                    }
+
+                    state.value = TaskListState.Success(task)
+                }
+
                 is ResourceList.Error -> state.value = TaskListState.NoData
             }
         }
@@ -55,7 +72,7 @@ class TaskListViewModel: ViewModel() {
         return TaskProvider.getTasks()
     }
 
-    fun deleteTask(position: Int){
+    fun deleteTask(position: Int) {
         TaskProvider.taskDataSet.removeAt(position)
     }
 

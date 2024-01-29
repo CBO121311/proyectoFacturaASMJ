@@ -2,6 +2,7 @@ package com.sergiogv98.tasklist.ui
 
 import com.moronlu18.data.task.Task
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -9,6 +10,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
@@ -23,13 +25,13 @@ import com.moronlu18.tasklist.databinding.FragmentTaskListBinding
 import com.sergiogv98.usecase.TaskListViewModel
 
 
-class TaskList : Fragment(), MenuProvider {
+class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
 
 
     private var _binding: FragmentTaskListBinding? = null
     private val binding get() = _binding!!
     private val viewModel: TaskListViewModel by viewModels()
-    private lateinit var adapter: TaskAdapter
+    private lateinit var taskAdapter: TaskAdapter
     private var firstCharge = true
 
     override fun onCreateView(
@@ -48,14 +50,8 @@ class TaskList : Fragment(), MenuProvider {
         super.onViewCreated(view, savedInstanceState)
         setUpToolBar()
         initRecyclerViewTask()
+        setUpFab()
 
-        if (firstCharge) {
-            viewModel.getTaskList(firstCharge)
-            firstCharge = false
-        } else {
-            viewModel.getTaskList(firstCharge)
-        }
-        setUpFab(false)
         viewModel.getState().observe(viewLifecycleOwner) {
             when (it) {
                 is TaskListState.Loading -> showProgressBar(it.value)
@@ -67,32 +63,42 @@ class TaskList : Fragment(), MenuProvider {
 
     private fun initRecyclerViewTask() {
 
-        adapter = TaskAdapter(
-            taskList = viewModel.getTasks(),
-            onClickListener = { task -> onItemSelected(task) },
-            onClickDeleted = { position -> onDeletedItem(position) },
-            onClickEdit = { position -> onEditItem(position) }
-        )
+        taskAdapter = TaskAdapter(this)
 
         binding.taskListRecyclerTasks.layoutManager = LinearLayoutManager(requireContext())
-        binding.taskListRecyclerTasks.adapter = adapter
+        binding.taskListRecyclerTasks.adapter = taskAdapter
     }
 
-    /**
-     * Envía un objeto (Task) al layout taskDetail utilizando SafeArgs
-     */
-    private fun onItemSelected(task: Task) {
-        findNavController().navigate(TaskListDirections.actionTaskListToTaskDetail(task))
+    override fun taskClick(position: Int) {
+        navigateDetailTask(position)
     }
 
-    private fun onEditItem(position: Int) {
+    override fun taskOnLongClick(view: View, position: Int, task: Task) {
+        showPopUpMenu(view, position, task)
+    }
+
+    private fun onSuccess(dataset: ArrayList<Task>) {
+        binding.taskListRecyclerTasks.visibility = View.VISIBLE
+        binding.taskListLlEmpty.visibility = View.GONE
+        binding.taskListLlEmptyImg.cancelAnimation()
+        taskAdapter.update(dataset)
+    }
+
+    private fun navigateDetailTask(position: Int){
         val bundle = Bundle()
-        bundle.putInt("taskPosition", position)
+        bundle.putInt("detailposition", position)
+        parentFragmentManager.setFragmentResult("detailkey", bundle)
+        findNavController().navigate(R.id.action_taskList_to_taskDetail)
+    }
+
+    private fun onEditItem(position: Int){
+        val bundle = Bundle()
+        bundle.putInt("taskposition", position)
         parentFragmentManager.setFragmentResult("taskkey", bundle)
         findNavController().navigate(R.id.action_taskList_to_taskCreation)
     }
 
-    private fun onDeletedItem(position: Int) {
+    private fun onDeletedItem(task: Task) {
 
         findNavController().navigate(
             TaskListDirections.actionTaskListToBaseFragmentDialog2(
@@ -107,61 +113,65 @@ class TaskList : Fragment(), MenuProvider {
         ) { _, result ->
             val success = result.getBoolean(BaseFragmentDialog.result, false)
             if (success) {
-                viewModel.deleteTask(position)
-                adapter.notifyItemRemoved(position)
-                if (viewModel.getTasks().isEmpty()) {
-                    showNoData()
+                taskAdapter.deleteTask(task)
+                viewModel.getTaskListNoLoading()
+            }
+        }
+    }
+
+    private fun showPopUpMenu(view: View, position: Int, task: Task){
+        val popupMenu = PopupMenu(requireContext(), view, Gravity.END)
+
+        popupMenu.inflate(R.menu.menu_pop)
+
+        popupMenu.setOnMenuItemClickListener {
+
+            when(it.itemId){
+
+                R.id.menu_see -> {
+                    navigateDetailTask(position)
+                    true
                 }
+
+                R.id.menu_edit -> {
+                    onEditItem(position)
+                    true
+                }
+
+                R.id.menu_delete -> {
+                    onDeletedItem(task)
+                    true
+                }
+
+                else -> false
             }
         }
-    }
 
-    private fun showNoData() {
-        binding.taskListRecyclerTasks.visibility = View.GONE
-        binding.taskListLlEmpty.visibility = View.VISIBLE
-        binding.taskListLlEmptyImg.playAnimation()
-    }
-
-    private fun showNothing() {
-        binding.taskListRecyclerTasks.visibility = View.GONE
-        binding.taskListLlEmpty.visibility = View.GONE
-    }
-
-    private fun onSuccess(dataset: ArrayList<Task>) {
-        binding.taskListRecyclerTasks.visibility = View.VISIBLE
-        binding.taskListLlEmpty.visibility = View.GONE
-        binding.taskListLlEmptyImg.cancelAnimation()
-        adapter.update(dataset)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    private fun showProgressBar(value: Boolean) {
-
-        if (value) {
-            showNothing()
-            setUpFab(true)
-            findNavController().navigate(R.id.action_taskList_to_fragmentProgressDialogKiwi)
-        } else {
-            setUpFab(false)
-            findNavController().popBackStack()
+        popupMenu.setOnDismissListener {
+            taskAdapter.clearSelection()
         }
+
+        //popupMenu.setForceShowIcon(true)
+        popupMenu.show()
     }
 
-    private fun setUpFab(charge: Boolean) {
-        (requireActivity() as? MainActivity)?.fab?.apply {
-            visibility = if(charge){
-                View.GONE
-            } else {
-                View.VISIBLE
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.menu_task_list, menu)
+    }
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
+            R.id.menu_action_refresh -> {
+                viewModel.getTaskList()
+                true
             }
-            setImageResource(com.moronlu18.invoice.R.drawable.ic_action_add)
-            setOnClickListener {
-                findNavController().navigate(R.id.action_taskList_to_taskCreation)
+
+            R.id.menu_action_sort -> {
+                taskAdapter.toggleSortOrder()
+                true
             }
+
+            else -> false
         }
     }
 
@@ -174,23 +184,50 @@ class TaskList : Fragment(), MenuProvider {
         menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-        menuInflater.inflate(R.menu.menu_task_list, menu)
-    }
-
-    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        return when (menuItem.itemId) {
-            R.id.menu_action_refresh -> {
-                viewModel.getTaskList(true)
-                true
+    private fun setUpFab() {
+        (requireActivity() as? MainActivity)?.fab?.apply {
+            visibility = View.VISIBLE
+            setImageResource(com.moronlu18.invoice.R.drawable.ic_action_add)
+            setOnClickListener {
+                findNavController().navigate(R.id.action_taskList_to_taskCreation)
             }
-
-            R.id.menu_action_sort -> {
-                adapter.toggleSortOrder()
-                true
-            }
-
-            else -> false
         }
     }
+
+
+    private fun showNoData() {
+        binding.taskListRecyclerTasks.visibility = View.GONE
+        binding.taskListLlEmpty.visibility = View.VISIBLE
+        binding.taskListLlEmptyImg.playAnimation()
+    }
+
+    private fun showNothing() {
+        binding.taskListRecyclerTasks.visibility = View.GONE
+        binding.taskListLlEmpty.visibility = View.GONE
+    }
+
+    private fun showProgressBar(value: Boolean) {
+
+        if (value) {
+            findNavController().navigate(R.id.action_taskList_to_fragmentProgressDialogKiwi)
+        } else {
+            findNavController().popBackStack()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (firstCharge){
+            viewModel.getTaskList()
+            firstCharge = false
+        } else {
+            viewModel.getTaskListNoLoading()
+        }
+    }
+
 }

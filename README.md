@@ -2,6 +2,15 @@ Invoice versión 3, es la aplicación que se está realizando de manera modular 
 
  ## Historial de versiones
 - ------------------------
+### V3.8.0 (29/01/2024)
+ *Escrito por SergioGV98*
+ - Mejoras en módulos de tareas: TaskAdapter, TaskCreation, TaskDetail, TaskList. (Mi gran dolor)
+ - Optimización de código en el módulo de Task.
+ - Creación de TypeConverters para TaskStatus y TaskType.
+ - Implementación del DAO para la entidad Task.
+ - Modificación de la entidad Task para implementar su funcionamiento en la base de datos.
+
+- ------------------------
 ### V3.7.6 (20/01/2024)
  *Escrito por mateotamayoo*
  - Entidad Invoice cambia y hace uso de nueva entidad denominada Line_Item
