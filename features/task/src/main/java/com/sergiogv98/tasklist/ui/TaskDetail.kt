@@ -14,6 +14,7 @@ import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.tasklist.R
 import com.moronlu18.tasklist.databinding.FragmentTaskDetailBinding
 import com.sergiogv98.usecase.TaskDetailViewModel
+import com.sergiogv98.utils.TaskUtils
 
 class TaskDetail : Fragment() {
 
@@ -65,10 +66,10 @@ class TaskDetail : Fragment() {
         viewModel.let {
             it.customerName.value = viewModel.getCustomerName(task?.customerId?.value ?: 0)
             it.taskName.value = task?.nomTask
-            it.taskStatus.value = task?.taskStatus.toString()
-            it.typeTask.value = task?.typeTask.toString()
-            it.dateCreation.value = task?.dateCreation.toString()
-            it.dateEnd.value = task?.dateFinalization.toString()
+            it.taskStatus.value = TaskUtils().taskStatusGive( task!!.dateFinalization, task!!.taskStatus)
+            it.typeTask.value = TaskUtils().formatType(task!!.typeTask)
+            it.dateCreation.value = TaskUtils().convertInstantToDateText(task!!.dateCreation)
+            it.dateEnd.value = TaskUtils().convertInstantToDateText(task!!.dateFinalization)
             it.taskDescription.value = task?.descTask
         }
         val customer = viewModel.getCustomerPhoto(task!!.customerId.value)

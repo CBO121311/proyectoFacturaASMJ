@@ -42,6 +42,8 @@ class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
         _binding = FragmentTaskListBinding.inflate(inflater, container, false)
         binding.viewmodel = this.viewModel
         binding.lifecycleOwner = this
+        showNothing()
+
         return binding.root
     }
 
