@@ -71,9 +71,7 @@ class InvoiceCreation : Fragment() {
                 InvoiceSelected = posFactura
                 val invoiceEdit = viewmodel.getInvoicePos(posFactura)
                 viewmodel.setEditorMode(true)
-                //Todo Modificado
-                //binding.invoiceCreationTieCliente.setText(invoiceEdit.customerId.id.toString())
-                binding.invoiceCreationTieCliente.setText(invoiceEdit.customerId.value)
+                binding.invoiceCreationTieCliente.setText(invoiceEdit.customerId.value.toString())
                 val formatoFecha =
                     DateTimeFormatter.ofPattern("dd/MM/yyyy").withZone(ZoneId.systemDefault())
                 binding.invoiceCreationTieFechaEm.setText(formatoFecha.format(invoiceEdit.issuedDate))

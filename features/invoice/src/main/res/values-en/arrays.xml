@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="invoice_creation_spStrings">
-        <item>Earring</item>
+        <item>Stand by</item>
         <item>Paid</item>
         <item>Overdue</item>
     </string-array>
