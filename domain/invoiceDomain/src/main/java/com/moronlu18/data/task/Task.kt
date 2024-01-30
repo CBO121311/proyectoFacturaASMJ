@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.base.TaskId
+import com.moronlu18.data.converter.CustomerIdTypeConverter
 import com.moronlu18.data.converter.InstantConverter
 import com.moronlu18.data.converter.TaskIdTypeConverter
 import com.moronlu18.data.converter.TaskStatusConverter
@@ -30,6 +31,7 @@ data class Task(
     @PrimaryKey
     @TypeConverters(TaskIdTypeConverter::class)
     val id: @RawValue TaskId,
+    @TypeConverters(CustomerIdTypeConverter::class)
     val customerId: @RawValue CustomerId,
     val nomTask: String,
     @TypeConverters(TaskTypeConverter::class)
