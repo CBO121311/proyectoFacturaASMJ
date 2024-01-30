@@ -91,7 +91,6 @@ class InvoiceDetail : Fragment(), MenuProvider {
         val customer = getCustomerbyID(invoice.customerId.value)
 
         viewmodeldetail.let {
-            //it.user.value = invoice.customerId.name
             it.user.value = customer?.name
             it.startDate.value = formatoFecha.format(invoice.issuedDate)
             it.endDate.value = formatoFecha.format(invoice.dueDate)
@@ -110,11 +109,11 @@ class InvoiceDetail : Fragment(), MenuProvider {
      */
     fun setColorEstado(status: String): Int {
         return if (status.equals("PENDIENTE")) {
-             Color.parseColor("#FF1100")
+            Color.parseColor("#FF1100")
         }else if(status.equals("PAGADA")) {
-             Color.parseColor("#217C00")
+            Color.parseColor("#217C00")
         }else {
-             Color.parseColor("#978303")
+            Color.parseColor("#978303")
         }
 
     }

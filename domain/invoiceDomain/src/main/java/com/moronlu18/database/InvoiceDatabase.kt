@@ -1,6 +1,5 @@
 package com.moronlu18.database
 
-import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -14,14 +13,18 @@ import com.moronlu18.data.converter.CustomerIdTypeConverter
 import com.moronlu18.data.converter.EmailTypeConverter
 import com.moronlu18.data.converter.PhotoTypeConverter
 import com.moronlu18.data.converter.InstantConverter
+import com.moronlu18.data.converter.InvoiceIdTypeConverter
+import com.moronlu18.data.converter.InvoiceStatusTypeConverter
 import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.converter.TaskIdTypeConverter
 import com.moronlu18.data.converter.TaskStatusConverter
 import com.moronlu18.data.converter.TaskTypeConverter
+import com.moronlu18.data.invoice.Invoice
 import com.moronlu18.data.task.Task
 import com.moronlu18.database.dao.AccountDao
 import com.moronlu18.database.dao.BusinessProfileDao
 import com.moronlu18.database.dao.CustomerDao
+import com.moronlu18.database.dao.InvoiceDao
 import com.moronlu18.database.dao.TaskDao
 import com.moronlu18.database.dao.UserDao
 import com.moronlu18.invoice.Locator
@@ -33,7 +36,8 @@ import kotlinx.coroutines.launch
 
 
 @Database(
-    entities = [Account::class, BusinessProfile::class, User::class, Task::class, Customer::class],
+    entities = [Account::class, BusinessProfile::class, User::class, Task::class, Customer::class,
+               Invoice::class],
     version = 2, //la version 2 hace que no pete ya que lo borra constantemente (???)
     exportSchema = false
 )
@@ -48,11 +52,16 @@ import kotlinx.coroutines.launch
     TaskTypeConverter::class,
     CustomerIdTypeConverter::class,
     PhotoTypeConverter::class,
-    InstantConverter::class
+    InstantConverter::class,
+    InvoiceIdTypeConverter::class,
+    InvoiceStatusTypeConverter::class,
+    CustomerIdTypeConverter::class,
+
 )
 abstract class InvoiceDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun accountDao(): AccountDao
+    abstract fun invoiceDao(): InvoiceDao
     abstract fun taskDao(): TaskDao
     abstract fun businessProfileDao(): BusinessProfileDao
     abstract fun customerDao(): CustomerDao
@@ -88,6 +97,9 @@ abstract class InvoiceDatabase : RoomDatabase() {
                 .addTypeConverter(CustomerIdTypeConverter())
                 .addTypeConverter(PhotoTypeConverter())
                 .addTypeConverter(InstantConverter())
+                .addTypeConverter(InvoiceIdTypeConverter())
+                .addTypeConverter(InvoiceStatusTypeConverter())
+                .addTypeConverter(CustomerIdTypeConverter())
                 .addCallback(
                     RoomDbInitializer(INSTANCE)
                     //Es una clase que implemente que la interfaz

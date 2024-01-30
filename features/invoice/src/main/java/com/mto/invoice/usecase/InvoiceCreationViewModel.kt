@@ -29,8 +29,7 @@ class InvoiceCreationViewModel: ViewModel() {
     private var state = MutableLiveData<InvoiceCreationState>()
     fun validateAll() {
         when {
-            user.value == null-> state.value = InvoiceCreationState.CustomerUnspecified
-            user.value!!.isEmpty() -> state.value = InvoiceCreationState.CustomerUnspecified
+            user.value.isNullOrBlank() -> state.value = InvoiceCreationState.CustomerUnspecified
             !CustomerProvider.containsId(user.value!!.toString().toInt())-> state.value = InvoiceCreationState.CustomerNoExists
             TextUtils.isEmpty(startDate.value)-> state.value = InvoiceCreationState.StartDateEmptyError
             !pattern.matcher(startDate.value).matches() -> state.value = InvoiceCreationState.StartDateFormatError

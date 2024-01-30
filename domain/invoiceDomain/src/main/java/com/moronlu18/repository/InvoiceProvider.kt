@@ -1,16 +1,14 @@
 package com.moronlu18.repository
 
 
-import com.moronlu18.data.account.Email
 import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.base.InvoiceId
 import com.moronlu18.data.base.ItemId
 import com.moronlu18.data.invoice.LineItem
-import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.invoice.Invoice
 import com.moronlu18.data.invoice.InvoiceStatus
+import com.moronlu18.database.InvoiceDatabase
 import com.moronlu18.network.ResourceList
-import com.moronlu18.inovice.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
@@ -19,7 +17,7 @@ import java.time.Instant
 import java.util.Calendar
 import kotlin.random.Random
 
-class InvoiceProvider private constructor() {
+class InvoiceProvider {
     companion object {
         var dataSet: MutableList<Invoice> = mutableListOf()
 
@@ -43,7 +41,7 @@ class InvoiceProvider private constructor() {
                             1,
                             2.4,
                             21,
-                            ),
+                        ),
                         LineItem(
                             InvoiceId(1),
                             ItemId(2),
@@ -86,7 +84,7 @@ class InvoiceProvider private constructor() {
             dataSet.add(
                 Invoice(
                     id = InvoiceId(3),
-                   customerId = CustomerId(4),
+                    customerId = CustomerId(4),
                     number = giveNumberInvoice(),
                     status = InvoiceStatus.PAGADA,
                     issuedDate = Instant.now(),
@@ -126,7 +124,7 @@ class InvoiceProvider private constructor() {
                             2,
                             5.04,
                             10,
-                            ),
+                        ),
                         LineItem(
                             InvoiceId(4),
                             ItemId(5),
@@ -220,7 +218,7 @@ class InvoiceProvider private constructor() {
         }
 
         fun obtainsId(): Int {
-            return dataSet.maxByOrNull { it.id.value as Int }?.id?.value ?: 0
+            return dataSet.maxByOrNull { it.id.value }?.id?.value ?: 0
         }
 
         fun obtainsIdByInvoice(invoice: Invoice): Int {
@@ -240,4 +238,9 @@ class InvoiceProvider private constructor() {
             }
         }
     }
+
+    fun getInvoiceList(): kotlinx.coroutines.flow.Flow<List<Invoice>> {
+        return InvoiceDatabase.getInstance().invoiceDao().selectAll()
+    }
+
 }

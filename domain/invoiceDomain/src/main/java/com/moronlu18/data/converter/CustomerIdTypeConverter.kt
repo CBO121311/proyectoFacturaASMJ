@@ -10,9 +10,9 @@ class CustomerIdTypeConverter {
     fun toCustomerId(value: Int): CustomerId {
         return CustomerId(value)
     }
-
     @TypeConverter
-    fun fromCustomerId(customerId: CustomerId): Int {
+    fun fromCustomerId(customerId: CustomerId):Int{
         return customerId.value
     }
+
 }
