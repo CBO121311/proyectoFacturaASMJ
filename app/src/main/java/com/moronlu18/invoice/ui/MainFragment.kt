@@ -33,14 +33,14 @@ class MainFragment : Fragment() {
 
 
 
-        (requireActivity() as? MainActivity)?.toolbar?.setNavigationOnClickListener {
+        /*(requireActivity() as? MainActivity)?.toolbar?.setNavigationOnClickListener {
             if (findNavController().currentDestination?.id == R.id.mainFragment) {
                 //activity?.finish()
                 activity?.moveTaskToBack(true)
             } else {
                 findNavController().popBackStack()
             }
-        }
+        }*/
 
         setUpFab()
 

@@ -20,6 +20,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cbo.customer.adapter.CustomerAdapter
 import com.cbo.customer.usecase.CustomerListViewModel
@@ -58,6 +60,19 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //Hay que añadirlo en el fragment principal.
+        var appBarConfiguration =
+            AppBarConfiguration.Builder(R.id.customerList)
+                .setOpenableLayout((requireActivity() as MainActivity).drawer)
+                .build()
+
+        NavigationUI.setupWithNavController(
+            (requireActivity() as MainActivity).toolbar,
+            findNavController(),
+            appBarConfiguration
+        )
+
 
         setUpToolbar()
         setUpFab()

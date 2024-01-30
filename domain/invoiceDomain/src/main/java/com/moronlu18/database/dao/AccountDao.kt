@@ -37,13 +37,3 @@ interface AccountDao {
 }
 
 
-@Dao
-interface InvoiceDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(invoice: Invoice): Long
-
-    //relacion 1 a N
-    //@Query("SELECT * FROM invoice JOIN lineitem ON invoice.id = lineitem.idInvoice")
-    fun loadInvoiceAndLineItem(): Map<Invoice, List<LineItem>> // me devuelve account y perfil dentro de un mapa
-
-}

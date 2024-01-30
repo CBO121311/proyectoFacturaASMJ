@@ -25,7 +25,7 @@ class SignUpViewModel : ViewModel() {
     val password1 = MutableLiveData<String>()
     val password2 = MutableLiveData<String>()
     private val pattern = Pattern.compile("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")
-
+    private var userRepository = UserRepository()
     fun validateSignUp() {
 
 
@@ -34,9 +34,7 @@ class SignUpViewModel : ViewModel() {
 
             name.value.isNullOrBlank() -> state.value = SignUpState.NameEmptyError
             email.value.isNullOrBlank() -> state.value = SignUpState.EmailEmptyError
-            !pattern.matcher(email.value!!).matches() -> state.value =
-                SignUpState.EmailFormatError
-
+            !pattern.matcher(email.value!!).matches() -> state.value = SignUpState.EmailFormatError
             password1.value.isNullOrBlank() -> state.value = SignUpState.PasswordEmptyError
             password2.value.isNullOrBlank() -> state.value = SignUpState.PasswordEmptyError
             !isEqualPassword(password1.value!!, password2.value!!) -> state.value =
@@ -47,84 +45,40 @@ class SignUpViewModel : ViewModel() {
                 state.postValue(SignUpState.Loading(true))
                 viewModelScope.launch(Dispatchers.IO) {
 
-
                     //para solucionar uno de los errores   withContext(Dispatchers.Main)
                     //utilizar el postValue que está dentro del liveData
                     //Que actualiza el hilo
-                    //Todo Cambio de idea, se utiliza el contexto.
-
-
-                    /*withContext(Dispatchers.Main){
-
-                        state.value = SignUpState.Loading(true)
-                    }*/
-
-                    //state.postValue(SignUpState.Loading(true))
-                    //Por qué post?, porque ya tengo un LiveData
-                    //Y el procesador ya sabe donde ejecutar esta sentencia
-
-                    //Log.i("viewModel", "He pasado por aquí")
 
                     //
-                    val result = UserRepositoryQuitar.existEmailUser(
+                    /*val result = UserRepositoryQuitar.existEmailUser(
                         User(
                             name.value!!,
                             email.value!!
                         )
-                    )
+                    )*/
 
+                    val user = User(name.value!!,email.value!!)
 
+                    val result = userRepository.insert(user);
 
-                    //Todo Lourdes añadir
-                    //necesitamos el result.
-                    //val result= userRepository.insert(user);
-
-
-                    //Todo esto quiero que se haga antes
-                    /*runBlocking {
-                        state.postValue(SignUpState.Loading(false))
-                    }*/
-
-
-                    //UserRepository.insert(User("ABnnB","ABC"));
-
-
-
-                    withContext(Dispatchers.Main){
-
-                       state.value = SignUpState.Loading(false)
+                    withContext(Dispatchers.Main) {
+                        state.value = SignUpState.Loading(false)
                     }
 
-
-
-
                     when (result) {
-
                         is Resource.Error -> {
 
-                            withContext(Dispatchers.Main){
-                                state.value = SignUpState.AuthencationError(result.exception.message!!)
+                            withContext(Dispatchers.Main) {
+                                state.value =
+                                    SignUpState.AuthencationError(result.exception.message!!)
                             }
-
-                            //Todo Esta líenea es el que hay que añadir
-                            //state.value = SignUpState.SignUpError(result.exception.message ?: "Unknown Error")
-
-                            //state.value = SignUpState.AuthencationError(result.exception.message!!)
-
-                            //state.postValue(SignUpState.AuthencationError(result.exception.message!!))
                         }
-
 
                         is Resource.Success<*> -> {
 
-                            withContext(Dispatchers.Main){
+                            withContext(Dispatchers.Main) {
                                 state.value = SignUpState.OnSuccess(result.data as User)
                             }
-
-                            //state.value = SignUpState.OnSuccess(result.data as User)
-                            //state.postValue(SignUpState.OnSuccess(result.data as User))
-
-                            //state.postValue(SignUpState.OnSuccess)
                         }
                     }
                 }

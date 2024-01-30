@@ -1,5 +1,6 @@
 package com.moronlu18.database
 
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -9,14 +10,18 @@ import com.moronlu18.data.account.Account
 import com.moronlu18.data.account.BusinessProfile
 import com.moronlu18.data.account.User
 import com.moronlu18.data.converter.AccountIdTypeConverter
+import com.moronlu18.data.converter.CustomerIdTypeConverter
 import com.moronlu18.data.converter.EmailTypeConverter
+import com.moronlu18.data.converter.PhotoTypeConverter
 import com.moronlu18.data.converter.InstantConverter
+import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.converter.TaskIdTypeConverter
 import com.moronlu18.data.converter.TaskStatusConverter
 import com.moronlu18.data.converter.TaskTypeConverter
 import com.moronlu18.data.task.Task
 import com.moronlu18.database.dao.AccountDao
 import com.moronlu18.database.dao.BusinessProfileDao
+import com.moronlu18.database.dao.CustomerDao
 import com.moronlu18.database.dao.TaskDao
 import com.moronlu18.database.dao.UserDao
 import com.moronlu18.invoice.Locator
@@ -28,19 +33,30 @@ import kotlinx.coroutines.launch
 
 
 @Database(
-    entities = [Account::class, BusinessProfile::class, User::class, Task::class],
-    version = 1, //version hace que no pete ya que lo borra constantemente.
+    entities = [Account::class, BusinessProfile::class, User::class, Task::class, Customer::class],
+    version = 2, //la version 2 hace que no pete ya que lo borra constantemente (???)
     exportSchema = false
 )
 //Hay que decir que convertidores vamos a utilizar
 //El primero se lo paso por el parametro.
 //El convertidores de tupo que vamos a utilizar
-@TypeConverters(AccountIdTypeConverter::class, EmailTypeConverter::class, TaskStatusConverter::class, TaskTypeConverter::class, TaskIdTypeConverter::class, InstantConverter::class)
+@TypeConverters(
+    AccountIdTypeConverter::class,
+    EmailTypeConverter::class,
+    TaskIdTypeConverter::class,
+    TaskStatusConverter::class,
+    TaskTypeConverter::class,
+    CustomerIdTypeConverter::class,
+    PhotoTypeConverter::class,
+    InstantConverter::class
+)
 abstract class InvoiceDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun accountDao(): AccountDao
     abstract fun taskDao(): TaskDao
     abstract fun businessProfileDao(): BusinessProfileDao
+    abstract fun customerDao(): CustomerDao
+
 
     companion object {
         @Volatile
@@ -48,7 +64,7 @@ abstract class InvoiceDatabase : RoomDatabase() {
 
         //Nosotros no propagamos desde el getInstance
         fun getInstance(): InvoiceDatabase {
-            return INSTANCE ?: synchronized(InvoiceDatabase::class){
+            return INSTANCE ?: synchronized(InvoiceDatabase::class) {
                 val instance = buildDatabase()
                 INSTANCE = instance
                 instance //Uno es nullable y otro no lo es
@@ -69,6 +85,9 @@ abstract class InvoiceDatabase : RoomDatabase() {
                 .addTypeConverter(TaskStatusConverter())
                 .addTypeConverter(TaskTypeConverter())
                 .addTypeConverter(TaskIdTypeConverter())
+                .addTypeConverter(CustomerIdTypeConverter())
+                .addTypeConverter(PhotoTypeConverter())
+                .addTypeConverter(InstantConverter())
                 .addTypeConverter(InstantConverter())
                 .addCallback(
                     RoomDbInitializer(INSTANCE)
@@ -97,17 +116,23 @@ abstract class InvoiceDatabase : RoomDatabase() {
             //Ejecuta este código si no es nulo
             instance.let { invoiceDatabase ->
                 invoiceDatabase?.userDao()?.insert(
-                    User("Alejandro", "abc@hotmail.es"))
+                    User("Alejandro", "abc@hotmail.es")
+                )
                 invoiceDatabase?.userDao()?.insert(
-                    User("Cristian", "rim@hotmail.es"))
+                    User("Cristian", "rim@hotmail.es")
+                )
                 invoiceDatabase?.userDao()?.insert(
-                    User("Sergio", "123cab@hotmail.es"))
+                    User("Sergio", "123cab@hotmail.es")
+                )
                 invoiceDatabase?.userDao()?.insert(
-                    User("Jessica", "paella@hotmail.com"))
+                    User("Jessica", "paella@hotmail.com")
+                )
                 invoiceDatabase?.userDao()?.insert(
-                    User("Pedro","op@hotmail.es"))
+                    User("Pedro", "op@hotmail.es")
+                )
                 invoiceDatabase?.userDao()?.insert(
-                    User("Carlos", "mesa@gmail.com"))
+                    User("Carlos", "mesa@gmail.com")
+                )
 
             }
             //viewModelScope.launch(Dispatcher.IO){userRepository.insert}

@@ -41,8 +41,8 @@
                 android:id="@+id/tietNameSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={viewmodel.name}"
-                android:hint="Nombre" />
+                android:hint="Nombre"
+                android:text="@={viewmodel.name}" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -50,19 +50,19 @@
             android:id="@+id/tilEmailSignUp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:errorEnabled="true"
-            app:startIconDrawable="@drawable/ic_action_email"
             app:endIconMode="clear_text"
+            app:errorEnabled="true"
             app:layout_constraintEnd_toStartOf="@+id/ended"
             app:layout_constraintStart_toStartOf="@+id/started"
-            app:layout_constraintTop_toBottomOf="@+id/tilNameSignUp">
+            app:layout_constraintTop_toBottomOf="@+id/tilNameSignUp"
+            app:startIconDrawable="@drawable/ic_action_email">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tietEmailSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
                 android:hint="Correo electrónico"
+                android:inputType="textEmailAddress"
                 android:text="@={viewmodel.email}" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,8 +71,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            app:errorEnabled="true"
             app:endIconMode="password_toggle"
+            app:errorEnabled="true"
             app:layout_constraintEnd_toStartOf="@+id/ended"
             app:layout_constraintStart_toStartOf="@+id/started"
             app:layout_constraintTop_toBottomOf="@+id/tilEmailSignUp">
@@ -90,8 +90,8 @@
             android:id="@+id/tilConfirmPasswordSignUp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:errorEnabled="true"
             app:endIconMode="password_toggle"
+            app:errorEnabled="true"
             app:layout_constraintEnd_toStartOf="@+id/ended"
             app:layout_constraintStart_toStartOf="@+id/started"
             app:layout_constraintTop_toBottomOf="@+id/tilPasswordSignUp">
@@ -101,8 +101,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Confirmar Contraseña"
-                android:text="@={viewmodel.password2}"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:text="@={viewmodel.password2}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Spinner
@@ -120,8 +120,8 @@
             android:id="@+id/spProfile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:minHeight="48dp"
             android:entries="@array/typeperfilesp"
+            android:minHeight="48dp"
             app:layout_constraintBaseline_toBaselineOf="@id/tvProfiLe"
             app:layout_constraintEnd_toStartOf="@+id/ended"
             app:layout_constraintStart_toEndOf="@+id/brStart" />
@@ -151,55 +151,6 @@
             app:layout_constraintStart_toStartOf="@+id/started"
             app:layout_constraintTop_toBottomOf="@+id/tvType" />
 
-        <!-- <TextView
-            android:id="@+id/tvCalification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:gravity="center"
-            android:text="@string/tvCalification"
-            app:layout_constraintEnd_toStartOf="@+id/ended"
-            app:layout_constraintStart_toStartOf="@+id/started"
-            app:layout_constraintTop_toBottomOf="@+id/tvProfiLe" />
-
-       <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toStartOf="@+id/ended"
-            app:layout_constraintStart_toStartOf="@+id/started"
-            app:layout_constraintTop_toBottomOf="@+id/tvCalification">
-
-            <RadioButton
-                android:id="@+id/rbLevel1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="RadioButton" />
-
-            <RadioButton
-                android:id="@+id/rbLevel2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="RadioButton" />
-
-            <RadioButton
-                android:id="@+id/rbLevel3"
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="RadioButton" />
-        </RadioGroup>
-
-        <Spinner
-            android:id="@+id/spinRepositoryUser"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            app:layout_constraintStart_toStartOf="@+id/started"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />-->
-
         <Button
             android:id="@+id/btnConfirmar"
             android:layout_width="wrap_content"
@@ -218,12 +169,5 @@
             app:layout_constraintEnd_toStartOf="@+id/ended"
             app:layout_constraintStart_toStartOf="@+id/started"
             app:layout_constraintTop_toBottomOf="@+id/btnConfirmar" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!-- email.data.value
-       android:onClick="@{()->viewmodel.validateCredentials()}"
-     -->
-    <!-- <variable name = "viewmodel" type = com.murray.use.signUpViewModel-->
-    <!-- <variable User -->
 </layout>

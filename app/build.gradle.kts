@@ -97,4 +97,9 @@ dependencies {
 
     //Soporte de fechas en Kotlin
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
+
+
+    // Declare the dependency for the Firebase Authentication library
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-auth-ktx:22.3.0")
 }

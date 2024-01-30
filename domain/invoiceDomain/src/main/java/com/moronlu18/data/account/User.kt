@@ -12,7 +12,7 @@ import androidx.room.PrimaryKey
  *
  */
 
-@Entity
+@Entity (tableName = "user")
 data class User(@PrimaryKey val name: String, val email: String) : Comparable<User> {
     override fun compareTo(other: User): Int {
         return name.lowercase().compareTo(other.name.lowercase())

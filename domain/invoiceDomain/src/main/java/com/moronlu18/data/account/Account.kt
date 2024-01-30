@@ -32,11 +32,12 @@ import com.moronlu18.data.converter.EmailTypeConverter
 
 
 class Account(
-    @PrimaryKey
+
     //Crea un nuevo accountid con el account de la base de datos.
     //Y al revés también.
+    @PrimaryKey
     @TypeConverters(AccountIdTypeConverter::class)
-    val id: AccountId,
+    val accountId: AccountId,
     @TypeConverters(EmailTypeConverter::class)
     val email: Email,
     val password: String,
@@ -45,6 +46,10 @@ class Account(
     //private var businessProfile: BusinessProfile, //Fk -> 1-1 (1,0 - 1,1).
     var businessProfile: Int?
 ) {
+    //Para que lo genere la base de datos.
+    //@PrimaryKey(autoGenerate = true)
+    //var id:Int =0
+
     //businessProfile es una ForeignKey,
     //En el selectOriginal no queremos meter el businessProfile.
     //Vamos a hacer una conversión de tipos.
@@ -66,7 +71,7 @@ class Account(
             businessProfile: Int?
         ): Account {
             return Account(
-                id = AccountId(id),
+                accountId = AccountId(id),
                 email = email,
                 password = password,
                 displayName = displayName,

@@ -31,9 +31,9 @@ class SignInViewModel : ViewModel() {
 
     fun validateCredentials() {
 
-        viewModelScope.launch(Dispatchers.IO) {
-            UserRepository.insert(User("Ddd", "cbo@hotmail.es"))
-        }
+       // viewModelScope.launch(Dispatchers.IO) {
+            //UserRepository.insert(User("Ddd", "cbo@hotmail.es"))
+        //}
 
         Log.i(TAG, "El email es: ${email.value} y el password es ${password.value}")
 

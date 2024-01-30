@@ -1,6 +1,7 @@
 package com.moronlu18.invoice
 
 import android.app.Application
+import com.google.firebase.FirebaseApp
 
 class InvoiceApplication : Application() {
 
@@ -10,6 +11,6 @@ class InvoiceApplication : Application() {
         Locator.initWith(this)
 
         //Se inicializa la  conexión a FireBase
-        //Firebase.initializeApp(this)
+        FirebaseApp.initializeApp(this)
     }
 }
