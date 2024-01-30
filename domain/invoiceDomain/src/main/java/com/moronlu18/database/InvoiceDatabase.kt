@@ -88,7 +88,6 @@ abstract class InvoiceDatabase : RoomDatabase() {
                 .addTypeConverter(CustomerIdTypeConverter())
                 .addTypeConverter(PhotoTypeConverter())
                 .addTypeConverter(InstantConverter())
-                .addTypeConverter(InstantConverter())
                 .addCallback(
                     RoomDbInitializer(INSTANCE)
                     //Es una clase que implemente que la interfaz
