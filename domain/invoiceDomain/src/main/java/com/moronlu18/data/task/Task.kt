@@ -7,7 +7,9 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.base.TaskId
-import com.moronlu18.data.converter.StatusTypeConverter
+import com.moronlu18.data.converter.TaskIdTypeConverter
+import com.moronlu18.data.converter.TaskStatusConverter
+import com.moronlu18.data.converter.TaskTypeConverter
 import com.moronlu18.data.customer.Customer
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
@@ -25,12 +27,13 @@ import java.time.Instant
 @Parcelize
 data class Task(
     @PrimaryKey
+    @TypeConverters(TaskIdTypeConverter::class)
     val id: @RawValue TaskId,
     val customerId: @RawValue CustomerId,
     val nomTask: String,
-    @TypeConverters(StatusTypeConverter::class)
+    @TypeConverters(TaskTypeConverter::class)
     val typeTask: TypeTask,
-    @TypeConverters(StatusTypeConverter::class)
+    @TypeConverters(TaskStatusConverter::class)
     val taskStatus: TaskStatus,
     val descTask: String? = null,
     val dateCreation: Instant,

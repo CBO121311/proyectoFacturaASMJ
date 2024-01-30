@@ -10,8 +10,13 @@ import com.moronlu18.data.account.BusinessProfile
 import com.moronlu18.data.account.User
 import com.moronlu18.data.converter.AccountIdTypeConverter
 import com.moronlu18.data.converter.EmailTypeConverter
+import com.moronlu18.data.converter.TaskIdTypeConverter
+import com.moronlu18.data.converter.TaskStatusConverter
+import com.moronlu18.data.converter.TaskTypeConverter
+import com.moronlu18.data.task.Task
 import com.moronlu18.database.dao.AccountDao
 import com.moronlu18.database.dao.BusinessProfileDao
+import com.moronlu18.database.dao.TaskDao
 import com.moronlu18.database.dao.UserDao
 import com.moronlu18.invoice.Locator
 import kotlinx.coroutines.CoroutineScope
@@ -22,17 +27,18 @@ import kotlinx.coroutines.launch
 
 
 @Database(
-    entities = [Account::class, BusinessProfile::class, User::class],
+    entities = [Account::class, BusinessProfile::class, User::class, Task::class],
     version = 1, //version hace que no pete ya que lo borra constantemente.
     exportSchema = false
 )
 //Hay que decir que convertidores vamos a utilizar
 //El primero se lo paso por el parametro.
 //El convertidores de tupo que vamos a utilizar
-@TypeConverters(AccountIdTypeConverter::class, EmailTypeConverter::class)
+@TypeConverters(AccountIdTypeConverter::class, EmailTypeConverter::class, TaskStatusConverter::class, TaskTypeConverter::class, TaskIdTypeConverter::class)
 abstract class InvoiceDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun accountDao(): AccountDao
+    abstract fun taskDao(): TaskDao
     abstract fun businessProfileDao(): BusinessProfileDao
 
     companion object {
@@ -59,6 +65,9 @@ abstract class InvoiceDatabase : RoomDatabase() {
                 //y creamos un objeto de esta clase para convertir de un tipo a otro.
                 .addTypeConverter(AccountIdTypeConverter())
                 .addTypeConverter(EmailTypeConverter())
+                .addTypeConverter(TaskStatusConverter())
+                .addTypeConverter(TaskTypeConverter())
+                .addTypeConverter(TaskIdTypeConverter())
                 .addCallback(
                     RoomDbInitializer(INSTANCE)
                     //Es una clase que implemente que la interfaz
