@@ -10,6 +10,7 @@ import com.moronlu18.data.account.BusinessProfile
 import com.moronlu18.data.account.User
 import com.moronlu18.data.converter.AccountIdTypeConverter
 import com.moronlu18.data.converter.EmailTypeConverter
+import com.moronlu18.data.converter.InstantConverter
 import com.moronlu18.data.converter.TaskIdTypeConverter
 import com.moronlu18.data.converter.TaskStatusConverter
 import com.moronlu18.data.converter.TaskTypeConverter
@@ -34,7 +35,7 @@ import kotlinx.coroutines.launch
 //Hay que decir que convertidores vamos a utilizar
 //El primero se lo paso por el parametro.
 //El convertidores de tupo que vamos a utilizar
-@TypeConverters(AccountIdTypeConverter::class, EmailTypeConverter::class, TaskStatusConverter::class, TaskTypeConverter::class, TaskIdTypeConverter::class)
+@TypeConverters(AccountIdTypeConverter::class, EmailTypeConverter::class, TaskStatusConverter::class, TaskTypeConverter::class, TaskIdTypeConverter::class, InstantConverter::class)
 abstract class InvoiceDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun accountDao(): AccountDao
@@ -68,6 +69,7 @@ abstract class InvoiceDatabase : RoomDatabase() {
                 .addTypeConverter(TaskStatusConverter())
                 .addTypeConverter(TaskTypeConverter())
                 .addTypeConverter(TaskIdTypeConverter())
+                .addTypeConverter(InstantConverter())
                 .addCallback(
                     RoomDbInitializer(INSTANCE)
                     //Es una clase que implemente que la interfaz

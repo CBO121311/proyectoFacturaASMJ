@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.base.TaskId
+import com.moronlu18.data.converter.InstantConverter
 import com.moronlu18.data.converter.TaskIdTypeConverter
 import com.moronlu18.data.converter.TaskStatusConverter
 import com.moronlu18.data.converter.TaskTypeConverter
@@ -36,6 +37,8 @@ data class Task(
     @TypeConverters(TaskStatusConverter::class)
     val taskStatus: TaskStatus,
     val descTask: String? = null,
+    @TypeConverters(InstantConverter::class)
     val dateCreation: Instant,
+    @TypeConverters(InstantConverter::class)
     val dateFinalization: Instant
 ) : Parcelable
