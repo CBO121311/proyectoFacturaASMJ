@@ -57,4 +57,7 @@ dependencies {
     implementation ("com.hbb20:ccp:2.7.3")
 
     implementation ("androidx.preference:preference-ktx:1.2.1")
+
+    //Librería para usar el asLiveData en el viewmodel
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
 }

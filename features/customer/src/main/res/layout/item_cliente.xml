@@ -56,7 +56,7 @@
             android:layout_marginEnd="@dimen/cl_item_marginend_tvName"
             android:maxLength="40"
             android:maxLines="2"
-            android:text="@string/cd_tvExampleName"
+
             app:layout_constraintEnd_toStartOf="@+id/item_guide_limit2"
             app:layout_constraintStart_toEndOf="@+id/customer_list_ivCliente"
             app:layout_constraintTop_toTopOf="parent" />
@@ -67,7 +67,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:maxLength="100"
-            android:text="@string/cl_tvExampleEmail"
             app:layout_constraintEnd_toStartOf="@+id/item_guide_limit2"
             app:layout_constraintStart_toStartOf="@+id/customer_list_tvName"
             app:layout_constraintTop_toBottomOf="@+id/customer_list_tvName" />
@@ -80,7 +79,6 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/cl_item_marginend_ibPhone"
             android:maxLength="18"
-            android:text="@string/customer_NotAvailable"
             app:layout_constraintBottom_toBottomOf="@+id/customer_list_tvCity"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/item_guide_limit1" />
@@ -94,7 +92,6 @@
             android:layout_marginBottom="@dimen/cl_item_marginbottom_tvCity"
             android:maxLength="30"
             android:maxLines="2"
-            android:text="@string/customer_NotAvailable"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/item_guide_limit1"
             app:layout_constraintStart_toStartOf="@+id/customer_list_tvName"
@@ -121,7 +118,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/cl_item_padding_tvId"
-            android:text="@string/cl_tvExampleId"
+
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

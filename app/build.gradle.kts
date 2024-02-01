@@ -66,6 +66,7 @@ android {
 dependencies {
 
     implementation("androidx.core:core-ktx:1.9.0")
+
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
@@ -102,4 +103,7 @@ dependencies {
     // Declare the dependency for the Firebase Authentication library
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-auth-ktx:22.3.0")
+
+    //Librería para usar el asLiveData en el viewmodel
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
 }

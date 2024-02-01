@@ -41,44 +41,40 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/customer_creation_glTop" />
 
-        <LinearLayout
-            android:id="@+id/customer_creation_llid"
-            android:layout_width="wrap_content"
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/customer_creation_cvid"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/cc_llid_marginTop"
-            android:orientation="horizontal"
-            android:visibility="gone"
+            android:layout_marginStart="24dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="@+id/customer_creation_glTop">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/customer_creation_tilIdCustomer"
-                android:layout_width="@dimen/cc_til_IdCustomer_width"
+            <LinearLayout
+                android:id="@+id/customer_creation_llid"
+                android:layout_width="@dimen/cd_llid_width"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/cc_llidCustomer_marginStart"
-
-                android:layout_marginEnd="@dimen/cc_margin_til"
-                android:hint="@string/cc_hint_id"
-                android:padding="@dimen/cc_llidCustomer_padding"
-                app:errorEnabled="true"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@color/cd_color_fondo_2"
+                android:orientation="horizontal"
+                android:padding="@dimen/cd_llid_padding"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                app:startIconTint="@color/customer_color_seed">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/customer_creation_tietIdCustomer"
-                    style="customer_creation_tietStyle"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/customer_creation_tvId"
+                    style="@style/customer_detail_tvTitle"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/cc_tiet_idCustomer_background"
-                    android:inputType="number"
-                    android:maxLength="3"
-                    android:text="@={viewmodelcustomercreation.idCustomer}" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
+                    android:text="@string/txtIdv2" />
 
+                <TextView
+                    android:id="@+id/customer_creation_tvIdCustomer"
+                    style="@style/customer_detail_tvDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/customer_creation_cvImgCustomer"
@@ -130,9 +126,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/cc_margin_til"
                     android:layout_marginEnd="@dimen/cc_margin_til"
-                    android:hint="@string/cc_til_hint_name"
+                    android:hint="@string/txtNombre"
                     app:errorEnabled="true"
-                    app:helperText="@string/cc_til_helperText"
+                    app:helperText="@string/txtRequeriment"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -155,9 +151,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/cc_margin_til"
                     android:layout_marginEnd="@dimen/cc_margin_til"
-                    android:hint="@string/cc_til_hint_email"
+                    android:hint="@string/txtEmail"
                     app:errorEnabled="true"
-                    app:helperText="@string/cc_til_helperText"
+                    app:helperText="@string/txtRequeriment"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilNameCustomer"
@@ -194,7 +190,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/cc_margin_til"
-                    android:hint="@string/cc_til_hint_phone"
+                    android:hint="@string/txtPhone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/customer_creation_ccp"
                     app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilCustomerEmail"
@@ -217,7 +213,7 @@
                     android:layout_marginStart="@dimen/cc_margin_til"
                     android:layout_marginTop="@dimen/cc_marginTop_til"
                     android:layout_marginEnd="@dimen/cc_margin_til"
-                    android:hint="@string/cc_til_hint_address"
+                    android:hint="@string/txtAddress"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilPhone"
@@ -240,7 +236,7 @@
                     android:layout_marginStart="@dimen/cc_margin_til"
                     android:layout_marginTop="@dimen/cc_marginTop_til"
                     android:layout_marginEnd="@dimen/cc_margin_til"
-                    android:hint="@string/cc_til_hint_city"
+                    android:hint="@string/txtCity"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilAddress"
@@ -268,7 +264,7 @@
                     android:drawableEnd="@drawable/ic_action_save"
                     android:onClick="@{()->viewmodelcustomercreation.validateCredentials()}"
                     android:padding="@dimen/cc_padding_btnSave"
-                    android:text="@string/cc_btn_text_save"
+                    android:text="@string/txtSave"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilCity" />

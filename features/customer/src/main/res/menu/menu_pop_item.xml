@@ -6,19 +6,19 @@
         android:id="@+id/menupop_see"
         android:icon="@android:drawable/ic_menu_view"
         android:orderInCategory="20"
-        android:title="@string/cl_popmenu_title_See"
+        android:title="@string/txtSee"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menupop_edit"
         android:icon="@android:drawable/ic_menu_edit"
         android:orderInCategory="50"
-        android:title="@string/cl_popmenu_title_edit"
+        android:title="@string/txtEdit"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menupop_remove"
         android:icon="@android:drawable/ic_menu_delete"
         android:orderInCategory="100"
-        android:title="@string/cl_popmenu_title_delete"
+        android:title="@string/txtRemove"
         app:showAsAction="ifRoom" />
 
 </menu>

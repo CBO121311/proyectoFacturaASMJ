@@ -4,6 +4,8 @@ package com.cbo.customer.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.moronlu18.customercreation.R
 import com.moronlu18.data.customer.Customer
@@ -11,15 +13,13 @@ import com.moronlu18.customercreation.databinding.ItemClienteBinding
 
 class CustomerAdapter(
     private val listener: OnCustomerClick
-) : RecyclerView.Adapter<CustomerAdapter.CustomerViewHolder>() {
-
-    private var dataset = arrayListOf<Customer>()
+) : ListAdapter<Customer, CustomerAdapter.CustomerViewHolder>(CUSTOMER_COMPARATOR) {
 
     //Cuando no hay ninguna posición seleccionada.
     private var selectedPosition = RecyclerView.NO_POSITION
 
     interface OnCustomerClick {
-        fun customerClick(position: Int)
+        fun customerClick(customer: Customer)
         fun customerOnLongClick(view: View, position: Int, customer: Customer)
     }
 
@@ -29,41 +29,44 @@ class CustomerAdapter(
         return CustomerViewHolder(layoutInflater.inflate(R.layout.item_cliente, parent, false))
     }
 
-    override fun getItemCount(): Int {
-        return dataset.size
-    }
-
     override fun onBindViewHolder(holder: CustomerViewHolder, position: Int) {
-        val item = dataset[position]
+        val item = getItem(position)
         holder.bind(item)
     }
 
-    /**
-     * Actualiza los datos del adaptador con nuevo datos de clientes y notifica.
-     *
-     */
-    fun update(newDataSet: ArrayList<Customer>) {
-
-        dataset = newDataSet
-        notifyDataSetChanged()
-    }
 
     /**
-     * Elimina un cliente específico de los datos del adaptador y notifica.
-     *
+     * Ordena los datos del adaptador por id
      */
-    fun deleteCustomer(customer: Customer) {
-        dataset.remove(customer)
-        notifyDataSetChanged()
+    fun sortId() {
+        val sortedCustomerList = currentList.sortedBy { it.id }
+        submitList(sortedCustomerList)
     }
 
     /**
      * Ordena los datos del adaptador por nombre y notifica.
      */
     fun sortName() {
-        dataset.sort()
-        notifyDataSetChanged()
+        val sortedCustomerList = currentList.sortedBy { it.name.lowercase() }
+        submitList(sortedCustomerList)
     }
+
+    /**
+     * Ordena los datos del adaptador por nombre descendente
+     */
+    fun sortNameDescend() {
+        val sortedCustomerList = currentList.sortedByDescending { it.name.lowercase() }
+        submitList(sortedCustomerList)
+    }
+
+    /**
+     * Ordena los datos del adaptador por email
+     */
+    fun sortEmail() {
+        val sortedCustomerList = currentList.sortedByDescending { it.email.toString().lowercase() }
+        submitList(sortedCustomerList)
+    }
+
 
     /**
      * Desmarca la posición seleccionada y notifica.
@@ -98,7 +101,7 @@ class CustomerAdapter(
                 }
 
                 root.setOnClickListener {
-                    listener.customerClick(adapterPosition)
+                    listener.customerClick(customer)
                     customeItemIvCheck.visibility = View.GONE
                 }
                 root.setOnLongClickListener {
@@ -130,4 +133,18 @@ class CustomerAdapter(
             }
         }
     }
+    companion object{
+        //es una clase anonima (??) objeto anonimo (??)
+        private val CUSTOMER_COMPARATOR = object :DiffUtil.ItemCallback<Customer>(){
+            override fun areItemsTheSame(oldItem: Customer, newItem: Customer): Boolean {
+                return oldItem == newItem
+            }
+
+            override fun areContentsTheSame(oldItem: Customer, newItem: Customer): Boolean {
+                return oldItem.name == newItem.name
+            }
+
+        }
+    }
+
 }

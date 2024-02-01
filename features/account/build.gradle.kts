@@ -55,6 +55,6 @@ dependencies {
     implementation ("com.airbnb.android:lottie:$lottieVersion")
     implementation ("com.mikhaellopez:circularimageview:4.3.1")
 
-    //
+    //Librería para usar el asLiveData en el viewmodel
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
 }

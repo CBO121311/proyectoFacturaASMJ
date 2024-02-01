@@ -11,15 +11,20 @@ import java.io.ByteArrayOutputStream
 class PhotoTypeConverter {
 
     @TypeConverter
-    fun toByteArray(byteArray: ByteArray):Bitmap
-    {
-        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+    fun fromBitmap(bitmap: Bitmap?): ByteArray? {
+        return bitmap?.let {
+            // Convertir el bitmap a un array de bytes
+            val stream = ByteArrayOutputStream()
+            it.compress(Bitmap.CompressFormat.PNG, 100, stream)
+            stream.toByteArray()
+        }
     }
 
     @TypeConverter
-    fun fromByArray(bitmap: Bitmap):ByteArray {
-        val byteArrayOutputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
-        return byteArrayOutputStream.toByteArray()
+    fun toBitmap(byteArray: ByteArray?): Bitmap? {
+        return byteArray?.let {
+            // Convertir el array de bytes a un bitmap
+            BitmapFactory.decodeByteArray(it, 0, it.size)
+        }
     }
 }

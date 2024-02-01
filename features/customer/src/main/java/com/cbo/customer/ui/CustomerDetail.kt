@@ -14,11 +14,11 @@ import android.view.ViewGroup
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.cbo.customer.usecase.CustomerDetailViewModel
 import com.moronlu18.data.customer.Customer
 import com.moronlu18.customercreation.R
@@ -31,8 +31,9 @@ class CustomerDetail : Fragment(), MenuProvider {
     private val viewModel: CustomerDetailViewModel by viewModels()
     private var _binding: FragmentCustomerDetailBinding? = null
     private val binding get() = _binding!!
-    private var customer: Customer? = null
-    private var posCostumer: Int = 0
+    private val args: CustomerDetailArgs by navArgs()
+
+
     private val doubleClickDelay = 200L
 
     //prevenir doble click
@@ -66,18 +67,8 @@ class CustomerDetail : Fragment(), MenuProvider {
             }
         })
 
-        if(customer == null){
 
-
-            parentFragmentManager.setFragmentResultListener("detailkey", this,
-                FragmentResultListener { _, result ->
-                    posCostumer = result.getInt("detailposition")
-                    customer = viewModel.getCustomerByPosition(posCostumer)
-                }
-            )
-
-        }
-
+        onSuccess()
     }
 
 
@@ -87,18 +78,19 @@ class CustomerDetail : Fragment(), MenuProvider {
      */
     private fun onSuccess() {
 
+        val customer = args.customnav
         viewModel.let {
-            it.idCustomer.value = customer?.id?.value.toString()
-            it.nameCustomer.value = customer?.name
-            it.emailCustomer.value = customer?.email.toString()
-            it.phoneCustomer.value = isValue(customer?.phone)
-            it.cityCustomer.value = isValue(customer?.city)
-            it.addressCustomer.value = isValue(customer?.address)
+            it.idCustomer.value = customer.id.value.toString()
+            it.nameCustomer.value = customer.name
+            it.emailCustomer.value = customer.email.toString()
+            it.phoneCustomer.value = isValue(customer.phone)
+            it.cityCustomer.value = isValue(customer.city)
+            it.addressCustomer.value = isValue(customer.address)
         }
-        if (customer?.phototrial != null) {
-            binding.customerDetailCiPhoto.setImageResource(customer?.phototrial!!)
+        if (customer.phototrial != null) {
+            binding.customerDetailCiPhoto.setImageResource(customer.phototrial!!)
         } else {
-            binding.customerDetailCiPhoto.setImageBitmap(customer?.photo!!)
+            binding.customerDetailCiPhoto.setImageBitmap(customer.photo!!)
         }
     }
 
@@ -109,7 +101,9 @@ class CustomerDetail : Fragment(), MenuProvider {
      */
     private fun deleteConfirmation() {
 
-        if (viewModel.isDeleteSafe(customer!!)) {
+        val customer = args.customnav
+
+        if (viewModel.isDeleteSafe(customer)) {
 
             findNavController().navigate(
                 CustomerDetailDirections.actionCustomerDetailToBaseFragmentDialog2(
@@ -123,7 +117,7 @@ class CustomerDetail : Fragment(), MenuProvider {
             ) { _, result ->
                 val success = result.getBoolean(BaseFragmentDialog.result, false)
                 if (success) {
-                    viewModel.deleteCustomer(customer!!)
+                    viewModel.deleteCustomer(customer)
 
                     Handler(Looper.getMainLooper()).postDelayed({
                         findNavController().popBackStack()
@@ -156,7 +150,7 @@ class CustomerDetail : Fragment(), MenuProvider {
      * Invocado cuando se selecciona un elemento del menú de opciones.
      */
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-
+        val customer = args.customnav
         //Evitar la doble pulsación.
         if (SystemClock.elapsedRealtime() - mLastClickTime < doubleClickDelay) {
             return true;
@@ -171,7 +165,7 @@ class CustomerDetail : Fragment(), MenuProvider {
             }
 
             R.id.menu_cd_action_edit -> {
-                onEditItem(customer!!)
+                onEditItem(customer)
                 true
             }
 
@@ -225,13 +219,11 @@ class CustomerDetail : Fragment(), MenuProvider {
      */
     private fun onEditItem(customer: Customer) {
 
-        val posCustomer = viewModel.getPositionByCustomer(customer)
-
-        val bundle = Bundle();
-        bundle.putInt("customposition", posCustomer)
-
-        parentFragmentManager.setFragmentResult("customkey", bundle)
-        findNavController().navigate(R.id.action_customerDetail_to_customerCreation)
+        findNavController().navigate(
+            CustomerDetailDirections.actionCustomerDetailToCustomerCreation(
+                customer
+            )
+        )
     }
 
     /**
@@ -239,9 +231,6 @@ class CustomerDetail : Fragment(), MenuProvider {
      */
     override fun onStart() {
         super.onStart()
-
-        //Todo Remedio temporal hasta que se solucione idioma
-        customer = viewModel.getCustomerByPosition(posCostumer)
         viewModel.onSuccess()
 
     }
@@ -251,8 +240,7 @@ class CustomerDetail : Fragment(), MenuProvider {
      */
     override fun onResume() {
         super.onResume()
-            customer = viewModel.getCustomerByPosition(posCostumer)
-            viewModel.onSuccess()
+        //viewModel.onSuccess()
     }
 
 

@@ -38,7 +38,7 @@
                     style="@style/customer_detail_tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/cd_tvId" />
+                    android:text="@string/txtIdv2" />
 
                 <TextView
                     android:id="@+id/customer_detail_tvIdCustomer"
@@ -88,7 +88,7 @@
                         style="@style/customer_detail_tvTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/cd_tvName" />
+                        android:text="@string/txtNombre" />
 
                     <TextView
                         android:id="@+id/customer_detail_tvNameCustomer"
@@ -115,7 +115,7 @@
                         style="@style/customer_detail_tvTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/cd_tvEmail" />
+                        android:text="@string/txtEmail" />
 
                     <TextView
                         android:id="@+id/customer_detail_tvEmailCustomer"
@@ -164,7 +164,7 @@
                         style="@style/customer_detail_tvTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/cd_tvPhone" />
+                        android:text="@string/txtPhone" />
 
                     <TextView
                         android:id="@+id/customer_detail_tvPhoneCustomer"
@@ -193,7 +193,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="2"
-                        android:text="@string/cd_tvAddress" />
+                        android:text="@string/txtEmail" />
 
                     <TextView
                         android:id="@+id/customer_detail_tvAddressCustomer"
@@ -219,7 +219,7 @@
                         style="@style/customer_detail_tvTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/cd_tvCity" />
+                        android:text="@string/txtCity" />
 
                     <TextView
                         android:id="@+id/customer_detail_tvCityName"

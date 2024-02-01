@@ -7,7 +7,9 @@ import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.moronlu18.data.account.Account
 import com.moronlu18.data.account.BusinessProfile
+import com.moronlu18.data.account.Email
 import com.moronlu18.data.account.User
+import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.converter.AccountIdTypeConverter
 import com.moronlu18.data.converter.CustomerIdTypeConverter
 import com.moronlu18.data.converter.EmailTypeConverter
@@ -27,17 +29,19 @@ import com.moronlu18.database.dao.CustomerDao
 import com.moronlu18.database.dao.InvoiceDao
 import com.moronlu18.database.dao.TaskDao
 import com.moronlu18.database.dao.UserDao
+import com.moronlu18.inovice.R
 import com.moronlu18.invoice.Locator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 @Database(
     entities = [Account::class, BusinessProfile::class, User::class, Task::class, Customer::class,
-               Invoice::class],
+        Invoice::class],
     version = 2, //la version 2 hace que no pete ya que lo borra constantemente (???)
     exportSchema = false
 )
@@ -55,8 +59,6 @@ import kotlinx.coroutines.launch
     InstantConverter::class,
     InvoiceIdTypeConverter::class,
     InvoiceStatusTypeConverter::class,
-    CustomerIdTypeConverter::class,
-
 )
 abstract class InvoiceDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
@@ -99,7 +101,6 @@ abstract class InvoiceDatabase : RoomDatabase() {
                 .addTypeConverter(InstantConverter())
                 .addTypeConverter(InvoiceIdTypeConverter())
                 .addTypeConverter(InvoiceStatusTypeConverter())
-                .addTypeConverter(CustomerIdTypeConverter())
                 .addCallback(
                     RoomDbInitializer(INSTANCE)
                     //Es una clase que implemente que la interfaz
@@ -114,18 +115,34 @@ abstract class InvoiceDatabase : RoomDatabase() {
 
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
-            applicationScope.launch(Dispatchers.IO) {
-                populateDatabase()
+            runBlocking {
+
+                applicationScope.launch(Dispatchers.IO) {
+                    populateDatabase()
+
+                }
             }
+
+
         }
 
         private suspend fun populateDatabase() {
             populateUsers()
+            populateCustomer()
         }
 
         private suspend fun populateUsers() {
+
+            val userDao = getInstance()?.userDao()
+            userDao?.insert(User("Alejandro", "abc@hotmail.es"))
+            userDao?.insert(User("Cristian", "rim@hotmail.es"))
+            userDao?.insert(User("Sergio", "123cab@hotmail.es"))
+            userDao?.insert(User("Jessica", "paella@hotmail.com"))
+            userDao?.insert(User("Pedro", "op@hotmail.es"))
+            userDao?.insert(User("Carlos", "mesa@gmail.com"))
+
             //Ejecuta este código si no es nulo
-            instance.let { invoiceDatabase ->
+            /*instance.let { invoiceDatabase ->
                 invoiceDatabase?.userDao()?.insert(
                     User("Alejandro", "abc@hotmail.es")
                 )
@@ -144,9 +161,53 @@ abstract class InvoiceDatabase : RoomDatabase() {
                 invoiceDatabase?.userDao()?.insert(
                     User("Carlos", "mesa@gmail.com")
                 )
+                Log.e("Circula", "Terminado")
+            }*/
+        }
 
-            }
-            //viewModelScope.launch(Dispatcher.IO){userRepository.insert}
+        private fun populateCustomer() {
+            var customId = 1;
+
+            getInstance().customerDao().insert(
+                Customer(
+                    CustomerId(customId++), "Mr.Kiwi",
+                    Email("kiwi@example.com"),
+                    "+64 21 123 456",
+                    "Auckland",
+                    "Main Street, 123",
+                    phototrial = R.drawable.kiwituxedo
+                )
+            )
+            getInstance().customerDao().insert(
+                Customer(
+                    CustomerId(customId++), "Maria Schmidt",
+                    Email("schmidt@example.com"),
+                    "+49 123456789",
+                    "Berlín",
+                    "Kurfürstendamm, 123", //R.drawable.elephantuxedo
+                    phototrial = R.drawable.elephantuxedo
+                )
+            )
+
+            getInstance().customerDao().insert(
+                Customer(
+                    CustomerId(customId++), "Alejandro López",
+                    Email("cebolla@example.com"),
+                    phototrial = R.drawable.cbotuxedo
+                )
+            )
+
+            getInstance().customerDao().insert(
+                Customer(
+                    CustomerId(customId),
+                    "Zariel García",
+                    Email("garc@example.com"),
+                    "+34 687223344",
+                    "Valencia",
+                    "Avenida Reino de Valencia, 789",
+                    phototrial = R.drawable.kangorutuxedo
+                )
+            )
         }
     }
 }

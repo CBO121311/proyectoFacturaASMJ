@@ -5,17 +5,24 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.asLiveData
 import com.cbo.customer.ui.CustomerListState
 import com.moronlu18.data.customer.Customer
 import com.moronlu18.network.ResourceList
 import com.moronlu18.repository.CustomerProvider
 import com.moronlu18.invoice.Locator
+import com.moronlu18.repository.CustomerProviderDB
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 
 class CustomerListViewModel : ViewModel() {
 
     private var state = MutableLiveData<CustomerListState>()
-    private val repository = CustomerProvider
+    private var customerProviderDB = CustomerProviderDB()
+    var allCustomer = customerProviderDB.getCustomerList().asLiveData()
+
+
 
 
     /**
@@ -24,13 +31,18 @@ class CustomerListViewModel : ViewModel() {
      */
     fun getCustomerList() {
         viewModelScope.launch {
-            state.value = CustomerListState.Loading(true)
-            val result = CustomerProvider.getCustomerList()
-            state.value = CustomerListState.Loading(false)
+            //state.value = CustomerListState.Loading(true)
+            //val result = CustomerProvider.getCustomerList()
+            //state.value = CustomerListState.Loading(false)
 
-            when (result) {
+            when{
+                allCustomer.value?.isEmpty() == true -> state.value = CustomerListState.NoDataError
+                else -> state.value = CustomerListState.Success
+            }
+
+           /* when (result) {
                 is ResourceList.Success<*> -> {
-                    val list = result.data as ArrayList<Customer>
+                    /*val list = result.data as ArrayList<Customer>
 
                     val sortPreference = Locator.settingsPreferencesRepository.getSettingValue("customersort","id")
                     when(sortPreference){
@@ -38,13 +50,14 @@ class CustomerListViewModel : ViewModel() {
                         "name_asc" -> list.sortBy { it.name }
                         "name_desc" -> list.sortByDescending { it.name }
                         "email" -> list.sortBy { it.email.toString() }
-                    }
+                    }*/
 
-                    state.value = CustomerListState.Success(list)
+
+                    state.value = CustomerListState.Success
                 }
 
                 is ResourceList.Error -> state.value = CustomerListState.NoDataError
-            }
+            }*/
         }
     }
 
@@ -67,7 +80,7 @@ class CustomerListViewModel : ViewModel() {
                         "email" -> list.sortBy { it.email.toString() }
                     }
 
-                    state.value = CustomerListState.Success(list)
+                    state.value = CustomerListState.Success
                 }
 
                 is ResourceList.Error -> state.value = CustomerListState.NoDataError
@@ -81,11 +94,18 @@ class CustomerListViewModel : ViewModel() {
      * Devuelve true si no hay problema, false si lo hay.
      */
     fun isDeleteSafe(customer: Customer): Boolean {
-        return if (repository.isCustomerSafeDelete(customer.id.value)) {
+        return  true
+       /* return if (customerProviderDB.isCustomerSafeDelete(customer.id.value)) {
             state.value = CustomerListState.ReferencedCustomer
             false
         } else {
             true
+        }*/
+    }
+
+    fun delete (customer: Customer){
+        viewModelScope.launch(Dispatchers.IO) {
+            customerProviderDB.delete(customer)
         }
     }
 

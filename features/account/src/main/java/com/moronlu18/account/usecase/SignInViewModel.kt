@@ -8,11 +8,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.moronlu18.data.account.Account
-import com.moronlu18.data.account.User
 import com.moronlu18.network.Resource
 import com.moronlu18.firebase.AuthFirebase
-import com.moronlu18.repository.UserRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 const val TAG = "ViewModel"

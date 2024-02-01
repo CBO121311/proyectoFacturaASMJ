@@ -21,19 +21,40 @@ data class Customer(
     @TypeConverters(CustomerIdTypeConverter::class)
     @PrimaryKey
     val id: @RawValue CustomerId,
-    val name: String,
-    @TypeConverters (EmailTypeConverter::class)
-    val email: @RawValue Email,
-    val phone: String? = null,
-    val city: String? = null,
-    val address: String? = null,
-    @TypeConverters (PhotoTypeConverter::class)
-    val photo: Bitmap? = null,
+    var name: String,
+    @TypeConverters(EmailTypeConverter::class)
+    var email: @RawValue Email,
+    var phone: String? = null,
+    var city: String? = null,
+    var address: String? = null,
+    @TypeConverters(PhotoTypeConverter::class)
+    var photo: Bitmap? = null,
     val phototrial: Int? = null,
 
     ) : Parcelable, Comparable<Customer> {
     override fun compareTo(other: Customer): Int {
         return name.lowercase().compareTo(other.name.lowercase())
+    }
+    companion object {
+        fun create(
+            id: Int,
+            name: String,
+            email: Email,
+            phone: String?,
+            city: String?,
+            address: String?,
+            photo: Bitmap?
+        ): Customer {
+            return Customer(
+                id = CustomerId(id),
+                name = name,
+                email = email,
+                phone = phone,
+                city = city,
+                address = address,
+                photo = photo
+            )
+        }
     }
 }
 

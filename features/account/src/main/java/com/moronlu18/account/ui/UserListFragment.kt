@@ -14,18 +14,15 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.moronlu18.account.adapter.UserAdapter
-import com.moronlu18.account.usecase.UserListState
 import com.moronlu18.account.usecase.UserListViewModel
 import com.moronlu18.data.account.User
 import com.moronlu18.accountsignin.R
 import com.moronlu18.accountsignin.databinding.FragmentUserListBinding
 import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.invoice.utils.Utils
-import com.moronlu18.invoice.utils.Utils.showToast
 
 
 //Aquí te doy permiso para el menu
@@ -144,24 +141,9 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick, MenuProvider {
      */
 
     private fun setUpUserRecycler() {
-
-       /* userAdapter = UserAdapter(
-            this,
-            onItemClick = { user -> userClick(user) },
-            onItemDelete = { user -> showConfirmationDialog(user) }
-        )*/
-
-
-
         //Crear el constructor primario
         userAdapter = UserAdapter(this) {
-            //when(event){}
-
-            Toast.makeText(
-                requireContext(),
-                "Usuario Seleccionado mediante lambda $it",
-                Toast.LENGTH_LONG
-            ).show()
+            Toast.makeText(requireContext(), "Usuario Seleccionado mediante lambda $it", Toast.LENGTH_LONG).show()
         }
 
         //1. ¿Cómo quiero que se muestren los elementos de la lista?
@@ -206,7 +188,8 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick, MenuProvider {
             .setTitle("Confirmación")
             .setMessage("¿Estás seguro de que quieres eliminar a ${user.name}?")
             .setPositiveButton("Sí") { _, _ ->
-            userAdapter.removeUser(user)
+                viewModel.delete(user)
+
             }
             .setNegativeButton("No", null)
             .show()
@@ -233,7 +216,7 @@ class UserListFragment : Fragment(), UserAdapter.OnUserClick, MenuProvider {
 
             R.id.action_refresh ->{
                 //Ordenador por email
-                viewModel.sortPreestablecido()
+                //viewModel.sortPreestablecido()
                 viewModel.getUserList()
                 return true
             }

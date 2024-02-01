@@ -1,6 +1,5 @@
 package com.moronlu18.repository
 
-import android.database.sqlite.SQLiteConstraintException
 import android.database.sqlite.SQLiteException
 import com.moronlu18.data.account.User
 import com.moronlu18.database.InvoiceDatabase
@@ -8,7 +7,7 @@ import com.moronlu18.network.Resource
 import kotlinx.coroutines.flow.Flow
 
 
-class UserRepository {
+class UserRepositoryDB {
     fun insert(user: User): Resource {
         try {
             InvoiceDatabase.getInstance()?.userDao()?.insert(user)
@@ -25,6 +24,5 @@ class UserRepository {
     fun delete(user: User) {
         InvoiceDatabase.getInstance().userDao().delete(user)
     }
-
 }
 

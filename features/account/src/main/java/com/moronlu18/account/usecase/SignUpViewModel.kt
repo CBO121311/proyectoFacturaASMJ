@@ -1,18 +1,14 @@
 package com.moronlu18.account.usecase
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.moronlu18.data.account.User
-import com.moronlu18.data.account.UserSignUp
 import com.moronlu18.network.Resource
-import com.moronlu18.repository.UserRepository
-import com.moronlu18.repository.UserRepositoryQuitar
+import com.moronlu18.repository.UserRepositoryDB
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import java.util.regex.Pattern
 
@@ -25,7 +21,7 @@ class SignUpViewModel : ViewModel() {
     val password1 = MutableLiveData<String>()
     val password2 = MutableLiveData<String>()
     private val pattern = Pattern.compile("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")
-    private var userRepository = UserRepository()
+    private var userRepositoryDB = UserRepositoryDB()
     fun validateSignUp() {
 
 
@@ -59,7 +55,7 @@ class SignUpViewModel : ViewModel() {
 
                     val user = User(name.value!!,email.value!!)
 
-                    val result = userRepository.insert(user);
+                    val result = userRepositoryDB.insert(user);
 
                     withContext(Dispatchers.Main) {
                         state.value = SignUpState.Loading(false)
@@ -95,11 +91,11 @@ class SignUpViewModel : ViewModel() {
     }
 
 
-    fun addUserSignUp(user: UserSignUp) {
+    /*fun addUserSignUp(user: UserSignUp) {
         UserRepositoryQuitar.addUser(user.toUser())
     }
-
     fun addUserDirect(user: User) {
         UserRepositoryQuitar.addUser(user)
-    }
+    }*/
+
 }

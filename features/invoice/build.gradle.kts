@@ -52,4 +52,7 @@ dependencies {
 
     //api("androidx.preference:preference:1.2.1")
     implementation ("androidx.preference:preference-ktx:1.2.1")
+
+    //Librería para usar el asLiveData en el viewmodel
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
 }

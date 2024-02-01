@@ -73,7 +73,6 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
             appBarConfiguration
         )
 
-
         setUpToolbar()
         setUpFab()
         initRecyclerViewCustomer()
@@ -82,11 +81,15 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
             when (it) {
                 is CustomerListState.Loading -> showProgressBar(it.value)
                 CustomerListState.NoDataError -> showListEmptyView()
-                is CustomerListState.Success -> onSuccess(it.dataset)
+                is CustomerListState.Success -> onSuccess()
                 CustomerListState.ReferencedCustomer -> showReferencedCustomer()
                 else -> {}
             }
         })
+
+        viewModel.allCustomer.observe(viewLifecycleOwner) {
+            it.let { customerAdapter.submitList(it) }
+        }
     }
 
     /**
@@ -101,8 +104,8 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
     /**
      * Se ejecuta al hacer clic en un elemento de la lista.
      */
-    override fun customerClick(position: Int) {
-        navigateDetailCustomer(position)
+    override fun customerClick(customer: Customer) {
+        navigateDetailCustomer(customer)
     }
 
     /**
@@ -118,37 +121,36 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
      * Acción cuando se obtiene con éxito la lista de clientes.
      * Actualiza la interfaz de usuario para mostrar la lista de clientes.
      */
-    private fun onSuccess(dataset: ArrayList<Customer>) {
+    private fun onSuccess() {
 
         binding.customerListClEmpty.visibility = View.GONE
         binding.customerListRvClientes.visibility = View.VISIBLE
-        customerAdapter.update(dataset)
     }
 
 
     /**
      * Navega a la pantalla de detalle del cliente cuando se hace clic en un cliente de la lista.
      */
-    private fun navigateDetailCustomer(position: Int) {
+    private fun navigateDetailCustomer(customer: Customer) {
 
-        val bundle = Bundle()
-        bundle.putInt("detailposition", position)
-        parentFragmentManager.setFragmentResult("detailkey", bundle)
-
-        findNavController().navigate(R.id.action_customerList_to_customerDetail)
+        findNavController().navigate(
+            CustomerListDirections.actionCustomerListToCustomerDetail(
+                customer
+            )
+        )
     }
 
 
     /**
      * Envía la posición de la lista de cliente al que se desea editar.
      */
-    private fun onEditItem(position: Int) {
+    private fun onEditItem(customer: Customer) {
 
-        val bundle = Bundle();
-        bundle.putInt("customposition", position)
-
-        parentFragmentManager.setFragmentResult("customkey", bundle)
-        findNavController().navigate(R.id.action_customerList_to_customerCreation)
+        findNavController().navigate(
+            CustomerListDirections.actionCustomerListToCustomerCreation(
+                customer
+            )
+        )
     }
 
     /**
@@ -171,8 +173,8 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
             ) { _, result ->
                 val success = result.getBoolean(BaseFragmentDialog.result, false)
                 if (success) {
-                    customerAdapter.deleteCustomer(customer)
-                    viewModel.getCustomerListNoLoading()
+                    viewModel.delete(customer)
+                    //viewModel.getCustomerListNoLoading()
                 }
             }
         }
@@ -212,12 +214,12 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
 
             when (it.itemId) {
                 R.id.menupop_see -> {
-                    navigateDetailCustomer(position)
+                    navigateDetailCustomer(customer)
                     true
                 }
 
                 R.id.menupop_edit -> {
-                    onEditItem(position)
+                    onEditItem(customer)
                     true
                 }
 
@@ -255,6 +257,7 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
 
             R.id.menu_cd_action_refresh -> {
                 viewModel.getCustomerList()
+                customerAdapter.sortId()
                 true
             }
 
@@ -324,12 +327,14 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
      */
     override fun onStart() {
         super.onStart()
-        if (isFirstTime) {
-            viewModel.getCustomerList()
+        viewModel.getCustomerList()
+
+        /*if (isFirstTime) {
+
             isFirstTime = false
         } else {
             viewModel.getCustomerListNoLoading()
-        }
+        }*/
     }
 
     /**

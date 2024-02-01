@@ -6,8 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.moronlu18.data.account.User
-import com.moronlu18.repository.UserRepositoryQuitar
-import com.moronlu18.repository.UserRepository
+import com.moronlu18.repository.UserRepositoryDB
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -16,10 +15,10 @@ class UserListViewModel : ViewModel() {
     private var state = MutableLiveData<UserListState>()
 
 
-    private var userRepository = UserRepository()
+    private var userRepositoryDB = UserRepositoryDB()
 
     //La secuencia de usuario, está vinculado al ciclo de vida del viewmodel
-    var allUser = userRepository.getUserList().asLiveData()
+    var allUser = userRepositoryDB.getUserList().asLiveData()
 
     //Esto será siempre null si lo dejamos así.
     //private var allUser: LiveData<List<User>>? = MutableLiveData<List<User>>()
@@ -55,19 +54,19 @@ class UserListViewModel : ViewModel() {
         }
     }
 
-    fun sortNatural() {
+    /*fun sortNatural() {
         UserRepositoryQuitar.dataSet.sort()
     }
 
     fun sortPreestablecido() {
         UserRepositoryQuitar.dataSet.sortBy { it.email.toString().lowercase() }
-    }
+    }*/
 
 
     fun delete(user: User){
         //No puede bloquear el hilo principal (Dispatchers.IO)
         viewModelScope.launch(Dispatchers.IO) {
-            userRepository.delete(user);
+            userRepositoryDB.delete(user);
         }
     }
 }

@@ -5,6 +5,8 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
+import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.customer.Customer
 import kotlinx.coroutines.flow.Flow
 
@@ -14,6 +16,15 @@ interface CustomerDao {
     fun insert(customer: Customer): Long
     @Query ("SELECT * FROM customer")
     fun  selectAll(): Flow<List<Customer>>
+
+    @Query("SELECT * FROM customer WHERE id = :customerId")
+    fun getCustomerById(customerId: CustomerId): Customer?
+
+    @Query("SELECT MAX(id) FROM customer")
+    fun getLastCustomerId(): Int?
+
+    @Update
+    fun update(customer: Customer)
 
     @Delete
     fun delete(customer: Customer)

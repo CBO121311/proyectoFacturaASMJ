@@ -120,7 +120,6 @@ class SignUpFragment : Fragment() {
 
             findNavController().navigate(R.id.action_signUpFragment_to_userListFragment2)
         }
-
     }
 
 
@@ -168,8 +167,7 @@ class SignUpFragment : Fragment() {
 
 
     private fun onSuccess(user: User) {
-
-        viewModel.addUserDirect(user)
+        //viewModel.addUserDirect(user)
         Toast.makeText(requireContext(), "Se ha añadido al repositorio", Toast.LENGTH_SHORT).show()
 
         findNavController().navigate(R.id.action_signUpFragment_to_userListFragment2)

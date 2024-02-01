@@ -45,7 +45,7 @@ class CustomerDetailViewModel : ViewModel() {
     /**
      * Método que obtiene la posición del cliente en la lista
      */
-    fun getPositionByCustomer(customer: Customer): Int {
+    private fun getPositionByCustomer(customer: Customer): Int {
         return repository.getPosByCustomer(customer)
     }
 

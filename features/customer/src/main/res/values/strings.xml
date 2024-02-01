@@ -1,47 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="cc_til_hint_name">Nombre</string>
-    <string name="cc_til_hint_email">Correo Electrónico</string>
-    <string name="cc_til_hint_phone">Teléfono</string>
-    <string name="cc_til_hint_address">Dirección</string>
-    <string name="cc_til_hint_city">Ciudad</string>
-    <string name="cc_btn_text_save">Guardar</string>
-    <string name="cc_til_helperText">Requerido*</string>
+    <string name="txtId" translatable="false">ID</string>
+    <string name="txtIdv2" translatable="false">ID: </string>
+    <string name="txtNombre">Nombre</string>
+    <string name="txtEmail">Correo Electrónico</string>
+    <string name="txtPhone">Teléfono</string>
+    <string name="txtAddress">Dirección</string>
+    <string name="txtCity">Ciudad</string>
+    <string name="txtSave">Guardar</string>
+    <string name="txtRequeriment">Requerido*</string>
+
+
     <string name="cc_descriptiontext_ibCustomer">Pulsa añadir una imagen</string>
-
-
-    <string name="cd_tvName">Nombre:</string>
-    <string name="cd_tvExampleName" translatable="false">Mr. Kiwi</string>
-    <string name="cd_tvExampleEmail" translatable="false">abc@hotmail.es</string>
-    <string name="cd_tvEmail">Correo Electrónico:</string>
-    <string name="cd_tvPhone">Teléfono:</string>
-    <string name="cd_tvExamplePhone" translatable="false">672231356</string>
-    <string name="cd_tvAddress">Dirección:</string>
-    <string name="cd_tvExampleAddress" translatable="false">Calle Salamanca Nº27 (21110)</string>
-    <string name="cd_tvCity">Ciudad:</string>
-    <string name="cd_tvExampleCity" translatable="false">Málaga</string>
     <string name="cd_cd_flbtnCorrect">Salir de detalles de cliente</string>
-
 
     <string name="title_deleteCustomer">Eliminar cliente</string>
     <string name="Content_deleteCustomer">¿Estás seguro de que quieres borrar el cliente?</string>
     <string name="ftlbtnAdd">Añadir cliente</string>
-    <string name="cl_tvEmpty1">No tienes clientes…</string>
-    <string name="cl_tvEmpty2">Toca el botón \'+\' para añadir uno</string>
     <string name="cl_cd_imgtdelete">Borrar cliente</string>
     <string name="cl_cd_imgtedit">Editar cliente</string>
-    <string name="cl_tvExampleName" translatable="false">Mr.Onion</string>
-    <string name="cl_tvExampleEmail" translatable="false">abc@hotmail.es</string>
-    <string name="cl_tvExampleId" translatable="false">123</string>
-    <string name="cl_menu_edit">Editar</string>
-    <string name="cl_menu_delete">Borrar</string>
-    <string name="cc_hint_id" translatable="false">ID</string>
-    <string name="cd_tvId" translatable="false">ID:</string>
+    <string name="cl_tvEmpty1">No tienes clientes…</string>
+
+    <string name="cl_tvEmpty2">Toca el botón \'+\' para añadir uno</string>
+
     <string name="menu_title_refresh_customerList">Ordenar Id</string>
     <string name="menu_title_sortName_customerList">Ordenar Nombre</string>
-    <string name="cl_popmenu_title_See">Ver</string>
-    <string name="cl_popmenu_title_edit">Editar</string>
-    <string name="cl_popmenu_title_delete">Eliminar</string>
+    <string name="txtSee">Ver</string>
+    <string name="txtEdit">Editar</string>
+    <string name="txtRemove">Eliminar</string>
     <string name="customer_NotAvailable">N/a</string>
 
     <string name="ccp_dialog_title" translatable="false">Selecciona un pais</string>

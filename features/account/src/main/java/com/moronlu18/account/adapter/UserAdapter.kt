@@ -65,8 +65,8 @@ class UserAdapter(
     }
 
     fun removeUser(user: User) {
-        currentList.remove(user)
-        notifyDataSetChanged()
+        //currentList.remove(user)
+        //notifyDataSetChanged()
     }
 
 
@@ -95,7 +95,6 @@ class UserAdapter(
             }
         }
     }
-
 
     //Hacer comparator.
     //Esto se ejecuta cuando se hace submit y le paso los nuevos datos del flujo.
