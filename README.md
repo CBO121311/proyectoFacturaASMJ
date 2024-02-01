@@ -3,7 +3,7 @@ Invoice versión 3, es la aplicación que se está realizando de manera modular 
  ## Historial de versiones
 - ------------------------
 ### V3.8.1 (01/02/2024)
- *Escrito por SergioGV98*
+ *Escrito por CBO121311*
  - En el módulo se ha hecho las modificaciones necesarias para que customer pueda añadir, eliminar y editar los datos que contiene su tabla.
  - Se ha añadido que haya datos predeterminados tanto en customer como en user al crear la base de datos.
  - Lógica cambiada utilizando los safeArgs en los distintos fragment del customer.
