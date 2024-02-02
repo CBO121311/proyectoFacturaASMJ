@@ -12,8 +12,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.jcasrui.item.usecase.ItemDetailViewModel
@@ -23,9 +25,10 @@ import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.itemcreation.R
 import com.moronlu18.itemcreation.databinding.FragmentItemDetailBinding
 
-class ItemDetail : Fragment(), MenuProvider{
+class ItemDetail : Fragment(), MenuProvider {
 
-    private val item: Item? = null
+    private var item: Item? = null
+    private var positionItem: Int = 0
     private val args: ItemDetailArgs by navArgs()
     private var _binding: FragmentItemDetailBinding? = null
     private val binding get() = _binding!!
@@ -40,7 +43,7 @@ class ItemDetail : Fragment(), MenuProvider{
         binding.lifecycleOwner = this
 
         val article: Item = args.item
-        binding.itemDetailCvImg.setImageResource(article.photo)
+        binding.itemDetailCvImg.setImageResource(article.photo!!)
         binding.itemDetailTvContentName.text = article.name
         binding.itemDetailTvContentDescription.text = article.description
         binding.itemDetailTvContentType.text = article.type.name
@@ -62,10 +65,44 @@ class ItemDetail : Fragment(), MenuProvider{
         setUpFab()
         setUpToolbar()
 
+        viewModel.getState().observe(viewLifecycleOwner, Observer {
+            when (it) {
+                ItemDetailState.OnSuccess -> onSuccess()
+                ItemDetailState.ReferencedItem -> showReferencedItem()
+            }
+        })
+
+        parentFragmentManager.setFragmentResultListener("detailkey", this,
+            FragmentResultListener { _, result ->
+                positionItem = result.getInt("detailposition")
+                item = viewModel.getPositionItem(positionItem)
+            }
+        )
+
         binding.itemDetailBtnSave.setOnClickListener {
             val fragmentManager = requireActivity().supportFragmentManager
             fragmentManager.popBackStack()
         }
+    }
+
+    private fun onSuccess() {
+        viewModel.let {
+            it.id.value = item!!.id.toString()
+            it.type.value = item!!.type.name
+            it.vat.value = item!!.vat.name
+            it.name.value = item!!.description.toString()
+            it.price.value = item!!.price.toString()
+            it.description.value = item!!.description.toString()
+        }
+    }
+
+    private fun showReferencedItem() {
+        findNavController().navigate(
+            ItemListDirections.actionItemListToBaseFragmentDialogWarning(
+                getString(R.string.title_warning),
+                getString(R.string.content_warning)
+            )
+        )
     }
 
     /**
@@ -119,7 +156,6 @@ class ItemDetail : Fragment(), MenuProvider{
     /**
      * Eliminar un artículo
      */
-
     private fun deleteItem() {
         if (viewModel.deleteItemSafe(item!!)) {
             findNavController().navigate(
@@ -136,7 +172,7 @@ class ItemDetail : Fragment(), MenuProvider{
                 val success = result.getBoolean(BaseFragmentDialog.result, false)
                 if (success) {
                     //adapter.notifyItemRemoved(position)
-                    viewModel.deleteItemSafe(item!!)
+                    viewModel.deleteItem(item!!)
                     Handler(Looper.getMainLooper()).postDelayed({
                         findNavController().popBackStack()
                     }, 100)

@@ -5,7 +5,7 @@ import com.moronlu18.data.base.ItemId
 import com.moronlu18.data.invoice.LineItem
 import com.moronlu18.data.item.ItemType
 
-import com.moronlu18.data.item.VatType
+import com.moronlu18.data.item.VatItemType
 import com.moronlu18.inovice.R
 import com.moronlu18.network.ResourceList
 import kotlinx.coroutines.Dispatchers
@@ -27,7 +27,7 @@ class ItemProvider {
                 Item(
                     ItemId(idItem++),
                     ItemType.PRODUCT,
-                    VatType.TWENTYONE,
+                    VatItemType.TWENTYONE,
                     "Pizza",
                     2.52,
                     "Producto sección precocinados",
@@ -39,7 +39,7 @@ class ItemProvider {
                 Item(
                     ItemId(idItem++),
                     ItemType.PRODUCT,
-                    VatType.TWENTYONE,
+                    VatItemType.TWENTYONE,
                     "Leche",
                     1.20,
                     "Producto sección lacteos",
@@ -51,7 +51,7 @@ class ItemProvider {
                 Item(
                     ItemId(idItem++),
                     ItemType.PRODUCT,
-                    VatType.TWENTYONE,
+                    VatItemType.TWENTYONE,
                     "Manzana",
                     0.42,
                     "Producto sección fruta",
@@ -63,7 +63,7 @@ class ItemProvider {
                 Item(
                     ItemId(idItem++),
                     ItemType.PRODUCT,
-                    VatType.FIVE,
+                    VatItemType.FIVE,
                     "Pan de espelta",
                     0.92,
                     "Producto sección panadería",
@@ -75,7 +75,7 @@ class ItemProvider {
                 Item(
                     ItemId(idItem++),
                     ItemType.SERVICE,
-                    VatType.TEN,
+                    VatItemType.TEN,
                     "Repartidor",
                     3.8,
                     "Repartir productos a clientes",

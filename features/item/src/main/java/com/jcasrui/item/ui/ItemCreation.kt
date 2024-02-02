@@ -22,7 +22,7 @@ import com.jcasrui.item.usecase.ItemCreationViewModel
 import com.moronlu18.accounts.entity.Item
 import com.moronlu18.data.base.ItemId
 import com.moronlu18.data.item.ItemType
-import com.moronlu18.data.item.VatType
+import com.moronlu18.data.item.VatItemType
 import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.itemcreation.R
 import com.moronlu18.itemcreation.databinding.FragmentItemCreationBinding
@@ -88,9 +88,9 @@ class ItemCreation : Fragment() {
 
         viewModel.getState().observe(viewLifecycleOwner, Observer {
             when (it) {
-                ItemState.NameIsMandatory -> setNameItemEmptyError()
-                ItemState.RateIsMandatory -> setRateItemEmptyError()
-                ItemState.OnSuccess -> onSuccessCreate()
+                ItemCreationState.NameIsMandatory -> setNameItemEmptyError()
+                ItemCreationState.RateIsMandatory -> setRateItemEmptyError()
+                ItemCreationState.OnSuccess -> onSuccessCreate()
                 else -> {}
             }
         })
@@ -153,24 +153,24 @@ class ItemCreation : Fragment() {
         }
     }
 
-    private fun chooseVatType(): VatType {
+    private fun chooseVatType(): VatItemType {
         return when (binding.itemCreationSpVatType.selectedItemId) {
-            0L -> VatType.ZERO
-            1L -> VatType.FOUR
-            2L -> VatType.FIVE
-            3L -> VatType.TEN
-            4L -> VatType.TWENTYONE
-            else -> VatType.TWENTYONE
+            0L -> VatItemType.ZERO
+            1L -> VatItemType.FOUR
+            2L -> VatItemType.FIVE
+            3L -> VatItemType.TEN
+            4L -> VatItemType.TWENTYONE
+            else -> VatItemType.TWENTYONE
         }
     }
 
     private fun vatType(item: Item): Int {
         return when (item.vat) {
-            VatType.ZERO -> 0
-            VatType.FOUR -> 1
-            VatType.FIVE -> 2
-            VatType.TEN -> 3
-            VatType.TWENTYONE -> 4
+            VatItemType.ZERO -> 0
+            VatItemType.FOUR -> 1
+            VatItemType.FIVE -> 2
+            VatItemType.TEN -> 3
+            VatItemType.TWENTYONE -> 4
         }
     }
 

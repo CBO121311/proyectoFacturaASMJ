@@ -4,7 +4,7 @@ import android.text.TextUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.jcasrui.item.ui.ItemState
+import com.jcasrui.item.ui.ItemCreationState
 import com.moronlu18.accounts.entity.Item
 import com.moronlu18.repository.ItemProvider
 
@@ -14,14 +14,14 @@ class ItemCreationViewModel : ViewModel() {
     var rateItem = MutableLiveData<String>()
     var prevItem: Item? = null
     private var isEditor = MutableLiveData<Boolean>()
-    private var state = MutableLiveData<ItemState>()
+    private var state = MutableLiveData<ItemCreationState>()
 
     fun validateItem() {
         //Log.i(TAG, "El nombre es ${nameItem.value} y el precio es ${rateItem.value}")
         when {
-            TextUtils.isEmpty(nameItem.value) -> state.value = ItemState.NameIsMandatory
-            TextUtils.isEmpty(rateItem.value) -> state.value = ItemState.RateIsMandatory
-            else -> state.value = ItemState.OnSuccess
+            TextUtils.isEmpty(nameItem.value) -> state.value = ItemCreationState.NameIsMandatory
+            TextUtils.isEmpty(rateItem.value) -> state.value = ItemCreationState.RateIsMandatory
+            else -> state.value = ItemCreationState.OnSuccess
         }
     }
 
@@ -49,7 +49,7 @@ class ItemCreationViewModel : ViewModel() {
         return isEditor.value ?: false
     }
 
-    fun getState(): LiveData<ItemState> {
+    fun getState(): LiveData<ItemCreationState> {
         return state
     }
 }

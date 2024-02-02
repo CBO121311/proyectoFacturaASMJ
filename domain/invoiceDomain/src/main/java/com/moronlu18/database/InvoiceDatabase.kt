@@ -5,11 +5,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.moronlu18.accounts.entity.Item
 import com.moronlu18.data.account.Account
 import com.moronlu18.data.account.BusinessProfile
 import com.moronlu18.data.account.Email
 import com.moronlu18.data.account.User
 import com.moronlu18.data.base.CustomerId
+import com.moronlu18.data.base.ItemId
 import com.moronlu18.data.converter.AccountIdTypeConverter
 import com.moronlu18.data.converter.CustomerIdTypeConverter
 import com.moronlu18.data.converter.EmailTypeConverter
@@ -17,16 +19,22 @@ import com.moronlu18.data.converter.PhotoTypeConverter
 import com.moronlu18.data.converter.InstantConverter
 import com.moronlu18.data.converter.InvoiceIdTypeConverter
 import com.moronlu18.data.converter.InvoiceStatusTypeConverter
+import com.moronlu18.data.converter.ItemIdTypeConverter
+import com.moronlu18.data.converter.ItemTypeConverter
+import com.moronlu18.data.converter.ItemVatTypeConverter
 import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.converter.TaskIdTypeConverter
 import com.moronlu18.data.converter.TaskStatusConverter
 import com.moronlu18.data.converter.TaskTypeConverter
 import com.moronlu18.data.invoice.Invoice
+import com.moronlu18.data.item.ItemType
+import com.moronlu18.data.item.VatItemType
 import com.moronlu18.data.task.Task
 import com.moronlu18.database.dao.AccountDao
 import com.moronlu18.database.dao.BusinessProfileDao
 import com.moronlu18.database.dao.CustomerDao
 import com.moronlu18.database.dao.InvoiceDao
+import com.moronlu18.database.dao.ItemDao
 import com.moronlu18.database.dao.TaskDao
 import com.moronlu18.database.dao.UserDao
 import com.moronlu18.inovice.R
@@ -41,7 +49,7 @@ import kotlinx.coroutines.runBlocking
 
 @Database(
     entities = [Account::class, BusinessProfile::class, User::class, Task::class, Customer::class,
-        Invoice::class],
+        Invoice::class, Item::class],
     version = 2, //la version 2 hace que no pete ya que lo borra constantemente (???)
     exportSchema = false
 )
@@ -59,6 +67,9 @@ import kotlinx.coroutines.runBlocking
     InstantConverter::class,
     InvoiceIdTypeConverter::class,
     InvoiceStatusTypeConverter::class,
+    ItemIdTypeConverter::class,
+    ItemTypeConverter::class,
+    ItemVatTypeConverter::class
 )
 abstract class InvoiceDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
@@ -67,6 +78,7 @@ abstract class InvoiceDatabase : RoomDatabase() {
     abstract fun taskDao(): TaskDao
     abstract fun businessProfileDao(): BusinessProfileDao
     abstract fun customerDao(): CustomerDao
+    abstract fun itemDao(): ItemDao
 
 
     companion object {
@@ -101,6 +113,9 @@ abstract class InvoiceDatabase : RoomDatabase() {
                 .addTypeConverter(InstantConverter())
                 .addTypeConverter(InvoiceIdTypeConverter())
                 .addTypeConverter(InvoiceStatusTypeConverter())
+                .addTypeConverter(ItemIdTypeConverter())
+                .addTypeConverter(ItemTypeConverter())
+                .addTypeConverter(ItemVatTypeConverter())
                 .addCallback(
                     RoomDbInitializer(INSTANCE)
                     //Es una clase que implemente que la interfaz
@@ -129,6 +144,66 @@ abstract class InvoiceDatabase : RoomDatabase() {
         private suspend fun populateDatabase() {
             populateUsers()
             populateCustomer()
+            populateItem()
+        }
+
+        private fun populateItem() {
+            var itemId = 1;
+            val itemDao = getInstance().itemDao()
+            itemDao.insert(
+                Item(
+                    ItemId(itemId++),
+                    ItemType.PRODUCT,
+                    VatItemType.FIVE,
+                    "Fresa",
+                    3.50
+                )
+            )
+            itemDao.insert(
+                Item(
+                    ItemId(itemId++),
+                    ItemType.SERVICE,
+                    VatItemType.TWENTYONE,
+                    "Repartir productos",
+                    34.85
+                )
+            )
+            itemDao.insert(
+                Item(
+                    ItemId(itemId++),
+                    ItemType.PRODUCT,
+                    VatItemType.TWENTYONE,
+                    "Vino tinto",
+                    12.45
+                )
+            )
+            itemDao.insert(
+                Item(
+                    ItemId(itemId++),
+                    ItemType.SERVICE,
+                    VatItemType.TWENTYONE,
+                    "Reponer productos",
+                    29.43
+                )
+            )
+            itemDao.insert(
+                Item(
+                    ItemId(itemId++),
+                    ItemType.PRODUCT,
+                    VatItemType.FIVE,
+                    "Pulpo",
+                    9.75
+                )
+            )
+            itemDao.insert(
+                Item(
+                    ItemId(itemId),
+                    ItemType.PRODUCT,
+                    VatItemType.FIVE,
+                    "Solomillo",
+                    11.30
+                )
+            )
         }
 
         private suspend fun populateUsers() {

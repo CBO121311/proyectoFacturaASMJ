@@ -1,6 +1,6 @@
 package com.moronlu18.data.item
 
-enum class VatType(val iva: Int) {
+enum class VatItemType(val iva: Int) {
     ZERO(0),
     FOUR(4), // SUPERREDUCIDO
     FIVE(5), // SUPERREDUCIDO
