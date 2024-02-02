@@ -28,7 +28,13 @@
     <fragment
         android:id="@+id/itemCreation"
         android:name="com.jcasrui.item.ui.ItemCreation"
-        android:label="@string/title_itemcreation" />
+        android:label="@string/title_itemcreation" >
+        <argument
+            android:name="item"
+            app:argType="com.moronlu18.accounts.entity.Item"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 
     <fragment
         android:id="@+id/itemDetail"

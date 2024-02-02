@@ -7,6 +7,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.moronlu18.accounts.entity.Item
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ItemDao {
@@ -15,8 +16,8 @@ interface ItemDao {
 
     @Update
     fun update(item: Item)
-/*    @Query("SELECT * FROM item")
-    fun selectAll(): List<Item>*/
+    @Query("SELECT * FROM item")
+    fun selectAll(): Flow<List<Item>>
 
     @Delete
     fun delete(item: Item)

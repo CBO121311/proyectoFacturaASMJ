@@ -16,24 +16,6 @@ import com.moronlu18.data.item.VatItemType
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 
-/*
-    tableName = "item",
-    foreignKeys = [ForeignKey(
-        entity = ItemType::class,
-        parentColumns = arrayOf("id"),
-        childColumns = arrayOf("type"),
-        onDelete = RESTRICT,
-        onUpdate = CASCADE
-    ),
-        ForeignKey(
-            entity = VatItemType::class,
-            parentColumns = arrayOf("id"),
-            childColumns = arrayOf("vat"),
-            onDelete = RESTRICT,
-            onUpdate = CASCADE
-        )
-    ]
-)*/
 @Entity(tableName = "item")
 @Parcelize
 data class Item(
