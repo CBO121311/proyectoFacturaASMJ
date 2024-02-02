@@ -12,6 +12,7 @@ import com.moronlu18.data.account.Email
 import com.moronlu18.data.account.User
 import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.base.ItemId
+import com.moronlu18.data.base.TaskId
 import com.moronlu18.data.converter.AccountIdTypeConverter
 import com.moronlu18.data.converter.CustomerIdTypeConverter
 import com.moronlu18.data.converter.EmailTypeConverter
@@ -30,6 +31,8 @@ import com.moronlu18.data.invoice.Invoice
 import com.moronlu18.data.item.ItemType
 import com.moronlu18.data.item.VatItemType
 import com.moronlu18.data.task.Task
+import com.moronlu18.data.task.TaskStatus
+import com.moronlu18.data.task.TypeTask
 import com.moronlu18.database.dao.AccountDao
 import com.moronlu18.database.dao.BusinessProfileDao
 import com.moronlu18.database.dao.CustomerDao
@@ -45,12 +48,12 @@ import kotlinx.coroutines.SupervisorJob
 
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.time.Instant
 
 
 @Database(
-    entities = [Account::class, BusinessProfile::class, User::class, Task::class, Customer::class,
-        Invoice::class, Item::class],
-    version = 2, //la version 2 hace que no pete ya que lo borra constantemente (???)
+    entities = [Account::class, BusinessProfile::class, User::class, Task::class, Customer::class, Invoice::class, Item::class],
+    version = 3, //la version 2 hace que no pete ya que lo borra constantemente (???)
     exportSchema = false
 )
 //Hay que decir que convertidores vamos a utilizar
@@ -97,26 +100,17 @@ abstract class InvoiceDatabase : RoomDatabase() {
         //El contexto
         private fun buildDatabase(): InvoiceDatabase {
             return Room.databaseBuilder(
-                Locator.requireApplication,
-                InvoiceDatabase::class.java,
-                "Invoice"
-            ).fallbackToDestructiveMigration()
-                .allowMainThreadQueries()
+                Locator.requireApplication, InvoiceDatabase::class.java, "Invoice"
+            ).fallbackToDestructiveMigration().allowMainThreadQueries()
                 //y creamos un objeto de esta clase para convertir de un tipo a otro.
-                .addTypeConverter(AccountIdTypeConverter())
-                .addTypeConverter(EmailTypeConverter())
-                .addTypeConverter(TaskStatusConverter())
-                .addTypeConverter(TaskTypeConverter())
-                .addTypeConverter(TaskIdTypeConverter())
-                .addTypeConverter(CustomerIdTypeConverter())
-                .addTypeConverter(PhotoTypeConverter())
-                .addTypeConverter(InstantConverter())
+                .addTypeConverter(AccountIdTypeConverter()).addTypeConverter(EmailTypeConverter())
+                .addTypeConverter(TaskStatusConverter()).addTypeConverter(TaskTypeConverter())
+                .addTypeConverter(TaskIdTypeConverter()).addTypeConverter(CustomerIdTypeConverter())
+                .addTypeConverter(PhotoTypeConverter()).addTypeConverter(InstantConverter())
                 .addTypeConverter(InvoiceIdTypeConverter())
                 .addTypeConverter(InvoiceStatusTypeConverter())
-                .addTypeConverter(ItemIdTypeConverter())
-                .addTypeConverter(ItemTypeConverter())
-                .addTypeConverter(ItemVatTypeConverter())
-                .addCallback(
+                .addTypeConverter(ItemIdTypeConverter()).addTypeConverter(ItemTypeConverter())
+                .addTypeConverter(ItemVatTypeConverter()).addCallback(
                     RoomDbInitializer(INSTANCE)
                     //Es una clase que implemente que la interfaz
                 ).build()
@@ -145,6 +139,7 @@ abstract class InvoiceDatabase : RoomDatabase() {
             populateUsers()
             populateCustomer()
             populateItem()
+            populateTask()
         }
 
         private fun populateItem() {
@@ -152,11 +147,7 @@ abstract class InvoiceDatabase : RoomDatabase() {
             val itemDao = getInstance().itemDao()
             itemDao.insert(
                 Item(
-                    ItemId(itemId++),
-                    ItemType.PRODUCT,
-                    VatItemType.FIVE,
-                    "Fresa",
-                    3.50
+                    ItemId(itemId++), ItemType.PRODUCT, VatItemType.FIVE, "Fresa", 3.50
                 )
             )
             itemDao.insert(
@@ -170,11 +161,7 @@ abstract class InvoiceDatabase : RoomDatabase() {
             )
             itemDao.insert(
                 Item(
-                    ItemId(itemId++),
-                    ItemType.PRODUCT,
-                    VatItemType.TWENTYONE,
-                    "Vino tinto",
-                    12.45
+                    ItemId(itemId++), ItemType.PRODUCT, VatItemType.TWENTYONE, "Vino tinto", 12.45
                 )
             )
             itemDao.insert(
@@ -188,20 +175,12 @@ abstract class InvoiceDatabase : RoomDatabase() {
             )
             itemDao.insert(
                 Item(
-                    ItemId(itemId++),
-                    ItemType.PRODUCT,
-                    VatItemType.FIVE,
-                    "Pulpo",
-                    9.75
+                    ItemId(itemId++), ItemType.PRODUCT, VatItemType.FIVE, "Pulpo", 9.75
                 )
             )
             itemDao.insert(
                 Item(
-                    ItemId(itemId),
-                    ItemType.PRODUCT,
-                    VatItemType.FIVE,
-                    "Solomillo",
-                    11.30
+                    ItemId(itemId), ItemType.PRODUCT, VatItemType.FIVE, "Solomillo", 11.30
                 )
             )
         }
@@ -245,7 +224,8 @@ abstract class InvoiceDatabase : RoomDatabase() {
 
             getInstance().customerDao().insert(
                 Customer(
-                    CustomerId(customId++), "Mr.Kiwi",
+                    CustomerId(customId++),
+                    "Mr.Kiwi",
                     Email("kiwi@example.com"),
                     "+64 21 123 456",
                     "Auckland",
@@ -255,7 +235,8 @@ abstract class InvoiceDatabase : RoomDatabase() {
             )
             getInstance().customerDao().insert(
                 Customer(
-                    CustomerId(customId++), "Maria Schmidt",
+                    CustomerId(customId++),
+                    "Maria Schmidt",
                     Email("schmidt@example.com"),
                     "+49 123456789",
                     "Berlín",
@@ -266,7 +247,8 @@ abstract class InvoiceDatabase : RoomDatabase() {
 
             getInstance().customerDao().insert(
                 Customer(
-                    CustomerId(customId++), "Alejandro López",
+                    CustomerId(customId++),
+                    "Alejandro López",
                     Email("cebolla@example.com"),
                     phototrial = R.drawable.cbotuxedo
                 )
@@ -283,6 +265,60 @@ abstract class InvoiceDatabase : RoomDatabase() {
                     phototrial = R.drawable.kangorutuxedo
                 )
             )
+        }
+
+        private fun populateTask() {
+            var taskId = 1;
+
+            getInstance().taskDao().insert(
+                Task(
+                    TaskId(taskId++),
+                    CustomerId(1),
+                    "Hacer la presentación",
+                    TypeTask.LLAMAR,
+                    TaskStatus.PENDIENTE,
+                    "Preparar la presentación para la reunión de ventas",
+                    Instant.parse("2023-11-15T00:00:00Z"),
+                    Instant.parse("2023-11-15T00:00:00Z")
+                )
+            )
+            getInstance().taskDao().insert(
+                Task(
+                    TaskId(taskId++),
+                    CustomerId(2),
+                    "Completar informe",
+                    TypeTask.LLAMAR,
+                    TaskStatus.PENDIENTE,
+                    "Finalizar el informe mensual de ventas y enviarlo al cliente",
+                    Instant.parse("2023-11-15T00:00:00Z"),
+                    Instant.parse("2023-11-15T00:00:00Z"),
+                )
+            )
+            getInstance().taskDao().insert(
+                Task(
+                    TaskId(taskId++),
+                    CustomerId(3),
+                    "Entrenamiento en línea",
+                    TypeTask.VISITA,
+                    TaskStatus.VENCIDA,
+                    "Participar en el curso de desarrollo web en línea",
+                    Instant.parse("2023-11-15T00:00:00Z"),
+                    Instant.parse("2023-11-15T00:00:00Z"),
+                )
+            )
+            getInstance().taskDao().insert(
+                Task(
+                    TaskId(taskId++),
+                    CustomerId(4),
+                    "Poblar la base de datos",
+                    TypeTask.VISITA,
+                    TaskStatus.VENCIDA,
+                    "Participar en el proyecto",
+                    Instant.parse("2023-11-15T00:00:00Z"),
+                    Instant.parse("2023-11-15T00:00:00Z"),
+                )
+            )
+
         }
     }
 }
