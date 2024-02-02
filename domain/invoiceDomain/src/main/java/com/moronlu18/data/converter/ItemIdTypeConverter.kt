@@ -3,7 +3,8 @@ package com.moronlu18.data.converter
 import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import com.moronlu18.data.base.ItemId
-import com.moronlu18.data.item.VatItemType
+
+
 
 @ProvidedTypeConverter
 class ItemIdTypeConverter {
@@ -13,7 +14,7 @@ class ItemIdTypeConverter {
     }
 
     @TypeConverter
-    fun fromItemId(itemId: ItemId): Int {
+    fun fromItemId(itemId: ItemId): Int{
         return itemId.value
     }
 }

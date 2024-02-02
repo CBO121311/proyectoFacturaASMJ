@@ -122,7 +122,6 @@ class CustomerAdapter(
 
         /**
          * Función para proporcionar un valor predeterminado ("N/a") si el valor dado es nulo o vacío.
-         *
          */
         private fun isValue(value: String?): String {
 

@@ -13,6 +13,11 @@ import com.moronlu18.data.converter.EmailTypeConverter
 
 //Los constructores no pueden ser privado ya que nos devuelve el DAO
 
+
+//Tiene
+/*1ºEntidad que tiene relacion
+2ºLa columna de la tabla businness
+3º El atributo de la tabla account*/
 @Entity(
     tableName = "account", foreignKeys = [
         ForeignKey(
@@ -24,13 +29,6 @@ import com.moronlu18.data.converter.EmailTypeConverter
         )
     ]
 )
-//Tiene
-/*1ºEntidad que tiene relacion
-2ºLa columna de la tabla businness
-3º El atributo de la tabla account*/
-
-
-
 class Account(
 
     //Crea un nuevo accountid con el account de la base de datos.

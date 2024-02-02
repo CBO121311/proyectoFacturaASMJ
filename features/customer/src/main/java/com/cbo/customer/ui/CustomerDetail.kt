@@ -235,14 +235,6 @@ class CustomerDetail : Fragment(), MenuProvider {
 
     }
 
-    /**
-     * Actualiza el cliente obtenido por la posición y llama a "onSuccess"
-     */
-    override fun onResume() {
-        super.onResume()
-        //viewModel.onSuccess()
-    }
-
 
     /**
      * Liberamos la referencia al binding.

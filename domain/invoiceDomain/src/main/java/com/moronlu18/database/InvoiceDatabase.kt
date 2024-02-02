@@ -45,15 +45,13 @@ import com.moronlu18.invoice.Locator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.time.Instant
 
 
 @Database(
     entities = [Account::class, BusinessProfile::class, User::class, Task::class, Customer::class, Invoice::class, Item::class],
-    version = 3, //la version 2 hace que no pete ya que lo borra constantemente (???)
+    version = 3,
     exportSchema = false
 )
 //Hay que decir que convertidores vamos a utilizar
@@ -124,15 +122,11 @@ abstract class InvoiceDatabase : RoomDatabase() {
 
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
-            runBlocking {
 
-                applicationScope.launch(Dispatchers.IO) {
-                    populateDatabase()
+            applicationScope.launch(Dispatchers.IO) {
+                populateDatabase()
 
-                }
             }
-
-
         }
 
         private suspend fun populateDatabase() {
@@ -187,84 +181,76 @@ abstract class InvoiceDatabase : RoomDatabase() {
 
         private suspend fun populateUsers() {
 
-            val userDao = getInstance()?.userDao()
-            userDao?.insert(User("Alejandro", "abc@hotmail.es"))
-            userDao?.insert(User("Cristian", "rim@hotmail.es"))
-            userDao?.insert(User("Sergio", "123cab@hotmail.es"))
-            userDao?.insert(User("Jessica", "paella@hotmail.com"))
-            userDao?.insert(User("Pedro", "op@hotmail.es"))
-            userDao?.insert(User("Carlos", "mesa@gmail.com"))
-
-            //Ejecuta este código si no es nulo
-            /*instance.let { invoiceDatabase ->
-                invoiceDatabase?.userDao()?.insert(
+            getInstance().let { invoiceDatabase ->
+                invoiceDatabase.userDao().insert(
                     User("Alejandro", "abc@hotmail.es")
                 )
-                invoiceDatabase?.userDao()?.insert(
+                invoiceDatabase.userDao().insert(
                     User("Cristian", "rim@hotmail.es")
                 )
-                invoiceDatabase?.userDao()?.insert(
+                invoiceDatabase.userDao().insert(
                     User("Sergio", "123cab@hotmail.es")
                 )
-                invoiceDatabase?.userDao()?.insert(
+                invoiceDatabase.userDao().insert(
                     User("Jessica", "paella@hotmail.com")
                 )
-                invoiceDatabase?.userDao()?.insert(
+                invoiceDatabase.userDao().insert(
                     User("Pedro", "op@hotmail.es")
                 )
-                invoiceDatabase?.userDao()?.insert(
+                invoiceDatabase.userDao().insert(
                     User("Carlos", "mesa@gmail.com")
                 )
-                Log.e("Circula", "Terminado")
-            }*/
+            }
         }
 
         private fun populateCustomer() {
             var customId = 1;
 
-            getInstance().customerDao().insert(
-                Customer(
-                    CustomerId(customId++),
-                    "Mr.Kiwi",
-                    Email("kiwi@example.com"),
-                    "+64 21 123 456",
-                    "Auckland",
-                    "Main Street, 123",
-                    phototrial = R.drawable.kiwituxedo
+            getInstance().let {
+                it.customerDao().insert(
+                    Customer(
+                        CustomerId(customId++),
+                        "Mr.Kiwi",
+                        Email("kiwi@example.com"),
+                        "+64 21 123 456",
+                        "Auckland",
+                        "Main Street, 123",
+                        phototrial = R.drawable.kiwituxedo
+                    )
                 )
-            )
-            getInstance().customerDao().insert(
-                Customer(
-                    CustomerId(customId++),
-                    "Maria Schmidt",
-                    Email("schmidt@example.com"),
-                    "+49 123456789",
-                    "Berlín",
-                    "Kurfürstendamm, 123", //R.drawable.elephantuxedo
-                    phototrial = R.drawable.elephantuxedo
+                it.customerDao().insert(
+                    Customer(
+                        CustomerId(customId++),
+                        "Maria Schmidt",
+                        Email("schmidt@example.com"),
+                        "+49 123456789",
+                        "Berlín",
+                        "Kurfürstendamm, 123", //R.drawable.elephantuxedo
+                        phototrial = R.drawable.elephantuxedo
+                    )
                 )
-            )
 
-            getInstance().customerDao().insert(
-                Customer(
-                    CustomerId(customId++),
-                    "Alejandro López",
-                    Email("cebolla@example.com"),
-                    phototrial = R.drawable.cbotuxedo
+                it.customerDao().insert(
+                    Customer(
+                        CustomerId(customId++),
+                        "Alejandro López",
+                        Email("cebolla@example.com"),
+                        phototrial = R.drawable.cbotuxedo
+                    )
                 )
-            )
 
-            getInstance().customerDao().insert(
-                Customer(
-                    CustomerId(customId),
-                    "Zariel García",
-                    Email("garc@example.com"),
-                    "+34 687223344",
-                    "Valencia",
-                    "Avenida Reino de Valencia, 789",
-                    phototrial = R.drawable.kangorutuxedo
+                it.customerDao().insert(
+                    Customer(
+                        CustomerId(customId),
+                        "Zariel García",
+                        Email("garc@example.com"),
+                        "+34 687223344",
+                        "Valencia",
+                        "Avenida Reino de Valencia, 789",
+                        phototrial = R.drawable.kangorutuxedo
+                    )
                 )
-            )
+            }
         }
 
         private fun populateTask() {

@@ -18,6 +18,14 @@ class CustomerProviderDB {
         return Resource.Success(Customer)
     }
 
+    fun getCustomerList(): Flow<List<Customer>> {
+        return InvoiceDatabase.getInstance().customerDao().selectAll()
+    }
+
+    fun delete(customer: Customer) {
+        InvoiceDatabase.getInstance().customerDao().delete(customer)
+    }
+
     fun update(customer: Customer): Resource {
         try {
 
@@ -38,12 +46,5 @@ class CustomerProviderDB {
         return InvoiceDatabase.getInstance().customerDao().getLastCustomerId()
     }
 
-    fun getCustomerList(): Flow<List<Customer>> {
-        return InvoiceDatabase.getInstance().customerDao().selectAll()
-    }
 
-
-    fun delete(customer: Customer) {
-        InvoiceDatabase.getInstance().customerDao().delete(customer)
-    }
 }
