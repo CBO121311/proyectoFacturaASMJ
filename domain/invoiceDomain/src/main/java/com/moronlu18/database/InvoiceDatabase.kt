@@ -11,6 +11,7 @@ import com.moronlu18.data.account.BusinessProfile
 import com.moronlu18.data.account.Email
 import com.moronlu18.data.account.User
 import com.moronlu18.data.base.CustomerId
+import com.moronlu18.data.base.InvoiceId
 import com.moronlu18.data.base.ItemId
 import com.moronlu18.data.base.TaskId
 import com.moronlu18.data.converter.AccountIdTypeConverter
@@ -28,6 +29,8 @@ import com.moronlu18.data.converter.TaskIdTypeConverter
 import com.moronlu18.data.converter.TaskStatusConverter
 import com.moronlu18.data.converter.TaskTypeConverter
 import com.moronlu18.data.invoice.Invoice
+import com.moronlu18.data.invoice.InvoiceStatus
+import com.moronlu18.data.invoice.LineItem
 import com.moronlu18.data.item.ItemType
 import com.moronlu18.data.item.VatItemType
 import com.moronlu18.data.task.Task
@@ -38,19 +41,22 @@ import com.moronlu18.database.dao.BusinessProfileDao
 import com.moronlu18.database.dao.CustomerDao
 import com.moronlu18.database.dao.InvoiceDao
 import com.moronlu18.database.dao.ItemDao
+import com.moronlu18.database.dao.lineItemDao
 import com.moronlu18.database.dao.TaskDao
 import com.moronlu18.database.dao.UserDao
 import com.moronlu18.inovice.R
 import com.moronlu18.invoice.Locator
+import com.moronlu18.repository.InvoiceProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import java.time.Duration
 import java.time.Instant
 
 
 @Database(
-    entities = [Account::class, BusinessProfile::class, User::class, Task::class, Customer::class, Invoice::class, Item::class],
+    entities = [Account::class, BusinessProfile::class, User::class, Task::class, Customer::class, Invoice::class, Item::class, LineItem::class],
     version = 3,
     exportSchema = false
 )
@@ -76,6 +82,7 @@ abstract class InvoiceDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun accountDao(): AccountDao
     abstract fun invoiceDao(): InvoiceDao
+    abstract fun lineItemDao(): lineItemDao
     abstract fun taskDao(): TaskDao
     abstract fun businessProfileDao(): BusinessProfileDao
     abstract fun customerDao(): CustomerDao
@@ -134,6 +141,8 @@ abstract class InvoiceDatabase : RoomDatabase() {
             populateCustomer()
             populateItem()
             populateTask()
+            populateInvoice()
+            populateLineItem()
         }
 
         private fun populateItem() {
@@ -251,6 +260,54 @@ abstract class InvoiceDatabase : RoomDatabase() {
                     )
                 )
             }
+        }
+        private fun populateInvoice() {
+            getInstance().invoiceDao().insert(
+                Invoice(
+                    id = InvoiceId(1),
+                    customerId = CustomerId(1),
+                    number = InvoiceProvider.giveNumberInvoice(),
+                    status = InvoiceStatus.PENDIENTE,
+                    issuedDate = Instant.now(),
+                    dueDate = Instant.now().plus(Duration.ofDays(30)),
+                    lineItems = listOf(
+                        LineItem(
+                            InvoiceId(1),
+                            ItemId(1),
+                            1,
+                            3.50,
+                            5,
+                        ),
+                        LineItem(
+                            InvoiceId(1),
+                            ItemId(2),
+                            1,
+                            34.85, 21
+                        ),
+
+                        )
+                )
+            )
+        }
+
+        private fun populateLineItem() {
+            getInstance().lineItemDao().insert(
+                LineItem(
+                    InvoiceId(1),
+                    ItemId(1),
+                    1,
+                    2.4,
+                    21,
+                ),
+            )
+            getInstance().lineItemDao().insert(
+                LineItem(
+                    InvoiceId(1),
+                    ItemId(2),
+                    1,
+                    4.56, 21
+                ),
+            )
         }
 
         private fun populateTask() {

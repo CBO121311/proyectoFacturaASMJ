@@ -20,6 +20,9 @@ interface CustomerDao {
     @Query("SELECT * FROM customer WHERE id = :customerId")
     fun getCustomerById(customerId: CustomerId): Customer?
 
+    @Query("SELECT name FROM customer WHERE id = :customerId")
+    fun getNameById(customerId: CustomerId): String?
+
     @Query("SELECT MAX(id) FROM customer")
     fun getLastCustomerId(): Int?
 

@@ -4,23 +4,29 @@ import android.os.Parcelable
 import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.TypeConverters
+import com.moronlu18.accounts.entity.Item
 import com.moronlu18.data.base.InvoiceId
 import com.moronlu18.data.base.ItemId
+import com.moronlu18.data.converter.InvoiceIdTypeConverter
+import com.moronlu18.data.converter.ItemIdTypeConverter
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 @Entity(
-    tableName = "line_item", foreignKeys = [
+    tableName = "line_item",
+    primaryKeys =["invoiceId","itemId"],
+    foreignKeys = [
         ForeignKey(
-            entity = InvoiceId::class,
+            entity = Invoice::class,
             parentColumns = arrayOf("id"),
-            childColumns = arrayOf("invoiceid"),
+            childColumns = arrayOf("invoiceId"),
             onDelete = ForeignKey.RESTRICT,
             onUpdate = ForeignKey.CASCADE
         ),
         ForeignKey(
-            entity = ItemId::class,
+            entity = Item::class,
             parentColumns = arrayOf("id"),
-            childColumns = arrayOf("itemid"),
+            childColumns = arrayOf("itemId"),
             onDelete = ForeignKey.RESTRICT,
             onUpdate = ForeignKey.CASCADE
         )
@@ -28,7 +34,9 @@ import kotlinx.parcelize.RawValue
 )
 @Parcelize
 data class LineItem(
+    @TypeConverters(InvoiceIdTypeConverter::class)
     val invoiceId: @RawValue InvoiceId,
+    @TypeConverters(ItemIdTypeConverter::class)
     val itemId: @RawValue ItemId,
     @NonNull
     var quantity:Int,

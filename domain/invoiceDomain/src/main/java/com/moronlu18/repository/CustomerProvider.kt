@@ -199,15 +199,6 @@ class CustomerProvider private constructor() {
             return false
         }
 
-        fun getNom(id: Int): String {
-            var nombre = "Cliente"
-            for (item in CustomerdataSet) {
-                if (item.id.value == id) {
-                    nombre = item.name
-                }
-            }
-            return nombre
-        }
 
     }
 }

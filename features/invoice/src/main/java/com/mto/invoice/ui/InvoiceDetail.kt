@@ -21,15 +21,12 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.moronlu18.accounts.entity.Item
-import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.invoice.Invoice
 import com.moronlu18.data.invoice.InvoiceStatus
-import com.moronlu18.data.invoice.LineItem
 import com.moronlu18.invoice.base.BaseFragmentDialog
 import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.invoicelist.R
 import com.moronlu18.invoicelist.databinding.FragmentInvoiceDetailBinding
-import com.moronlu18.repository.CustomerProvider
 import com.mto.invoice.adapter.detail.ItemAdapter
 import com.mto.invoice.usecase.InvoiceDetailState
 import com.mto.invoice.usecase.InvoiceDetailViewModel
@@ -43,7 +40,7 @@ class InvoiceDetail : Fragment(), MenuProvider {
     private val viewmodeldetail: InvoiceDetailViewModel by viewModels()
     private val doubleClickDelay = 200L
     private lateinit var invoice: Invoice
-    private var posInvoice: Int = 0
+    private var idInvoice: Int = 0
 
     private val binding get() = _binding!!
 
@@ -67,38 +64,41 @@ class InvoiceDetail : Fragment(), MenuProvider {
         viewmodeldetail.getState().observe(viewLifecycleOwner, Observer {
             when (it) {
                 InvoiceDetailState.OnSuccess -> onSuccess()
+                else -> {}
             }
         })
         parentFragmentManager.setFragmentResultListener("detailkey", this,
             FragmentResultListener { _, result ->
-                posInvoice = result.getInt("detailposition")
-                invoice = viewmodeldetail.getInvoiceByPos(posInvoice)
+                idInvoice = result.getInt("detailposition")
+                invoice = viewmodeldetail.getInvoiceById(idInvoice)
             }
         )
+    }
+    override fun onStart() {
+        super.onStart()
+        viewmodeldetail.onSuccess()
+    }
 
-
+    override fun onResume() {
+        super.onResume()
+        invoice = viewmodeldetail.getInvoiceById(idInvoice)
+        viewmodeldetail.onSuccess()
     }
 
     private fun onSuccess() {
         val formatoFecha =
             DateTimeFormatter.ofPattern("dd/MM/yyyy").withZone(ZoneId.systemDefault())
-
-        fun getCustomerbyID(id: Int): Customer? {
-            return CustomerProvider.CustomerdataSet.find { it.id.value == id }
-        }
-
-        //TODO cambio de de CBO que cambia un customerId por un customer.
-        val customer = getCustomerbyID(invoice.customerId.value)
-
+        val customer = viewmodeldetail.getCustomerById(invoice.customerId)
+        val listaItem = viewmodeldetail.getListItemByInvoiceId(invoice.id)
         viewmodeldetail.let {
             it.user.value = customer?.name
             it.startDate.value = formatoFecha.format(invoice.issuedDate)
             it.endDate.value = formatoFecha.format(invoice.dueDate)
             it.status.value = giveStatusText(invoice.status)
-            it.number.value = viewmodeldetail.giveNumber()
-            it.total.value = viewmodeldetail.giveTotal(invoice.lineItems!!.toMutableList())
+            it.number.value = invoice.number
+            it.total.value = viewmodeldetail.giveTotal(listaItem)
             binding.invoiceDetailTvEstado.setTextColor(setColorEstado(invoice.status.toString()))
-            initReciclerView()
+            initReciclerView(listaItem as MutableList<Item>)
         }
 
     }
@@ -132,38 +132,16 @@ class InvoiceDetail : Fragment(), MenuProvider {
 
     }
 
-
-    private fun initReciclerView() {
+    private fun initReciclerView(lista: MutableList<Item>) {
         val manager = LinearLayoutManager(requireContext())
 
         binding.invoiceDetailRvArticulos.layoutManager = manager
         binding.invoiceDetailRvArticulos.adapter =
-            ItemAdapter(getListLineItem(invoice.lineItems!!.toMutableList())) { item ->
+            ItemAdapter(lista) { item ->
                 onItemSelected(
                     item
                 )
             }
-    }
-
-    /**
-     * Función que obtiene una lista mutable de items dada una lista de objetos line_item
-     */
-    private fun getListLineItem(lista: MutableList<LineItem>): MutableList<Item> {
-        val listaMutable: MutableList<Item> = mutableListOf()
-        var acumulador = 0
-        for (item in lista) {
-            while (acumulador < item.quantity) {
-                listaMutable.add(viewmodeldetail.giveItemById(item.itemId.value))
-                acumulador++;
-            }
-            acumulador = 0
-        }
-        return listaMutable
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     fun onItemSelected(item: Item) {
@@ -195,9 +173,7 @@ class InvoiceDetail : Fragment(), MenuProvider {
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return when (menuItem.itemId) {
-
             R.id.menu_cd_action_delete -> {
-
                 Handler(Looper.getMainLooper()).postDelayed({
                     onDeleteItem()
                 }, doubleClickDelay)
@@ -214,27 +190,21 @@ class InvoiceDetail : Fragment(), MenuProvider {
             else -> false
         }
     }
-    override fun onStart() {
-        super.onStart()
-        viewmodeldetail.onSuccess()
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        invoice = viewmodeldetail.getInvoiceByPos(posInvoice)
-        viewmodeldetail.onSuccess()
-    }
-
+    /**
+     * Función que navega a la interfaz de creación para editar los datos de la factura
+     */
     private fun onEditItem(invoice: Invoice) {
-        val posInvoice = viewmodeldetail.getPosByInvoice(invoice)
+        val idInvoice = invoice.id.value
         val bundle = Bundle();
-        bundle.putInt("position", posInvoice)
+        bundle.putInt("position", idInvoice)
         parentFragmentManager.setFragmentResult("invoicekey", bundle)
         findNavController().navigate(R.id.action_invoiceDetail_to_invoiceCreation)
 
     }
 
+    /**
+     * Función que borra una factura y pide confirmación
+     */
     private fun onDeleteItem() {
         findNavController().navigate(
             InvoiceDetailDirections.actionInvoiceDetailToBaseFragmentDialog2(
@@ -248,13 +218,22 @@ class InvoiceDetail : Fragment(), MenuProvider {
         ) { _, result ->
             val success = result.getBoolean(BaseFragmentDialog.result, false)
             if (success) {
-                viewmodeldetail.deleteInvoice(invoice)
+                //ToDo error por clave foranea
+                //viewmodeldetail.delete(invoice)
                 Handler(Looper.getMainLooper()).postDelayed({
                     findNavController().popBackStack()
                 }, 100)
             }
         }
 
+    }
+
+    /**
+     * Función que libera el binding
+     */
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

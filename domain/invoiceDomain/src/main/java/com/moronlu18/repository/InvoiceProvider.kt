@@ -7,7 +7,6 @@ import com.moronlu18.data.base.ItemId
 import com.moronlu18.data.invoice.LineItem
 import com.moronlu18.data.invoice.Invoice
 import com.moronlu18.data.invoice.InvoiceStatus
-import com.moronlu18.database.InvoiceDatabase
 import com.moronlu18.network.ResourceList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -190,45 +189,11 @@ class InvoiceProvider {
             }
         }
 
-        fun addOrUpdateInvoice(invoice: Invoice, pos: Int?) {
-            if (pos == null) {
-                dataSet.add(invoice)
-            } else {
-                dataSet[pos] = invoice
-            }
-        }
-
-        fun deleteInvoice(pos: Int) {
-            dataSet.removeAt(pos)
-        }
-
-        fun getPosByInvoice(invoice: Invoice): Int {
-            return dataSet.indexOf(invoice)
-        }
-
-        fun getInvoicePos(position: Int): Invoice {
-            return dataSet[position]
-        }
-
         /**
          * Comprueba si el id de cliente está en Invoice
          */
         fun isCustomerReferenceFactura(idCli: Int): Boolean {
             return dataSet.any() { it.customerId.value == idCli }
-        }
-
-        fun obtainsId(): Int {
-            return dataSet.maxByOrNull { it.id.value }?.id?.value ?: 0
-        }
-
-        fun obtainsIdByInvoice(invoice: Invoice): Int {
-            var id = 0
-            for (item in dataSet) {
-                if (item == invoice) {
-                    id = item.id.value
-                }
-            }
-            return id
         }
 
         fun itemReferenceInvoice(idItem: Int): Boolean {
@@ -237,10 +202,6 @@ class InvoiceProvider {
                 item?.any { it.itemId.value == idItem } ?: false
             }
         }
-    }
-
-    fun getInvoiceList(): kotlinx.coroutines.flow.Flow<List<Invoice>> {
-        return InvoiceDatabase.getInstance().invoiceDao().selectAll()
     }
 
 }

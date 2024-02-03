@@ -10,6 +10,7 @@ class InvoiceStatusTypeConverter {
     fun toType(value:Int): InvoiceStatus {
         return enumValues<InvoiceStatus>()[value]
     }
+    @TypeConverter
     fun fromType(value: InvoiceStatus): Int {
         return value.ordinal
     }

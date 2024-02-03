@@ -4,13 +4,14 @@ import android.text.TextUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.moronlu18.accounts.entity.Item
-import com.moronlu18.data.customer.Customer
+import com.moronlu18.data.base.InvoiceId
 import com.moronlu18.data.invoice.Invoice
 import com.moronlu18.data.invoice.LineItem
 import com.moronlu18.repository.CustomerProvider
-import com.moronlu18.repository.InvoiceProvider
-import com.moronlu18.repository.ItemProvider
+import com.moronlu18.repository.InvoiceProviderDB
+import com.moronlu18.repository.ItemProviderBD
 import com.mto.invoice.adapter.creation.ItemCreationAdapter
 import java.time.LocalDate
 import java.time.ZoneOffset
@@ -27,6 +28,11 @@ class InvoiceCreationViewModel: ViewModel() {
     private var isEditor = MutableLiveData<Boolean>()
     private val pattern = Pattern.compile("([0-9]{2,})([/])([0-9]{2,})([/])([0-9]{4,})")
     private var state = MutableLiveData<InvoiceCreationState>()
+    var allItems= ItemProviderBD.getItemList().asLiveData()
+
+    /**
+     * Función que valida todos los parámetros necesarios para crear una factura
+     */
     fun validateAll() {
         when {
             user.value.isNullOrBlank() -> state.value = InvoiceCreationState.CustomerUnspecified
@@ -44,9 +50,16 @@ class InvoiceCreationViewModel: ViewModel() {
         }
     }
 
+    /**
+     * Función que devuelve el state actual
+     */
     fun getState() : LiveData<InvoiceCreationState> {
         return state
     }
+
+    /**
+     * Función que comprueba si las fechas están en el rango correcto
+     */
     fun incorrectRange(startDate:String,endDate:String):Boolean {
         val formato = DateTimeFormatter.ofPattern("dd/MM/yyyy")
         try {
@@ -58,48 +71,80 @@ class InvoiceCreationViewModel: ViewModel() {
         }
     }
 
+    /**
+     * Función que añade una factura a la base de datos
+     */
     fun addRepository(invoice: Invoice) {
-        InvoiceProvider.dataSet.add(invoice)
+        InvoiceProviderDB.insert(invoice)
     }
-    fun editRepository(invoice: Invoice, posInvoice: Int) {
-        InvoiceProvider.addOrUpdateInvoice(invoice, posInvoice)
-    }
-
-    fun getInvoicePos(position:Int): Invoice {
-        return InvoiceProvider.getInvoicePos(position)
-    }
-    fun getCustomerById(id:Int): Customer? {
-        return CustomerProvider.getCustomerbyID(id)
-
-    }
-
+    /**
+     * Función que obtiene el id de la nueva factura que se va a crear
+     */
     fun giveId(): Int {
-        return InvoiceProvider.obtainsId()
+        return InvoiceProviderDB.getNewId()
     }
+    /**
+     * Función que obtiene una factura a través de un id
+     */
+    fun getInvoiceById(id: Int): Invoice {
+        return InvoiceProviderDB.getInvoiceById(id)
+    }
+    /**
+     * Función que obtiene una lista de items en base al id de la factura
+     */
+    fun getListItemByInvoiceId(idInvoice: InvoiceId): List<Item> {
+        return InvoiceProviderDB.getListItem(idInvoice)
+    }
+    /**
+     * Función que obtiene el total de una lista de items de una factura
+     */
+    fun giveTotal(lista: List<Item>): String {
+        val suma = lista.sumOf { it.price }
+        return String.format("%.2f€", suma)
+    }
+
+    /**
+     * Función que actualiza una factura de la base de datos
+     */
+    fun editRepository(invoice: Invoice) {
+        InvoiceProviderDB.update(invoice)
+    }
+
+    /**
+     * Función que crea un objeto lineItem y lo guarda en la base de datos
+     */
+    fun insertLineItem(lineItem: LineItem) {
+        InvoiceProviderDB.insertLineItem(lineItem)
+    }
+
+    /**
+     * Función que obtiene el nombre del cliente dado su id, usado para mostrar su nombre en la interfaz
+     * de creacion, en el botón de la parte superior derecha
+     */
     fun giveNom(): String {
-        return CustomerProvider.getNom(user.value.toString().toInt())
+        val name = InvoiceProviderDB.getCustomerNameById(user.value.toString().toInt())
+        return if (name.isNullOrBlank()) {
+            "Cliente"
+        }else {
+            name
+        }
     }
-    fun giveIdEditor(invoice: Invoice): Int {
-        return InvoiceProvider.obtainsIdByInvoice(invoice)
-    }
-    fun giveItemById(id:Int): Item {
-        return ItemProvider.getItemById(id)!!
-    }
-    fun giveTotal(lista: MutableList<Item>) : String{
-        return ItemProvider.getTotalItems(lista)
-    }
-    fun giveTotalLineItem(lista: MutableList<LineItem>) : String{
-        return ItemProvider.getTotal(lista)
-    }
+    /**
+     * Función que obtiene el numero de la factura para ser creada
+     */
     fun giveNumber():String {
-        return InvoiceProvider.giveNumberInvoice()
+        return InvoiceProviderDB.giveNumberInvoice()
     }
-    fun giveListItem(): MutableList<Item> {
-        return ItemProvider.dataSetItem
-    }
+
+    /**
+     * Función que inicializa la true la variable del modo edición
+     */
     fun setEditorMode(isEditorMode: Boolean) {
         isEditor.value = isEditorMode
     }
+    /**
+     * Función que devuelve el valor de la variable edición
+     */
     fun getEditorMode(): Boolean {
         return isEditor.value ?: false
     }

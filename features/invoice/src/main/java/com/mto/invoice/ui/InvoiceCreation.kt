@@ -14,9 +14,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.moronlu18.accounts.entity.Item
+import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.base.InvoiceId
 import com.moronlu18.data.invoice.LineItem
 import com.moronlu18.data.invoice.Invoice
@@ -25,6 +27,7 @@ import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.invoicelist.R
 import com.moronlu18.invoicelist.databinding.FragmentInvoiceCreationBinding
 import com.mto.invoice.adapter.creation.AddItemCreationAdapter
+import com.mto.invoice.adapter.creation.CreationAdapter
 import com.mto.invoice.adapter.creation.ItemCreationAdapter
 import com.mto.invoice.usecase.InvoiceCreationState
 import com.mto.invoice.usecase.InvoiceCreationViewModel
@@ -45,13 +48,16 @@ class InvoiceCreation : Fragment() {
     private val binding get() = _binding!!
 
     private val viewmodel: InvoiceCreationViewModel by viewModels()
-
+    private lateinit var adapter: CreationAdapter
     private var _ItemSelected: Item? = null;
     private val ItemSelected get() = _ItemSelected!!
 
     private var InvoiceSelected by Delegates.notNull<Int>()
+
     private var itemMutableList: MutableList<Item> = mutableListOf()
     private lateinit var manager2: LinearLayoutManager
+    private lateinit var invoiceEdit: Invoice
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,18 +73,18 @@ class InvoiceCreation : Fragment() {
 
         parentFragmentManager.setFragmentResultListener(
             "invoicekey", this, FragmentResultListener { _, result ->
-                val posFactura: Int = result.getInt("position")
-                InvoiceSelected = posFactura
-                val invoiceEdit = viewmodel.getInvoicePos(posFactura)
+                val idFactura =  result.getInt("position")
+                InvoiceSelected = idFactura
+                invoiceEdit = viewmodel.getInvoiceById(idFactura)
                 viewmodel.setEditorMode(true)
                 binding.invoiceCreationTieCliente.setText(invoiceEdit.customerId.value.toString())
                 val formatoFecha =
                     DateTimeFormatter.ofPattern("dd/MM/yyyy").withZone(ZoneId.systemDefault())
                 binding.invoiceCreationTieFechaEm.setText(formatoFecha.format(invoiceEdit.issuedDate))
                 binding.invoiceCreationTieFechaFin.setText(formatoFecha.format(invoiceEdit.dueDate))
-                itemMutableList = getListLineItem(invoiceEdit.lineItems as MutableList<LineItem>)
+                itemMutableList = viewmodel.getListItemByInvoiceId(invoiceEdit.id) as MutableList<Item>
                 initReciclerView()
-                binding.invoiceCreationTvTotalText.setText(viewmodel.giveTotalLineItem(invoiceEdit.lineItems as MutableList<LineItem>))
+                binding.invoiceCreationTvTotalText.setText(viewmodel.giveTotal(itemMutableList as List<Item>))
             }
         )
         return binding.root;
@@ -97,7 +103,7 @@ class InvoiceCreation : Fragment() {
         viewmodel.getState().observe(viewLifecycleOwner, Observer {
             when (it) {
                 InvoiceCreationState.CustomerUnspecified -> setCustomerUnspecified()
-                InvoiceCreationState.AtLeastOneItem -> setAtLeastOneItem()
+                InvoiceCreationState.AtLeastOneItem -> setAtLeastOneItem(view)
                 InvoiceCreationState.CustomerNoExists -> setCustomerNoExists()
                 InvoiceCreationState.StartDateEmptyError -> setStartDateEmpty()
                 InvoiceCreationState.EndDateEmptyError -> setEndDateEmpty()
@@ -109,6 +115,10 @@ class InvoiceCreation : Fragment() {
                 else -> {}
             }
         })
+        initRecyclerItems()
+        viewmodel.allItems.observe(viewLifecycleOwner) {
+            it.let { adapter.submitList(it) }
+        }
 
 
         binding.invoiceCreationBtnArticulo.setOnClickListener {
@@ -123,6 +133,20 @@ class InvoiceCreation : Fragment() {
         }
 
         initReciclerView()
+    }
+
+    /**
+     * Función que inicializa el adapter de items disponibles, que están en la base de datos
+     * del proyecto
+     */
+    fun initRecyclerItems() {
+        adapter = CreationAdapter (
+            onClickListener = { item -> onItemSelected(item) },
+            )
+        val manager = LinearLayoutManager(requireContext())
+        binding.invoiceCreationRvDisponibles.layoutManager = manager
+        binding.invoiceCreationRvDisponibles.adapter = adapter
+
     }
 
     private fun parse(num: Int): InvoiceStatus {
@@ -141,35 +165,45 @@ class InvoiceCreation : Fragment() {
         val stat = binding.invoiceCreationSpEstado.selectedItemPosition
         val issued = parseStringToInstant(binding.invoiceCreationTieFechaEm.text.toString())
         val due = parseStringToInstant(binding.invoiceCreationTieFechaFin.text.toString())
+        lateinit var lineItems: List<LineItem>
         var idInvoice by Delegates.notNull<Int>()
         if (viewmodel.getEditorMode()) {
-            idInvoice = viewmodel.giveIdEditor(viewmodel.getInvoicePos(InvoiceSelected))
+            idInvoice = invoiceEdit.id.value
+            lineItems = createListLineItems(idInvoice, itemMutableList)
             val editInvoice = Invoice(
                 id = InvoiceId(idInvoice),
-                customerId = viewmodel.getCustomerById(customId)!!.id,
-                number = viewmodel.giveNumber(),
+                customerId = CustomerId(customId),
+                number = invoiceEdit.number,
                 status = parse(stat),
                 issuedDate = issued,
                 dueDate = due,
                 lineItems = createListLineItems(idInvoice, itemMutableList)
             )
-            viewmodel.editRepository(editInvoice, InvoiceSelected)
+            viewmodel.editRepository(editInvoice)
+            addLineItems(lineItems)
         } else {
             idInvoice = viewmodel.giveId() + 1
+            lineItems = createListLineItems(idInvoice, itemMutableList)
             val invoice = Invoice(
                 id = InvoiceId(idInvoice),
-                customerId = viewmodel.getCustomerById(customId)!!.id,
+                customerId = CustomerId(customId),
                 number = viewmodel.giveNumber(),
                 status = parse(stat),
                 issuedDate = issued,
                 dueDate = due,
                 lineItems = createListLineItems(idInvoice, itemMutableList)
-
             )
             viewmodel.addRepository(invoice)
+            addLineItems(lineItems)
         }
 
         findNavController().popBackStack()
+    }
+
+    private fun addLineItems(lista: List<LineItem>) {
+        for (item in lista) {
+            viewmodel.insertLineItem(item)
+        }
     }
 
     /**
@@ -188,9 +222,9 @@ class InvoiceCreation : Fragment() {
                     itemId = item.id,
                     quantity = 1,
                     price = item.price,
-                    iva = 1
+                    iva = item.vat.iva
                 )
-                lista.add(creacion);
+                lista.add(creacion)
             }
             return lista
         } else {
@@ -201,7 +235,7 @@ class InvoiceCreation : Fragment() {
                     itemId = item.id,
                     quantity = 1,
                     price = item.price,
-                    iva = 1
+                    iva = item.vat.iva
                 )
                 for (itemMutable in itemMutableList.sortedBy { it.id }) {
                     if (item.id == itemMutable.id) {
@@ -338,21 +372,6 @@ class InvoiceCreation : Fragment() {
             visibility = View.GONE
         }
     }
-    /**
-     * Función que obtiene una lista mutable de items dada una lista de objetos line_item
-     */
-    private fun getListLineItem(lista: MutableList<LineItem>): MutableList<Item> {
-        val listaMutable: MutableList<Item> = mutableListOf()
-        var acumulador = 0
-        for (item in lista) {
-            while (acumulador < item.quantity) {
-                listaMutable.add(viewmodel.giveItemById(item.itemId.value))
-                acumulador++;
-            }
-            acumulador = 0
-        }
-        return listaMutable
-    }
 
     private fun initReciclerView() {
         if (viewmodel.getEditorMode()) {
@@ -369,15 +388,6 @@ class InvoiceCreation : Fragment() {
                     item
                 )
             }
-        } else {
-            val manager = LinearLayoutManager(requireContext())
-            binding.invoiceCreationRvDisponibles.layoutManager = manager
-            binding.invoiceCreationRvDisponibles.adapter =
-                ItemCreationAdapter(viewmodel.giveListItem()) { item ->
-                    onItemSelected(
-                        item
-                    )
-                }
         }
     }
 
@@ -419,8 +429,9 @@ class InvoiceCreation : Fragment() {
 
     }
 
-    private fun setAtLeastOneItem() {
-        binding.invoiceCreationRvErrorAnadidos.text = getString(R.string.errAtLeastOneItem)
+    private fun setAtLeastOneItem(view: View) {
+        Snackbar.make(view,getString(R.string.errAtLeastOneItem), Snackbar.LENGTH_LONG)
+            .setAction("Action", null).show()
     }
 
     private fun setCustomerNoExists() {
@@ -476,7 +487,6 @@ class InvoiceCreation : Fragment() {
 
             }
         }
-
     }
 
     inner class ListenerDates : TextWatcher {
