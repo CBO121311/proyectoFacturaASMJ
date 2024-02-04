@@ -219,7 +219,7 @@ class InvoiceDetail : Fragment(), MenuProvider {
             val success = result.getBoolean(BaseFragmentDialog.result, false)
             if (success) {
                 //ToDo error por clave foranea
-                //viewmodeldetail.delete(invoice)
+                viewmodeldetail.delete(invoice)
                 Handler(Looper.getMainLooper()).postDelayed({
                     findNavController().popBackStack()
                 }, 100)

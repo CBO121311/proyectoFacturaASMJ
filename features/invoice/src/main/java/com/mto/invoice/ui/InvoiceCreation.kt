@@ -180,6 +180,7 @@ class InvoiceCreation : Fragment() {
                 lineItems = createListLineItems(idInvoice, itemMutableList)
             )
             viewmodel.editRepository(editInvoice)
+            viewmodel.deleteAndAddLineItems(invoiceEdit.id)
             addLineItems(lineItems)
         } else {
             idInvoice = viewmodel.giveId() + 1
@@ -200,6 +201,9 @@ class InvoiceCreation : Fragment() {
         findNavController().popBackStack()
     }
 
+    /**
+     * Función que añade la lista de line_items mediante la llamada a la funcion del viewmodel
+     */
     private fun addLineItems(lista: List<LineItem>) {
         for (item in lista) {
             viewmodel.insertLineItem(item)

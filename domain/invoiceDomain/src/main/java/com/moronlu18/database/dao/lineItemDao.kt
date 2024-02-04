@@ -18,4 +18,8 @@ interface lineItemDao {
     @Query("SELECT name FROM customer where id = :id")
     fun getCustomerNameById(id:Int): String
 
+    @Query("SELECT * FROM line_item where invoiceId = :id")
+    fun getListItemsById(id:Int): List<LineItem>
+
+
 }

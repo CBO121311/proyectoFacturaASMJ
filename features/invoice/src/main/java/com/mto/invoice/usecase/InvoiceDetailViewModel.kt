@@ -10,6 +10,7 @@ import com.moronlu18.data.base.InvoiceId
 import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.invoice.Invoice
 import com.moronlu18.repository.InvoiceProviderDB
+import com.moronlu18.repository.LineItemProviderDB
 import com.mto.invoice.adapter.detail.ItemAdapter
 
 class InvoiceDetailViewModel : ViewModel() {
@@ -54,9 +55,15 @@ class InvoiceDetailViewModel : ViewModel() {
     }
 
     /**
-     * Función que borra una factura
+     * Función que borra de la base de datos, en primer lugar, de la tabla line_item las columnas
+     * relacionadas con el id de la factura y en segundo lugar la factura, en este orden para
+     * evitar errores de 'foreign key'
      */
     fun delete(invoice: Invoice) {
+        val listaItems = LineItemProviderDB.getListItemsById(invoice.id.value)
+        for (lineitem in listaItems) {
+            LineItemProviderDB.delete(lineitem)
+        }
         InvoiceProviderDB.delete(invoice)
     }
 

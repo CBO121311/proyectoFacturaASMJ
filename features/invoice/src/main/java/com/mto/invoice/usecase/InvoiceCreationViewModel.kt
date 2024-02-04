@@ -12,6 +12,7 @@ import com.moronlu18.data.invoice.LineItem
 import com.moronlu18.repository.CustomerProvider
 import com.moronlu18.repository.InvoiceProviderDB
 import com.moronlu18.repository.ItemProviderBD
+import com.moronlu18.repository.LineItemProviderDB
 import com.mto.invoice.adapter.creation.ItemCreationAdapter
 import java.time.LocalDate
 import java.time.ZoneOffset
@@ -114,7 +115,18 @@ class InvoiceCreationViewModel: ViewModel() {
      * Función que crea un objeto lineItem y lo guarda en la base de datos
      */
     fun insertLineItem(lineItem: LineItem) {
-        InvoiceProviderDB.insertLineItem(lineItem)
+        LineItemProviderDB.insert(lineItem)
+    }
+
+    /**
+     * Función que borra la lista de line_items antigua y guarda los datos de la lista del modo
+     * edición en la base de datos
+     */
+    fun deleteAndAddLineItems(invoiceId: InvoiceId) {
+        val lista = LineItemProviderDB.getListItemsById(invoiceId.value)
+        for (lineitem in lista) {
+           LineItemProviderDB.delete(lineitem)
+        }
     }
 
     /**

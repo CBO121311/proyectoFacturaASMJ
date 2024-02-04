@@ -6,10 +6,10 @@ import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.base.InvoiceId
 import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.invoice.Invoice
-import com.moronlu18.data.invoice.LineItem
 import com.moronlu18.database.InvoiceDatabase
 import com.moronlu18.network.Resource
 import kotlinx.coroutines.flow.Flow
+import java.lang.NullPointerException
 import java.util.Calendar
 import kotlin.random.Random
 
@@ -24,15 +24,6 @@ class InvoiceProviderDB {
             return Resource.Success(invoice)
         }
 
-        fun insertLineItem(lineItem: LineItem): Resource {
-            try {
-                InvoiceDatabase.getInstance()?.lineItemDao()?.insert(lineItem)
-            } catch (e: SQLiteException) {
-                return Resource.Error(e)
-            }
-            return Resource.Success(lineItem)
-        }
-
         fun update(invoice: Invoice): Resource {
             try {
 
@@ -45,35 +36,46 @@ class InvoiceProviderDB {
             return Resource.Success(invoice)
         }
 
-        fun getInvoiceListFlow(): Flow<List<Invoice>> {
-            return InvoiceDatabase.getInstance().invoiceDao().selectAll()
-        }
         fun delete(invoice: Invoice) {
             InvoiceDatabase.getInstance().invoiceDao().delete(invoice)
         }
-        fun getInvoiceById(id:Int): Invoice {
+
+        fun getInvoiceListFlow(): Flow<List<Invoice>> {
+            return InvoiceDatabase.getInstance().invoiceDao().selectAll()
+        }
+
+        fun getInvoiceById(id: Int): Invoice {
             return InvoiceDatabase.getInstance().invoiceDao().getInvoiceById(id)!!
 
         }
+
         fun getCustomerById(customerId: CustomerId): Customer {
             return InvoiceDatabase.getInstance().customerDao().getCustomerById(customerId)!!
 
         }
+
         fun getNewId(): Int {
-            return InvoiceDatabase.getInstance().invoiceDao().getLastInvoiceId()!!
+            return try {
+                return InvoiceDatabase.getInstance().invoiceDao().getLastInvoiceId()!!
+            } catch (e: NullPointerException) {
+                0
+            }
         }
+
         fun getListItem(invoiceId: InvoiceId): List<Item> {
             return InvoiceDatabase.getInstance().invoiceDao().getItemListById(invoiceId.value)!!
         }
 
-        fun getCustomerNameById(id:Int): String? {
+        fun getCustomerNameById(id: Int): String? {
             return InvoiceDatabase.getInstance().invoiceDao().getCustomerNameById(id)
 
         }
+
         fun getListNumber(): List<String>? {
             return InvoiceDatabase.getInstance().invoiceDao().getListNumber()
 
         }
+
         /**
          * Función que genera un string aleatorio para el número de la factura
          * que comienza por los cuatro digitos del año actual
@@ -101,7 +103,6 @@ class InvoiceProviderDB {
             return numberInvoice
 
         }
-
 
     }
 }
