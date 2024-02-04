@@ -1,10 +1,12 @@
 package com.moronlu18.data.task
 
+import android.graphics.Bitmap
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
+import com.moronlu18.data.account.Email
 import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.base.TaskId
 import com.moronlu18.data.converter.CustomerIdTypeConverter
@@ -32,15 +34,43 @@ data class Task(
     @TypeConverters(TaskIdTypeConverter::class)
     val id: @RawValue TaskId,
     @TypeConverters(CustomerIdTypeConverter::class)
-    val customerId: @RawValue CustomerId,
-    val nomTask: String,
+    var customerId: @RawValue CustomerId,
+    var nomTask: String,
     @TypeConverters(TaskTypeConverter::class)
-    val typeTask: TypeTask,
+    var typeTask: TypeTask,
     @TypeConverters(TaskStatusConverter::class)
-    val taskStatus: TaskStatus,
-    val descTask: String? = null,
+    var taskStatus: TaskStatus,
+    var descTask: String? = null,
     @TypeConverters(InstantConverter::class)
-    val dateCreation: Instant,
+    var dateCreation: Instant,
     @TypeConverters(InstantConverter::class)
-    val dateFinalization: Instant
-) : Parcelable
+    var dateFinalization: Instant
+) : Parcelable, Comparable<Task> {
+    override fun compareTo(other: Task): Int {
+        return nomTask.lowercase().compareTo(other.nomTask.lowercase())
+    }
+
+    companion object {
+        fun create(
+            id: Int,
+            customerId: CustomerId,
+            nameTask: String,
+            typeTask: TypeTask,
+            taskStatus: TaskStatus,
+            descTask: String?,
+            dateCreation: Instant,
+            dateFinalization: Instant
+        ): Task {
+            return Task(
+                id = TaskId(id),
+                customerId = customerId,
+                nomTask = nameTask,
+                typeTask = typeTask,
+                taskStatus = taskStatus,
+                descTask = descTask,
+                dateCreation = dateCreation,
+                dateFinalization = dateFinalization
+            )
+        }
+    }
+}

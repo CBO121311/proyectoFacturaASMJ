@@ -32,7 +32,6 @@ class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
     private val binding get() = _binding!!
     private val viewModel: TaskListViewModel by viewModels()
     private lateinit var taskAdapter: TaskAdapter
-    private var firstCharge = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,8 +57,12 @@ class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
             when (it) {
                 is TaskListState.Loading -> showProgressBar(it.value)
                 TaskListState.NoData -> showNoData()
-                is TaskListState.Success -> onSuccess(it.dataset)
+                is TaskListState.Success -> onSuccess()
             }
+        }
+
+        viewModel.allTask.observe(viewLifecycleOwner){
+            it.let { taskAdapter.submitList(it) }
         }
     }
 
@@ -71,33 +74,29 @@ class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
         binding.taskListRecyclerTasks.adapter = taskAdapter
     }
 
-    override fun taskClick(position: Int) {
-        navigateDetailTask(position)
+    override fun taskClick(task: Task) {
+        navigateDetailTask(task)
     }
 
-    override fun taskOnLongClick(view: View, position: Int, task: Task) {
-        showPopUpMenu(view, position, task)
+    override fun taskOnLongClick(view: View, task: Task) {
+        showPopUpMenu(view, task)
     }
 
-    private fun onSuccess(dataset: ArrayList<Task>) {
+    private fun onSuccess() {
         binding.taskListRecyclerTasks.visibility = View.VISIBLE
         binding.taskListLlEmpty.visibility = View.GONE
         binding.taskListLlEmptyImg.cancelAnimation()
-        taskAdapter.update(dataset)
+        //taskAdapter.update(dataset)
     }
 
-    private fun navigateDetailTask(position: Int){
-        val bundle = Bundle()
-        bundle.putInt("detailposition", position)
-        parentFragmentManager.setFragmentResult("detailkey", bundle)
-        findNavController().navigate(R.id.action_taskList_to_taskDetail)
+    private fun navigateDetailTask(task: Task){
+        findNavController().navigate(
+            TaskListDirections.actionTaskListToTaskDetail(task)
+        )
     }
 
-    private fun onEditItem(position: Int){
-        val bundle = Bundle()
-        bundle.putInt("taskposition", position)
-        parentFragmentManager.setFragmentResult("taskkey", bundle)
-        findNavController().navigate(R.id.action_taskList_to_taskCreation)
+    private fun onEditItem(task: Task){
+        findNavController().navigate(TaskListDirections.actionTaskListToTaskCreation(task))
     }
 
     private fun onDeletedItem(task: Task) {
@@ -115,13 +114,12 @@ class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
         ) { _, result ->
             val success = result.getBoolean(BaseFragmentDialog.result, false)
             if (success) {
-                taskAdapter.deleteTask(task)
-                viewModel.getTaskListNoLoading()
+                viewModel.deleteTask(task)
             }
         }
     }
 
-    private fun showPopUpMenu(view: View, position: Int, task: Task){
+    private fun showPopUpMenu(view: View, task: Task){
         val popupMenu = PopupMenu(requireContext(), view, Gravity.END)
 
         popupMenu.inflate(R.menu.menu_pop)
@@ -131,12 +129,12 @@ class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
             when(it.itemId){
 
                 R.id.menu_see -> {
-                    navigateDetailTask(position)
+                    navigateDetailTask(task)
                     true
                 }
 
                 R.id.menu_edit -> {
-                    onEditItem(position)
+                    onEditItem(task)
                     true
                 }
 
@@ -153,7 +151,6 @@ class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
             taskAdapter.clearSelection()
         }
 
-        //popupMenu.setForceShowIcon(true)
         popupMenu.show()
     }
 
@@ -165,6 +162,7 @@ class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
         return when (menuItem.itemId) {
             R.id.menu_action_refresh -> {
                 viewModel.getTaskList()
+                taskAdapter.sortId()
                 true
             }
 
@@ -224,12 +222,7 @@ class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
 
     override fun onStart() {
         super.onStart()
-        if (firstCharge){
-            viewModel.getTaskList()
-            firstCharge = false
-        } else {
-            viewModel.getTaskListNoLoading()
-        }
+        viewModel.getTaskList()
     }
 
 }

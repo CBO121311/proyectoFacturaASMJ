@@ -91,31 +91,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/task_creation_img_top" />
 
-        <Button
-            android:id="@+id/task_creation_button_date_creation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:clickable="false"
-            android:text="@={viewmodeltaskcreation.dateCreation}"
-            app:layout_constraintEnd_toStartOf="@+id/guideline5"
-            app:layout_constraintHorizontal_bias="0.41"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/task_creation_img_top" />
-
-        <Button
-            android:id="@+id/task_creation_button_date_end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_weight="1"
-            android:clickable="false"
-            android:text="@={viewmodeltaskcreation.dateEnd}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline5"
-            app:layout_constraintTop_toBottomOf="@+id/task_creation_img_top" />
-
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline4"
             android:layout_width="wrap_content"
@@ -156,13 +131,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/task_creation_text_description_margin_start"
-            android:layout_marginTop="8dp"
             android:text="@string/task_creation_txv_descripcion"
             android:textColor="@color/md_theme_dark_outlineVariant"
             app:layout_constraintBottom_toTopOf="@+id/task_creation_til_description"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/task_creation_button_date_creation"
-            app:layout_constraintVertical_bias="0.51" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Spinner
             android:id="@+id/task_creation_type_task_list"
@@ -246,10 +218,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
             android:clickable="true"
-            app:layout_constraintBottom_toBottomOf="@+id/task_creation_button_date_creation"
-            app:layout_constraintEnd_toStartOf="@+id/task_creation_button_date_creation"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/task_creation_img_top"
             app:srcCompat="@drawable/ic_calendar" />
@@ -258,31 +227,57 @@
             android:id="@+id/task_creation_img_calendar_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             android:clickable="true"
-            app:layout_constraintBottom_toBottomOf="@+id/task_creation_button_date_end"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/task_creation_button_date_end"
-            app:layout_constraintTop_toTopOf="@+id/task_creation_button_date_end"
+            app:layout_constraintStart_toEndOf="@+id/task_creation_date_end_txt"
+            app:layout_constraintTop_toBottomOf="@+id/task_creation_date_end_txt"
             app:srcCompat="@drawable/ic_calendar" />
 
         <TextView
             android:id="@+id/task_creation_date_creation_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="65dp"
+            android:layout_marginTop="40dp"
             android:text="@string/task_creation_date_creation_txt"
-            app:layout_constraintBottom_toTopOf="@+id/task_creation_button_date_creation"
-            app:layout_constraintEnd_toEndOf="@+id/task_creation_button_date_creation"
-            app:layout_constraintStart_toStartOf="@+id/task_creation_button_date_creation" />
+            app:layout_constraintBottom_toTopOf="@+id/task_creation_img_calendar_creation"
+            app:layout_constraintStart_toStartOf="@+id/task_creation_img_top"
+            app:layout_constraintTop_toBottomOf="@+id/task_creation_task_til_name" />
 
         <TextView
             android:id="@+id/task_creation_date_end_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="65dp"
+            android:layout_marginBottom="50dp"
             android:text="@string/task_creation_date_fin_txt"
-            app:layout_constraintBottom_toTopOf="@+id/task_creation_button_date_end"
-            app:layout_constraintEnd_toEndOf="@+id/task_creation_button_date_end"
-            app:layout_constraintStart_toStartOf="@+id/task_creation_button_date_end" />
+            app:layout_constraintBottom_toTopOf="@+id/task_creation_til_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/task_creation_task_til_name" />
+
+        <TextView
+            android:id="@+id/task_creation_date_creation_txt_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/task_creation_img_calendar_creation"
+            app:layout_constraintEnd_toEndOf="@+id/task_creation_date_creation_txt"
+            app:layout_constraintStart_toStartOf="@+id/task_creation_date_creation_txt"
+            app:layout_constraintTop_toBottomOf="@+id/task_creation_date_creation_txt" />
+
+        <TextView
+            android:id="@+id/task_creation_date_end_txt_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="10dp"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="@+id/task_creation_img_calendar_end"
+            app:layout_constraintEnd_toEndOf="@+id/task_creation_date_end_txt"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/task_creation_date_end_txt"
+            app:layout_constraintTop_toBottomOf="@+id/task_creation_date_end_txt"
+            app:layout_constraintVertical_bias="1.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

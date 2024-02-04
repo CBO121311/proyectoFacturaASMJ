@@ -11,43 +11,63 @@
         android:label="@string/title_list_task"
         tools:layout="@layout/fragment_task_list" >
         <action
-            android:id="@+id/action_taskList_to_taskDetail"
-            app:destination="@id/taskDetail"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right" />
-        <action
             android:id="@+id/action_taskList_to_taskCreation"
-            app:destination="@id/taskCreation"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right" />
+            app:destination="@id/taskCreation" />
+        <action
+            android:id="@+id/action_taskList_to_taskDetail"
+            app:destination="@id/taskDetail" />
         <action
             android:id="@+id/action_taskList_to_baseFragmentDialog2"
             app:destination="@id/baseFragmentDialog2" />
+        <action
+            android:id="@+id/action_taskList_to_baseFragmentDialogWarning"
+            app:destination="@id/baseFragmentDialogWarning" />
         <action
             android:id="@+id/action_taskList_to_fragmentProgressDialogKiwi"
             app:destination="@id/fragmentProgressDialogKiwi" />
     </fragment>
     <fragment
+        android:id="@+id/taskCreation"
+        android:name="com.sergiogv98.tasklist.ui.TaskCreation"
+        android:label="TaskCreation" >
+        <argument
+            android:name="tasknav"
+            app:argType="com.moronlu18.data.task.Task"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
         android:id="@+id/taskDetail"
         android:name="com.sergiogv98.tasklist.ui.TaskDetail"
-        android:label="@string/title_task_detail"
-        tools:layout="@layout/fragment_task_detail" >
+        android:label="TaskDetail" >
+        <argument
+            android:name="tasknav"
+            app:argType="com.moronlu18.data.task.Task" />
+        <action
+            android:id="@+id/action_taskDetail_to_taskCreation"
+            app:destination="@id/taskCreation" />
         <action
             android:id="@+id/action_taskDetail_to_baseFragmentDialog2"
             app:destination="@id/baseFragmentDialog2" />
         <action
-            android:id="@+id/action_taskDetail_to_taskCreation"
-            app:destination="@id/taskCreation" />
+            android:id="@+id/action_taskDetail_to_baseFragmentDialogWarning"
+            app:destination="@id/baseFragmentDialogWarning" />
     </fragment>
-    <fragment
-        android:id="@+id/taskCreation"
-        android:name="com.sergiogv98.tasklist.ui.TaskCreation"
-        android:label="@string/title_task_creation"
-        tools:layout="@layout/fragment_task_creation" />
     <dialog
         android:id="@+id/baseFragmentDialog2"
         android:name="com.moronlu18.invoice.base.BaseFragmentDialog"
         android:label="BaseFragmentDialog" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="message"
+            app:argType="string" />
+    </dialog>
+    <dialog
+        android:id="@+id/baseFragmentDialogWarning"
+        android:name="com.moronlu18.invoice.base.BaseFragmentDialogWarning"
+        android:label="BaseFragmentDialogWarning" >
         <argument
             android:name="title"
             app:argType="string" />

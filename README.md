@@ -2,6 +2,11 @@ Invoice versión 3, es la aplicación que se está realizando de manera modular 
 
  ## Historial de versiones
  - ------------------------
+### V3.9.5 (04/02/2024)
+ *Escrito por SergioGV98*
+ - Se ha implementado una actualización en las funcionalidades de TaskList, TaskCreate y TaskDetail. Ahora, estas funciones obtienen de manera completa todos los datos necesarios directamente desde la base de datos de Invoice.
+
+ - ------------------------
 ### V3.8.2 (04/02/2024)
  *Escrito por mateotamayoo*
  - Modificaciones necesarias para que el módulo pueda añadir y editar usando los datos de la tabla(borrado ha sido desactivado temporalmente)

@@ -10,19 +10,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
-import com.moronlu18.data.base.TaskId
+import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.task.Task
 import com.moronlu18.data.task.TaskStatus
 import com.moronlu18.data.task.TypeTask
 import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.tasklist.databinding.FragmentTaskCreationBinding
 import com.sergiogv98.usecase.TaskCreationViewModel
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.LocalDate
@@ -38,7 +41,7 @@ class TaskCreation : Fragment() {
     private val binding get() = _binding!!
     private val calendar = Calendar.getInstance()
     private val viewModel: TaskCreationViewModel by viewModels()
-    private var editTaskPos = -1
+    private val args: TaskCreationArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +51,6 @@ class TaskCreation : Fragment() {
         binding.viewmodeltaskcreation = this.viewModel
         binding.lifecycleOwner = this
         viewModel.setEditorMode(false)
-        clientDropDownInit()
 
         binding.autoCompleteTxt.addTextChangedListener(GeneralTextWatcher(binding.taskCreationTaskDropdown))
         binding.taskCreationTxvTaskName.addTextChangedListener(GeneralTextWatcher(binding.taskCreationTaskTilName))
@@ -60,25 +62,17 @@ class TaskCreation : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setUpFab()
-        parentFragmentManager.setFragmentResultListener(
-            "taskkey", this
-        ) { _, result ->
-            val posTask: Int = result.getInt("taskposition")
-            val taskEdit = viewModel.taskGive(posTask)
-            viewModel.setEditorMode(true)
-            setTaskContent(taskEdit)
-            Log.d("taskkey", taskEdit.toString())
+
+        viewLifecycleOwner.lifecycleScope.launch {
             clientDropDownInit()
-            editTaskPos = posTask
-            viewModel.prevTask = taskEdit
         }
 
         binding.taskCreationImgCalendarCreation.setOnClickListener {
-            showDatePicker(binding.taskCreationButtonDateCreation)
+            showDatePicker(binding.taskCreationDateCreationTxtShow)
         }
 
         binding.taskCreationImgCalendarEnd.setOnClickListener {
-            showDatePicker(binding.taskCreationButtonDateEnd)
+            showDatePicker(binding.taskCreationDateEndTxtShow)
         }
 
         binding.taskCreationButtonAdd.setOnClickListener {
@@ -95,26 +89,32 @@ class TaskCreation : Fragment() {
             }
         }
 
+        val task: Task? = args.tasknav
+
+        if(task != null){
+            setTaskContent(task)
+        }
+
     }
 
     private fun setTaskContent(task: Task) {
-        binding.autoCompleteTxt.setText(viewModel.giveClientName(task.customerId.value as Int))
+        binding.autoCompleteTxt.setText(viewModel.giveClientName(task.customerId.value))
         binding.taskCreationTxvTaskName.setText(task.nomTask)
-        binding.taskCreationButtonDateCreation.text = processDateString(task.dateCreation)
-        binding.taskCreationButtonDateEnd.text = processDateString(task.dateFinalization)
+        binding.taskCreationDateCreationTxtShow.text = processDateString(task.dateCreation)
+        binding.taskCreationDateEndTxtShow.text = processDateString(task.dateFinalization)
         binding.taskCreationTxvDescription.setText(task.descTask)
         binding.taskCreationTypeTaskList.setSelection(returnTaskType(task))
         setTaskStatusInRadioGroup(task)
     }
 
-    private fun showDatePicker(button: Button) {
+    private fun showDatePicker(text: TextView) {
         val datePickerDialog = DatePickerDialog(
             requireContext(), { _, year: Int, monthOfYear: Int, dayOfMonth: Int ->
                 val selectedDate = Calendar.getInstance()
                 selectedDate.set(year, monthOfYear, dayOfMonth)
                 val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                 val formattedDate = dateFormat.format(selectedDate.time)
-                button.text = formattedDate
+                text.text = formattedDate
             },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
@@ -125,51 +125,60 @@ class TaskCreation : Fragment() {
 
     }
 
-    private fun clientDropDownInit(){
-        binding.autoCompleteTxt.setAdapter(
-            ArrayAdapter(
-                requireContext(),
-                R.layout.simple_dropdown_item_1line,
-                viewModel.giveListCustomer()
+    private suspend fun clientDropDownInit() {
+        try {
+            val customerList = viewModel.giveListCustomer()
+            Log.i("TaskCreationFragment", "Customer List: $customerList")
+
+            binding.autoCompleteTxt.setAdapter(
+                ArrayAdapter(
+                    requireContext(),
+                    R.layout.simple_dropdown_item_1line,
+                    customerList
+                )
             )
-        )
+        } catch (e: Exception) {
+            Log.e("TaskCreationFragment", "Error initializing client dropdown", e)
+        }
     }
 
     private fun onSuccessCreate() {
-        val selectedClientName = binding.autoCompleteTxt.text.toString()
-        val selectedClient = viewModel.taskGiveCustomerId(selectedClientName)
-        val nameTask = binding.taskCreationTxvTaskName.text.toString()
-        val description = binding.taskCreationTxvDescription.text.toString()
-        val dateCreation = processDate(binding.taskCreationButtonDateCreation.text.toString())
-        val dateEnd = processDate(binding.taskCreationButtonDateEnd.text.toString())
+        val task: Task? = args.tasknav
 
-        if (viewModel.getEditorMode()) {
-            val updateTask = Task(
-                id = TaskId(editTaskPos),
-                customerId = selectedClient!!.id,
-                nomTask = nameTask,
-                typeTask = taskTypeChoose(),
-                taskStatus = taskStatusChoose(),
-                descTask = description,
-                dateCreation = dateCreation,
-                dateFinalization = dateEnd
-            )
-            viewModel.updateTask(updateTask, editTaskPos)
+        val selectedClientName = binding.autoCompleteTxt.text.toString()
+        val selectedClientPosition = (binding.autoCompleteTxt.adapter as? ArrayAdapter<String>)?.getPosition(selectedClientName)!! +1
+
+        if (task != null) {
+            // Actualizar tarea existente
+            task.nomTask = binding.taskCreationTxvTaskName.text.toString()
+            task.customerId = CustomerId(selectedClientPosition ?: -1)
+            task.descTask = binding.taskCreationTxvDescription.text.toString()
+            task.taskStatus = taskStatusChoose()
+            task.typeTask = taskTypeChoose()
+            task.dateCreation = processDate(binding.taskCreationDateCreationTxtShow.text.toString())
+            task.dateFinalization = processDate(binding.taskCreationDateEndTxtShow.text.toString())
+
+            viewModel.updateTask(task)
         } else {
-            val task = Task(
-                id = TaskId(viewModel.taskGiveId()),
-                customerId = selectedClient!!.id,
-                nomTask = nameTask,
-                typeTask = taskTypeChoose(),
+            // Crear nueva tarea
+            val id = viewModel.getNextTaskId()
+            val newTask = Task.create(
+                id = id,
+                customerId = CustomerId(selectedClientPosition ?: -1),
+                nameTask = binding.taskCreationTxvTaskName.text.toString(),
+                descTask = binding.taskCreationTxvDescription.text.toString(),
                 taskStatus = taskStatusChoose(),
-                descTask = description,
-                dateCreation = dateCreation,
-                dateFinalization = dateEnd
+                typeTask = taskTypeChoose(),
+                dateCreation = processDate(binding.taskCreationDateCreationTxtShow.text.toString()),
+                dateFinalization = processDate(binding.taskCreationDateEndTxtShow.text.toString())
             )
-            viewModel.addTaskRepository(task)
+
+            viewModel.addTaskRepository(newTask)
         }
+
         findNavController().popBackStack()
     }
+
 
     private fun processDate(dateString: String): Instant {
         val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
@@ -228,6 +237,7 @@ class TaskCreation : Fragment() {
             TaskStatus.VENCIDA -> binding.taskCreationRdbVencida.id
             TaskStatus.FINALIZADA -> binding.taskCreationRdbFinalizada.id
         }
+
         statusRadioGroup.check(radioButtonId)
     }
 

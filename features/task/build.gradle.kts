@@ -55,4 +55,5 @@ dependencies {
 
     //Librería para usar el asLiveData en el viewmodel
     implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
+
 }

@@ -1,14 +1,18 @@
 package com.sergiogv98.usecase
 
 import android.text.TextUtils
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.task.Task
-import com.moronlu18.repository.CustomerProvider
-import com.moronlu18.repository.TaskProvider
+import com.moronlu18.repository.CustomerProviderDB
+import com.moronlu18.repository.TaskRepositoryBD
 import com.sergiogv98.tasklist.ui.TaskCreationState
+import kotlinx.coroutines.launch
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneOffset
@@ -18,9 +22,11 @@ class TaskCreationViewModel : ViewModel() {
 
     var taskName = MutableLiveData<String>()
     var customerName = MutableLiveData<String>()
-    var dateCreation = MutableLiveData<String>()
-    var dateEnd = MutableLiveData<String>()
-    var prevTask: Task? = null
+    private var dateCreation = MutableLiveData<String>()
+    private var dateEnd = MutableLiveData<String>()
+
+    private var taskRepositoryBD = TaskRepositoryBD()
+    private var customerProviderDB = CustomerProviderDB()
 
     private var state = MutableLiveData<TaskCreationState>()
     private var isEditor = MutableLiveData<Boolean>()
@@ -43,40 +49,65 @@ class TaskCreationViewModel : ViewModel() {
         return state
     }
 
+
     fun taskGiveId(): Int {
-        return (TaskProvider.taskDataSet.size + 1).coerceAtLeast(1)
+        return taskRepositoryBD.getLastTaskId()!!
     }
 
-    fun taskGiveCustomerId(nameCustomer: String): Customer? {
-        return CustomerProvider.getListCustomer().find { it.name == nameCustomer }
+    suspend fun taskGiveCustomerId(nameCustomer: String): Customer? {
+        var result: Customer? = null
+
+        customerProviderDB.getCustomerList().collect { customerList ->
+            val matchingCustomer = customerList.find { it.name == nameCustomer }
+            result = matchingCustomer
+        }
+
+        return result
     }
 
-    fun taskGive(position: Int): Task {
-        return TaskProvider.taskDataSet[position]
+    fun getTaskByPosition(posTask: Int): Task? {
+        return taskRepositoryBD.getTaskByPosition(posTask)
     }
 
-    fun giveListCustomer() : List<String> {
-        return CustomerProvider.getListCustomer().map { it.name }
+    fun getNextTaskId(): Int {
+        return 1 + (taskRepositoryBD.getLastTaskId() ?: 0)
     }
+
+    suspend fun giveListCustomer(): List<String> {
+        try {
+            val customerList = mutableListOf<String>()
+
+            viewModelScope.launch {
+                customerProviderDB.getCustomerList().collect { customerListFlow ->
+                    customerList.addAll(customerListFlow.map { customer ->
+                        customer.name
+                    })
+
+                    Log.i("TaskCreationViewModel", "Customer List: $customerList")
+                }
+            }
+            return customerList
+        } catch (e: Exception) {
+            Log.e("TaskCreationViewModel", "Error fetching customer list", e)
+            return emptyList()
+        }
+    }
+
 
     fun giveClientName(id: Int): String{
-        return CustomerProvider.getCustomerNameById(id).toString()
+        return customerProviderDB.getCustomerById(CustomerId(id))!!.name
     }
 
     fun addTaskRepository(task: Task){
-        TaskProvider.taskDataSet.add(task)
+        taskRepositoryBD.insert(task)
     }
 
-    fun updateTask(task: Task, position: Int){
-        TaskProvider.updateTasks(task, position)
+    fun updateTask(task: Task){
+        taskRepositoryBD.update(task)
     }
 
     fun setEditorMode(editorMode: Boolean){
         isEditor.value = editorMode
-    }
-
-    fun getEditorMode(): Boolean {
-        return isEditor.value?: false
     }
 
     private fun isValidDate(fechCrea: String?, fechEnd: String?): Boolean {

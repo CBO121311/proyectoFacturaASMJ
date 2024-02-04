@@ -4,17 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.moronlu18.data.base.CustomerId
-import com.moronlu18.data.base.TaskId
 import com.moronlu18.data.customer.Customer
-import com.moronlu18.data.task.Task
-import com.moronlu18.data.task.TaskStatus
-import com.moronlu18.data.task.TypeTask
-import com.moronlu18.repository.CustomerProvider
-import com.moronlu18.repository.CustomerProvider.Companion.getCustomerNameById
-import com.moronlu18.repository.CustomerProvider.Companion.getCustomerbyID
-import com.moronlu18.repository.TaskProvider
+import com.moronlu18.repository.CustomerProviderDB
+import com.moronlu18.repository.TaskRepositoryBD
 import com.sergiogv98.tasklist.ui.TaskDetailState
-import java.time.Instant
 
 class TaskDetailViewModel : ViewModel() {
 
@@ -26,22 +19,20 @@ class TaskDetailViewModel : ViewModel() {
     var dateCreation = MutableLiveData<String>()
     var dateEnd = MutableLiveData<String>()
     var taskDescription = MutableLiveData<String>()
-    private val repository = TaskProvider
+    private var taskRepositoryBD = TaskRepositoryBD()
+    private var customerProviderDB = CustomerProviderDB()
 
-    fun getPositionByTask(task: Task): Int{
-        return repository.getPositionByTask(task)
+    /*
+    fun getCustomerPhoto(customerId: Int): Customer {
+        return taskRepositoryBD.getCustomerById(customerId) ?: Customer() // Ajusta según tu implementación
+    }*/
+
+    fun getCustomerName(customerId: CustomerId): String? {
+        return customerProviderDB.getCustomerById(customerId)?.name
     }
 
-    fun getTaskByPosition(posTask: Int): Task{
-        return repository.getTaskPosition(posTask)
-    }
-
-    fun getCustomerPhoto(customerId: Int): Customer{
-        return getCustomerbyID(customerId)!!
-    }
-
-    fun getCustomerName(position: Int): String?{
-        return CustomerProvider.getCustomerNameById(position)
+    fun getCustomer(customerId: CustomerId): Customer? {
+        return customerProviderDB.getCustomerById(customerId)
     }
 
     fun onSuccess(){

@@ -4,22 +4,25 @@ import com.moronlu18.data.task.Task
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.moronlu18.repository.CustomerProvider
+import com.moronlu18.repository.CustomerProviderDB
 import com.moronlu18.tasklist.R
 import com.moronlu18.tasklist.databinding.ItemTaskBinding
+import com.sergiogv98.utils.TaskUtils
 
 class TaskAdapter(
     private val listener: OnTaskClick
-) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+) : ListAdapter<Task, TaskAdapter.TaskViewHolder>(TASK_COMPARATOR) {
 
-    private var dataset = arrayListOf<Task>()
-    private var selectedPosition = RecyclerView.NO_POSITION
     private var isAscendingOrder = true
 
-    interface OnTaskClick{
-        fun taskClick(position: Int)
-        fun taskOnLongClick(view: View, position: Int, task: Task)
+    private var selectedPosition = RecyclerView.NO_POSITION
+
+    interface OnTaskClick {
+        fun taskClick(task: Task)
+        fun taskOnLongClick(view: View, task: Task)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -27,68 +30,87 @@ class TaskAdapter(
         return TaskViewHolder(layoutInflater.inflate(R.layout.item_task, parent, false))
     }
 
-    override fun getItemCount(): Int {
-        return dataset.size
-    }
-
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        val item = dataset[position]
+        val item = getItem(position)
         holder.bind(item)
     }
 
-    fun update(newDataSet: ArrayList<Task>) {
-        dataset = newDataSet
-        notifyDataSetChanged()
+    fun sortId(){
+        val sortedList = currentList.sortedBy { it.id }
+        submitList(sortedList)
     }
 
-    fun deleteTask(task: Task){
-        dataset.remove(task)
-        notifyDataSetChanged()
+
+    /*
+
+    fun sortName(){
+        val sortedList = currentList.sortedBy { it.nomTask.lowercase() }
+        submitList(sortedList)
+    }
+
+    fun sortCustomerNameAscent(){
+        val sortedList = currentList.sortedBy { it.customerId.value }
+        submitList(sortedList)
+    }
+
+    fun sortCustomerNameDescent(){
+        val sortedList = currentList.sortedByDescending { it.customerId.value }
+        submitList(sortedList)
+    }*/
+
+    fun clearSelection() {
+        submitList(currentList)
     }
 
     fun toggleSortOrder() {
         isAscendingOrder = !isAscendingOrder
-        sortTasks()
-        notifyDataSetChanged()
+        val sortedList = if (isAscendingOrder) currentList.sortedBy { it.nomTask }
+        else currentList.sortedByDescending { it.nomTask }
+        submitList(sortedList)
     }
 
-    private fun sortTasks() {
-        if (isAscendingOrder) {
-            dataset.sortBy { it.nomTask }
-        } else {
-            dataset.sortByDescending { it.nomTask }
-        }
-        notifyDataSetChanged()
+    fun deleteTask(task: Task) {
+        submitList(currentList - task)
     }
 
-    fun clearSelection(){
-        selectedPosition = RecyclerView.NO_POSITION
-        notifyDataSetChanged()
-    }
 
-    inner class TaskViewHolder(private val view: View): RecyclerView.ViewHolder(view){
+    inner class TaskViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
         private val binding = ItemTaskBinding.bind(view)
-        fun bind(task: Task){
-            with(binding){
-                taskClientName.text = CustomerProvider.getCustomerNameById(task.customerId.value)
+
+        fun bind(task: Task) {
+            with(binding) {
+                taskClientName.text = CustomerProviderDB().getCustomerById(task.customerId)?.name ?: "Fallo"
                 taskName.text = task.nomTask
                 taskDescription.text = task.descTask
-                taskEndDate.text = task.dateFinalization.toString()
-                taskCreationDate.text = task.dateCreation.toString()
+                taskEndDate.text = TaskUtils().convertInstantToDateText(task.dateFinalization)
+                taskCreationDate.text = TaskUtils().convertInstantToDateText(task.dateCreation)
 
                 root.setOnClickListener {
-                    listener.taskClick(adapterPosition)
+                    listener.taskClick(task)
                 }
 
                 root.setOnLongClickListener {
                     selectedPosition = adapterPosition
-                    listener.taskOnLongClick(view, adapterPosition, task)
-                    notifyDataSetChanged()
+                    listener.taskOnLongClick(view, task)
                     true
                 }
             }
         }
+    }
 
+    companion object{
+        private val TASK_COMPARATOR = object :DiffUtil.ItemCallback<Task>(){
+            override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
+                return oldItem == newItem
+            }
+
+            override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean {
+                return oldItem.nomTask == newItem.nomTask
+            }
+
+        }
     }
 }
+
+
