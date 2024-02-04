@@ -3,9 +3,15 @@ package com.cbo.customer.usecase
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.cbo.customer.ui.CustomerDetailState
+import com.cbo.customer.ui.CustomerListState
 import com.moronlu18.data.customer.Customer
+import com.moronlu18.network.Resource
 import com.moronlu18.repository.CustomerProvider
+import com.moronlu18.repository.CustomerProviderDB
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CustomerDetailViewModel : ViewModel() {
 
@@ -16,44 +22,20 @@ class CustomerDetailViewModel : ViewModel() {
     var phoneCustomer = MutableLiveData<String>()
     var addressCustomer = MutableLiveData<String>()
     var cityCustomer = MutableLiveData<String>()
-    private val repository = CustomerProvider
+    private val customerProviderDB = CustomerProviderDB()
 
 
-    /**
-     * Borra el cliente desde el ViewModel.
-     */
-    fun deleteCustomer(customer: Customer) {
-        val position = getPositionByCustomer(customer)
-        if (position != -1) {
-            repository.deleteCustomer(position)
+    fun delete(customer: Customer) {
+        viewModelScope.launch(Dispatchers.IO) {
+
+            when (customerProviderDB.delete(customer)) {
+                is Resource.Success<*> -> {}
+
+                else -> {
+                    state.value = CustomerDetailState.ReferencedCustomer
+                }
+            }
         }
-    }
-
-    /**
-     * Comprueba si es seguro borrar un cliente porque podría estar referenciado.
-     * Devuelve true si no hay problema, false si lo hay.
-     */
-    fun isDeleteSafe(customer: Customer): Boolean {
-        return if (repository.isCustomerSafeDelete(customer.id.value)) {
-            state.value = CustomerDetailState.ReferencedCustomer
-            false
-        } else {
-            true
-        }
-    }
-
-    /**
-     * Método que obtiene la posición del cliente en la lista
-     */
-    private fun getPositionByCustomer(customer: Customer): Int {
-        return repository.getPosByCustomer(customer)
-    }
-
-    /**
-     * Obtiene el cliente en base a su posición en la lista.
-     */
-    fun getCustomerByPosition(posCustomer: Int): Customer {
-        return repository.getCustomerPos(posCustomer)
     }
 
     /**

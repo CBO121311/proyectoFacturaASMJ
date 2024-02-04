@@ -14,6 +14,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jcasrui.item.adapter.ItemAdapter
 import com.jcasrui.item.usecase.ItemListViewModel
@@ -51,6 +53,17 @@ class ItemList : Fragment(), MenuProvider {
         setUpToolbar()
         initRecyclerViewItem()
         viewModel.getItemList()
+
+        var appBarConfiguration =
+            AppBarConfiguration.Builder(R.id.itemList)
+                .setOpenableLayout((requireActivity() as MainActivity).drawer)
+                .build()
+
+        NavigationUI.setupWithNavController(
+            (requireActivity() as MainActivity).toolbar,
+            findNavController(),
+            appBarConfiguration
+        )
 
         /*
         binding.fab.setOnClickListener {

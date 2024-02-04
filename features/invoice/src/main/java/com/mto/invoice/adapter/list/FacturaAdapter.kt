@@ -66,10 +66,10 @@ class FacturaAdapter(
 
             }
 
-            if (customer?.phototrial != null) {
-                binding.itemFacturaIvKiwi.setImageResource(customer.phototrial!!)
+            if (customer?.photo != null) {
+                binding.itemFacturaIvKiwi.setImageBitmap(customer.photo)
             } else {
-                binding.itemFacturaIvKiwi.setImageBitmap(customer?.photo)
+                binding.itemFacturaIvKiwi.setImageResource(R.drawable.kiwidinero)
             }
 
             itemView.setOnClickListener { onClickListener?.invoke(invoiceModel) }

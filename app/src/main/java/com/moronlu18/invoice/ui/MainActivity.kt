@@ -1,25 +1,26 @@
 package com.moronlu18.invoice.ui
 
+
+import android.database.CursorWindow
 import android.os.Bundle
-import android.view.Gravity
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.navigateUp
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.moronlu18.invoice.R
 import com.moronlu18.invoice.databinding.ActivityMainBinding
 import com.moronlu18.invoice.utils.showToast
+import java.lang.reflect.Field
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,6 +44,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+
         //Todo
         //Sustituir la AppBar por defecto por el widget Toolbar de nuestro layout
         setSupportActionBar(binding.content.toolbar)
@@ -53,9 +56,8 @@ class MainActivity : AppCompatActivity() {
 
         //Lo que hace este es poner el icono hamburguesa [---]
         //que tiene un id android.R.id.home
-        supportActionBar?.setHomeButtonEnabled(true) //todo comentamos esto de nuevo.
+        //supportActionBar?.setHomeButtonEnabled(true) //todo comentamos esto de nuevo.
         //supportActionBar?.setHomeAsUpIndicator(android.R.drawable.ic_menu_info_details)
-
 
 
         //OPCION 2:
@@ -63,6 +65,7 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment
         navController = navHostFragment.navController
+
 
 
         //Yo le digo que se configure la barra de navegación con este grafo
@@ -79,10 +82,8 @@ class MainActivity : AppCompatActivity() {
         //La appbar es responsable del drawerlayout, y quiero que sea responsable del abrir y el cierre del Drawerlayout
 
 
-
         //appBarConfiguration = AppBarConfiguration(navController.graph)
         //setupActionBarWithNavController(navController, appBarConfiguration)
-
 
 
 
@@ -93,31 +94,47 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController*/
 
 
-        binding.content.fab.setOnClickListener { view ->
-            Snackbar.make(
-                view,
-                "No me dejes así, pon una función o hazla no visible <_<",
-                Snackbar.LENGTH_LONG
-            )
-                .setAction("Action", null).show()
-        }
-
         //Configurar evento click del menu Nav_View.
         setupNavigationView()
 
-        //navController = findNavController(R.id.nav_host_fragment_content_main)
+        val toolbar = binding.content.toolbar
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+
+        //Todo Esto se añadio por el tema de tamaño del bitmap
+        try {
+            val field: Field = CursorWindow::class.java.getDeclaredField("sCursorWindowSize")
+            field.setAccessible(true)
+            field.set(null, 100 * 1024 * 1024) //thef 100MB is the new size
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
     }
 
     /**
      * Implementar el listener de las opciones del menú del componente Nav_view
      */
     private fun setupNavigationView(){
-     binding.navView.setNavigationItemSelectedListener { item->
-         when(item.itemId){
+     binding.navView.setNavigationItemSelectedListener { mItem->
+         when(mItem.itemId){
+             R.id.action_customer ->{
+                 navController.navigate(R.id.nav_graph_customer)
+                 //showToast("He pulsado Invoice")
+             }
+
+             R.id.action_item ->{
+                 navController.navigate(R.id.nav_graph_item)
+                 //showToast("He pulsado Invoice")
+             }
+
+             R.id.action_task ->{
+                 navController.navigate(R.id.nav_graph_task)
+                 //showToast("He pulsado Invoice")
+             }
+
              R.id.action_invoice ->{
-                 //findNavController.navigate(R.id.action_mainFragment_to_nav_graph_customer)
-                 navController.navigate(R.id.action_mainFragment_to_nav_graph_customer)
-                 showToast("He pulsado Invoice")
+                 navController.navigate(R.id.nav_graph_invoice)
              }
 
              else -> {
@@ -149,10 +166,10 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(R.id.settingsFragment)
                 true
             }
-            android.R.id.home->{
+            /*android.R.id.home->{
                 binding.drawerLayout.openDrawer(GravityCompat.START)
                 true
-            }
+            }*/
             else -> super.onOptionsItemSelected(item)
         }
     }

@@ -1,7 +1,15 @@
 package com.moronlu18.invoice
 
 import android.app.Application
+import android.content.ContentResolver
 import android.content.Context
+import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.net.Uri
+import android.util.Log
+import androidx.core.content.res.ResourcesCompat
 import androidx.datastore.preferences.preferencesDataStore
 import com.moronlu18.invoice.data.preferences.UserPreferencesRepository
 import com.moronlu18.invoice.ui.preferences.DataStorePreferencesRepository
@@ -14,31 +22,55 @@ import com.moronlu18.invoice.ui.preferences.DataStorePreferencesRepository
 object Locator {
     public var application: Application? = null
 
-    //inline hace una variable inmovil en el mismo momento. Y hace las dos operaciones a la vez.
-     public inline val requireApplication
+    public inline val requireApplication
         get() = application ?: error("Missing call: initWith(application)")
 
-    //Esto debe iniciar para poder crear el contexto de los datos (?)
     fun initWith(application: Application) {
         this.application = application
     }
 
-    //Solo el repositorio de la aplicación
-    //user_preferences es un xml y este XML es accesible al repositorio.
-    //Y todos preguntaran a este locator.
-
-    //crea un fichero que se acaba de guardar en files-> datastore
     private val Context.userStore by preferencesDataStore(name = "user")
     private val Context.settingsStore by preferencesDataStore(name = "settings")
 
-    //lazy =Se inicialice la primera que lo llames.
-    //Este es único para todos.
     val userPreferencesRepository by lazy {
-        //UserPreferencesRepository(application.userStore) //para evitar el nulo se hace requiereApplication.
         UserPreferencesRepository(requireApplication.userStore)
     }
 
     val settingsPreferencesRepository by lazy {
         DataStorePreferencesRepository(requireApplication.settingsStore)
+    }
+
+    val appResources: Resources
+        get() = requireApplication.resources
+
+    fun convertirRecursoABitmap(resourceId: Int): Bitmap {
+        val options = BitmapFactory.Options()
+        return BitmapFactory.decodeResource(appResources, resourceId, options)
+    }
+
+    /*private fun getbitMap(imageView: ImageView): Bitmap {
+        val bitmap = Bitmap.createBitmap(imageView.width, imageView.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        imageView.draw(canvas)
+        return bitmap
+    }*/
+
+    fun getResourceBitmapV2(resourceId: Int): Bitmap {
+        val context = requireApplication
+
+        val options = BitmapFactory.Options()
+        return BitmapFactory.decodeResource(context.resources, resourceId,options)
+    }
+
+    fun getResourceUri(resourceId: Int): Uri? {
+        val context = requireApplication
+        val uri = Uri.Builder()
+            .scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+            .authority(context.packageName)
+            .appendPath(context.resources.getResourceTypeName(resourceId))
+            .appendPath(context.resources.getResourceEntryName(resourceId))
+            .build()
+
+        return uri
     }
 }

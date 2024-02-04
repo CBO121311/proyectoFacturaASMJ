@@ -11,9 +11,11 @@ import com.moronlu18.data.customer.Customer
 import com.moronlu18.network.ResourceList
 import com.moronlu18.repository.CustomerProvider
 import com.moronlu18.invoice.Locator
+import com.moronlu18.network.Resource
 import com.moronlu18.repository.CustomerProviderDB
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class CustomerListViewModel : ViewModel() {
@@ -22,90 +24,43 @@ class CustomerListViewModel : ViewModel() {
     private var customerProviderDB = CustomerProviderDB()
     var allCustomer = customerProviderDB.getCustomerList().asLiveData()
 
-
-
-
     /**
      * Función que pide el listado de customer al repositorio con una pantalla de carga.
      * No tiene que devolver nada.
      */
     fun getCustomerList() {
         viewModelScope.launch {
-            //state.value = CustomerListState.Loading(true)
-            //val result = CustomerProvider.getCustomerList()
-            //state.value = CustomerListState.Loading(false)
 
-            when{
+            when {
                 allCustomer.value?.isEmpty() == true -> state.value = CustomerListState.NoDataError
-                else -> state.value = CustomerListState.Success
-            }
 
-           /* when (result) {
-                is ResourceList.Success<*> -> {
-                    /*val list = result.data as ArrayList<Customer>
-
-                    val sortPreference = Locator.settingsPreferencesRepository.getSettingValue("customersort","id")
-                    when(sortPreference){
-                        "id" -> list.sortBy { it.id }
-                        "name_asc" -> list.sortBy { it.name }
-                        "name_desc" -> list.sortByDescending { it.name }
-                        "email" -> list.sortBy { it.email.toString() }
-                    }*/
-
-
-                    state.value = CustomerListState.Success
-                }
-
-                is ResourceList.Error -> state.value = CustomerListState.NoDataError
-            }*/
-        }
-    }
-
-    /**
-     * Función que pide el listado de customer al repositorio sin tiempo de carga.
-     * Añadido por razones de exposición.
-     */
-    fun getCustomerListNoLoading() {
-        viewModelScope.launch {
-
-            when (val result = CustomerProvider.getCustomerListNoLoading()) {
-                is ResourceList.Success<*> -> {
-                    val list = result.data as ArrayList<Customer>
-
-                    val sortPreference = Locator.settingsPreferencesRepository.getSettingValue("customersort","id")
-                    when(sortPreference){
-                        "id" -> list.sortBy { it.id }
-                        "name_asc" -> list.sortBy { it.name }
-                        "name_desc" -> list.sortByDescending { it.name }
-                        "email" -> list.sortBy { it.email.toString() }
+                else -> {
+                    allCustomer = when (Locator.settingsPreferencesRepository.getSettingValue("customersort", "id")) {
+                        "id" -> customerProviderDB.getCustomerList().asLiveData()
+                        "name_asc" -> customerProviderDB.getCustomerListName().asLiveData()
+                        "name_desc" -> customerProviderDB.getCustomerListNameDesc().asLiveData()
+                        "email" -> customerProviderDB.getCustomerListEmail().asLiveData()
+                        else -> customerProviderDB.getCustomerList().asLiveData()
                     }
 
                     state.value = CustomerListState.Success
                 }
-
-                is ResourceList.Error -> state.value = CustomerListState.NoDataError
             }
         }
     }
 
-
-    /**
-     * Comprueba si es seguro borrar un cliente porque podría estar referenciado.
-     * Devuelve true si no hay problema, false si lo hay.
-     */
-    fun isDeleteSafe(customer: Customer): Boolean {
-        return  true
-       /* return if (customerProviderDB.isCustomerSafeDelete(customer.id.value)) {
-            state.value = CustomerListState.ReferencedCustomer
-            false
-        } else {
-            true
-        }*/
-    }
-
-    fun delete (customer: Customer){
+    fun delete(customer: Customer) {
         viewModelScope.launch(Dispatchers.IO) {
-            customerProviderDB.delete(customer)
+
+            when (customerProviderDB.delete(customer)) {
+                is Resource.Success<*> -> {}
+
+                is Resource.Error -> {
+                    withContext(Dispatchers.Main) {
+                        state.value = CustomerListState.ReferencedCustomer
+                    }
+                }
+            }
         }
     }
 

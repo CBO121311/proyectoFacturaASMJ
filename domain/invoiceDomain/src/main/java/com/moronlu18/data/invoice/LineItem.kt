@@ -1,7 +1,6 @@
 package com.moronlu18.data.invoice
 
 import android.os.Parcelable
-import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.TypeConverters
@@ -38,10 +37,7 @@ data class LineItem(
     val invoiceId: @RawValue InvoiceId,
     @TypeConverters(ItemIdTypeConverter::class)
     val itemId: @RawValue ItemId,
-    @NonNull
     var quantity:Int,
-    @NonNull
     var price:Double,
-    @NonNull
     val iva:Int
 ): Parcelable

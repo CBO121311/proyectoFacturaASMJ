@@ -1,15 +1,18 @@
 package com.sergiogv98.tasklist.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.moronlu18.data.task.Task
 import com.moronlu18.invoice.ui.MainActivity
+import com.moronlu18.tasklist.R
 import com.moronlu18.tasklist.databinding.FragmentTaskDetailBinding
 import com.sergiogv98.usecase.TaskDetailViewModel
 import com.sergiogv98.utils.TaskUtils
@@ -68,12 +71,10 @@ class TaskDetail : Fragment() {
 
         val customer = viewModel.getCustomer(task.customerId)
 
-        if (customer != null) {
-            if (customer.phototrial != null) {
-                binding.taskDetailsClientImageView.setImageResource(customer.phototrial!!)
-            }// else {
-               // binding.taskDetailsClientImageView.setImageBitmap(customer.phototrial!!)
-            //}
+        if (customer?.photo!=null){
+            binding.taskDetailsClientImageView.setImageBitmap(customer?.photo)
+        }else{
+            binding.taskDetailsClientImageView.setImageResource(R.drawable.kiwidinero)
         }
     }
 

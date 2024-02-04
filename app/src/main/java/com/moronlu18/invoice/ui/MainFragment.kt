@@ -24,23 +24,11 @@ class MainFragment : Fragment() {
     ): View? {
 
         _binding = FragmentMainBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
-        /*(requireActivity() as? MainActivity)?.toolbar?.setNavigationOnClickListener {
-            if (findNavController().currentDestination?.id == R.id.mainFragment) {
-                //activity?.finish()
-                activity?.moveTaskToBack(true)
-            } else {
-                findNavController().popBackStack()
-            }
-        }*/
 
         setUpFab()
 
@@ -55,7 +43,6 @@ class MainFragment : Fragment() {
 
 
         binding.cvAbout.btnAnimationNav(R.id.action_mainFragment_to_about)
-
 
         parentFragmentManager.setFragmentResultListener(
             BaseFragmentDialog.request,
@@ -139,13 +126,6 @@ class MainFragment : Fragment() {
                 findNavController().navigate(idDestination)
             }
         }
-    }
-
-
-
-    override fun onStart() {
-        super.onStart()
-
     }
 
     override fun onDestroyView() {

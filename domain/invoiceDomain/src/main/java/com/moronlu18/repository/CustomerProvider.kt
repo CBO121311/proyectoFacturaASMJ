@@ -29,7 +29,7 @@ class CustomerProvider private constructor() {
                     "+64 21 123 456",
                     "Auckland",
                     "Main Street, 123",
-                    phototrial = R.drawable.kiwituxedo
+                    //phototrial = R.drawable.kiwituxedo
                 )
             )
 
@@ -41,7 +41,7 @@ class CustomerProvider private constructor() {
                     "+49 123456789",
                     "Berlín",
                     "Kurfürstendamm, 123", //R.drawable.elephantuxedo
-                    phototrial = R.drawable.elephantuxedo
+                    //phototrial = R.drawable.elephantuxedo
                 )
             )
 
@@ -50,7 +50,7 @@ class CustomerProvider private constructor() {
                     CustomerId(idCustomer++),
                     "Alejandro López",
                     Email("cebolla@example.com"),
-                    phototrial = R.drawable.cbotuxedo
+                    //phototrial = R.drawable.cbotuxedo
                 )
             )
 
@@ -62,47 +62,9 @@ class CustomerProvider private constructor() {
                     "+34 687223344",
                     "Valencia",
                     "Avenida Reino de Valencia, 789",
-                    phototrial = R.drawable.kangorutuxedo
+                    //phototrial = R.drawable.kangorutuxedo
                 )
             )
-        }
-
-        /**
-         * Comprueba si el idCustomer es válido y si existe en el repositorio.
-         * Devuelve true si es válido y existe, false en caso contrario.
-         */
-        fun isCustomerExistOrNumeric(idCli: String, currentClient: Customer): Boolean {
-
-            if (idCli.toIntOrNull() != null && idCli.toInt() > 0) {
-
-                return CustomerdataSet.any { it.id.value == idCli.toInt() && it.id != currentClient.id }
-            }
-            return false
-        }
-
-        /**
-         * Comprueba si el Customer está referenciado en otros repositorios y es seguro borrarlo.
-         * Devuelve true si es seguro borrarlo, false en caso contrario.
-         */
-        fun isCustomerSafeDelete(customerId: Int): Boolean {
-
-            return InvoiceProvider.isCustomerReferenceFactura(customerId) ||
-                    TaskProvider.isCustomerReferenceTask(customerId)
-        }
-
-        /**
-         * Obtiene la lista de customers con un tiempo de espera de dos segundos.
-         * Devuelve un objeto ResourceList.
-         */
-        suspend fun getCustomerList(): ResourceList {
-            return withContext(Dispatchers.IO) {
-                delay(2000)
-                when {
-                    CustomerdataSet.isEmpty() -> ResourceList.Error(Exception("No hay datos"))
-
-                    else -> ResourceList.Success(CustomerdataSet as ArrayList<Customer>)
-                }
-            }
         }
 
         /**
@@ -119,25 +81,6 @@ class CustomerProvider private constructor() {
             } catch (e: Exception) {
                 ResourceList.Error(e)
             }
-        }
-
-        /**
-         * Añade o actualiza un customer en el repositorio.
-         */
-        fun addOrUpdateCustomer(customer: Customer, pos: Int?) {
-
-            if (pos == null) {
-                CustomerdataSet.add(customer)
-            } else {
-                CustomerdataSet[pos] = customer
-            }
-        }
-
-        /**
-         * Borra un customer del repositorio según su posición.
-         */
-        fun deleteCustomer(pos: Int) {
-            CustomerdataSet.removeAt(pos)
         }
 
         /**

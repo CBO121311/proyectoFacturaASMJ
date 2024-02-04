@@ -32,11 +32,7 @@ class CustomerDetail : Fragment(), MenuProvider {
     private var _binding: FragmentCustomerDetailBinding? = null
     private val binding get() = _binding!!
     private val args: CustomerDetailArgs by navArgs()
-
-
     private val doubleClickDelay = 200L
-
-    //prevenir doble click
     private var mLastClickTime: Long = 0
 
 
@@ -44,7 +40,6 @@ class CustomerDetail : Fragment(), MenuProvider {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
 
         _binding = FragmentCustomerDetailBinding.inflate(inflater, container, false)
 
@@ -66,9 +61,6 @@ class CustomerDetail : Fragment(), MenuProvider {
                 CustomerDetailState.ReferencedCustomer -> showReferencedCustomer()
             }
         })
-
-
-        onSuccess()
     }
 
 
@@ -87,10 +79,10 @@ class CustomerDetail : Fragment(), MenuProvider {
             it.cityCustomer.value = isValue(customer.city)
             it.addressCustomer.value = isValue(customer.address)
         }
-        if (customer.phototrial != null) {
-            binding.customerDetailCiPhoto.setImageResource(customer.phototrial!!)
+        if (customer.photo != null) {
+            binding.customerDetailCiPhoto.setImageBitmap(customer.photo)
         } else {
-            binding.customerDetailCiPhoto.setImageBitmap(customer.photo!!)
+            binding.customerDetailCiPhoto.setImageResource(R.drawable.kiwidinero)
         }
     }
 
@@ -103,26 +95,19 @@ class CustomerDetail : Fragment(), MenuProvider {
 
         val customer = args.customnav
 
-        if (viewModel.isDeleteSafe(customer)) {
+        val dialog = BaseFragmentDialog.newInstance(
+            getString(R.string.title_deleteCustomer),
+            getString(R.string.Content_deleteCustomer)
+        )
+        dialog.show(childFragmentManager,"delete_dialog")
 
-            findNavController().navigate(
-                CustomerDetailDirections.actionCustomerDetailToBaseFragmentDialog2(
-                    getString(R.string.title_deleteCustomer),
-                    getString(R.string.Content_deleteCustomer)
-                )
-            )
-            parentFragmentManager.setFragmentResultListener(
-                BaseFragmentDialog.request,
-                viewLifecycleOwner
-            ) { _, result ->
-                val success = result.getBoolean(BaseFragmentDialog.result, false)
-                if (success) {
-                    viewModel.deleteCustomer(customer)
+        dialog.parentFragmentManager.setFragmentResultListener(
+            BaseFragmentDialog.request,
+            viewLifecycleOwner
+        ) { _, result ->
 
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        findNavController().popBackStack()
-                    }, 100)
-                }
+            if (result.getBoolean(BaseFragmentDialog.result)) {
+                viewModel.delete(customer)
             }
         }
     }

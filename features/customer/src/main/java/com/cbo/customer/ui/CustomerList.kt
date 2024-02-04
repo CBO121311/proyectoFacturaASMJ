@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -37,12 +38,8 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
     private var _binding: FragmentCustomerListBinding? = null
     private val binding get() = _binding!!
     private lateinit var customerAdapter: CustomerAdapter
-    private var isDeleting = false
     private val viewModel: CustomerListViewModel by viewModels()
-    private var isFirstTime = true
     private val doubleClickDelay = 200L
-
-    //prevenir doble click
     private var mLastClickTime: Long = 0
 
     override fun onCreateView(
@@ -61,6 +58,8 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.getCustomerList()
+
         //Hay que añadirlo en el fragment principal.
         var appBarConfiguration =
             AppBarConfiguration.Builder(R.id.customerList)
@@ -77,13 +76,14 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
         setUpFab()
         initRecyclerViewCustomer()
 
+
+
         viewModel.getState().observe(viewLifecycleOwner, Observer {
             when (it) {
                 is CustomerListState.Loading -> showProgressBar(it.value)
                 CustomerListState.NoDataError -> showListEmptyView()
                 is CustomerListState.Success -> onSuccess()
                 CustomerListState.ReferencedCustomer -> showReferencedCustomer()
-                else -> {}
             }
         })
 
@@ -91,6 +91,7 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
             it.let { customerAdapter.submitList(it) }
         }
     }
+
 
     /**
      * Inicializa y configura el RecyclerView para mostrar la lista de clientes.
@@ -159,23 +160,19 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
      */
     private fun onDeletedItem(customer: Customer) {
 
-        isDeleting = true
-        if (viewModel.isDeleteSafe(customer)) {
-            findNavController().navigate(
-                CustomerListDirections.actionCustomerListToBaseFragmentDialog2(
-                    getString(R.string.title_deleteCustomer),
-                    getString(R.string.Content_deleteCustomer)
-                )
-            )
-            parentFragmentManager.setFragmentResultListener(
-                BaseFragmentDialog.request,
-                viewLifecycleOwner
-            ) { _, result ->
-                val success = result.getBoolean(BaseFragmentDialog.result, false)
-                if (success) {
-                    viewModel.delete(customer)
-                    //viewModel.getCustomerListNoLoading()
-                }
+        val dialog = BaseFragmentDialog.newInstance(
+            getString(R.string.title_deleteCustomer),
+            getString(R.string.Content_deleteCustomer)
+        )
+        dialog.show(childFragmentManager, "delete_dialog")
+
+        dialog.parentFragmentManager.setFragmentResultListener(
+            BaseFragmentDialog.request,
+            viewLifecycleOwner
+        ) { _, result ->
+
+            if (result.getBoolean(BaseFragmentDialog.result)) {
+                viewModel.delete(customer)
             }
         }
     }
@@ -320,22 +317,6 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
         }
     }
 
-
-    /**
-     * Se llama al iniciar el Fragment. Obtiene la lista con el loading la primera vez.
-     * En las siguientes llamadas utiliza una función pero sin el loading.
-     */
-    override fun onStart() {
-        super.onStart()
-        viewModel.getCustomerList()
-
-        /*if (isFirstTime) {
-
-            isFirstTime = false
-        } else {
-            viewModel.getCustomerListNoLoading()
-        }*/
-    }
 
     /**
      * Liberamos la referencia al binding.

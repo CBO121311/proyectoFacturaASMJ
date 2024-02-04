@@ -34,7 +34,6 @@ class CustomerAdapter(
         holder.bind(item)
     }
 
-
     /**
      * Ordena los datos del adaptador por id
      */
@@ -48,22 +47,6 @@ class CustomerAdapter(
      */
     fun sortName() {
         val sortedCustomerList = currentList.sortedBy { it.name.lowercase() }
-        submitList(sortedCustomerList)
-    }
-
-    /**
-     * Ordena los datos del adaptador por nombre descendente
-     */
-    fun sortNameDescend() {
-        val sortedCustomerList = currentList.sortedByDescending { it.name.lowercase() }
-        submitList(sortedCustomerList)
-    }
-
-    /**
-     * Ordena los datos del adaptador por email
-     */
-    fun sortEmail() {
-        val sortedCustomerList = currentList.sortedByDescending { it.email.toString().lowercase() }
         submitList(sortedCustomerList)
     }
 
@@ -94,10 +77,11 @@ class CustomerAdapter(
 
                 customerListTvid.text = customer.id.value.toString()
 
-                if (customer.phototrial != null) {
-                    customerListIvCliente.setImageResource(customer.phototrial!!)
-                } else {
+                if(customer.photo!= null){
+
                     customerListIvCliente.setImageBitmap(customer.photo)
+                }else{
+                    customerListIvCliente.setImageResource(R.drawable.kiwidinero)
                 }
 
                 root.setOnClickListener {
@@ -132,9 +116,10 @@ class CustomerAdapter(
             }
         }
     }
-    companion object{
+
+    companion object {
         //es una clase anonima (??) objeto anonimo (??)
-        private val CUSTOMER_COMPARATOR = object :DiffUtil.ItemCallback<Customer>(){
+        private val CUSTOMER_COMPARATOR = object : DiffUtil.ItemCallback<Customer>() {
             override fun areItemsTheSame(oldItem: Customer, newItem: Customer): Boolean {
                 return oldItem == newItem
             }

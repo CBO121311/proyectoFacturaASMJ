@@ -17,17 +17,18 @@ import com.moronlu18.data.base.TaskId
 import com.moronlu18.data.converter.AccountIdTypeConverter
 import com.moronlu18.data.converter.CustomerIdTypeConverter
 import com.moronlu18.data.converter.EmailTypeConverter
-import com.moronlu18.data.converter.PhotoTypeConverter
 import com.moronlu18.data.converter.InstantConverter
 import com.moronlu18.data.converter.InvoiceIdTypeConverter
 import com.moronlu18.data.converter.InvoiceStatusTypeConverter
 import com.moronlu18.data.converter.ItemIdTypeConverter
 import com.moronlu18.data.converter.ItemTypeConverter
 import com.moronlu18.data.converter.ItemVatTypeConverter
+import com.moronlu18.data.converter.PhotoTypeConverter
 import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.converter.TaskIdTypeConverter
 import com.moronlu18.data.converter.TaskStatusConverter
 import com.moronlu18.data.converter.TaskTypeConverter
+import com.moronlu18.data.converter.UriTypeConverter
 import com.moronlu18.data.invoice.Invoice
 import com.moronlu18.data.invoice.InvoiceStatus
 import com.moronlu18.data.invoice.LineItem
@@ -70,13 +71,14 @@ import java.time.Instant
     TaskStatusConverter::class,
     TaskTypeConverter::class,
     CustomerIdTypeConverter::class,
-    PhotoTypeConverter::class,
     InstantConverter::class,
     InvoiceIdTypeConverter::class,
     InvoiceStatusTypeConverter::class,
     ItemIdTypeConverter::class,
     ItemTypeConverter::class,
-    ItemVatTypeConverter::class
+    ItemVatTypeConverter::class,
+    PhotoTypeConverter::class,
+    //UriTypeConverter::class
 )
 abstract class InvoiceDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
@@ -108,14 +110,21 @@ abstract class InvoiceDatabase : RoomDatabase() {
                 Locator.requireApplication, InvoiceDatabase::class.java, "Invoice"
             ).fallbackToDestructiveMigration().allowMainThreadQueries()
                 //y creamos un objeto de esta clase para convertir de un tipo a otro.
-                .addTypeConverter(AccountIdTypeConverter()).addTypeConverter(EmailTypeConverter())
-                .addTypeConverter(TaskStatusConverter()).addTypeConverter(TaskTypeConverter())
-                .addTypeConverter(TaskIdTypeConverter()).addTypeConverter(CustomerIdTypeConverter())
-                .addTypeConverter(PhotoTypeConverter()).addTypeConverter(InstantConverter())
+                .addTypeConverter(AccountIdTypeConverter())
+                .addTypeConverter(EmailTypeConverter())
+                .addTypeConverter(TaskStatusConverter())
+                .addTypeConverter(TaskTypeConverter())
+                .addTypeConverter(TaskIdTypeConverter())
+                .addTypeConverter(CustomerIdTypeConverter())
+                .addTypeConverter(InstantConverter())
                 .addTypeConverter(InvoiceIdTypeConverter())
                 .addTypeConverter(InvoiceStatusTypeConverter())
-                .addTypeConverter(ItemIdTypeConverter()).addTypeConverter(ItemTypeConverter())
-                .addTypeConverter(ItemVatTypeConverter()).addCallback(
+                .addTypeConverter(ItemIdTypeConverter())
+                .addTypeConverter(ItemTypeConverter())
+                .addTypeConverter(ItemVatTypeConverter())
+                //.addTypeConverter(UriTypeConverter())
+                .addTypeConverter(PhotoTypeConverter())
+                .addCallback(
                     RoomDbInitializer(INSTANCE)
                     //Es una clase que implemente que la interfaz
                 ).build()
@@ -145,50 +154,8 @@ abstract class InvoiceDatabase : RoomDatabase() {
             populateLineItem()
         }
 
-        private fun populateItem() {
-            var itemId = 1;
-            val itemDao = getInstance().itemDao()
-            itemDao.insert(
-                Item(
-                    ItemId(itemId++), ItemType.PRODUCT, VatItemType.FIVE, "Fresa", 3.50
-                )
-            )
-            itemDao.insert(
-                Item(
-                    ItemId(itemId++),
-                    ItemType.SERVICE,
-                    VatItemType.TWENTYONE,
-                    "Repartir productos",
-                    34.85
-                )
-            )
-            itemDao.insert(
-                Item(
-                    ItemId(itemId++), ItemType.PRODUCT, VatItemType.TWENTYONE, "Vino tinto", 12.45
-                )
-            )
-            itemDao.insert(
-                Item(
-                    ItemId(itemId++),
-                    ItemType.SERVICE,
-                    VatItemType.TWENTYONE,
-                    "Reponer productos",
-                    29.43
-                )
-            )
-            itemDao.insert(
-                Item(
-                    ItemId(itemId++), ItemType.PRODUCT, VatItemType.FIVE, "Pulpo", 9.75
-                )
-            )
-            itemDao.insert(
-                Item(
-                    ItemId(itemId), ItemType.PRODUCT, VatItemType.FIVE, "Solomillo", 11.30
-                )
-            )
-        }
 
-        private suspend fun populateUsers() {
+        private fun populateUsers() {
 
             getInstance().let { invoiceDatabase ->
                 invoiceDatabase.userDao().insert(
@@ -224,9 +191,11 @@ abstract class InvoiceDatabase : RoomDatabase() {
                         "+64 21 123 456",
                         "Auckland",
                         "Main Street, 123",
-                        phototrial = R.drawable.kiwituxedo
+
+                        photo = Locator.getResourceBitmapV2(R.drawable.kiwituxedo)
                     )
                 )
+
                 it.customerDao().insert(
                     Customer(
                         CustomerId(customId++),
@@ -234,8 +203,9 @@ abstract class InvoiceDatabase : RoomDatabase() {
                         Email("schmidt@example.com"),
                         "+49 123456789",
                         "Berlín",
-                        "Kurfürstendamm, 123", //R.drawable.elephantuxedo
-                        phototrial = R.drawable.elephantuxedo
+                        "Kurfürstendamm, 123",
+                        photo = Locator.getResourceBitmapV2(R.drawable.elephantuxedo)
+
                     )
                 )
 
@@ -244,7 +214,7 @@ abstract class InvoiceDatabase : RoomDatabase() {
                         CustomerId(customId++),
                         "Alejandro López",
                         Email("cebolla@example.com"),
-                        phototrial = R.drawable.cbotuxedo
+                        photo = Locator.getResourceBitmapV2(R.drawable.cbotuxedo)
                     )
                 )
 
@@ -256,7 +226,7 @@ abstract class InvoiceDatabase : RoomDatabase() {
                         "+34 687223344",
                         "Valencia",
                         "Avenida Reino de Valencia, 789",
-                        phototrial = R.drawable.kangorutuxedo
+                        photo = Locator.getResourceBitmapV2(R.drawable.kangorutuxedo)
                     )
                 )
             }
@@ -310,13 +280,60 @@ abstract class InvoiceDatabase : RoomDatabase() {
             )
         }
 
+
+        private fun populateItem() {
+            var itemId = 1;
+            val itemDao = getInstance().itemDao()
+            itemDao.insert(
+                Item(
+                    ItemId(itemId++), ItemType.PRODUCT, VatItemType.FIVE, "Fresa", 3.50
+                )
+            )
+            itemDao.insert(
+                Item(
+                    ItemId(itemId++),
+                    ItemType.SERVICE,
+                    VatItemType.TWENTYONE,
+                    "Repartir productos",
+                    34.85
+                )
+            )
+            itemDao.insert(
+                Item(
+                    ItemId(itemId++), ItemType.PRODUCT, VatItemType.TWENTYONE, "Vino tinto", 12.45
+                )
+            )
+            itemDao.insert(
+                Item(
+                    ItemId(itemId++),
+                    ItemType.SERVICE,
+                    VatItemType.TWENTYONE,
+                    "Reponer productos",
+                    29.43
+                )
+            )
+            itemDao.insert(
+                Item(
+                    ItemId(itemId++), ItemType.PRODUCT, VatItemType.FIVE, "Pulpo", 9.75
+                )
+            )
+            itemDao.insert(
+                Item(
+                    ItemId(itemId), ItemType.PRODUCT, VatItemType.FIVE, "Solomillo", 11.30
+                )
+            )
+        }
+
+
+
+
         private fun populateTask() {
             var taskId = 1;
 
             getInstance().taskDao().insert(
                 Task(
                     TaskId(taskId++),
-                    CustomerId(1),
+                    CustomerId(2),
                     "Hacer la presentación",
                     TypeTask.LLAMAR,
                     TaskStatus.PENDIENTE,

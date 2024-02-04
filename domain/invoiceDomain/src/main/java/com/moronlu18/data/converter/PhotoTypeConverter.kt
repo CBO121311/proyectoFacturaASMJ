@@ -10,6 +10,7 @@ import java.io.ByteArrayOutputStream
 @ProvidedTypeConverter
 class PhotoTypeConverter {
 
+
     /**
      * Convierte el bitmap a un array de bytes
      */

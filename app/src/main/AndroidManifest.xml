@@ -3,6 +3,7 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools">
 
+
     <dist:module dist:instant="true" />
     <!--Escribimos android:name="InvoiceApplication", para que herede de Application  -->
     <application
@@ -16,6 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.ProyectoASMJ"
         tools:targetApi="31">
+
+
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"

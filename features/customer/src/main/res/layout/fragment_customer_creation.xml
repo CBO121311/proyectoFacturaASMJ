@@ -33,10 +33,11 @@
             android:layout_width="@dimen/cc_width_ivCustomer"
             android:layout_height="@dimen/cc_height_ivCustomer"
             android:scaleType="centerInside"
-            app:civ_border_color="@color/seed"
             android:src="@drawable/kiwidiner_background"
+            app:civ_border_color="@color/seed"
 
             app:civ_border_width="@dimen/customer_border_ivCustomer"
+            app:layout_constraintBottom_toTopOf="@+id/cc_glhalf"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/customer_creation_glTop" />

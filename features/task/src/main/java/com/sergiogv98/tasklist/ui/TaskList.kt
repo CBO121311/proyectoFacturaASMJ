@@ -16,6 +16,8 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.moronlu18.invoice.base.BaseFragmentDialog
 import com.moronlu18.invoice.ui.MainActivity
@@ -52,6 +54,18 @@ class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
         setUpToolBar()
         initRecyclerViewTask()
         setUpFab()
+
+        var appBarConfiguration =
+            AppBarConfiguration.Builder(R.id.taskList)
+                .setOpenableLayout((requireActivity() as MainActivity).drawer)
+                .build()
+
+        NavigationUI.setupWithNavController(
+            (requireActivity() as MainActivity).toolbar,
+            findNavController(),
+            appBarConfiguration
+        )
+
 
         viewModel.getState().observe(viewLifecycleOwner) {
             when (it) {

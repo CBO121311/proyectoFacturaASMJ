@@ -14,11 +14,21 @@ import kotlinx.coroutines.flow.Flow
 interface CustomerDao {
     @Insert (onConflict = OnConflictStrategy.REPLACE)
     fun insert(customer: Customer): Long
-    @Query ("SELECT * FROM customer")
+
+    @Query ("SELECT * FROM customer ORDER BY id")
     fun  selectAll(): Flow<List<Customer>>
+    @Query ("SELECT * FROM customer ORDER BY name ASC")
+    fun  selectAllName(): Flow<List<Customer>>
+
+    @Query ("SELECT * FROM customer ORDER BY name DESC")
+    fun  selectAllNameDesc(): Flow<List<Customer>>
+
+    @Query ("SELECT * FROM customer ORDER BY email ASC")
+    fun  selectAllEmail(): Flow<List<Customer>>
+
 
     @Query("SELECT * FROM customer WHERE id = :customerId")
-    fun getCustomerById(customerId: CustomerId): Customer?
+    fun selectCustomerById(customerId: CustomerId): Customer?
 
     @Query("SELECT name FROM customer WHERE id = :customerId")
     fun getNameById(customerId: CustomerId): String?

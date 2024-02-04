@@ -12,6 +12,8 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.moronlu18.invoicelist.R
 import com.mto.invoice.adapter.list.FacturaAdapter
@@ -43,6 +45,17 @@ class InvoiceList : Fragment(), MenuProvider {
         setUpToolbar()
         setUpFab()
         initRecyclerView()
+
+        var appBarConfiguration =
+            AppBarConfiguration.Builder(R.id.invoiceList)
+                .setOpenableLayout((requireActivity() as MainActivity).drawer)
+                .build()
+
+        NavigationUI.setupWithNavController(
+            (requireActivity() as MainActivity).toolbar,
+            findNavController(),
+            appBarConfiguration
+        )
 
         viewmodel.getState().observe(viewLifecycleOwner) {
             when (it) {

@@ -42,34 +42,24 @@ class CustomerViewModel : ViewModel() {
     }
 
     /**
-     * Añade un cliente al repositorio.
+     * Añade un cliente.
      */
     fun addCustomer(customer: Customer) {
         customerProviderDB.insert(customer)
     }
 
     /**
-     * Actualiza un cliente en el repositorio. Esto solo se hace en el modo editar.
+     * Actualiza un cliente.
      */
     fun updateCustomer(customer: Customer) {
-
-        //customerProviderDB.insert(customer)
-
         customerProviderDB.update(customer)
     }
 
     /**
-     * Devuelve el siguiente ID autogenerado, que es el máximo ID + 1.
+     * Devuelve el siguiente ID autogenerado, que es el máximo ID de la tabla + 1.
      */
     fun getNextCustomerId(): Int {
         return 1 + (customerProviderDB.getLastCustomerId() ?: 0)
-    }
-
-    /**
-     * Ordena la lista de cliente de manera personalizado en base al id
-     */
-    fun sortRefresh() {
-        //customerProviderDB.CustomerdataSet.sort()
     }
 
     /**

@@ -1,10 +1,12 @@
 package com.cbo.customer.ui
 
 
+
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
+
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -31,10 +33,10 @@ class CustomerCreation : Fragment() {
     private var _binding: FragmentCustomerCreationBinding? = null
     private val binding get() = _binding!!
     private lateinit var launcher: ActivityResultLauncher<String>
+    private var selectimgUri: Uri? = null
+
     private val viewModel: CustomerViewModel by viewModels()
-
     private val args: CustomerCreationArgs by navArgs()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,10 +49,12 @@ class CustomerCreation : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setUpGallery()
+
         setUpFab()
 
         //El observable
@@ -103,10 +107,10 @@ class CustomerCreation : Fragment() {
 
         binding.customerCreationTietCity.setText(customerEdit.city)
 
-        if (customerEdit.phototrial != null) {
-            binding.customerCreationImgcAvatar.setImageResource(customerEdit.phototrial!!)
-        } else {
+        if (customerEdit.photo != null) {
             binding.customerCreationImgcAvatar.setImageBitmap(customerEdit.photo)
+        } else {
+            binding.customerCreationImgcAvatar.setImageResource(R.drawable.kiwidinero)
         }
     }
 
@@ -117,36 +121,31 @@ class CustomerCreation : Fragment() {
      */
     private fun onSuccessCreate() {
 
-        val phone: String = if (binding.customerCreationTietPhone.text.toString().isNotBlank()) {
+        val phone: String? = if (binding.customerCreationTietPhone.text.toString().isNotBlank()) {
             String.format(
                 binding.customerCreationCcp.selectedCountryCodeWithPlus + " " +
                         binding.customerCreationTietPhone.text.toString()
             )
         } else {
-            ""
+            null
         }
         val customer: Customer? = args.customnav
 
 
         if (customer != null) {
 
-            /*val updatedCustomer = Customer.create( id = binding.customerCreationTvIdCustomer.text.toString().toInt(),
-                name = binding.customerCreationTietNameCustomer.text.toString(),
-                email = Email(binding.customerCreationTietEmailCustomer.text.toString()),
-                phone = phone,
-                city = binding.customerCreationTietCity.text.toString(),
-                address = binding.customerCreationTietAddress.text.toString(),
-                photo = getbitMap(binding.customerCreationImgcAvatar))*/
-            //customer = updatedCustomer
-
             customer.name = binding.customerCreationTietNameCustomer.text.toString()
             customer.email = Email(binding.customerCreationTietEmailCustomer.text.toString())
             customer.phone = phone
-            customer.city = binding.customerCreationTietCity.text.toString()
-            customer.address = binding.customerCreationTietAddress.text.toString()
+            customer.city =
+                if (binding.customerCreationTietCity.text.isNullOrBlank()) null else binding.customerCreationTietCity.text.toString()
+            customer.address =
+                if (binding.customerCreationTietAddress.text.isNullOrBlank()) null else binding.customerCreationTietAddress.text.toString()
+            //customer.photo = selectedImageUri
             customer.photo = getbitMap(binding.customerCreationImgcAvatar)
 
             viewModel.updateCustomer(customer)
+            getbitMap(binding.customerCreationImgcAvatar)
 
         } else {
             val id = viewModel.getNextCustomerId()
@@ -155,8 +154,9 @@ class CustomerCreation : Fragment() {
                 name = binding.customerCreationTietNameCustomer.text.toString(),
                 email = Email(binding.customerCreationTietEmailCustomer.text.toString()),
                 phone = phone,
-                city = binding.customerCreationTietCity.text.toString(),
-                address = binding.customerCreationTietAddress.text.toString(),
+                city = if (binding.customerCreationTietCity.text.isNullOrBlank()) null else binding.customerCreationTietCity.text.toString(),
+                address = if (binding.customerCreationTietAddress.text.isNullOrBlank()) null else binding.customerCreationTietAddress.text.toString(),
+                //photo = selectedImageUri!!
                 photo = getbitMap(binding.customerCreationImgcAvatar)
             )
             viewModel.addCustomer(newCustomer)
@@ -166,25 +166,8 @@ class CustomerCreation : Fragment() {
     }
 
 
-    /**
-     * Configura la galería para permitir al usuario seleccionar una imagen del dispositivo.
-     */
-    private fun setUpGallery() {
-
-        launcher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            if (uri != null) {
-                binding.customerCreationImgcAvatar.setImageURI(uri)
-            }
-        }
-        binding.customerCreationImgbtnCustomer.setOnClickListener {
-            launcher.launch("image/*")
-        }
-    }
 
 
-    /**
-     * Obtiene un Bitmap a partir de la imagen actual de la ImageView.
-     */
 
     private fun getbitMap(imageView: ImageView): Bitmap {
         val bitmap = Bitmap.createBitmap(imageView.width, imageView.height, Bitmap.Config.ARGB_8888)
@@ -192,6 +175,48 @@ class CustomerCreation : Fragment() {
         imageView.draw(canvas)
         return bitmap
     }
+    private fun setUpGallery() {
+
+        launcher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            if (uri != null) {
+                binding.customerCreationImgcAvatar.setImageURI(uri)
+                //onImageSelected(uri)
+            }
+        }
+        binding.customerCreationImgbtnCustomer.setOnClickListener {
+            launcher.launch("image/*")
+        }
+    }
+
+    private fun onImageSelected(uri: Uri) {
+        //selectimgUri = uri
+    }
+
+
+
+    /**
+     * Configura el launcher para el resultado de la galería.
+     */
+    /*private fun setUpGallery() {
+
+        launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = it.data
+                val imageUri = data?.data
+                binding.customerCreationImgcAvatar.setImageURI(imageUri)
+                onImageSelected(imageUri!!)
+            }
+        }
+    }*/
+
+    /**
+     * Abre la galería para permitir al usuario seleccionar una imagen del dispositivo.
+     */
+    /*private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        launcher.launch(intent)
+    }*/
+
 
     /**
      * Configura la visibilidad del botón flotante.
@@ -202,7 +227,6 @@ class CustomerCreation : Fragment() {
             visibility = View.GONE
         }
     }
-
 
     /**
      * TextWatcher para anular el mensaje de error en un TextInputLayout.

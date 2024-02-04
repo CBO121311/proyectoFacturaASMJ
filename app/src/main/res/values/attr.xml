@@ -1,0 +1,5 @@
+<resources>
+    <declare-styleable name="BottomAppBar">
+        <attr name="fabAttached" format="boolean" />
+    </declare-styleable>
+</resources>
