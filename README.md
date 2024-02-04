@@ -1,6 +1,14 @@
 Invoice versión 3, es la aplicación que se está realizando de manera modular para el estudio de todo el temario de la asignatura ✨DEINT.✨
 
  ## Historial de versiones
+  - ------------------------
+### V3.9.7 (04/02/2024)
+ *Escrito por CBO121311*
+ - Se ha modificado Customer para que utilice Uri de vez de Bitmap.
+ - El drawer se ha modificado para que te lleve a cada módulo.
+ - Correción de error al editar un customer.
+ - Preparado ciertos detalles para utilizar BottomAppBar, actualmente está anulado.
+
  - ------------------------
 ### V3.9.5 (04/02/2024)
  *Escrito por SergioGV98*
