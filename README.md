@@ -1,6 +1,14 @@
 Invoice versión 3, es la aplicación que se está realizando de manera modular para el estudio de todo el temario de la asignatura ✨DEINT.✨
 
  ## Historial de versiones
+ - ------------------------
+### V3.8.2 (04/02/2024)
+ *Escrito por mateotamayoo*
+ - Modificaciones necesarias para que el módulo pueda añadir y editar usando los datos de la tabla(borrado ha sido desactivado temporalmente)
+ - Cambios en los adaptadores y en los viewmodels
+ - Añadidos valores por defecto en la base de datos para invoice y line_item
+
+- ------------------------
 - ------------------------
 ### V3.8.1 (01/02/2024)
  *Escrito por CBO121311*

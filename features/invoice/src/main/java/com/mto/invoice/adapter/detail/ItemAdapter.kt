@@ -26,13 +26,21 @@ class ItemAdapter(private val itemList: List<Item>, private val onClickListener:
         val binding = ItemItemdetailBinding.bind(view)
 
         fun render(itemModel: Item, onClickListener: (Item) -> Unit) {
-            binding.invoicedItemItemTvName.text = itemModel.name
+            binding.invoicedItemItemTvName.text = truncarString(itemModel.name)
             binding.invoicedItemItemTvDescription.text = itemModel.description
             binding.invoicedItemItemTvTypeContent.text = itemModel.type.name
             binding.invoicedItemItemTvRateContent.text = itemModel.price.toString()
             //ToDo fallo por la foto del item
             //binding.invoicedItemItemIvItem.setImageResource(itemModel.photo!!)
             itemView.setOnClickListener { onClickListener(itemModel) }
+        }
+
+        fun truncarString(str: String): String {
+            return if (str.length > 14) {
+                str.substring(0, 12) + "..."
+            } else {
+                str
+            }
         }
     }
 
