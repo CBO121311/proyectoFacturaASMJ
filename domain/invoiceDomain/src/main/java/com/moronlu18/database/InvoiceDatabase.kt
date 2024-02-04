@@ -77,8 +77,8 @@ import java.time.Instant
     ItemIdTypeConverter::class,
     ItemTypeConverter::class,
     ItemVatTypeConverter::class,
-    PhotoTypeConverter::class,
-    //UriTypeConverter::class
+    //PhotoTypeConverter::class,
+    UriTypeConverter::class
 )
 abstract class InvoiceDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
@@ -122,8 +122,8 @@ abstract class InvoiceDatabase : RoomDatabase() {
                 .addTypeConverter(ItemIdTypeConverter())
                 .addTypeConverter(ItemTypeConverter())
                 .addTypeConverter(ItemVatTypeConverter())
-                //.addTypeConverter(UriTypeConverter())
-                .addTypeConverter(PhotoTypeConverter())
+                .addTypeConverter(UriTypeConverter())
+                //.addTypeConverter(PhotoTypeConverter())
                 .addCallback(
                     RoomDbInitializer(INSTANCE)
                     //Es una clase que implemente que la interfaz
@@ -192,7 +192,7 @@ abstract class InvoiceDatabase : RoomDatabase() {
                         "Auckland",
                         "Main Street, 123",
 
-                        photo = Locator.getResourceBitmapV2(R.drawable.kiwituxedo)
+                        photo = Locator.getResourceUri(R.drawable.kiwituxedo)
                     )
                 )
 
@@ -204,7 +204,7 @@ abstract class InvoiceDatabase : RoomDatabase() {
                         "+49 123456789",
                         "Berlín",
                         "Kurfürstendamm, 123",
-                        photo = Locator.getResourceBitmapV2(R.drawable.elephantuxedo)
+                        photo = Locator.getResourceUri(R.drawable.elephantuxedo)
 
                     )
                 )
@@ -214,7 +214,7 @@ abstract class InvoiceDatabase : RoomDatabase() {
                         CustomerId(customId++),
                         "Alejandro López",
                         Email("cebolla@example.com"),
-                        photo = Locator.getResourceBitmapV2(R.drawable.cbotuxedo)
+                        photo = Locator.getResourceUri(R.drawable.cbotuxedo)
                     )
                 )
 
@@ -226,7 +226,7 @@ abstract class InvoiceDatabase : RoomDatabase() {
                         "+34 687223344",
                         "Valencia",
                         "Avenida Reino de Valencia, 789",
-                        photo = Locator.getResourceBitmapV2(R.drawable.kangorutuxedo)
+                        photo = Locator.getResourceUri(R.drawable.kangorutuxedo)
                     )
                 )
             }

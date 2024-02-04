@@ -67,7 +67,7 @@ class FacturaAdapter(
             }
 
             if (customer?.photo != null) {
-                binding.itemFacturaIvKiwi.setImageBitmap(customer.photo)
+                binding.itemFacturaIvKiwi.setImageURI(customer.photo)
             } else {
                 binding.itemFacturaIvKiwi.setImageResource(R.drawable.kiwidinero)
             }

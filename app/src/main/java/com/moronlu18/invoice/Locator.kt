@@ -40,7 +40,7 @@ object Locator {
         DataStorePreferencesRepository(requireApplication.settingsStore)
     }
 
-    val appResources: Resources
+    private val appResources: Resources
         get() = requireApplication.resources
 
     fun convertirRecursoABitmap(resourceId: Int): Bitmap {

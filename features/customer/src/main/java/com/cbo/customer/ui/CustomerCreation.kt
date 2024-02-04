@@ -2,8 +2,6 @@ package com.cbo.customer.ui
 
 
 
-import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
 
@@ -12,7 +10,6 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -20,6 +17,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.cbo.customer.usecase.CustomerViewModel
 import com.google.android.material.textfield.TextInputLayout
 import com.moronlu18.data.customer.Customer
@@ -52,6 +50,7 @@ class CustomerCreation : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         setUpGallery()
 
@@ -108,7 +107,7 @@ class CustomerCreation : Fragment() {
         binding.customerCreationTietCity.setText(customerEdit.city)
 
         if (customerEdit.photo != null) {
-            binding.customerCreationImgcAvatar.setImageBitmap(customerEdit.photo)
+            binding.customerCreationImgcAvatar.setImageURI(customerEdit.photo)
         } else {
             binding.customerCreationImgcAvatar.setImageResource(R.drawable.kiwidinero)
         }
@@ -131,7 +130,9 @@ class CustomerCreation : Fragment() {
         }
         val customer: Customer? = args.customnav
 
-
+        if (selectimgUri == null) {
+               selectimgUri = defaulImageUri(R.drawable.kiwidinero)
+           }
         if (customer != null) {
 
             customer.name = binding.customerCreationTietNameCustomer.text.toString()
@@ -141,11 +142,10 @@ class CustomerCreation : Fragment() {
                 if (binding.customerCreationTietCity.text.isNullOrBlank()) null else binding.customerCreationTietCity.text.toString()
             customer.address =
                 if (binding.customerCreationTietAddress.text.isNullOrBlank()) null else binding.customerCreationTietAddress.text.toString()
-            //customer.photo = selectedImageUri
-            customer.photo = getbitMap(binding.customerCreationImgcAvatar)
+            customer.photo = selectimgUri
+            //customer.photo = getbitMap(binding.customerCreationImgcAvatar)
 
             viewModel.updateCustomer(customer)
-            getbitMap(binding.customerCreationImgcAvatar)
 
         } else {
             val id = viewModel.getNextCustomerId()
@@ -156,8 +156,8 @@ class CustomerCreation : Fragment() {
                 phone = phone,
                 city = if (binding.customerCreationTietCity.text.isNullOrBlank()) null else binding.customerCreationTietCity.text.toString(),
                 address = if (binding.customerCreationTietAddress.text.isNullOrBlank()) null else binding.customerCreationTietAddress.text.toString(),
-                //photo = selectedImageUri!!
-                photo = getbitMap(binding.customerCreationImgcAvatar)
+                photo = selectimgUri
+                //photo = getbitMap(binding.customerCreationImgcAvatar)
             )
             viewModel.addCustomer(newCustomer)
             //viewModel.sortRefresh()
@@ -165,22 +165,23 @@ class CustomerCreation : Fragment() {
         findNavController().popBackStack()
     }
 
-
-
-
-
-    private fun getbitMap(imageView: ImageView): Bitmap {
-        val bitmap = Bitmap.createBitmap(imageView.width, imageView.height, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        imageView.draw(canvas)
-        return bitmap
+    private fun defaulImageUri(resourceId: Int): Uri {
+        return Uri.parse("android.resource://${requireContext().packageName}/$resourceId")
     }
+    private fun loadSelectedImage(uri: Uri) {
+        Glide.with(this)
+            .load(uri)
+            .into(binding.customerCreationImgcAvatar)
+    }
+
+
     private fun setUpGallery() {
 
         launcher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             if (uri != null) {
-                binding.customerCreationImgcAvatar.setImageURI(uri)
-                //onImageSelected(uri)
+                loadSelectedImage(uri)
+                //binding.customerCreationImgcAvatar.setImageURI(uri)
+                onImageSelected(uri)
             }
         }
         binding.customerCreationImgbtnCustomer.setOnClickListener {
@@ -189,7 +190,7 @@ class CustomerCreation : Fragment() {
     }
 
     private fun onImageSelected(uri: Uri) {
-        //selectimgUri = uri
+        selectimgUri = uri
     }
 
 

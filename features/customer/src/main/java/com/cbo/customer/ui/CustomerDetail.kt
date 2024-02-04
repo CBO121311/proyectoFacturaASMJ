@@ -80,7 +80,7 @@ class CustomerDetail : Fragment(), MenuProvider {
             it.addressCustomer.value = isValue(customer.address)
         }
         if (customer.photo != null) {
-            binding.customerDetailCiPhoto.setImageBitmap(customer.photo)
+            binding.customerDetailCiPhoto.setImageURI(customer.photo)
         } else {
             binding.customerDetailCiPhoto.setImageResource(R.drawable.kiwidinero)
         }

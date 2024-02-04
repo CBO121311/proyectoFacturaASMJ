@@ -72,7 +72,7 @@ class TaskDetail : Fragment() {
         val customer = viewModel.getCustomer(task.customerId)
 
         if (customer?.photo!=null){
-            binding.taskDetailsClientImageView.setImageBitmap(customer?.photo)
+            binding.taskDetailsClientImageView.setImageURI(customer?.photo)
         }else{
             binding.taskDetailsClientImageView.setImageResource(R.drawable.kiwidinero)
         }

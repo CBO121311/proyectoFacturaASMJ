@@ -79,7 +79,7 @@ class CustomerAdapter(
 
                 if(customer.photo!= null){
 
-                    customerListIvCliente.setImageBitmap(customer.photo)
+                    customerListIvCliente.setImageURI(customer.photo)
                 }else{
                     customerListIvCliente.setImageResource(R.drawable.kiwidinero)
                 }

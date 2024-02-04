@@ -29,8 +29,8 @@ data class Customer(
     var phone: String? = null,
     var city: String? = null,
     var address: String? = null,
-    @TypeConverters(PhotoTypeConverter::class)
-    var photo: Bitmap? = null
+    @TypeConverters(UriTypeConverter::class)
+    var photo: Uri? = null
     ) : Parcelable, Comparable<Customer> {
     override fun compareTo(other: Customer): Int {
         return name.lowercase().compareTo(other.name.lowercase())
@@ -43,7 +43,7 @@ data class Customer(
             phone: String?,
             city: String?,
             address: String?,
-            photo: Bitmap
+            photo: Uri?
         ): Customer {
             return Customer(
                 id = CustomerId(id),
