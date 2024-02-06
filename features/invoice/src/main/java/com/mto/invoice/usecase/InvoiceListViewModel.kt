@@ -66,6 +66,7 @@ class InvoiceListViewModel : ViewModel() {
                 }
 
                 is ResourceList.Error -> state.value = InvoiceListState.NoDataSet
+                else -> {}
             }
         }
     }

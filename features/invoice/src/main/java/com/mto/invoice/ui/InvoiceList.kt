@@ -62,6 +62,7 @@ class InvoiceList : Fragment(), MenuProvider {
                 is InvoiceListState.Loading -> showProgressBar(it.value)
                 InvoiceListState.NoDataSet -> showNoData()
                 is InvoiceListState.Success -> onSuccess()
+                else -> {}
             }
         }
         viewmodel.allInvoice.observe(viewLifecycleOwner) {

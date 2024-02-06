@@ -18,7 +18,7 @@
 
     <string name="invoiceStatusPendiente">Pendiente</string>
     <string name="invoiceStatusPagada">Pagada</string>
-    <string name="invoiceStatusVencida">Vencidad</string>
+    <string name="invoiceStatusVencida">Vencida</string>
 
     <string name="tieCliente">Cliente:</string>
     <string name="tieFechaEm">Fecha de emisión: </string>
