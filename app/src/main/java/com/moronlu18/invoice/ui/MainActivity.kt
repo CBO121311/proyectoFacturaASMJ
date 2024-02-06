@@ -1,7 +1,7 @@
 package com.moronlu18.invoice.ui
 
 
-import android.database.CursorWindow
+
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -19,7 +19,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.moronlu18.invoice.R
 import com.moronlu18.invoice.databinding.ActivityMainBinding
 import com.moronlu18.invoice.utils.showToast
-import java.lang.reflect.Field
 
 
 class MainActivity : AppCompatActivity() {
@@ -45,7 +44,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
         //Todo
         //Sustituir la AppBar por defecto por el widget Toolbar de nuestro layout
         setSupportActionBar(binding.content.toolbar)
@@ -67,7 +65,6 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
 
-
         //Yo le digo que se configure la barra de navegación con este grafo
         //2. Se crea la configuración de la App Bar con el control de la apertura y cierre del DrawerLayout
         appBarConfiguration =
@@ -86,7 +83,6 @@ class MainActivity : AppCompatActivity() {
         //setupActionBarWithNavController(navController, appBarConfiguration)
 
 
-
         //Si utilizo estas tres últimos líneas de código puedo resetear la barra de navegación.
 
 
@@ -97,53 +93,53 @@ class MainActivity : AppCompatActivity() {
         //Configurar evento click del menu Nav_View.
         setupNavigationView()
 
-        val toolbar = binding.content.toolbar
+        /*val toolbar = binding.content.toolbar
         setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)^*/
 
         //Todo Esto se añadio por el tema de tamaño del bitmap
-        try {
+        /*try {
             val field: Field = CursorWindow::class.java.getDeclaredField("sCursorWindowSize")
             field.setAccessible(true)
             field.set(null, 100 * 1024 * 1024) //thef 100MB is the new size
         } catch (e: Exception) {
             e.printStackTrace()
-        }
+        }*/
 
     }
 
     /**
      * Implementar el listener de las opciones del menú del componente Nav_view
      */
-    private fun setupNavigationView(){
-     binding.navView.setNavigationItemSelectedListener { mItem->
-         when(mItem.itemId){
-             R.id.action_customer ->{
-                 navController.navigate(R.id.nav_graph_customer)
-                 //showToast("He pulsado Invoice")
-             }
+    private fun setupNavigationView() {
+        binding.navView.setNavigationItemSelectedListener { mItem ->
+            when (mItem.itemId) {
+                R.id.action_customer -> {
+                    navController.navigate(R.id.nav_graph_customer)
+                    //showToast("He pulsado Invoice")
+                }
 
-             R.id.action_item ->{
-                 navController.navigate(R.id.nav_graph_item)
-                 //showToast("He pulsado Invoice")
-             }
+                R.id.action_item -> {
+                    navController.navigate(R.id.nav_graph_item)
+                    //showToast("He pulsado Invoice")
+                }
 
-             R.id.action_task ->{
-                 navController.navigate(R.id.nav_graph_task)
-                 //showToast("He pulsado Invoice")
-             }
+                R.id.action_task -> {
+                    navController.navigate(R.id.nav_graph_task)
+                    //showToast("He pulsado Invoice")
+                }
 
-             R.id.action_invoice ->{
-                 navController.navigate(R.id.nav_graph_invoice)
-             }
+                R.id.action_invoice -> {
+                    navController.navigate(R.id.nav_graph_invoice)
+                }
 
-             else -> {
-                 showToast("Opción invalida")
-             }
-         }
-         binding.drawerLayout.closeDrawer(GravityCompat.START)
-         true
-     }
+                else -> {
+                    showToast("Opción invalida")
+                }
+            }
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+            true
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -186,9 +182,9 @@ class MainActivity : AppCompatActivity() {
      */
     //Solo si la caja está abierta es cuando lo cerramos.
     override fun onBackPressed() {
-        if(binding.drawerLayout.isDrawerOpen(GravityCompat.START))
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START))
             binding.drawerLayout.closeDrawer(GravityCompat.START)
         else //dejamos que el SO haga su función
-        super.onBackPressed()
+            super.onBackPressed()
     }
 }

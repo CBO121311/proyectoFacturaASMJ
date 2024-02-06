@@ -6,18 +6,18 @@
     <item
         android:id = "@+id/action_customer"
         android:icon="@drawable/ic_person"
-        android:title="Clientes"/>
+        android:title="@string/txvCustomer"/>
     <item
         android:id = "@+id/action_item"
         android:icon="@drawable/ic_action_item"
-        android:title="Articulos"/>
+        android:title="@string/txvItem"/>
     <item
         android:id = "@+id/action_invoice"
-        android:icon="@android:drawable/ic_menu_call"
-        android:title="Facturas"/>
+        android:icon="@drawable/ic_action_invoice"
+        android:title="@string/txvInvoice"/>
     <item
         android:id="@+id/action_task"
-        android:icon="@android:drawable/ic_lock_lock"
-        android:title="Tareas"
+        android:icon="@drawable/ic_action_task"
+        android:title="@string/txvTask"
         />
 </menu>

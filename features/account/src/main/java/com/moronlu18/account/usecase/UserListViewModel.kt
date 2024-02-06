@@ -47,7 +47,7 @@ class UserListViewModel : ViewModel() {
      * Función que pide el listado de usuarios al repositorio
      */
     fun getUserList() {
-        //El flow tiene ya de por si una corrutina, podemos el viewmodelscope launch.
+
         when {
             allUser.value?.isEmpty() == true -> state.value = UserListState.NoDataError
             else -> state.value = UserListState.Success

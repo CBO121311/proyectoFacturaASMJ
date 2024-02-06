@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#9F8AEA"
+        android:background="#B6A7EC"
         app:headerLayout="@layout/header_nav"
         app:menu="@menu/menu_drawer"
         />

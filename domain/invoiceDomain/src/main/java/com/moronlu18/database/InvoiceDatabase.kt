@@ -23,7 +23,6 @@ import com.moronlu18.data.converter.InvoiceStatusTypeConverter
 import com.moronlu18.data.converter.ItemIdTypeConverter
 import com.moronlu18.data.converter.ItemTypeConverter
 import com.moronlu18.data.converter.ItemVatTypeConverter
-import com.moronlu18.data.converter.PhotoTypeConverter
 import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.converter.TaskIdTypeConverter
 import com.moronlu18.data.converter.TaskStatusConverter
@@ -95,7 +94,6 @@ abstract class InvoiceDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: InvoiceDatabase? = null
 
-        //Nosotros no propagamos desde el getInstance
         fun getInstance(): InvoiceDatabase {
             return INSTANCE ?: synchronized(InvoiceDatabase::class) {
                 val instance = buildDatabase()
@@ -104,7 +102,6 @@ abstract class InvoiceDatabase : RoomDatabase() {
             }
         }
 
-        //El contexto
         private fun buildDatabase(): InvoiceDatabase {
             return Room.databaseBuilder(
                 Locator.requireApplication, InvoiceDatabase::class.java, "Invoice"
@@ -231,6 +228,7 @@ abstract class InvoiceDatabase : RoomDatabase() {
                 )
             }
         }
+
         private fun populateInvoice() {
             getInstance().invoiceDao().insert(
                 Invoice(
@@ -323,8 +321,6 @@ abstract class InvoiceDatabase : RoomDatabase() {
                 )
             )
         }
-
-
 
 
         private fun populateTask() {

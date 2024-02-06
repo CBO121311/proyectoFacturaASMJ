@@ -43,12 +43,12 @@
     <string name="about_authors_sergdesc">Task module manager</string>
     <string name="progress_dialog_title">Waiting...</string>
     <string name="dialog_warning_title">Understood</string>
-    <string name="dashboard_txvCustomer">Customers</string>
-    <string name="dashboard_txvTask">Tasks</string>
-    <string name="dashboard_txvInvoice">Invoices</string>
+    <string name="txvCustomer">Customers</string>
+    <string name="txvTask">Tasks</string>
+    <string name="txvInvoice">Invoices</string>
     <string name="dashboard_txvSignOut">Sign Out</string>
     <string name="dashboard_txvAbout">About</string>
-    <string name="dashboard_txvItem">Items</string>
+    <string name="txvItem">Items</string>
     <string name="dashboard_txvSignUp">Sign Up</string>
     <string name="dashboard_txvSignIn">Sign In</string>
     <string name="pr_title_item">Items</string>

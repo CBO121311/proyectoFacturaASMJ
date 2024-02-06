@@ -2,9 +2,9 @@ package com.cbo.customer.ui
 
 
 
+
 import android.net.Uri
 import android.os.Bundle
-
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -35,6 +35,7 @@ class CustomerCreation : Fragment() {
 
     private val viewModel: CustomerViewModel by viewModels()
     private val args: CustomerCreationArgs by navArgs()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,7 +47,6 @@ class CustomerCreation : Fragment() {
 
         return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
