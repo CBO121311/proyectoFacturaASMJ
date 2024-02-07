@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.base.TaskId
 import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.task.Task
@@ -28,8 +29,30 @@ interface TaskDao {
     @Query("SELECT * FROM task ORDER BY id ASC LIMIT 1 OFFSET :position")
     fun getTaskByPosition(position: Int): Task?
 
+    @Query("SELECT name FROM customer")
+    fun getAllCustomerNames(): List<String>
+
+    @Query("SELECT * FROM customer WHERE id = :customerId")
+    fun selectCustomerById(customerId: CustomerId): Customer?
+
+    @Query ("SELECT * FROM task ORDER BY id")
+    fun  selectAllById(): Flow<List<Task>>
+
+    @Query ("SELECT * FROM task ORDER BY nomTask")
+    fun  selectAllByName(): Flow<List<Task>>
+
+    @Query ("SELECT * FROM customer ORDER BY name ASC")
+    fun  selectAllCustomerName(): Flow<List<Customer>>
+
+    @Query ("SELECT * FROM customer ORDER BY name DESC")
+    fun  selectAllCustomerNameDesc(): Flow<List<Customer>>
+
     @Query("SELECT MAX(id) FROM task")
     fun getLastTaskId(): Int?
+
+    @Query("SELECT * FROM task WHERE customerId = :customerId")
+    fun selectTasksByCustomerId(customerId: CustomerId): List<Task>
+
 
     @Update
     fun update(task: Task)

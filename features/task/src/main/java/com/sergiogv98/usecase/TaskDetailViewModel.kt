@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.customer.Customer
-import com.moronlu18.repository.CustomerProviderDB
 import com.moronlu18.repository.TaskRepositoryBD
 import com.sergiogv98.tasklist.ui.TaskDetailState
 
@@ -20,7 +19,6 @@ class TaskDetailViewModel : ViewModel() {
     var dateEnd = MutableLiveData<String>()
     var taskDescription = MutableLiveData<String>()
     private var taskRepositoryBD = TaskRepositoryBD()
-    private var customerProviderDB = CustomerProviderDB()
 
     /*
     fun getCustomerPhoto(customerId: Int): Customer {
@@ -28,11 +26,11 @@ class TaskDetailViewModel : ViewModel() {
     }*/
 
     fun getCustomerName(customerId: CustomerId): String? {
-        return customerProviderDB.getCustomerById(customerId)?.name
+        return taskRepositoryBD.getCustomerById(customerId)?.name
     }
 
     fun getCustomer(customerId: CustomerId): Customer? {
-        return customerProviderDB.getCustomerById(customerId)
+        return taskRepositoryBD.getCustomerById(customerId)
     }
 
     fun onSuccess(){

@@ -15,6 +15,7 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -25,6 +26,7 @@ import com.moronlu18.tasklist.R
 import com.sergiogv98.tasklist.adapter.TaskAdapter
 import com.moronlu18.tasklist.databinding.FragmentTaskListBinding
 import com.sergiogv98.usecase.TaskListViewModel
+import kotlinx.coroutines.launch
 
 
 class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
@@ -65,6 +67,11 @@ class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
             appBarConfiguration
         )
 
+        viewLifecycleOwner.lifecycleScope.launch {
+            if (!viewModel.hasTasks()){
+                showNoData()
+            }
+        }
 
         viewModel.getState().observe(viewLifecycleOwner) {
             when (it) {
@@ -99,7 +106,6 @@ class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
         binding.taskListRecyclerTasks.visibility = View.VISIBLE
         binding.taskListLlEmpty.visibility = View.GONE
         binding.taskListLlEmptyImg.cancelAnimation()
-        //taskAdapter.update(dataset)
     }
 
     private fun navigateDetailTask(task: Task){
@@ -212,11 +218,6 @@ class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
         binding.taskListRecyclerTasks.visibility = View.GONE
         binding.taskListLlEmpty.visibility = View.VISIBLE
         binding.taskListLlEmptyImg.playAnimation()
-    }
-
-    private fun showNothing() {
-        binding.taskListRecyclerTasks.visibility = View.GONE
-        binding.taskListLlEmpty.visibility = View.GONE
     }
 
     private fun showProgressBar(value: Boolean) {

@@ -5,7 +5,6 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
@@ -25,7 +23,6 @@ import com.moronlu18.data.task.TypeTask
 import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.tasklist.databinding.FragmentTaskCreationBinding
 import com.sergiogv98.usecase.TaskCreationViewModel
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.LocalDate
@@ -42,7 +39,6 @@ class TaskCreation : Fragment() {
     private val calendar = Calendar.getInstance()
     private val viewModel: TaskCreationViewModel by viewModels()
     private val args: TaskCreationArgs by navArgs()
-    private lateinit var customerNameList: List<String>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,7 +51,6 @@ class TaskCreation : Fragment() {
 
         binding.autoCompleteTxt.addTextChangedListener(GeneralTextWatcher(binding.taskCreationTaskDropdown))
         binding.taskCreationTxvTaskName.addTextChangedListener(GeneralTextWatcher(binding.taskCreationTaskTilName))
-        customerNameList = viewModel.giveListCustomer()
         return binding.root
     }
 
@@ -63,7 +58,6 @@ class TaskCreation : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setUpFab()
-        clientDropDownInit(customerNameList)
 
         binding.taskCreationImgCalendarCreation.setOnClickListener {
             showDatePicker(binding.taskCreationDateCreationTxtShow)
@@ -91,6 +85,9 @@ class TaskCreation : Fragment() {
 
         if(task != null){
             setTaskContent(task)
+            clientDropDownInit(task)
+        } else {
+            clientDropDownInit(null)
         }
 
     }
@@ -122,14 +119,18 @@ class TaskCreation : Fragment() {
 
     }
 
-    private fun clientDropDownInit(customerNameList: List<String>) {
-        binding.autoCompleteTxt.setAdapter(
-            ArrayAdapter(
-                requireContext(),
-                R.layout.simple_dropdown_item_1line,
-                customerNameList
-            )
-        )
+    private fun clientDropDownInit(task: Task?) {
+        val customerNameList = viewModel.giveListCustomer()
+
+        if(task != null){
+            binding.autoCompleteTxt.setText(viewModel.giveClientName(task.customerId))
+            viewModel.customerName.value = viewModel.giveClientName(task.customerId)
+
+            val editClientIndex = customerNameList.indexOf(viewModel.customerName.value)
+            binding.autoCompleteTxt.setSelection(editClientIndex)
+        }
+
+        binding.autoCompleteTxt.setAdapter(ArrayAdapter(requireContext(), R.layout.simple_dropdown_item_1line, customerNameList))
     }
 
     private fun onSuccessCreate() {
@@ -149,7 +150,6 @@ class TaskCreation : Fragment() {
 
             viewModel.updateTask(task)
         } else {
-            // Crear nueva tarea
             val id = viewModel.getNextTaskId()
             val newTask = Task.create(
                 id = id,

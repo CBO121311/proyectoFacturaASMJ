@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.moronlu18.repository.CustomerProviderDB
+import com.moronlu18.repository.TaskRepositoryBD
 import com.moronlu18.tasklist.R
 import com.moronlu18.tasklist.databinding.ItemTaskBinding
 import com.sergiogv98.utils.TaskUtils
@@ -69,18 +69,13 @@ class TaskAdapter(
         submitList(sortedList)
     }
 
-    fun deleteTask(task: Task) {
-        submitList(currentList - task)
-    }
-
-
     inner class TaskViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
         private val binding = ItemTaskBinding.bind(view)
 
         fun bind(task: Task) {
             with(binding) {
-                taskClientName.text = CustomerProviderDB().getCustomerById(task.customerId)?.name ?: "Fallo"
+                taskClientName.text = TaskRepositoryBD().getCustomerById(task.customerId)?.name ?: "Fallo"
                 taskName.text = task.nomTask
                 taskDescription.text = task.descTask
                 taskEndDate.text = TaskUtils().convertInstantToDateText(task.dateFinalization)

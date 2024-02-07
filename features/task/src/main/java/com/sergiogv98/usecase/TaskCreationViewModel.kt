@@ -1,19 +1,13 @@
 package com.sergiogv98.usecase
 
 import android.text.TextUtils
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.moronlu18.data.base.CustomerId
-import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.task.Task
-import com.moronlu18.repository.CustomerProviderDB
 import com.moronlu18.repository.TaskRepositoryBD
 import com.sergiogv98.tasklist.ui.TaskCreationState
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneOffset
@@ -27,7 +21,6 @@ class TaskCreationViewModel : ViewModel() {
     private var dateEnd = MutableLiveData<String>()
 
     private var taskRepositoryBD = TaskRepositoryBD()
-    private var customerProviderDB = CustomerProviderDB()
 
     private var state = MutableLiveData<TaskCreationState>()
     private var isEditor = MutableLiveData<Boolean>()
@@ -50,48 +43,16 @@ class TaskCreationViewModel : ViewModel() {
         return state
     }
 
-
-    fun taskGiveId(): Int {
-        return taskRepositoryBD.getLastTaskId()!!
-    }
-
-    suspend fun taskGiveCustomerId(nameCustomer: String): Customer? {
-        var result: Customer? = null
-
-        customerProviderDB.getCustomerList().collect { customerList ->
-            val matchingCustomer = customerList.find { it.name == nameCustomer }
-            result = matchingCustomer
-        }
-
-        return result
-    }
-
-    fun getTaskByPosition(posTask: Int): Task? {
-        return taskRepositoryBD.getTaskByPosition(posTask)
-    }
-
     fun getNextTaskId(): Int {
         return 1 + (taskRepositoryBD.getLastTaskId() ?: 0)
     }
 
     fun giveListCustomer(): List<String> {
-        val customerNames = mutableListOf<String>()
-        viewModelScope.launch {
-            customerProviderDB.getAllCustomerNames().collect { names ->
-                customerNames.addAll(names)
-            }
-            Log.i("giveListCustomer", customerNames.toString())
-        }
-        return customerNames
-    }
-
-    fun giveClientPosition(customerId: CustomerId): Int? {
-        val customer = customerProviderDB.getCustomerById(customerId)
-        return customer?.id?.value
+       return taskRepositoryBD.getAllCustomerNames()
     }
 
     fun giveClientName(customerId: CustomerId): String{
-        return customerProviderDB.getCustomerById(customerId)?.name ?: "Paco"
+        return taskRepositoryBD.getCustomerById(customerId)?.name ?: "Null"
     }
 
     fun addTaskRepository(task: Task){

@@ -4,19 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.task.Task
-import com.moronlu18.network.ResourceList
-import com.moronlu18.repository.TaskProvider
-import com.moronlu18.invoice.Locator
-import com.moronlu18.repository.CustomerProvider
 import com.sergiogv98.tasklist.ui.TaskListState
 import kotlinx.coroutines.launch
 import androidx.lifecycle.asLiveData
-import com.moronlu18.data.base.TaskId
-import com.moronlu18.database.InvoiceDatabase
+import com.moronlu18.invoice.Locator
 import com.moronlu18.repository.TaskRepositoryBD
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.firstOrNull
 
 class TaskListViewModel : ViewModel() {
 
@@ -28,27 +23,23 @@ class TaskListViewModel : ViewModel() {
         viewModelScope.launch {
             when{
                 allTask.value?.isEmpty() == true -> state.value = TaskListState.NoData
-                else -> state.value = TaskListState.Success
-            }
-
-            /*
-            when (result) {
-                is ResourceList.Success<*> -> {
-                    val task = result.data as ArrayList<Task>
-
-                    when (Locator.settingsPreferencesRepository.getSettingValue("tasksort", "id")) {
-                        "id" -> task.sortBy { it.id.value }
-                        "name_customer_asc" -> task.sortBy { getCustomer(it.customerId.value - 1) }
-                        "name_customer_desc" -> task.sortByDescending { getCustomer(it.customerId.value - 1) }
-                        "name_task" -> task.sortBy { it.nomTask }
+                else -> {
+                    allTask = when (Locator.settingsPreferencesRepository.getSettingValue("tasksort", "id")) {
+                        "id" -> taskRepositoryBD.getTaskListById().asLiveData()
+                        "name_customer_asc" -> taskRepositoryBD.getTaskOrderByCustomerName().asLiveData()
+                        "name_customer_desc" -> taskRepositoryBD.getTaskOrderByCustomerNameDesc().asLiveData()
+                        "name_task" -> taskRepositoryBD.getTaskOrderByName().asLiveData()
+                        else -> taskRepositoryBD.getTaskList().asLiveData()
                     }
 
-                    state.value = TaskListState.Success(task)
+                    state.value = TaskListState.Success
                 }
-
-                is ResourceList.Error -> state.value = TaskListState.NoData
-            }*/
+            }
         }
+    }
+
+    suspend fun hasTasks(): Boolean {
+        return taskRepositoryBD.getTaskList().firstOrNull()?.isNotEmpty() ?: false
     }
 
     fun deleteTask(task: Task) {

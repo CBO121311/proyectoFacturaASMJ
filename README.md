@@ -2,6 +2,12 @@ Invoice versión 3, es la aplicación que se está realizando de manera modular 
 
  ## Historial de versiones
   - ------------------------
+### V3.9.9 (07/02/2024)
+ *Escrito por SergioGV98*
+ - Se ha eliminado codigo innecesario, movido y mejorado el actual relacionado con tareas.
+ - Se ha corregido ciertos bugs en detalles.
+ - Se ha implementado las preferencias usando la base de datos(Posibles fallos).
+  - ------------------------
 ### V3.9.7 (04/02/2024)
  *Escrito por CBO121311*
  - Se ha modificado Customer para que utilice Uri de vez de Bitmap.

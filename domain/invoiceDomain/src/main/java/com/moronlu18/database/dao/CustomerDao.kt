@@ -26,12 +26,6 @@ interface CustomerDao {
     @Query ("SELECT * FROM customer ORDER BY email ASC")
     fun  selectAllEmail(): Flow<List<Customer>>
 
-    @Query("SELECT name FROM customer")
-    fun getAllCustomerNames(): Flow<List<String>>
-
-    @Query("SELECT * FROM customer WHERE id = :customerId")
-    fun selectCustomerById(customerId: CustomerId): Customer?
-
     @Query("SELECT name FROM customer WHERE id = :customerId")
     fun getNameById(customerId: CustomerId): String?
 
