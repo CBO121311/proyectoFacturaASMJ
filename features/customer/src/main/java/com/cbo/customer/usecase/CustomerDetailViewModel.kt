@@ -5,10 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cbo.customer.ui.CustomerDetailState
-import com.cbo.customer.ui.CustomerListState
 import com.moronlu18.data.customer.Customer
 import com.moronlu18.network.Resource
-import com.moronlu18.repository.CustomerProvider
 import com.moronlu18.repository.CustomerProviderDB
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -8,8 +8,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.asLiveData
 import com.cbo.customer.ui.CustomerListState
 import com.moronlu18.data.customer.Customer
-import com.moronlu18.network.ResourceList
-import com.moronlu18.repository.CustomerProvider
 import com.moronlu18.invoice.Locator
 import com.moronlu18.network.Resource
 import com.moronlu18.repository.CustomerProviderDB
@@ -32,7 +30,7 @@ class CustomerListViewModel : ViewModel() {
         viewModelScope.launch {
 
             when {
-                allCustomer.value?.isEmpty() == true -> state.value = CustomerListState.NoDataError
+                allCustomer.value?.isEmpty() == true  -> state.value = CustomerListState.NoDataError
 
                 else -> {
                     allCustomer = when (Locator.settingsPreferencesRepository.getSettingValue("customersort", "id")) {

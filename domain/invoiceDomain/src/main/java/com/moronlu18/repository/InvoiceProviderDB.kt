@@ -99,5 +99,9 @@ class InvoiceProviderDB {
 
         }
 
+        fun getCustomerById(customerId: CustomerId): Customer {
+            return InvoiceDatabase.getInstance().customerDao().selectCustomerById(customerId)!!
+
+        }
     }
 }
