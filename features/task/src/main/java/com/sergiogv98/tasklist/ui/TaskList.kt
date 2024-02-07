@@ -43,7 +43,6 @@ class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
         _binding = FragmentTaskListBinding.inflate(inflater, container, false)
         binding.viewmodel = this.viewModel
         binding.lifecycleOwner = this
-        showNothing()
 
         return binding.root
     }
@@ -55,7 +54,7 @@ class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
         initRecyclerViewTask()
         setUpFab()
 
-        var appBarConfiguration =
+        val appBarConfiguration =
             AppBarConfiguration.Builder(R.id.taskList)
                 .setOpenableLayout((requireActivity() as MainActivity).drawer)
                 .build()

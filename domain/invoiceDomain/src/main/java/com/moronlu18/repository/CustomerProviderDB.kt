@@ -34,6 +34,10 @@ class CustomerProviderDB {
         return InvoiceDatabase.getInstance().customerDao().selectAllEmail()
     }
 
+    fun getAllCustomerNames(): Flow<List<String>>{
+        return InvoiceDatabase.getInstance().customerDao().getAllCustomerNames()
+    }
+
     fun delete(customer: Customer): Resource {
         try {
             InvoiceDatabase.getInstance().customerDao().delete(customer)

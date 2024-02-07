@@ -42,6 +42,7 @@ class TaskCreation : Fragment() {
     private val calendar = Calendar.getInstance()
     private val viewModel: TaskCreationViewModel by viewModels()
     private val args: TaskCreationArgs by navArgs()
+    private lateinit var customerNameList: List<String>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,7 +55,7 @@ class TaskCreation : Fragment() {
 
         binding.autoCompleteTxt.addTextChangedListener(GeneralTextWatcher(binding.taskCreationTaskDropdown))
         binding.taskCreationTxvTaskName.addTextChangedListener(GeneralTextWatcher(binding.taskCreationTaskTilName))
-
+        customerNameList = viewModel.giveListCustomer()
         return binding.root
     }
 
@@ -62,10 +63,7 @@ class TaskCreation : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setUpFab()
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            clientDropDownInit()
-        }
+        clientDropDownInit(customerNameList)
 
         binding.taskCreationImgCalendarCreation.setOnClickListener {
             showDatePicker(binding.taskCreationDateCreationTxtShow)
@@ -98,8 +96,7 @@ class TaskCreation : Fragment() {
     }
 
     private fun setTaskContent(task: Task) {
-        binding.autoCompleteTxt.setText(viewModel.giveClientName(task.customerId.value))
-        binding.taskCreationTxvTaskName.setText(task.nomTask)
+        viewModel.taskName.value = task.nomTask
         binding.taskCreationDateCreationTxtShow.text = processDateString(task.dateCreation)
         binding.taskCreationDateEndTxtShow.text = processDateString(task.dateFinalization)
         binding.taskCreationTxvDescription.setText(task.descTask)
@@ -125,21 +122,14 @@ class TaskCreation : Fragment() {
 
     }
 
-    private suspend fun clientDropDownInit() {
-        try {
-            val customerList = viewModel.giveListCustomer()
-            Log.i("TaskCreationFragment", "Customer List: $customerList")
-
-            binding.autoCompleteTxt.setAdapter(
-                ArrayAdapter(
-                    requireContext(),
-                    R.layout.simple_dropdown_item_1line,
-                    customerList
-                )
+    private fun clientDropDownInit(customerNameList: List<String>) {
+        binding.autoCompleteTxt.setAdapter(
+            ArrayAdapter(
+                requireContext(),
+                R.layout.simple_dropdown_item_1line,
+                customerNameList
             )
-        } catch (e: Exception) {
-            Log.e("TaskCreationFragment", "Error initializing client dropdown", e)
-        }
+        )
     }
 
     private fun onSuccessCreate() {
@@ -149,7 +139,6 @@ class TaskCreation : Fragment() {
         val selectedClientPosition = (binding.autoCompleteTxt.adapter as? ArrayAdapter<String>)?.getPosition(selectedClientName)!! +1
 
         if (task != null) {
-            // Actualizar tarea existente
             task.nomTask = binding.taskCreationTxvTaskName.text.toString()
             task.customerId = CustomerId(selectedClientPosition ?: -1)
             task.descTask = binding.taskCreationTxvDescription.text.toString()

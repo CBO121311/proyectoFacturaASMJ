@@ -57,7 +57,7 @@ import java.time.Instant
 
 @Database(
     entities = [Account::class, BusinessProfile::class, User::class, Task::class, Customer::class, Invoice::class, Item::class, LineItem::class],
-    version = 3,
+    version = 1,
     exportSchema = false
 )
 //Hay que decir que convertidores vamos a utilizar

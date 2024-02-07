@@ -12,6 +12,7 @@ import com.moronlu18.data.task.Task
 import com.moronlu18.repository.CustomerProviderDB
 import com.moronlu18.repository.TaskRepositoryBD
 import com.sergiogv98.tasklist.ui.TaskCreationState
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.time.Instant
 import java.time.LocalDate
@@ -73,29 +74,24 @@ class TaskCreationViewModel : ViewModel() {
         return 1 + (taskRepositoryBD.getLastTaskId() ?: 0)
     }
 
-    suspend fun giveListCustomer(): List<String> {
-        try {
-            val customerList = mutableListOf<String>()
-
-            viewModelScope.launch {
-                customerProviderDB.getCustomerList().collect { customerListFlow ->
-                    customerList.addAll(customerListFlow.map { customer ->
-                        customer.name
-                    })
-
-                    Log.i("TaskCreationViewModel", "Customer List: $customerList")
-                }
+    fun giveListCustomer(): List<String> {
+        val customerNames = mutableListOf<String>()
+        viewModelScope.launch {
+            customerProviderDB.getAllCustomerNames().collect { names ->
+                customerNames.addAll(names)
             }
-            return customerList
-        } catch (e: Exception) {
-            Log.e("TaskCreationViewModel", "Error fetching customer list", e)
-            return emptyList()
+            Log.i("giveListCustomer", customerNames.toString())
         }
+        return customerNames
     }
 
+    fun giveClientPosition(customerId: CustomerId): Int? {
+        val customer = customerProviderDB.getCustomerById(customerId)
+        return customer?.id?.value
+    }
 
-    fun giveClientName(id: Int): String{
-        return customerProviderDB.getCustomerById(CustomerId(id))!!.name
+    fun giveClientName(customerId: CustomerId): String{
+        return customerProviderDB.getCustomerById(customerId)?.name ?: "Paco"
     }
 
     fun addTaskRepository(task: Task){
