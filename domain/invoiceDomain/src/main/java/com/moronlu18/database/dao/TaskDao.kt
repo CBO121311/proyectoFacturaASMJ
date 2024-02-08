@@ -41,18 +41,17 @@ interface TaskDao {
     @Query ("SELECT * FROM task ORDER BY nomTask")
     fun  selectAllByName(): Flow<List<Task>>
 
-    @Query ("SELECT * FROM customer ORDER BY name ASC")
-    fun  selectAllCustomerName(): Flow<List<Customer>>
+    @Query("SELECT * FROM task INNER JOIN customer ON task.customerId = customer.id ORDER BY customer.name ASC")
+    fun selectTasksOrderedByCustomerName(): Flow<List<Task>>
 
-    @Query ("SELECT * FROM customer ORDER BY name DESC")
-    fun  selectAllCustomerNameDesc(): Flow<List<Customer>>
+    @Query("SELECT * FROM task INNER JOIN customer ON task.customerId = customer.id ORDER BY customer.name DESC")
+    fun selectTasksOrderedByCustomerNameDesc(): Flow<List<Task>>
 
     @Query("SELECT MAX(id) FROM task")
     fun getLastTaskId(): Int?
 
     @Query("SELECT * FROM task WHERE customerId = :customerId")
     fun selectTasksByCustomerId(customerId: CustomerId): List<Task>
-
 
     @Update
     fun update(task: Task)

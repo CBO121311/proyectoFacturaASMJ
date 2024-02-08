@@ -11,7 +11,6 @@ import androidx.lifecycle.asLiveData
 import com.moronlu18.invoice.Locator
 import com.moronlu18.repository.TaskRepositoryBD
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.firstOrNull
 
 class TaskListViewModel : ViewModel() {
 
@@ -36,10 +35,6 @@ class TaskListViewModel : ViewModel() {
                 }
             }
         }
-    }
-
-    suspend fun hasTasks(): Boolean {
-        return taskRepositoryBD.getTaskList().firstOrNull()?.isNotEmpty() ?: false
     }
 
     fun deleteTask(task: Task) {

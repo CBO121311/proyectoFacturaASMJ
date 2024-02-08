@@ -1,6 +1,7 @@
 package com.sergiogv98.tasklist.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.moronlu18.data.task.Task
+import com.moronlu18.invoice.base.BaseFragmentDialog
 import com.moronlu18.invoice.ui.MainActivity
 import com.moronlu18.tasklist.R
 import com.moronlu18.tasklist.databinding.FragmentTaskDetailBinding
@@ -49,6 +51,10 @@ class TaskDetail : Fragment() {
             onEditItem(args.tasknav)
         }
 
+        binding.taskDetailsButtonDelete.setOnClickListener {
+            deleteTaskConfirmation()
+        }
+
         binding.taskDetailsButtonBack.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -78,6 +84,28 @@ class TaskDetail : Fragment() {
 
     private fun onEditItem(task: Task){
         findNavController().navigate(TaskDetailDirections.actionTaskDetailToTaskCreation(task))
+    }
+
+    private fun deleteTaskConfirmation(){
+        val task = args.tasknav
+
+        val dialog = BaseFragmentDialog.newInstance(
+            getString(R.string.delete_task_info_general),
+            getString(R.string.delete_task_info)
+        )
+
+        dialog.show(childFragmentManager, "delete_dialog")
+
+        dialog.parentFragmentManager.setFragmentResultListener(
+            BaseFragmentDialog.request,
+            viewLifecycleOwner
+        ) { _, result ->
+            if(!result.getBoolean(BaseFragmentDialog.request)){
+                Log.i("pruebas", "Me cago en dios")
+                viewModel.delete(task)
+                findNavController().popBackStack()
+            }
+        }
     }
 
     private fun setUpFab() {

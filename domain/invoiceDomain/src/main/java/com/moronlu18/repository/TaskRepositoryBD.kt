@@ -8,7 +8,6 @@ import com.moronlu18.database.InvoiceDatabase
 import com.moronlu18.network.Resource
 import com.moronlu18.network.Resource.Success
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 class TaskRepositoryBD {
     fun insert(task: Task): Resource{
@@ -60,34 +59,11 @@ class TaskRepositoryBD {
         return InvoiceDatabase.getInstance().taskDao().selectAllByName()
     }
 
-    fun getTaskOrderByCustomerNameDesc(): Flow<List<Task>> {
-        return InvoiceDatabase.getInstance().taskDao().selectAllCustomerName()
-            .map { customers ->
-                val tasksSortedByCustomerName = mutableListOf<Task>()
-                customers.forEach { customer ->
-                    val tasksForCustomer = InvoiceDatabase.getInstance().taskDao().selectTasksByCustomerId(customer.id)
-                    tasksSortedByCustomerName.addAll(tasksForCustomer)
-                }
-                tasksSortedByCustomerName.sortedBy { task ->
-                    customers.find { it.id == task.customerId }?.name
-                }
-                tasksSortedByCustomerName.toList()
-            }
+    fun getTaskOrderByCustomerName(): Flow<List<Task>> {
+        return InvoiceDatabase.getInstance().taskDao().selectTasksOrderedByCustomerName()
     }
 
-
-    fun getTaskOrderByCustomerName(): Flow<List<Task>> {
-        return InvoiceDatabase.getInstance().taskDao().selectAllCustomerNameDesc()
-            .map { customers ->
-                val tasksSortedByCustomerNameDesc = mutableListOf<Task>()
-                customers.forEach { customer ->
-                    val tasksForCustomer = InvoiceDatabase.getInstance().taskDao().selectTasksByCustomerId(customer.id)
-                    tasksSortedByCustomerNameDesc.addAll(tasksForCustomer)
-                }
-                tasksSortedByCustomerNameDesc.sortedByDescending { task ->
-                    customers.find { it.id == task.customerId }?.name
-                }
-                tasksSortedByCustomerNameDesc.toList()
-            }
+    fun getTaskOrderByCustomerNameDesc(): Flow<List<Task>> {
+        return InvoiceDatabase.getInstance().taskDao().selectTasksOrderedByCustomerNameDesc()
     }
 }

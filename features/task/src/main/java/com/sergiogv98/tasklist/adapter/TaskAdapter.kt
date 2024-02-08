@@ -40,24 +40,6 @@ class TaskAdapter(
         submitList(sortedList)
     }
 
-
-    /*
-
-    fun sortName(){
-        val sortedList = currentList.sortedBy { it.nomTask.lowercase() }
-        submitList(sortedList)
-    }
-
-    fun sortCustomerNameAscent(){
-        val sortedList = currentList.sortedBy { it.customerId.value }
-        submitList(sortedList)
-    }
-
-    fun sortCustomerNameDescent(){
-        val sortedList = currentList.sortedByDescending { it.customerId.value }
-        submitList(sortedList)
-    }*/
-
     fun clearSelection() {
         submitList(currentList)
     }
@@ -88,6 +70,7 @@ class TaskAdapter(
                 root.setOnLongClickListener {
                     selectedPosition = adapterPosition
                     listener.taskOnLongClick(view, task)
+                    notifyDataSetChanged()
                     true
                 }
             }

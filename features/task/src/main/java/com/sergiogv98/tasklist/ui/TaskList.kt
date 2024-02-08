@@ -15,7 +15,6 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -26,7 +25,6 @@ import com.moronlu18.tasklist.R
 import com.sergiogv98.tasklist.adapter.TaskAdapter
 import com.moronlu18.tasklist.databinding.FragmentTaskListBinding
 import com.sergiogv98.usecase.TaskListViewModel
-import kotlinx.coroutines.launch
 
 
 class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
@@ -45,7 +43,6 @@ class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
         _binding = FragmentTaskListBinding.inflate(inflater, container, false)
         binding.viewmodel = this.viewModel
         binding.lifecycleOwner = this
-
         return binding.root
     }
 
@@ -55,6 +52,8 @@ class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
         setUpToolBar()
         initRecyclerViewTask()
         setUpFab()
+
+        viewModel.getTaskList()
 
         val appBarConfiguration =
             AppBarConfiguration.Builder(R.id.taskList)
@@ -67,12 +66,6 @@ class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
             appBarConfiguration
         )
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            if (!viewModel.hasTasks()){
-                showNoData()
-            }
-        }
-
         viewModel.getState().observe(viewLifecycleOwner) {
             when (it) {
                 is TaskListState.Loading -> showProgressBar(it.value)
@@ -82,8 +75,14 @@ class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
         }
 
         viewModel.allTask.observe(viewLifecycleOwner){
-            it.let { taskAdapter.submitList(it) }
+            if(it.isEmpty()){
+                showNoData()
+            } else {
+                onSuccess()
+                it.let { taskAdapter.submitList(it) }
+            }
         }
+
     }
 
     private fun initRecyclerViewTask() {
@@ -180,7 +179,6 @@ class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return when (menuItem.itemId) {
             R.id.menu_action_refresh -> {
-                viewModel.getTaskList()
                 taskAdapter.sortId()
                 true
             }
@@ -232,11 +230,6 @@ class TaskList : Fragment(), MenuProvider, TaskAdapter.OnTaskClick {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.getTaskList()
     }
 
 }
