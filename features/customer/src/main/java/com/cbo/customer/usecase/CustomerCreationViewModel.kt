@@ -45,6 +45,7 @@ class CustomerViewModel : ViewModel() {
      * Añade un cliente.
      */
     fun addCustomer(customer: Customer) {
+
         customerProviderDB.insert(customer)
     }
 

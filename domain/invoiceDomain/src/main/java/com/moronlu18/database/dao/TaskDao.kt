@@ -58,4 +58,7 @@ interface TaskDao {
 
     @Delete
     fun delete(task: Task)
+
+    @Query("SELECT EXISTS(SELECT 1 FROM task WHERE customerId = :customerId)")
+    fun customerExistTask(customerId: Int): Boolean
 }

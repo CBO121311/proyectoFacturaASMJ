@@ -40,4 +40,6 @@ interface InvoiceDao {
     @Query("SELECT number FROM invoice")
     fun getListNumber(): List<String>
 
+    @Query("SELECT EXISTS(SELECT 1 FROM invoice WHERE customerId = :customerId)")
+    fun customerExistInvoice(customerId: Int): Boolean
 }

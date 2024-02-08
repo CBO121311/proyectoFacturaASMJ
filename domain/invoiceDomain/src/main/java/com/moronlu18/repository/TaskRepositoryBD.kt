@@ -66,4 +66,8 @@ class TaskRepositoryBD {
     fun getTaskOrderByCustomerNameDesc(): Flow<List<Task>> {
         return InvoiceDatabase.getInstance().taskDao().selectTasksOrderedByCustomerNameDesc()
     }
+
+    fun customerExistTask(customerId: CustomerId): Boolean{
+        return InvoiceDatabase.getInstance().taskDao().customerExistTask(customerId.value)
+    }
 }

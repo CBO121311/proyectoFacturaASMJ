@@ -2,8 +2,6 @@ package com.cbo.customer.ui
 
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.Menu
@@ -20,6 +18,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.cbo.customer.usecase.CustomerDetailViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.moronlu18.data.customer.Customer
 import com.moronlu18.customercreation.R
 import com.moronlu18.customercreation.databinding.FragmentCustomerDetailBinding
@@ -91,25 +90,33 @@ class CustomerDetail : Fragment(), MenuProvider {
      * Comprueba si se puede eliminar un cliente o está referenciado.
      * Y si es posible, muestra un alertDialog de confirmación antes de eliminar el cliente.
      */
+
     private fun deleteConfirmation() {
 
         val customer = args.customnav
 
-        val dialog = BaseFragmentDialog.newInstance(
-            getString(R.string.title_deleteCustomer),
-            getString(R.string.Content_deleteCustomer)
-        )
-        dialog.show(childFragmentManager,"delete_dialog")
 
-        dialog.parentFragmentManager.setFragmentResultListener(
-            BaseFragmentDialog.request,
-            viewLifecycleOwner
-        ) { _, result ->
+        if (!viewModel.isCustomerReferenced(customer)){
+            val dialog = BaseFragmentDialog.newInstance(
+                getString(R.string.title_deleteCustomer),
+                getString(R.string.Content_deleteCustomer)
+            )
+            dialog.show(childFragmentManager,"delete_dialog")
 
-            if (result.getBoolean(BaseFragmentDialog.result)) {
-                viewModel.delete(customer)
+            dialog.parentFragmentManager.setFragmentResultListener(
+                BaseFragmentDialog.request,
+                viewLifecycleOwner
+            ) { _, result ->
+
+                if (result.getBoolean(BaseFragmentDialog.result)) {
+                    viewModel.delete(customer)
+                    Snackbar.make(requireView(),"Cliente borrado", Snackbar.LENGTH_LONG).show()
+                    findNavController().popBackStack()
+                }
             }
         }
+
+
     }
 
     /**

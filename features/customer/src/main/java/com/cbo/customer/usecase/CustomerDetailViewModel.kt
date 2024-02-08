@@ -8,8 +8,11 @@ import com.cbo.customer.ui.CustomerDetailState
 import com.moronlu18.data.customer.Customer
 import com.moronlu18.network.Resource
 import com.moronlu18.repository.CustomerProviderDB
+import com.moronlu18.repository.InvoiceProviderDB
+import com.moronlu18.repository.TaskRepositoryBD
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CustomerDetailViewModel : ViewModel() {
 
@@ -21,7 +24,8 @@ class CustomerDetailViewModel : ViewModel() {
     var addressCustomer = MutableLiveData<String>()
     var cityCustomer = MutableLiveData<String>()
     private val customerProviderDB = CustomerProviderDB()
-
+    private val invoiceProviderDB = InvoiceProviderDB()
+    private val taskRepositoryBD = TaskRepositoryBD()
 
     fun delete(customer: Customer) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -30,10 +34,20 @@ class CustomerDetailViewModel : ViewModel() {
                 is Resource.Success<*> -> {}
 
                 else -> {
-                    state.value = CustomerDetailState.ReferencedCustomer
+                    withContext(Dispatchers.Main) {
+                        state.value = CustomerDetailState.ReferencedCustomer
+                    }
                 }
             }
         }
+    }
+
+    fun isCustomerReferenced(customer: Customer): Boolean {
+        val isReferenced = taskRepositoryBD.customerExistTask(customer.id) || invoiceProviderDB.customerExistInvoice(customer.id)
+        if (isReferenced) {
+            state.value = CustomerDetailState.ReferencedCustomer
+        }
+        return isReferenced
     }
 
     /**

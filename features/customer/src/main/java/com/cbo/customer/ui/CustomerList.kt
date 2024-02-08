@@ -13,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -26,6 +25,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cbo.customer.adapter.CustomerAdapter
 import com.cbo.customer.usecase.CustomerListViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.moronlu18.data.customer.Customer
 import com.moronlu18.customercreation.R
 
@@ -46,7 +46,7 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentCustomerListBinding.inflate(inflater, container, false)
 
         binding.viewmodelcustomerlist = this.viewModel
@@ -88,7 +88,9 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
         })
 
         viewModel.allCustomer.observe(viewLifecycleOwner) {
-            it.let { customerAdapter.submitList(it) }
+            it.let {
+                viewModel.isCustomerListEmpty()
+                customerAdapter.submitList(it) }
         }
     }
 
@@ -160,19 +162,25 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
      */
     private fun onDeletedItem(customer: Customer) {
 
-        val dialog = BaseFragmentDialog.newInstance(
-            getString(R.string.title_deleteCustomer),
-            getString(R.string.Content_deleteCustomer)
-        )
-        dialog.show(childFragmentManager, "delete_dialog")
+        if (!viewModel.isCustomerReferenced(customer)) {
 
-        dialog.parentFragmentManager.setFragmentResultListener(
-            BaseFragmentDialog.request,
-            viewLifecycleOwner
-        ) { _, result ->
+            val dialog = BaseFragmentDialog.newInstance(
+                getString(R.string.title_deleteCustomer),
+                getString(R.string.Content_deleteCustomer)
+            )
+            dialog.show(childFragmentManager, "delete_dialog")
 
-            if (result.getBoolean(BaseFragmentDialog.result)) {
-                viewModel.delete(customer)
+            dialog.parentFragmentManager.setFragmentResultListener(
+                BaseFragmentDialog.request,
+                viewLifecycleOwner
+            ) { _, result ->
+
+                if (result.getBoolean(BaseFragmentDialog.result)) {
+                    viewModel.delete(customer)
+
+
+                    Snackbar.make(requireView(), "Cliente borrado", Snackbar.LENGTH_LONG).show()
+                }
             }
         }
     }
@@ -316,7 +324,6 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
             findNavController().popBackStack()
         }
     }
-
 
     /**
      * Liberamos la referencia al binding.

@@ -26,9 +26,8 @@ class BaseFragmentDialog() : DialogFragment() {
 
             bundle.putBoolean(result, true)
             setFragmentResult(request, bundle)
-            dismiss()
 
-            //requireActivity().supportFragmentManager.setFragmentResult(request, bundle)
+            requireActivity().supportFragmentManager.setFragmentResult(request, bundle)
         }
 
         builder.setNegativeButton(

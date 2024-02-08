@@ -104,4 +104,8 @@ class InvoiceProviderDB {
 
         }
     }
+
+    fun customerExistInvoice(customerId: CustomerId): Boolean{
+        return InvoiceDatabase.getInstance().invoiceDao().customerExistInvoice(customerId.value)
+    }
 }
