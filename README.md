@@ -1,6 +1,14 @@
 Invoice versión 4, es la aplicación que se está realizando de manera modular para el estudio de todo el temario de la asignatura ✨DEINT.✨
 
  ## Historial de versiones
+### V4.0.3 (08/02/2024)
+ *Escrito por CBO121311*
+
+Sobre el módulo Customer:
+- Añadido las consultas para saber si un cliente existe en otra tabla.
+- Corregido al borrar en detalles de Customer (gracias Mateo).
+- Arreglado los distintos errores al tener la lista vacía.
+ 
   - ------------------------
 ### V4.0.2 (08/02/2024)
  *Escrito por SergioGV98*
