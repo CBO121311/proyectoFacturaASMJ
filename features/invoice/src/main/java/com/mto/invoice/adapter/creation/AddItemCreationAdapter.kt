@@ -27,7 +27,6 @@ class AddItemCreationAdapter (private val itemList: MutableList<Item>): Recycler
             binding.invoicecItemItemTvName.text = itemModel.name
             binding.invoicecItemItemTvRate.text = "P/U: " + itemModel.price.toString()
             binding.invoiceItemItemTvUnidades.text ="1"
-
         }
     }
 }

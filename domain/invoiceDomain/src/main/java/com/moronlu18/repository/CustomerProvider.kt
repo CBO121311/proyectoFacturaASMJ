@@ -4,10 +4,7 @@ import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.account.Email
 import com.moronlu18.data.base.CustomerId
 import com.moronlu18.network.ResourceList
-import com.moronlu18.inovice.R
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.withContext
+
 
 class CustomerProvider private constructor() {
     companion object {
@@ -132,16 +129,6 @@ class CustomerProvider private constructor() {
             }
             return false
         }
-
-        fun containsId(id: Int): Boolean {
-            for (item in CustomerdataSet) {
-                if (item.id.value == id) {
-                    return true
-                }
-            }
-            return false
-        }
-
 
     }
 }

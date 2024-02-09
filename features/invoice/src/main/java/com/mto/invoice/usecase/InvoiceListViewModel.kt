@@ -9,7 +9,6 @@ import com.moronlu18.data.invoice.Invoice
 import com.moronlu18.network.ResourceList
 import com.moronlu18.repository.InvoiceProvider
 import com.moronlu18.invoice.Locator
-import com.moronlu18.repository.CustomerProvider
 import com.moronlu18.repository.InvoiceProviderDB
 import kotlinx.coroutines.launch
 
@@ -55,7 +54,6 @@ class InvoiceListViewModel : ViewModel() {
                     val invoices = result.data as ArrayList<Invoice>
                     val sortPreference = Locator.settingsPreferencesRepository.getSortInvoice()
 
-
                     when (sortPreference) {
                         "id" -> invoices.sortBy { it.id }
                         "name_asc" -> invoices.sortBy { getCustomerName(it.customerId.value) }
@@ -79,6 +77,6 @@ class InvoiceListViewModel : ViewModel() {
     }
 
     private fun getCustomerName(customerId: Int): String? {
-        return CustomerProvider.getCustomerNameById(customerId)
+        return InvoiceProviderDB.getCustomerNameById(customerId)
     }
 }

@@ -9,7 +9,7 @@ import com.moronlu18.accounts.entity.Item
 import com.moronlu18.data.base.InvoiceId
 import com.moronlu18.data.invoice.Invoice
 import com.moronlu18.data.invoice.LineItem
-import com.moronlu18.repository.CustomerProvider
+import com.moronlu18.repository.CustomerProviderDB
 import com.moronlu18.repository.InvoiceProviderDB
 import com.moronlu18.repository.ItemProviderBD
 import com.moronlu18.repository.LineItemProviderDB
@@ -18,7 +18,6 @@ import java.time.LocalDate
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.util.regex.Pattern
-
 
 class InvoiceCreationViewModel: ViewModel() {
 
@@ -30,6 +29,8 @@ class InvoiceCreationViewModel: ViewModel() {
     private val pattern = Pattern.compile("([0-9]{2,})([/])([0-9]{2,})([/])([0-9]{4,})")
     private var state = MutableLiveData<InvoiceCreationState>()
     var allItems= ItemProviderBD.getItemList().asLiveData()
+    var customerProv = CustomerProviderDB()
+    var allCustomers = customerProv.getCustomerList().asLiveData()
 
     /**
      * Función que valida todos los parámetros necesarios para crear una factura
@@ -37,7 +38,7 @@ class InvoiceCreationViewModel: ViewModel() {
     fun validateAll() {
         when {
             user.value.isNullOrBlank() -> state.value = InvoiceCreationState.CustomerUnspecified
-            !CustomerProvider.containsId(user.value!!.toString().toInt())-> state.value = InvoiceCreationState.CustomerNoExists
+            !allCustomers.value!!.any { it.id.value == user.value.toString().toInt() } -> state.value = InvoiceCreationState.CustomerNoExists
             TextUtils.isEmpty(startDate.value)-> state.value = InvoiceCreationState.StartDateEmptyError
             !pattern.matcher(startDate.value).matches() -> state.value = InvoiceCreationState.StartDateFormatError
             TextUtils.isEmpty(endDate.value)-> state.value = InvoiceCreationState.EndDateEmptyError
@@ -125,7 +126,7 @@ class InvoiceCreationViewModel: ViewModel() {
     fun deleteAndAddLineItems(invoiceId: InvoiceId) {
         val lista = LineItemProviderDB.getListItemsById(invoiceId.value)
         for (lineitem in lista) {
-           LineItemProviderDB.delete(lineitem)
+            LineItemProviderDB.delete(lineitem)
         }
     }
 
@@ -141,13 +142,13 @@ class InvoiceCreationViewModel: ViewModel() {
             name
         }
     }
+
     /**
      * Función que obtiene el numero de la factura para ser creada
      */
     fun giveNumber():String {
         return InvoiceProviderDB.giveNumberInvoice()
     }
-
     /**
      * Función que inicializa la true la variable del modo edición
      */

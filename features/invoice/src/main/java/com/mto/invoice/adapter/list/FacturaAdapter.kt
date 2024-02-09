@@ -11,7 +11,7 @@ import com.moronlu18.invoicelist.R
 import com.moronlu18.data.invoice.Invoice
 import com.moronlu18.data.invoice.InvoiceStatus
 import com.moronlu18.invoicelist.databinding.ItemFacturaBinding
-import com.moronlu18.repository.CustomerProvider
+import com.moronlu18.repository.InvoiceProviderDB
 
 class FacturaAdapter(
     private val onClickListener: (Invoice) -> Unit
@@ -40,7 +40,7 @@ class FacturaAdapter(
     }
 
     private fun getCustomerName(customerId: Int): String? {
-        return CustomerProvider.getCustomerNameById(customerId)
+        return InvoiceProviderDB.getCustomerNameById(customerId)
     }
 
     override fun getItemCount(): Int = currentList.size
@@ -52,10 +52,8 @@ class FacturaAdapter(
         fun render(
             invoiceModel: Invoice,
             onClickListener: (Invoice) -> Unit,
-
             ) {
-
-            val customer = CustomerProvider.getCustomerbyID(invoiceModel.customerId.value)
+            val customer = InvoiceProviderDB.getCustomerById(invoiceModel.customerId)
 
             binding.itemFacturaIvtNumber.text = invoiceModel.number
             binding.itemFacturaTvId.text = invoiceModel.id.value.toString()

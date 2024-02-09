@@ -119,6 +119,7 @@ class InvoiceCreation : Fragment() {
         viewmodel.allItems.observe(viewLifecycleOwner) {
             it.let { adapter.submitList(it) }
         }
+        viewmodel.allCustomers.observe(viewLifecycleOwner) {}
 
 
         binding.invoiceCreationBtnArticulo.setOnClickListener {
