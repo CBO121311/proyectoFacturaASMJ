@@ -38,6 +38,10 @@ class TaskRepositoryBD {
         return InvoiceDatabase.getInstance().taskDao().selectCustomerById(customerId)
     }
 
+    fun getCustomerIdByName(customerName: String): CustomerId{
+        return InvoiceDatabase.getInstance().taskDao().getCustomerIdByName(customerName)
+    }
+
     fun getLastTaskId(): Int? {
         return InvoiceDatabase.getInstance().taskDao().getLastTaskId()
     }

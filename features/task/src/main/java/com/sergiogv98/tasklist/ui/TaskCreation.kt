@@ -16,7 +16,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
-import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.task.Task
 import com.moronlu18.data.task.TaskStatus
 import com.moronlu18.data.task.TypeTask
@@ -85,9 +84,9 @@ class TaskCreation : Fragment() {
 
         if(task != null){
             setTaskContent(task)
-            clientDropDownInit(task)
+            clientDropDownInit()
         } else {
-            clientDropDownInit(null)
+            clientDropDownInit()
         }
 
     }
@@ -119,29 +118,14 @@ class TaskCreation : Fragment() {
 
     }
 
-    private fun clientDropDownInit(task: Task?) {
-        val customerNameList = viewModel.giveListCustomer()
-
-        if(task != null){
-            binding.autoCompleteTxt.setText(viewModel.giveClientName(task.customerId))
-            viewModel.customerName.value = viewModel.giveClientName(task.customerId)
-
-            val editClientIndex = customerNameList.indexOf(viewModel.customerName.value)
-            binding.autoCompleteTxt.setSelection(editClientIndex)
-        }
-
-        binding.autoCompleteTxt.setAdapter(ArrayAdapter(requireContext(), R.layout.simple_dropdown_item_1line, customerNameList))
-    }
-
     private fun onSuccessCreate() {
         val task: Task? = args.tasknav
-
         val selectedClientName = binding.autoCompleteTxt.text.toString()
-        val selectedClientPosition = (binding.autoCompleteTxt.adapter as? ArrayAdapter<String>)?.getPosition(selectedClientName)!! +1
+        val selectedClientId = viewModel.getCustomerId(selectedClientName)
 
         if (task != null) {
             task.nomTask = binding.taskCreationTxvTaskName.text.toString()
-            task.customerId = CustomerId(selectedClientPosition ?: -1)
+            task.customerId = selectedClientId
             task.descTask = binding.taskCreationTxvDescription.text.toString()
             task.taskStatus = taskStatusChoose()
             task.typeTask = taskTypeChoose()
@@ -153,7 +137,7 @@ class TaskCreation : Fragment() {
             val id = viewModel.getNextTaskId()
             val newTask = Task.create(
                 id = id,
-                customerId = CustomerId(selectedClientPosition ?: -1),
+                customerId = selectedClientId,
                 nameTask = binding.taskCreationTxvTaskName.text.toString(),
                 descTask = binding.taskCreationTxvDescription.text.toString(),
                 taskStatus = taskStatusChoose(),
@@ -167,6 +151,14 @@ class TaskCreation : Fragment() {
 
         findNavController().popBackStack()
     }
+
+    private fun clientDropDownInit() {
+        val customerList = viewModel.giveListCustomerName()
+        val adapter = ArrayAdapter(requireContext(), R.layout.simple_dropdown_item_1line, customerList)
+        binding.autoCompleteTxt.setAdapter(adapter)
+    }
+
+
 
 
     private fun processDate(dateString: String): Instant {

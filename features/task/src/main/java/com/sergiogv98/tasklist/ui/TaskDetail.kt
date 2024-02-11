@@ -63,7 +63,7 @@ class TaskDetail : Fragment() {
     private fun onSuccess(){
         val task = args.tasknav
         viewModel.let {
-            it.customerName.value = viewModel.getCustomerName(task.customerId)
+            it.customerName.value = viewModel.getCustomer(task.customerId)!!.name
             it.taskName.value = task.nomTask
             it.taskStatus.value = TaskUtils().taskStatusGive( task.dateFinalization, task.taskStatus)
             it.typeTask.value = TaskUtils().formatType(task.typeTask)
@@ -101,7 +101,6 @@ class TaskDetail : Fragment() {
             viewLifecycleOwner
         ) { _, result ->
             if(!result.getBoolean(BaseFragmentDialog.request)){
-                Log.i("pruebas", "Me cago en dios")
                 viewModel.delete(task)
                 findNavController().popBackStack()
             }

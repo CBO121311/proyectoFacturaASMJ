@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.moronlu18.data.base.CustomerId
+import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.task.Task
 import com.moronlu18.repository.TaskRepositoryBD
 import com.sergiogv98.tasklist.ui.TaskCreationState
@@ -47,12 +48,12 @@ class TaskCreationViewModel : ViewModel() {
         return 1 + (taskRepositoryBD.getLastTaskId() ?: 0)
     }
 
-    fun giveListCustomer(): List<String> {
+    fun giveListCustomerName(): List<String> {
        return taskRepositoryBD.getAllCustomerNames()
     }
 
-    fun giveClientName(customerId: CustomerId): String{
-        return taskRepositoryBD.getCustomerById(customerId)?.name ?: "Null"
+    fun getCustomerId(customerName: String): CustomerId {
+        return taskRepositoryBD.getCustomerIdByName(customerName)
     }
 
     fun addTaskRepository(task: Task){

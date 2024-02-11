@@ -29,10 +29,6 @@ class TaskDetailViewModel : ViewModel() {
         return taskRepositoryBD.getCustomerById(customerId) ?: Customer() // Ajusta según tu implementación
     }*/
 
-    fun getCustomerName(customerId: CustomerId): String? {
-        return taskRepositoryBD.getCustomerById(customerId)?.name
-    }
-
     fun getCustomer(customerId: CustomerId): Customer? {
         return taskRepositoryBD.getCustomerById(customerId)
     }
