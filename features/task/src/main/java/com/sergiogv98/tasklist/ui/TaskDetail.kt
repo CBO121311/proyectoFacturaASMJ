@@ -86,6 +86,7 @@ class TaskDetail : Fragment() {
         findNavController().navigate(TaskDetailDirections.actionTaskDetailToTaskCreation(task))
     }
 
+
     private fun deleteTaskConfirmation(){
         val task = args.tasknav
 

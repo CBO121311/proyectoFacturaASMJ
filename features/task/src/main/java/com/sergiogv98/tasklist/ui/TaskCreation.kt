@@ -93,8 +93,8 @@ class TaskCreation : Fragment() {
 
     private fun setTaskContent(task: Task) {
         viewModel.taskName.value = task.nomTask
-        binding.taskCreationDateCreationTxtShow.text = processDateString(task.dateCreation)
-        binding.taskCreationDateEndTxtShow.text = processDateString(task.dateFinalization)
+        viewModel.dateCreation.value = processDateString(task.dateCreation)
+        viewModel.dateEnd.value = processDateString(task.dateFinalization)
         binding.taskCreationTxvDescription.setText(task.descTask)
         binding.taskCreationTypeTaskList.setSelection(returnTaskType(task))
         setTaskStatusInRadioGroup(task)

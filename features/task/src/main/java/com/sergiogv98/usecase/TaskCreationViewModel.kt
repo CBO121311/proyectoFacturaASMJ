@@ -18,8 +18,8 @@ class TaskCreationViewModel : ViewModel() {
 
     var taskName = MutableLiveData<String>()
     var customerName = MutableLiveData<String>()
-    private var dateCreation = MutableLiveData<String>()
-    private var dateEnd = MutableLiveData<String>()
+    var dateCreation = MutableLiveData<String>()
+    var dateEnd = MutableLiveData<String>()
 
     private var taskRepositoryBD = TaskRepositoryBD()
 
