@@ -1,6 +1,13 @@
 Invoice versión 4, es la aplicación que se está realizando de manera modular para el estudio de todo el temario de la asignatura ✨DEINT.✨
 
  ## Historial de versiones
+
+### V4.0.4 (13/02/2024)
+ *Escrito por CBO121311*
+
+- Quitado la vista landscape porque da error (gracias Jessica).
+ 
+  - ------------------------
 ### V4.0.3 (08/02/2024)
  *Escrito por CBO121311*
 
