@@ -38,10 +38,10 @@ interface TaskDao {
     @Query("SELECT name FROM customer WHERE id = :customerId")
     fun getCustomerNameById(customerId: Int): String
 
-    @Query("SELECT * FROM task INNER JOIN customer ON task.customerId = customer.id ORDER BY customer.name ASC")
+    @Query("SELECT * FROM task INNER JOIN customer ON task.customerId = customer.id ORDER BY LOWER(customer.name) ASC")
     fun selectTasksOrderedByCustomerName(): Flow<List<Task>>
 
-    @Query("SELECT * FROM task INNER JOIN customer ON task.customerId = customer.id ORDER BY customer.name DESC")
+    @Query("SELECT * FROM task INNER JOIN customer ON task.customerId = customer.id ORDER BY LOWER(customer.name) DESC")
     fun selectTasksOrderedByCustomerNameDesc(): Flow<List<Task>>
 
     @Query("SELECT MAX(id) FROM task")
