@@ -40,4 +40,14 @@ interface CustomerDao {
 
     @Delete
     fun delete(customer: Customer)
+
+    //Task
+    @Query("SELECT * FROM customer")
+    fun getAllCustomer(): List<Customer>
+
+    @Query("SELECT name FROM customer")
+    fun getAllCustomerNames(): List<String>
+
+    @Query("SELECT id FROM customer WHERE name = :customerName")
+    fun getCustomerIdByName(customerName: String): CustomerId
 }

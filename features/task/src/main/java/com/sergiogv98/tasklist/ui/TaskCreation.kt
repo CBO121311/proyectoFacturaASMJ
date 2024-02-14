@@ -153,7 +153,14 @@ class TaskCreation : Fragment() {
     }
 
     private fun clientDropDownInit() {
+        val task: Task? = args.tasknav
         val customerList = viewModel.giveListCustomerName()
+
+        if (task!= null){
+
+            binding.autoCompleteTxt.setText(viewModel.getCustomerName(task.customerId.value))
+            viewModel.customerName.value = viewModel.getCustomerName(task.customerId.value)
+        }
         val adapter = ArrayAdapter(requireContext(), R.layout.simple_dropdown_item_1line, customerList)
         binding.autoCompleteTxt.setAdapter(adapter)
     }

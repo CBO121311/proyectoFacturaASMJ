@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.task.Task
+import com.moronlu18.repository.CustomerProviderDB
 import com.moronlu18.repository.TaskRepositoryBD
 import com.sergiogv98.tasklist.ui.TaskDetailState
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +24,7 @@ class TaskDetailViewModel : ViewModel() {
     var dateEnd = MutableLiveData<String>()
     var taskDescription = MutableLiveData<String>()
     private var taskRepositoryBD = TaskRepositoryBD()
+    private var customerRepositoryBD = CustomerProviderDB()
 
     /*
     fun getCustomerPhoto(customerId: Int): Customer {
@@ -30,7 +32,7 @@ class TaskDetailViewModel : ViewModel() {
     }*/
 
     fun getCustomer(customerId: CustomerId): Customer? {
-        return taskRepositoryBD.getCustomerById(customerId)
+        return customerRepositoryBD.getCustomerById(customerId)
     }
 
     fun delete(task: Task) {

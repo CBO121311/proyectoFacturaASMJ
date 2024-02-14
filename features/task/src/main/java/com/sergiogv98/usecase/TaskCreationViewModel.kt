@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.moronlu18.data.base.CustomerId
-import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.task.Task
+import com.moronlu18.repository.CustomerProviderDB
 import com.moronlu18.repository.TaskRepositoryBD
 import com.sergiogv98.tasklist.ui.TaskCreationState
 import java.time.Instant
@@ -22,6 +22,7 @@ class TaskCreationViewModel : ViewModel() {
     var dateEnd = MutableLiveData<String>()
 
     private var taskRepositoryBD = TaskRepositoryBD()
+    private var customerRepositoryBD = CustomerProviderDB()
 
     private var state = MutableLiveData<TaskCreationState>()
     private var isEditor = MutableLiveData<Boolean>()
@@ -39,6 +40,10 @@ class TaskCreationViewModel : ViewModel() {
         }
     }
 
+    fun getCustomerName(customerId: Int): String {
+        return taskRepositoryBD.getCustomerNameById(customerId)
+    }
+
 
     fun getState(): LiveData<TaskCreationState> {
         return state
@@ -49,11 +54,11 @@ class TaskCreationViewModel : ViewModel() {
     }
 
     fun giveListCustomerName(): List<String> {
-       return taskRepositoryBD.getAllCustomerNames()
+       return customerRepositoryBD.getAllCustomerNames()
     }
 
     fun getCustomerId(customerName: String): CustomerId {
-        return taskRepositoryBD.getCustomerIdByName(customerName)
+        return customerRepositoryBD.getCustomerIdByName(customerName)
     }
 
     fun addTaskRepository(task: Task){

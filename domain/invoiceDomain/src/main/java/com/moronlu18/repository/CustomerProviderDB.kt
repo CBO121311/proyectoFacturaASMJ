@@ -58,4 +58,16 @@ class CustomerProviderDB {
     fun getLastCustomerId(): Int? {
         return InvoiceDatabase.getInstance().customerDao().getLastCustomerId()
     }
+
+    fun getAllCustomerNames(): List<String>{
+        return InvoiceDatabase.getInstance().customerDao().getAllCustomerNames()
+    }
+
+    fun getCustomerById(customerId: CustomerId): Customer? {
+        return InvoiceDatabase.getInstance().customerDao().selectCustomerById(customerId)
+    }
+
+    fun getCustomerIdByName(customerName: String): CustomerId{
+        return InvoiceDatabase.getInstance().customerDao().getCustomerIdByName(customerName)
+    }
 }

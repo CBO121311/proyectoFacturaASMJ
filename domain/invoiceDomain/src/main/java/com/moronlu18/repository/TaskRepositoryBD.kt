@@ -30,18 +30,6 @@ class TaskRepositoryBD {
         return Success(task)
     }
 
-    fun getAllCustomerNames(): List<String>{
-        return InvoiceDatabase.getInstance().taskDao().getAllCustomerNames()
-    }
-
-    fun getCustomerById(customerId: CustomerId): Customer? {
-        return InvoiceDatabase.getInstance().taskDao().selectCustomerById(customerId)
-    }
-
-    fun getCustomerIdByName(customerName: String): CustomerId{
-        return InvoiceDatabase.getInstance().taskDao().getCustomerIdByName(customerName)
-    }
-
     fun getLastTaskId(): Int? {
         return InvoiceDatabase.getInstance().taskDao().getLastTaskId()
     }
@@ -52,6 +40,10 @@ class TaskRepositoryBD {
 
     fun delete (task: Task){
         InvoiceDatabase.getInstance().taskDao().delete(task)
+    }
+
+    fun getCustomerNameById(customerId: Int): String{
+        return InvoiceDatabase.getInstance().taskDao().getCustomerNameById(customerId)
     }
 
     // Configuracion

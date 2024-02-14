@@ -23,29 +23,20 @@ interface TaskDao {
     @Query("SELECT * FROM task WHERE id = :taskId")
     fun getTaskById(taskId: TaskId): Task?
 
-    @Query("SELECT id FROM customer WHERE name = :customerName")
-    fun getCustomerIdByName(customerName: String): CustomerId
-
     @Query("SELECT rowid FROM task WHERE id = :taskId")
     fun getPositionByTaskId(taskId: TaskId): Int?
 
     @Query("SELECT * FROM task ORDER BY id ASC LIMIT 1 OFFSET :position")
     fun getTaskByPosition(position: Int): Task?
 
-    @Query("SELECT * FROM customer")
-    fun getAllCustomer(): List<Customer>
-
-    @Query("SELECT name FROM customer")
-    fun getAllCustomerNames(): List<String>
-
-    @Query("SELECT * FROM customer WHERE id = :customerId")
-    fun selectCustomerById(customerId: CustomerId): Customer?
-
     @Query ("SELECT * FROM task ORDER BY id")
-    fun  selectAllById(): Flow<List<Task>>
+    fun selectAllById(): Flow<List<Task>>
 
     @Query ("SELECT * FROM task ORDER BY nomTask")
-    fun  selectAllByName(): Flow<List<Task>>
+    fun selectAllByName(): Flow<List<Task>>
+
+    @Query("SELECT name FROM customer WHERE id = :customerId")
+    fun getCustomerNameById(customerId: Int): String
 
     @Query("SELECT * FROM task INNER JOIN customer ON task.customerId = customer.id ORDER BY customer.name ASC")
     fun selectTasksOrderedByCustomerName(): Flow<List<Task>>
