@@ -32,6 +32,9 @@ interface ItemDao {
     @Query("SELECT * FROM item ORDER BY price DESC")
     fun selectAllPriceDesc(): Flow<List<Item>>
 
+
     @Delete
     fun delete(item: Item)
+    @Query("SELECT * FROM item join line_item where id == itemId and invoiceId == :idInv")
+    fun getItemListById(idInv:Int): List<Item>
 }

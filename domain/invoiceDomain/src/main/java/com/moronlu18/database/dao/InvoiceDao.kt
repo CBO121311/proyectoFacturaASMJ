@@ -6,7 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.moronlu18.accounts.entity.Item
 import com.moronlu18.data.base.ItemId
 import com.moronlu18.data.invoice.Invoice
 import kotlinx.coroutines.flow.Flow
@@ -26,17 +25,20 @@ interface InvoiceDao {
     @Query("select * from invoice join line_item on invoice.id == line_item.invoiceId")
     fun loadInvoiceAndLineItem(): Map<Invoice, List<LineItem>>
      */
-    @Query("select * from invoice")
+    @Query("select * from invoice order by id")
     fun selectAll(): Flow<List<Invoice>>
+
+    @Query("SELECT * FROM invoice INNER JOIN customer ON invoice.customerId = customer.id ORDER BY LOWER(customer.name) ASC")
+    fun getInvoiceByNameAZ(): Flow<List<Invoice>>
+    @Query("SELECT * FROM invoice INNER JOIN customer ON invoice.customerId = customer.id ORDER BY LOWER(customer.name) DESC")
+    fun getInvoiceByNameZA(): Flow<List<Invoice>>
+    @Query("SELECT * FROM invoice order by status")
+    fun getInvoiceByStatus(): Flow<List<Invoice>>
     @Query("SELECT * FROM invoice WHERE id = :invoiceId")
     fun getInvoiceById(invoiceId: Int): Invoice?
     @Query("SELECT MAX(id) FROM invoice")
     fun getLastInvoiceId(): Int?
 
-    @Query("SELECT * FROM item join line_item where id == itemId and invoiceId == :idInv")
-    fun getItemListById(idInv:Int): List<Item>
-    @Query("SELECT name FROM customer where id = :id")
-    fun getCustomerNameById(id:Int): String
 
     @Query("SELECT number FROM invoice")
     fun getListNumber(): List<String>

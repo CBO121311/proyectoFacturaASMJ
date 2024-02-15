@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.moronlu18.accounts.entity.Item
+import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.base.InvoiceId
 import com.moronlu18.data.invoice.Invoice
 import com.moronlu18.data.invoice.LineItem
@@ -135,7 +136,7 @@ class InvoiceCreationViewModel: ViewModel() {
      * de creacion, en el botón de la parte superior derecha
      */
     fun giveNom(): String {
-        val name = InvoiceProviderDB.getCustomerNameById(user.value.toString().toInt())
+        val name = InvoiceProviderDB.getCustomerNameById(CustomerId(user.value.toString().toInt()))
         return if (name.isNullOrBlank()) {
             "Cliente"
         }else {

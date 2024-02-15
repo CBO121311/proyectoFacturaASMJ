@@ -6,8 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.moronlu18.data.invoice.Invoice
-import com.moronlu18.network.ResourceList
-import com.moronlu18.repository.InvoiceProvider
+
 import com.moronlu18.invoice.Locator
 import com.moronlu18.repository.InvoiceProviderDB
 import kotlinx.coroutines.launch
@@ -26,48 +25,29 @@ class InvoiceListViewModel : ViewModel() {
 
     fun getInvoiceList() {
         viewModelScope.launch {
+
             when {
                 allInvoice.value?.isEmpty() == true -> state.value = InvoiceListState.NoDataSet
-                else -> state.value = InvoiceListState.Success
-            }
 
-          /*  val sortPreference = Locator.settingsPreferencesRepository.getSortInvoice()
-            when (sortPreference) {
-                "id" -> lista.sortBy { it.id }
-                "name_asc" -> lista.sortBy { getCustomerName(it.customerId.value) }
-                "name_desc" -> lista.sortByDescending { getCustomerName(it.customerId.value) }
-                "status" -> lista.sortBy { it.status.toString() }
-            }
-            state.value = InvoiceListState.Success*/
-
-        }
-    }
-
-    /**
-     * Función que devuelve la lista sin carga llamada cuando se borra una factura
-     */
-    fun getListWithoutLoading() {
-        viewModelScope.launch {
-
-            when (val result = InvoiceProvider.getListWithoutLoading()) {
-                is ResourceList.Success<*> -> {
-                    val invoices = result.data as ArrayList<Invoice>
-                    val sortPreference = Locator.settingsPreferencesRepository.getSortInvoice()
-
-                    when (sortPreference) {
-                        "id" -> invoices.sortBy { it.id }
-                        "name_asc" -> invoices.sortBy { getCustomerName(it.customerId.value) }
-                        "name_desc" -> invoices.sortByDescending { getCustomerName(it.customerId.value) }
-                        "status" -> invoices.sortBy { it.status.toString() }
+                else -> {
+                    allInvoice = when (Locator.settingsPreferencesRepository.getSettingValue(
+                        "invoicesort",
+                        "id"
+                    )) {
+                        "id" -> InvoiceProviderDB.getInvoiceListFlow().asLiveData()
+                        "name_asc" -> InvoiceProviderDB.getInvoiceByNameAZ().asLiveData()
+                        "name_desc" -> InvoiceProviderDB.getInvoiceByNameZA().asLiveData()
+                        "status" -> InvoiceProviderDB.getInvoiceByStatus().asLiveData()
+                        else -> InvoiceProviderDB.getInvoiceListFlow().asLiveData()
                     }
+
                     state.value = InvoiceListState.Success
                 }
-
-                is ResourceList.Error -> state.value = InvoiceListState.NoDataSet
-                else -> {}
             }
+
         }
     }
+
 
     /**
      * Función que devuelve la variable state
@@ -76,7 +56,4 @@ class InvoiceListViewModel : ViewModel() {
         return state
     }
 
-    private fun getCustomerName(customerId: Int): String? {
-        return InvoiceProviderDB.getCustomerNameById(customerId)
-    }
 }

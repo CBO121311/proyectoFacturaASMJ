@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.moronlu18.data.base.CustomerId
 import com.moronlu18.invoicelist.R
 import com.moronlu18.data.invoice.Invoice
 import com.moronlu18.data.invoice.InvoiceStatus
@@ -35,11 +36,11 @@ class FacturaAdapter(
     }
 
     fun sort() {
-        val sortedInvoiceList = currentList.sortedBy { getCustomerName(it.customerId.value) }
+        val sortedInvoiceList = currentList.sortedBy { getCustomerName(it.customerId) }
         submitList(sortedInvoiceList)
     }
 
-    private fun getCustomerName(customerId: Int): String? {
+    private fun getCustomerName(customerId: CustomerId): String? {
         return InvoiceProviderDB.getCustomerNameById(customerId)
     }
 
@@ -54,21 +55,22 @@ class FacturaAdapter(
             onClickListener: (Invoice) -> Unit,
             ) {
             val customer = InvoiceProviderDB.getCustomerById(invoiceModel.customerId)
+            with(binding) {
+                itemFacturaIvtNumber.text = invoiceModel.number
+                itemFacturaTvId.text = invoiceModel.id.value.toString()
+                itemFacturaTvCliente.text = customer?.name
+                with(itemFacturaEstado) {
+                    text = giveStatusText(invoiceModel.status)
+                    setTextColor(setColorEstado(invoiceModel.status))
 
-            binding.itemFacturaIvtNumber.text = invoiceModel.number
-            binding.itemFacturaTvId.text = invoiceModel.id.value.toString()
-            binding.itemFacturaTvCliente.text = customer?.name
-            with(binding.itemFacturaEstado) {
-                text = giveStatusText(invoiceModel.status)
-                setTextColor(setColorEstado(invoiceModel.status))
-
+                }
+                if (customer?.photo != null) {
+                    itemFacturaIvKiwi.setImageURI(customer.photo)
+                } else {
+                    itemFacturaIvKiwi.setImageResource(R.drawable.kiwidinero)
+                }
             }
 
-            if (customer?.photo != null) {
-                binding.itemFacturaIvKiwi.setImageURI(customer.photo)
-            } else {
-                binding.itemFacturaIvKiwi.setImageResource(R.drawable.kiwidinero)
-            }
 
             itemView.setOnClickListener { onClickListener?.invoke(invoiceModel) }
 

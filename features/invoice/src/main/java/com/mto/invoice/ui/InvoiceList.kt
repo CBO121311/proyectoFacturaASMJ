@@ -46,6 +46,8 @@ class InvoiceList : Fragment(), MenuProvider {
         setUpFab()
         initRecyclerView()
 
+        viewmodel.getInvoiceList()
+
         var appBarConfiguration =
             AppBarConfiguration.Builder(R.id.invoiceList)
                 .setOpenableLayout((requireActivity() as MainActivity).drawer)

@@ -43,6 +43,15 @@ class InvoiceProviderDB {
         fun getInvoiceListFlow(): Flow<List<Invoice>> {
             return InvoiceDatabase.getInstance().invoiceDao().selectAll()
         }
+        fun getInvoiceByNameAZ(): Flow<List<Invoice>> {
+            return InvoiceDatabase.getInstance().invoiceDao().getInvoiceByNameAZ()
+        }
+        fun getInvoiceByNameZA(): Flow<List<Invoice>> {
+            return InvoiceDatabase.getInstance().invoiceDao().getInvoiceByNameZA()
+        }
+        fun getInvoiceByStatus(): Flow<List<Invoice>> {
+            return InvoiceDatabase.getInstance().invoiceDao().getInvoiceByStatus()
+        }
 
         fun getInvoiceById(id: Int): Invoice {
             return InvoiceDatabase.getInstance().invoiceDao().getInvoiceById(id)!!
@@ -58,11 +67,11 @@ class InvoiceProviderDB {
         }
 
         fun getListItem(invoiceId: InvoiceId): List<Item> {
-            return InvoiceDatabase.getInstance().invoiceDao().getItemListById(invoiceId.value)!!
+            return InvoiceDatabase.getInstance().itemDao().getItemListById(invoiceId.value)!!
         }
 
-        fun getCustomerNameById(id: Int): String? {
-            return InvoiceDatabase.getInstance().invoiceDao().getCustomerNameById(id)
+        fun getCustomerNameById(customerId: CustomerId): String? {
+            return InvoiceDatabase.getInstance().customerDao().getNameById(customerId)
 
         }
 
