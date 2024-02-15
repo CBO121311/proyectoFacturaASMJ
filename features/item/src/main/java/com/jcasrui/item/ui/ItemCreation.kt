@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.TextInputLayout
 import com.jcasrui.item.usecase.ItemCreationViewModel
 import com.moronlu18.accounts.entity.Item
@@ -34,7 +35,7 @@ class ItemCreation : Fragment() {
     private lateinit var launcher: ActivityResultLauncher<Intent>
     private val viewModel: ItemCreationViewModel by viewModels()
     private var selectedImageUri: Uri? = null
-    private var editPosItem = -1
+    private val args: ItemCreationArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,26 +45,15 @@ class ItemCreation : Fragment() {
 
         binding.viewmodelitemcreation = this.viewModel
         binding.lifecycleOwner = this
-        viewModel.setEditor(false)
 
-        parentFragmentManager.setFragmentResultListener(
-            "itemKey", this, FragmentResultListener { _, result ->
-                val positionItem: Int = result.getInt("itemPosition")
-                val itemEdit = viewModel.getPositionItem(positionItem)
-                viewModel.setEditor(true)
-
-                binding.itemCreationTieName.setText(itemEdit.name)
-                binding.itemCreationTieDescription.setText(itemEdit.description)
-                binding.itemCreationSpItemType.setSelection(itemType(itemEdit))
-                binding.itemCreationSpVatType.setSelection(vatType(itemEdit))
-                binding.itemCreationTieRate.setText(itemEdit.price.toString())
-                //binding.itemCreationSwitchTaxable.isChecked
-
-                editPosItem = positionItem
-
-                viewModel.prevItem = itemEdit
-            }
-        )
+        val item = args.item
+        if (item != null) {
+            binding.itemCreationTieName.setText(item.name)
+            binding.itemCreationTieDescription.setText(item.description)
+            binding.itemCreationSpItemType.setSelection(itemType(item))
+            binding.itemCreationSpVatType.setSelection(vatType(item))
+            binding.itemCreationTieRate.setText(item.price.toString())
+        }
 
         return binding.root
     }
@@ -108,20 +98,20 @@ class ItemCreation : Fragment() {
         val name = binding.itemCreationTieName.text.toString()
         val description = binding.itemCreationTieDescription.text.toString()
         val price = binding.itemCreationTieRate.text.toString().toDouble()
-        //val taxable = binding.itemCreationSwitchTaxable.isChecked
 
-        if (viewModel.getEditor()) {
+        val itemArgs = args.item
+
+        if (itemArgs != null) {
             val updateItem = Item(
-                id = ItemId(editPosItem + 1),
+                id = itemArgs.id,
                 type = chooseItemType(),
                 vat = chooseVatType(),
                 name = name,
                 price = price,
                 description = description.ifEmpty { "Sin descripción" },
-                photo = R.drawable.cart,
-                //taxable = taxable
+                photo = R.drawable.cart
             )
-            viewModel.updateItem(updateItem, editPosItem)
+            viewModel.updateItem(updateItem)
         } else {
             val item = Item(
                 id = ItemId(viewModel.getNextId()),
@@ -130,8 +120,7 @@ class ItemCreation : Fragment() {
                 name = name,
                 price = price,
                 description = description.ifEmpty { "Sin descripción" },
-                photo = R.drawable.cart,
-                //taxable = taxable
+                photo = R.drawable.cart
             )
             viewModel.addItem(item)
         }

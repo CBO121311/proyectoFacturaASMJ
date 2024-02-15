@@ -50,12 +50,6 @@ class ItemDetail : Fragment(), MenuProvider {
         binding.itemDetailTvContentVat.text = article.vat.name
         binding.itemDetailTvContentRate.text = article.price.toString()
 
-        /*if (article.taxable) {
-            binding.itemDetailTvTaxable.text = "Impuestos incluidos"
-        } else {
-            binding.itemDetailTvTaxable.text = "Sin impuestos"
-        }*/
-
         return binding.root
     }
 

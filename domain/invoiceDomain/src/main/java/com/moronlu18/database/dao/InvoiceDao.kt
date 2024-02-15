@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.moronlu18.accounts.entity.Item
+import com.moronlu18.data.base.ItemId
 import com.moronlu18.data.invoice.Invoice
 import kotlinx.coroutines.flow.Flow
 
@@ -42,4 +43,7 @@ interface InvoiceDao {
 
     @Query("SELECT EXISTS(SELECT 1 FROM invoice WHERE customerId = :customerId)")
     fun customerExistInvoice(customerId: Int): Boolean
+
+    @Query("SELECT EXISTS(SELECT 1 FROM line_item WHERE itemId = :itemId)")
+    fun itemExistsLineItem(itemId: ItemId): Boolean
 }

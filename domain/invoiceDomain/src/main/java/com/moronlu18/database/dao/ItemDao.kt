@@ -16,8 +16,21 @@ interface ItemDao {
 
     @Update
     fun update(item: Item)
-    @Query("SELECT * FROM item")
+
+    @Query("SELECT * FROM item ORDER BY id")
     fun selectAll(): Flow<List<Item>>
+
+    @Query("SELECT MAX(id) FROM item")
+    fun getLastItemId(): Int?
+
+    @Query("SELECT * FROM item ORDER BY name")
+    fun selectAllName(): Flow<List<Item>>
+
+    @Query("SELECT * FROM item ORDER BY price")
+    fun selectAllPrice(): Flow<List<Item>>
+
+    @Query("SELECT * FROM item ORDER BY price DESC")
+    fun selectAllPriceDesc(): Flow<List<Item>>
 
     @Delete
     fun delete(item: Item)

@@ -49,11 +49,6 @@ class ItemList : Fragment(), MenuProvider {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setUpFab()
-        setUpToolbar()
-        initRecyclerViewItem()
-        viewModel.getItemList()
-
         var appBarConfiguration =
             AppBarConfiguration.Builder(R.id.itemList)
                 .setOpenableLayout((requireActivity() as MainActivity).drawer)
@@ -65,20 +60,28 @@ class ItemList : Fragment(), MenuProvider {
             appBarConfiguration
         )
 
-        /*
-        binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_itemList_to_itemCreation)
-        }*/
+        setUpFab()
+        setUpToolbar()
+        initRecyclerViewItem()
 
         viewModel.getState().observe(viewLifecycleOwner, Observer {
             when (it) {
                 is ItemListState.Loading -> showProgressBar(it.value)
                 ItemListState.NoData -> showNoData()
-                is ItemListState.Success -> onSuccess(it.dataset)
+                is ItemListState.OnSuccess -> onSuccess()
                 ItemListState.ReferencedItem -> showReferencedItem()
                 else -> {}
             }
         })
+
+        viewModel.allItem.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) {
+                showNoData()
+            } else {
+                onSuccess()
+                it.let { adapter.submitList(it) }
+            }
+        }
     }
 
     private fun initRecyclerViewItem() {
@@ -87,10 +90,11 @@ class ItemList : Fragment(), MenuProvider {
         adapter = ItemAdapter(
             onClickListener = { item -> onItemSelected(item) },
             //onClickEdit = { position -> onEditItem(position) },
-            onClickDelete = { position -> onDeleteItem(position) }
+            //onClickDelete = { position -> onDeleteItem(position) }
         )
         binding.itemListRvItems.layoutManager = manager
         binding.itemListRvItems.adapter = adapter
+
     }
 
     /*
@@ -115,6 +119,7 @@ class ItemList : Fragment(), MenuProvider {
         )
     }
 
+    /*
     private fun onDeleteItem(position: Int) {
         val item = viewModel.getPositionItem(position)
 
@@ -141,6 +146,7 @@ class ItemList : Fragment(), MenuProvider {
             }
         }
     }
+    */
 
     private fun onItemSelected(item: Item) {
         findNavController().navigate(ItemListDirections.actionItemListToItemDetail(item))
@@ -151,10 +157,9 @@ class ItemList : Fragment(), MenuProvider {
         binding.itemListRvItems.visibility = View.GONE
     }
 
-    private fun onSuccess(dataset: ArrayList<Item>) {
+    private fun onSuccess() {
         binding.itemListConstraintLayoutEmpty.visibility = View.GONE
         binding.itemListRvItems.visibility = View.VISIBLE
-        adapter.update(dataset)
     }
 
     /**
