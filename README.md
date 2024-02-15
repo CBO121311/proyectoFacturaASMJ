@@ -5,7 +5,8 @@ Invoice versión 4, es la aplicación que se está realizando de manera modular 
 ### V4.0.5 (15/02/2024)
  *Escrito por CBO121311*
 
-- Modificado para evitar usar la navegación de BaseFragmentDialog.
+- Modificado para evitar usar la navegación cuando se llama BaseFragmentDialog.
+- La ordenación de customer por nombre, será igual sea minúscula o mayúscula.
 - Añadido fotos de ejemplo al populateItem
 
   - ------------------------
