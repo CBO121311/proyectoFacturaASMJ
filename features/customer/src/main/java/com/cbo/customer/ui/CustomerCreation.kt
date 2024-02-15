@@ -1,9 +1,15 @@
 package com.cbo.customer.ui
 
 
-
-
+import android.Manifest
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,6 +18,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -21,7 +31,7 @@ import com.bumptech.glide.Glide
 import com.cbo.customer.usecase.CustomerViewModel
 import com.google.android.material.textfield.TextInputLayout
 import com.moronlu18.data.customer.Customer
-import com.moronlu18.data.account.Email
+import com.moronlu18.data.base.Email
 import com.moronlu18.customercreation.R
 import com.moronlu18.customercreation.databinding.FragmentCustomerCreationBinding
 import com.moronlu18.invoice.ui.MainActivity
@@ -35,6 +45,10 @@ class CustomerCreation : Fragment() {
 
     private val viewModel: CustomerViewModel by viewModels()
     private val args: CustomerCreationArgs by navArgs()
+    /*private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
+    private val notificationManager: NotificationManager by lazy {
+        requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    }*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +62,7 @@ class CustomerCreation : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -77,6 +92,33 @@ class CustomerCreation : Fragment() {
         if (customer != null) {
             setUpEditMode(customer)
         }
+
+
+
+        /*requestPermissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+                //refreshUI()
+                if (it) {
+                    showDummyNotification("nanana")
+                } else {
+                    Snackbar.make(
+                        binding.root,
+                        "Please grant Notification permission from App Settings",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
+            }*/
+
+        // Sets up notification channel.
+        //createNotificationChannel()
+
+        // Sets up button.
+
+
+        // Refresh UI.
+        //refreshUI()
+
+
     }
 
     /**
@@ -131,11 +173,14 @@ class CustomerCreation : Fragment() {
         val customer: Customer? = args.customnav
 
         if (selectimgUri == null) {
-               selectimgUri = defaulImageUri(R.drawable.kiwidinero)
-           }
+            selectimgUri = defaulImageUri(R.drawable.kiwidinero)
+        }
+
+        val name = binding.customerCreationTietNameCustomer.text.toString()
+
         if (customer != null) {
 
-            customer.name = binding.customerCreationTietNameCustomer.text.toString()
+            customer.name = name
             customer.email = Email(binding.customerCreationTietEmailCustomer.text.toString())
             customer.phone = phone
             customer.city =
@@ -146,12 +191,11 @@ class CustomerCreation : Fragment() {
             //customer.photo = getbitMap(binding.customerCreationImgcAvatar)
 
             viewModel.updateCustomer(customer)
-
         } else {
             val id = viewModel.getNextCustomerId()
             val newCustomer = Customer.create(
                 id = id,
-                name = binding.customerCreationTietNameCustomer.text.toString(),
+                name = name,
                 email = Email(binding.customerCreationTietEmailCustomer.text.toString()),
                 phone = phone,
                 city = if (binding.customerCreationTietCity.text.isNullOrBlank()) null else binding.customerCreationTietCity.text.toString(),
@@ -160,14 +204,29 @@ class CustomerCreation : Fragment() {
                 //photo = getbitMap(binding.customerCreationImgcAvatar)
             )
             viewModel.addCustomer(newCustomer)
-            //viewModel.sortRefresh()
         }
+       /* if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.POST_NOTIFICATIONS,
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            showDummyNotification(name)
+        }*/
+
+
+
+        /* else {
+             requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+         }*/
+
+
         findNavController().popBackStack()
     }
 
     private fun defaulImageUri(resourceId: Int): Uri {
         return Uri.parse("android.resource://${requireContext().packageName}/$resourceId")
     }
+
     private fun loadSelectedImage(uri: Uri) {
         Glide.with(this)
             .load(uri)
@@ -192,7 +251,6 @@ class CustomerCreation : Fragment() {
     private fun onImageSelected(uri: Uri) {
         selectimgUri = uri
     }
-
 
 
     /**
@@ -277,5 +335,70 @@ class CustomerCreation : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+
+    private fun showDummyNotification(name:String) {
+
+        val builder = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle("Has creado un nuevo cliente 🎉")
+            .setContentText("El cliente se llama $name")
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setContentIntent(
+                PendingIntent.getActivity(
+                    requireContext(), 0, Intent(),
+                    PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+                )
+            )
+            .setAutoCancel(true)
+
+        with(NotificationManagerCompat.from(requireContext())) {
+            if (ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return
+            }
+            notify(1, builder.build())
+        }
+    }
+
+    companion object {
+        const val CHANNEL_ID = "customer_channel2"
+    }
+
+    /**
+     * Refresh UI elements.
+     */
+    /*@RequiresApi(Build.VERSION_CODES.N)
+    private fun refreshUI() {
+
+        val textNotificationEnabled = binding.textNotificationEnabled2
+        textNotificationEnabled.text =
+            if (notificationManager.areNotificationsEnabled()) "TRUE" else "FALSE"*/
+
+    //Creamos un canal
+    /**
+     * Creates Notification Channel (required for API level >= 26) before sending any notification.
+     */
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createNotificationChannel() {
+        val channel = NotificationChannel(
+            CHANNEL_ID,
+            "Important Notification Channel",
+            NotificationManager.IMPORTANCE_HIGH,
+        ).apply {
+            description = "This notification contains important announcement, etc."
+        }
+        //notificationManager.createNotificationChannel(channel)
     }
 }

@@ -1,12 +1,10 @@
 package com.moronlu18.data.task
 
-import android.graphics.Bitmap
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.moronlu18.data.account.Email
 import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.base.TaskId
 import com.moronlu18.data.converter.CustomerIdTypeConverter
