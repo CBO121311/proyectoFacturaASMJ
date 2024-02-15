@@ -2,6 +2,13 @@ Invoice versión 4, es la aplicación que se está realizando de manera modular 
 
  ## Historial de versiones
 
+### V4.0.5 (15/02/2024)
+ *Escrito por CBO121311*
+
+- Modificado para evitar usar la navegación de BaseFragmentDialog.
+- Añadido fotos de ejemplo al populateItem
+
+  - ------------------------
 ### V4.0.4 (13/02/2024)
  *Escrito por CBO121311*
 
