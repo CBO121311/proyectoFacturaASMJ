@@ -4,11 +4,9 @@ import android.database.sqlite.SQLiteConstraintException
 import android.database.sqlite.SQLiteException
 import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.customer.Customer
-import com.moronlu18.data.task.Task
 import com.moronlu18.database.InvoiceDatabase
 import com.moronlu18.network.Resource
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 class CustomerProviderDB {
     fun insert(customer: Customer): Resource {

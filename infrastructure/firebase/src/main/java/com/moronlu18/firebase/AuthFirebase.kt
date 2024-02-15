@@ -4,8 +4,9 @@ import android.util.Log
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.moronlu18.data.account.Account
+import com.moronlu18.data.account.AccountId
 import com.moronlu18.data.account.AccountState
-import com.moronlu18.data.account.Email
+import com.moronlu18.data.base.Email
 import com.moronlu18.network.Resource
 //import com.moronlu18.accounts.network.Resource
 
@@ -45,7 +46,7 @@ class AuthFirebase {
                 //authResult.user!!.displayName
 
                 account = Account.create(
-                    authResult.user!!.hashCode(),
+                    AccountId(authResult.user!!.hashCode()),
                     Email(email),
                     password,
                     authResult.user!!.displayName,

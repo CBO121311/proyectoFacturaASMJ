@@ -25,9 +25,6 @@
         <action
             android:id="@+id/action_customerList_to_fragmentProgressDialogKiwi"
             app:destination="@id/fragmentProgressDialogKiwi" />
-        <action
-            android:id="@+id/action_customerList_to_baseFragmentDialogWarning"
-            app:destination="@id/baseFragmentDialogWarning" />
     </fragment>
     <fragment
         android:id="@+id/customerCreation"
@@ -46,9 +43,6 @@
         android:label="@string/title_customerdetail"
         tools:layout="@layout/fragment_customer_detail">
         <action
-            android:id="@+id/action_customerDetail_to_baseFragmentDialogWarning"
-            app:destination="@id/baseFragmentDialogWarning" />
-        <action
             android:id="@+id/action_customerDetail_to_customerCreation"
             app:destination="@id/customerCreation"
             app:popEnterAnim="@android:anim/fade_in"
@@ -61,15 +55,4 @@
         android:id="@+id/fragmentProgressDialogKiwi"
         android:name="com.moronlu18.invoice.base.FragmentProgressDialogKiwi"
         android:label="FragmentProgressDialogKiwi" />
-    <dialog
-        android:id="@+id/baseFragmentDialogWarning"
-        android:name="com.moronlu18.invoice.base.BaseFragmentDialogWarning"
-        android:label="BaseFragmentDialogWarning" >
-        <argument
-            android:name="title"
-            app:argType="string" />
-        <argument
-            android:name="message"
-            app:argType="string" />
-    </dialog>
 </navigation>

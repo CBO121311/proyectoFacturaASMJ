@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
+import com.moronlu18.data.base.Email
 import com.moronlu18.data.converter.AccountIdTypeConverter
 import com.moronlu18.data.converter.EmailTypeConverter
 
@@ -33,6 +34,8 @@ class Account(
 
     //Crea un nuevo accountid con el account de la base de datos.
     //Y al revés también.
+
+    //Hay que comprobar el id, el email y el state.
     @PrimaryKey
     @TypeConverters(AccountIdTypeConverter::class)
     val accountId: AccountId,
@@ -61,7 +64,7 @@ class Account(
     //Y así garantizo que todas las cuenta sean no verificados.
     companion object {
         fun create(
-            id: Int,
+            id: AccountId,
             email: Email,
             password: String,
             displayName: String?,
@@ -69,7 +72,7 @@ class Account(
             businessProfile: Int?
         ): Account {
             return Account(
-                accountId = AccountId(id),
+                accountId = id,
                 email = email,
                 password = password,
                 displayName = displayName,

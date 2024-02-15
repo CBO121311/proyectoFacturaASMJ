@@ -5,4 +5,8 @@ import com.moronlu18.data.base.UniqueId
 
 //es de la base de datos a mi modelo.
 data class AccountId(override val value: Int): UniqueId(value) {
+    init {
+        if(value<0)
+            throw AccountException.InvalidId()
+    }
 }

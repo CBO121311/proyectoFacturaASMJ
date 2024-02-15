@@ -1,6 +1,7 @@
-package com.moronlu18.data.account
+package com.moronlu18.data.base
 
 import android.os.Parcelable
+import com.moronlu18.data.account.AccountException
 import kotlinx.parcelize.Parcelize
 import java.util.regex.Pattern
 
@@ -19,8 +20,4 @@ data class Email(val value: String):Parcelable {
     override fun toString(): String {
         return value.lowercase()
     }
-
-
-
-
 }

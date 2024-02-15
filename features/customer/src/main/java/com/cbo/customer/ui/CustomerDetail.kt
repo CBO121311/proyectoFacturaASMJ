@@ -3,6 +3,7 @@ package com.cbo.customer.ui
 
 import android.os.Bundle
 import android.os.SystemClock
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -23,6 +24,7 @@ import com.moronlu18.data.customer.Customer
 import com.moronlu18.customercreation.R
 import com.moronlu18.customercreation.databinding.FragmentCustomerDetailBinding
 import com.moronlu18.invoice.base.BaseFragmentDialog
+import com.moronlu18.invoice.base.BaseFragmentDialogWarning
 import com.moronlu18.invoice.ui.MainActivity
 
 class CustomerDetail : Fragment(), MenuProvider {
@@ -95,7 +97,6 @@ class CustomerDetail : Fragment(), MenuProvider {
 
         val customer = args.customnav
 
-
         if (!viewModel.isCustomerReferenced(customer)){
             val dialog = BaseFragmentDialog.newInstance(
                 getString(R.string.title_deleteCustomer),
@@ -115,8 +116,6 @@ class CustomerDetail : Fragment(), MenuProvider {
                 }
             }
         }
-
-
     }
 
     /**
@@ -160,7 +159,6 @@ class CustomerDetail : Fragment(), MenuProvider {
                 onEditItem(customer)
                 true
             }
-
             else -> false
         }
     }
@@ -182,12 +180,12 @@ class CustomerDetail : Fragment(), MenuProvider {
      * Función que muestra el AlertDialog si el estado es ReferencedCustomer.
      */
     private fun showReferencedCustomer() {
-        findNavController().navigate(
-            CustomerDetailDirections.actionCustomerDetailToBaseFragmentDialogWarning(
-                getString(R.string.title_ad_warning),
-                getString(R.string.errReferencedCustomer)
-            )
+
+        val dialog = BaseFragmentDialogWarning.newInstance(
+            getString(R.string.title_ad_warning),
+            getString(R.string.errReferencedCustomer)
         )
+        dialog.show(childFragmentManager,"warning_dialog")
     }
 
     /**
@@ -224,7 +222,6 @@ class CustomerDetail : Fragment(), MenuProvider {
     override fun onStart() {
         super.onStart()
         viewModel.onSuccess()
-
     }
 
 

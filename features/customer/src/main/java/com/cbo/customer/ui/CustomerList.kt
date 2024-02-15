@@ -31,6 +31,7 @@ import com.moronlu18.customercreation.R
 
 import com.moronlu18.customercreation.databinding.FragmentCustomerListBinding
 import com.moronlu18.invoice.base.BaseFragmentDialog
+import com.moronlu18.invoice.base.BaseFragmentDialogWarning
 import com.moronlu18.invoice.ui.MainActivity
 
 class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
@@ -295,12 +296,11 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
      * Muestra alertDialog de advertencia cuando se intenta eliminar un cliente referenciado.
      */
     private fun showReferencedCustomer() {
-        findNavController().navigate(
-            CustomerListDirections.actionCustomerListToBaseFragmentDialogWarning(
-                getString(R.string.title_ad_warning),
-                getString(R.string.errReferencedCustomer)
-            )
+        val dialog = BaseFragmentDialogWarning.newInstance(
+            getString(R.string.title_ad_warning),
+            getString(R.string.errReferencedCustomer)
         )
+        dialog.show(childFragmentManager,"warning_dialog")
     }
 
 
@@ -332,4 +332,6 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
         super.onDestroyView()
         _binding = null
     }
+
+
 }

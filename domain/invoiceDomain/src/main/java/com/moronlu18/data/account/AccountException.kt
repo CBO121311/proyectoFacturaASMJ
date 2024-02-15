@@ -5,4 +5,5 @@ package com.moronlu18.data.account
 //RunTimeException, excepción genérica
 sealed class AccountException(message : String = ""):RuntimeException(message) {
     class InvalidEmailFormat: AccountException("Email con formato inválido");
+    class InvalidId: AccountException("Id incorrecto");
 }

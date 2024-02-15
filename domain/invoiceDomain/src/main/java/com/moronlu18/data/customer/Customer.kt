@@ -1,20 +1,17 @@
 package com.moronlu18.data.customer
 
 
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
-import com.moronlu18.data.account.Email
+import com.moronlu18.data.base.Email
 import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.converter.CustomerIdTypeConverter
 import com.moronlu18.data.converter.EmailTypeConverter
-import com.moronlu18.data.converter.PhotoTypeConverter
 import com.moronlu18.data.converter.UriTypeConverter
 import kotlinx.parcelize.Parcelize
-import kotlinx.parcelize.RawValue
 
 
 @Entity(tableName = "customer")
@@ -33,7 +30,7 @@ data class Customer(
     var photo: Uri? = null
     ) : Parcelable, Comparable<Customer> {
     override fun compareTo(other: Customer): Int {
-        return name.lowercase().compareTo(other.name.lowercase())
+        return email.value.lowercase().compareTo(other.email.value.lowercase())
     }
     companion object {
         fun create(

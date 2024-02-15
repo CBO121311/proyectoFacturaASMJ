@@ -15,6 +15,7 @@ class BaseFragmentDialogWarning : DialogFragment() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(title)
         builder.setMessage(message)
+        builder.setCancelable(false)
 
         builder.setNegativeButton(
             getString(R.string.dialog_warning_title)
@@ -30,12 +31,13 @@ class BaseFragmentDialogWarning : DialogFragment() {
         const val result = "result"
 
         // Método de fábrica para crear una instancia de BaseFragmentDialog con argumentos
-        fun newInstance(title: String, message: String): BaseFragmentDialog {
-            val fragment = BaseFragmentDialog()
+        fun newInstance(title: String, message: String): BaseFragmentDialogWarning {
+            val fragment = BaseFragmentDialogWarning()
             val args = Bundle()
             args.putString(Companion.title, title)
             args.putString(Companion.message, message)
             fragment.arguments = args
+
             return fragment
         }
     }

@@ -17,13 +17,13 @@ interface CustomerDao {
 
     @Query ("SELECT * FROM customer ORDER BY id")
     fun  selectAll(): Flow<List<Customer>>
-    @Query ("SELECT * FROM customer ORDER BY name ASC")
+    @Query ("SELECT * FROM customer ORDER BY LOWER(name) ASC")
     fun  selectAllName(): Flow<List<Customer>>
 
-    @Query ("SELECT * FROM customer ORDER BY name DESC")
+    @Query ("SELECT * FROM customer ORDER BY LOWER(name) COLLATE NOCASE DESC")
     fun  selectAllNameDesc(): Flow<List<Customer>>
 
-    @Query ("SELECT * FROM customer ORDER BY email ASC")
+    @Query ("SELECT * FROM customer ORDER BY LOWER(email) ASC")
     fun  selectAllEmail(): Flow<List<Customer>>
 
     @Query("SELECT name FROM customer WHERE id = :customerId")

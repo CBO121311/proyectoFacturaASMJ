@@ -15,9 +15,6 @@ class CustomerAdapter(
     private val listener: OnCustomerClick
 ) : ListAdapter<Customer, CustomerAdapter.CustomerViewHolder>(CUSTOMER_COMPARATOR) {
 
-    //Cuando no hay ninguna posición seleccionada.
-    private var selectedPosition = RecyclerView.NO_POSITION
-
     interface OnCustomerClick {
         fun customerClick(customer: Customer)
         fun customerOnLongClick(view: View, position: Int, customer: Customer)
@@ -58,7 +55,7 @@ class CustomerAdapter(
         selectedPosition = RecyclerView.NO_POSITION
         notifyDataSetChanged()
     }
-
+    private var selectedPosition = RecyclerView.NO_POSITION
 
     inner class CustomerViewHolder(private val view: View) :
         RecyclerView.ViewHolder(view) {

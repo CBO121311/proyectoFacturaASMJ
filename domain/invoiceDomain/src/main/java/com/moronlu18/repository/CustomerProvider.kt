@@ -1,7 +1,7 @@
 package com.moronlu18.repository
 
 import com.moronlu18.data.customer.Customer
-import com.moronlu18.data.account.Email
+import com.moronlu18.data.base.Email
 import com.moronlu18.data.base.CustomerId
 import com.moronlu18.network.ResourceList
 

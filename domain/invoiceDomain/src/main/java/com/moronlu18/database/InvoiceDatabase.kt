@@ -8,7 +8,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.moronlu18.accounts.entity.Item
 import com.moronlu18.data.account.Account
 import com.moronlu18.data.account.BusinessProfile
-import com.moronlu18.data.account.Email
+import com.moronlu18.data.base.Email
 import com.moronlu18.data.account.User
 import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.base.InvoiceId
@@ -284,7 +284,12 @@ abstract class InvoiceDatabase : RoomDatabase() {
             val itemDao = getInstance().itemDao()
             itemDao.insert(
                 Item(
-                    ItemId(itemId++), ItemType.PRODUCT, VatItemType.FIVE, "Fresa", 3.50
+                    ItemId(itemId++), ItemType.PRODUCT,
+                    VatItemType.TWENTYONE,
+                    "Pizza",
+                    2.52,
+                    "Producto sección precocinados",
+                    R.drawable.pizza
                 )
             )
             itemDao.insert(
@@ -293,12 +298,17 @@ abstract class InvoiceDatabase : RoomDatabase() {
                     ItemType.SERVICE,
                     VatItemType.TWENTYONE,
                     "Repartir productos",
-                    34.85
+                    34.85, photo = R.drawable.servicio
                 )
             )
             itemDao.insert(
                 Item(
-                    ItemId(itemId++), ItemType.PRODUCT, VatItemType.TWENTYONE, "Vino tinto", 12.45
+                    ItemId(itemId++), ItemType.PRODUCT,
+                    VatItemType.TWENTYONE,
+                    "Leche",
+                    1.20,
+                    "Producto sección lacteos",
+                    R.drawable.leche,
                 )
             )
             itemDao.insert(
@@ -307,17 +317,27 @@ abstract class InvoiceDatabase : RoomDatabase() {
                     ItemType.SERVICE,
                     VatItemType.TWENTYONE,
                     "Reponer productos",
-                    29.43
+                    29.43, photo = R.drawable.servicio
                 )
             )
             itemDao.insert(
                 Item(
-                    ItemId(itemId++), ItemType.PRODUCT, VatItemType.FIVE, "Pulpo", 9.75
+                    ItemId(itemId++), ItemType.PRODUCT,
+                    VatItemType.TWENTYONE,
+                    "Manzana",
+                    0.42,
+                    "Producto sección fruta",
+                    R.drawable.manzana
                 )
             )
             itemDao.insert(
                 Item(
-                    ItemId(itemId), ItemType.PRODUCT, VatItemType.FIVE, "Solomillo", 11.30
+                    ItemId(itemId), ItemType.PRODUCT,
+                    VatItemType.FIVE,
+                    "Pan de espelta",
+                    0.92,
+                    "Producto sección panadería",
+                    R.drawable.panespelta
                 )
             )
         }

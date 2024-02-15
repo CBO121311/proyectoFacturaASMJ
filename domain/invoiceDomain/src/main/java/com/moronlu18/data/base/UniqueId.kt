@@ -10,11 +10,14 @@ abstract class UniqueId(open val value:Any) {
         return value == other.value
     }
 
+    //ClassCastException da error ClassCastException
+    //google truth
+
     override fun hashCode(): Int {
         return value.hashCode()
     }
 
     override fun toString(): String {
-        return super.toString()
+        return "$value"
     }
 }
