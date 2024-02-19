@@ -2,6 +2,15 @@ Invoice versión 4, es la aplicación que se está realizando de manera modular 
 
  ## Historial de versiones
 
+
+### V4.1.0 (19/02/2024)
+ *Escrito por CBO121311*
+
+- Añadido en configuración "Activar notifcaciones".
+- Añadido en customer que salga una notificación al añadir un cliente
+- Corregido el error de que crasheaba la aplicación por el tema del URI (aleluya)
+- Limpieza de código.
+
 ### V4.0.5 (15/02/2024)
  *Escrito por CBO121311*
 
