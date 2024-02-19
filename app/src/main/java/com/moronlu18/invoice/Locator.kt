@@ -4,12 +4,7 @@ import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
 import android.content.res.Resources
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Canvas
 import android.net.Uri
-import android.util.Log
-import androidx.core.content.res.ResourcesCompat
 import androidx.datastore.preferences.preferencesDataStore
 import com.moronlu18.invoice.data.preferences.UserPreferencesRepository
 import com.moronlu18.invoice.ui.preferences.DataStorePreferencesRepository
@@ -43,24 +38,6 @@ object Locator {
     private val appResources: Resources
         get() = requireApplication.resources
 
-    fun convertirRecursoABitmap(resourceId: Int): Bitmap {
-        val options = BitmapFactory.Options()
-        return BitmapFactory.decodeResource(appResources, resourceId, options)
-    }
-
-    /*private fun getbitMap(imageView: ImageView): Bitmap {
-        val bitmap = Bitmap.createBitmap(imageView.width, imageView.height, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        imageView.draw(canvas)
-        return bitmap
-    }*/
-
-    fun getResourceBitmapV2(resourceId: Int): Bitmap {
-        val context = requireApplication
-
-        val options = BitmapFactory.Options()
-        return BitmapFactory.decodeResource(context.resources, resourceId,options)
-    }
 
     fun getResourceUri(resourceId: Int): Uri? {
         val context = requireApplication

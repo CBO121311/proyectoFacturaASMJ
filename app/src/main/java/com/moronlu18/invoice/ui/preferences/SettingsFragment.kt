@@ -1,13 +1,28 @@
 package com.moronlu18.invoice.ui.preferences
 
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -16,6 +31,7 @@ import androidx.preference.SwitchPreference
 import com.moronlu18.invoice.Locator
 import com.moronlu18.invoice.R
 import com.moronlu18.invoice.ui.MainActivity
+import com.moronlu18.invoice.utils.Utils
 import java.util.Locale
 
 
@@ -23,12 +39,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     //Para que podamos navegar de nuevo en setting estan en él.
     private var isInSettingFragment = false
+    private val notificationManager: NotificationManager by lazy {
+        requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    }
 
     override fun onStart() {
         super.onStart()
         setUpFab()
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
 
 
@@ -59,6 +79,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         initPreferencesBigText()
         initPreferencesLanguage()
         initPreferencesNight()
+        initPreferencesNotification()
     }
 
 
@@ -118,6 +139,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             Locator.settingsPreferencesRepository.getSettingValue("key_language", "es")
         updateSummary(language)
 
+
         language?.setOnPreferenceChangeListener { _, newValue ->
 
             Locator.settingsPreferencesRepository.putSettingValue(
@@ -145,6 +167,87 @@ class SettingsFragment : PreferenceFragmentCompat() {
         configuration.setLocale(newLocale)
         resources.updateConfiguration(configuration, resources.displayMetrics)
         activity?.recreate()
+    }
+
+    private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun initPreferencesNotification() {
+        val active = preferenceManager.findPreference<SwitchPreference>("key_active_notification")
+        active?.isChecked = notificationManager.areNotificationsEnabled()
+
+        createNotificationChannel()
+
+        requestPermissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+                when {
+                    !it -> {
+                        active?.isChecked = false
+                        Utils.showSnackBar( requireActivity().findViewById(android.R.id.content),
+                            "Para habilitar las notificaciones, ve a la configuración de la aplicación y concede los permisos necesarios."
+                        )
+                    }
+                    else -> {
+                        showDummyNotification()
+                    }
+                }
+            }
+
+
+        active?.setOnPreferenceChangeListener { _, newValue ->
+            val isChecked = newValue as Boolean
+
+            when {
+                !isChecked -> {
+                    Utils.showSnackBar( requireActivity().findViewById(android.R.id.content),
+                        "Para desactivar las notificaciones, ve a la configuración de la aplicación."
+                    )
+
+                    false
+                }
+                ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED -> {
+                    requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                    true
+                }
+                else -> true
+            }
+        }
+    }
+
+
+
+
+    @SuppressLint("MissingPermission")
+    private fun showDummyNotification() {
+        val builder = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle("Bien hecho! 😊🎉 ")
+            .setContentText("Las notificaciones se han activado 🥝")
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setAutoCancel(true)
+
+        with(NotificationManagerCompat.from(requireContext())) {
+            notify(1, builder.build())
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun createNotificationChannel() {
+        val channel = NotificationChannel(
+            CHANNEL_ID,
+            "Important Notification Channel",
+            NotificationManager.IMPORTANCE_HIGH,
+        ).apply {
+            description = "This notification contains important announcement, etc."
+        }
+        notificationManager.createNotificationChannel(channel)
+    }
+
+    companion object {
+        const val CHANNEL_ID = "notify_channel"
     }
 
 
@@ -222,6 +325,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             true
         }
     }
+
 
     /**
      * Actualiza el summary con la preferencia seleccionada.

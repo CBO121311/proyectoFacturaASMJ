@@ -37,21 +37,21 @@
             />
     </PreferenceCategory>
 
-   <!-- <PreferenceCategory
+    <PreferenceCategory
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:title="@string/pc_title_setting_notificaction">
         <SwitchPreference
             android:defaultValue="false"
             android:key="@string/key_active_notification"
-            android:summary="Activación de las notificaciones"
+            android:summary="@string/pr_summary_notification"
             android:title="@string/title_active_notification" />
-        <ListPreference
+       <!-- <ListPreference
             android:entries="@array/ringtone_entries"
             android:entryValues="@array/ringtone_values"
             android:key="@string/key_notification"
-            android:title="@string/listpreference_title_ringtone" />
-    </PreferenceCategory>-->
+            android:title="@string/listpreference_title_ringtone" />-->
+    </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pc_title_setting_sort">
         <ListPreference

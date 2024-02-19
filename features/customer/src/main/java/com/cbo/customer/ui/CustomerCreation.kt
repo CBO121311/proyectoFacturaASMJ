@@ -2,10 +2,8 @@ package com.cbo.customer.ui
 
 
 import android.Manifest
-import android.app.NotificationChannel
-import android.app.NotificationManager
+import android.app.Activity
 import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -22,6 +20,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -40,15 +39,11 @@ import com.moronlu18.invoice.ui.MainActivity
 class CustomerCreation : Fragment() {
     private var _binding: FragmentCustomerCreationBinding? = null
     private val binding get() = _binding!!
-    private lateinit var launcher: ActivityResultLauncher<String>
+    private lateinit var launcher: ActivityResultLauncher<Intent>
     private var selectimgUri: Uri? = null
 
     private val viewModel: CustomerViewModel by viewModels()
     private val args: CustomerCreationArgs by navArgs()
-    /*private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
-    private val notificationManager: NotificationManager by lazy {
-        requireContext().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-    }*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,7 +57,8 @@ class CustomerCreation : Fragment() {
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -92,31 +88,6 @@ class CustomerCreation : Fragment() {
         if (customer != null) {
             setUpEditMode(customer)
         }
-
-
-
-        /*requestPermissionLauncher =
-            registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-                //refreshUI()
-                if (it) {
-                    showDummyNotification("nanana")
-                } else {
-                    Snackbar.make(
-                        binding.root,
-                        "Please grant Notification permission from App Settings",
-                        Snackbar.LENGTH_LONG
-                    ).show()
-                }
-            }*/
-
-        // Sets up notification channel.
-        //createNotificationChannel()
-
-        // Sets up button.
-
-
-        // Refresh UI.
-        //refreshUI()
 
 
     }
@@ -160,6 +131,7 @@ class CustomerCreation : Fragment() {
      * Se le llama en caso de éxito.
      * Realiza las acciones necesarias para la creación o edición de un cliente si tiene éxito.
      */
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun onSuccessCreate() {
 
         val phone: String? = if (binding.customerCreationTietPhone.text.toString().isNotBlank()) {
@@ -205,19 +177,17 @@ class CustomerCreation : Fragment() {
             )
             viewModel.addCustomer(newCustomer)
         }
-       /* if (ContextCompat.checkSelfPermission(
+
+
+
+        if (ContextCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.POST_NOTIFICATIONS,
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            showDummyNotification(name)
-        }*/
+            showNotification(name)
+        }
 
-
-
-        /* else {
-             requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-         }*/
 
 
         findNavController().popBackStack()
@@ -236,45 +206,29 @@ class CustomerCreation : Fragment() {
 
     private fun setUpGallery() {
 
-        launcher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            if (uri != null) {
-                loadSelectedImage(uri)
-                //binding.customerCreationImgcAvatar.setImageURI(uri)
-                onImageSelected(uri)
+        launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val uri = result.data?.data
+                if (uri != null) {
+                    // Solicitar permiso persistente para el URI seleccionado
+                    requireContext().contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    loadSelectedImage(uri)
+                    onImageSelected(uri)
+                }
             }
         }
+
         binding.customerCreationImgbtnCustomer.setOnClickListener {
-            launcher.launch("image/*")
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
+            intent.type = "image/*"
+            launcher.launch(intent)
         }
     }
 
     private fun onImageSelected(uri: Uri) {
         selectimgUri = uri
     }
-
-
-    /**
-     * Configura el launcher para el resultado de la galería.
-     */
-    /*private fun setUpGallery() {
-
-        launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == Activity.RESULT_OK) {
-                val data: Intent? = it.data
-                val imageUri = data?.data
-                binding.customerCreationImgcAvatar.setImageURI(imageUri)
-                onImageSelected(imageUri!!)
-            }
-        }
-    }*/
-
-    /**
-     * Abre la galería para permitir al usuario seleccionar una imagen del dispositivo.
-     */
-    /*private fun openGallery() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        launcher.launch(intent)
-    }*/
 
 
     /**
@@ -338,7 +292,7 @@ class CustomerCreation : Fragment() {
     }
 
 
-    private fun showDummyNotification(name:String) {
+    private fun showNotification(name:String) {
 
         val builder = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -359,13 +313,6 @@ class CustomerCreation : Fragment() {
                     Manifest.permission.POST_NOTIFICATIONS
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
                 return
             }
             notify(1, builder.build())
@@ -374,31 +321,5 @@ class CustomerCreation : Fragment() {
 
     companion object {
         const val CHANNEL_ID = "customer_channel2"
-    }
-
-    /**
-     * Refresh UI elements.
-     */
-    /*@RequiresApi(Build.VERSION_CODES.N)
-    private fun refreshUI() {
-
-        val textNotificationEnabled = binding.textNotificationEnabled2
-        textNotificationEnabled.text =
-            if (notificationManager.areNotificationsEnabled()) "TRUE" else "FALSE"*/
-
-    //Creamos un canal
-    /**
-     * Creates Notification Channel (required for API level >= 26) before sending any notification.
-     */
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun createNotificationChannel() {
-        val channel = NotificationChannel(
-            CHANNEL_ID,
-            "Important Notification Channel",
-            NotificationManager.IMPORTANCE_HIGH,
-        ).apply {
-            description = "This notification contains important announcement, etc."
-        }
-        //notificationManager.createNotificationChannel(channel)
     }
 }

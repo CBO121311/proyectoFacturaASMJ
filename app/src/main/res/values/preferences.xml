@@ -7,7 +7,7 @@
     <string name="title_active_notification">Activar Notificaciones</string>
 
     <string name="listpreference_title_ringtone">Tono Notificación</string>
-    <string name="key_active_notification" translatable="false">active_preference</string>
+    <string name="key_active_notification" translatable="false">key_active_notification</string>
     <string name="etp_title_email">Correo electrónico</string>
     <string name="etp_title_password">Contraseña del usuario</string>
     <string name="pr_title_customer">Clientes</string>
@@ -46,4 +46,5 @@
     <string name="pr_alertdialog_restart_title">Confirmación</string>
     <string name="pr_alertdialog_restart_positive">Aceptar</string>
     <string name="pr_alertdialog_restart_cancel">Cancelar</string>
+    <string name="pr_summary_notification">Activación de las notificaciones</string>
 </resources>

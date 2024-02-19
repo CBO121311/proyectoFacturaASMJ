@@ -1,4 +1,4 @@
-package com.moronlu18.customercreation
+package com.moronlu18.customer
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
