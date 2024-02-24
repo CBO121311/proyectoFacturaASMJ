@@ -52,4 +52,6 @@
     <string name="tvNumber">Number</string>
     <string name="invoiceStatusPagada">Paid</string>
     <string name="invoiceStatusVencida">Overdue</string>
+    <string name="NotificationCreationInvoice">Invoice created successfully</string>
+    <string name="NotificationTextContextInvoice">New invoice identifier:</string>
 </resources>

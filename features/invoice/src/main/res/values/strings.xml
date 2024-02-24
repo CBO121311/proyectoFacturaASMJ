@@ -65,5 +65,7 @@
     <string name="Content_deleteInvoice">¿Estás seguro de que quieres borrar la factura?</string>
     <string name="cl_menu_edit">Editar</string>
     <string name="cl_menu_delete">Borrar</string>
+    <string name="NotificationCreationInvoice">Factura creada con éxito</string>
+    <string name="NotificationTextContextInvoice">Identificador de la nueva factura:</string>
 
 </resources>

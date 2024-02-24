@@ -24,6 +24,7 @@ import com.moronlu18.data.invoice.LineItem
 import com.moronlu18.data.invoice.Invoice
 import com.moronlu18.data.invoice.InvoiceStatus
 import com.moronlu18.invoice.ui.MainActivity
+import com.moronlu18.invoice.utils.sendNotification
 import com.moronlu18.invoicelist.R
 import com.moronlu18.invoicelist.databinding.FragmentInvoiceCreationBinding
 import com.mto.invoice.adapter.creation.AddItemCreationAdapter
@@ -63,7 +64,6 @@ class InvoiceCreation : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentInvoiceCreationBinding.inflate(inflater, container, false)
         binding.viewmodel = this.viewmodel
         binding.lifecycleOwner = this
@@ -198,7 +198,7 @@ class InvoiceCreation : Fragment() {
             viewmodel.addRepository(invoice)
             addLineItems(lineItems)
         }
-
+        sendNotification(CHANNEL_ID, requireContext(), getString(R.string.NotificationCreationInvoice),getString(R.string.NotificationTextContextInvoice) + " " + idInvoice)
         findNavController().popBackStack()
     }
 
@@ -513,6 +513,9 @@ class InvoiceCreation : Fragment() {
 
         }
 
+    }
+    companion object {
+        const val CHANNEL_ID = "InvoiceCreation_Notifications"
     }
 
 
