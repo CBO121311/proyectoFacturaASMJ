@@ -2,7 +2,13 @@ Invoice versión 4, es la aplicación que se está realizando de manera modular 
 
  ## Historial de versiones
 
+### V4.1.1 (24/02/2024)
+ *Escrito por mateotamayoo*
 
+- Añadido fichero de ayuda para lanzar notificaciones.
+- Añadida notificación cuando se crea una factura
+- Clases de prueba para los POJOS de Invoice
+  
 ### V4.1.0 (19/02/2024)
  *Escrito por CBO121311*
 
