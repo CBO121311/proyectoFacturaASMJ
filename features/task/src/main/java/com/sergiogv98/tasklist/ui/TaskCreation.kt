@@ -65,7 +65,7 @@ class TaskCreation : Fragment() {
             showDatePicker(binding.taskCreationDateCreationTxtShow)
         }
 
-        binding.taskCreationImgCalendarEnd.setOnClickListener {
+        binding.taskCreationBtnCalendarEnd.setOnClickListener {
             showDatePicker(binding.taskCreationDateEndTxtShow)
         }
 

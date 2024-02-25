@@ -2,7 +2,6 @@ package com.moronlu18.repository
 
 import android.database.sqlite.SQLiteException
 import com.moronlu18.data.base.CustomerId
-import com.moronlu18.data.customer.Customer
 import com.moronlu18.data.task.Task
 import com.moronlu18.database.InvoiceDatabase
 import com.moronlu18.network.Resource

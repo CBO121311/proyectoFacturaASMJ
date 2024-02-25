@@ -213,26 +213,50 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/task_creation_button_date_creation" />-->
 
-        <ImageView
-            android:id="@+id/task_creation_img_calendar_creation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+
+        <Button
+            android:id="@+id/taskCreationImgCalendarCreation"
+            android:layout_width="50dp"
+            android:layout_height="45dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:clickable="true"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/task_creation_img_top"
-            app:srcCompat="@drawable/ic_calendar" />
+            app:layout_constraintTop_toBottomOf="@+id/task_creation_img_top"/>
 
         <ImageView
-            android:id="@+id/task_creation_img_calendar_end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_calendar"
+            app:layout_constraintBottom_toBottomOf="@+id/taskCreationImgCalendarCreation"
+            app:layout_constraintEnd_toEndOf="@+id/taskCreationImgCalendarCreation"
+            app:layout_constraintStart_toStartOf="@+id/taskCreationImgCalendarCreation"
+            app:layout_constraintTop_toTopOf="@+id/taskCreationImgCalendarCreation" />
+            />
+
+        <Button
+            android:id="@+id/task_creation_btn_calendar_end"
+            android:layout_width="50dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="6dp"
             android:clickable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/task_creation_date_end_txt"
-            app:layout_constraintTop_toBottomOf="@+id/task_creation_date_end_txt"
-            app:srcCompat="@drawable/ic_calendar" />
+            app:layout_constraintTop_toBottomOf="@+id/task_creation_date_end_txt" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="2dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_calendar"
+            app:layout_constraintBottom_toBottomOf="@+id/task_creation_btn_calendar_end"
+            app:layout_constraintEnd_toEndOf="@+id/task_creation_btn_calendar_end"
+            app:layout_constraintStart_toStartOf="@+id/task_creation_btn_calendar_end"
+            app:layout_constraintTop_toTopOf="@+id/task_creation_btn_calendar_end" />
+
 
         <TextView
             android:id="@+id/task_creation_date_creation_txt"
@@ -250,11 +274,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="65dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="85dp"
             android:text="@string/task_creation_date_fin_txt"
             app:layout_constraintBottom_toTopOf="@+id/task_creation_til_description"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/task_creation_task_til_name" />
+            app:layout_constraintTop_toBottomOf="@+id/task_creation_img_top" />
 
         <TextView
             android:id="@+id/task_creation_date_creation_txt_show"
