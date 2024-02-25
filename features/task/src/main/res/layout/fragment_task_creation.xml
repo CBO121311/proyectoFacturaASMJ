@@ -202,22 +202,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/task_creation_status" />
 
-        <!--<TextView
-            android:id="@+id/task_date_error_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="@color/red"
-            app:layout_constraintBottom_toTopOf="@+id/task_creation_text_description"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/task_creation_button_date_creation" />-->
-
-
         <Button
             android:id="@+id/taskCreationImgCalendarCreation"
-            android:layout_width="50dp"
-            android:layout_height="45dp"
+            android:layout_width="@dimen/button_date_width"
+            android:layout_height="@dimen/button_date_height"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:clickable="true"
@@ -225,8 +213,8 @@
             app:layout_constraintTop_toBottomOf="@+id/task_creation_img_top"/>
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/img_calendar_button"
+            android:layout_height="@dimen/img_calendar_button"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_calendar"
             app:layout_constraintBottom_toBottomOf="@+id/taskCreationImgCalendarCreation"
@@ -237,8 +225,8 @@
 
         <Button
             android:id="@+id/task_creation_btn_calendar_end"
-            android:layout_width="50dp"
-            android:layout_height="45dp"
+            android:layout_width="@dimen/button_date_width"
+            android:layout_height="@dimen/button_date_height"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="6dp"
             android:clickable="true"
@@ -247,8 +235,8 @@
             app:layout_constraintTop_toBottomOf="@+id/task_creation_date_end_txt" />
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="@dimen/img_calendar_button"
+            android:layout_height="@dimen/img_calendar_button"
             android:layout_marginEnd="2dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_calendar"

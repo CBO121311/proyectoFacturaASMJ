@@ -60,4 +60,7 @@
     <dimen name="task_details_img_width_height">120dp</dimen>
     <dimen name="task_list_description_max_width">350dp</dimen>
     <dimen name="task_list_ll_img">220dp</dimen>
+    <dimen name="button_date_width">50dp</dimen>
+    <dimen name="button_date_height">45dp</dimen>
+    <dimen name="img_calendar_button">30dp</dimen>
 </resources>
