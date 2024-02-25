@@ -26,10 +26,6 @@ class TaskDetailViewModel : ViewModel() {
     private var taskRepositoryBD = TaskRepositoryBD()
     private var customerRepositoryBD = CustomerProviderDB()
 
-    /*
-    fun getCustomerPhoto(customerId: Int): Customer {
-        return taskRepositoryBD.getCustomerById(customerId) ?: Customer() // Ajusta según tu implementación
-    }*/
 
     fun getCustomer(customerId: CustomerId): Customer? {
         return customerRepositoryBD.getCustomerById(customerId)

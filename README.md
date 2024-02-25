@@ -2,6 +2,13 @@ Invoice versión 4, es la aplicación que se está realizando de manera modular 
 
  ## Historial de versiones
 
+### V4.1.2 (25/02/2024)
+ *Escrito por SergioGV98*
+
+- Añadida notificación cuando se crea una tarea o se edita.
+- Clases de prueba para los POJOS de Task.
+- Se ha limpiado varias partes del codigo de tareas.
+
 ### V4.1.1 (24/02/2024)
  *Escrito por mateotamayoo*
 

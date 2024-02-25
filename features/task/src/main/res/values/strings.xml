@@ -16,7 +16,7 @@
     <string name="task_creation_button_add">Crear tarea</string>
     <string name="task_creation_txt_button_fecha_creacion">Fecha de Creación</string>
     <string name="task_creation_txt_button_fecha_finalizacion">Fecha de Finalización</string>
-    <string name="task_list_empty_list">No tienes tareas...</string>
+    <string name="task_list_empty_list">No tienes tareas</string>
     <string name="task_list_customer_help_text">Campo obligatorio</string>
     <string name="task_list_task_help_text">Campo obligatorio</string>
     <string name="title_list_task">Lista de tareas</string>
@@ -36,4 +36,7 @@
     <string name="menu_edit">Editar</string>
     <string name="menu_delete">Eliminar</string>
     <string name="menu_see">Ver</string>
+    <string name="NotificationTaskCreate">Tarea creada con exito</string>
+    <string name="NotificationTextContextTask">Nombre de la tarea: </string>
+    <string name="NotificationTaskEdit">Tarea modificada con exito</string>
 </resources>

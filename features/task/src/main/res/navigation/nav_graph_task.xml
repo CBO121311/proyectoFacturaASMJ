@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/taskCreation"
         android:name="com.sergiogv98.tasklist.ui.TaskCreation"
-        android:label="TaskCreation" >
+        android:label="@string/title_task_creation" >
         <argument
             android:name="tasknav"
             app:argType="com.moronlu18.data.task.Task"
@@ -39,7 +39,7 @@
     <fragment
         android:id="@+id/taskDetail"
         android:name="com.sergiogv98.tasklist.ui.TaskDetail"
-        android:label="TaskDetail" >
+        android:label="@string/title_task_detail" >
         <argument
             android:name="tasknav"
             app:argType="com.moronlu18.data.task.Task" />

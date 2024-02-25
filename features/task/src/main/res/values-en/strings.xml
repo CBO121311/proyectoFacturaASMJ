@@ -17,8 +17,8 @@
     <string name="task_creation_txt_button_fecha_creacion">Creation Date</string>
     <string name="task_creation_txt_button_fecha_finalizacion">End Date</string>
     <string name="task_list_empty_list">You have no tasks...</string>
-    <string name="task_list_customer_help_text">Required field</string>
-    <string name="task_list_task_help_text">Required field</string>
+    <string name="task_list_customer_help_text">Mandatory field</string>
+    <string name="task_list_task_help_text">Mandatory field</string>
     <string name="title_list_task">Task List</string>
     <string name="title_task_creation">Task Creation</string>
     <string name="title_task_detail">Task Details</string>
@@ -35,5 +35,8 @@
     <string name="task_vencida">Expired</string>
     <string name="menu_edit">Edit</string>
     <string name="menu_delete">Delete</string>
-
+    <string name="menu_see">View</string>
+    <string name="NotificationTaskCreate">Task created successfully</string>
+    <string name="NotificationTextContextTask">Task Name: </string>
+    <string name="NotificationTaskEdit">Successfully modified task</string>
 </resources>

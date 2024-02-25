@@ -20,6 +20,8 @@ import com.moronlu18.data.task.Task
 import com.moronlu18.data.task.TaskStatus
 import com.moronlu18.data.task.TypeTask
 import com.moronlu18.invoice.ui.MainActivity
+import com.moronlu18.invoice.utils.createNotificationChannel
+import com.moronlu18.invoice.utils.sendNotification
 import com.moronlu18.tasklist.databinding.FragmentTaskCreationBinding
 import com.sergiogv98.usecase.TaskCreationViewModel
 import java.text.SimpleDateFormat
@@ -47,6 +49,7 @@ class TaskCreation : Fragment() {
         binding.viewmodeltaskcreation = this.viewModel
         binding.lifecycleOwner = this
         viewModel.setEditorMode(false)
+        createNotificationChannel(CHANNEL_ID, requireContext())
 
         binding.autoCompleteTxt.addTextChangedListener(GeneralTextWatcher(binding.taskCreationTaskDropdown))
         binding.taskCreationTxvTaskName.addTextChangedListener(GeneralTextWatcher(binding.taskCreationTaskTilName))
@@ -132,6 +135,7 @@ class TaskCreation : Fragment() {
             task.dateCreation = processDate(binding.taskCreationDateCreationTxtShow.text.toString())
             task.dateFinalization = processDate(binding.taskCreationDateEndTxtShow.text.toString())
 
+            sendNotification(CHANNEL_ID, requireContext(), getString(com.moronlu18.tasklist.R.string.NotificationTaskEdit), getString(com.moronlu18.tasklist.R.string.NotificationTextContextTask) + " " + (task.nomTask))
             viewModel.updateTask(task)
         } else {
             val id = viewModel.getNextTaskId()
@@ -146,9 +150,10 @@ class TaskCreation : Fragment() {
                 dateFinalization = processDate(binding.taskCreationDateEndTxtShow.text.toString())
             )
 
+            sendNotification(CHANNEL_ID, requireContext(), getString(com.moronlu18.tasklist.R.string.NotificationTaskCreate), getString(com.moronlu18.tasklist.R.string.NotificationTextContextTask) + " " + (newTask.nomTask))
+
             viewModel.addTaskRepository(newTask)
         }
-
         findNavController().popBackStack()
     }
 
@@ -272,5 +277,9 @@ class TaskCreation : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        const val CHANNEL_ID = "TaskCreation_Notifications"
     }
 }
