@@ -14,7 +14,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginTop="70dp"
-        android:src="@drawable/cbotuxedo"
+        android:src="@drawable/kiwituxedo"
         app:civ_border_color="@color/seed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

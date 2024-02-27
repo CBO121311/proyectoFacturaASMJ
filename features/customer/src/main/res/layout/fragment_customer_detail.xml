@@ -56,7 +56,7 @@
             style="@style/cvCustomerDetailCornerName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/cd_cv_marginTop"
+            android:layout_marginTop="8dp"
             app:cardCornerRadius="@dimen/cd_radius_cv"
             app:cardElevation="@dimen/cd_cardElevation_cv"
             app:layout_constraintEnd_toStartOf="@+id/customer_detailglRight"

@@ -73,8 +73,8 @@
     <string name="dashboard_txvSignIn">Login</string>
 
     <string name="iv_descr_ivAnimation">Animacion de Inicio</string>
-    <string name="txtName_drawer" translatable="false">Alejandro López</string>
-    <string name="txtEmail_drawer" translatable="false">abc@hotmail.es</string>
+    <string name="txtName_drawer" translatable="false">Mr.Kiwi</string>
+    <string name="txtEmail_drawer" translatable="false">kiwi@example.com</string>
     <string name="notification_permission_rationale_title">Alerta</string>
     <string name="notification_permission_rationale_message">Se requiere permiso de notificación para mostrar la notificación.</string>
     <string name="notification_setting_title">Permiso de notificación</string>
