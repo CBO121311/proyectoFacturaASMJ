@@ -55,7 +55,7 @@
     <string name="pr_title_invoice">Invoices</string>
     <string name="summary_account">User account information</string>
     <string name="title_account">User account</string>
-    <string name="title_active_notification">Enable Notifications</string>
+    <string name="title_active_notification">Notifications</string>
     <string name="listpreference_title_ringtone">Notification Tone</string>
     <string name="etp_title_email">Email</string>
     <string name="etp_title_password">User password</string>
@@ -78,4 +78,11 @@
     <string name="pr_alertdialog_restart_positive">Accept</string>
     <string name="pr_alertdialog_restart_cancel">Cancel</string>
     <string name="pr_alertdialog_restart_message">You must restart the application to apply the changes</string>
+    <string name="notification_permission_rationale_title">Alert</string>
+    <string name="notification_permission_rationale_message">Notification permission is required, to show notification</string>
+    <string name="notification_setting_title">Notification Permission</string>
+    <string name="notification_setting_message">Notification permission is required, Please allow notification permission from setting</string>
+    <string name="pr_summary_notification">Enable notification</string>
+    <string name="notification_example_title">"Well done! 😊🎉 "</string>
+    <string name="notification_example_content">Notifications have been enabled 🥝</string>
 </resources>

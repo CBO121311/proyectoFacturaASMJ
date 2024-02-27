@@ -3,7 +3,6 @@ package com.moronlu18.invoice
 import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
-import android.content.res.Resources
 import android.net.Uri
 import androidx.datastore.preferences.preferencesDataStore
 import com.moronlu18.invoice.data.preferences.UserPreferencesRepository
@@ -35,19 +34,15 @@ object Locator {
         DataStorePreferencesRepository(requireApplication.settingsStore)
     }
 
-    private val appResources: Resources
-        get() = requireApplication.resources
-
-
     fun getResourceUri(resourceId: Int): Uri? {
         val context = requireApplication
-        val uri = Uri.Builder()
+
+        return Uri.Builder()
             .scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
             .authority(context.packageName)
             .appendPath(context.resources.getResourceTypeName(resourceId))
             .appendPath(context.resources.getResourceEntryName(resourceId))
             .build()
-
-        return uri
     }
+
 }

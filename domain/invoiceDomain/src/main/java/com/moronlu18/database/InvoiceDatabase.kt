@@ -46,7 +46,6 @@ import com.moronlu18.database.dao.TaskDao
 import com.moronlu18.database.dao.UserDao
 import com.moronlu18.inovice.R
 import com.moronlu18.invoice.Locator
-import com.moronlu18.repository.InvoiceProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -62,7 +61,7 @@ import java.time.Instant
 )
 //Hay que decir que convertidores vamos a utilizar
 //El primero se lo paso por el parametro.
-//El convertidores de tupo que vamos a utilizar
+//Los convertidores de tipo que vamos a utilizar
 @TypeConverters(
     AccountIdTypeConverter::class,
     EmailTypeConverter::class,
@@ -76,7 +75,6 @@ import java.time.Instant
     ItemIdTypeConverter::class,
     ItemTypeConverter::class,
     ItemVatTypeConverter::class,
-    //PhotoTypeConverter::class,
     UriTypeConverter::class
 )
 abstract class InvoiceDatabase : RoomDatabase() {
@@ -234,7 +232,7 @@ abstract class InvoiceDatabase : RoomDatabase() {
                 Invoice(
                     id = InvoiceId(1),
                     customerId = CustomerId(1),
-                    number = InvoiceProvider.giveNumberInvoice(),
+                    number = "20247686",
                     status = InvoiceStatus.PENDIENTE,
                     issuedDate = Instant.now(),
                     dueDate = Instant.now().plus(Duration.ofDays(30)),
@@ -252,8 +250,7 @@ abstract class InvoiceDatabase : RoomDatabase() {
                             1,
                             34.85, 21
                         ),
-
-                        )
+                    )
                 )
             )
         }
@@ -394,7 +391,6 @@ abstract class InvoiceDatabase : RoomDatabase() {
                     Instant.parse("2023-11-15T00:00:00Z"),
                 )
             )
-
         }
     }
 }

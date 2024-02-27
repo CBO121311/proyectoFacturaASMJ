@@ -28,7 +28,6 @@ import com.cbo.customer.usecase.CustomerListViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.moronlu18.data.customer.Customer
 import com.moronlu18.customercreation.R
-
 import com.moronlu18.customercreation.databinding.FragmentCustomerListBinding
 import com.moronlu18.invoice.base.BaseFragmentDialog
 import com.moronlu18.invoice.base.BaseFragmentDialogWarning

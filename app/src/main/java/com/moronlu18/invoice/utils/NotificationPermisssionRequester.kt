@@ -9,6 +9,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.moronlu18.invoice.Locator
+import com.moronlu18.invoice.ui.MainActivity
 
 class NotificationPermisssionRequester(private val activity: ComponentActivity) {
 
@@ -22,11 +24,17 @@ class NotificationPermisssionRequester(private val activity: ComponentActivity) 
                             showNotificationPermissionRationale()
                         else
                             showSettingDialog() //Caso de uso o apartado 6 del diagrama Android Developer
-
                     }
 
             } else {
-                activity.showToast("Permiso asignado")
+                sendNotification(
+                    MainActivity.CHANNEL_ID,
+                    activity,
+                    activity.getString(com.moronlu18.invoice.R.string.notification_example_title),
+                    activity.getString(com.moronlu18.invoice.R.string.notification_example_content)
+                )
+                Locator.settingsPreferencesRepository.putBoolean("key_active_notification", true)
+
             }
         }
 
@@ -40,8 +48,8 @@ class NotificationPermisssionRequester(private val activity: ComponentActivity) 
             activity,
             R.style.MaterialAlertDialog_Material3
         )
-            .setTitle("Notification Permission")
-            .setMessage("Notification permission is required, Please allow notification permission from setting")
+            .setTitle(activity.getString(com.moronlu18.invoice.R.string.notification_setting_title))
+            .setMessage(activity.getString(com.moronlu18.invoice.R.string.notification_setting_message))
             .setPositiveButton("Ok") { _, _ ->
                 val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                 intent.data = Uri.parse("package:${activity.packageName}")
@@ -61,8 +69,8 @@ class NotificationPermisssionRequester(private val activity: ComponentActivity) 
             activity,
             R.style.MaterialAlertDialog_Material3
         )
-            .setTitle("Alert")
-            .setMessage("Notification permission is required, to show notification")
+            .setTitle(activity.getString(com.moronlu18.invoice.R.string.notification_permission_rationale_title))
+            .setMessage(activity.getString(com.moronlu18.invoice.R.string.notification_permission_rationale_message))
             .setPositiveButton("Ok") { _, _ ->
                 if (Build.VERSION.SDK_INT >= 33) {
                     requestPermissionLauncher?.launch(android.Manifest.permission.POST_NOTIFICATIONS)
@@ -72,6 +80,7 @@ class NotificationPermisssionRequester(private val activity: ComponentActivity) 
             .setNegativeButton("Cancel", null)
             .show()
     }
+
 
     /**
      * Función que solicita el permiso para crear notificaciones

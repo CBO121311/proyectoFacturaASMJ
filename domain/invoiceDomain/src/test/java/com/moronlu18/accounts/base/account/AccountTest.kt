@@ -1,4 +1,4 @@
-package com.moronlu18.accounts.base
+package com.moronlu18.accounts.base.account
 
 
 import com.moronlu18.data.account.Account

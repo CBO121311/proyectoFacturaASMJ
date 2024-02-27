@@ -3,7 +3,6 @@ package com.cbo.customer.ui
 
 import android.os.Bundle
 import android.os.SystemClock
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater

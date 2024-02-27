@@ -4,7 +4,7 @@
 
     <string name="summary_account">Información de la cuenta de usuario</string>
     <string name="title_account">Cuenta de usuario</string>
-    <string name="title_active_notification">Activar Notificaciones</string>
+    <string name="title_active_notification">Notificaciones</string>
 
     <string name="listpreference_title_ringtone">Tono Notificación</string>
     <string name="key_active_notification" translatable="false">key_active_notification</string>

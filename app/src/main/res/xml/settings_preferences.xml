@@ -10,6 +10,7 @@
     <PreferenceCategory
         android:title="@string/pc_title_setting_design">
         <SwitchPreference
+            android:icon="@drawable/ic_action_night"
             android:defaultValue="false"
             android:summaryOn="@string/sp_summary_on"
             android:summaryOff="@string/sp_summary_off"
@@ -17,6 +18,7 @@
             android:title="@string/sp_title_modenight" />
 
         <SwitchPreference
+            android:icon="@drawable/ic_action_bigtext"
             android:defaultValue="false"
             android:key="@string/key_setting_text"
             android:title="@string/sp_title_bigText"
@@ -28,6 +30,7 @@
     <PreferenceCategory
         android:title="@string/pc_title_setting_language">
         <ListPreference
+            android:icon="@drawable/ic_action_language"
             android:defaultValue="en"
             android:entries="@array/language_entries"
             android:entryValues="@array/language_values"
@@ -41,11 +44,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:title="@string/pc_title_setting_notificaction">
-        <SwitchPreference
-            android:defaultValue="false"
+        <Preference
             android:key="@string/key_active_notification"
             android:summary="@string/pr_summary_notification"
-            android:title="@string/title_active_notification" />
+            android:title="@string/title_active_notification"
+            android:icon="@drawable/ic_action_notification"
+            />
        <!-- <ListPreference
             android:entries="@array/ringtone_entries"
             android:entryValues="@array/ringtone_values"
@@ -56,29 +60,31 @@
     <PreferenceCategory android:title="@string/pc_title_setting_sort">
         <ListPreference
             android:entries="@array/sort_customer_entries"
+            android:icon="@drawable/ic_action_customer"
             android:entryValues="@array/sort_customer_values"
             android:key="@string/key_sort_customer"
             android:summary="@string/preference_empty"
             android:title="@string/pr_title_customer" />
         <ListPreference
+            android:icon="@drawable/ic_action_item"
             android:entries="@array/sort_item_entries"
             android:entryValues="@array/sort_item_values"
             android:key="@string/key_sort_item"
             android:summary="@string/preference_empty"
             android:title="@string/pr_title_item" />
         <ListPreference
+            android:icon="@drawable/ic_action_task"
             android:entries="@array/sort_task_entries"
             android:entryValues="@array/sort_task_values"
             android:key="@string/key_sort_task"
             android:summary="@string/preference_empty"
             android:title="@string/pr_title_task" />
         <ListPreference
+            android:icon="@drawable/ic_action_invoice"
             android:entries="@array/sort_invoice_entries"
             android:entryValues="@array/sort_invoice_values"
             android:key="@string/key_sort_invoice"
             android:summary="@string/preference_empty"
             android:title="@string/pr_title_invoice" />
     </PreferenceCategory>
-
-
 </PreferenceScreen>

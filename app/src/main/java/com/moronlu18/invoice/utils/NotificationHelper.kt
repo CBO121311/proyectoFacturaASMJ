@@ -10,6 +10,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.moronlu18.invoice.R
 
+
 /**
  * Creates Notification Channel (required for API level >= 26) before sending any notification.
  */
@@ -35,7 +36,7 @@ fun createNotificationChannel(channelId: String,context: Context) {
 fun sendNotification(channelId: String,context: Context, title: String, textContext: String){
 
     val builder = NotificationCompat.Builder(context, channelId)
-        .setSmallIcon(R.drawable.ic_launcher_foreground)
+        .setSmallIcon(R.drawable.ic_notification_general)
         .setContentTitle(title)
         .setContentText(textContext)
         .setPriority(NotificationCompat.PRIORITY_HIGH)

@@ -56,7 +56,7 @@
     <string name="about_authors_mateodesc">Encargado del módulo Invoice</string>
     <string name="about_authors_sergdesc">Encargado del módulo Task</string>
     <string name="about_authors_serg" translatable="false">Sergio García Vico</string>
-    <string name="about_versionapp" translatable="false">3.7.7</string>
+    <string name="about_versionapp" translatable="false">4.2.0</string>
     <string name="progress_dialog_title">Esperando...</string>
     <string name="dialog_warning_title">Entendido</string>
     <string name="contentDescriptionfab" translatable="false">Botón que será heredado entre los fragment</string>
@@ -72,11 +72,14 @@
     <string name="dashboard_txvSignUp">Registro</string>
     <string name="dashboard_txvSignIn">Login</string>
 
-
     <string name="iv_descr_ivAnimation">Animacion de Inicio</string>
     <string name="txtName_drawer" translatable="false">Alejandro López</string>
     <string name="txtEmail_drawer" translatable="false">abc@hotmail.es</string>
-
-
+    <string name="notification_permission_rationale_title">Alerta</string>
+    <string name="notification_permission_rationale_message">Se requiere permiso de notificación para mostrar la notificación.</string>
+    <string name="notification_setting_title">Permiso de notificación</string>
+    <string name="notification_setting_message">Se requiere permiso de notificación. Permita el permiso de notificación desde la configuración.</string>
+    <string name="notification_example_title">"¡Bien hecho! 😊🎉 "</string>
+    <string name="notification_example_content">Las notificaciones han sido habilitados 🥝</string>
 
 </resources>

@@ -20,7 +20,7 @@ interface CustomerDao {
     @Query ("SELECT * FROM customer ORDER BY LOWER(name) ASC")
     fun  selectAllName(): Flow<List<Customer>>
 
-    @Query ("SELECT * FROM customer ORDER BY LOWER(name) COLLATE NOCASE DESC")
+    @Query ("SELECT * FROM customer ORDER BY LOWER(name) DESC")
     fun  selectAllNameDesc(): Flow<List<Customer>>
 
     @Query ("SELECT * FROM customer ORDER BY LOWER(email) ASC")

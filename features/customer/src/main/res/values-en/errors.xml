@@ -28,4 +28,7 @@
     <string name="txtRemove">Delete</string>
     <string name="customer_NotAvailable">Not Available</string>
     <string name="customer_error_FormatEmail">Wrong email format</string>
+    <string name="cc_notification_creation_title">You registered a new customer 🎉</string>
+    <string name="cc_notification_content">Customer name is %1$s</string>
+    <string name="cc_notification_edit_title">You edited a customer 🎉</string>
 </resources>

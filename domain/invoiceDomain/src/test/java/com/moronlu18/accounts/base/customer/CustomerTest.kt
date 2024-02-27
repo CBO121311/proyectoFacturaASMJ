@@ -1,4 +1,4 @@
-package com.moronlu18.accounts.base
+package com.moronlu18.accounts.base.customer
 
 
 import com.moronlu18.data.base.Email

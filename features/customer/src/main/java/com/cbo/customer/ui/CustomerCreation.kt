@@ -1,11 +1,9 @@
 package com.cbo.customer.ui
 
 
-import android.Manifest
+
 import android.app.Activity
-import android.app.PendingIntent
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -17,10 +15,6 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -34,6 +28,8 @@ import com.moronlu18.data.base.Email
 import com.moronlu18.customercreation.R
 import com.moronlu18.customercreation.databinding.FragmentCustomerCreationBinding
 import com.moronlu18.invoice.ui.MainActivity
+import com.moronlu18.invoice.utils.createNotificationChannel
+import com.moronlu18.invoice.utils.sendNotification
 
 
 class CustomerCreation : Fragment() {
@@ -53,7 +49,7 @@ class CustomerCreation : Fragment() {
 
         binding.viewmodelcustomercreation = this.viewModel
         binding.lifecycleOwner = this
-
+        createNotificationChannel(CHANNEL_ID, requireContext())
         return binding.root
     }
 
@@ -85,10 +81,11 @@ class CustomerCreation : Fragment() {
         //binding.customerCreationCcp.setAutoDetectedCountry(true)
         val customer: Customer? = args.customnav
 
-        if (customer != null) {
-            setUpEditMode(customer)
+        when {
+            customer != null -> {
+                setUpEditMode(customer)
+            }
         }
-
 
     }
 
@@ -119,10 +116,14 @@ class CustomerCreation : Fragment() {
 
         binding.customerCreationTietCity.setText(customerEdit.city)
 
-        if (customerEdit.photo != null) {
-            binding.customerCreationImgcAvatar.setImageURI(customerEdit.photo)
-        } else {
-            binding.customerCreationImgcAvatar.setImageResource(R.drawable.kiwidinero)
+        when {
+            customerEdit.photo != null -> {
+                binding.customerCreationImgcAvatar.setImageURI(customerEdit.photo)
+            }
+
+            else -> {
+                binding.customerCreationImgcAvatar.setImageResource(R.drawable.kiwidinero)
+            }
         }
     }
 
@@ -134,62 +135,71 @@ class CustomerCreation : Fragment() {
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun onSuccessCreate() {
 
-        val phone: String? = if (binding.customerCreationTietPhone.text.toString().isNotBlank()) {
-            String.format(
-                binding.customerCreationCcp.selectedCountryCodeWithPlus + " " +
-                        binding.customerCreationTietPhone.text.toString()
-            )
-        } else {
-            null
+        val phone: String? = when {
+            binding.customerCreationTietPhone.text.toString().isNotBlank() -> {
+                String.format(
+                    binding.customerCreationCcp.selectedCountryCodeWithPlus + " " +
+                            binding.customerCreationTietPhone.text.toString()
+                )
+            }
+            else -> {
+                null
+            }
         }
         val customer: Customer? = args.customnav
 
-        if (selectimgUri == null) {
-            selectimgUri = defaulImageUri(R.drawable.kiwidinero)
-        }
-
         val name = binding.customerCreationTietNameCustomer.text.toString()
 
-        if (customer != null) {
+        when {
+            customer != null -> {
 
-            customer.name = name
-            customer.email = Email(binding.customerCreationTietEmailCustomer.text.toString())
-            customer.phone = phone
-            customer.city =
-                if (binding.customerCreationTietCity.text.isNullOrBlank()) null else binding.customerCreationTietCity.text.toString()
-            customer.address =
-                if (binding.customerCreationTietAddress.text.isNullOrBlank()) null else binding.customerCreationTietAddress.text.toString()
-            customer.photo = selectimgUri
-            //customer.photo = getbitMap(binding.customerCreationImgcAvatar)
+                customer.name = name
+                customer.email = Email(binding.customerCreationTietEmailCustomer.text.toString())
+                customer.phone = phone
+                customer.city =
+                    when {
+                        binding.customerCreationTietCity.text.isNullOrBlank() -> null
+                        else -> binding.customerCreationTietCity.text.toString()
+                    }
+                customer.address =
+                    when {
+                        binding.customerCreationTietAddress.text.isNullOrBlank() -> null
+                        else -> binding.customerCreationTietAddress.text.toString()
+                    }
 
-            viewModel.updateCustomer(customer)
-        } else {
-            val id = viewModel.getNextCustomerId()
-            val newCustomer = Customer.create(
-                id = id,
-                name = name,
-                email = Email(binding.customerCreationTietEmailCustomer.text.toString()),
-                phone = phone,
-                city = if (binding.customerCreationTietCity.text.isNullOrBlank()) null else binding.customerCreationTietCity.text.toString(),
-                address = if (binding.customerCreationTietAddress.text.isNullOrBlank()) null else binding.customerCreationTietAddress.text.toString(),
-                photo = selectimgUri
-                //photo = getbitMap(binding.customerCreationImgcAvatar)
-            )
-            viewModel.addCustomer(newCustomer)
+                customer.photo = selectimgUri ?: customer.photo
+
+                viewModel.updateCustomer(customer)
+                sendNotification(
+                    CHANNEL_ID, requireContext(),
+                    getString(R.string.cc_notification_edit_title),
+                    getString(R.string.cc_notification_content, name)
+                )
+
+            }
+
+            else -> {
+
+                selectimgUri ?: defaulImageUri(R.drawable.kiwidinero)
+
+                val id = viewModel.getNextCustomerId()
+                val newCustomer = Customer.create(
+                    id = id,
+                    name = name,
+                    email = Email(binding.customerCreationTietEmailCustomer.text.toString()),
+                    phone = phone,
+                    city = if (binding.customerCreationTietCity.text.isNullOrBlank()) null else binding.customerCreationTietCity.text.toString(),
+                    address = if (binding.customerCreationTietAddress.text.isNullOrBlank()) null else binding.customerCreationTietAddress.text.toString(),
+                    photo = selectimgUri
+                )
+                viewModel.addCustomer(newCustomer)
+                sendNotification(
+                    CHANNEL_ID, requireContext(),
+                    getString(R.string.cc_notification_creation_title),
+                    getString(R.string.cc_notification_content, name)
+                )
+            }
         }
-
-
-
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.POST_NOTIFICATIONS,
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            showNotification(name)
-        }
-
-
-
         findNavController().popBackStack()
     }
 
@@ -206,17 +216,21 @@ class CustomerCreation : Fragment() {
 
     private fun setUpGallery() {
 
-        launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val uri = result.data?.data
-                if (uri != null) {
-                    // Solicitar permiso persistente para el URI seleccionado
-                    requireContext().contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                    loadSelectedImage(uri)
-                    onImageSelected(uri)
+        launcher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val uri = result.data?.data
+                    if (uri != null) {
+                        // Solicitar permiso persistente para el URI seleccionado
+                        requireContext().contentResolver.takePersistableUriPermission(
+                            uri,
+                            Intent.FLAG_GRANT_READ_URI_PERMISSION
+                        )
+                        loadSelectedImage(uri)
+                        onImageSelected(uri)
+                    }
                 }
             }
-        }
 
         binding.customerCreationImgbtnCustomer.setOnClickListener {
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
@@ -291,35 +305,7 @@ class CustomerCreation : Fragment() {
         _binding = null
     }
 
-
-    private fun showNotification(name:String) {
-
-        val builder = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("Has creado un nuevo cliente 🎉")
-            .setContentText("El cliente se llama $name")
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setContentIntent(
-                PendingIntent.getActivity(
-                    requireContext(), 0, Intent(),
-                    PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-                )
-            )
-            .setAutoCancel(true)
-
-        with(NotificationManagerCompat.from(requireContext())) {
-            if (ActivityCompat.checkSelfPermission(
-                    requireContext(),
-                    Manifest.permission.POST_NOTIFICATIONS
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                return
-            }
-            notify(1, builder.build())
-        }
-    }
-
     companion object {
-        const val CHANNEL_ID = "customer_channel2"
+        const val CHANNEL_ID = "customer_channel"
     }
 }

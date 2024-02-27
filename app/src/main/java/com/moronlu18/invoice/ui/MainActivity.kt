@@ -2,9 +2,11 @@ package com.moronlu18.invoice.ui
 
 
 
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -18,6 +20,8 @@ import androidx.navigation.ui.navigateUp
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.moronlu18.invoice.R
 import com.moronlu18.invoice.databinding.ActivityMainBinding
+import com.moronlu18.invoice.utils.NotificationPermisssionRequester
+import com.moronlu18.invoice.utils.createNotificationChannel
 import com.moronlu18.invoice.utils.showToast
 
 
@@ -37,6 +41,7 @@ class MainActivity : AppCompatActivity() {
     val toolbar: Toolbar get() = binding.content.toolbar
     val drawer: DrawerLayout get() = binding.drawerLayout
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -44,7 +49,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        //Todo
         //Sustituir la AppBar por defecto por el widget Toolbar de nuestro layout
         setSupportActionBar(binding.content.toolbar)
 
@@ -56,7 +60,6 @@ class MainActivity : AppCompatActivity() {
         //que tiene un id android.R.id.home
         //supportActionBar?.setHomeButtonEnabled(true) //todo comentamos esto de nuevo.
         //supportActionBar?.setHomeAsUpIndicator(android.R.drawable.ic_menu_info_details)
-
 
         //OPCION 2:
         //1. Métodos que permite acceder al controlador del Grafo de navegación
@@ -76,36 +79,11 @@ class MainActivity : AppCompatActivity() {
             binding.content.toolbar, navController, appBarConfiguration
         )
 
-        //La appbar es responsable del drawerlayout, y quiero que sea responsable del abrir y el cierre del Drawerlayout
-
-
-        //appBarConfiguration = AppBarConfiguration(navController.graph)
-        //setupActionBarWithNavController(navController, appBarConfiguration)
-
-
-        //Si utilizo estas tres últimos líneas de código puedo resetear la barra de navegación.
-
-
-        /*val navController = findNavController(R.id.nav_host_fragment_content_main) as NavHostController
-        navController = navHostFragment.navController*/
-
-
         //Configurar evento click del menu Nav_View.
         setupNavigationView()
 
-        /*val toolbar = binding.content.toolbar
-        setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayShowTitleEnabled(false)^*/
-
-        //Todo Esto se añadio por el tema de tamaño del bitmap
-        /*try {
-            val field: Field = CursorWindow::class.java.getDeclaredField("sCursorWindowSize")
-            field.setAccessible(true)
-            field.set(null, 100 * 1024 * 1024) //thef 100MB is the new size
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }*/
-
+        notificationPermissionRequest = NotificationPermisssionRequester(this)
+        createNotificationChannel(CHANNEL_ID, this)
     }
 
     /**
@@ -153,19 +131,12 @@ class MainActivity : AppCompatActivity() {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
-        //Añadido por mi.
-        //binding.fab.visibility = View.VISIBLE
-
         return when (item.itemId) {
             R.id.action_settings -> {
                 //La navegación se realiza directamente utilizando el id del fragment.
                 navController.navigate(R.id.settingsFragment)
                 true
             }
-            /*android.R.id.home->{
-                binding.drawerLayout.openDrawer(GravityCompat.START)
-                true
-            }*/
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -180,11 +151,15 @@ class MainActivity : AppCompatActivity() {
     /**
      * Se sobreescribe el método que gestiona la pulsación del botón Back
      */
-    //Solo si la caja está abierta es cuando lo cerramos.
     override fun onBackPressed() {
         if (binding.drawerLayout.isDrawerOpen(GravityCompat.START))
             binding.drawerLayout.closeDrawer(GravityCompat.START)
-        else //dejamos que el SO haga su función
+        else
             super.onBackPressed()
+    }
+
+    companion object{
+        const val CHANNEL_ID = "active_notification_channel"
+        var notificationPermissionRequest: NotificationPermisssionRequester? = null
     }
 }

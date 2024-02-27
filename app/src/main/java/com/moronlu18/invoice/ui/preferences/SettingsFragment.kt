@@ -2,9 +2,7 @@ package com.moronlu18.invoice.ui.preferences
 
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
@@ -14,14 +12,8 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.preference.ListPreference
@@ -169,85 +161,40 @@ class SettingsFragment : PreferenceFragmentCompat() {
         activity?.recreate()
     }
 
-    private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
 
+    /**
+     * Preferencias de notificación
+     */
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun initPreferencesNotification() {
+        val active = preferenceManager.findPreference<Preference>("key_active_notification")
+
+
+        active?.setOnPreferenceClickListener {
+            if (notificationManager.areNotificationsEnabled()) {
+                Utils.showSnackBar(
+                    requireActivity().findViewById(android.R.id.content),
+                    "Las notificaciones está activadas, " +
+                            "ve a la configuración de la aplicación para desactivarlos"
+                )
+            } else {
+                if (ContextCompat.checkSelfPermission(requireContext(),
+                        Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED)
+                {
+                    MainActivity.notificationPermissionRequest?.tryRequest()
+                }
+            }
+            true
+        }
+    }
+
+    /**
+     * Método para actualizar el estado del switch de notificaciones
+     */
+
+    fun updateNotifSwitchState(isActive: Boolean) {
         val active = preferenceManager.findPreference<SwitchPreference>("key_active_notification")
-        active?.isChecked = notificationManager.areNotificationsEnabled()
-
-        createNotificationChannel()
-
-        requestPermissionLauncher =
-            registerForActivityResult(ActivityResultContracts.RequestPermission()) {
-                when {
-                    !it -> {
-                        active?.isChecked = false
-                        Utils.showSnackBar( requireActivity().findViewById(android.R.id.content),
-                            "Para habilitar las notificaciones, ve a la configuración de la aplicación y concede los permisos necesarios."
-                        )
-                    }
-                    else -> {
-                        showDummyNotification()
-                    }
-                }
-            }
-
-
-        active?.setOnPreferenceChangeListener { _, newValue ->
-            val isChecked = newValue as Boolean
-
-            when {
-                !isChecked -> {
-                    Utils.showSnackBar( requireActivity().findViewById(android.R.id.content),
-                        "Para desactivar las notificaciones, ve a la configuración de la aplicación."
-                    )
-
-                    false
-                }
-                ContextCompat.checkSelfPermission(
-                    requireContext(),
-                    Manifest.permission.POST_NOTIFICATIONS
-                ) != PackageManager.PERMISSION_GRANTED -> {
-                    requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-                    true
-                }
-                else -> true
-            }
-        }
-    }
-
-
-
-
-    @SuppressLint("MissingPermission")
-    private fun showDummyNotification() {
-        val builder = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("Bien hecho! 😊🎉 ")
-            .setContentText("Las notificaciones se han activado 🥝")
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setAutoCancel(true)
-
-        with(NotificationManagerCompat.from(requireContext())) {
-            notify(1, builder.build())
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun createNotificationChannel() {
-        val channel = NotificationChannel(
-            CHANNEL_ID,
-            "Important Notification Channel",
-            NotificationManager.IMPORTANCE_HIGH,
-        ).apply {
-            description = "This notification contains important announcement, etc."
-        }
-        notificationManager.createNotificationChannel(channel)
-    }
-
-    companion object {
-        const val CHANNEL_ID = "notify_channel"
+        active?.isChecked = isActive
     }
 
 

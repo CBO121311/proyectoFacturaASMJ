@@ -32,4 +32,7 @@
 
     <string name="ccp_dialog_title" translatable="false">Selecciona un pais</string>
     <string name="ccp_select_country" translatable="false">Seleccionar un país</string>
+    <string name="cc_notification_creation_title">Has creado un nuevo cliente 🎉</string>
+    <string name="cc_notification_content">El nombre del cliente es %1$s</string>
+    <string name="cc_notification_edit_title">Editaste un cliente 🎉</string>
 </resources>
