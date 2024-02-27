@@ -1,13 +1,12 @@
-# El historial de versiones se ha puesto más abajo por el tema de prepararse el README en la entrega
-
+# Invoice Kiwi
 
 
 ## Características generales
 - Se ha hecho el nav-graph utilizando include-dynamic y cada navegación funciona de forma independiente.
-- Añadir y eliminar son funcionables. En Customer funciona el Editar.
 - Control de distintas excepciones utilizando el viewModel
-- Módelo más parecido a MVVM
-- Añadido Splash y about.
+- Implementado el cambio de idioma y modo Noche, este último requiere reinicio.
+- Animación de splash (realizado por CBO121311)
+
 
 # Logo
 
@@ -15,22 +14,61 @@
 
 # Capas de Layout
 
+***EN PROCESO***
 ## Customer
+
+Funcionalidades:
+- Lista, añade, edita y elimina clientes.
+- Editar y eliminar se puede hacer desde List (mantener pulsado un cliente desde lista) y desde Detalle.
+- Al tener un cliente seleccionado se marcará con una marca en la foto.
+- Se puede añadir fotos de la galería y conservarlos.
+- Para el tema de prefijo telefónico se añadio de una libería.
+- En toolbar ordena desde el Id y por Nombre de cliente.
+- En preferencias ordena por ID, Nombre A-Z, Nombre Z-A, Email
+- Notificaciones implementedas si añade o edita un cliente.
+- Test unitario implementados en Customer, CustomerId, Email.
+
 |Creation|Creation: Edit Version|Detail|List|
 | ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
 |<img src="ImagenesMuestra/CustomerCreation.png" width="200">|<img src="ImagenesMuestra/CustomerCreationEdit.png" width="200">|<img src="ImagenesMuestra/CustomerDetail.png" width="200">| <img src="ImagenesMuestra/CustomerList.png" width="200">|| <img src="ImagenesMuestra/CustomerList.png" width="200">|
 
 ## Item
+
+Funcionalidades:
+- Lista, añade, edita y elimina items.
+- 
+- En preferencias ordena por ID, nombre, precio ascendente, precio descendente.
+
+
 |Creation|Detail|List| 
 | ------------------------------ | ------------------------------ | ------------------------------ | 
 |<img src="ImagenesMuestra/ItemCreation.png" width="250">|<img src="ImagenesMuestra/ItemDetail.png" width="250">| <img src="ImagenesMuestra/ItemList.png" width="250">|
 
 ## Task
+
+Funcionalidades:
+- Lista, añade, edita y elimina Tareas.
+- Editar y eliminar se puede hacer desde List (mantener pulsado una tarea desde la lista) y desde Detail.
+- En toolbar ordena desde el Id y por Nombre de tarea, tanto en ascendente como en descendente.
+- Desde preferencias ordena por ID, Nombre de cliente A-Z, Nombre de cliente Z-A y Nombre de tarea.
+- Notificaciones implementadas si añade o edita una tarea.
+- Test unitario implementados en Task, TaskId, TaskStatus, TypeTask.
+
+
 |Creation|Detail|List| 
 | ------------------------------ | ------------------------------ | ------------------------------ | 
 |<img src="ImagenesMuestra/TaskCreation.png" width="250">|<img src="ImagenesMuestra/TaskDetail.png" width="250">| <img src="ImagenesMuestra/TaskList.png" width="250">|
 
 ## Invoice
+
+Funcionalidades:
+- Lista, añade, edita y elimina Facturas.
+- En toolbar ordena desde el Id y por Nombre de cliente.
+- Desde preferencias ordena por ID, Nombre de cliente A-Z, Nombre de cliente Z-A y Estado.
+- Notificaciones implementadas si....
+- Test unitario implementados en Invoice, InvoiceId, InvoiceStatus, LineItem.
+
+
 |Creation|Detail|List| 
 | ------------------------------ | ------------------------------ | ------------------------------ | 
 |<img src="ImagenesMuestra/InvoiceCreation.png" width="250">|<img src="ImagenesMuestra/InvoiceDetail.png" width="250">| <img src="ImagenesMuestra/InvoiceList.png" width="250">|
@@ -41,10 +79,14 @@
 |<img src="ImagenesMuestra/Dashboard.png" width="300">|<img src="ImagenesMuestra/About.png" width="300">|
 
 
+## Autores
+- Jefe del proyecto y encargado del módulo Customer: Alejandro López Calderón
+- Encargado de módulo Item: Jessica Castro Ruiz
+- Encargado del módulo Task: Sergio García Vico
+- Encargado de módulo Invoice: Christian Mateo Tamayo Rivera
 
-Invoice versión 4, es la aplicación que se está realizando de manera modular para el estudio de todo el temario de la asignatura ✨DEINT.✨
 
- ## Historial de versiones
+## Historial de versiones
 
 ### V4.2.0 (27/02/2024)
  *Escrito por CBO121311*
