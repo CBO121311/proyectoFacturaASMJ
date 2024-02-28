@@ -80,7 +80,7 @@ Funcionalidades:
 - Lista, añade, edita y elimina Facturas.
 - En toolbar ordena desde el Id y por Nombre de cliente.
 - Desde preferencias ordena por ID, Nombre de cliente A-Z, Nombre de cliente Z-A y Estado.
-- Notificaciones implementadas si.....
+- Notificaciones implementadas si añade o edita una factura.
 - Test unitario implementados en Invoice, InvoiceId, InvoiceStatus, LineItem.
 
 
