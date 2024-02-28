@@ -26,10 +26,7 @@ class InvoiceProviderDB {
 
         fun update(invoice: Invoice): Resource {
             try {
-
                 InvoiceDatabase.getInstance().invoiceDao().update(invoice)
-
-
             } catch (e: SQLiteException) {
                 return Resource.Error(e)
             }
