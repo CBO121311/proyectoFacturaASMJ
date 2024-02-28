@@ -1,36 +1,49 @@
 # Invoice Kiwi
 
-
 ## Características generales
-- Se ha hecho el nav-graph utilizando include-dynamic y cada navegación funciona de forma independiente.
-- Control de distintas excepciones utilizando el viewModel
-- Implementado el cambio de idioma y modo Noche, este último requiere reinicio.
-- Animación de splash (realizado por CBO121311)
+**- Navegación Dinámica:** Utilización de include-dynamic en el nav-graph para una navegación modular y independiente entre las distintas secciones de la aplicación.
+
+**- Arquitectura MVVM:** Implementación lo más parecido del patrón de diseño Modelo-Vista-VistaModelo.
+
+**-Persistencia de Datos con Room:** Utilización del framework de persistencia de datos Room.
+
+**- Configuración Avanzada:** Personalización para la experiencia del usuario con opciones como cambio de idioma, activación de notificaciones, ajuste de tamaño de texto (solo en el dashboard) y modo nocturno. (Requiere reinicio de la aplicación).
+
+**- Animación de Inicio:** Introducción de una animación de splash creada por CBO121311.
+
+**- Menús de Navegación Intuitivos:** Implementación de cajones de navegación (Navigation Drawer) que ofrecen acceso rápido a diferentes módulos de la aplicación.
+
+**- Sección "Acerca De":** Incluye sección de los desarrolladores de la aplicación.
+
+**- Funcionalidad de Apagado:** Integrado un botón de apagado que permite cerrar la aplicación.
 
 
-# Logo
+## Logo
+<img src="ImagenesMuestra/ic_launcher_theme_kiwiv3_round.webp" width="200">
 
-<img src="ImagenesMuestra/ic_launcher_theme_kiwiv1_round.webp" width="200">
+# Módulos
 
-# Capas de Layout
+## General
+|Dashboard|About|Settings|MenuDrawer|
+| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
+|<img src="ImagenesMuestra/Dashboard.png" width="200">|<img src="ImagenesMuestra/About.png" width="200">|<img src="ImagenesMuestra/Settings1.png" width="200">|<img src="ImagenesMuestra/MenuDrawer.png" width="200">|
 
-***EN PROCESO***
+
 ## Customer
 
-Funcionalidades:
-- Lista, añade, edita y elimina clientes.
-- Editar y eliminar se puede hacer desde List (mantener pulsado un cliente desde lista) y desde Detalle.
-- Al tener un cliente seleccionado se marcará con una marca en la foto.
-- Se puede añadir fotos de la galería y conservarlos.
-- Para el tema de prefijo telefónico se añadio de una libería.
-- En toolbar ordena desde el Id y por Nombre de cliente.
-- En preferencias ordena por ID, Nombre A-Z, Nombre Z-A, Email
-- Notificaciones implementedas si añade o edita un cliente.
-- Test unitario implementados en Customer, CustomerId, Email.
+Funcionalidades implementadas:
+- **Lista, Añade, Edita y Elimina Clientes:** Se muestra la lista de clientes de la base de datos, agregar nuevos, editarlos y eliminarlos según sea necesario.
+- **Acciones Rápidas:** La edición y eliminación de clientes se pueden realizar tanto desde la lista principal (manteniendo pulsado un cliente) como desde los detalles de cada cliente.
+- **Gestión de Imágenes:** Permite adjuntar fotos desde la galería de imágenes para cada cliente y estas imágenes se conservan en la base de datos.
+- **Prefijo Telefónico:** Se implementó una biblioteca para gestionar el prefijo telefónico.
+- **Orden en la Toolbar:** La lista de clientes se puede ordenar según el ID y el Nombre de Cliente desde la barra de herramientas.
+- **Orden en Preferencias:** En las preferencias, se puede elegir ordenar la lista de clientes por ID, Nombre (A-Z), Nombre (Z-A) y Email.
+- **Notificaciones de Eventos:** Se han implementado notificaciones para informar al usuario sobre la creación o edición exitosa de un cliente.
+- **Pruebas Unitarias:** Se han realizado las pruebas unitarias de Customer, CustomerId y Email.
 
-|Creation|Creation: Edit Version|Detail|List|
-| ------------------------------ | ------------------------------ | ------------------------------ | ------------------------------ |
-|<img src="ImagenesMuestra/CustomerCreation.png" width="200">|<img src="ImagenesMuestra/CustomerCreationEdit.png" width="200">|<img src="ImagenesMuestra/CustomerDetail.png" width="200">| <img src="ImagenesMuestra/CustomerList.png" width="200">|| <img src="ImagenesMuestra/CustomerList.png" width="200">|
+|Creation|Detail|List|
+| ------------------------------ | ------------------------------ | ------------------------------ |
+|<img src="ImagenesMuestra/CustomerCreation.png" width="250">|<img src="ImagenesMuestra/CustomerDetail.png" width="250">| <img src="ImagenesMuestra/CustomerList.png" width="250">|
 
 ## Item
 
@@ -65,7 +78,7 @@ Funcionalidades:
 - Lista, añade, edita y elimina Facturas.
 - En toolbar ordena desde el Id y por Nombre de cliente.
 - Desde preferencias ordena por ID, Nombre de cliente A-Z, Nombre de cliente Z-A y Estado.
-- Notificaciones implementadas si....
+- Notificaciones implementadas si.....
 - Test unitario implementados en Invoice, InvoiceId, InvoiceStatus, LineItem.
 
 
@@ -73,17 +86,12 @@ Funcionalidades:
 | ------------------------------ | ------------------------------ | ------------------------------ | 
 |<img src="ImagenesMuestra/InvoiceCreation.png" width="250">|<img src="ImagenesMuestra/InvoiceDetail.png" width="250">| <img src="ImagenesMuestra/InvoiceList.png" width="250">|
 
-## Extra
-|Dashboard|About|
-| ------------------------------ | ------------------------------ |
-|<img src="ImagenesMuestra/Dashboard.png" width="300">|<img src="ImagenesMuestra/About.png" width="300">|
-
 
 ## Autores
-- Jefe del proyecto y encargado del módulo Customer: Alejandro López Calderón
-- Encargado de módulo Item: Jessica Castro Ruiz
-- Encargado del módulo Task: Sergio García Vico
-- Encargado de módulo Invoice: Christian Mateo Tamayo Rivera
+- Jefe del proyecto y encargado del módulo Customer: **Alejandro López Calderón**
+- Encargado de módulo Item: **Jessica Castro Ruiz**
+- Encargado del módulo Task: **Sergio García Vico**
+- Encargado de módulo Invoice: **Christian Mateo Tamayo Rivera**
 
 
 ## Historial de versiones
