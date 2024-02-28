@@ -47,6 +47,7 @@ Funcionalidades implementadas:
 
 ## Item
 
+**En Proceso, esperando actualización del módulo**
 Funcionalidades:
 - Lista, añade, edita y elimina items.
 - 
