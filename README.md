@@ -17,6 +17,7 @@
 
 **- Funcionalidad de Apagado:** Integrado un botón de apagado que permite cerrar la aplicación.
 
+**- Botón Floating Button único:** Implementación de un botón floating button (fab) que está heredado por varias layout de la aplicación.
 
 ## Logo
 <img src="ImagenesMuestra/ic_launcher_theme_kiwiv3_round.webp" width="200">
