@@ -23,13 +23,13 @@ data class Item(
     @PrimaryKey
     val id: @RawValue ItemId,
     @TypeConverters(ItemTypeConverter::class)
-    val type: ItemType,
+    var type: ItemType,
     @TypeConverters(ItemVatTypeConverter::class)
-    val vat: VatItemType,
-    val name: String,
-    val price: Double,
-    val description: String? = null,
-    val photo: Int? = null,
+    var vat: VatItemType,
+    var name: String,
+    var price: Double,
+    var description: String? = null,
+    var photo: Int? = null,
     //val photo: Int,
 ) : Parcelable, Comparable<Item> {
 

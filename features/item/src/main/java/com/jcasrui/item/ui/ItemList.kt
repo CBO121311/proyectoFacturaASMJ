@@ -49,6 +49,8 @@ class ItemList : Fragment(), MenuProvider {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.getItemList()
+
         var appBarConfiguration =
             AppBarConfiguration.Builder(R.id.itemList)
                 .setOpenableLayout((requireActivity() as MainActivity).drawer)
@@ -90,11 +92,10 @@ class ItemList : Fragment(), MenuProvider {
         adapter = ItemAdapter(
             onClickListener = { item -> onItemSelected(item) },
             //onClickEdit = { position -> onEditItem(position) },
-            //onClickDelete = { position -> onDeleteItem(position) }
+            onClickDelete = { item -> onDeleteItem(item) }
         )
         binding.itemListRvItems.layoutManager = manager
         binding.itemListRvItems.adapter = adapter
-
     }
 
     /*
@@ -111,42 +112,33 @@ class ItemList : Fragment(), MenuProvider {
     }*/
 
     private fun showReferencedItem() {
-        findNavController().navigate(
-            ItemListDirections.actionItemListToBaseFragmentDialogWarning(
-                getString(R.string.title_warning),
-                getString(R.string.content_warning)
-            )
+        val dialog = BaseFragmentDialog.newInstance(
+            getString(R.string.title_warning),
+            getString(R.string.content_warning)
         )
+        dialog.show(childFragmentManager, "edit_dialog")
     }
 
-    /*
-    private fun onDeleteItem(position: Int) {
-        val item = viewModel.getPositionItem(position)
-
+    private fun onDeleteItem(item: Item) {
         if (viewModel.deleteItemSafe(item)) {
-            findNavController().navigate(
-                ItemListDirections.actionItemListToBaseFragmentDialog(
-                    getString(R.string.title_deleteItem),
-                    getString(R.string.content_deleteItem)
-                )
+            val dialog = BaseFragmentDialog.newInstance(
+                getString(R.string.title_deleteItem),
+                getString(R.string.content_deleteItem)
             )
 
-            parentFragmentManager.setFragmentResultListener(
+            dialog.show(childFragmentManager, "delete_dialog")
+
+            dialog.parentFragmentManager.setFragmentResultListener(
                 BaseFragmentDialog.request,
                 viewLifecycleOwner
             ) { _, result ->
-                val success = result.getBoolean(BaseFragmentDialog.result, false)
+                val success = result.getBoolean(BaseFragmentDialog.result)
                 if (success) {
-                    adapter.notifyItemRemoved(position)
-                    viewModel.deleteItem(position)
-                    if (viewModel.getItem().isEmpty()) {
-                        showNoData()
-                    }
+                    viewModel.deleteItem(item)
                 }
             }
         }
     }
-    */
 
     private fun onItemSelected(item: Item) {
         findNavController().navigate(ItemListDirections.actionItemListToItemDetail(item))
@@ -184,11 +176,12 @@ class ItemList : Fragment(), MenuProvider {
         return when (menuItem.itemId) {
             R.id.menuItemList_actionRefresh -> {
                 viewModel.getItemList()
+                adapter.sortId()
                 return true
             }
 
             R.id.menuItemList_actionSort -> {
-                adapter.sort()
+                adapter.sortName()
                 return true
             }
 

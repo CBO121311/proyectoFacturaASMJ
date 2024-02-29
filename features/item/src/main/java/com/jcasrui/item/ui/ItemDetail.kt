@@ -27,8 +27,6 @@ import com.moronlu18.itemcreation.databinding.FragmentItemDetailBinding
 
 class ItemDetail : Fragment(), MenuProvider {
 
-    private var item: Item? = null
-    private var positionItem: Int = 0
     private val args: ItemDetailArgs by navArgs()
     private var _binding: FragmentItemDetailBinding? = null
     private val binding get() = _binding!!
@@ -43,7 +41,11 @@ class ItemDetail : Fragment(), MenuProvider {
         binding.lifecycleOwner = this
 
         val article: Item = args.item
-        binding.itemDetailCvImg.setImageResource(article.photo!!)
+        if (article.photo != null) {
+            binding.itemDetailCvImg.setImageResource(article.photo!!)
+        } else {
+            binding.itemDetailCvImg.setImageResource(R.drawable.cart)
+        }
         binding.itemDetailTvContentName.text = article.name
         binding.itemDetailTvContentDescription.text = article.description
         binding.itemDetailTvContentType.text = article.type.name
@@ -66,13 +68,6 @@ class ItemDetail : Fragment(), MenuProvider {
             }
         })
 
-        parentFragmentManager.setFragmentResultListener("detailkey", this,
-            FragmentResultListener { _, result ->
-                positionItem = result.getInt("detailposition")
-                item = viewModel.getPositionItem(positionItem)
-            }
-        )
-
         binding.itemDetailBtnSave.setOnClickListener {
             val fragmentManager = requireActivity().supportFragmentManager
             fragmentManager.popBackStack()
@@ -80,23 +75,30 @@ class ItemDetail : Fragment(), MenuProvider {
     }
 
     private fun onSuccess() {
+        val item = args.item
+
         viewModel.let {
-            it.id.value = item!!.id.toString()
-            it.type.value = item!!.type.name
-            it.vat.value = item!!.vat.name
-            it.name.value = item!!.description.toString()
-            it.price.value = item!!.price.toString()
-            it.description.value = item!!.description.toString()
+            it.id.value = item.id.toString()
+            it.type.value = item.type.name
+            it.vat.value = item.vat.name
+            it.name.value = item.description.toString()
+            it.price.value = item.price.toString()
+            it.description.value = item.description.toString()
+        }
+
+        if (item.photo != null) {
+            binding.itemDetailCvImg.setImageResource(item.photo!!)
+        } else {
+            binding.itemDetailCvImg.setImageResource(R.drawable.cart)
         }
     }
 
     private fun showReferencedItem() {
-        findNavController().navigate(
-            ItemListDirections.actionItemListToBaseFragmentDialogWarning(
-                getString(R.string.title_warning),
-                getString(R.string.content_warning)
-            )
+        val dialog = BaseFragmentDialog.newInstance(
+            getString(R.string.title_warning),
+            getString(R.string.content_warning)
         )
+        dialog.show(childFragmentManager, "edit_dialog")
     }
 
     /**
@@ -120,12 +122,12 @@ class ItemDetail : Fragment(), MenuProvider {
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         return when (menuItem.itemId) {
             R.id.menuItemDetail_actionEdit -> {
-                //editItem(item!!)     // editar artículo
+                editItem()     // editar artículo
                 true
             }
 
             R.id.menuItemDetail_actionDelete -> {
-                //deleteItem()   // borrar artículo
+                deleteItem()   // borrar artículo
                 true
             }
 
@@ -136,40 +138,33 @@ class ItemDetail : Fragment(), MenuProvider {
     /**
      * Función que edita el artículo
      */
-    private fun editItem(item: Item) {
-        val positionItem = viewModel.getPosition(item)
-
-        if (viewModel.deleteItemSafe(item)) {
-            val bundle = Bundle()
-            bundle.putInt("itemPosition", positionItem)
-            parentFragmentManager.setFragmentResult("itemKey", bundle)
-            findNavController().navigate(R.id.action_itemDetail_to_itemCreation)
-        }
+    private fun editItem() {
+        val item = args.item
+        findNavController().navigate(ItemDetailDirections.actionItemDetailToItemCreation(item))
     }
 
     /**
      * Eliminar un artículo
      */
     private fun deleteItem() {
-        if (viewModel.deleteItemSafe(item!!)) {
-            findNavController().navigate(
-                ItemListDirections.actionItemListToBaseFragmentDialog(
-                    getString(R.string.title_deleteItem),
-                    getString(R.string.content_deleteItem)
-                )
+        val item = args.item
+
+        if (viewModel.deleteItemSafe(item)) {
+            val dialog = BaseFragmentDialog.newInstance(
+                getString(R.string.title_deleteItem),
+                getString(R.string.content_deleteItem)
             )
 
-            parentFragmentManager.setFragmentResultListener(
+            dialog.show(childFragmentManager, "delete_dialog")
+
+            dialog.parentFragmentManager.setFragmentResultListener(
                 BaseFragmentDialog.request,
                 viewLifecycleOwner
             ) { _, result ->
-                val success = result.getBoolean(BaseFragmentDialog.result, false)
+                val success = result.getBoolean(BaseFragmentDialog.result)
                 if (success) {
-                    //adapter.notifyItemRemoved(position)
-                    viewModel.deleteItem(item!!)
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        findNavController().popBackStack()
-                    }, 100)
+                    viewModel.deleteItem(item)
+                    findNavController().popBackStack()
                 }
             }
         }

@@ -13,7 +13,7 @@ import com.moronlu18.itemcreation.databinding.ItemItemBinding
 class ItemAdapter(
     private val onClickListener: ((Item) -> Unit)? = null,
     private val onClickEdit: ((Int) -> Unit)? = null,
-    private val onClickDelete: ((Int) -> Unit)? = null,
+    private val onClickDelete: ((Item) -> Unit)? = null,
 ) : ListAdapter<Item, ItemAdapter.ItemViewHolder>(ITEM_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -26,10 +26,15 @@ class ItemAdapter(
         holder.bind(item, onClickListener, onClickEdit, onClickDelete)
     }
 
+    fun sortId() {
+        val sortedItemList = currentList.sortedBy { it.id }
+        submitList(sortedItemList)
+    }
+
     /**
      * Función que ordena el dataset en base a una propiedad personalizada
      */
-    fun sort() {
+    fun sortName() {
         val sortedItemList = currentList.sortedBy { it.name.lowercase() }
         submitList(sortedItemList)
     }
@@ -41,7 +46,7 @@ class ItemAdapter(
             itemModel: Item,
             onClickListener: ((Item) -> Unit)? = null,
             onClickEdit: ((Int) -> Unit)? = null,
-            onClickDelete: ((Int) -> Unit)? = null,
+            onClickDelete: ((Item) -> Unit)? = null,
         ) {
             if (itemModel.photo != null) {
                 binding.itemItemCImg.setImageResource(itemModel.photo!!)
@@ -57,7 +62,7 @@ class ItemAdapter(
             itemView.setOnClickListener { onClickListener?.invoke(itemModel) }
 
             itemView.setOnLongClickListener {
-                onClickDelete?.invoke(adapterPosition)
+                onClickDelete?.invoke(itemModel)
                 true
             }
         }

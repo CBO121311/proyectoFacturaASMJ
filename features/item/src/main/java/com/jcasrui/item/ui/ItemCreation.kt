@@ -42,17 +42,22 @@ class ItemCreation : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentItemCreationBinding.inflate(inflater, container, false)
-
         binding.viewmodelitemcreation = this.viewModel
         binding.lifecycleOwner = this
 
         val item = args.item
         if (item != null) {
-            binding.itemCreationTieName.setText(item.name)
+            viewModel.nameItem.value = item.name
             binding.itemCreationTieDescription.setText(item.description)
             binding.itemCreationSpItemType.setSelection(itemType(item))
             binding.itemCreationSpVatType.setSelection(vatType(item))
-            binding.itemCreationTieRate.setText(item.price.toString())
+            viewModel.rateItem.value = item.price.toString()
+
+            if (item.photo != null) {
+                binding.itemCreationCivImagenItem.setImageResource(item.photo!!)
+            } else {
+                binding.itemCreationCivImagenItem.setImageResource(R.drawable.cart)
+            }
         }
 
         return binding.root
@@ -99,19 +104,16 @@ class ItemCreation : Fragment() {
         val description = binding.itemCreationTieDescription.text.toString()
         val price = binding.itemCreationTieRate.text.toString().toDouble()
 
-        val itemArgs = args.item
-
+        var itemArgs = args.item
         if (itemArgs != null) {
-            val updateItem = Item(
-                id = itemArgs.id,
-                type = chooseItemType(),
-                vat = chooseVatType(),
-                name = name,
-                price = price,
-                description = description.ifEmpty { "Sin descripción" },
-                photo = R.drawable.cart
-            )
-            viewModel.updateItem(updateItem)
+            itemArgs.name = name
+            itemArgs.type = chooseItemType()
+            itemArgs.vat = chooseVatType()
+            itemArgs.price = price
+            itemArgs.description = description
+            itemArgs.photo = R.drawable.cart
+
+            viewModel.updateItem(itemArgs)
         } else {
             val item = Item(
                 id = ItemId(viewModel.getNextId()),
