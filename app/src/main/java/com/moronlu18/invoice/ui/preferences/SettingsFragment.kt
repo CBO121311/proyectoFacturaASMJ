@@ -89,19 +89,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
             Locator.settingsPreferencesRepository.getBoolean("key_night_mode", false)
 
         nightMode?.setOnPreferenceChangeListener { _, newValue ->
-            /*Locator.settingsPreferencesRepository.putBoolean(
-                "key_night_mode",
-                newValue as Boolean
-            )
 
-            if (newValue) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-            }*/
             showConfirmationDialog(newValue as Boolean)
-
-            //restartActivity()
 
             true
         }
@@ -321,7 +310,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onResume() {
         super.onResume()
         isInSettingFragment = true
-
     }
 
     override fun onPause() {

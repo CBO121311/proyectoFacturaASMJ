@@ -1,3 +1,23 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="drawer_civ_width">200dp</dimen>
+    <dimen name="drawer_civ_height">200dp</dimen>
+    <dimen name="drawer_civ_marginTop">70dp</dimen>
+    <dimen name="drawer_txtname_margintop">16dp</dimen>
+    <dimen name="drawer_txtemail_margintop">8dp</dimen>
+    <dimen name="drawer_email_size">18sp</dimen>
+    <dimen name="drawer_name_size">24sp</dimen>
+    <dimen name="cm_fab_marginEnd">24dp</dimen>
+    <dimen name="cm_fab_marginBottom">24dp</dimen>
+    <dimen name="fdkiwi_iv_width">63dp</dimen>
+    <dimen name="fdkiwi_iv_height">72dp</dimen>
+    <dimen name="dash_img_title_width">259dp</dimen>
+    <dimen name="dash_img_title_height">62dp</dimen>
+    <dimen name="dash_img_marginbottom">24dp</dimen>
+    <dimen name="dash_ll_button_padding">10dp</dimen>
+    <dimen name="dash_cv_radius">24dp</dimen>
+    <dimen name="dash_cv_cardelev">3dp</dimen>
+    <dimen name="dash_cv_margintop">16dp</dimen>
+    <dimen name="dash_cv_margintop_long">32dp</dimen>
+    <dimen name="dash_iv_mbottom">5dp</dimen>
 </resources>

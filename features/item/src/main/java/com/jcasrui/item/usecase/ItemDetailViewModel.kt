@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jcasrui.item.ui.ItemDetailState
 import com.moronlu18.accounts.entity.Item
-import com.moronlu18.repository.ItemProvider
 import com.moronlu18.repository.ItemProviderBD
 import com.moronlu18.repository.LineItemProviderDB
 import kotlinx.coroutines.Dispatchers

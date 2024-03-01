@@ -39,6 +39,8 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
     private val binding get() = _binding!!
     private lateinit var customerAdapter: CustomerAdapter
     private val viewModel: CustomerListViewModel by viewModels()
+
+    //Utilizado para evitar el doble click.
     private val doubleClickDelay = 200L
     private var mLastClickTime: Long = 0
 
@@ -60,7 +62,6 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
 
         viewModel.getCustomerList()
 
-        //Hay que añadirlo en el fragment principal.
         var appBarConfiguration =
             AppBarConfiguration.Builder(R.id.customerList)
                 .setOpenableLayout((requireActivity() as MainActivity).drawer)
@@ -179,7 +180,8 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
                     viewModel.delete(customer)
 
 
-                    Snackbar.make(requireView(), "Cliente borrado", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(requireView(),
+                        getString(R.string.customer_snackbar_delete_customer), Snackbar.LENGTH_LONG).show()
                 }
             }
         }
@@ -212,28 +214,31 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
         popupMenu.setOnMenuItemClickListener {
 
             //SystemClock.elapsedRealtime() obtener el tiempo actual en milisegundos
-            if (SystemClock.elapsedRealtime() - mLastClickTime < doubleClickDelay) {
-                return@setOnMenuItemClickListener true;
-            }
-            mLastClickTime = SystemClock.elapsedRealtime();
+            when {
+                SystemClock.elapsedRealtime() - mLastClickTime < doubleClickDelay -> return@setOnMenuItemClickListener true;
 
-            when (it.itemId) {
-                R.id.menupop_see -> {
-                    navigateDetailCustomer(customer)
-                    true
+                else -> {
+                    mLastClickTime = SystemClock.elapsedRealtime();
+
+                    when (it.itemId) {
+                        R.id.menupop_see -> {
+                            navigateDetailCustomer(customer)
+                            true
+                        }
+
+                        R.id.menupop_edit -> {
+                            onEditItem(customer)
+                            true
+                        }
+
+                        R.id.menupop_remove -> {
+                            onDeletedItem(customer)
+                            true
+                        }
+
+                        else -> false
+                    }
                 }
-
-                R.id.menupop_edit -> {
-                    onEditItem(customer)
-                    true
-                }
-
-                R.id.menupop_remove -> {
-                    onDeletedItem(customer)
-                    true
-                }
-
-                else -> false
             }
         }
         popupMenu.setOnDismissListener {
@@ -263,14 +268,17 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
             R.id.menu_cd_action_refresh -> {
                 viewModel.getCustomerList()
                 customerAdapter.sortId()
+                Snackbar.make(requireView(),
+                    getString(R.string.cl_snackbar_order_id), Snackbar.LENGTH_LONG).show()
                 true
             }
 
             R.id.menu_cd_action_sortname -> {
                 customerAdapter.sortName()
+                Snackbar.make(requireView(),
+                    getString(R.string.cl_snackbar_order_name), Snackbar.LENGTH_LONG).show()
                 true
             }
-
             else -> false
         }
     }
@@ -317,10 +325,9 @@ class CustomerList : Fragment(), MenuProvider, CustomerAdapter.OnCustomerClick {
      */
     private fun showProgressBar(value: Boolean) {
 
-        if (value) {
-            findNavController().navigate(R.id.action_customerList_to_fragmentProgressDialogKiwi)
-        } else {
-            findNavController().popBackStack()
+        when {
+            value -> findNavController().navigate(R.id.action_customerList_to_fragmentProgressDialogKiwi)
+            else -> findNavController().popBackStack()
         }
     }
 

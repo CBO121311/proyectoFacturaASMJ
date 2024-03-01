@@ -1,7 +1,6 @@
 package com.moronlu18.repository
 
 import android.database.sqlite.SQLiteException
-import com.moronlu18.data.base.CustomerId
 import com.moronlu18.data.task.Task
 import com.moronlu18.database.InvoiceDatabase
 import com.moronlu18.network.Resource
@@ -60,9 +59,5 @@ class TaskRepositoryBD {
 
     fun getTaskOrderByCustomerNameDesc(): Flow<List<Task>> {
         return InvoiceDatabase.getInstance().taskDao().selectTasksOrderedByCustomerNameDesc()
-    }
-
-    fun customerExistTask(customerId: CustomerId): Boolean{
-        return InvoiceDatabase.getInstance().taskDao().customerExistTask(customerId.value)
     }
 }

@@ -35,4 +35,8 @@
     <string name="cc_notification_creation_title">Has creado un nuevo cliente 🎉</string>
     <string name="cc_notification_content">El nombre del cliente es %1$s</string>
     <string name="cc_notification_edit_title">Editaste un cliente 🎉</string>
+    <string name="customer_snackbar_delete_customer">Cliente borrado</string>
+    <string name="cl_snackbar_order_id">Ordenado por ID</string>
+    <string name="cl_snackbar_order_name">Ordenado por nombre</string>
+    <string name="cd_desc" translatable="false">N/a</string>
 </resources>

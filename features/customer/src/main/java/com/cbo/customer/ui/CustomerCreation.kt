@@ -74,7 +74,6 @@ class CustomerCreation : Fragment() {
         })
 
         binding.customerCreationTvIdCustomer.text = viewModel.getNextCustomerId().toString()
-        //binding.customerCreationId.addTextChangedListener(CcWatcher(binding.customerCreationTilIdCustomer))
         binding.customerCreationTietNameCustomer.addTextChangedListener(CcWatcher(binding.customerCreationTilNameCustomer))
         binding.customerCreationTietEmailCustomer.addTextChangedListener(CcWatcher(binding.customerCreationTilCustomerEmail))
         //binding.customerCreationCcp.changeDefaultLanguage(CountryCodePicker.Language.DUTCH)
@@ -179,7 +178,6 @@ class CustomerCreation : Fragment() {
             }
 
             else -> {
-
                 selectimgUri ?: defaulImageUri(R.drawable.kiwidinero)
 
                 val id = viewModel.getNextCustomerId()
@@ -203,17 +201,25 @@ class CustomerCreation : Fragment() {
         findNavController().popBackStack()
     }
 
+    /**
+     * Devuelve un URI predeterminado de una imagen
+     */
     private fun defaulImageUri(resourceId: Int): Uri {
         return Uri.parse("android.resource://${requireContext().packageName}/$resourceId")
     }
 
+    /**
+     * Carga la imagen seleccionada usando Glide.
+     */
     private fun loadSelectedImage(uri: Uri) {
         Glide.with(this)
             .load(uri)
             .into(binding.customerCreationImgcAvatar)
     }
 
-
+    /**
+     * Configuración de la galería para seleccionar una imagen.
+     */
     private fun setUpGallery() {
 
         launcher =
@@ -221,7 +227,7 @@ class CustomerCreation : Fragment() {
                 if (result.resultCode == Activity.RESULT_OK) {
                     val uri = result.data?.data
                     if (uri != null) {
-                        // Solicitar permiso persistente para el URI seleccionado
+                        // Solicitar permiso
                         requireContext().contentResolver.takePersistableUriPermission(
                             uri,
                             Intent.FLAG_GRANT_READ_URI_PERMISSION
@@ -240,6 +246,9 @@ class CustomerCreation : Fragment() {
         }
     }
 
+    /**
+     * Se llama cuando se selecciona una imagen, actualiza la URI.
+     */
     private fun onImageSelected(uri: Uri) {
         selectimgUri = uri
     }

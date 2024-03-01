@@ -94,12 +94,12 @@ class MainActivity : AppCompatActivity() {
             when (mItem.itemId) {
                 R.id.action_customer -> {
                     navController.navigate(R.id.nav_graph_customer)
-                    //showToast("He pulsado Invoice")
+
                 }
 
                 R.id.action_item -> {
                     navController.navigate(R.id.nav_graph_item)
-                    //showToast("He pulsado Invoice")
+
                 }
 
                 R.id.action_task -> {

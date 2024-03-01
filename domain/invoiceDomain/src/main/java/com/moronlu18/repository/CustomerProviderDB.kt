@@ -68,4 +68,12 @@ class CustomerProviderDB {
     fun getCustomerIdByName(customerName: String): CustomerId{
         return InvoiceDatabase.getInstance().customerDao().getCustomerIdByName(customerName)
     }
+
+    fun customerExistInvoice(customerId: CustomerId): Boolean{
+        return InvoiceDatabase.getInstance().invoiceDao().customerExistInvoice(customerId.value)
+    }
+
+    fun customerExistTask(customerId: CustomerId): Boolean{
+        return InvoiceDatabase.getInstance().taskDao().customerExistTask(customerId.value)
+    }
 }

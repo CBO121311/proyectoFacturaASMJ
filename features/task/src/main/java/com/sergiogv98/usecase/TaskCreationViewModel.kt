@@ -93,6 +93,4 @@ class TaskCreationViewModel : ViewModel() {
 
         return fechaEnd.isBefore(fechaCreation)
     }
-
-
 }

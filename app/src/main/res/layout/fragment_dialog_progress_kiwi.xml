@@ -5,21 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--<ProgressBar
-        android:id="@+id/progressBarKiwi"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />-->
-
-
     <ImageView
         android:id="@+id/imageViewLoadingKiwi"
-        android:layout_width="63dp"
-        android:layout_height="72dp"
+        android:layout_width="@dimen/fdkiwi_iv_width"
+        android:layout_height="@dimen/fdkiwi_iv_height"
         android:layout_centerInParent="true"
         android:src="@drawable/kiwipistola"
         android:visibility="visible"

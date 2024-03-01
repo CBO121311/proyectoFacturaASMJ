@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewmodelcustomercreation"
             type="com.cbo.customer.usecase.CustomerViewModel" />
@@ -47,7 +48,7 @@
             android:id="@+id/customer_creation_cvid"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="@dimen/cc_marginStart_cv_id"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/customer_creation_glTop">
 
@@ -73,7 +74,7 @@
                     style="@style/customer_detail_tvDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxLines="1"/>
+                    android:maxLines="1" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -98,7 +99,7 @@
                 android:contentDescription="@string/cc_descriptiontext_ibCustomer"
                 android:focusable="true"
                 android:padding="@dimen/cc_padding_imgButton"
-                android:src="@drawable/ic_action_altimage"/>
+                android:src="@drawable/ic_action_altimage" />
         </androidx.cardview.widget.CardView>
 
 
@@ -184,7 +185,7 @@
                     app:ccp_showNameCode="false"
                     app:layout_constraintBottom_toTopOf="@+id/customer_creation_tilAddress"
                     app:layout_constraintStart_toStartOf="@+id/customer_creation_tilCustomerEmail"
-                    app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilCustomerEmail"/>
+                    app:layout_constraintTop_toBottomOf="@+id/customer_creation_tilCustomerEmail" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/customer_creation_tilPhone"

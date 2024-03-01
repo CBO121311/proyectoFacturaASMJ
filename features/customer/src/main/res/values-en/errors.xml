@@ -31,4 +31,7 @@
     <string name="cc_notification_creation_title">You registered a new customer 🎉</string>
     <string name="cc_notification_content">Customer name is %1$s</string>
     <string name="cc_notification_edit_title">You edited a customer 🎉</string>
+    <string name="customer_snackbar_delete_customer">Deleted customer</string>
+    <string name="cl_snackbar_order_id">Sorted by ID</string>
+    <string name="cl_snackbar_order_name">Sorted by name</string>
 </resources>

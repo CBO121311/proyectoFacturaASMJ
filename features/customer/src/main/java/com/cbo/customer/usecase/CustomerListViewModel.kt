@@ -11,8 +11,6 @@ import com.moronlu18.data.customer.Customer
 import com.moronlu18.invoice.Locator
 import com.moronlu18.network.Resource
 import com.moronlu18.repository.CustomerProviderDB
-import com.moronlu18.repository.InvoiceProviderDB
-import com.moronlu18.repository.TaskRepositoryBD
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -23,13 +21,11 @@ class CustomerListViewModel : ViewModel() {
     private var state = MutableLiveData<CustomerListState>()
     private var customerProviderDB = CustomerProviderDB()
     var allCustomer = customerProviderDB.getCustomerList().asLiveData()
-    private val invoiceProviderDB = InvoiceProviderDB()
-    private val taskRepositoryBD = TaskRepositoryBD()
+
     /**
      * Función que pide el listado de customer al repositorio con una pantalla de carga.
-     * No tiene que devolver nada.
+     *
      */
-
 
     fun getCustomerList() {
         viewModelScope.launch {
@@ -70,27 +66,28 @@ class CustomerListViewModel : ViewModel() {
         }
     }
 
+
+    fun isCustomerListEmpty() {
+        when {
+            allCustomer.value?.isEmpty() == true -> state.value = CustomerListState.NoDataError
+
+            else -> state.value = CustomerListState.Success
+        }
+    }
+
+    fun isCustomerReferenced(customer: Customer): Boolean {
+        val isReferenced = customerProviderDB.customerExistTask(customer.id) || customerProviderDB.customerExistInvoice(customer.id)
+        when {
+            isReferenced -> state.value = CustomerListState.ReferencedCustomer
+        }
+        return isReferenced
+    }
+
     /**
      * Devuelve la variable State.
      * No se puede modificar su valor fuera del ViewModel.
      */
     fun getState(): LiveData<CustomerListState> {
         return state
-    }
-
-    fun isCustomerListEmpty() {
-        if (allCustomer.value?.isEmpty() == true) {
-            state.value = CustomerListState.NoDataError
-        }else{
-            state.value = CustomerListState.Success
-        }
-    }
-
-    fun isCustomerReferenced(customer: Customer): Boolean {
-        val isReferenced = taskRepositoryBD.customerExistTask(customer.id) || invoiceProviderDB.customerExistInvoice(customer.id)
-        if (isReferenced) {
-            state.value = CustomerListState.ReferencedCustomer
-        }
-        return isReferenced
     }
 }

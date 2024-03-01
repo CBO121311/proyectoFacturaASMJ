@@ -79,10 +79,10 @@ class CustomerDetail : Fragment(), MenuProvider {
             it.cityCustomer.value = isValue(customer.city)
             it.addressCustomer.value = isValue(customer.address)
         }
-        if (customer.photo != null) {
-            binding.customerDetailCiPhoto.setImageURI(customer.photo)
-        } else {
-            binding.customerDetailCiPhoto.setImageResource(R.drawable.kiwidinero)
+        when {
+            customer.photo != null -> binding.customerDetailCiPhoto.setImageURI(customer.photo)
+            else -> binding.customerDetailCiPhoto.setImageResource(R.drawable.kiwidinero)
+
         }
     }
 
@@ -96,22 +96,26 @@ class CustomerDetail : Fragment(), MenuProvider {
 
         val customer = args.customnav
 
-        if (!viewModel.isCustomerReferenced(customer)){
-            val dialog = BaseFragmentDialog.newInstance(
-                getString(R.string.title_deleteCustomer),
-                getString(R.string.Content_deleteCustomer)
-            )
-            dialog.show(childFragmentManager,"delete_dialog")
+        when {
+            !viewModel.isCustomerReferenced(customer) -> {
+                val dialog = BaseFragmentDialog.newInstance(
+                    getString(R.string.title_deleteCustomer),
+                    getString(R.string.Content_deleteCustomer)
+                )
+                dialog.show(childFragmentManager,"delete_dialog")
 
-            dialog.parentFragmentManager.setFragmentResultListener(
-                BaseFragmentDialog.request,
-                viewLifecycleOwner
-            ) { _, result ->
+                dialog.parentFragmentManager.setFragmentResultListener(
+                    BaseFragmentDialog.request,
+                    viewLifecycleOwner
+                ) { _, result ->
 
-                if (result.getBoolean(BaseFragmentDialog.result)) {
-                    viewModel.delete(customer)
-                    Snackbar.make(requireView(),"Cliente borrado", Snackbar.LENGTH_LONG).show()
-                    findNavController().popBackStack()
+                    when {
+                        result.getBoolean(BaseFragmentDialog.result) -> {
+                            viewModel.delete(customer)
+                            Snackbar.make(requireView(), getString(R.string.customer_snackbar_delete_customer), Snackbar.LENGTH_LONG).show()
+                            findNavController().popBackStack()
+                        }
+                    }
                 }
             }
         }
@@ -142,23 +146,26 @@ class CustomerDetail : Fragment(), MenuProvider {
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         val customer = args.customnav
         //Evitar la doble pulsación.
-        if (SystemClock.elapsedRealtime() - mLastClickTime < doubleClickDelay) {
-            return true;
-        }
-        mLastClickTime = SystemClock.elapsedRealtime();
+        when {
+            SystemClock.elapsedRealtime() - mLastClickTime < doubleClickDelay -> return true;
+            else -> {
+                mLastClickTime = SystemClock.elapsedRealtime();
 
-        return when (menuItem.itemId) {
+                return when (menuItem.itemId) {
 
-            R.id.menu_cd_action_delete -> {
-                deleteConfirmation()
-                true
+                    R.id.menu_cd_action_delete -> {
+                        deleteConfirmation()
+                        true
+                    }
+
+                    R.id.menu_cd_action_edit -> {
+                        onEditItem(customer)
+                        true
+                    }
+
+                    else -> false
+                }
             }
-
-            R.id.menu_cd_action_edit -> {
-                onEditItem(customer)
-                true
-            }
-            else -> false
         }
     }
 
@@ -168,10 +175,9 @@ class CustomerDetail : Fragment(), MenuProvider {
      */
     private fun isValue(value: String?): String {
 
-        return if (value.isNullOrBlank()) {
-            "N/a"
-        } else {
-            value
+        return when {
+            value.isNullOrBlank() -> getString(R.string.cd_desc)
+            else -> value
         }
     }
 

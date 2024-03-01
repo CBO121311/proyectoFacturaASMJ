@@ -66,6 +66,7 @@
     <dimen name="cd_llid_padding">5dp</dimen>
     <dimen name="ci_ivCheck_width">27dp</dimen>
     <dimen name="customer_item_ivCheck_height">28dp</dimen>
+    <dimen name="cc_marginStart_cv_id">24dp</dimen>
 
 
 </resources>

@@ -32,8 +32,8 @@
         android:id="@+id/cvSigIn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="3dp"
+        app:cardCornerRadius="@dimen/dash_cv_radius"
+        app:cardElevation="@dimen/dash_cv_cardelev"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:layout_constraintWidth_percent="0.42">
@@ -42,13 +42,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="@dimen/dash_ll_button_padding">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top|center"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="@dimen/dash_iv_mbottom"
                 android:src="@drawable/imglogin" />
 
             <TextView
@@ -68,8 +68,8 @@
         android:id="@+id/cvSignUp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="3dp"
+        app:cardCornerRadius="@dimen/dash_cv_radius"
+        app:cardElevation="@dimen/dash_cv_cardelev"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:layout_constraintWidth_percent="0.42">
@@ -79,13 +79,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="@dimen/dash_ll_button_padding">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="@dimen/dash_iv_mbottom"
                 android:src="@drawable/imgregistro" />
 
             <TextView
@@ -104,9 +104,9 @@
         android:id="@+id/cvTask"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="3dp"
+        android:layout_marginTop="@dimen/dash_cv_margintop"
+        app:cardCornerRadius="@dimen/dash_cv_radius"
+        app:cardElevation="@dimen/dash_cv_cardelev"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/cvCustomer"
         app:layout_constraintWidth_percent="0.42">
@@ -116,13 +116,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="@dimen/dash_ll_button_padding">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="@dimen/dash_iv_mbottom"
                 android:src="@drawable/imgtareas" />
 
             <TextView
@@ -141,9 +141,9 @@
         android:id="@+id/cvItem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="3dp"
+        android:layout_marginTop="@dimen/dash_cv_margintop_long"
+        app:cardCornerRadius="@dimen/dash_cv_radius"
+        app:cardElevation="@dimen/dash_cv_cardelev"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/cvSignUp"
         app:layout_constraintWidth_percent="0.42">
@@ -153,13 +153,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="@dimen/dash_ll_button_padding">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="@dimen/dash_iv_mbottom"
                 android:src="@drawable/imgarticulos" />
 
             <TextView
@@ -178,9 +178,9 @@
         android:id="@+id/cvCustomer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="3dp"
+        android:layout_marginTop="@dimen/dash_cv_margintop_long"
+        app:cardCornerRadius="@dimen/dash_cv_radius"
+        app:cardElevation="@dimen/dash_cv_cardelev"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/cvSigIn"
         app:layout_constraintWidth_percent="0.42">
@@ -190,13 +190,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="@dimen/dash_ll_button_padding">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="@dimen/dash_iv_mbottom"
                 android:src="@drawable/imgclientes" />
 
             <TextView
@@ -216,9 +216,9 @@
         android:id="@+id/cvInvoice"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="3dp"
+        android:layout_marginTop="@dimen/dash_cv_margintop"
+        app:cardCornerRadius="@dimen/dash_cv_radius"
+        app:cardElevation="@dimen/dash_cv_cardelev"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/cvItem"
         app:layout_constraintWidth_percent="0.42">
@@ -228,13 +228,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="@dimen/dash_ll_button_padding">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="@dimen/dash_iv_mbottom"
                 android:src="@drawable/imgfacturas" />
 
             <TextView
@@ -251,9 +251,9 @@
         android:id="@+id/cvAbout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="3dp"
+        android:layout_marginTop="@dimen/dash_cv_margintop"
+        app:cardCornerRadius="@dimen/dash_cv_radius"
+        app:cardElevation="@dimen/dash_cv_cardelev"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/cvTask"
         app:layout_constraintWidth_percent="0.42">
@@ -263,13 +263,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="@dimen/dash_ll_button_padding">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="@dimen/dash_iv_mbottom"
                 android:src="@drawable/imgabout" />
 
             <TextView
@@ -287,9 +287,9 @@
         android:id="@+id/cvSignOut"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="3dp"
+        android:layout_marginTop="@dimen/dash_cv_margintop"
+        app:cardCornerRadius="@dimen/dash_cv_radius"
+        app:cardElevation="@dimen/dash_cv_cardelev"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/cvInvoice"
         app:layout_constraintWidth_percent="0.42">
@@ -299,13 +299,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="@dimen/dash_ll_button_padding">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="@dimen/dash_iv_mbottom"
                 android:src="@drawable/imgcerrarsesion" />
 
             <TextView
@@ -328,10 +328,10 @@
         app:layout_constraintGuide_begin="113dp" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="259dp"
-        android:layout_height="62dp"
-        android:layout_marginBottom="24dp"
+        android:id="@+id/imgTitleDashBoard"
+        android:layout_width="@dimen/dash_img_title_width"
+        android:layout_height="@dimen/dash_img_title_height"
+        android:layout_marginBottom="@dimen/dash_img_marginbottom"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline"
