@@ -85,4 +85,5 @@
     <string name="pr_summary_notification">Enable notification</string>
     <string name="notification_example_title">"Well done! 😊🎉 "</string>
     <string name="notification_example_content">Notifications have been enabled 🥝</string>
+    <string name="show_notificaction_activate_warning">Notifications are on, go to the app settings to turn them off</string>
 </resources>

@@ -193,7 +193,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="2"
-                        android:text="@string/txtEmail" />
+                        android:text="@string/txtAddress" />
 
                     <TextView
                         android:id="@+id/customer_detail_tvAddressCustomer"

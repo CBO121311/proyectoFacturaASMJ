@@ -81,5 +81,6 @@
     <string name="notification_setting_message">Se requiere permiso de notificación. Permita el permiso de notificación desde la configuración.</string>
     <string name="notification_example_title">"¡Bien hecho! 😊🎉 "</string>
     <string name="notification_example_content">Las notificaciones han sido habilitados 🥝</string>
+    <string name="show_notificaction_activate_warning">Las notificaciones está activadas, ve a la configuración de la aplicación para desactivarlos</string>
 
 </resources>

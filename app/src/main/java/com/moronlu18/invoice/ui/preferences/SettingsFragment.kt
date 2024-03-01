@@ -163,8 +163,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
             if (notificationManager.areNotificationsEnabled()) {
                 Utils.showSnackBar(
                     requireActivity().findViewById(android.R.id.content),
-                    "Las notificaciones está activadas, " +
-                            "ve a la configuración de la aplicación para desactivarlos"
+                    getString(R.string.show_notificaction_activate_warning)
                 )
             } else {
                 if (ContextCompat.checkSelfPermission(requireContext(),

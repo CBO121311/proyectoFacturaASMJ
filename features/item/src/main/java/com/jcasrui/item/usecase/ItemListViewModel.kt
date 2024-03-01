@@ -46,7 +46,7 @@ class ItemListViewModel : ViewModel() {
                         "itemsort",
                         "id"
                     )) {
-                        "id" -> itemProviderDB.getItemListPriceDesc().asLiveData()
+                        "id" -> itemProviderDB.getItemList().asLiveData()
                         "name_item" -> itemProviderDB.getItemListName().asLiveData()
                         "price_asc" -> itemProviderDB.getItemListPrice().asLiveData()
                         "price_desc" -> itemProviderDB.getItemListPriceDesc().asLiveData()

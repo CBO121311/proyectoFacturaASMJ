@@ -17,7 +17,7 @@
     <string name="title_deleteCustomer">Delete customer</string>
     <string name="Content_deleteCustomer">Are you sure to delete this customer?</string>
     <string name="ftlbtnAdd">Add customer</string>
-    <string name="cl_tvEmpty1">You don\'t have clients...</string>
+    <string name="cl_tvEmpty1">You don\'t have customers...</string>
     <string name="cl_tvEmpty2">Tap the \'+\' button to add one</string>
     <string name="cl_cd_imgtdelete">Delete customer</string>
     <string name="cl_cd_imgtedit">Edit customer</string>
@@ -28,9 +28,9 @@
     <string name="txtRemove">Delete</string>
     <string name="customer_NotAvailable">Not Available</string>
     <string name="customer_error_FormatEmail">Wrong email format</string>
-    <string name="cc_notification_creation_title">You registered a new customer 🎉</string>
+    <string name="cc_notification_creation_title">New customer registered 🎉</string>
     <string name="cc_notification_content">Customer name is %1$s</string>
-    <string name="cc_notification_edit_title">You edited a customer 🎉</string>
+    <string name="cc_notification_edit_title">Edited customer 🎉</string>
     <string name="customer_snackbar_delete_customer">Deleted customer</string>
     <string name="cl_snackbar_order_id">Sorted by ID</string>
     <string name="cl_snackbar_order_name">Sorted by name</string>
