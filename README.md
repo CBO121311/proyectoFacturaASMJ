@@ -38,7 +38,7 @@ Funcionalidades implementadas:
 - **Gestión de Imágenes:** Permite adjuntar fotos desde la galería de imágenes para cada cliente y estas imágenes se conservan en la base de datos.
 - **Prefijo Telefónico:** Se implementó una biblioteca para gestionar el prefijo telefónico.
 - **Orden en la Toolbar:** La lista de clientes se puede ordenar según el ID y el Nombre de Cliente desde la barra de herramientas.
-- **Orden en Preferencias:** En las preferencias, se puede elegir ordenar la lista de clientes por ID, Nombre (A-Z), Nombre (Z-A) y Email.
+- **Orden en Preferencias:** En las preferencias se puede elegir ordenar la lista de clientes por ID, Nombre (A-Z), Nombre (Z-A) y Email.
 - **Notificaciones de Eventos:** Se han implementado notificaciones para informar al usuario sobre la creación o edición exitosa de un cliente.
 - **Pruebas Unitarias:** Se han realizado las pruebas unitarias de Customer, CustomerId y Email.
 
@@ -51,8 +51,11 @@ Funcionalidades implementadas:
 **En Proceso, esperando actualización del módulo**
 Funcionalidades:
 - Lista, añade, edita y elimina items.
-- 
+- Eliminar se puede hacer desde List, manteniendo pulsado. Editar y eliminar desde Detail.
+- En toolbar ordena desde el Id y por nombre de item.
 - En preferencias ordena por ID, nombre, precio ascendente, precio descendente.
+- Notificaciones implementadas si añade o edita un item.
+- Test unitario implementados en Item, ItemId.
 
 
 |Creation|Detail|List| 
@@ -67,7 +70,7 @@ Funcionalidades:
 - En toolbar ordena desde el Id y por Nombre de tarea, tanto en ascendente como en descendente.
 - Desde preferencias ordena por ID, Nombre de cliente A-Z, Nombre de cliente Z-A y Nombre de tarea.
 - Notificaciones implementadas si añade o edita una tarea.
-- Test unitario implementados en Task, TaskId, TaskStatus, TypeTask.
+- Test unitario implementados en Task, TaskId.
 
 
 |Creation|Detail|List| 
@@ -81,7 +84,7 @@ Funcionalidades:
 - En toolbar ordena desde el Id y por Nombre de cliente.
 - Desde preferencias ordena por ID, Nombre de cliente A-Z, Nombre de cliente Z-A y Estado.
 - Notificaciones implementadas si añade o edita una factura.
-- Test unitario implementados en Invoice, InvoiceId, InvoiceStatus, LineItem.
+- Test unitario implementados en Invoice, InvoiceId, LineItem.
 
 
 |Creation|Detail|List| 
