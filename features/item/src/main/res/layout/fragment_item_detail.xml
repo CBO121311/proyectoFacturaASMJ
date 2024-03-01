@@ -17,12 +17,12 @@
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/itemDetail_cvImg"
-            android:layout_width="@dimen/itemDetail_civWidth"
-            android:layout_height="@dimen/itemDetail_civHeight"
+            android:layout_width="@dimen/civWidth"
+            android:layout_height="@dimen/civHeight"
             android:contentDescription="@string/itemDetail_tvDescriptionImg"
             android:src="@drawable/manzana"
             app:civ_border_color="@color/purple_500"
-            app:civ_border_width="@dimen/itemDetail_civBorderHeight"
+            app:civ_border_width="@dimen/civBorderHeightWidth"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -31,179 +31,175 @@
             android:id="@+id/itemDetail_cvInformation"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/itemDetail_cvMarginTopButton"
-            android:layout_marginBottom="@dimen/itemDetail_cvMarginTopButton"
-            android:elevation="@dimen/itemDetail_cvElevation"
-            app:cardCornerRadius="@dimen/itemDetail_cvCornerRadius"
+            android:layout_marginTop="@dimen/cvMarginTopButton"
+            android:layout_marginBottom="@dimen/cvMarginTopButton"
+            android:elevation="@dimen/cvElevation"
+            app:cardCornerRadius="@dimen/cvCornerRadius"
             app:layout_constraintBottom_toTopOf="@+id/itemDetail_btnSave"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/itemDetail_cvImg">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/itemDetail_clInformation"
+            <ScrollView
+                android:id="@+id/scrollView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:fadeScrollbars="false"
+                android:scrollbars="vertical">
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/itemDetail_glStart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_begin="@dimen/itemDetail_guideBeginEnd" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/itemDetail_clInformation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/itemDetail_glEnd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_end="@dimen/itemDetail_guideBeginEnd" />
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/itemDetail_glStart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="@dimen/itemDetail_guideBeginEnd" />
 
-                <TextView
-                    android:id="@+id/itemDetail_tvName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/itemDetail_tvPaddingTop"
-                    android:text="@string/item_name"
-                    android:textSize="@dimen/item_sizeTitles"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/itemDetail_glEnd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="@dimen/itemDetail_guideBeginEnd" />
 
-                <TextView
-                    android:id="@+id/itemDetail_tvContentName"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:maxLength="30"
-                    android:maxLines="2"
-                    android:text="@string/itemDetail_tvNamePrueba"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/item_sizeText"
-                    app:layout_constraintEnd_toStartOf="@+id/itemDetail_glEnd"
-                    app:layout_constraintStart_toStartOf="@+id/itemDetail_glStart"
-                    app:layout_constraintTop_toBottomOf="@+id/itemDetail_tvName" />
+                    <TextView
+                        android:id="@+id/itemDetail_tvName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/itemDetail_tvPaddingTop"
+                        android:text="@string/item_name"
+                        android:textSize="@dimen/item_sizeTitles"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/itemDetail_tvDescription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/itemDetail_paddingGeneral"
-                    android:text="@string/item_description"
-                    android:textSize="@dimen/item_sizeTitles"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/itemDetail_tvContentName" />
+                    <TextView
+                        android:id="@+id/itemDetail_tvContentName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:maxLength="30"
+                        android:maxLines="2"
+                        android:text="@string/itemDetail_tvNamePrueba"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/item_sizeText"
+                        app:layout_constraintEnd_toStartOf="@+id/itemDetail_glEnd"
+                        app:layout_constraintStart_toStartOf="@+id/itemDetail_glStart"
+                        app:layout_constraintTop_toBottomOf="@+id/itemDetail_tvName" />
 
-                <TextView
-                    android:id="@+id/item_detail_tvContentDescription"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:maxLength="100"
-                    android:maxLines="3"
-                    android:text="@string/itemDetail_tvDescriptionPrueba"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/item_sizeText"
-                    app:layout_constraintEnd_toStartOf="@+id/itemDetail_glEnd"
-                    app:layout_constraintStart_toStartOf="@+id/itemDetail_glStart"
-                    app:layout_constraintTop_toBottomOf="@+id/itemDetail_tvDescription" />
+                    <TextView
+                        android:id="@+id/itemDetail_tvDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/itemDetail_paddingGeneral"
+                        android:text="@string/item_description"
+                        android:textSize="@dimen/item_sizeTitles"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/itemDetail_tvContentName" />
 
-                <TextView
-                    android:id="@+id/item_detail_tvType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/itemDetail_paddingGeneral"
-                    android:text="@string/itemDetail_tvItemTypeText"
-                    android:textSize="@dimen/item_sizeTitles"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/item_detail_tvContentDescription" />
+                    <TextView
+                        android:id="@+id/item_detail_tvContentDescription"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:maxLength="100"
+                        android:maxLines="6"
+                        android:text="@string/itemDetail_tvDescriptionPrueba"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/item_sizeText"
+                        app:layout_constraintEnd_toStartOf="@+id/itemDetail_glEnd"
+                        app:layout_constraintStart_toStartOf="@+id/itemDetail_glStart"
+                        app:layout_constraintTop_toBottomOf="@+id/itemDetail_tvDescription" />
 
-                <TextView
-                    android:id="@+id/itemDetail_tvContentType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/itemDetail_tvItemTypePrueba"
-                    android:textSize="@dimen/item_sizeText"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/item_detail_tvType" />
+                    <TextView
+                        android:id="@+id/item_detail_tvType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/itemDetail_paddingGeneral"
+                        android:text="@string/itemDetail_tvItemTypeText"
+                        android:textSize="@dimen/item_sizeTitles"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/item_detail_tvContentDescription" />
 
-                <TextView
-                    android:id="@+id/itemDetail_tvRate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/itemDetail_paddingGeneral"
-                    android:text="@string/item_tvPrice"
-                    android:textSize="@dimen/item_sizeTitles"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/itemDetail_tvContentType" />
+                    <TextView
+                        android:id="@+id/itemDetail_tvContentType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/itemDetail_tvItemTypePrueba"
+                        android:textSize="@dimen/item_sizeText"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/item_detail_tvType" />
 
-                <TextView
-                    android:id="@+id/item_detail_tvContentRate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLength="9"
-                    android:maxLines="1"
-                    android:text="@string/itemDetail_tvRatePrueba"
-                    android:textSize="@dimen/item_sizeText"
-                    app:layout_constraintEnd_toStartOf="@+id/itemDetail_glEnd"
-                    app:layout_constraintHorizontal_bias="0.48"
-                    app:layout_constraintStart_toStartOf="@+id/itemDetail_glStart"
-                    app:layout_constraintTop_toBottomOf="@+id/itemDetail_tvRate" />
+                    <TextView
+                        android:id="@+id/itemDetail_tvRate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/itemDetail_paddingGeneral"
+                        android:text="@string/item_tvPrice"
+                        android:textSize="@dimen/item_sizeTitles"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/itemDetail_tvContentType" />
 
-                <TextView
-                    android:id="@+id/itemDetail_tvSymbolEuro"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/item_marginSymbol"
-                    android:text="@string/item_tvSymbolEuro"
-                    android:textSize="@dimen/item_sizeText"
-                    app:layout_constraintBottom_toBottomOf="@+id/item_detail_tvContentRate"
-                    app:layout_constraintStart_toEndOf="@+id/item_detail_tvContentRate"
-                    app:layout_constraintTop_toTopOf="@+id/item_detail_tvContentRate" />
+                    <TextView
+                        android:id="@+id/item_detail_tvContentRate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLength="9"
+                        android:maxLines="1"
+                        android:text="@string/itemDetail_tvRatePrueba"
+                        android:textSize="@dimen/item_sizeText"
+                        app:layout_constraintEnd_toStartOf="@+id/itemDetail_glEnd"
+                        app:layout_constraintHorizontal_bias="0.48"
+                        app:layout_constraintStart_toStartOf="@+id/itemDetail_glStart"
+                        app:layout_constraintTop_toBottomOf="@+id/itemDetail_tvRate" />
 
-                <TextView
-                    android:id="@+id/item_detail_tvVat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/itemDetail_paddingGeneral"
-                    android:text="@string/itemDetail_tvVatTypeText"
-                    android:textSize="@dimen/item_sizeTitles"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/item_detail_tvContentRate" />
+                    <TextView
+                        android:id="@+id/itemDetail_tvSymbolEuro"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/item_marginSymbol"
+                        android:text="@string/item_tvSymbolEuro"
+                        android:textSize="@dimen/item_sizeText"
+                        app:layout_constraintBottom_toBottomOf="@+id/item_detail_tvContentRate"
+                        app:layout_constraintStart_toEndOf="@+id/item_detail_tvContentRate"
+                        app:layout_constraintTop_toTopOf="@+id/item_detail_tvContentRate" />
 
-                <TextView
-                    android:id="@+id/itemDetail_tvContentVat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/itemDetail_tvVatTypePrueba"
-                    android:textSize="@dimen/item_sizeText"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/item_detail_tvVat" />
+                    <TextView
+                        android:id="@+id/item_detail_tvVat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/itemDetail_paddingGeneral"
+                        android:text="@string/itemDetail_tvVatTypeText"
+                        android:textSize="@dimen/item_sizeTitles"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/item_detail_tvContentRate" />
 
-                <!--
-                <TextView
-                    android:id="@+id/itemDetail_tvTaxable"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/itemDetail_paddingGeneral"
-                    android:text="@string/itemDetail_tvTaxablePrueba"
-                    android:textSize="@dimen/item_sizeTitles"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/item_detail_tvContentRate" />
--->
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/itemDetail_tvContentVat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/itemDetail_paddingGeneral"
+                        android:text="@string/itemDetail_tvVatTypePrueba"
+                        android:textSize="@dimen/item_sizeText"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/item_detail_tvVat" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
+            </ScrollView>
         </com.google.android.material.card.MaterialCardView>
 
         <Button
@@ -215,6 +211,5 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -25,6 +25,8 @@ import com.moronlu18.data.base.ItemId
 import com.moronlu18.data.item.ItemType
 import com.moronlu18.data.item.VatItemType
 import com.moronlu18.invoice.ui.MainActivity
+import com.moronlu18.invoice.utils.createNotificationChannel
+import com.moronlu18.invoice.utils.sendNotification
 import com.moronlu18.itemcreation.R
 import com.moronlu18.itemcreation.databinding.FragmentItemCreationBinding
 
@@ -44,6 +46,7 @@ class ItemCreation : Fragment() {
         _binding = FragmentItemCreationBinding.inflate(inflater, container, false)
         binding.viewmodelitemcreation = this.viewModel
         binding.lifecycleOwner = this
+        createNotificationChannel(CHANNEL_ID, requireContext())
 
         val item = args.item
         if (item != null) {
@@ -114,6 +117,7 @@ class ItemCreation : Fragment() {
             itemArgs.photo = R.drawable.cart
 
             viewModel.updateItem(itemArgs)
+            sendNotification(CHANNEL_ID, requireContext(), "Artículo editado", "El artículo es $name")
         } else {
             val item = Item(
                 id = ItemId(viewModel.getNextId()),
@@ -125,6 +129,7 @@ class ItemCreation : Fragment() {
                 photo = R.drawable.cart
             )
             viewModel.addItem(item)
+            sendNotification(CHANNEL_ID, requireContext(), "Artículo registrado", "El artículo es $name")
         }
         findNavController().popBackStack()
     }
@@ -201,5 +206,9 @@ class ItemCreation : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object{
+        const val CHANNEL_ID = "channel_item"
     }
 }

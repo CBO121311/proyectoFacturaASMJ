@@ -4,52 +4,41 @@
     <dimen name="item_sizeText">18sp</dimen>
     <dimen name="item_sizeSubtitles">16sp</dimen>
     <dimen name="item_marginSymbol">4dp</dimen>
+    <dimen name="civWidth">210dp</dimen>
+    <dimen name="civHeight">180dp</dimen>
+    <dimen name="civBorderHeightWidth">4dp</dimen>
+    <dimen name="cvCornerRadius">35dp</dimen>
+    <dimen name="cvMarginTopButton">15dp</dimen>
+    <dimen name="cvElevation">4dp</dimen>
 
-    <dimen name="itemCreation_guideVertical">15dp</dimen>
-    <dimen name="itemCreation_guideHorizontal">15dp</dimen>
-    <dimen name="itemCreation_paddingLayout">16dp</dimen>
+    <dimen name="itemCreation_paddingLayout">18dp</dimen>
+    <dimen name="itemCreation_guide">15dp</dimen>
     <dimen name="itemCreation_heightBtn">50dp</dimen>
     <dimen name="itemCreation_paddingGeneral">10dp</dimen>
     <dimen name="itemCreation_paddingtilName">20dp</dimen>
     <dimen name="itemCreation_paddingtvTaxable">20dp</dimen>
-    <dimen name="itemCreation_civWidth">210dp</dimen>
-    <dimen name="itemCreation_civHeight">180dp</dimen>
-    <dimen name="itemCreation_civBorderWidth">4dp</dimen>
     <dimen name="itemCreation_cvCornerRadius">100dp</dimen>
-    <dimen name="itemCreation_cvElevation">4dp</dimen>
     <dimen name="itemCreation_imgBtnWidthHeight">48dp</dimen>
     <dimen name="itemCreation_imgBtnPadding">8dp</dimen>
-    <dimen name="itemCreation_cvMarginTop">30dp</dimen>
-    <dimen name="itemCreation_cvMarginButton">25dp</dimen>
-    <dimen name="itemCreation_cvCRadius">35dp</dimen>
     <dimen name="itemCreation_tvMarginStart">7dp</dimen>
+    <dimen name="itemCreation_rlVatTypeMargin">20dp</dimen>
 
     <dimen name="itemDetail_paddingGeneral">25dp</dimen>
-    <dimen name="itemDetail_civWidth">210dp</dimen>
-    <dimen name="itemDetail_civHeight">180dp</dimen>
-    <dimen name="itemDetail_civBorderHeight">4dp</dimen>
-    <dimen name="itemDetail_cvMarginTopButton">30dp</dimen>
-    <dimen name="itemDetail_cvElevation">4dp</dimen>
-    <dimen name="itemDetail_cvCornerRadius">35dp</dimen>
     <dimen name="itemDetail_guideBeginEnd">35dp</dimen>
     <dimen name="itemDetail_tvPaddingTop">20dp</dimen>
     <dimen name="itemDetail_btnHeight">50dp</dimen>
 
     <dimen name="itemList_marginFab">16dp</dimen>
-    <dimen name="itemList_widthNoData">210dp</dimen>
-    <dimen name="itemList_heightNoData">210dp</dimen>
+    <dimen name="itemList_widthHeightNoData">210dp</dimen>
 
     <dimen name="itemItem_marginGeneral">10dp</dimen>
-    <dimen name="itemItem_cardMargin">5dp</dimen>
-    <dimen name="itemItem_cardRadius">12dp</dimen>
-    <dimen name="itemItem_cardElevation">4dp</dimen>
+    <dimen name="itemItem_cvTvMargin">5dp</dimen>
+    <dimen name="itemItem_cvRadius">12dp</dimen>
     <dimen name="itemItem_borderWitchImg">2dp</dimen>
     <dimen name="itemItem_sizeImg">66dp</dimen>
     <dimen name="itemItem_widthHeightButton">25dp</dimen>
     <dimen name="itemItem_marginId">8dp</dimen>
     <dimen name="itemItem_guideEnd">90dp</dimen>
     <dimen name="itemItem_civImgMarginStart">35dp</dimen>
-    <dimen name="itemItem_civImgMarginTopButton">10dp</dimen>
     <dimen name="itemItem_tvMarginStartTopButton">15dp</dimen>
-    <dimen name="itemItem_tvMarginTop">5dp</dimen>
 </resources>
